@@ -74,24 +74,6 @@ const (
 	StorageServiceStoragePoolGetProcedure = "/pilab.cloud.agent.v1.StorageService/StoragePoolGet"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	storageServiceServiceDescriptor                    = v1.File_pilab_cloud_agent_v1_storageservice_proto.Services().ByName("StorageService")
-	storageServiceVolumeCreateMethodDescriptor         = storageServiceServiceDescriptor.Methods().ByName("VolumeCreate")
-	storageServiceVolumeDeleteMethodDescriptor         = storageServiceServiceDescriptor.Methods().ByName("VolumeDelete")
-	storageServiceVolumeResizeMethodDescriptor         = storageServiceServiceDescriptor.Methods().ByName("VolumeResize")
-	storageServiceVolumeListMethodDescriptor           = storageServiceServiceDescriptor.Methods().ByName("VolumeList")
-	storageServiceVolumeGetMethodDescriptor            = storageServiceServiceDescriptor.Methods().ByName("VolumeGet")
-	storageServiceVolumeCloneMethodDescriptor          = storageServiceServiceDescriptor.Methods().ByName("VolumeClone")
-	storageServiceVolumeSnapshotCreateMethodDescriptor = storageServiceServiceDescriptor.Methods().ByName("VolumeSnapshotCreate")
-	storageServiceVolumeSnapshotRevertMethodDescriptor = storageServiceServiceDescriptor.Methods().ByName("VolumeSnapshotRevert")
-	storageServiceVolumeSnapshotDeleteMethodDescriptor = storageServiceServiceDescriptor.Methods().ByName("VolumeSnapshotDelete")
-	storageServiceStoragePoolCreateMethodDescriptor    = storageServiceServiceDescriptor.Methods().ByName("StoragePoolCreate")
-	storageServiceStoragePoolDeleteMethodDescriptor    = storageServiceServiceDescriptor.Methods().ByName("StoragePoolDelete")
-	storageServiceStoragePoolListMethodDescriptor      = storageServiceServiceDescriptor.Methods().ByName("StoragePoolList")
-	storageServiceStoragePoolGetMethodDescriptor       = storageServiceServiceDescriptor.Methods().ByName("StoragePoolGet")
-)
-
 // StorageServiceClient is a client for the pilab.cloud.agent.v1.StorageService service.
 type StorageServiceClient interface {
 	// Volume Management
@@ -101,6 +83,7 @@ type StorageServiceClient interface {
 	VolumeList(context.Context, *connect.Request[v1.VolumeListRequest]) (*connect.Response[v1.VolumeListResponse], error)
 	VolumeGet(context.Context, *connect.Request[v1.VolumeGetRequest]) (*connect.Response[v1.VolumeGetResponse], error)
 	VolumeClone(context.Context, *connect.Request[v1.VolumeCloneRequest]) (*connect.Response[v1.VolumeCloneResponse], error)
+	// Snapshot management
 	VolumeSnapshotCreate(context.Context, *connect.Request[v1.VolumeSnapshotCreateRequest]) (*connect.Response[v1.VolumeSnapshotCreateResponse], error)
 	VolumeSnapshotRevert(context.Context, *connect.Request[v1.VolumeSnapshotRevertRequest]) (*connect.Response[v1.VolumeSnapshotRevertResponse], error)
 	VolumeSnapshotDelete(context.Context, *connect.Request[v1.VolumeSnapshotDeleteRequest]) (*connect.Response[v1.VolumeSnapshotDeleteResponse], error)
@@ -120,83 +103,84 @@ type StorageServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewStorageServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) StorageServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	storageServiceMethods := v1.File_pilab_cloud_agent_v1_storageservice_proto.Services().ByName("StorageService").Methods()
 	return &storageServiceClient{
 		volumeCreate: connect.NewClient[v1.VolumeCreateRequest, v1.VolumeCreateResponse](
 			httpClient,
 			baseURL+StorageServiceVolumeCreateProcedure,
-			connect.WithSchema(storageServiceVolumeCreateMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("VolumeCreate")),
 			connect.WithClientOptions(opts...),
 		),
 		volumeDelete: connect.NewClient[v1.VolumeDeleteRequest, v1.VolumeDeleteResponse](
 			httpClient,
 			baseURL+StorageServiceVolumeDeleteProcedure,
-			connect.WithSchema(storageServiceVolumeDeleteMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("VolumeDelete")),
 			connect.WithClientOptions(opts...),
 		),
 		volumeResize: connect.NewClient[v1.VolumeResizeRequest, v1.VolumeResizeResponse](
 			httpClient,
 			baseURL+StorageServiceVolumeResizeProcedure,
-			connect.WithSchema(storageServiceVolumeResizeMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("VolumeResize")),
 			connect.WithClientOptions(opts...),
 		),
 		volumeList: connect.NewClient[v1.VolumeListRequest, v1.VolumeListResponse](
 			httpClient,
 			baseURL+StorageServiceVolumeListProcedure,
-			connect.WithSchema(storageServiceVolumeListMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("VolumeList")),
 			connect.WithClientOptions(opts...),
 		),
 		volumeGet: connect.NewClient[v1.VolumeGetRequest, v1.VolumeGetResponse](
 			httpClient,
 			baseURL+StorageServiceVolumeGetProcedure,
-			connect.WithSchema(storageServiceVolumeGetMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("VolumeGet")),
 			connect.WithClientOptions(opts...),
 		),
 		volumeClone: connect.NewClient[v1.VolumeCloneRequest, v1.VolumeCloneResponse](
 			httpClient,
 			baseURL+StorageServiceVolumeCloneProcedure,
-			connect.WithSchema(storageServiceVolumeCloneMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("VolumeClone")),
 			connect.WithClientOptions(opts...),
 		),
 		volumeSnapshotCreate: connect.NewClient[v1.VolumeSnapshotCreateRequest, v1.VolumeSnapshotCreateResponse](
 			httpClient,
 			baseURL+StorageServiceVolumeSnapshotCreateProcedure,
-			connect.WithSchema(storageServiceVolumeSnapshotCreateMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("VolumeSnapshotCreate")),
 			connect.WithClientOptions(opts...),
 		),
 		volumeSnapshotRevert: connect.NewClient[v1.VolumeSnapshotRevertRequest, v1.VolumeSnapshotRevertResponse](
 			httpClient,
 			baseURL+StorageServiceVolumeSnapshotRevertProcedure,
-			connect.WithSchema(storageServiceVolumeSnapshotRevertMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("VolumeSnapshotRevert")),
 			connect.WithClientOptions(opts...),
 		),
 		volumeSnapshotDelete: connect.NewClient[v1.VolumeSnapshotDeleteRequest, v1.VolumeSnapshotDeleteResponse](
 			httpClient,
 			baseURL+StorageServiceVolumeSnapshotDeleteProcedure,
-			connect.WithSchema(storageServiceVolumeSnapshotDeleteMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("VolumeSnapshotDelete")),
 			connect.WithClientOptions(opts...),
 		),
 		storagePoolCreate: connect.NewClient[v1.StoragePoolCreateRequest, v1.StoragePoolCreateResponse](
 			httpClient,
 			baseURL+StorageServiceStoragePoolCreateProcedure,
-			connect.WithSchema(storageServiceStoragePoolCreateMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("StoragePoolCreate")),
 			connect.WithClientOptions(opts...),
 		),
 		storagePoolDelete: connect.NewClient[v1.StoragePoolDeleteRequest, v1.StoragePoolDeleteResponse](
 			httpClient,
 			baseURL+StorageServiceStoragePoolDeleteProcedure,
-			connect.WithSchema(storageServiceStoragePoolDeleteMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("StoragePoolDelete")),
 			connect.WithClientOptions(opts...),
 		),
 		storagePoolList: connect.NewClient[v1.StoragePoolListRequest, v1.StoragePoolListResponse](
 			httpClient,
 			baseURL+StorageServiceStoragePoolListProcedure,
-			connect.WithSchema(storageServiceStoragePoolListMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("StoragePoolList")),
 			connect.WithClientOptions(opts...),
 		),
 		storagePoolGet: connect.NewClient[v1.StoragePoolGetRequest, v1.StoragePoolGetResponse](
 			httpClient,
 			baseURL+StorageServiceStoragePoolGetProcedure,
-			connect.WithSchema(storageServiceStoragePoolGetMethodDescriptor),
+			connect.WithSchema(storageServiceMethods.ByName("StoragePoolGet")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -293,6 +277,7 @@ type StorageServiceHandler interface {
 	VolumeList(context.Context, *connect.Request[v1.VolumeListRequest]) (*connect.Response[v1.VolumeListResponse], error)
 	VolumeGet(context.Context, *connect.Request[v1.VolumeGetRequest]) (*connect.Response[v1.VolumeGetResponse], error)
 	VolumeClone(context.Context, *connect.Request[v1.VolumeCloneRequest]) (*connect.Response[v1.VolumeCloneResponse], error)
+	// Snapshot management
 	VolumeSnapshotCreate(context.Context, *connect.Request[v1.VolumeSnapshotCreateRequest]) (*connect.Response[v1.VolumeSnapshotCreateResponse], error)
 	VolumeSnapshotRevert(context.Context, *connect.Request[v1.VolumeSnapshotRevertRequest]) (*connect.Response[v1.VolumeSnapshotRevertResponse], error)
 	VolumeSnapshotDelete(context.Context, *connect.Request[v1.VolumeSnapshotDeleteRequest]) (*connect.Response[v1.VolumeSnapshotDeleteResponse], error)
@@ -309,82 +294,83 @@ type StorageServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewStorageServiceHandler(svc StorageServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	storageServiceMethods := v1.File_pilab_cloud_agent_v1_storageservice_proto.Services().ByName("StorageService").Methods()
 	storageServiceVolumeCreateHandler := connect.NewUnaryHandler(
 		StorageServiceVolumeCreateProcedure,
 		svc.VolumeCreate,
-		connect.WithSchema(storageServiceVolumeCreateMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("VolumeCreate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceVolumeDeleteHandler := connect.NewUnaryHandler(
 		StorageServiceVolumeDeleteProcedure,
 		svc.VolumeDelete,
-		connect.WithSchema(storageServiceVolumeDeleteMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("VolumeDelete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceVolumeResizeHandler := connect.NewUnaryHandler(
 		StorageServiceVolumeResizeProcedure,
 		svc.VolumeResize,
-		connect.WithSchema(storageServiceVolumeResizeMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("VolumeResize")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceVolumeListHandler := connect.NewUnaryHandler(
 		StorageServiceVolumeListProcedure,
 		svc.VolumeList,
-		connect.WithSchema(storageServiceVolumeListMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("VolumeList")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceVolumeGetHandler := connect.NewUnaryHandler(
 		StorageServiceVolumeGetProcedure,
 		svc.VolumeGet,
-		connect.WithSchema(storageServiceVolumeGetMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("VolumeGet")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceVolumeCloneHandler := connect.NewUnaryHandler(
 		StorageServiceVolumeCloneProcedure,
 		svc.VolumeClone,
-		connect.WithSchema(storageServiceVolumeCloneMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("VolumeClone")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceVolumeSnapshotCreateHandler := connect.NewUnaryHandler(
 		StorageServiceVolumeSnapshotCreateProcedure,
 		svc.VolumeSnapshotCreate,
-		connect.WithSchema(storageServiceVolumeSnapshotCreateMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("VolumeSnapshotCreate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceVolumeSnapshotRevertHandler := connect.NewUnaryHandler(
 		StorageServiceVolumeSnapshotRevertProcedure,
 		svc.VolumeSnapshotRevert,
-		connect.WithSchema(storageServiceVolumeSnapshotRevertMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("VolumeSnapshotRevert")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceVolumeSnapshotDeleteHandler := connect.NewUnaryHandler(
 		StorageServiceVolumeSnapshotDeleteProcedure,
 		svc.VolumeSnapshotDelete,
-		connect.WithSchema(storageServiceVolumeSnapshotDeleteMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("VolumeSnapshotDelete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceStoragePoolCreateHandler := connect.NewUnaryHandler(
 		StorageServiceStoragePoolCreateProcedure,
 		svc.StoragePoolCreate,
-		connect.WithSchema(storageServiceStoragePoolCreateMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("StoragePoolCreate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceStoragePoolDeleteHandler := connect.NewUnaryHandler(
 		StorageServiceStoragePoolDeleteProcedure,
 		svc.StoragePoolDelete,
-		connect.WithSchema(storageServiceStoragePoolDeleteMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("StoragePoolDelete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceStoragePoolListHandler := connect.NewUnaryHandler(
 		StorageServiceStoragePoolListProcedure,
 		svc.StoragePoolList,
-		connect.WithSchema(storageServiceStoragePoolListMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("StoragePoolList")),
 		connect.WithHandlerOptions(opts...),
 	)
 	storageServiceStoragePoolGetHandler := connect.NewUnaryHandler(
 		StorageServiceStoragePoolGetProcedure,
 		svc.StoragePoolGet,
-		connect.WithSchema(storageServiceStoragePoolGetMethodDescriptor),
+		connect.WithSchema(storageServiceMethods.ByName("StoragePoolGet")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/pilab.cloud.agent.v1.StorageService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

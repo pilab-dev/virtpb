@@ -39,13 +39,6 @@ const (
 	JobServiceSubscribeProcedure = "/pilab.cloud.director.v1.JobService/Subscribe"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	jobServiceServiceDescriptor         = v1.File_pilab_cloud_director_v1_jobservice_proto.Services().ByName("JobService")
-	jobServiceUpdateJobMethodDescriptor = jobServiceServiceDescriptor.Methods().ByName("UpdateJob")
-	jobServiceSubscribeMethodDescriptor = jobServiceServiceDescriptor.Methods().ByName("Subscribe")
-)
-
 // JobServiceClient is a client for the pilab.cloud.director.v1.JobService service.
 type JobServiceClient interface {
 	UpdateJob(context.Context, *connect.Request[v1.UpdateJobRequest]) (*connect.Response[v1.UpdateJobResponse], error)
@@ -61,17 +54,18 @@ type JobServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewJobServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) JobServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	jobServiceMethods := v1.File_pilab_cloud_director_v1_jobservice_proto.Services().ByName("JobService").Methods()
 	return &jobServiceClient{
 		updateJob: connect.NewClient[v1.UpdateJobRequest, v1.UpdateJobResponse](
 			httpClient,
 			baseURL+JobServiceUpdateJobProcedure,
-			connect.WithSchema(jobServiceUpdateJobMethodDescriptor),
+			connect.WithSchema(jobServiceMethods.ByName("UpdateJob")),
 			connect.WithClientOptions(opts...),
 		),
 		subscribe: connect.NewClient[v1.SubscribeRequest, v1.SubscribeResponse](
 			httpClient,
 			baseURL+JobServiceSubscribeProcedure,
-			connect.WithSchema(jobServiceSubscribeMethodDescriptor),
+			connect.WithSchema(jobServiceMethods.ByName("Subscribe")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -105,16 +99,17 @@ type JobServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewJobServiceHandler(svc JobServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	jobServiceMethods := v1.File_pilab_cloud_director_v1_jobservice_proto.Services().ByName("JobService").Methods()
 	jobServiceUpdateJobHandler := connect.NewUnaryHandler(
 		JobServiceUpdateJobProcedure,
 		svc.UpdateJob,
-		connect.WithSchema(jobServiceUpdateJobMethodDescriptor),
+		connect.WithSchema(jobServiceMethods.ByName("UpdateJob")),
 		connect.WithHandlerOptions(opts...),
 	)
 	jobServiceSubscribeHandler := connect.NewServerStreamHandler(
 		JobServiceSubscribeProcedure,
 		svc.Subscribe,
-		connect.WithSchema(jobServiceSubscribeMethodDescriptor),
+		connect.WithSchema(jobServiceMethods.ByName("Subscribe")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/pilab.cloud.director.v1.JobService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

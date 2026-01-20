@@ -45,6 +45,7 @@ type StorageServiceClient interface {
 	VolumeList(ctx context.Context, in *VolumeListRequest, opts ...grpc.CallOption) (*VolumeListResponse, error)
 	VolumeGet(ctx context.Context, in *VolumeGetRequest, opts ...grpc.CallOption) (*VolumeGetResponse, error)
 	VolumeClone(ctx context.Context, in *VolumeCloneRequest, opts ...grpc.CallOption) (*VolumeCloneResponse, error)
+	// Snapshot management
 	VolumeSnapshotCreate(ctx context.Context, in *VolumeSnapshotCreateRequest, opts ...grpc.CallOption) (*VolumeSnapshotCreateResponse, error)
 	VolumeSnapshotRevert(ctx context.Context, in *VolumeSnapshotRevertRequest, opts ...grpc.CallOption) (*VolumeSnapshotRevertResponse, error)
 	VolumeSnapshotDelete(ctx context.Context, in *VolumeSnapshotDeleteRequest, opts ...grpc.CallOption) (*VolumeSnapshotDeleteResponse, error)
@@ -204,6 +205,7 @@ type StorageServiceServer interface {
 	VolumeList(context.Context, *VolumeListRequest) (*VolumeListResponse, error)
 	VolumeGet(context.Context, *VolumeGetRequest) (*VolumeGetResponse, error)
 	VolumeClone(context.Context, *VolumeCloneRequest) (*VolumeCloneResponse, error)
+	// Snapshot management
 	VolumeSnapshotCreate(context.Context, *VolumeSnapshotCreateRequest) (*VolumeSnapshotCreateResponse, error)
 	VolumeSnapshotRevert(context.Context, *VolumeSnapshotRevertRequest) (*VolumeSnapshotRevertResponse, error)
 	VolumeSnapshotDelete(context.Context, *VolumeSnapshotDeleteRequest) (*VolumeSnapshotDeleteResponse, error)

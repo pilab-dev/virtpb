@@ -41,13 +41,6 @@ const (
 	CloudDirectorServiceAgentEventsProcedure = "/pilab.cloud.director.v1.CloudDirectorService/AgentEvents"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	cloudDirectorServiceServiceDescriptor             = v1.File_pilab_cloud_director_v1_clouddirector_proto.Services().ByName("CloudDirectorService")
-	cloudDirectorServiceRegisterAgentMethodDescriptor = cloudDirectorServiceServiceDescriptor.Methods().ByName("RegisterAgent")
-	cloudDirectorServiceAgentEventsMethodDescriptor   = cloudDirectorServiceServiceDescriptor.Methods().ByName("AgentEvents")
-)
-
 // CloudDirectorServiceClient is a client for the pilab.cloud.director.v1.CloudDirectorService
 // service.
 type CloudDirectorServiceClient interface {
@@ -65,17 +58,18 @@ type CloudDirectorServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewCloudDirectorServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) CloudDirectorServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	cloudDirectorServiceMethods := v1.File_pilab_cloud_director_v1_clouddirector_proto.Services().ByName("CloudDirectorService").Methods()
 	return &cloudDirectorServiceClient{
 		registerAgent: connect.NewClient[v1.RegisterAgentRequest, v1.RegisterAgentResponse](
 			httpClient,
 			baseURL+CloudDirectorServiceRegisterAgentProcedure,
-			connect.WithSchema(cloudDirectorServiceRegisterAgentMethodDescriptor),
+			connect.WithSchema(cloudDirectorServiceMethods.ByName("RegisterAgent")),
 			connect.WithClientOptions(opts...),
 		),
 		agentEvents: connect.NewClient[v1.AgentEventsRequest, v1.ManagerMessage](
 			httpClient,
 			baseURL+CloudDirectorServiceAgentEventsProcedure,
-			connect.WithSchema(cloudDirectorServiceAgentEventsMethodDescriptor),
+			connect.WithSchema(cloudDirectorServiceMethods.ByName("AgentEvents")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -110,16 +104,17 @@ type CloudDirectorServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewCloudDirectorServiceHandler(svc CloudDirectorServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	cloudDirectorServiceMethods := v1.File_pilab_cloud_director_v1_clouddirector_proto.Services().ByName("CloudDirectorService").Methods()
 	cloudDirectorServiceRegisterAgentHandler := connect.NewUnaryHandler(
 		CloudDirectorServiceRegisterAgentProcedure,
 		svc.RegisterAgent,
-		connect.WithSchema(cloudDirectorServiceRegisterAgentMethodDescriptor),
+		connect.WithSchema(cloudDirectorServiceMethods.ByName("RegisterAgent")),
 		connect.WithHandlerOptions(opts...),
 	)
 	cloudDirectorServiceAgentEventsHandler := connect.NewBidiStreamHandler(
 		CloudDirectorServiceAgentEventsProcedure,
 		svc.AgentEvents,
-		connect.WithSchema(cloudDirectorServiceAgentEventsMethodDescriptor),
+		connect.WithSchema(cloudDirectorServiceMethods.ByName("AgentEvents")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/pilab.cloud.director.v1.CloudDirectorService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

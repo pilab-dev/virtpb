@@ -138,50 +138,6 @@ const (
 	AgentServiceCloneVmFromTemplateProcedure = "/pilab.cloud.agent.v2.AgentService/CloneVmFromTemplate"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	agentServiceServiceDescriptor                        = v2.File_pilab_cloud_agent_v2_agent_service_proto.Services().ByName("AgentService")
-	agentServiceRegisterHostMethodDescriptor             = agentServiceServiceDescriptor.Methods().ByName("RegisterHost")
-	agentServiceHeartbeatMethodDescriptor                = agentServiceServiceDescriptor.Methods().ByName("Heartbeat")
-	agentServiceGetHostStatusMethodDescriptor            = agentServiceServiceDescriptor.Methods().ByName("GetHostStatus")
-	agentServiceCreateVMMethodDescriptor                 = agentServiceServiceDescriptor.Methods().ByName("CreateVM")
-	agentServiceGetVMDetailsMethodDescriptor             = agentServiceServiceDescriptor.Methods().ByName("GetVMDetails")
-	agentServiceUpdateVMMethodDescriptor                 = agentServiceServiceDescriptor.Methods().ByName("UpdateVM")
-	agentServiceDeleteVMMethodDescriptor                 = agentServiceServiceDescriptor.Methods().ByName("DeleteVM")
-	agentServiceStartVMMethodDescriptor                  = agentServiceServiceDescriptor.Methods().ByName("StartVM")
-	agentServiceStopVMMethodDescriptor                   = agentServiceServiceDescriptor.Methods().ByName("StopVM")
-	agentServiceForceStopVMMethodDescriptor              = agentServiceServiceDescriptor.Methods().ByName("ForceStopVM")
-	agentServiceRebootVMMethodDescriptor                 = agentServiceServiceDescriptor.Methods().ByName("RebootVM")
-	agentServicePauseVMMethodDescriptor                  = agentServiceServiceDescriptor.Methods().ByName("PauseVM")
-	agentServiceResumeVMMethodDescriptor                 = agentServiceServiceDescriptor.Methods().ByName("ResumeVM")
-	agentServiceInitiateMigrationMethodDescriptor        = agentServiceServiceDescriptor.Methods().ByName("InitiateMigration")
-	agentServicePrepareForMigrationMethodDescriptor      = agentServiceServiceDescriptor.Methods().ByName("PrepareForMigration")
-	agentServiceCreateSnapshotMethodDescriptor           = agentServiceServiceDescriptor.Methods().ByName("CreateSnapshot")
-	agentServiceRevertToSnapshotMethodDescriptor         = agentServiceServiceDescriptor.Methods().ByName("RevertToSnapshot")
-	agentServiceDeleteSnapshotMethodDescriptor           = agentServiceServiceDescriptor.Methods().ByName("DeleteSnapshot")
-	agentServiceGetTaskStatusMethodDescriptor            = agentServiceServiceDescriptor.Methods().ByName("GetTaskStatus")
-	agentServiceCancelTaskMethodDescriptor               = agentServiceServiceDescriptor.Methods().ByName("CancelTask")
-	agentServiceConfigureNetworkMethodDescriptor         = agentServiceServiceDescriptor.Methods().ByName("ConfigureNetwork")
-	agentServiceConfigureStorageMethodDescriptor         = agentServiceServiceDescriptor.Methods().ByName("ConfigureStorage")
-	agentServiceConfigureTimeMethodDescriptor            = agentServiceServiceDescriptor.Methods().ByName("ConfigureTime")
-	agentServiceSetMaintenanceModeMethodDescriptor       = agentServiceServiceDescriptor.Methods().ByName("SetMaintenanceMode")
-	agentServiceUpdateHostMethodDescriptor               = agentServiceServiceDescriptor.Methods().ByName("UpdateHost")
-	agentServiceGetContentLibraryItemsMethodDescriptor   = agentServiceServiceDescriptor.Methods().ByName("GetContentLibraryItems")
-	agentServiceUploadContentLibraryItemMethodDescriptor = agentServiceServiceDescriptor.Methods().ByName("UploadContentLibraryItem")
-	agentServiceDeleteContentLibraryItemMethodDescriptor = agentServiceServiceDescriptor.Methods().ByName("DeleteContentLibraryItem")
-	agentServiceGetDatastoresMethodDescriptor            = agentServiceServiceDescriptor.Methods().ByName("GetDatastores")
-	agentServiceGetDatastoreMethodDescriptor             = agentServiceServiceDescriptor.Methods().ByName("GetDatastore")
-	agentServiceCreateDatastoreMethodDescriptor          = agentServiceServiceDescriptor.Methods().ByName("CreateDatastore")
-	agentServiceDeleteDatastoreMethodDescriptor          = agentServiceServiceDescriptor.Methods().ByName("DeleteDatastore")
-	agentServiceGetNetworksMethodDescriptor              = agentServiceServiceDescriptor.Methods().ByName("GetNetworks")
-	agentServiceGetNetworkMethodDescriptor               = agentServiceServiceDescriptor.Methods().ByName("GetNetwork")
-	agentServiceCreateNetworkMethodDescriptor            = agentServiceServiceDescriptor.Methods().ByName("CreateNetwork")
-	agentServiceDeleteNetworkMethodDescriptor            = agentServiceServiceDescriptor.Methods().ByName("DeleteNetwork")
-	agentServiceAttachIsoMethodDescriptor                = agentServiceServiceDescriptor.Methods().ByName("AttachIso")
-	agentServiceDetachIsoMethodDescriptor                = agentServiceServiceDescriptor.Methods().ByName("DetachIso")
-	agentServiceCloneVmFromTemplateMethodDescriptor      = agentServiceServiceDescriptor.Methods().ByName("CloneVmFromTemplate")
-)
-
 // AgentServiceClient is a client for the pilab.cloud.agent.v2.AgentService service.
 type AgentServiceClient interface {
 	// Host Management
@@ -252,239 +208,240 @@ type AgentServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewAgentServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AgentServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	agentServiceMethods := v2.File_pilab_cloud_agent_v2_agent_service_proto.Services().ByName("AgentService").Methods()
 	return &agentServiceClient{
 		registerHost: connect.NewClient[v2.RegisterHostRequest, v2.RegisterHostResponse](
 			httpClient,
 			baseURL+AgentServiceRegisterHostProcedure,
-			connect.WithSchema(agentServiceRegisterHostMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("RegisterHost")),
 			connect.WithClientOptions(opts...),
 		),
 		heartbeat: connect.NewClient[v2.HeartbeatRequest, v2.HeartbeatResponse](
 			httpClient,
 			baseURL+AgentServiceHeartbeatProcedure,
-			connect.WithSchema(agentServiceHeartbeatMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("Heartbeat")),
 			connect.WithClientOptions(opts...),
 		),
 		getHostStatus: connect.NewClient[v2.GetHostStatusRequest, v2.HostStatus](
 			httpClient,
 			baseURL+AgentServiceGetHostStatusProcedure,
-			connect.WithSchema(agentServiceGetHostStatusMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("GetHostStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		createVM: connect.NewClient[v2.CreateVMRequest, v2.CreateVMResponse](
 			httpClient,
 			baseURL+AgentServiceCreateVMProcedure,
-			connect.WithSchema(agentServiceCreateVMMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("CreateVM")),
 			connect.WithClientOptions(opts...),
 		),
 		getVMDetails: connect.NewClient[v2.GetVMDetailsRequest, v2.GetVMDetailsResponse](
 			httpClient,
 			baseURL+AgentServiceGetVMDetailsProcedure,
-			connect.WithSchema(agentServiceGetVMDetailsMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("GetVMDetails")),
 			connect.WithClientOptions(opts...),
 		),
 		updateVM: connect.NewClient[v2.UpdateVMRequest, v2.UpdateVMResponse](
 			httpClient,
 			baseURL+AgentServiceUpdateVMProcedure,
-			connect.WithSchema(agentServiceUpdateVMMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("UpdateVM")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteVM: connect.NewClient[v2.DeleteVMRequest, v2.DeleteVMResponse](
 			httpClient,
 			baseURL+AgentServiceDeleteVMProcedure,
-			connect.WithSchema(agentServiceDeleteVMMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("DeleteVM")),
 			connect.WithClientOptions(opts...),
 		),
 		startVM: connect.NewClient[v2.StartVMRequest, v2.StartVMResponse](
 			httpClient,
 			baseURL+AgentServiceStartVMProcedure,
-			connect.WithSchema(agentServiceStartVMMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("StartVM")),
 			connect.WithClientOptions(opts...),
 		),
 		stopVM: connect.NewClient[v2.StopVMRequest, v2.StopVMResponse](
 			httpClient,
 			baseURL+AgentServiceStopVMProcedure,
-			connect.WithSchema(agentServiceStopVMMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("StopVM")),
 			connect.WithClientOptions(opts...),
 		),
 		forceStopVM: connect.NewClient[v2.ForceStopVMRequest, v2.ForceStopVMResponse](
 			httpClient,
 			baseURL+AgentServiceForceStopVMProcedure,
-			connect.WithSchema(agentServiceForceStopVMMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("ForceStopVM")),
 			connect.WithClientOptions(opts...),
 		),
 		rebootVM: connect.NewClient[v2.RebootVMRequest, v2.RebootVMResponse](
 			httpClient,
 			baseURL+AgentServiceRebootVMProcedure,
-			connect.WithSchema(agentServiceRebootVMMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("RebootVM")),
 			connect.WithClientOptions(opts...),
 		),
 		pauseVM: connect.NewClient[v2.PauseVMRequest, v2.PauseVMResponse](
 			httpClient,
 			baseURL+AgentServicePauseVMProcedure,
-			connect.WithSchema(agentServicePauseVMMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("PauseVM")),
 			connect.WithClientOptions(opts...),
 		),
 		resumeVM: connect.NewClient[v2.ResumeVMRequest, v2.ResumeVMResponse](
 			httpClient,
 			baseURL+AgentServiceResumeVMProcedure,
-			connect.WithSchema(agentServiceResumeVMMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("ResumeVM")),
 			connect.WithClientOptions(opts...),
 		),
 		initiateMigration: connect.NewClient[v2.InitiateMigrationRequest, v2.InitiateMigrationResponse](
 			httpClient,
 			baseURL+AgentServiceInitiateMigrationProcedure,
-			connect.WithSchema(agentServiceInitiateMigrationMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("InitiateMigration")),
 			connect.WithClientOptions(opts...),
 		),
 		prepareForMigration: connect.NewClient[v2.PrepareForMigrationRequest, v2.PrepareForMigrationResponse](
 			httpClient,
 			baseURL+AgentServicePrepareForMigrationProcedure,
-			connect.WithSchema(agentServicePrepareForMigrationMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("PrepareForMigration")),
 			connect.WithClientOptions(opts...),
 		),
 		createSnapshot: connect.NewClient[v2.CreateSnapshotRequest, v2.CreateSnapshotResponse](
 			httpClient,
 			baseURL+AgentServiceCreateSnapshotProcedure,
-			connect.WithSchema(agentServiceCreateSnapshotMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("CreateSnapshot")),
 			connect.WithClientOptions(opts...),
 		),
 		revertToSnapshot: connect.NewClient[v2.RevertToSnapshotRequest, v2.RevertToSnapshotResponse](
 			httpClient,
 			baseURL+AgentServiceRevertToSnapshotProcedure,
-			connect.WithSchema(agentServiceRevertToSnapshotMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("RevertToSnapshot")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteSnapshot: connect.NewClient[v2.DeleteSnapshotRequest, v2.DeleteSnapshotResponse](
 			httpClient,
 			baseURL+AgentServiceDeleteSnapshotProcedure,
-			connect.WithSchema(agentServiceDeleteSnapshotMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("DeleteSnapshot")),
 			connect.WithClientOptions(opts...),
 		),
 		getTaskStatus: connect.NewClient[v2.GetTaskStatusRequest, v2.Task](
 			httpClient,
 			baseURL+AgentServiceGetTaskStatusProcedure,
-			connect.WithSchema(agentServiceGetTaskStatusMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("GetTaskStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		cancelTask: connect.NewClient[v2.CancelTaskRequest, v2.CancelTaskResponse](
 			httpClient,
 			baseURL+AgentServiceCancelTaskProcedure,
-			connect.WithSchema(agentServiceCancelTaskMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("CancelTask")),
 			connect.WithClientOptions(opts...),
 		),
 		configureNetwork: connect.NewClient[v2.ConfigureNetworkRequest, v2.ConfigureNetworkResponse](
 			httpClient,
 			baseURL+AgentServiceConfigureNetworkProcedure,
-			connect.WithSchema(agentServiceConfigureNetworkMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("ConfigureNetwork")),
 			connect.WithClientOptions(opts...),
 		),
 		configureStorage: connect.NewClient[v2.ConfigureStorageRequest, v2.ConfigureStorageResponse](
 			httpClient,
 			baseURL+AgentServiceConfigureStorageProcedure,
-			connect.WithSchema(agentServiceConfigureStorageMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("ConfigureStorage")),
 			connect.WithClientOptions(opts...),
 		),
 		configureTime: connect.NewClient[v2.ConfigureTimeRequest, v2.ConfigureTimeResponse](
 			httpClient,
 			baseURL+AgentServiceConfigureTimeProcedure,
-			connect.WithSchema(agentServiceConfigureTimeMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("ConfigureTime")),
 			connect.WithClientOptions(opts...),
 		),
 		setMaintenanceMode: connect.NewClient[v2.SetMaintenanceModeRequest, v2.SetMaintenanceModeResponse](
 			httpClient,
 			baseURL+AgentServiceSetMaintenanceModeProcedure,
-			connect.WithSchema(agentServiceSetMaintenanceModeMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("SetMaintenanceMode")),
 			connect.WithClientOptions(opts...),
 		),
 		updateHost: connect.NewClient[v2.UpdateHostRequest, v2.UpdateHostResponse](
 			httpClient,
 			baseURL+AgentServiceUpdateHostProcedure,
-			connect.WithSchema(agentServiceUpdateHostMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("UpdateHost")),
 			connect.WithClientOptions(opts...),
 		),
 		getContentLibraryItems: connect.NewClient[v2.GetContentLibraryItemsRequest, v2.GetContentLibraryItemsResponse](
 			httpClient,
 			baseURL+AgentServiceGetContentLibraryItemsProcedure,
-			connect.WithSchema(agentServiceGetContentLibraryItemsMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("GetContentLibraryItems")),
 			connect.WithClientOptions(opts...),
 		),
 		uploadContentLibraryItem: connect.NewClient[v2.UploadContentLibraryItemRequest, v2.UploadContentLibraryItemResponse](
 			httpClient,
 			baseURL+AgentServiceUploadContentLibraryItemProcedure,
-			connect.WithSchema(agentServiceUploadContentLibraryItemMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("UploadContentLibraryItem")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteContentLibraryItem: connect.NewClient[v2.DeleteContentLibraryItemRequest, v2.DeleteContentLibraryItemResponse](
 			httpClient,
 			baseURL+AgentServiceDeleteContentLibraryItemProcedure,
-			connect.WithSchema(agentServiceDeleteContentLibraryItemMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("DeleteContentLibraryItem")),
 			connect.WithClientOptions(opts...),
 		),
 		getDatastores: connect.NewClient[v2.GetDatastoresRequest, v2.GetDatastoresResponse](
 			httpClient,
 			baseURL+AgentServiceGetDatastoresProcedure,
-			connect.WithSchema(agentServiceGetDatastoresMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("GetDatastores")),
 			connect.WithClientOptions(opts...),
 		),
 		getDatastore: connect.NewClient[v2.GetDatastoreRequest, v2.GetDatastoreResponse](
 			httpClient,
 			baseURL+AgentServiceGetDatastoreProcedure,
-			connect.WithSchema(agentServiceGetDatastoreMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("GetDatastore")),
 			connect.WithClientOptions(opts...),
 		),
 		createDatastore: connect.NewClient[v2.CreateDatastoreRequest, v2.CreateDatastoreResponse](
 			httpClient,
 			baseURL+AgentServiceCreateDatastoreProcedure,
-			connect.WithSchema(agentServiceCreateDatastoreMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("CreateDatastore")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteDatastore: connect.NewClient[v2.DeleteDatastoreRequest, v2.DeleteDatastoreResponse](
 			httpClient,
 			baseURL+AgentServiceDeleteDatastoreProcedure,
-			connect.WithSchema(agentServiceDeleteDatastoreMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("DeleteDatastore")),
 			connect.WithClientOptions(opts...),
 		),
 		getNetworks: connect.NewClient[v2.GetNetworksRequest, v2.GetNetworksResponse](
 			httpClient,
 			baseURL+AgentServiceGetNetworksProcedure,
-			connect.WithSchema(agentServiceGetNetworksMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("GetNetworks")),
 			connect.WithClientOptions(opts...),
 		),
 		getNetwork: connect.NewClient[v2.GetNetworkRequest, v2.GetNetworkResponse](
 			httpClient,
 			baseURL+AgentServiceGetNetworkProcedure,
-			connect.WithSchema(agentServiceGetNetworkMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("GetNetwork")),
 			connect.WithClientOptions(opts...),
 		),
 		createNetwork: connect.NewClient[v2.CreateNetworkRequest, v2.CreateNetworkResponse](
 			httpClient,
 			baseURL+AgentServiceCreateNetworkProcedure,
-			connect.WithSchema(agentServiceCreateNetworkMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("CreateNetwork")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteNetwork: connect.NewClient[v2.DeleteNetworkRequest, v2.DeleteNetworkResponse](
 			httpClient,
 			baseURL+AgentServiceDeleteNetworkProcedure,
-			connect.WithSchema(agentServiceDeleteNetworkMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("DeleteNetwork")),
 			connect.WithClientOptions(opts...),
 		),
 		attachIso: connect.NewClient[v2.AttachIsoRequest, v2.AttachIsoResponse](
 			httpClient,
 			baseURL+AgentServiceAttachIsoProcedure,
-			connect.WithSchema(agentServiceAttachIsoMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("AttachIso")),
 			connect.WithClientOptions(opts...),
 		),
 		detachIso: connect.NewClient[v2.DetachIsoRequest, v2.DetachIsoResponse](
 			httpClient,
 			baseURL+AgentServiceDetachIsoProcedure,
-			connect.WithSchema(agentServiceDetachIsoMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("DetachIso")),
 			connect.WithClientOptions(opts...),
 		),
 		cloneVmFromTemplate: connect.NewClient[v2.CloneVmFromTemplateRequest, v2.CloneVmFromTemplateResponse](
 			httpClient,
 			baseURL+AgentServiceCloneVmFromTemplateProcedure,
-			connect.WithSchema(agentServiceCloneVmFromTemplateMethodDescriptor),
+			connect.WithSchema(agentServiceMethods.ByName("CloneVmFromTemplate")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -795,238 +752,239 @@ type AgentServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	agentServiceMethods := v2.File_pilab_cloud_agent_v2_agent_service_proto.Services().ByName("AgentService").Methods()
 	agentServiceRegisterHostHandler := connect.NewUnaryHandler(
 		AgentServiceRegisterHostProcedure,
 		svc.RegisterHost,
-		connect.WithSchema(agentServiceRegisterHostMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("RegisterHost")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceHeartbeatHandler := connect.NewUnaryHandler(
 		AgentServiceHeartbeatProcedure,
 		svc.Heartbeat,
-		connect.WithSchema(agentServiceHeartbeatMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("Heartbeat")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceGetHostStatusHandler := connect.NewUnaryHandler(
 		AgentServiceGetHostStatusProcedure,
 		svc.GetHostStatus,
-		connect.WithSchema(agentServiceGetHostStatusMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("GetHostStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceCreateVMHandler := connect.NewUnaryHandler(
 		AgentServiceCreateVMProcedure,
 		svc.CreateVM,
-		connect.WithSchema(agentServiceCreateVMMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("CreateVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceGetVMDetailsHandler := connect.NewUnaryHandler(
 		AgentServiceGetVMDetailsProcedure,
 		svc.GetVMDetails,
-		connect.WithSchema(agentServiceGetVMDetailsMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("GetVMDetails")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceUpdateVMHandler := connect.NewUnaryHandler(
 		AgentServiceUpdateVMProcedure,
 		svc.UpdateVM,
-		connect.WithSchema(agentServiceUpdateVMMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("UpdateVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceDeleteVMHandler := connect.NewUnaryHandler(
 		AgentServiceDeleteVMProcedure,
 		svc.DeleteVM,
-		connect.WithSchema(agentServiceDeleteVMMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("DeleteVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceStartVMHandler := connect.NewUnaryHandler(
 		AgentServiceStartVMProcedure,
 		svc.StartVM,
-		connect.WithSchema(agentServiceStartVMMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("StartVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceStopVMHandler := connect.NewUnaryHandler(
 		AgentServiceStopVMProcedure,
 		svc.StopVM,
-		connect.WithSchema(agentServiceStopVMMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("StopVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceForceStopVMHandler := connect.NewUnaryHandler(
 		AgentServiceForceStopVMProcedure,
 		svc.ForceStopVM,
-		connect.WithSchema(agentServiceForceStopVMMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("ForceStopVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceRebootVMHandler := connect.NewUnaryHandler(
 		AgentServiceRebootVMProcedure,
 		svc.RebootVM,
-		connect.WithSchema(agentServiceRebootVMMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("RebootVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServicePauseVMHandler := connect.NewUnaryHandler(
 		AgentServicePauseVMProcedure,
 		svc.PauseVM,
-		connect.WithSchema(agentServicePauseVMMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("PauseVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceResumeVMHandler := connect.NewUnaryHandler(
 		AgentServiceResumeVMProcedure,
 		svc.ResumeVM,
-		connect.WithSchema(agentServiceResumeVMMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("ResumeVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceInitiateMigrationHandler := connect.NewUnaryHandler(
 		AgentServiceInitiateMigrationProcedure,
 		svc.InitiateMigration,
-		connect.WithSchema(agentServiceInitiateMigrationMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("InitiateMigration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServicePrepareForMigrationHandler := connect.NewUnaryHandler(
 		AgentServicePrepareForMigrationProcedure,
 		svc.PrepareForMigration,
-		connect.WithSchema(agentServicePrepareForMigrationMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("PrepareForMigration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceCreateSnapshotHandler := connect.NewUnaryHandler(
 		AgentServiceCreateSnapshotProcedure,
 		svc.CreateSnapshot,
-		connect.WithSchema(agentServiceCreateSnapshotMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("CreateSnapshot")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceRevertToSnapshotHandler := connect.NewUnaryHandler(
 		AgentServiceRevertToSnapshotProcedure,
 		svc.RevertToSnapshot,
-		connect.WithSchema(agentServiceRevertToSnapshotMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("RevertToSnapshot")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceDeleteSnapshotHandler := connect.NewUnaryHandler(
 		AgentServiceDeleteSnapshotProcedure,
 		svc.DeleteSnapshot,
-		connect.WithSchema(agentServiceDeleteSnapshotMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("DeleteSnapshot")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceGetTaskStatusHandler := connect.NewUnaryHandler(
 		AgentServiceGetTaskStatusProcedure,
 		svc.GetTaskStatus,
-		connect.WithSchema(agentServiceGetTaskStatusMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("GetTaskStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceCancelTaskHandler := connect.NewUnaryHandler(
 		AgentServiceCancelTaskProcedure,
 		svc.CancelTask,
-		connect.WithSchema(agentServiceCancelTaskMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("CancelTask")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceConfigureNetworkHandler := connect.NewUnaryHandler(
 		AgentServiceConfigureNetworkProcedure,
 		svc.ConfigureNetwork,
-		connect.WithSchema(agentServiceConfigureNetworkMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("ConfigureNetwork")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceConfigureStorageHandler := connect.NewUnaryHandler(
 		AgentServiceConfigureStorageProcedure,
 		svc.ConfigureStorage,
-		connect.WithSchema(agentServiceConfigureStorageMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("ConfigureStorage")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceConfigureTimeHandler := connect.NewUnaryHandler(
 		AgentServiceConfigureTimeProcedure,
 		svc.ConfigureTime,
-		connect.WithSchema(agentServiceConfigureTimeMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("ConfigureTime")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceSetMaintenanceModeHandler := connect.NewUnaryHandler(
 		AgentServiceSetMaintenanceModeProcedure,
 		svc.SetMaintenanceMode,
-		connect.WithSchema(agentServiceSetMaintenanceModeMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("SetMaintenanceMode")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceUpdateHostHandler := connect.NewUnaryHandler(
 		AgentServiceUpdateHostProcedure,
 		svc.UpdateHost,
-		connect.WithSchema(agentServiceUpdateHostMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("UpdateHost")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceGetContentLibraryItemsHandler := connect.NewUnaryHandler(
 		AgentServiceGetContentLibraryItemsProcedure,
 		svc.GetContentLibraryItems,
-		connect.WithSchema(agentServiceGetContentLibraryItemsMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("GetContentLibraryItems")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceUploadContentLibraryItemHandler := connect.NewClientStreamHandler(
 		AgentServiceUploadContentLibraryItemProcedure,
 		svc.UploadContentLibraryItem,
-		connect.WithSchema(agentServiceUploadContentLibraryItemMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("UploadContentLibraryItem")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceDeleteContentLibraryItemHandler := connect.NewUnaryHandler(
 		AgentServiceDeleteContentLibraryItemProcedure,
 		svc.DeleteContentLibraryItem,
-		connect.WithSchema(agentServiceDeleteContentLibraryItemMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("DeleteContentLibraryItem")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceGetDatastoresHandler := connect.NewUnaryHandler(
 		AgentServiceGetDatastoresProcedure,
 		svc.GetDatastores,
-		connect.WithSchema(agentServiceGetDatastoresMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("GetDatastores")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceGetDatastoreHandler := connect.NewUnaryHandler(
 		AgentServiceGetDatastoreProcedure,
 		svc.GetDatastore,
-		connect.WithSchema(agentServiceGetDatastoreMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("GetDatastore")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceCreateDatastoreHandler := connect.NewUnaryHandler(
 		AgentServiceCreateDatastoreProcedure,
 		svc.CreateDatastore,
-		connect.WithSchema(agentServiceCreateDatastoreMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("CreateDatastore")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceDeleteDatastoreHandler := connect.NewUnaryHandler(
 		AgentServiceDeleteDatastoreProcedure,
 		svc.DeleteDatastore,
-		connect.WithSchema(agentServiceDeleteDatastoreMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("DeleteDatastore")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceGetNetworksHandler := connect.NewUnaryHandler(
 		AgentServiceGetNetworksProcedure,
 		svc.GetNetworks,
-		connect.WithSchema(agentServiceGetNetworksMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("GetNetworks")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceGetNetworkHandler := connect.NewUnaryHandler(
 		AgentServiceGetNetworkProcedure,
 		svc.GetNetwork,
-		connect.WithSchema(agentServiceGetNetworkMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("GetNetwork")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceCreateNetworkHandler := connect.NewUnaryHandler(
 		AgentServiceCreateNetworkProcedure,
 		svc.CreateNetwork,
-		connect.WithSchema(agentServiceCreateNetworkMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("CreateNetwork")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceDeleteNetworkHandler := connect.NewUnaryHandler(
 		AgentServiceDeleteNetworkProcedure,
 		svc.DeleteNetwork,
-		connect.WithSchema(agentServiceDeleteNetworkMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("DeleteNetwork")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceAttachIsoHandler := connect.NewUnaryHandler(
 		AgentServiceAttachIsoProcedure,
 		svc.AttachIso,
-		connect.WithSchema(agentServiceAttachIsoMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("AttachIso")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceDetachIsoHandler := connect.NewUnaryHandler(
 		AgentServiceDetachIsoProcedure,
 		svc.DetachIso,
-		connect.WithSchema(agentServiceDetachIsoMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("DetachIso")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceCloneVmFromTemplateHandler := connect.NewUnaryHandler(
 		AgentServiceCloneVmFromTemplateProcedure,
 		svc.CloneVmFromTemplate,
-		connect.WithSchema(agentServiceCloneVmFromTemplateMethodDescriptor),
+		connect.WithSchema(agentServiceMethods.ByName("CloneVmFromTemplate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/pilab.cloud.agent.v2.AgentService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

@@ -78,25 +78,6 @@ const (
 	AgentDirectorServiceAcknowledgeAgentConfigurationProcedure = "/agent_director.AgentDirectorService/AcknowledgeAgentConfiguration"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	agentDirectorServiceServiceDescriptor                             = v1.File_pilab_cloud_agent_v1_agent_director_proto.Services().ByName("AgentDirectorService")
-	agentDirectorServiceReportHeartbeatMethodDescriptor               = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportHeartbeat")
-	agentDirectorServiceReportHypervisorStatusMethodDescriptor        = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportHypervisorStatus")
-	agentDirectorServiceReportVMStatusMethodDescriptor                = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportVMStatus")
-	agentDirectorServiceReportDiskStatusMethodDescriptor              = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportDiskStatus")
-	agentDirectorServiceReportNetworkInterfaceStatusMethodDescriptor  = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportNetworkInterfaceStatus")
-	agentDirectorServiceReportHardwareStatusMethodDescriptor          = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportHardwareStatus")
-	agentDirectorServiceReportVMMetricsMethodDescriptor               = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportVMMetrics")
-	agentDirectorServiceReportHypervisorResourceUsageMethodDescriptor = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportHypervisorResourceUsage")
-	agentDirectorServiceReportEventMethodDescriptor                   = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportEvent")
-	agentDirectorServiceStreamLogsMethodDescriptor                    = agentDirectorServiceServiceDescriptor.Methods().ByName("StreamLogs")
-	agentDirectorServiceReportTaskProgressMethodDescriptor            = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportTaskProgress")
-	agentDirectorServiceReportWorkflowStateMethodDescriptor           = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportWorkflowState")
-	agentDirectorServiceReportAgentUpdateStatusMethodDescriptor       = agentDirectorServiceServiceDescriptor.Methods().ByName("ReportAgentUpdateStatus")
-	agentDirectorServiceAcknowledgeAgentConfigurationMethodDescriptor = agentDirectorServiceServiceDescriptor.Methods().ByName("AcknowledgeAgentConfiguration")
-)
-
 // AgentDirectorServiceClient is a client for the agent_director.AgentDirectorService service.
 type AgentDirectorServiceClient interface {
 	// --- Status and Health Reporting ---
@@ -129,89 +110,90 @@ type AgentDirectorServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewAgentDirectorServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) AgentDirectorServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	agentDirectorServiceMethods := v1.File_pilab_cloud_agent_v1_agent_director_proto.Services().ByName("AgentDirectorService").Methods()
 	return &agentDirectorServiceClient{
 		reportHeartbeat: connect.NewClient[v1.HeartbeatRequest, v1.HeartbeatResponse](
 			httpClient,
 			baseURL+AgentDirectorServiceReportHeartbeatProcedure,
-			connect.WithSchema(agentDirectorServiceReportHeartbeatMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportHeartbeat")),
 			connect.WithClientOptions(opts...),
 		),
 		reportHypervisorStatus: connect.NewClient[v1.HypervisorStatus, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceReportHypervisorStatusProcedure,
-			connect.WithSchema(agentDirectorServiceReportHypervisorStatusMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportHypervisorStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		reportVMStatus: connect.NewClient[v1.VMStatusUpdate, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceReportVMStatusProcedure,
-			connect.WithSchema(agentDirectorServiceReportVMStatusMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportVMStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		reportDiskStatus: connect.NewClient[v1.DiskStatusUpdate, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceReportDiskStatusProcedure,
-			connect.WithSchema(agentDirectorServiceReportDiskStatusMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportDiskStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		reportNetworkInterfaceStatus: connect.NewClient[v1.NetworkInterfaceStatusUpdate, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceReportNetworkInterfaceStatusProcedure,
-			connect.WithSchema(agentDirectorServiceReportNetworkInterfaceStatusMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportNetworkInterfaceStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		reportHardwareStatus: connect.NewClient[v1.HardwareStatusUpdate, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceReportHardwareStatusProcedure,
-			connect.WithSchema(agentDirectorServiceReportHardwareStatusMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportHardwareStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		reportVMMetrics: connect.NewClient[v1.VMMetrics, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceReportVMMetricsProcedure,
-			connect.WithSchema(agentDirectorServiceReportVMMetricsMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportVMMetrics")),
 			connect.WithClientOptions(opts...),
 		),
 		reportHypervisorResourceUsage: connect.NewClient[v1.HypervisorResourceUsage, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceReportHypervisorResourceUsageProcedure,
-			connect.WithSchema(agentDirectorServiceReportHypervisorResourceUsageMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportHypervisorResourceUsage")),
 			connect.WithClientOptions(opts...),
 		),
 		reportEvent: connect.NewClient[v1.Event, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceReportEventProcedure,
-			connect.WithSchema(agentDirectorServiceReportEventMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportEvent")),
 			connect.WithClientOptions(opts...),
 		),
 		streamLogs: connect.NewClient[v1.LogRequest, v1.LogResponse](
 			httpClient,
 			baseURL+AgentDirectorServiceStreamLogsProcedure,
-			connect.WithSchema(agentDirectorServiceStreamLogsMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("StreamLogs")),
 			connect.WithClientOptions(opts...),
 		),
 		reportTaskProgress: connect.NewClient[v1.TaskProgress, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceReportTaskProgressProcedure,
-			connect.WithSchema(agentDirectorServiceReportTaskProgressMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportTaskProgress")),
 			connect.WithClientOptions(opts...),
 		),
 		reportWorkflowState: connect.NewClient[v1.WorkflowState, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceReportWorkflowStateProcedure,
-			connect.WithSchema(agentDirectorServiceReportWorkflowStateMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportWorkflowState")),
 			connect.WithClientOptions(opts...),
 		),
 		reportAgentUpdateStatus: connect.NewClient[v1.AgentUpdateStatus, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceReportAgentUpdateStatusProcedure,
-			connect.WithSchema(agentDirectorServiceReportAgentUpdateStatusMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("ReportAgentUpdateStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		acknowledgeAgentConfiguration: connect.NewClient[v1.AgentConfiguration, emptypb.Empty](
 			httpClient,
 			baseURL+AgentDirectorServiceAcknowledgeAgentConfigurationProcedure,
-			connect.WithSchema(agentDirectorServiceAcknowledgeAgentConfigurationMethodDescriptor),
+			connect.WithSchema(agentDirectorServiceMethods.ByName("AcknowledgeAgentConfiguration")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -338,88 +320,89 @@ type AgentDirectorServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewAgentDirectorServiceHandler(svc AgentDirectorServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	agentDirectorServiceMethods := v1.File_pilab_cloud_agent_v1_agent_director_proto.Services().ByName("AgentDirectorService").Methods()
 	agentDirectorServiceReportHeartbeatHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportHeartbeatProcedure,
 		svc.ReportHeartbeat,
-		connect.WithSchema(agentDirectorServiceReportHeartbeatMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportHeartbeat")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceReportHypervisorStatusHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportHypervisorStatusProcedure,
 		svc.ReportHypervisorStatus,
-		connect.WithSchema(agentDirectorServiceReportHypervisorStatusMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportHypervisorStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceReportVMStatusHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportVMStatusProcedure,
 		svc.ReportVMStatus,
-		connect.WithSchema(agentDirectorServiceReportVMStatusMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportVMStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceReportDiskStatusHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportDiskStatusProcedure,
 		svc.ReportDiskStatus,
-		connect.WithSchema(agentDirectorServiceReportDiskStatusMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportDiskStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceReportNetworkInterfaceStatusHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportNetworkInterfaceStatusProcedure,
 		svc.ReportNetworkInterfaceStatus,
-		connect.WithSchema(agentDirectorServiceReportNetworkInterfaceStatusMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportNetworkInterfaceStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceReportHardwareStatusHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportHardwareStatusProcedure,
 		svc.ReportHardwareStatus,
-		connect.WithSchema(agentDirectorServiceReportHardwareStatusMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportHardwareStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceReportVMMetricsHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportVMMetricsProcedure,
 		svc.ReportVMMetrics,
-		connect.WithSchema(agentDirectorServiceReportVMMetricsMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportVMMetrics")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceReportHypervisorResourceUsageHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportHypervisorResourceUsageProcedure,
 		svc.ReportHypervisorResourceUsage,
-		connect.WithSchema(agentDirectorServiceReportHypervisorResourceUsageMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportHypervisorResourceUsage")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceReportEventHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportEventProcedure,
 		svc.ReportEvent,
-		connect.WithSchema(agentDirectorServiceReportEventMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportEvent")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceStreamLogsHandler := connect.NewBidiStreamHandler(
 		AgentDirectorServiceStreamLogsProcedure,
 		svc.StreamLogs,
-		connect.WithSchema(agentDirectorServiceStreamLogsMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("StreamLogs")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceReportTaskProgressHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportTaskProgressProcedure,
 		svc.ReportTaskProgress,
-		connect.WithSchema(agentDirectorServiceReportTaskProgressMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportTaskProgress")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceReportWorkflowStateHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportWorkflowStateProcedure,
 		svc.ReportWorkflowState,
-		connect.WithSchema(agentDirectorServiceReportWorkflowStateMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportWorkflowState")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceReportAgentUpdateStatusHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceReportAgentUpdateStatusProcedure,
 		svc.ReportAgentUpdateStatus,
-		connect.WithSchema(agentDirectorServiceReportAgentUpdateStatusMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("ReportAgentUpdateStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentDirectorServiceAcknowledgeAgentConfigurationHandler := connect.NewUnaryHandler(
 		AgentDirectorServiceAcknowledgeAgentConfigurationProcedure,
 		svc.AcknowledgeAgentConfiguration,
-		connect.WithSchema(agentDirectorServiceAcknowledgeAgentConfigurationMethodDescriptor),
+		connect.WithSchema(agentDirectorServiceMethods.ByName("AcknowledgeAgentConfiguration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/agent_director.AgentDirectorService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

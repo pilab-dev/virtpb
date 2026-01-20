@@ -99,32 +99,6 @@ const (
 	VirtualizationServiceListAgentsProcedure = "/virtualization.VirtualizationService/ListAgents"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	virtualizationServiceServiceDescriptor                          = v1.File_pilab_cloud_virtualization_v1_virtualization_proto.Services().ByName("VirtualizationService")
-	virtualizationServiceCreateTenantMethodDescriptor               = virtualizationServiceServiceDescriptor.Methods().ByName("CreateTenant")
-	virtualizationServiceGetTenantMethodDescriptor                  = virtualizationServiceServiceDescriptor.Methods().ByName("GetTenant")
-	virtualizationServiceListTenantsMethodDescriptor                = virtualizationServiceServiceDescriptor.Methods().ByName("ListTenants")
-	virtualizationServiceUpdateTenantMethodDescriptor               = virtualizationServiceServiceDescriptor.Methods().ByName("UpdateTenant")
-	virtualizationServiceDeleteTenantMethodDescriptor               = virtualizationServiceServiceDescriptor.Methods().ByName("DeleteTenant")
-	virtualizationServiceCreatePortGroupMethodDescriptor            = virtualizationServiceServiceDescriptor.Methods().ByName("CreatePortGroup")
-	virtualizationServiceGetPortGroupMethodDescriptor               = virtualizationServiceServiceDescriptor.Methods().ByName("GetPortGroup")
-	virtualizationServiceListPortGroupsMethodDescriptor             = virtualizationServiceServiceDescriptor.Methods().ByName("ListPortGroups")
-	virtualizationServiceUpdatePortGroupMethodDescriptor            = virtualizationServiceServiceDescriptor.Methods().ByName("UpdatePortGroup")
-	virtualizationServiceDeletePortGroupMethodDescriptor            = virtualizationServiceServiceDescriptor.Methods().ByName("DeletePortGroup")
-	virtualizationServiceSetPortGroupSystemServicesMethodDescriptor = virtualizationServiceServiceDescriptor.Methods().ByName("SetPortGroupSystemServices")
-	virtualizationServiceGetPortGroupSystemServicesMethodDescriptor = virtualizationServiceServiceDescriptor.Methods().ByName("GetPortGroupSystemServices")
-	virtualizationServiceCreateNetworkMethodDescriptor              = virtualizationServiceServiceDescriptor.Methods().ByName("CreateNetwork")
-	virtualizationServiceGetNetworkMethodDescriptor                 = virtualizationServiceServiceDescriptor.Methods().ByName("GetNetwork")
-	virtualizationServiceListNetworksMethodDescriptor               = virtualizationServiceServiceDescriptor.Methods().ByName("ListNetworks")
-	virtualizationServiceUpdateNetworkMethodDescriptor              = virtualizationServiceServiceDescriptor.Methods().ByName("UpdateNetwork")
-	virtualizationServiceDeleteNetworkMethodDescriptor              = virtualizationServiceServiceDescriptor.Methods().ByName("DeleteNetwork")
-	virtualizationServiceAttachVMToPortGroupMethodDescriptor        = virtualizationServiceServiceDescriptor.Methods().ByName("AttachVMToPortGroup")
-	virtualizationServiceDetachVMFromPortGroupMethodDescriptor      = virtualizationServiceServiceDescriptor.Methods().ByName("DetachVMFromPortGroup")
-	virtualizationServiceGetAgentStatusMethodDescriptor             = virtualizationServiceServiceDescriptor.Methods().ByName("GetAgentStatus")
-	virtualizationServiceListAgentsMethodDescriptor                 = virtualizationServiceServiceDescriptor.Methods().ByName("ListAgents")
-)
-
 // VirtualizationServiceClient is a client for the virtualization.VirtualizationService service.
 type VirtualizationServiceClient interface {
 	// Tenant Management
@@ -165,131 +139,132 @@ type VirtualizationServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewVirtualizationServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) VirtualizationServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	virtualizationServiceMethods := v1.File_pilab_cloud_virtualization_v1_virtualization_proto.Services().ByName("VirtualizationService").Methods()
 	return &virtualizationServiceClient{
 		createTenant: connect.NewClient[v1.CreateTenantRequest, v1.Tenant](
 			httpClient,
 			baseURL+VirtualizationServiceCreateTenantProcedure,
-			connect.WithSchema(virtualizationServiceCreateTenantMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("CreateTenant")),
 			connect.WithClientOptions(opts...),
 		),
 		getTenant: connect.NewClient[v1.GetTenantRequest, v1.Tenant](
 			httpClient,
 			baseURL+VirtualizationServiceGetTenantProcedure,
-			connect.WithSchema(virtualizationServiceGetTenantMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("GetTenant")),
 			connect.WithClientOptions(opts...),
 		),
 		listTenants: connect.NewClient[v1.ListTenantsRequest, v1.ListTenantsResponse](
 			httpClient,
 			baseURL+VirtualizationServiceListTenantsProcedure,
-			connect.WithSchema(virtualizationServiceListTenantsMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("ListTenants")),
 			connect.WithClientOptions(opts...),
 		),
 		updateTenant: connect.NewClient[v1.UpdateTenantRequest, v1.Tenant](
 			httpClient,
 			baseURL+VirtualizationServiceUpdateTenantProcedure,
-			connect.WithSchema(virtualizationServiceUpdateTenantMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("UpdateTenant")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteTenant: connect.NewClient[v1.DeleteTenantRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VirtualizationServiceDeleteTenantProcedure,
-			connect.WithSchema(virtualizationServiceDeleteTenantMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("DeleteTenant")),
 			connect.WithClientOptions(opts...),
 		),
 		createPortGroup: connect.NewClient[v1.CreatePortGroupRequest, v1.PortGroup](
 			httpClient,
 			baseURL+VirtualizationServiceCreatePortGroupProcedure,
-			connect.WithSchema(virtualizationServiceCreatePortGroupMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("CreatePortGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		getPortGroup: connect.NewClient[v1.GetPortGroupRequest, v1.PortGroup](
 			httpClient,
 			baseURL+VirtualizationServiceGetPortGroupProcedure,
-			connect.WithSchema(virtualizationServiceGetPortGroupMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("GetPortGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		listPortGroups: connect.NewClient[v1.ListPortGroupsRequest, v1.ListPortGroupsResponse](
 			httpClient,
 			baseURL+VirtualizationServiceListPortGroupsProcedure,
-			connect.WithSchema(virtualizationServiceListPortGroupsMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("ListPortGroups")),
 			connect.WithClientOptions(opts...),
 		),
 		updatePortGroup: connect.NewClient[v1.UpdatePortGroupRequest, v1.PortGroup](
 			httpClient,
 			baseURL+VirtualizationServiceUpdatePortGroupProcedure,
-			connect.WithSchema(virtualizationServiceUpdatePortGroupMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("UpdatePortGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		deletePortGroup: connect.NewClient[v1.DeletePortGroupRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VirtualizationServiceDeletePortGroupProcedure,
-			connect.WithSchema(virtualizationServiceDeletePortGroupMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("DeletePortGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		setPortGroupSystemServices: connect.NewClient[v1.SetPortGroupSystemServicesRequest, v1.PortGroup](
 			httpClient,
 			baseURL+VirtualizationServiceSetPortGroupSystemServicesProcedure,
-			connect.WithSchema(virtualizationServiceSetPortGroupSystemServicesMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("SetPortGroupSystemServices")),
 			connect.WithClientOptions(opts...),
 		),
 		getPortGroupSystemServices: connect.NewClient[v1.GetPortGroupSystemServicesRequest, v1.SystemServicesConfig](
 			httpClient,
 			baseURL+VirtualizationServiceGetPortGroupSystemServicesProcedure,
-			connect.WithSchema(virtualizationServiceGetPortGroupSystemServicesMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("GetPortGroupSystemServices")),
 			connect.WithClientOptions(opts...),
 		),
 		createNetwork: connect.NewClient[v1.CreateNetworkRequest, v1.Network](
 			httpClient,
 			baseURL+VirtualizationServiceCreateNetworkProcedure,
-			connect.WithSchema(virtualizationServiceCreateNetworkMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("CreateNetwork")),
 			connect.WithClientOptions(opts...),
 		),
 		getNetwork: connect.NewClient[v1.GetNetworkRequest, v1.Network](
 			httpClient,
 			baseURL+VirtualizationServiceGetNetworkProcedure,
-			connect.WithSchema(virtualizationServiceGetNetworkMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("GetNetwork")),
 			connect.WithClientOptions(opts...),
 		),
 		listNetworks: connect.NewClient[v1.ListNetworksRequest, v1.ListNetworksResponse](
 			httpClient,
 			baseURL+VirtualizationServiceListNetworksProcedure,
-			connect.WithSchema(virtualizationServiceListNetworksMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("ListNetworks")),
 			connect.WithClientOptions(opts...),
 		),
 		updateNetwork: connect.NewClient[v1.UpdateNetworkRequest, v1.Network](
 			httpClient,
 			baseURL+VirtualizationServiceUpdateNetworkProcedure,
-			connect.WithSchema(virtualizationServiceUpdateNetworkMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("UpdateNetwork")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteNetwork: connect.NewClient[v1.DeleteNetworkRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VirtualizationServiceDeleteNetworkProcedure,
-			connect.WithSchema(virtualizationServiceDeleteNetworkMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("DeleteNetwork")),
 			connect.WithClientOptions(opts...),
 		),
 		attachVMToPortGroup: connect.NewClient[v1.AttachVMToPortGroupRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VirtualizationServiceAttachVMToPortGroupProcedure,
-			connect.WithSchema(virtualizationServiceAttachVMToPortGroupMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("AttachVMToPortGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		detachVMFromPortGroup: connect.NewClient[v1.DetachVMFromPortGroupRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VirtualizationServiceDetachVMFromPortGroupProcedure,
-			connect.WithSchema(virtualizationServiceDetachVMFromPortGroupMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("DetachVMFromPortGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		getAgentStatus: connect.NewClient[v1.GetAgentStatusRequest, v1.AgentStatusResponse](
 			httpClient,
 			baseURL+VirtualizationServiceGetAgentStatusProcedure,
-			connect.WithSchema(virtualizationServiceGetAgentStatusMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("GetAgentStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		listAgents: connect.NewClient[v1.ListAgentsRequest, v1.ListAgentsResponse](
 			httpClient,
 			baseURL+VirtualizationServiceListAgentsProcedure,
-			connect.WithSchema(virtualizationServiceListAgentsMethodDescriptor),
+			connect.WithSchema(virtualizationServiceMethods.ByName("ListAgents")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -463,130 +438,131 @@ type VirtualizationServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewVirtualizationServiceHandler(svc VirtualizationServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	virtualizationServiceMethods := v1.File_pilab_cloud_virtualization_v1_virtualization_proto.Services().ByName("VirtualizationService").Methods()
 	virtualizationServiceCreateTenantHandler := connect.NewUnaryHandler(
 		VirtualizationServiceCreateTenantProcedure,
 		svc.CreateTenant,
-		connect.WithSchema(virtualizationServiceCreateTenantMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("CreateTenant")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceGetTenantHandler := connect.NewUnaryHandler(
 		VirtualizationServiceGetTenantProcedure,
 		svc.GetTenant,
-		connect.WithSchema(virtualizationServiceGetTenantMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("GetTenant")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceListTenantsHandler := connect.NewUnaryHandler(
 		VirtualizationServiceListTenantsProcedure,
 		svc.ListTenants,
-		connect.WithSchema(virtualizationServiceListTenantsMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("ListTenants")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceUpdateTenantHandler := connect.NewUnaryHandler(
 		VirtualizationServiceUpdateTenantProcedure,
 		svc.UpdateTenant,
-		connect.WithSchema(virtualizationServiceUpdateTenantMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("UpdateTenant")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceDeleteTenantHandler := connect.NewUnaryHandler(
 		VirtualizationServiceDeleteTenantProcedure,
 		svc.DeleteTenant,
-		connect.WithSchema(virtualizationServiceDeleteTenantMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("DeleteTenant")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceCreatePortGroupHandler := connect.NewUnaryHandler(
 		VirtualizationServiceCreatePortGroupProcedure,
 		svc.CreatePortGroup,
-		connect.WithSchema(virtualizationServiceCreatePortGroupMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("CreatePortGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceGetPortGroupHandler := connect.NewUnaryHandler(
 		VirtualizationServiceGetPortGroupProcedure,
 		svc.GetPortGroup,
-		connect.WithSchema(virtualizationServiceGetPortGroupMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("GetPortGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceListPortGroupsHandler := connect.NewUnaryHandler(
 		VirtualizationServiceListPortGroupsProcedure,
 		svc.ListPortGroups,
-		connect.WithSchema(virtualizationServiceListPortGroupsMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("ListPortGroups")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceUpdatePortGroupHandler := connect.NewUnaryHandler(
 		VirtualizationServiceUpdatePortGroupProcedure,
 		svc.UpdatePortGroup,
-		connect.WithSchema(virtualizationServiceUpdatePortGroupMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("UpdatePortGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceDeletePortGroupHandler := connect.NewUnaryHandler(
 		VirtualizationServiceDeletePortGroupProcedure,
 		svc.DeletePortGroup,
-		connect.WithSchema(virtualizationServiceDeletePortGroupMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("DeletePortGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceSetPortGroupSystemServicesHandler := connect.NewUnaryHandler(
 		VirtualizationServiceSetPortGroupSystemServicesProcedure,
 		svc.SetPortGroupSystemServices,
-		connect.WithSchema(virtualizationServiceSetPortGroupSystemServicesMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("SetPortGroupSystemServices")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceGetPortGroupSystemServicesHandler := connect.NewUnaryHandler(
 		VirtualizationServiceGetPortGroupSystemServicesProcedure,
 		svc.GetPortGroupSystemServices,
-		connect.WithSchema(virtualizationServiceGetPortGroupSystemServicesMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("GetPortGroupSystemServices")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceCreateNetworkHandler := connect.NewUnaryHandler(
 		VirtualizationServiceCreateNetworkProcedure,
 		svc.CreateNetwork,
-		connect.WithSchema(virtualizationServiceCreateNetworkMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("CreateNetwork")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceGetNetworkHandler := connect.NewUnaryHandler(
 		VirtualizationServiceGetNetworkProcedure,
 		svc.GetNetwork,
-		connect.WithSchema(virtualizationServiceGetNetworkMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("GetNetwork")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceListNetworksHandler := connect.NewUnaryHandler(
 		VirtualizationServiceListNetworksProcedure,
 		svc.ListNetworks,
-		connect.WithSchema(virtualizationServiceListNetworksMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("ListNetworks")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceUpdateNetworkHandler := connect.NewUnaryHandler(
 		VirtualizationServiceUpdateNetworkProcedure,
 		svc.UpdateNetwork,
-		connect.WithSchema(virtualizationServiceUpdateNetworkMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("UpdateNetwork")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceDeleteNetworkHandler := connect.NewUnaryHandler(
 		VirtualizationServiceDeleteNetworkProcedure,
 		svc.DeleteNetwork,
-		connect.WithSchema(virtualizationServiceDeleteNetworkMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("DeleteNetwork")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceAttachVMToPortGroupHandler := connect.NewUnaryHandler(
 		VirtualizationServiceAttachVMToPortGroupProcedure,
 		svc.AttachVMToPortGroup,
-		connect.WithSchema(virtualizationServiceAttachVMToPortGroupMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("AttachVMToPortGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceDetachVMFromPortGroupHandler := connect.NewUnaryHandler(
 		VirtualizationServiceDetachVMFromPortGroupProcedure,
 		svc.DetachVMFromPortGroup,
-		connect.WithSchema(virtualizationServiceDetachVMFromPortGroupMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("DetachVMFromPortGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceGetAgentStatusHandler := connect.NewUnaryHandler(
 		VirtualizationServiceGetAgentStatusProcedure,
 		svc.GetAgentStatus,
-		connect.WithSchema(virtualizationServiceGetAgentStatusMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("GetAgentStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	virtualizationServiceListAgentsHandler := connect.NewUnaryHandler(
 		VirtualizationServiceListAgentsProcedure,
 		svc.ListAgents,
-		connect.WithSchema(virtualizationServiceListAgentsMethodDescriptor),
+		connect.WithSchema(virtualizationServiceMethods.ByName("ListAgents")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/virtualization.VirtualizationService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

@@ -88,29 +88,6 @@ const (
 	HostServiceDisableNetworkInterfaceProcedure = "/pilab.cloud.director.v1.HostService/DisableNetworkInterface"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	hostServiceServiceDescriptor                         = v1.File_pilab_cloud_frontend_v1_host_service_proto.Services().ByName("HostService")
-	hostServiceGetHostOverviewMethodDescriptor           = hostServiceServiceDescriptor.Methods().ByName("GetHostOverview")
-	hostServiceGetMonitoringDataMethodDescriptor         = hostServiceServiceDescriptor.Methods().ByName("GetMonitoringData")
-	hostServiceListHostVMsMethodDescriptor               = hostServiceServiceDescriptor.Methods().ByName("ListHostVMs")
-	hostServiceGetHostPermissionsMethodDescriptor        = hostServiceServiceDescriptor.Methods().ByName("GetHostPermissions")
-	hostServiceListHostDatastoresMethodDescriptor        = hostServiceServiceDescriptor.Methods().ByName("ListHostDatastores")
-	hostServiceMountDatastoreMethodDescriptor            = hostServiceServiceDescriptor.Methods().ByName("MountDatastore")
-	hostServiceUnmountDatastoreMethodDescriptor          = hostServiceServiceDescriptor.Methods().ByName("UnmountDatastore")
-	hostServiceGetHostSystemSettingsMethodDescriptor     = hostServiceServiceDescriptor.Methods().ByName("GetHostSystemSettings")
-	hostServiceUpdateNTPConfigMethodDescriptor           = hostServiceServiceDescriptor.Methods().ByName("UpdateNTPConfig")
-	hostServiceUpdateTimezoneMethodDescriptor            = hostServiceServiceDescriptor.Methods().ByName("UpdateTimezone")
-	hostServiceUpdateDNSSettingsMethodDescriptor         = hostServiceServiceDescriptor.Methods().ByName("UpdateDNSSettings")
-	hostServiceUpdateRoutingSettingsMethodDescriptor     = hostServiceServiceDescriptor.Methods().ByName("UpdateRoutingSettings")
-	hostServiceGetMaintenanceModeStatusMethodDescriptor  = hostServiceServiceDescriptor.Methods().ByName("GetMaintenanceModeStatus")
-	hostServiceEnterMaintenanceModeMethodDescriptor      = hostServiceServiceDescriptor.Methods().ByName("EnterMaintenanceMode")
-	hostServiceExitMaintenanceModeMethodDescriptor       = hostServiceServiceDescriptor.Methods().ByName("ExitMaintenanceMode")
-	hostServiceListHostNetworkInterfacesMethodDescriptor = hostServiceServiceDescriptor.Methods().ByName("ListHostNetworkInterfaces")
-	hostServiceEnableNetworkInterfaceMethodDescriptor    = hostServiceServiceDescriptor.Methods().ByName("EnableNetworkInterface")
-	hostServiceDisableNetworkInterfaceMethodDescriptor   = hostServiceServiceDescriptor.Methods().ByName("DisableNetworkInterface")
-)
-
 // HostServiceClient is a client for the pilab.cloud.director.v1.HostService service.
 type HostServiceClient interface {
 	// Host Overview
@@ -150,113 +127,114 @@ type HostServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewHostServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) HostServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	hostServiceMethods := v1.File_pilab_cloud_frontend_v1_host_service_proto.Services().ByName("HostService").Methods()
 	return &hostServiceClient{
 		getHostOverview: connect.NewClient[v1.GetHostOverviewRequest, v1.HostOverview](
 			httpClient,
 			baseURL+HostServiceGetHostOverviewProcedure,
-			connect.WithSchema(hostServiceGetHostOverviewMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("GetHostOverview")),
 			connect.WithClientOptions(opts...),
 		),
 		getMonitoringData: connect.NewClient[v1.GetMonitoringDataRequest, v1.MonitoringDataResponse](
 			httpClient,
 			baseURL+HostServiceGetMonitoringDataProcedure,
-			connect.WithSchema(hostServiceGetMonitoringDataMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("GetMonitoringData")),
 			connect.WithClientOptions(opts...),
 		),
 		listHostVMs: connect.NewClient[v1.ListHostVMsRequest, v1.HostVMsResponse](
 			httpClient,
 			baseURL+HostServiceListHostVMsProcedure,
-			connect.WithSchema(hostServiceListHostVMsMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("ListHostVMs")),
 			connect.WithClientOptions(opts...),
 		),
 		getHostPermissions: connect.NewClient[v1.GetHostPermissionsRequest, v1.HostPermissionsResponse](
 			httpClient,
 			baseURL+HostServiceGetHostPermissionsProcedure,
-			connect.WithSchema(hostServiceGetHostPermissionsMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("GetHostPermissions")),
 			connect.WithClientOptions(opts...),
 		),
 		listHostDatastores: connect.NewClient[v1.ListHostDatastoresRequest, v1.HostDatastoresResponse](
 			httpClient,
 			baseURL+HostServiceListHostDatastoresProcedure,
-			connect.WithSchema(hostServiceListHostDatastoresMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("ListHostDatastores")),
 			connect.WithClientOptions(opts...),
 		),
 		mountDatastore: connect.NewClient[v1.MountDatastoreRequest, v1.MountDatastoreResponse](
 			httpClient,
 			baseURL+HostServiceMountDatastoreProcedure,
-			connect.WithSchema(hostServiceMountDatastoreMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("MountDatastore")),
 			connect.WithClientOptions(opts...),
 		),
 		unmountDatastore: connect.NewClient[v1.UnmountDatastoreRequest, v1.UnmountDatastoreResponse](
 			httpClient,
 			baseURL+HostServiceUnmountDatastoreProcedure,
-			connect.WithSchema(hostServiceUnmountDatastoreMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("UnmountDatastore")),
 			connect.WithClientOptions(opts...),
 		),
 		getHostSystemSettings: connect.NewClient[v1.GetHostSystemSettingsRequest, v1.HostSystemSettingsResponse](
 			httpClient,
 			baseURL+HostServiceGetHostSystemSettingsProcedure,
-			connect.WithSchema(hostServiceGetHostSystemSettingsMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("GetHostSystemSettings")),
 			connect.WithClientOptions(opts...),
 		),
 		updateNTPConfig: connect.NewClient[v1.UpdateNTPConfigRequest, v1.UpdateNTPConfigResponse](
 			httpClient,
 			baseURL+HostServiceUpdateNTPConfigProcedure,
-			connect.WithSchema(hostServiceUpdateNTPConfigMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("UpdateNTPConfig")),
 			connect.WithClientOptions(opts...),
 		),
 		updateTimezone: connect.NewClient[v1.UpdateTimezoneRequest, v1.UpdateTimezoneResponse](
 			httpClient,
 			baseURL+HostServiceUpdateTimezoneProcedure,
-			connect.WithSchema(hostServiceUpdateTimezoneMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("UpdateTimezone")),
 			connect.WithClientOptions(opts...),
 		),
 		updateDNSSettings: connect.NewClient[v1.UpdateDNSSettingsRequest, v1.UpdateDNSSettingsResponse](
 			httpClient,
 			baseURL+HostServiceUpdateDNSSettingsProcedure,
-			connect.WithSchema(hostServiceUpdateDNSSettingsMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("UpdateDNSSettings")),
 			connect.WithClientOptions(opts...),
 		),
 		updateRoutingSettings: connect.NewClient[v1.UpdateRoutingSettingsRequest, v1.UpdateRoutingSettingsResponse](
 			httpClient,
 			baseURL+HostServiceUpdateRoutingSettingsProcedure,
-			connect.WithSchema(hostServiceUpdateRoutingSettingsMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("UpdateRoutingSettings")),
 			connect.WithClientOptions(opts...),
 		),
 		getMaintenanceModeStatus: connect.NewClient[v1.GetMaintenanceModeStatusRequest, v1.MaintenanceModeStatusResponse](
 			httpClient,
 			baseURL+HostServiceGetMaintenanceModeStatusProcedure,
-			connect.WithSchema(hostServiceGetMaintenanceModeStatusMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("GetMaintenanceModeStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		enterMaintenanceMode: connect.NewClient[v1.EnterMaintenanceModeRequest, v1.EnterMaintenanceModeResponse](
 			httpClient,
 			baseURL+HostServiceEnterMaintenanceModeProcedure,
-			connect.WithSchema(hostServiceEnterMaintenanceModeMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("EnterMaintenanceMode")),
 			connect.WithClientOptions(opts...),
 		),
 		exitMaintenanceMode: connect.NewClient[v1.ExitMaintenanceModeRequest, v1.ExitMaintenanceModeResponse](
 			httpClient,
 			baseURL+HostServiceExitMaintenanceModeProcedure,
-			connect.WithSchema(hostServiceExitMaintenanceModeMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("ExitMaintenanceMode")),
 			connect.WithClientOptions(opts...),
 		),
 		listHostNetworkInterfaces: connect.NewClient[v1.ListHostNetworkInterfacesRequest, v1.HostNetworkInterfacesResponse](
 			httpClient,
 			baseURL+HostServiceListHostNetworkInterfacesProcedure,
-			connect.WithSchema(hostServiceListHostNetworkInterfacesMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("ListHostNetworkInterfaces")),
 			connect.WithClientOptions(opts...),
 		),
 		enableNetworkInterface: connect.NewClient[v1.EnableNetworkInterfaceRequest, v1.EnableNetworkInterfaceResponse](
 			httpClient,
 			baseURL+HostServiceEnableNetworkInterfaceProcedure,
-			connect.WithSchema(hostServiceEnableNetworkInterfaceMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("EnableNetworkInterface")),
 			connect.WithClientOptions(opts...),
 		),
 		disableNetworkInterface: connect.NewClient[v1.DisableNetworkInterfaceRequest, v1.DisableNetworkInterfaceResponse](
 			httpClient,
 			baseURL+HostServiceDisableNetworkInterfaceProcedure,
-			connect.WithSchema(hostServiceDisableNetworkInterfaceMethodDescriptor),
+			connect.WithSchema(hostServiceMethods.ByName("DisableNetworkInterface")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -410,112 +388,113 @@ type HostServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewHostServiceHandler(svc HostServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	hostServiceMethods := v1.File_pilab_cloud_frontend_v1_host_service_proto.Services().ByName("HostService").Methods()
 	hostServiceGetHostOverviewHandler := connect.NewUnaryHandler(
 		HostServiceGetHostOverviewProcedure,
 		svc.GetHostOverview,
-		connect.WithSchema(hostServiceGetHostOverviewMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("GetHostOverview")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceGetMonitoringDataHandler := connect.NewUnaryHandler(
 		HostServiceGetMonitoringDataProcedure,
 		svc.GetMonitoringData,
-		connect.WithSchema(hostServiceGetMonitoringDataMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("GetMonitoringData")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceListHostVMsHandler := connect.NewUnaryHandler(
 		HostServiceListHostVMsProcedure,
 		svc.ListHostVMs,
-		connect.WithSchema(hostServiceListHostVMsMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("ListHostVMs")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceGetHostPermissionsHandler := connect.NewUnaryHandler(
 		HostServiceGetHostPermissionsProcedure,
 		svc.GetHostPermissions,
-		connect.WithSchema(hostServiceGetHostPermissionsMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("GetHostPermissions")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceListHostDatastoresHandler := connect.NewUnaryHandler(
 		HostServiceListHostDatastoresProcedure,
 		svc.ListHostDatastores,
-		connect.WithSchema(hostServiceListHostDatastoresMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("ListHostDatastores")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceMountDatastoreHandler := connect.NewUnaryHandler(
 		HostServiceMountDatastoreProcedure,
 		svc.MountDatastore,
-		connect.WithSchema(hostServiceMountDatastoreMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("MountDatastore")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceUnmountDatastoreHandler := connect.NewUnaryHandler(
 		HostServiceUnmountDatastoreProcedure,
 		svc.UnmountDatastore,
-		connect.WithSchema(hostServiceUnmountDatastoreMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("UnmountDatastore")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceGetHostSystemSettingsHandler := connect.NewUnaryHandler(
 		HostServiceGetHostSystemSettingsProcedure,
 		svc.GetHostSystemSettings,
-		connect.WithSchema(hostServiceGetHostSystemSettingsMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("GetHostSystemSettings")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceUpdateNTPConfigHandler := connect.NewUnaryHandler(
 		HostServiceUpdateNTPConfigProcedure,
 		svc.UpdateNTPConfig,
-		connect.WithSchema(hostServiceUpdateNTPConfigMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("UpdateNTPConfig")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceUpdateTimezoneHandler := connect.NewUnaryHandler(
 		HostServiceUpdateTimezoneProcedure,
 		svc.UpdateTimezone,
-		connect.WithSchema(hostServiceUpdateTimezoneMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("UpdateTimezone")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceUpdateDNSSettingsHandler := connect.NewUnaryHandler(
 		HostServiceUpdateDNSSettingsProcedure,
 		svc.UpdateDNSSettings,
-		connect.WithSchema(hostServiceUpdateDNSSettingsMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("UpdateDNSSettings")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceUpdateRoutingSettingsHandler := connect.NewUnaryHandler(
 		HostServiceUpdateRoutingSettingsProcedure,
 		svc.UpdateRoutingSettings,
-		connect.WithSchema(hostServiceUpdateRoutingSettingsMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("UpdateRoutingSettings")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceGetMaintenanceModeStatusHandler := connect.NewUnaryHandler(
 		HostServiceGetMaintenanceModeStatusProcedure,
 		svc.GetMaintenanceModeStatus,
-		connect.WithSchema(hostServiceGetMaintenanceModeStatusMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("GetMaintenanceModeStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceEnterMaintenanceModeHandler := connect.NewUnaryHandler(
 		HostServiceEnterMaintenanceModeProcedure,
 		svc.EnterMaintenanceMode,
-		connect.WithSchema(hostServiceEnterMaintenanceModeMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("EnterMaintenanceMode")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceExitMaintenanceModeHandler := connect.NewUnaryHandler(
 		HostServiceExitMaintenanceModeProcedure,
 		svc.ExitMaintenanceMode,
-		connect.WithSchema(hostServiceExitMaintenanceModeMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("ExitMaintenanceMode")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceListHostNetworkInterfacesHandler := connect.NewUnaryHandler(
 		HostServiceListHostNetworkInterfacesProcedure,
 		svc.ListHostNetworkInterfaces,
-		connect.WithSchema(hostServiceListHostNetworkInterfacesMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("ListHostNetworkInterfaces")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceEnableNetworkInterfaceHandler := connect.NewUnaryHandler(
 		HostServiceEnableNetworkInterfaceProcedure,
 		svc.EnableNetworkInterface,
-		connect.WithSchema(hostServiceEnableNetworkInterfaceMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("EnableNetworkInterface")),
 		connect.WithHandlerOptions(opts...),
 	)
 	hostServiceDisableNetworkInterfaceHandler := connect.NewUnaryHandler(
 		HostServiceDisableNetworkInterfaceProcedure,
 		svc.DisableNetworkInterface,
-		connect.WithSchema(hostServiceDisableNetworkInterfaceMethodDescriptor),
+		connect.WithSchema(hostServiceMethods.ByName("DisableNetworkInterface")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/pilab.cloud.director.v1.HostService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

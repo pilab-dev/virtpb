@@ -37,12 +37,6 @@ const (
 	TasksServiceListTasksProcedure = "/pilab.cloud.frontend.v1.TasksService/ListTasks"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	tasksServiceServiceDescriptor         = v1.File_pilab_cloud_frontend_v1_tasks_service_proto.Services().ByName("TasksService")
-	tasksServiceListTasksMethodDescriptor = tasksServiceServiceDescriptor.Methods().ByName("ListTasks")
-)
-
 // TasksServiceClient is a client for the pilab.cloud.frontend.v1.TasksService service.
 type TasksServiceClient interface {
 	ListTasks(context.Context, *connect.Request[v1.ListTasksRequest]) (*connect.Response[v1.ListTasksResponse], error)
@@ -57,11 +51,12 @@ type TasksServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewTasksServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) TasksServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	tasksServiceMethods := v1.File_pilab_cloud_frontend_v1_tasks_service_proto.Services().ByName("TasksService").Methods()
 	return &tasksServiceClient{
 		listTasks: connect.NewClient[v1.ListTasksRequest, v1.ListTasksResponse](
 			httpClient,
 			baseURL+TasksServiceListTasksProcedure,
-			connect.WithSchema(tasksServiceListTasksMethodDescriptor),
+			connect.WithSchema(tasksServiceMethods.ByName("ListTasks")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -88,10 +83,11 @@ type TasksServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewTasksServiceHandler(svc TasksServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	tasksServiceMethods := v1.File_pilab_cloud_frontend_v1_tasks_service_proto.Services().ByName("TasksService").Methods()
 	tasksServiceListTasksHandler := connect.NewUnaryHandler(
 		TasksServiceListTasksProcedure,
 		svc.ListTasks,
-		connect.WithSchema(tasksServiceListTasksMethodDescriptor),
+		connect.WithSchema(tasksServiceMethods.ByName("ListTasks")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/pilab.cloud.frontend.v1.TasksService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

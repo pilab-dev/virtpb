@@ -98,37 +98,6 @@ const (
 	VMServiceUpdateHardwareDeviceProcedure = "/pilab.cloud.vmmanager.v1.VMService/UpdateHardwareDevice"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	vMServiceServiceDescriptor                      = v1.File_pilab_cloud_vmmanager_v1_vmservice_proto.Services().ByName("VMService")
-	vMServiceCreateVMMethodDescriptor               = vMServiceServiceDescriptor.Methods().ByName("CreateVM")
-	vMServiceGetVMMethodDescriptor                  = vMServiceServiceDescriptor.Methods().ByName("GetVM")
-	vMServiceListVMsMethodDescriptor                = vMServiceServiceDescriptor.Methods().ByName("ListVMs")
-	vMServiceStartVMMethodDescriptor                = vMServiceServiceDescriptor.Methods().ByName("StartVM")
-	vMServiceStopVMMethodDescriptor                 = vMServiceServiceDescriptor.Methods().ByName("StopVM")
-	vMServiceRebootVMMethodDescriptor               = vMServiceServiceDescriptor.Methods().ByName("RebootVM")
-	vMServiceSuspendVMMethodDescriptor              = vMServiceServiceDescriptor.Methods().ByName("SuspendVM")
-	vMServiceResumeVMMethodDescriptor               = vMServiceServiceDescriptor.Methods().ByName("ResumeVM")
-	vMServiceShutdownVMMethodDescriptor             = vMServiceServiceDescriptor.Methods().ByName("ShutdownVM")
-	vMServiceDeleteVMMethodDescriptor               = vMServiceServiceDescriptor.Methods().ByName("DeleteVM")
-	vMServiceUpdateVMMethodDescriptor               = vMServiceServiceDescriptor.Methods().ByName("UpdateVM")
-	vMServiceAddDiskMethodDescriptor                = vMServiceServiceDescriptor.Methods().ByName("AddDisk")
-	vMServiceGetDiskMethodDescriptor                = vMServiceServiceDescriptor.Methods().ByName("GetDisk")
-	vMServiceListDisksMethodDescriptor              = vMServiceServiceDescriptor.Methods().ByName("ListDisks")
-	vMServiceRemoveDiskMethodDescriptor             = vMServiceServiceDescriptor.Methods().ByName("RemoveDisk")
-	vMServiceResizeDiskMethodDescriptor             = vMServiceServiceDescriptor.Methods().ByName("ResizeDisk")
-	vMServiceAddNetworkInterfaceMethodDescriptor    = vMServiceServiceDescriptor.Methods().ByName("AddNetworkInterface")
-	vMServiceGetNetworkInterfaceMethodDescriptor    = vMServiceServiceDescriptor.Methods().ByName("GetNetworkInterface")
-	vMServiceListNetworkInterfacesMethodDescriptor  = vMServiceServiceDescriptor.Methods().ByName("ListNetworkInterfaces")
-	vMServiceRemoveNetworkInterfaceMethodDescriptor = vMServiceServiceDescriptor.Methods().ByName("RemoveNetworkInterface")
-	vMServiceUpdateNetworkInterfaceMethodDescriptor = vMServiceServiceDescriptor.Methods().ByName("UpdateNetworkInterface")
-	vMServiceAddHardwareDeviceMethodDescriptor      = vMServiceServiceDescriptor.Methods().ByName("AddHardwareDevice")
-	vMServiceGetHardwareDeviceMethodDescriptor      = vMServiceServiceDescriptor.Methods().ByName("GetHardwareDevice")
-	vMServiceListHardwareDevicesMethodDescriptor    = vMServiceServiceDescriptor.Methods().ByName("ListHardwareDevices")
-	vMServiceRemoveHardwareDeviceMethodDescriptor   = vMServiceServiceDescriptor.Methods().ByName("RemoveHardwareDevice")
-	vMServiceUpdateHardwareDeviceMethodDescriptor   = vMServiceServiceDescriptor.Methods().ByName("UpdateHardwareDevice")
-)
-
 // VMServiceClient is a client for the pilab.cloud.vmmanager.v1.VMService service.
 type VMServiceClient interface {
 	// VM Lifecycle Management
@@ -172,161 +141,162 @@ type VMServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewVMServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) VMServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	vMServiceMethods := v1.File_pilab_cloud_vmmanager_v1_vmservice_proto.Services().ByName("VMService").Methods()
 	return &vMServiceClient{
 		createVM: connect.NewClient[v1.CreateVMRequest, v1.VM](
 			httpClient,
 			baseURL+VMServiceCreateVMProcedure,
-			connect.WithSchema(vMServiceCreateVMMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("CreateVM")),
 			connect.WithClientOptions(opts...),
 		),
 		getVM: connect.NewClient[v1.GetVMRequest, v1.VM](
 			httpClient,
 			baseURL+VMServiceGetVMProcedure,
-			connect.WithSchema(vMServiceGetVMMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("GetVM")),
 			connect.WithClientOptions(opts...),
 		),
 		listVMs: connect.NewClient[v1.ListVMsRequest, v1.ListVMsResponse](
 			httpClient,
 			baseURL+VMServiceListVMsProcedure,
-			connect.WithSchema(vMServiceListVMsMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("ListVMs")),
 			connect.WithClientOptions(opts...),
 		),
 		startVM: connect.NewClient[v1.StartVMRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VMServiceStartVMProcedure,
-			connect.WithSchema(vMServiceStartVMMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("StartVM")),
 			connect.WithClientOptions(opts...),
 		),
 		stopVM: connect.NewClient[v1.StopVMRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VMServiceStopVMProcedure,
-			connect.WithSchema(vMServiceStopVMMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("StopVM")),
 			connect.WithClientOptions(opts...),
 		),
 		rebootVM: connect.NewClient[v1.RebootVMRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VMServiceRebootVMProcedure,
-			connect.WithSchema(vMServiceRebootVMMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("RebootVM")),
 			connect.WithClientOptions(opts...),
 		),
 		suspendVM: connect.NewClient[v1.SuspendVMRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VMServiceSuspendVMProcedure,
-			connect.WithSchema(vMServiceSuspendVMMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("SuspendVM")),
 			connect.WithClientOptions(opts...),
 		),
 		resumeVM: connect.NewClient[v1.ResumeVMRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VMServiceResumeVMProcedure,
-			connect.WithSchema(vMServiceResumeVMMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("ResumeVM")),
 			connect.WithClientOptions(opts...),
 		),
 		shutdownVM: connect.NewClient[v1.ShutdownVMRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VMServiceShutdownVMProcedure,
-			connect.WithSchema(vMServiceShutdownVMMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("ShutdownVM")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteVM: connect.NewClient[v1.DeleteVMRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VMServiceDeleteVMProcedure,
-			connect.WithSchema(vMServiceDeleteVMMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("DeleteVM")),
 			connect.WithClientOptions(opts...),
 		),
 		updateVM: connect.NewClient[v1.UpdateVMRequest, v1.VM](
 			httpClient,
 			baseURL+VMServiceUpdateVMProcedure,
-			connect.WithSchema(vMServiceUpdateVMMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("UpdateVM")),
 			connect.WithClientOptions(opts...),
 		),
 		addDisk: connect.NewClient[v1.AddDiskRequest, v1.Disk](
 			httpClient,
 			baseURL+VMServiceAddDiskProcedure,
-			connect.WithSchema(vMServiceAddDiskMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("AddDisk")),
 			connect.WithClientOptions(opts...),
 		),
 		getDisk: connect.NewClient[v1.GetDiskRequest, v1.Disk](
 			httpClient,
 			baseURL+VMServiceGetDiskProcedure,
-			connect.WithSchema(vMServiceGetDiskMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("GetDisk")),
 			connect.WithClientOptions(opts...),
 		),
 		listDisks: connect.NewClient[v1.ListDisksRequest, v1.ListDisksResponse](
 			httpClient,
 			baseURL+VMServiceListDisksProcedure,
-			connect.WithSchema(vMServiceListDisksMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("ListDisks")),
 			connect.WithClientOptions(opts...),
 		),
 		removeDisk: connect.NewClient[v1.RemoveDiskRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VMServiceRemoveDiskProcedure,
-			connect.WithSchema(vMServiceRemoveDiskMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("RemoveDisk")),
 			connect.WithClientOptions(opts...),
 		),
 		resizeDisk: connect.NewClient[v1.ResizeDiskRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VMServiceResizeDiskProcedure,
-			connect.WithSchema(vMServiceResizeDiskMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("ResizeDisk")),
 			connect.WithClientOptions(opts...),
 		),
 		addNetworkInterface: connect.NewClient[v1.AddNetworkInterfaceRequest, v1.NetworkInterface](
 			httpClient,
 			baseURL+VMServiceAddNetworkInterfaceProcedure,
-			connect.WithSchema(vMServiceAddNetworkInterfaceMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("AddNetworkInterface")),
 			connect.WithClientOptions(opts...),
 		),
 		getNetworkInterface: connect.NewClient[v1.GetNetworkInterfaceRequest, v1.NetworkInterface](
 			httpClient,
 			baseURL+VMServiceGetNetworkInterfaceProcedure,
-			connect.WithSchema(vMServiceGetNetworkInterfaceMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("GetNetworkInterface")),
 			connect.WithClientOptions(opts...),
 		),
 		listNetworkInterfaces: connect.NewClient[v1.ListNetworkInterfacesRequest, v1.ListNetworkInterfacesResponse](
 			httpClient,
 			baseURL+VMServiceListNetworkInterfacesProcedure,
-			connect.WithSchema(vMServiceListNetworkInterfacesMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("ListNetworkInterfaces")),
 			connect.WithClientOptions(opts...),
 		),
 		removeNetworkInterface: connect.NewClient[v1.RemoveNetworkInterfaceRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VMServiceRemoveNetworkInterfaceProcedure,
-			connect.WithSchema(vMServiceRemoveNetworkInterfaceMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("RemoveNetworkInterface")),
 			connect.WithClientOptions(opts...),
 		),
 		updateNetworkInterface: connect.NewClient[v1.UpdateNetworkInterfaceRequest, v1.NetworkInterface](
 			httpClient,
 			baseURL+VMServiceUpdateNetworkInterfaceProcedure,
-			connect.WithSchema(vMServiceUpdateNetworkInterfaceMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("UpdateNetworkInterface")),
 			connect.WithClientOptions(opts...),
 		),
 		addHardwareDevice: connect.NewClient[v1.AddHardwareDeviceRequest, v1.HardwareDevice](
 			httpClient,
 			baseURL+VMServiceAddHardwareDeviceProcedure,
-			connect.WithSchema(vMServiceAddHardwareDeviceMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("AddHardwareDevice")),
 			connect.WithClientOptions(opts...),
 		),
 		getHardwareDevice: connect.NewClient[v1.GetHardwareDeviceRequest, v1.HardwareDevice](
 			httpClient,
 			baseURL+VMServiceGetHardwareDeviceProcedure,
-			connect.WithSchema(vMServiceGetHardwareDeviceMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("GetHardwareDevice")),
 			connect.WithClientOptions(opts...),
 		),
 		listHardwareDevices: connect.NewClient[v1.ListHardwareDevicesRequest, v1.ListHardwareDevicesResponse](
 			httpClient,
 			baseURL+VMServiceListHardwareDevicesProcedure,
-			connect.WithSchema(vMServiceListHardwareDevicesMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("ListHardwareDevices")),
 			connect.WithClientOptions(opts...),
 		),
 		removeHardwareDevice: connect.NewClient[v1.RemoveHardwareDeviceRequest, emptypb.Empty](
 			httpClient,
 			baseURL+VMServiceRemoveHardwareDeviceProcedure,
-			connect.WithSchema(vMServiceRemoveHardwareDeviceMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("RemoveHardwareDevice")),
 			connect.WithClientOptions(opts...),
 		),
 		updateHardwareDevice: connect.NewClient[v1.UpdateHardwareDeviceRequest, v1.HardwareDevice](
 			httpClient,
 			baseURL+VMServiceUpdateHardwareDeviceProcedure,
-			connect.WithSchema(vMServiceUpdateHardwareDeviceMethodDescriptor),
+			connect.WithSchema(vMServiceMethods.ByName("UpdateHardwareDevice")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -532,160 +502,161 @@ type VMServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewVMServiceHandler(svc VMServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	vMServiceMethods := v1.File_pilab_cloud_vmmanager_v1_vmservice_proto.Services().ByName("VMService").Methods()
 	vMServiceCreateVMHandler := connect.NewUnaryHandler(
 		VMServiceCreateVMProcedure,
 		svc.CreateVM,
-		connect.WithSchema(vMServiceCreateVMMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("CreateVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceGetVMHandler := connect.NewUnaryHandler(
 		VMServiceGetVMProcedure,
 		svc.GetVM,
-		connect.WithSchema(vMServiceGetVMMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("GetVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceListVMsHandler := connect.NewUnaryHandler(
 		VMServiceListVMsProcedure,
 		svc.ListVMs,
-		connect.WithSchema(vMServiceListVMsMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("ListVMs")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceStartVMHandler := connect.NewUnaryHandler(
 		VMServiceStartVMProcedure,
 		svc.StartVM,
-		connect.WithSchema(vMServiceStartVMMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("StartVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceStopVMHandler := connect.NewUnaryHandler(
 		VMServiceStopVMProcedure,
 		svc.StopVM,
-		connect.WithSchema(vMServiceStopVMMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("StopVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceRebootVMHandler := connect.NewUnaryHandler(
 		VMServiceRebootVMProcedure,
 		svc.RebootVM,
-		connect.WithSchema(vMServiceRebootVMMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("RebootVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceSuspendVMHandler := connect.NewUnaryHandler(
 		VMServiceSuspendVMProcedure,
 		svc.SuspendVM,
-		connect.WithSchema(vMServiceSuspendVMMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("SuspendVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceResumeVMHandler := connect.NewUnaryHandler(
 		VMServiceResumeVMProcedure,
 		svc.ResumeVM,
-		connect.WithSchema(vMServiceResumeVMMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("ResumeVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceShutdownVMHandler := connect.NewUnaryHandler(
 		VMServiceShutdownVMProcedure,
 		svc.ShutdownVM,
-		connect.WithSchema(vMServiceShutdownVMMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("ShutdownVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceDeleteVMHandler := connect.NewUnaryHandler(
 		VMServiceDeleteVMProcedure,
 		svc.DeleteVM,
-		connect.WithSchema(vMServiceDeleteVMMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("DeleteVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceUpdateVMHandler := connect.NewUnaryHandler(
 		VMServiceUpdateVMProcedure,
 		svc.UpdateVM,
-		connect.WithSchema(vMServiceUpdateVMMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("UpdateVM")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceAddDiskHandler := connect.NewUnaryHandler(
 		VMServiceAddDiskProcedure,
 		svc.AddDisk,
-		connect.WithSchema(vMServiceAddDiskMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("AddDisk")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceGetDiskHandler := connect.NewUnaryHandler(
 		VMServiceGetDiskProcedure,
 		svc.GetDisk,
-		connect.WithSchema(vMServiceGetDiskMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("GetDisk")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceListDisksHandler := connect.NewUnaryHandler(
 		VMServiceListDisksProcedure,
 		svc.ListDisks,
-		connect.WithSchema(vMServiceListDisksMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("ListDisks")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceRemoveDiskHandler := connect.NewUnaryHandler(
 		VMServiceRemoveDiskProcedure,
 		svc.RemoveDisk,
-		connect.WithSchema(vMServiceRemoveDiskMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("RemoveDisk")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceResizeDiskHandler := connect.NewUnaryHandler(
 		VMServiceResizeDiskProcedure,
 		svc.ResizeDisk,
-		connect.WithSchema(vMServiceResizeDiskMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("ResizeDisk")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceAddNetworkInterfaceHandler := connect.NewUnaryHandler(
 		VMServiceAddNetworkInterfaceProcedure,
 		svc.AddNetworkInterface,
-		connect.WithSchema(vMServiceAddNetworkInterfaceMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("AddNetworkInterface")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceGetNetworkInterfaceHandler := connect.NewUnaryHandler(
 		VMServiceGetNetworkInterfaceProcedure,
 		svc.GetNetworkInterface,
-		connect.WithSchema(vMServiceGetNetworkInterfaceMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("GetNetworkInterface")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceListNetworkInterfacesHandler := connect.NewUnaryHandler(
 		VMServiceListNetworkInterfacesProcedure,
 		svc.ListNetworkInterfaces,
-		connect.WithSchema(vMServiceListNetworkInterfacesMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("ListNetworkInterfaces")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceRemoveNetworkInterfaceHandler := connect.NewUnaryHandler(
 		VMServiceRemoveNetworkInterfaceProcedure,
 		svc.RemoveNetworkInterface,
-		connect.WithSchema(vMServiceRemoveNetworkInterfaceMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("RemoveNetworkInterface")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceUpdateNetworkInterfaceHandler := connect.NewUnaryHandler(
 		VMServiceUpdateNetworkInterfaceProcedure,
 		svc.UpdateNetworkInterface,
-		connect.WithSchema(vMServiceUpdateNetworkInterfaceMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("UpdateNetworkInterface")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceAddHardwareDeviceHandler := connect.NewUnaryHandler(
 		VMServiceAddHardwareDeviceProcedure,
 		svc.AddHardwareDevice,
-		connect.WithSchema(vMServiceAddHardwareDeviceMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("AddHardwareDevice")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceGetHardwareDeviceHandler := connect.NewUnaryHandler(
 		VMServiceGetHardwareDeviceProcedure,
 		svc.GetHardwareDevice,
-		connect.WithSchema(vMServiceGetHardwareDeviceMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("GetHardwareDevice")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceListHardwareDevicesHandler := connect.NewUnaryHandler(
 		VMServiceListHardwareDevicesProcedure,
 		svc.ListHardwareDevices,
-		connect.WithSchema(vMServiceListHardwareDevicesMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("ListHardwareDevices")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceRemoveHardwareDeviceHandler := connect.NewUnaryHandler(
 		VMServiceRemoveHardwareDeviceProcedure,
 		svc.RemoveHardwareDevice,
-		connect.WithSchema(vMServiceRemoveHardwareDeviceMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("RemoveHardwareDevice")),
 		connect.WithHandlerOptions(opts...),
 	)
 	vMServiceUpdateHardwareDeviceHandler := connect.NewUnaryHandler(
 		VMServiceUpdateHardwareDeviceProcedure,
 		svc.UpdateHardwareDevice,
-		connect.WithSchema(vMServiceUpdateHardwareDeviceMethodDescriptor),
+		connect.WithSchema(vMServiceMethods.ByName("UpdateHardwareDevice")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/pilab.cloud.vmmanager.v1.VMService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

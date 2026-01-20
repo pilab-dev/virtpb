@@ -138,45 +138,6 @@ const (
 	ManagementServiceGetPermissionsForRoleProcedure = "/pilab.cloud.director.v1.ManagementService/GetPermissionsForRole"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	managementServiceServiceDescriptor                       = v1.File_pilab_cloud_frontend_v1_management_service_proto.Services().ByName("ManagementService")
-	managementServiceCreateUserMethodDescriptor              = managementServiceServiceDescriptor.Methods().ByName("CreateUser")
-	managementServiceGetUserMethodDescriptor                 = managementServiceServiceDescriptor.Methods().ByName("GetUser")
-	managementServiceGetUserByUsernameMethodDescriptor       = managementServiceServiceDescriptor.Methods().ByName("GetUserByUsername")
-	managementServiceGetUserByEmailMethodDescriptor          = managementServiceServiceDescriptor.Methods().ByName("GetUserByEmail")
-	managementServiceUpdateUserMethodDescriptor              = managementServiceServiceDescriptor.Methods().ByName("UpdateUser")
-	managementServiceDeleteUserMethodDescriptor              = managementServiceServiceDescriptor.Methods().ByName("DeleteUser")
-	managementServiceSearchUsersMethodDescriptor             = managementServiceServiceDescriptor.Methods().ByName("SearchUsers")
-	managementServiceChangeUserPasswordMethodDescriptor      = managementServiceServiceDescriptor.Methods().ByName("ChangeUserPassword")
-	managementServiceCreateRoleMethodDescriptor              = managementServiceServiceDescriptor.Methods().ByName("CreateRole")
-	managementServiceGetRoleMethodDescriptor                 = managementServiceServiceDescriptor.Methods().ByName("GetRole")
-	managementServiceGetRoleByNameMethodDescriptor           = managementServiceServiceDescriptor.Methods().ByName("GetRoleByName")
-	managementServiceUpdateRoleMethodDescriptor              = managementServiceServiceDescriptor.Methods().ByName("UpdateRole")
-	managementServiceDeleteRoleMethodDescriptor              = managementServiceServiceDescriptor.Methods().ByName("DeleteRole")
-	managementServiceSearchRolesMethodDescriptor             = managementServiceServiceDescriptor.Methods().ByName("SearchRoles")
-	managementServiceAddRoleInheritanceMethodDescriptor      = managementServiceServiceDescriptor.Methods().ByName("AddRoleInheritance")
-	managementServiceRemoveRoleInheritanceMethodDescriptor   = managementServiceServiceDescriptor.Methods().ByName("RemoveRoleInheritance")
-	managementServiceGetParentRolesMethodDescriptor          = managementServiceServiceDescriptor.Methods().ByName("GetParentRoles")
-	managementServiceGetChildRolesMethodDescriptor           = managementServiceServiceDescriptor.Methods().ByName("GetChildRoles")
-	managementServiceGetAllParentRolesMethodDescriptor       = managementServiceServiceDescriptor.Methods().ByName("GetAllParentRoles")
-	managementServiceGetAllChildRolesMethodDescriptor        = managementServiceServiceDescriptor.Methods().ByName("GetAllChildRoles")
-	managementServiceCreateRoleGroupMethodDescriptor         = managementServiceServiceDescriptor.Methods().ByName("CreateRoleGroup")
-	managementServiceGetRoleGroupMethodDescriptor            = managementServiceServiceDescriptor.Methods().ByName("GetRoleGroup")
-	managementServiceGetRoleGroupByNameMethodDescriptor      = managementServiceServiceDescriptor.Methods().ByName("GetRoleGroupByName")
-	managementServiceUpdateRoleGroupMethodDescriptor         = managementServiceServiceDescriptor.Methods().ByName("UpdateRoleGroup")
-	managementServiceDeleteRoleGroupMethodDescriptor         = managementServiceServiceDescriptor.Methods().ByName("DeleteRoleGroup")
-	managementServiceSearchRoleGroupsMethodDescriptor        = managementServiceServiceDescriptor.Methods().ByName("SearchRoleGroups")
-	managementServiceAddUserToRoleGroupMethodDescriptor      = managementServiceServiceDescriptor.Methods().ByName("AddUserToRoleGroup")
-	managementServiceRemoveUserFromRoleGroupMethodDescriptor = managementServiceServiceDescriptor.Methods().ByName("RemoveUserFromRoleGroup")
-	managementServiceGetRoleGroupsForUserMethodDescriptor    = managementServiceServiceDescriptor.Methods().ByName("GetRoleGroupsForUser")
-	managementServiceGetUsersInRoleGroupMethodDescriptor     = managementServiceServiceDescriptor.Methods().ByName("GetUsersInRoleGroup")
-	managementServiceAssignRoleToUserMethodDescriptor        = managementServiceServiceDescriptor.Methods().ByName("AssignRoleToUser")
-	managementServiceUnassignRoleFromUserMethodDescriptor    = managementServiceServiceDescriptor.Methods().ByName("UnassignRoleFromUser")
-	managementServiceGetRolesForUserMethodDescriptor         = managementServiceServiceDescriptor.Methods().ByName("GetRolesForUser")
-	managementServiceGetPermissionsForRoleMethodDescriptor   = managementServiceServiceDescriptor.Methods().ByName("GetPermissionsForRole")
-)
-
 // ManagementServiceClient is a client for the pilab.cloud.director.v1.ManagementService service.
 type ManagementServiceClient interface {
 	// User Management
@@ -231,209 +192,210 @@ type ManagementServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewManagementServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ManagementServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	managementServiceMethods := v1.File_pilab_cloud_frontend_v1_management_service_proto.Services().ByName("ManagementService").Methods()
 	return &managementServiceClient{
 		createUser: connect.NewClient[v1.CreateUserRequest, v1.User](
 			httpClient,
 			baseURL+ManagementServiceCreateUserProcedure,
-			connect.WithSchema(managementServiceCreateUserMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("CreateUser")),
 			connect.WithClientOptions(opts...),
 		),
 		getUser: connect.NewClient[v1.GetUserRequest, v1.User](
 			httpClient,
 			baseURL+ManagementServiceGetUserProcedure,
-			connect.WithSchema(managementServiceGetUserMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetUser")),
 			connect.WithClientOptions(opts...),
 		),
 		getUserByUsername: connect.NewClient[v1.GetUserByUsernameRequest, v1.User](
 			httpClient,
 			baseURL+ManagementServiceGetUserByUsernameProcedure,
-			connect.WithSchema(managementServiceGetUserByUsernameMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetUserByUsername")),
 			connect.WithClientOptions(opts...),
 		),
 		getUserByEmail: connect.NewClient[v1.GetUserByEmailRequest, v1.User](
 			httpClient,
 			baseURL+ManagementServiceGetUserByEmailProcedure,
-			connect.WithSchema(managementServiceGetUserByEmailMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetUserByEmail")),
 			connect.WithClientOptions(opts...),
 		),
 		updateUser: connect.NewClient[v1.UpdateUserRequest, v1.User](
 			httpClient,
 			baseURL+ManagementServiceUpdateUserProcedure,
-			connect.WithSchema(managementServiceUpdateUserMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("UpdateUser")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteUser: connect.NewClient[v1.DeleteUserRequest, emptypb.Empty](
 			httpClient,
 			baseURL+ManagementServiceDeleteUserProcedure,
-			connect.WithSchema(managementServiceDeleteUserMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("DeleteUser")),
 			connect.WithClientOptions(opts...),
 		),
 		searchUsers: connect.NewClient[v1.SearchUsersRequest, v1.SearchUsersResponse](
 			httpClient,
 			baseURL+ManagementServiceSearchUsersProcedure,
-			connect.WithSchema(managementServiceSearchUsersMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("SearchUsers")),
 			connect.WithClientOptions(opts...),
 		),
 		changeUserPassword: connect.NewClient[v1.ChangeUserPasswordRequest, emptypb.Empty](
 			httpClient,
 			baseURL+ManagementServiceChangeUserPasswordProcedure,
-			connect.WithSchema(managementServiceChangeUserPasswordMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("ChangeUserPassword")),
 			connect.WithClientOptions(opts...),
 		),
 		createRole: connect.NewClient[v1.CreateRoleRequest, v1.Role](
 			httpClient,
 			baseURL+ManagementServiceCreateRoleProcedure,
-			connect.WithSchema(managementServiceCreateRoleMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("CreateRole")),
 			connect.WithClientOptions(opts...),
 		),
 		getRole: connect.NewClient[v1.GetRoleRequest, v1.Role](
 			httpClient,
 			baseURL+ManagementServiceGetRoleProcedure,
-			connect.WithSchema(managementServiceGetRoleMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetRole")),
 			connect.WithClientOptions(opts...),
 		),
 		getRoleByName: connect.NewClient[v1.GetRoleByNameRequest, v1.Role](
 			httpClient,
 			baseURL+ManagementServiceGetRoleByNameProcedure,
-			connect.WithSchema(managementServiceGetRoleByNameMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetRoleByName")),
 			connect.WithClientOptions(opts...),
 		),
 		updateRole: connect.NewClient[v1.UpdateRoleRequest, v1.Role](
 			httpClient,
 			baseURL+ManagementServiceUpdateRoleProcedure,
-			connect.WithSchema(managementServiceUpdateRoleMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("UpdateRole")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteRole: connect.NewClient[v1.DeleteRoleRequest, emptypb.Empty](
 			httpClient,
 			baseURL+ManagementServiceDeleteRoleProcedure,
-			connect.WithSchema(managementServiceDeleteRoleMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("DeleteRole")),
 			connect.WithClientOptions(opts...),
 		),
 		searchRoles: connect.NewClient[v1.SearchRolesRequest, v1.SearchRolesResponse](
 			httpClient,
 			baseURL+ManagementServiceSearchRolesProcedure,
-			connect.WithSchema(managementServiceSearchRolesMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("SearchRoles")),
 			connect.WithClientOptions(opts...),
 		),
 		addRoleInheritance: connect.NewClient[v1.AddRoleInheritanceRequest, emptypb.Empty](
 			httpClient,
 			baseURL+ManagementServiceAddRoleInheritanceProcedure,
-			connect.WithSchema(managementServiceAddRoleInheritanceMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("AddRoleInheritance")),
 			connect.WithClientOptions(opts...),
 		),
 		removeRoleInheritance: connect.NewClient[v1.RemoveRoleInheritanceRequest, emptypb.Empty](
 			httpClient,
 			baseURL+ManagementServiceRemoveRoleInheritanceProcedure,
-			connect.WithSchema(managementServiceRemoveRoleInheritanceMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("RemoveRoleInheritance")),
 			connect.WithClientOptions(opts...),
 		),
 		getParentRoles: connect.NewClient[v1.GetParentRolesRequest, v1.GetParentRolesResponse](
 			httpClient,
 			baseURL+ManagementServiceGetParentRolesProcedure,
-			connect.WithSchema(managementServiceGetParentRolesMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetParentRoles")),
 			connect.WithClientOptions(opts...),
 		),
 		getChildRoles: connect.NewClient[v1.GetChildRolesRequest, v1.GetChildRolesResponse](
 			httpClient,
 			baseURL+ManagementServiceGetChildRolesProcedure,
-			connect.WithSchema(managementServiceGetChildRolesMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetChildRoles")),
 			connect.WithClientOptions(opts...),
 		),
 		getAllParentRoles: connect.NewClient[v1.GetAllParentRolesRequest, v1.GetAllParentRolesResponse](
 			httpClient,
 			baseURL+ManagementServiceGetAllParentRolesProcedure,
-			connect.WithSchema(managementServiceGetAllParentRolesMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetAllParentRoles")),
 			connect.WithClientOptions(opts...),
 		),
 		getAllChildRoles: connect.NewClient[v1.GetAllChildRolesRequest, v1.GetAllChildRolesResponse](
 			httpClient,
 			baseURL+ManagementServiceGetAllChildRolesProcedure,
-			connect.WithSchema(managementServiceGetAllChildRolesMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetAllChildRoles")),
 			connect.WithClientOptions(opts...),
 		),
 		createRoleGroup: connect.NewClient[v1.CreateRoleGroupRequest, v1.RoleGroup](
 			httpClient,
 			baseURL+ManagementServiceCreateRoleGroupProcedure,
-			connect.WithSchema(managementServiceCreateRoleGroupMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("CreateRoleGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		getRoleGroup: connect.NewClient[v1.GetRoleGroupRequest, v1.RoleGroup](
 			httpClient,
 			baseURL+ManagementServiceGetRoleGroupProcedure,
-			connect.WithSchema(managementServiceGetRoleGroupMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetRoleGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		getRoleGroupByName: connect.NewClient[v1.GetRoleGroupByNameRequest, v1.RoleGroup](
 			httpClient,
 			baseURL+ManagementServiceGetRoleGroupByNameProcedure,
-			connect.WithSchema(managementServiceGetRoleGroupByNameMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetRoleGroupByName")),
 			connect.WithClientOptions(opts...),
 		),
 		updateRoleGroup: connect.NewClient[v1.UpdateRoleGroupRequest, v1.RoleGroup](
 			httpClient,
 			baseURL+ManagementServiceUpdateRoleGroupProcedure,
-			connect.WithSchema(managementServiceUpdateRoleGroupMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("UpdateRoleGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		deleteRoleGroup: connect.NewClient[v1.DeleteRoleGroupRequest, emptypb.Empty](
 			httpClient,
 			baseURL+ManagementServiceDeleteRoleGroupProcedure,
-			connect.WithSchema(managementServiceDeleteRoleGroupMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("DeleteRoleGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		searchRoleGroups: connect.NewClient[v1.SearchRoleGroupsRequest, v1.SearchRoleGroupsResponse](
 			httpClient,
 			baseURL+ManagementServiceSearchRoleGroupsProcedure,
-			connect.WithSchema(managementServiceSearchRoleGroupsMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("SearchRoleGroups")),
 			connect.WithClientOptions(opts...),
 		),
 		addUserToRoleGroup: connect.NewClient[v1.AddUserToRoleGroupRequest, emptypb.Empty](
 			httpClient,
 			baseURL+ManagementServiceAddUserToRoleGroupProcedure,
-			connect.WithSchema(managementServiceAddUserToRoleGroupMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("AddUserToRoleGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		removeUserFromRoleGroup: connect.NewClient[v1.RemoveUserFromRoleGroupRequest, emptypb.Empty](
 			httpClient,
 			baseURL+ManagementServiceRemoveUserFromRoleGroupProcedure,
-			connect.WithSchema(managementServiceRemoveUserFromRoleGroupMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("RemoveUserFromRoleGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		getRoleGroupsForUser: connect.NewClient[v1.GetRoleGroupsForUserRequest, v1.GetRoleGroupsForUserResponse](
 			httpClient,
 			baseURL+ManagementServiceGetRoleGroupsForUserProcedure,
-			connect.WithSchema(managementServiceGetRoleGroupsForUserMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetRoleGroupsForUser")),
 			connect.WithClientOptions(opts...),
 		),
 		getUsersInRoleGroup: connect.NewClient[v1.GetUsersInRoleGroupRequest, v1.GetUsersInRoleGroupResponse](
 			httpClient,
 			baseURL+ManagementServiceGetUsersInRoleGroupProcedure,
-			connect.WithSchema(managementServiceGetUsersInRoleGroupMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetUsersInRoleGroup")),
 			connect.WithClientOptions(opts...),
 		),
 		assignRoleToUser: connect.NewClient[v1.AssignRoleToUserRequest, emptypb.Empty](
 			httpClient,
 			baseURL+ManagementServiceAssignRoleToUserProcedure,
-			connect.WithSchema(managementServiceAssignRoleToUserMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("AssignRoleToUser")),
 			connect.WithClientOptions(opts...),
 		),
 		unassignRoleFromUser: connect.NewClient[v1.UnassignRoleFromUserRequest, emptypb.Empty](
 			httpClient,
 			baseURL+ManagementServiceUnassignRoleFromUserProcedure,
-			connect.WithSchema(managementServiceUnassignRoleFromUserMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("UnassignRoleFromUser")),
 			connect.WithClientOptions(opts...),
 		),
 		getRolesForUser: connect.NewClient[v1.GetRolesForUserRequest, v1.GetRolesForUserResponse](
 			httpClient,
 			baseURL+ManagementServiceGetRolesForUserProcedure,
-			connect.WithSchema(managementServiceGetRolesForUserMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetRolesForUser")),
 			connect.WithClientOptions(opts...),
 		),
 		getPermissionsForRole: connect.NewClient[v1.GetPermissionsForRoleRequest, v1.GetPermissionsForRoleResponse](
 			httpClient,
 			baseURL+ManagementServiceGetPermissionsForRoleProcedure,
-			connect.WithSchema(managementServiceGetPermissionsForRoleMethodDescriptor),
+			connect.WithSchema(managementServiceMethods.ByName("GetPermissionsForRole")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -699,208 +661,209 @@ type ManagementServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewManagementServiceHandler(svc ManagementServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	managementServiceMethods := v1.File_pilab_cloud_frontend_v1_management_service_proto.Services().ByName("ManagementService").Methods()
 	managementServiceCreateUserHandler := connect.NewUnaryHandler(
 		ManagementServiceCreateUserProcedure,
 		svc.CreateUser,
-		connect.WithSchema(managementServiceCreateUserMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("CreateUser")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetUserHandler := connect.NewUnaryHandler(
 		ManagementServiceGetUserProcedure,
 		svc.GetUser,
-		connect.WithSchema(managementServiceGetUserMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetUser")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetUserByUsernameHandler := connect.NewUnaryHandler(
 		ManagementServiceGetUserByUsernameProcedure,
 		svc.GetUserByUsername,
-		connect.WithSchema(managementServiceGetUserByUsernameMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetUserByUsername")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetUserByEmailHandler := connect.NewUnaryHandler(
 		ManagementServiceGetUserByEmailProcedure,
 		svc.GetUserByEmail,
-		connect.WithSchema(managementServiceGetUserByEmailMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetUserByEmail")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceUpdateUserHandler := connect.NewUnaryHandler(
 		ManagementServiceUpdateUserProcedure,
 		svc.UpdateUser,
-		connect.WithSchema(managementServiceUpdateUserMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("UpdateUser")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceDeleteUserHandler := connect.NewUnaryHandler(
 		ManagementServiceDeleteUserProcedure,
 		svc.DeleteUser,
-		connect.WithSchema(managementServiceDeleteUserMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("DeleteUser")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceSearchUsersHandler := connect.NewUnaryHandler(
 		ManagementServiceSearchUsersProcedure,
 		svc.SearchUsers,
-		connect.WithSchema(managementServiceSearchUsersMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("SearchUsers")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceChangeUserPasswordHandler := connect.NewUnaryHandler(
 		ManagementServiceChangeUserPasswordProcedure,
 		svc.ChangeUserPassword,
-		connect.WithSchema(managementServiceChangeUserPasswordMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("ChangeUserPassword")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceCreateRoleHandler := connect.NewUnaryHandler(
 		ManagementServiceCreateRoleProcedure,
 		svc.CreateRole,
-		connect.WithSchema(managementServiceCreateRoleMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("CreateRole")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetRoleHandler := connect.NewUnaryHandler(
 		ManagementServiceGetRoleProcedure,
 		svc.GetRole,
-		connect.WithSchema(managementServiceGetRoleMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetRole")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetRoleByNameHandler := connect.NewUnaryHandler(
 		ManagementServiceGetRoleByNameProcedure,
 		svc.GetRoleByName,
-		connect.WithSchema(managementServiceGetRoleByNameMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetRoleByName")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceUpdateRoleHandler := connect.NewUnaryHandler(
 		ManagementServiceUpdateRoleProcedure,
 		svc.UpdateRole,
-		connect.WithSchema(managementServiceUpdateRoleMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("UpdateRole")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceDeleteRoleHandler := connect.NewUnaryHandler(
 		ManagementServiceDeleteRoleProcedure,
 		svc.DeleteRole,
-		connect.WithSchema(managementServiceDeleteRoleMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("DeleteRole")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceSearchRolesHandler := connect.NewUnaryHandler(
 		ManagementServiceSearchRolesProcedure,
 		svc.SearchRoles,
-		connect.WithSchema(managementServiceSearchRolesMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("SearchRoles")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceAddRoleInheritanceHandler := connect.NewUnaryHandler(
 		ManagementServiceAddRoleInheritanceProcedure,
 		svc.AddRoleInheritance,
-		connect.WithSchema(managementServiceAddRoleInheritanceMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("AddRoleInheritance")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceRemoveRoleInheritanceHandler := connect.NewUnaryHandler(
 		ManagementServiceRemoveRoleInheritanceProcedure,
 		svc.RemoveRoleInheritance,
-		connect.WithSchema(managementServiceRemoveRoleInheritanceMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("RemoveRoleInheritance")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetParentRolesHandler := connect.NewUnaryHandler(
 		ManagementServiceGetParentRolesProcedure,
 		svc.GetParentRoles,
-		connect.WithSchema(managementServiceGetParentRolesMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetParentRoles")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetChildRolesHandler := connect.NewUnaryHandler(
 		ManagementServiceGetChildRolesProcedure,
 		svc.GetChildRoles,
-		connect.WithSchema(managementServiceGetChildRolesMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetChildRoles")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetAllParentRolesHandler := connect.NewUnaryHandler(
 		ManagementServiceGetAllParentRolesProcedure,
 		svc.GetAllParentRoles,
-		connect.WithSchema(managementServiceGetAllParentRolesMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetAllParentRoles")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetAllChildRolesHandler := connect.NewUnaryHandler(
 		ManagementServiceGetAllChildRolesProcedure,
 		svc.GetAllChildRoles,
-		connect.WithSchema(managementServiceGetAllChildRolesMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetAllChildRoles")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceCreateRoleGroupHandler := connect.NewUnaryHandler(
 		ManagementServiceCreateRoleGroupProcedure,
 		svc.CreateRoleGroup,
-		connect.WithSchema(managementServiceCreateRoleGroupMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("CreateRoleGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetRoleGroupHandler := connect.NewUnaryHandler(
 		ManagementServiceGetRoleGroupProcedure,
 		svc.GetRoleGroup,
-		connect.WithSchema(managementServiceGetRoleGroupMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetRoleGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetRoleGroupByNameHandler := connect.NewUnaryHandler(
 		ManagementServiceGetRoleGroupByNameProcedure,
 		svc.GetRoleGroupByName,
-		connect.WithSchema(managementServiceGetRoleGroupByNameMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetRoleGroupByName")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceUpdateRoleGroupHandler := connect.NewUnaryHandler(
 		ManagementServiceUpdateRoleGroupProcedure,
 		svc.UpdateRoleGroup,
-		connect.WithSchema(managementServiceUpdateRoleGroupMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("UpdateRoleGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceDeleteRoleGroupHandler := connect.NewUnaryHandler(
 		ManagementServiceDeleteRoleGroupProcedure,
 		svc.DeleteRoleGroup,
-		connect.WithSchema(managementServiceDeleteRoleGroupMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("DeleteRoleGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceSearchRoleGroupsHandler := connect.NewUnaryHandler(
 		ManagementServiceSearchRoleGroupsProcedure,
 		svc.SearchRoleGroups,
-		connect.WithSchema(managementServiceSearchRoleGroupsMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("SearchRoleGroups")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceAddUserToRoleGroupHandler := connect.NewUnaryHandler(
 		ManagementServiceAddUserToRoleGroupProcedure,
 		svc.AddUserToRoleGroup,
-		connect.WithSchema(managementServiceAddUserToRoleGroupMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("AddUserToRoleGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceRemoveUserFromRoleGroupHandler := connect.NewUnaryHandler(
 		ManagementServiceRemoveUserFromRoleGroupProcedure,
 		svc.RemoveUserFromRoleGroup,
-		connect.WithSchema(managementServiceRemoveUserFromRoleGroupMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("RemoveUserFromRoleGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetRoleGroupsForUserHandler := connect.NewUnaryHandler(
 		ManagementServiceGetRoleGroupsForUserProcedure,
 		svc.GetRoleGroupsForUser,
-		connect.WithSchema(managementServiceGetRoleGroupsForUserMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetRoleGroupsForUser")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetUsersInRoleGroupHandler := connect.NewUnaryHandler(
 		ManagementServiceGetUsersInRoleGroupProcedure,
 		svc.GetUsersInRoleGroup,
-		connect.WithSchema(managementServiceGetUsersInRoleGroupMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetUsersInRoleGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceAssignRoleToUserHandler := connect.NewUnaryHandler(
 		ManagementServiceAssignRoleToUserProcedure,
 		svc.AssignRoleToUser,
-		connect.WithSchema(managementServiceAssignRoleToUserMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("AssignRoleToUser")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceUnassignRoleFromUserHandler := connect.NewUnaryHandler(
 		ManagementServiceUnassignRoleFromUserProcedure,
 		svc.UnassignRoleFromUser,
-		connect.WithSchema(managementServiceUnassignRoleFromUserMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("UnassignRoleFromUser")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetRolesForUserHandler := connect.NewUnaryHandler(
 		ManagementServiceGetRolesForUserProcedure,
 		svc.GetRolesForUser,
-		connect.WithSchema(managementServiceGetRolesForUserMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetRolesForUser")),
 		connect.WithHandlerOptions(opts...),
 	)
 	managementServiceGetPermissionsForRoleHandler := connect.NewUnaryHandler(
 		ManagementServiceGetPermissionsForRoleProcedure,
 		svc.GetPermissionsForRole,
-		connect.WithSchema(managementServiceGetPermissionsForRoleMethodDescriptor),
+		connect.WithSchema(managementServiceMethods.ByName("GetPermissionsForRole")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/pilab.cloud.director.v1.ManagementService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

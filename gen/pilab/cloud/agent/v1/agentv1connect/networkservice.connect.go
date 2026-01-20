@@ -86,28 +86,6 @@ const (
 	NetworkServiceNetworkGetProcedure = "/pilab.cloud.agent.v1.NetworkService/NetworkGet"
 )
 
-// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
-var (
-	networkServiceServiceDescriptor                = v1.File_pilab_cloud_agent_v1_networkservice_proto.Services().ByName("NetworkService")
-	networkServiceOvsBridgeCreateMethodDescriptor  = networkServiceServiceDescriptor.Methods().ByName("OvsBridgeCreate")
-	networkServiceOvsBridgeDeleteMethodDescriptor  = networkServiceServiceDescriptor.Methods().ByName("OvsBridgeDelete")
-	networkServiceOvsBridgeListMethodDescriptor    = networkServiceServiceDescriptor.Methods().ByName("OvsBridgeList")
-	networkServiceOvsBridgeGetMethodDescriptor     = networkServiceServiceDescriptor.Methods().ByName("OvsBridgeGet")
-	networkServiceOvsPortCreateMethodDescriptor    = networkServiceServiceDescriptor.Methods().ByName("OvsPortCreate")
-	networkServiceOvsPortDeleteMethodDescriptor    = networkServiceServiceDescriptor.Methods().ByName("OvsPortDelete")
-	networkServiceOvsPortListMethodDescriptor      = networkServiceServiceDescriptor.Methods().ByName("OvsPortList")
-	networkServiceOvsPortGetMethodDescriptor       = networkServiceServiceDescriptor.Methods().ByName("OvsPortGet")
-	networkServiceOvsPortUpdateMethodDescriptor    = networkServiceServiceDescriptor.Methods().ByName("OvsPortUpdate")
-	networkServiceOvsQosRuleCreateMethodDescriptor = networkServiceServiceDescriptor.Methods().ByName("OvsQosRuleCreate")
-	networkServiceOvsQosRuleDeleteMethodDescriptor = networkServiceServiceDescriptor.Methods().ByName("OvsQosRuleDelete")
-	networkServiceOvsQosRuleListMethodDescriptor   = networkServiceServiceDescriptor.Methods().ByName("OvsQosRuleList")
-	networkServiceOvsQosRuleGetMethodDescriptor    = networkServiceServiceDescriptor.Methods().ByName("OvsQosRuleGet")
-	networkServiceNetworkCreateMethodDescriptor    = networkServiceServiceDescriptor.Methods().ByName("NetworkCreate")
-	networkServiceNetworkDeleteMethodDescriptor    = networkServiceServiceDescriptor.Methods().ByName("NetworkDelete")
-	networkServiceNetworkListMethodDescriptor      = networkServiceServiceDescriptor.Methods().ByName("NetworkList")
-	networkServiceNetworkGetMethodDescriptor       = networkServiceServiceDescriptor.Methods().ByName("NetworkGet")
-)
-
 // NetworkServiceClient is a client for the pilab.cloud.agent.v1.NetworkService service.
 type NetworkServiceClient interface {
 	// OVS Bridge Management
@@ -142,107 +120,108 @@ type NetworkServiceClient interface {
 // http://api.acme.com or https://acme.com/grpc).
 func NewNetworkServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) NetworkServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
+	networkServiceMethods := v1.File_pilab_cloud_agent_v1_networkservice_proto.Services().ByName("NetworkService").Methods()
 	return &networkServiceClient{
 		ovsBridgeCreate: connect.NewClient[v1.OvsBridgeCreateRequest, v1.OvsBridgeCreateResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsBridgeCreateProcedure,
-			connect.WithSchema(networkServiceOvsBridgeCreateMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsBridgeCreate")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsBridgeDelete: connect.NewClient[v1.OvsBridgeDeleteRequest, v1.OvsBridgeDeleteResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsBridgeDeleteProcedure,
-			connect.WithSchema(networkServiceOvsBridgeDeleteMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsBridgeDelete")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsBridgeList: connect.NewClient[v1.OvsBridgeListRequest, v1.OvsBridgeListResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsBridgeListProcedure,
-			connect.WithSchema(networkServiceOvsBridgeListMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsBridgeList")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsBridgeGet: connect.NewClient[v1.OvsBridgeGetRequest, v1.OvsBridgeGetResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsBridgeGetProcedure,
-			connect.WithSchema(networkServiceOvsBridgeGetMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsBridgeGet")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsPortCreate: connect.NewClient[v1.OvsPortCreateRequest, v1.OvsPortCreateResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsPortCreateProcedure,
-			connect.WithSchema(networkServiceOvsPortCreateMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsPortCreate")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsPortDelete: connect.NewClient[v1.OvsPortDeleteRequest, v1.OvsPortDeleteResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsPortDeleteProcedure,
-			connect.WithSchema(networkServiceOvsPortDeleteMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsPortDelete")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsPortList: connect.NewClient[v1.OvsPortListRequest, v1.OvsPortListResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsPortListProcedure,
-			connect.WithSchema(networkServiceOvsPortListMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsPortList")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsPortGet: connect.NewClient[v1.OvsPortGetRequest, v1.OvsPortGetResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsPortGetProcedure,
-			connect.WithSchema(networkServiceOvsPortGetMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsPortGet")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsPortUpdate: connect.NewClient[v1.OvsPortUpdateRequest, v1.OvsPortUpdateResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsPortUpdateProcedure,
-			connect.WithSchema(networkServiceOvsPortUpdateMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsPortUpdate")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsQosRuleCreate: connect.NewClient[v1.OvsQosRuleCreateRequest, v1.OvsQosRuleCreateResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsQosRuleCreateProcedure,
-			connect.WithSchema(networkServiceOvsQosRuleCreateMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsQosRuleCreate")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsQosRuleDelete: connect.NewClient[v1.OvsQosRuleDeleteRequest, v1.OvsQosRuleDeleteResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsQosRuleDeleteProcedure,
-			connect.WithSchema(networkServiceOvsQosRuleDeleteMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsQosRuleDelete")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsQosRuleList: connect.NewClient[v1.OvsQosRuleListRequest, v1.OvsQosRuleListResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsQosRuleListProcedure,
-			connect.WithSchema(networkServiceOvsQosRuleListMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsQosRuleList")),
 			connect.WithClientOptions(opts...),
 		),
 		ovsQosRuleGet: connect.NewClient[v1.OvsQosRuleGetRequest, v1.OvsQosRuleGetResponse](
 			httpClient,
 			baseURL+NetworkServiceOvsQosRuleGetProcedure,
-			connect.WithSchema(networkServiceOvsQosRuleGetMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("OvsQosRuleGet")),
 			connect.WithClientOptions(opts...),
 		),
 		networkCreate: connect.NewClient[v1.NetworkCreateRequest, v1.NetworkCreateResponse](
 			httpClient,
 			baseURL+NetworkServiceNetworkCreateProcedure,
-			connect.WithSchema(networkServiceNetworkCreateMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("NetworkCreate")),
 			connect.WithClientOptions(opts...),
 		),
 		networkDelete: connect.NewClient[v1.NetworkDeleteRequest, v1.NetworkDeleteResponse](
 			httpClient,
 			baseURL+NetworkServiceNetworkDeleteProcedure,
-			connect.WithSchema(networkServiceNetworkDeleteMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("NetworkDelete")),
 			connect.WithClientOptions(opts...),
 		),
 		networkList: connect.NewClient[v1.NetworkListRequest, v1.NetworkListResponse](
 			httpClient,
 			baseURL+NetworkServiceNetworkListProcedure,
-			connect.WithSchema(networkServiceNetworkListMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("NetworkList")),
 			connect.WithClientOptions(opts...),
 		),
 		networkGet: connect.NewClient[v1.NetworkGetRequest, v1.NetworkGetResponse](
 			httpClient,
 			baseURL+NetworkServiceNetworkGetProcedure,
-			connect.WithSchema(networkServiceNetworkGetMethodDescriptor),
+			connect.WithSchema(networkServiceMethods.ByName("NetworkGet")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -385,106 +364,107 @@ type NetworkServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewNetworkServiceHandler(svc NetworkServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	networkServiceMethods := v1.File_pilab_cloud_agent_v1_networkservice_proto.Services().ByName("NetworkService").Methods()
 	networkServiceOvsBridgeCreateHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsBridgeCreateProcedure,
 		svc.OvsBridgeCreate,
-		connect.WithSchema(networkServiceOvsBridgeCreateMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsBridgeCreate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsBridgeDeleteHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsBridgeDeleteProcedure,
 		svc.OvsBridgeDelete,
-		connect.WithSchema(networkServiceOvsBridgeDeleteMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsBridgeDelete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsBridgeListHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsBridgeListProcedure,
 		svc.OvsBridgeList,
-		connect.WithSchema(networkServiceOvsBridgeListMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsBridgeList")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsBridgeGetHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsBridgeGetProcedure,
 		svc.OvsBridgeGet,
-		connect.WithSchema(networkServiceOvsBridgeGetMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsBridgeGet")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsPortCreateHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsPortCreateProcedure,
 		svc.OvsPortCreate,
-		connect.WithSchema(networkServiceOvsPortCreateMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsPortCreate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsPortDeleteHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsPortDeleteProcedure,
 		svc.OvsPortDelete,
-		connect.WithSchema(networkServiceOvsPortDeleteMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsPortDelete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsPortListHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsPortListProcedure,
 		svc.OvsPortList,
-		connect.WithSchema(networkServiceOvsPortListMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsPortList")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsPortGetHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsPortGetProcedure,
 		svc.OvsPortGet,
-		connect.WithSchema(networkServiceOvsPortGetMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsPortGet")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsPortUpdateHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsPortUpdateProcedure,
 		svc.OvsPortUpdate,
-		connect.WithSchema(networkServiceOvsPortUpdateMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsPortUpdate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsQosRuleCreateHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsQosRuleCreateProcedure,
 		svc.OvsQosRuleCreate,
-		connect.WithSchema(networkServiceOvsQosRuleCreateMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsQosRuleCreate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsQosRuleDeleteHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsQosRuleDeleteProcedure,
 		svc.OvsQosRuleDelete,
-		connect.WithSchema(networkServiceOvsQosRuleDeleteMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsQosRuleDelete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsQosRuleListHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsQosRuleListProcedure,
 		svc.OvsQosRuleList,
-		connect.WithSchema(networkServiceOvsQosRuleListMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsQosRuleList")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceOvsQosRuleGetHandler := connect.NewUnaryHandler(
 		NetworkServiceOvsQosRuleGetProcedure,
 		svc.OvsQosRuleGet,
-		connect.WithSchema(networkServiceOvsQosRuleGetMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("OvsQosRuleGet")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceNetworkCreateHandler := connect.NewUnaryHandler(
 		NetworkServiceNetworkCreateProcedure,
 		svc.NetworkCreate,
-		connect.WithSchema(networkServiceNetworkCreateMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("NetworkCreate")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceNetworkDeleteHandler := connect.NewUnaryHandler(
 		NetworkServiceNetworkDeleteProcedure,
 		svc.NetworkDelete,
-		connect.WithSchema(networkServiceNetworkDeleteMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("NetworkDelete")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceNetworkListHandler := connect.NewUnaryHandler(
 		NetworkServiceNetworkListProcedure,
 		svc.NetworkList,
-		connect.WithSchema(networkServiceNetworkListMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("NetworkList")),
 		connect.WithHandlerOptions(opts...),
 	)
 	networkServiceNetworkGetHandler := connect.NewUnaryHandler(
 		NetworkServiceNetworkGetProcedure,
 		svc.NetworkGet,
-		connect.WithSchema(networkServiceNetworkGetMethodDescriptor),
+		connect.WithSchema(networkServiceMethods.ByName("NetworkGet")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/pilab.cloud.agent.v1.NetworkService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
