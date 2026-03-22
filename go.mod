@@ -1,18 +1,18 @@
 module go.pilab.hu/cloud/virtpb
 
-go 1.23.0
+go 1.25.0
 
-toolchain go1.24.2
+// This module is version v1.0.4
 
 require (
-	connectrpc.com/connect v1.18.1
-	google.golang.org/grpc v1.75.0
-	google.golang.org/protobuf v1.36.8
+	connectrpc.com/connect v1.19.1
+	google.golang.org/grpc v1.79.3
+	google.golang.org/protobuf v1.36.11
 )
 
 require (
-	golang.org/x/net v0.43.0 // indirect
-	golang.org/x/sys v0.35.0 // indirect
-	golang.org/x/text v0.28.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250818200422-3122310a409c // indirect
+	golang.org/x/net v0.52.0 // indirect
+	golang.org/x/sys v0.42.0 // indirect
+	golang.org/x/text v0.35.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260319201613-d00831a3d3e7 // indirect
 )
