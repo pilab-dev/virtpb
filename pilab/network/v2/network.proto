@@ -40,7 +40,7 @@ package pilab.cloud.network.v2;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/network/v2;networkv2";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
 option java_package = "hu.pilab.cloud.network.v2";
 option java_outer_classname = "NetworkProto";
 option java_multiple_files = true;

@@ -21,7 +21,7 @@ syntax = "proto3";
 
 package pilab.cloud.director.v2;
 
-option go_package = "go.pilab.hu/cloud/virtpb/director/v2;directorv2";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/director/v2;directorv2";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";

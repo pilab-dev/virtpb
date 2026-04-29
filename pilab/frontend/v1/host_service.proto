@@ -23,7 +23,7 @@ package pilab.cloud.frontend.v1;
 
 import "google/protobuf/empty.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/frontend/v1;frontendv1";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1";
 
 import "google/protobuf/timestamp.proto";
 

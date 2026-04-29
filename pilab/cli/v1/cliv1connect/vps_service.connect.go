@@ -42,7 +42,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "go.pilab.hu/cloud/virtpb/cli/v1"
+	v1 "go.pilab.hu/cloud/virtpb/pilab/cli/v1"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	http "net/http"
 	strings "strings"

@@ -15,7 +15,7 @@ syntax = "proto3";
 
 package pilab.cloud;
 
-option go_package = "go.pilab.hu/cloud/virtpb;cloudpb";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab;cloudpb";
 
 message HostStats {
   float cpu_usage = 2;

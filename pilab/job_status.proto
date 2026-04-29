@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package pilab.cloud;
 
-option go_package = "go.pilab.hu/cloud/virtpb;cloudpb";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab;cloudpb";
 
 // JobStatus is a message that represents the status of a Job.
 message JobStatus {

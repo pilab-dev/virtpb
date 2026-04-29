@@ -40,7 +40,7 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/cli/v1;cliv1";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/cli/v1;cliv1";
 
 // VPS Management Service - Comprehensive service for managing Virtual Private Servers
 // This service handles all operations described in the vpsctl CLI specification

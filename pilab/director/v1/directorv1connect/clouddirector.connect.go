@@ -29,7 +29,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "go.pilab.hu/cloud/virtpb/director/v1"
+	v1 "go.pilab.hu/cloud/virtpb/pilab/director/v1"
 	http "net/http"
 	strings "strings"
 )

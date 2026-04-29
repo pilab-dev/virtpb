@@ -27,7 +27,7 @@ import "pilab/vm_metrics.proto";
 import "pilab/host_stats.proto";
 import "pilab/job_status.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/ws/v1;wsv1";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/ws/v1;wsv1";
 
 message JobCreated {
   string job = 1;

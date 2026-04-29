@@ -15,7 +15,7 @@ import "pilab/vm_metrics.proto";
 import "pilab/job_status.proto";
 import "pilab/host_stats.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/frontend/v1;frontendv1";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1";
 
 // Service Definition
 service TasksService {

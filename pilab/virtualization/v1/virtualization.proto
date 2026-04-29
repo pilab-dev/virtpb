@@ -23,7 +23,7 @@ syntax = "proto3";
 
 package pilab.cloud.virtualization.v1;
 
-option go_package = "go.pilab.hu/cloud/virtpb/virtualization/v1;virtualizationv1";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/virtualization/v1;virtualizationv1";
 
 import "google/protobuf/empty.proto";
 

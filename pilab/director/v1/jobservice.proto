@@ -19,7 +19,7 @@ syntax = "proto3";
 
 package pilab.cloud.director.v1;
 
-option go_package = "go.pilab.hu/cloud/virtpb/director/v1;directorv1";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/director/v1;directorv1";
 
 // JobService is a service that allows the agent to update the status of a job.
 service JobService {

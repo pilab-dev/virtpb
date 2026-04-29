@@ -18,7 +18,7 @@ syntax = "proto3";
 
 package pilab.cloud.agent.v1;
 
-option go_package = "go.pilab.hu/cloud/virtpb/agent/v1;agentv1";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
 
 message StreamRequest {
   oneof message {

@@ -27,7 +27,7 @@ import "pilab/vm_metrics.proto";
 import "pilab/job_status.proto";
 import "pilab/host_stats.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/director/v1;directorv1";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/director/v1;directorv1";
 
 message VmGuestInfo {
     // ID of a VM

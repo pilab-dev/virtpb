@@ -22,7 +22,7 @@ syntax = "proto3";
 
 package pilab.cloud.agent.v2;
 
-option go_package = "go.pilab.hu/cloud/virtpb/agent/v2;agentv2";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v2;agentv2";
 
 service ISCSIService {
   rpc Discover(ISCSIDiscoverRequest) returns (ISCSIDiscoverResponse);

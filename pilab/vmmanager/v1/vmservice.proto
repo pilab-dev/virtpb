@@ -25,7 +25,7 @@ package pilab.cloud.vmmanager.v1;
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/vmmanager/v1;vmmanagerv1";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/vmmanager/v1;vmmanagerv1";
 
 // Service Definition
 service VMService {
