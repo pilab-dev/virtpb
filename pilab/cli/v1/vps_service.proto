@@ -1,0 +1,1698 @@
+// =============================================================================
+// VPS Service - Comprehensive CLI API for VPS/VM Management
+// =============================================================================
+// Purpose: Complete API for the vpsctl command-line tool. This is the largest
+// service definition, providing all operations needed for VPS management.
+//
+// Communication: Unary RPC for all operations
+//
+// Major Categories:
+// - Authentication: Login, OAuth2 device code flow, logout, user info
+// - VM Lifecycle: Create, get, list, update, delete, start, stop, restart
+// - VM Advanced: Migrate, rebuild, clone, linked clone, console access
+// - VM Resources: Hot-add CPU/memory (UpdateVMResources)
+// - Disk: Full disk lifecycle (create, attach, resize, detach, delete)
+// - Images: Image management from VM or upload
+// - Snapshots: Snapshot lifecycle with restore and consolidate
+// - Networks: Virtual network CRUD
+// - Network Interfaces: NIC management on VMs
+// - vSwitch: Virtual switch management
+// - Port Groups: Network segmentation with VLAN
+// - Public IP: IP allocation and assignment
+// - Security Groups: Firewall rules for VMs
+// - Templates: Instance templates for repeatable deployments
+// - OS Templates: OS definitions from osinfodb
+// - Monitoring: Metrics and activity logs
+// - Organizations: Multi-tenant management (admin)
+// - Users: User management (admin)
+// - Datastores: Storage management (DCUI operations)
+// - System: Host info, network config, health (DCUI operations)
+//
+// This is effectively a "monolithic" API that wraps all platform functionality
+// for CLI access, as opposed to the more decomposed microservice APIs.
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.cloud.cli.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/cli/v1;cliv1";
+
+// VPS Management Service - Comprehensive service for managing Virtual Private Servers
+// This service handles all operations described in the vpsctl CLI specification
+service VPSService {
+  // ============================================================================
+  // Authentication & Configuration Management
+  // ============================================================================
+  
+  // Authenticate user and return JWT token (legacy username/password)
+  rpc Login(LoginRequest) returns (LoginResponse);
+  
+  // OAuth2 Device Code Authentication
+  rpc InitiateDeviceAuth(InitiateDeviceAuthRequest) returns (InitiateDeviceAuthResponse);
+  rpc PollDeviceAuth(PollDeviceAuthRequest) returns (PollDeviceAuthResponse);
+  
+  // Invalidate user token
+  rpc Logout(LogoutRequest) returns (google.protobuf.Empty);
+  
+  // Get current user information
+  rpc GetCurrentUser(google.protobuf.Empty) returns (User);
+  
+  // ============================================================================
+  // Virtual Machine (VM) Management
+  // ============================================================================
+  
+  // VM Lifecycle Operations
+  rpc CreateVM(CreateVMRequest) returns (VM);
+  rpc GetVM(GetVMRequest) returns (VM);
+  rpc ListVMs(ListVMsRequest) returns (ListVMsResponse);
+  rpc UpdateVM(UpdateVMRequest) returns (VM);
+  rpc DeleteVM(DeleteVMRequest) returns (google.protobuf.Empty);
+  
+  // VM Power Operations
+  rpc StartVM(StartVMRequest) returns (google.protobuf.Empty);
+  rpc StopVM(StopVMRequest) returns (google.protobuf.Empty);
+  rpc RestartVM(RestartVMRequest) returns (google.protobuf.Empty);
+  rpc PauseVM(PauseVMRequest) returns (google.protobuf.Empty);
+  rpc UnpauseVM(UnpauseVMRequest) returns (google.protobuf.Empty);
+  
+  // VM Advanced Operations
+  rpc MigrateVM(MigrateVMRequest) returns (google.protobuf.Empty);
+  rpc RebuildVM(RebuildVMRequest) returns (VM);
+  rpc CloneVM(CloneVMRequest) returns (VM);
+  rpc LinkedCloneVM(LinkedCloneVMRequest) returns (VM);
+  rpc GetVMConsole(GetVMConsoleRequest) returns (GetVMConsoleResponse);
+  
+  // VM Resource Management (Hot-Add)
+  rpc UpdateVMResources(UpdateVMResourcesRequest) returns (UpdateVMResourcesResponse);
+  rpc GetVMResources(GetVMResourcesRequest) returns (GetVMResourcesResponse);
+  
+  // ============================================================================
+  // Disk Management
+  // ============================================================================
+  
+  rpc CreateDisk(CreateDiskRequest) returns (Disk);
+  rpc GetDisk(GetDiskRequest) returns (Disk);
+  rpc ListDisks(ListDisksRequest) returns (ListDisksResponse);
+  rpc UpdateDisk(UpdateDiskRequest) returns (Disk);
+  rpc DeleteDisk(DeleteDiskRequest) returns (google.protobuf.Empty);
+  rpc ExtendDisk(ExtendDiskRequest) returns (Disk);
+  rpc AttachDisk(AttachDiskRequest) returns (google.protobuf.Empty);
+  rpc DetachDisk(DetachDiskRequest) returns (google.protobuf.Empty);
+  
+  // ============================================================================
+  // Image Management
+  // ============================================================================
+  
+  rpc GetImage(GetImageRequest) returns (Image);
+  rpc ListImages(ListImagesRequest) returns (ListImagesResponse);
+  rpc CreateImage(CreateImageRequest) returns (Image);
+  rpc UploadImage(UploadImageRequest) returns (Image);
+  rpc DeleteImage(DeleteImageRequest) returns (google.protobuf.Empty);
+  
+  // ============================================================================
+  // Snapshot Management
+  // ============================================================================
+  
+  rpc GetSnapshot(GetSnapshotRequest) returns (Snapshot);
+  rpc ListSnapshots(ListSnapshotsRequest) returns (ListSnapshotsResponse);
+  rpc CreateSnapshot(CreateSnapshotRequest) returns (Snapshot);
+  rpc RestoreSnapshot(RestoreSnapshotRequest) returns (google.protobuf.Empty);
+  rpc DeleteSnapshot(DeleteSnapshotRequest) returns (google.protobuf.Empty);
+  rpc ConsolidateSnapshot(SnapshotConsolidateRequest) returns (google.protobuf.Empty);
+  
+  // ============================================================================
+  // Network Management
+  // ============================================================================
+  
+  rpc CreateNetwork(CreateNetworkRequest) returns (Network);
+  rpc GetNetwork(GetNetworkRequest) returns (Network);
+  rpc ListNetworks(ListNetworksRequest) returns (ListNetworksResponse);
+  rpc UpdateNetwork(UpdateNetworkRequest) returns (Network);
+  rpc DeleteNetwork(DeleteNetworkRequest) returns (google.protobuf.Empty);
+  
+  // Network Interface Management
+  rpc GetNetworkInterface(GetNetworkInterfaceRequest) returns (NetworkInterface);
+  rpc ListNetworkInterfaces(ListNetworkInterfacesRequest) returns (ListNetworkInterfacesResponse);
+  rpc AddNetworkInterface(AddNetworkInterfaceRequest) returns (NetworkInterface);
+  rpc RemoveNetworkInterface(RemoveNetworkInterfaceRequest) returns (google.protobuf.Empty);
+  
+  // vSwitch Management
+  rpc CreateVSwitch(CreateVSwitchRequest) returns (VSwitch);
+  rpc GetVSwitch(GetVSwitchRequest) returns (VSwitch);
+  rpc ListVSwitches(ListVSwitchesRequest) returns (ListVSwitchesResponse);
+  rpc DeleteVSwitch(DeleteVSwitchRequest) returns (google.protobuf.Empty);
+  
+  // Port Group Management
+  rpc CreatePortGroup(CreatePortGroupRequest) returns (PortGroup);
+  rpc GetPortGroup(GetPortGroupRequest) returns (PortGroup);
+  rpc ListPortGroups(ListPortGroupsRequest) returns (ListPortGroupsResponse);
+  rpc DeletePortGroup(DeletePortGroupRequest) returns (google.protobuf.Empty);
+  
+  // ============================================================================
+  // Public IP Management
+  // ============================================================================
+  
+  rpc CreatePublicIP(CreatePublicIPRequest) returns (PublicIP);
+  rpc GetPublicIP(GetPublicIPRequest) returns (PublicIP);
+  rpc ListPublicIPs(ListPublicIPsRequest) returns (ListPublicIPsResponse);
+  rpc UpdatePublicIP(UpdatePublicIPRequest) returns (PublicIP);
+  rpc DeletePublicIP(DeletePublicIPRequest) returns (google.protobuf.Empty);
+  rpc AssignPublicIP(AssignPublicIPRequest) returns (google.protobuf.Empty);
+  rpc UnassignPublicIP(UnassignPublicIPRequest) returns (google.protobuf.Empty);
+  
+  // ============================================================================
+  // Security Group Management
+  // ============================================================================
+  
+  rpc CreateSecurityGroup(CreateSecurityGroupRequest) returns (SecurityGroup);
+  rpc GetSecurityGroup(GetSecurityGroupRequest) returns (SecurityGroup);
+  rpc ListSecurityGroups(ListSecurityGroupsRequest) returns (ListSecurityGroupsResponse);
+  rpc UpdateSecurityGroup(UpdateSecurityGroupRequest) returns (SecurityGroup);
+  rpc DeleteSecurityGroup(DeleteSecurityGroupRequest) returns (google.protobuf.Empty);
+  
+  // Security Rule Management
+  rpc AddSecurityRule(AddSecurityRuleRequest) returns (SecurityRule);
+  rpc RemoveSecurityRule(RemoveSecurityRuleRequest) returns (google.protobuf.Empty);
+  
+  // ============================================================================
+  // Instance Template Management
+  // ============================================================================
+  
+  rpc CreateTemplate(CreateTemplateRequest) returns (Template);
+  rpc GetTemplate(GetTemplateRequest) returns (Template);
+  rpc ListTemplates(ListTemplatesRequest) returns (ListTemplatesResponse);
+  rpc DeleteTemplate(DeleteTemplateRequest) returns (google.protobuf.Empty);
+  
+  // ============================================================================
+  // OS Template Management (from osinfodb)
+  // ============================================================================
+  
+  // List all OS templates from osinfodb
+  rpc ListOSTemplates(ListOSTemplatesRequest) returns (ListOSTemplatesResponse);
+  
+  // Get a specific OS template by ID
+  rpc GetOSTemplate(GetOSTemplateRequest) returns (OSTemplate);
+  
+  // Sync OS templates from osinfodb.json
+  rpc SyncOSTemplates(SyncOSTemplatesRequest) returns (SyncOSTemplatesResponse);
+  
+  // Create a VM from an OS template
+  rpc CreateVMFromOSTemplate(CreateVMFromOSTemplateRequest) returns (VM);
+  
+  // ============================================================================
+  // Monitoring & Activity Logs
+  // ============================================================================
+  
+  rpc GetMetrics(GetMetricsRequest) returns (GetMetricsResponse);
+  rpc GetActivity(GetActivityRequest) returns (GetActivityResponse);
+  
+  // ============================================================================
+  // Organization & User Management (Admin Only)
+  // ============================================================================
+  
+  rpc CreateOrganization(CreateOrganizationRequest) returns (Organization);
+  rpc GetOrganization(GetOrganizationRequest) returns (Organization);
+  rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse);
+  rpc UpdateOrganization(UpdateOrganizationRequest) returns (Organization);
+  rpc DeleteOrganization(DeleteOrganizationRequest) returns (google.protobuf.Empty);
+  
+  rpc CreateUser(CreateUserRequest) returns (User);
+  rpc GetUser(GetUserRequest) returns (User);
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (User);
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
+  
+  // ============================================================================
+  // Utility Operations
+  // ============================================================================
+  
+  rpc GetVersion(google.protobuf.Empty) returns (VersionResponse);
+  
+  // ============================================================================
+  // Datastore Management (DCUI/Local Console)
+  // ============================================================================
+  
+  // Create a new datastore
+  rpc CreateDatastore(CreateDatastoreRequest) returns (Datastore);
+  
+  // Get a datastore by ID
+  rpc GetDatastore(GetDatastoreRequest) returns (Datastore);
+  
+  // List all datastores
+  rpc ListDatastores(ListDatastoresRequest) returns (ListDatastoresResponse);
+  
+  // Delete a datastore
+  rpc DeleteDatastore(DeleteDatastoreRequest) returns (google.protobuf.Empty);
+  
+  // Mount a datastore (NFS)
+  rpc MountDatastore(MountDatastoreRequest) returns (google.protobuf.Empty);
+  
+  // Unmount a datastore (NFS)
+  rpc UnmountDatastore(UnmountDatastoreRequest) returns (google.protobuf.Empty);
+  
+  // ============================================================================
+  // System Configuration (DCUI/Local Console)
+  // ============================================================================
+  
+  // Get host system information
+  rpc GetHostInfo(google.protobuf.Empty) returns (HostInfo);
+  
+  // Get host network configuration
+  rpc GetNetworkConfig(google.protobuf.Empty) returns (NetworkConfigResponse);
+  
+  // Get host storage configuration
+  rpc GetStorageConfig(google.protobuf.Empty) returns (StorageConfigResponse);
+  
+  // Get host health status
+  rpc GetHostHealth(google.protobuf.Empty) returns (HostHealthResponse);
+  
+  // Configure host networking
+  rpc ConfigureNetwork(ConfigureNetworkRequest) returns (google.protobuf.Empty);
+}
+
+// ============================================================================
+// Authentication & User Management Messages
+// ============================================================================
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+  string organization = 3;
+  string api_server = 4;
+}
+
+message LoginResponse {
+  string token = 1;
+  string refresh_token = 2;
+  User user = 3;
+  Organization organization = 4;
+  google.protobuf.Timestamp expires_at = 5;
+}
+
+// OAuth2 Device Code Authentication Messages
+message InitiateDeviceAuthRequest {
+  string client_id = 1;
+  repeated string scopes = 2;
+  string audience = 3;
+}
+
+message InitiateDeviceAuthResponse {
+  string device_code = 1;
+  string user_code = 2;
+  string verification_uri = 3;
+  string verification_uri_complete = 4;
+  int32 expires_in = 5;
+  int32 interval = 6;
+  string message = 7;
+}
+
+message PollDeviceAuthRequest {
+  string device_code = 1;
+  string client_id = 2;
+}
+
+message PollDeviceAuthResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  string token_type = 3;
+  int32 expires_in = 4;
+  repeated string scopes = 5;
+  User user = 6;
+  Organization organization = 7;
+  google.protobuf.Timestamp expires_at = 8;
+}
+
+message LogoutRequest {
+  string context_name = 1;
+  bool all = 2;
+}
+
+message User {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string full_name = 4;
+  repeated string roles = 5;
+  repeated string organizations = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+}
+
+message Organization {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  string owner_id = 4;
+  repeated string member_ids = 5;
+  ResourceQuota quota = 6;
+  ResourceUsage usage = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+message ResourceQuota {
+  int32 cpu_cores = 1;
+  int32 ram_mb = 2;
+  int32 disk_gb = 3;
+  int32 vms = 4;
+  int32 networks = 5;
+  int32 public_ips = 6;
+}
+
+message ResourceUsage {
+  int32 cpu_cores_used = 1;
+  int32 ram_mb_used = 2;
+  int32 disk_gb_used = 3;
+  int32 vms_used = 4;
+  int32 networks_used = 5;
+  int32 public_ips_used = 6;
+}
+
+// ============================================================================
+// Virtual Machine Messages
+// ============================================================================
+
+message VM {
+  string id = 1;
+  string name = 2;
+  string organization_id = 3;
+  VMState state = 4;
+  MachineType machine_type = 5;
+  Image image = 6;
+  repeated Disk disks = 7;
+  repeated NetworkInterface network_interfaces = 8;
+  repeated SecurityGroup security_groups = 9;
+  repeated PublicIP public_ips = 10;
+  map<string, string> labels = 11;
+  string description = 12;
+  bool preemptible = 13;
+  bool auto_restart_on_maintenance = 14;
+  string zone = 15;
+  map<string, string> metadata = 16;
+  google.protobuf.Timestamp created_at = 17;
+  google.protobuf.Timestamp updated_at = 18;
+}
+
+enum VMState {
+  VM_STATE_UNSPECIFIED = 0;
+  VM_STATE_PENDING = 1;
+  VM_STATE_RUNNING = 2;
+  VM_STATE_STOPPED = 3;
+  VM_STATE_PAUSED = 4;
+  VM_STATE_ERROR = 5;
+  VM_STATE_DELETING = 6;
+}
+
+message MachineType {
+  string id = 1;
+  string name = 2;
+  int32 cpu_cores = 3;
+  int32 ram_mb = 4;
+  string category = 5; // e.g., "standard", "highmem", "compute"
+}
+
+message CreateVMRequest {
+  string name = 1;
+  string machine_type = 2;
+  string image = 3;
+  int32 root_disk_size_gb = 4;
+  string root_disk_type = 5;
+  string network = 6;
+  string password = 7;
+  repeated string ssh_keys = 8;
+  string userdata = 9;
+  string boot_order = 10;
+  string description = 11;
+  map<string, string> labels = 12;
+  bool preemptible = 13;
+  bool auto_restart_on_maintenance = 14;
+  string zone = 15;
+  repeated string private_networks = 16;
+  string public_ip = 17;
+  repeated string security_groups = 18;
+  string service_account = 19;
+  map<string, string> metadata = 20;
+  bool wait = 21;
+}
+
+message GetVMRequest {
+  string name = 1;
+}
+
+message ListVMsRequest {
+  string organization_id = 1;
+  bool all_organizations = 2;
+  map<string, string> label_selector = 3;
+  map<string, string> field_selector = 4;
+  int32 page_size = 5;
+  string page_token = 6;
+}
+
+message ListVMsResponse {
+  repeated VM vms = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateVMRequest {
+  string name = 1;
+  string machine_type = 2;
+  string description = 3;
+  map<string, string> labels = 4;
+  repeated string add_labels = 5;
+  repeated string remove_labels = 6;
+  string boot_order = 7;
+  string password = 8;
+  repeated string add_ssh_keys = 9;
+  repeated string remove_ssh_keys = 10;
+  bool preemptible = 11;
+  bool auto_restart_on_maintenance = 12;
+  repeated string add_security_groups = 13;
+  repeated string remove_security_groups = 14;
+  string service_account = 15;
+  map<string, string> metadata = 16;
+  string rename = 17;
+}
+
+message DeleteVMRequest {
+  string name = 1;
+  bool delete_disks = 2;
+}
+
+message StartVMRequest {
+  string name = 1;
+  bool wait = 2;
+}
+
+message StopVMRequest {
+  string name = 1;
+  bool force = 2;
+  bool wait = 3;
+}
+
+message RestartVMRequest {
+  string name = 1;
+  bool wait = 2;
+}
+
+message PauseVMRequest {
+  string name = 1;
+}
+
+message UnpauseVMRequest {
+  string name = 1;
+}
+
+message MigrateVMRequest {
+  string name = 1;
+  string destination_host = 2;
+  bool live = 3;
+}
+
+message RebuildVMRequest {
+  string name = 1;
+  string image = 2;
+  string password = 3;
+  repeated string ssh_keys = 4;
+  string userdata = 5;
+  bool wait = 6;
+}
+
+message CloneVMRequest {
+  string source_vm_name = 1;
+  string new_vm_name = 2;
+  bool start = 3;
+  bool reset_network = 4;
+  bool re_password = 5;
+  repeated string new_ssh_keys = 6;
+  string new_public_ip = 7;
+}
+
+message LinkedCloneVMRequest {
+  string source_vm_name = 1;
+  string new_vm_name = 2;
+  string snapshot_name = 3;
+  string image_path = 4;  // path to store new disk images (e.g., /var/lib/libvirt/images)
+  bool start = 5;
+}
+
+message LinkedCloneVMResponse {
+  VM vm = 1;
+}
+
+message GetVMConsoleRequest {
+  string name = 1;
+}
+
+message GetVMConsoleResponse {
+  string console_url = 1;
+  string console_type = 2; // "vnc", "spice", "novnc"
+}
+
+// ============================================================================
+// VM Resource Management Messages (Hot-Add)
+// ============================================================================
+
+message UpdateVMResourcesRequest {
+  string vm_name = 1;
+  optional int32 cpu_cores = 2;
+  optional int32 memory_mb = 3;
+  bool hot_add = 4;  // Apply immediately without reboot
+}
+
+message UpdateVMResourcesResponse {
+  bool success = 1;
+  VM vm = 2;
+  string message = 3;
+}
+
+message GetVMResourcesRequest {
+  string vm_name = 1;
+}
+
+message GetVMResourcesResponse {
+  string vm_name = 1;
+  int32 current_cpu_cores = 2;
+  int32 current_memory_mb = 3;
+  int32 max_cpu_cores = 4;
+  int32 max_memory_mb = 5;
+  bool cpu_hot_add_enabled = 6;
+  bool memory_hot_add_enabled = 7;
+}
+
+// ============================================================================
+// Disk Management Messages
+// ============================================================================
+
+message Disk {
+  string id = 1;
+  string name = 2;
+  string organization_id = 3;
+  string vm_id = 4; // null if standalone
+  int64 size_gb = 5;
+  string disk_type = 6;
+  string storage_pool = 7;
+  string source_snapshot = 8;
+  string source_image = 9;
+  string zone = 10;
+  string description = 11;
+  map<string, string> labels = 12;
+  DiskState state = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+}
+
+enum DiskState {
+  DISK_STATE_UNSPECIFIED = 0;
+  DISK_STATE_CREATING = 1;
+  DISK_STATE_READY = 2;
+  DISK_STATE_ATTACHED = 3;
+  DISK_STATE_ERROR = 4;
+  DISK_STATE_DELETING = 5;
+}
+
+message CreateDiskRequest {
+  string name = 1;
+  int64 size_gb = 2;
+  string disk_type = 3;
+  string storage_pool = 4;
+  string source_snapshot = 5;
+  string source_image = 6;
+  string zone = 7;
+  string description = 8;
+  map<string, string> labels = 9;
+  bool wait = 10;
+}
+
+message GetDiskRequest {
+  string name = 1;
+}
+
+message ListDisksRequest {
+  string vm_name = 1;
+  bool unattached = 2;
+  string disk_type = 3;
+  string zone = 4;
+  int32 page_size = 5;
+  string page_token = 6;
+}
+
+message ListDisksResponse {
+  repeated Disk disks = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateDiskRequest {
+  string name = 1;
+  string description = 2;
+  map<string, string> labels = 3;
+  repeated string add_labels = 4;
+  repeated string remove_labels = 5;
+  string rename = 6;
+}
+
+message DeleteDiskRequest {
+  string name = 1;
+  bool force = 2;
+}
+
+message ExtendDiskRequest {
+  string name = 1;
+  int64 size_gb = 2;
+  string vm_name = 3;
+  bool resize_partition = 4;
+  bool wait = 5;
+}
+
+message AttachDiskRequest {
+  string disk_name = 1;
+  string vm_name = 2;
+  string device_name = 3;
+  bool read_only = 4;
+  bool wait = 5;
+}
+
+message DetachDiskRequest {
+  string disk_name = 1;
+  string vm_name = 2;
+  bool wait = 3;
+}
+
+// ============================================================================
+// Image Management Messages
+// ============================================================================
+
+message Image {
+  string id = 1;
+  string name = 2;
+  string organization_id = 3;
+  string os_family = 4;
+  string os_version = 5;
+  string architecture = 6;
+  int64 size_gb = 7;
+  string format = 8;
+  string visibility = 9; // "public", "private"
+  string family = 10;
+  string description = 11;
+  map<string, string> labels = 12;
+  ImageState state = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+}
+
+enum ImageState {
+  IMAGE_STATE_UNSPECIFIED = 0;
+  IMAGE_STATE_CREATING = 1;
+  IMAGE_STATE_READY = 2;
+  IMAGE_STATE_ERROR = 3;
+  IMAGE_STATE_DELETING = 4;
+}
+
+message GetImageRequest {
+  string name = 1;
+}
+
+message ListImagesRequest {
+  bool public_only = 1;
+  bool private_only = 2;
+  string os_family = 3;
+  string os_version = 4;
+  string family = 5;
+  int32 page_size = 6;
+  string page_token = 7;
+}
+
+message ListImagesResponse {
+  repeated Image images = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message CreateImageRequest {
+  string name = 1;
+  string source_vm = 2;
+  string source_disk = 3;
+  string description = 4;
+  map<string, string> labels = 5;
+  string visibility = 6;
+  string family = 7;
+  bool no_force_shutdown = 8;
+  bool wait = 9;
+}
+
+message UploadImageRequest {
+  string name = 1;
+  bytes image_data = 2;
+  string format = 3;
+  string description = 4;
+  map<string, string> labels = 5;
+  string visibility = 6;
+  bool wait = 7;
+}
+
+message DeleteImageRequest {
+  string name = 1;
+}
+
+// ============================================================================
+// Snapshot Management Messages
+// ============================================================================
+
+message Snapshot {
+  string id = 1;
+  string name = 2;
+  string organization_id = 3;
+  string vm_id = 4;
+  string disk_id = 5;
+  string description = 6;
+  map<string, string> labels = 7;
+  int64 size_gb = 8;
+  google.protobuf.Timestamp auto_delete_after = 9;
+  SnapshotState state = 10;
+  google.protobuf.Timestamp created_at = 11;
+  google.protobuf.Timestamp updated_at = 12;
+  bool memory_snapshot = 13;
+}
+
+enum SnapshotState {
+  SNAPSHOT_STATE_UNSPECIFIED = 0;
+  SNAPSHOT_STATE_CREATING = 1;
+  SNAPSHOT_STATE_READY = 2;
+  SNAPSHOT_STATE_ERROR = 3;
+  SNAPSHOT_STATE_DELETING = 4;
+}
+
+message GetSnapshotRequest {
+  string name = 1;
+}
+
+message ListSnapshotsRequest {
+  string vm_name = 1;
+  string disk_name = 2;
+  google.protobuf.Duration older_than = 3;
+  map<string, string> labels = 4;
+  int32 page_size = 5;
+  string page_token = 6;
+}
+
+message ListSnapshotsResponse {
+  repeated Snapshot snapshots = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message CreateSnapshotRequest {
+  string name = 1;
+  string vm_name = 2;
+  string disk_name = 3;
+  string description = 4;
+  map<string, string> labels = 5;
+  google.protobuf.Duration auto_delete_after = 6;
+  bool wait = 7;
+  bool include_memory = 8;
+}
+
+message RestoreSnapshotRequest {
+  string snapshot_name = 1;
+  string vm_name = 2;
+  string disk_name = 3;
+  string new_vm_name = 4;
+  string new_disk_name = 5;
+  bool wait = 6;
+}
+
+message DeleteSnapshotRequest {
+  string name = 1;
+}
+
+message SnapshotConsolidateRequest {
+  string vm_name = 1;
+  string snapshot_name = 2;
+}
+
+// ============================================================================
+// Network Management Messages
+// ============================================================================
+
+message Network {
+  string id = 1;
+  string name = 2;
+  string organization_id = 3;
+  string cidr_block = 4;
+  string zone = 5;
+  string description = 6;
+  map<string, string> labels = 7;
+  NetworkState state = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+enum NetworkState {
+  NETWORK_STATE_UNSPECIFIED = 0;
+  NETWORK_STATE_CREATING = 1;
+  NETWORK_STATE_READY = 2;
+  NETWORK_STATE_ERROR = 3;
+  NETWORK_STATE_DELETING = 4;
+}
+
+message NetworkInterface {
+  string id = 1;
+  string vm_id = 2;
+  string network_id = 3;
+  string mac_address = 4;
+  string private_ip = 5;
+  string model = 6;
+  string interface_type = 7;
+  string target = 8;
+  google.protobuf.Timestamp created_at = 9;
+}
+
+message CreateNetworkRequest {
+  string name = 1;
+  string cidr_block = 2;
+  string zone = 3;
+  string description = 4;
+  map<string, string> labels = 5;
+  bool wait = 6;
+}
+
+message GetNetworkRequest {
+  string name = 1;
+}
+
+message ListNetworksRequest {
+  string scope = 1; // "public", "private", "all"
+  string zone = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+}
+
+message ListNetworksResponse {
+  repeated Network networks = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateNetworkRequest {
+  string name = 1;
+  string description = 2;
+  map<string, string> labels = 3;
+  repeated string add_labels = 4;
+  repeated string remove_labels = 5;
+  string rename = 6;
+}
+
+message DeleteNetworkRequest {
+  string name = 1;
+}
+
+message GetNetworkInterfaceRequest {
+  string vm_name = 1;
+}
+
+message ListNetworkInterfacesRequest {
+  string vm_name = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message ListNetworkInterfacesResponse {
+  repeated NetworkInterface network_interfaces = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message AddNetworkInterfaceRequest {
+  string vm_name = 1;
+  string network_name = 2;
+  string private_ip = 3;
+  string mac_address = 4;
+  bool wait = 5;
+}
+
+message RemoveNetworkInterfaceRequest {
+  string vm_name = 1;
+  string interface_id = 2;
+  bool wait = 3;
+}
+
+// ============================================================================
+// vSwitch Management Messages
+// ============================================================================
+
+message VSwitch {
+  string id = 1;
+  string name = 2;
+  string type = 3;  // "standard", "distributed", "ovs"
+  string bridge_name = 4;
+  int32 mtu = 5;
+  map<string, string> config = 6;
+  VSwitchState state = 7;
+  repeated string port_groups = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+enum VSwitchState {
+  VSWITCH_STATE_UNSPECIFIED = 0;
+  VSWITCH_STATE_CREATING = 1;
+  VSWITCH_STATE_READY = 2;
+  VSWITCH_STATE_ERROR = 3;
+  VSWITCH_STATE_DELETING = 4;
+}
+
+message CreateVSwitchRequest {
+  string name = 1;
+  string type = 2;  // "standard", "ovs"
+  int32 mtu = 3;
+  map<string, string> config = 4;
+}
+
+message GetVSwitchRequest {
+  string name = 1;
+}
+
+message ListVSwitchesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListVSwitchesResponse {
+  repeated VSwitch vswitches = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message DeleteVSwitchRequest {
+  string name = 1;
+  bool force = 2;
+}
+
+// ============================================================================
+// Port Group Management Messages
+// ============================================================================
+
+message PortGroup {
+  string id = 1;
+  string name = 2;
+  string vswitch_name = 3;
+  int32 vlan_id = 4;
+  int32 mtu = 5;
+  bool allow_promiscuous = 6;
+  bool mac_changes = 7;
+  bool forged_transmits = 8;
+  repeated string allowed_macs = 9;
+  PortGroupState state = 10;
+  google.protobuf.Timestamp created_at = 11;
+  google.protobuf.Timestamp updated_at = 12;
+}
+
+enum PortGroupState {
+  PORT_GROUP_STATE_UNSPECIFIED = 0;
+  PORT_GROUP_STATE_CREATING = 1;
+  PORT_GROUP_STATE_READY = 2;
+  PORT_GROUP_STATE_ERROR = 3;
+  PORT_GROUP_STATE_DELETING = 4;
+}
+
+message CreatePortGroupRequest {
+  string name = 1;
+  string vswitch_name = 2;
+  int32 vlan_id = 3;
+  int32 mtu = 4;
+  bool allow_promiscuous = 5;
+  bool mac_changes = 6;
+  bool forged_transmits = 7;
+}
+
+message GetPortGroupRequest {
+  string name = 1;
+}
+
+message ListPortGroupsRequest {
+  string vswitch_name = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message ListPortGroupsResponse {
+  repeated PortGroup port_groups = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message DeletePortGroupRequest {
+  string name = 1;
+}
+
+// ============================================================================
+// Public IP Management Messages
+// ============================================================================
+
+message PublicIP {
+  string id = 1;
+  string name = 2;
+  string organization_id = 3;
+  string ip_address = 4;
+  string vm_id = 5;
+  string zone = 6;
+  string description = 7;
+  map<string, string> labels = 8;
+  PublicIPState state = 9;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+}
+
+enum PublicIPState {
+  PUBLIC_IP_STATE_UNSPECIFIED = 0;
+  PUBLIC_IP_STATE_ALLOCATING = 1;
+  PUBLIC_IP_STATE_READY = 2;
+  PUBLIC_IP_STATE_ASSIGNED = 3;
+  PUBLIC_IP_STATE_ERROR = 4;
+  PUBLIC_IP_STATE_DELETING = 5;
+}
+
+message CreatePublicIPRequest {
+  string name = 1;
+  string zone = 2;
+  string description = 3;
+  map<string, string> labels = 4;
+  bool wait = 5;
+}
+
+message GetPublicIPRequest {
+  string identifier = 1; // IP address or name
+}
+
+message ListPublicIPsRequest {
+  string assigned_to_vm = 1;
+  bool unassigned = 2;
+  string zone = 3;
+  int32 page_size = 4;
+  string page_token = 5;
+}
+
+message ListPublicIPsResponse {
+  repeated PublicIP public_ips = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdatePublicIPRequest {
+  string identifier = 1;
+  string description = 2;
+  map<string, string> labels = 3;
+  repeated string add_labels = 4;
+  repeated string remove_labels = 5;
+  string rename = 6;
+}
+
+message DeletePublicIPRequest {
+  string identifier = 1;
+}
+
+message AssignPublicIPRequest {
+  string identifier = 1;
+  string vm_name = 2;
+  string interface_id = 3;
+  bool wait = 4;
+}
+
+message UnassignPublicIPRequest {
+  string identifier = 1;
+  string vm_name = 2;
+  bool wait = 3;
+}
+
+// ============================================================================
+// Security Group Management Messages
+// ============================================================================
+
+message SecurityGroup {
+  string id = 1;
+  string name = 2;
+  string organization_id = 3;
+  string description = 4;
+  map<string, string> labels = 5;
+  repeated SecurityRule rules = 6;
+  SecurityGroupState state = 7;
+  google.protobuf.Timestamp created_at = 8;
+  google.protobuf.Timestamp updated_at = 9;
+}
+
+enum SecurityGroupState {
+  SECURITY_GROUP_STATE_UNSPECIFIED = 0;
+  SECURITY_GROUP_STATE_CREATING = 1;
+  SECURITY_GROUP_STATE_READY = 2;
+  SECURITY_GROUP_STATE_ERROR = 3;
+  SECURITY_GROUP_STATE_DELETING = 4;
+}
+
+message SecurityRule {
+  string id = 1;
+  string security_group_id = 2;
+  string direction = 3; // "ingress", "egress"
+  string protocol = 4; // "tcp", "udp", "icmp", "all"
+  string ports = 5; // "80", "22-25", "all"
+  string source_cidr = 6;
+  string source_security_group = 7;
+  string destination_cidr = 8;
+  string destination_security_group = 9;
+  string description = 10;
+  int32 priority = 11;
+  google.protobuf.Timestamp created_at = 12;
+}
+
+message CreateSecurityGroupRequest {
+  string name = 1;
+  string description = 2;
+  map<string, string> labels = 3;
+  bool wait = 4;
+}
+
+message GetSecurityGroupRequest {
+  string name = 1;
+}
+
+message ListSecurityGroupsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListSecurityGroupsResponse {
+  repeated SecurityGroup security_groups = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateSecurityGroupRequest {
+  string name = 1;
+  string description = 2;
+  map<string, string> labels = 3;
+  repeated string add_labels = 4;
+  repeated string remove_labels = 5;
+  string rename = 6;
+}
+
+message DeleteSecurityGroupRequest {
+  string name = 1;
+}
+
+message AddSecurityRuleRequest {
+  string group_name = 1;
+  string direction = 2;
+  string protocol = 3;
+  string ports = 4;
+  string source_cidr = 5;
+  string source_security_group = 6;
+  string destination_cidr = 7;
+  string destination_security_group = 8;
+  string description = 9;
+  int32 priority = 10;
+}
+
+message RemoveSecurityRuleRequest {
+  string group_name = 1;
+  string rule_id = 2;
+}
+
+// ============================================================================
+// Template Management Messages
+// ============================================================================
+
+message Template {
+  string id = 1;
+  string name = 2;
+  string organization_id = 3;
+  string description = 4;
+  map<string, string> labels = 5;
+  MachineType machine_type = 6;
+  Image image = 7;
+  int32 root_disk_size_gb = 8;
+  string root_disk_type = 9;
+  string network = 10;
+  repeated string private_networks = 11;
+  repeated string security_groups = 12;
+  repeated string ssh_keys = 13;
+  string userdata = 14;
+  string boot_order = 15;
+  map<string, string> metadata = 16;
+  bool preemptible = 17;
+  bool auto_restart_on_maintenance = 18;
+  TemplateState state = 19;
+  google.protobuf.Timestamp created_at = 20;
+  google.protobuf.Timestamp updated_at = 21;
+}
+
+enum TemplateState {
+  TEMPLATE_STATE_UNSPECIFIED = 0;
+  TEMPLATE_STATE_CREATING = 1;
+  TEMPLATE_STATE_READY = 2;
+  TEMPLATE_STATE_ERROR = 3;
+  TEMPLATE_STATE_DELETING = 4;
+}
+
+message CreateTemplateRequest {
+  string name = 1;
+  string source_vm = 2;
+  string description = 3;
+  map<string, string> labels = 4;
+  string machine_type = 5;
+  string image = 6;
+  int32 root_disk_size_gb = 7;
+  string root_disk_type = 8;
+  string network = 9;
+  repeated string private_networks = 10;
+  repeated string security_groups = 11;
+  repeated string ssh_keys = 12;
+  string userdata = 13;
+  string boot_order = 14;
+  map<string, string> metadata = 15;
+  bool preemptible = 16;
+  bool auto_restart_on_maintenance = 17;
+  bool wait = 18;
+}
+
+message GetTemplateRequest {
+  string name = 1;
+}
+
+message ListTemplatesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListTemplatesResponse {
+  repeated Template templates = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message DeleteTemplateRequest {
+  string name = 1;
+}
+
+// ============================================================================
+// OS Template Messages (from osinfodb)
+// ============================================================================
+
+message OSTemplate {
+  string id = 1;                    // Short ID (e.g., "ubuntu22.04")
+  string os_id = 2;                // Full OS ID (e.g., "http://ubuntu.com/ubuntu/22.04")
+  string name = 3;                  // Sanitized name (e.g., "ubuntu-22.04")
+  string full_name = 4;             // Full name (e.g., "Ubuntu 22.04 LTS")
+  string family = 5;               // OS family (linux, windows, bsd)
+  string vendor = 6;                // Vendor (Canonical, Red Hat, Microsoft)
+  string version = 7;              // Version string
+  string architecture = 8;         // Architecture (x86_64, aarch64, etc.)
+  int32 cpu_cores = 9;             // Recommended CPU cores
+  int32 memory_mb = 10;            // Recommended memory in MB
+  int32 disk_gb = 11;              // Recommended disk size in GB
+  bool cloud_init = 12;            // Supports cloud-init
+  repeated ImageURL image_urls = 13; // Available image download URLs
+  map<string, string> labels = 14; // Labels for filtering
+  OSTemplateState state = 15;      // Template state
+  google.protobuf.Timestamp created_at = 16;
+  google.protobuf.Timestamp updated_at = 17;
+}
+
+enum OSTemplateState {
+  OSTEMPLATE_STATE_UNSPECIFIED = 0;
+  OSTEMPLATE_STATE_CREATING = 1;
+  OSTEMPLATE_STATE_READY = 2;
+  OSTEMPLATE_STATE_ERROR = 3;
+  OSTEMPLATE_STATE_SYNCING = 4;
+}
+
+message ImageURL {
+  string url = 1;                  // Download URL
+  string type = 2;                 // "iso", "disk", "containerdisk"
+  string format = 3;               // "qcow2", "raw", "vmdk"
+  string variant_id = 4;           // Variant identifier
+  bool cloud_init = 5;            // Supports cloud-init
+}
+
+message ListOSTemplatesRequest {
+  string family = 1;               // Filter by OS family (linux, windows, bsd)
+  string vendor = 2;              // Filter by vendor
+  string architecture = 3;         // Filter by architecture
+  bool cloud_init_only = 4;       // Only show cloud-init supported
+  int32 page_size = 5;
+  string page_token = 6;
+}
+
+message ListOSTemplatesResponse {
+  repeated OSTemplate templates = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message GetOSTemplateRequest {
+  string os_id = 1;                // Can be full ID, short ID, or name
+}
+
+message SyncOSTemplatesRequest {
+  bool force = 1;                  // Force re-sync even if templates exist
+}
+
+message SyncOSTemplatesResponse {
+  int32 imported_count = 1;
+  google.protobuf.Timestamp synced_at = 2;
+}
+
+message CreateVMFromOSTemplateRequest {
+  string name = 1;                 // VM name
+  string os_id = 2;               // OS template ID (full ID, short ID, or name)
+  int32 cpu_cores = 3;            // Override recommended CPU (0 = use template default)
+  int32 memory_mb = 4;           // Override recommended memory (0 = use template default)
+  int32 root_disk_size_gb = 5;    // Override recommended disk size (0 = use template default)
+  string password = 6;             // Initial password
+  repeated string ssh_keys = 7;   // SSH keys for access
+  string userdata = 8;             // Cloud-init userdata
+  string boot_order = 9;           // Boot device order
+  string description = 10;         // VM description
+  map<string, string> labels = 11;
+  bool preemptible = 12;
+  bool auto_restart_on_maintenance = 13;
+  string zone = 14;                // Availability zone
+  repeated string private_networks = 15;
+  string public_ip = 16;
+  repeated string security_groups = 17;
+  string machine_type = 18;        // Override machine type
+  map<string, string> metadata = 19;
+  bool wait = 20;
+}
+
+// ============================================================================
+// Monitoring & Activity Messages
+// ============================================================================
+
+message GetMetricsRequest {
+  string vm_name = 1;
+  string metric_type = 2; // "cpu", "ram", "disk-io", "net-io"
+  google.protobuf.Duration period = 3;
+  google.protobuf.Duration interval = 4;
+  string output_format = 5;
+}
+
+message GetMetricsResponse {
+  repeated MetricPoint data_points = 1;
+  string metric_type = 2;
+  string vm_name = 3;
+}
+
+message MetricPoint {
+  google.protobuf.Timestamp timestamp = 1;
+  double value = 2;
+  string unit = 3;
+}
+
+message GetActivityRequest {
+  string resource_type = 1;
+  string resource_name = 2;
+  string action = 3;
+  string user = 4;
+  google.protobuf.Duration since = 5;
+  int32 limit = 6;
+  int32 page_size = 7;
+  string page_token = 8;
+}
+
+message GetActivityResponse {
+  repeated ActivityLog activities = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message ActivityLog {
+  string id = 1;
+  string user_id = 2;
+  string user_name = 3;
+  string action = 4;
+  string resource_type = 5;
+  string resource_name = 6;
+  string resource_id = 7;
+  map<string, string> details = 8;
+  string ip_address = 9;
+  google.protobuf.Timestamp timestamp = 10;
+}
+
+// ============================================================================
+// Organization Management Messages (Admin Only)
+// ============================================================================
+
+message CreateOrganizationRequest {
+  string name = 1;
+  string description = 2;
+  string owner_user = 3;
+  string owner_password = 4;
+  int32 quota_cpu = 5;
+  int32 quota_ram = 6;
+  int32 quota_disk = 7;
+  bool wait = 8;
+}
+
+message GetOrganizationRequest {
+  string name = 1;
+  bool show_quotas = 2;
+}
+
+message ListOrganizationsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListOrganizationsResponse {
+  repeated Organization organizations = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateOrganizationRequest {
+  string name = 1;
+  string description = 2;
+  int32 quota_cpu = 3;
+  int32 quota_ram = 4;
+  int32 quota_disk = 5;
+  repeated string add_members = 6;
+  repeated string remove_members = 7;
+  string rename = 8;
+}
+
+message DeleteOrganizationRequest {
+  string name = 1;
+  bool force = 2;
+}
+
+// ============================================================================
+// User Management Messages (Admin Only)
+// ============================================================================
+
+message CreateUserRequest {
+  string username = 1;
+  string password = 2;
+  string organization = 3;
+  string email = 4;
+  string full_name = 5;
+  repeated string roles = 6;
+  repeated string add_organizations = 7;
+}
+
+message GetUserRequest {
+  string username = 1;
+}
+
+message ListUsersRequest {
+  bool all_organizations = 1;
+  string organization = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateUserRequest {
+  string username = 1;
+  string password = 2;
+  string email = 3;
+  string full_name = 4;
+  repeated string add_organization = 5;
+  repeated string remove_organization = 6;
+  string set_roles_in_organization = 7;
+  string rename = 8;
+}
+
+message DeleteUserRequest {
+  string username = 1;
+}
+
+// ============================================================================
+// Utility Messages
+// ============================================================================
+
+message VersionResponse {
+  string cli_version = 1;
+  string api_version = 2;
+  string build_date = 3;
+  string git_commit = 4;
+}
+
+// ============================================================================
+// Datastore Messages (DCUI/Local Console)
+// ============================================================================
+
+enum DatastoreType {
+  DATASTORE_TYPE_UNSPECIFIED = 0;
+  DATASTORE_TYPE_LOCAL = 1;
+  DATASTORE_TYPE_NFS = 2;
+  DATASTORE_TYPE_ISCSI = 3;
+  DATASTORE_TYPE_CEPH = 4;
+}
+
+enum DatastoreStatus {
+  DATASTORE_STATUS_UNSPECIFIED = 0;
+  DATASTORE_STATUS_MOUNTED = 1;
+  DATASTORE_STATUS_UNMOUNTED = 2;
+  DATASTORE_STATUS_ERROR = 3;
+}
+
+message Datastore {
+  string id = 1;
+  string name = 2;
+  DatastoreType type = 3;
+  int64 total_capacity = 4;
+  int64 available_capacity = 5;
+  string mount_path = 6;
+  DatastoreStatus status = 7;
+  map<string, string> connection_info = 8;
+  repeated string supported_formats = 9;
+  bool is_local = 10;
+  string organization_id = 11;
+  google.protobuf.Timestamp created_at = 12;
+  google.protobuf.Timestamp updated_at = 13;
+}
+
+message CreateDatastoreRequest {
+  string name = 1;
+  DatastoreType type = 2;
+  map<string, string> connection_info = 3;
+  string organization_id = 4;
+}
+
+message GetDatastoreRequest {
+  string id = 1;
+}
+
+message ListDatastoresRequest {
+  DatastoreType type = 1;
+  bool mounted_only = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+}
+
+message ListDatastoresResponse {
+  repeated Datastore datastores = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message DeleteDatastoreRequest {
+  string id = 1;
+  bool force = 2;
+}
+
+message MountDatastoreRequest {
+  string id = 1;
+}
+
+message UnmountDatastoreRequest {
+  string id = 1;
+  bool force = 2;
+}
+
+// ============================================================================
+// System Configuration Messages (DCUI/Local Console)
+// ============================================================================
+
+message HostInfo {
+  string hostname = 1;
+  string os_name = 2;
+  string os_version = 3;
+  string kernel_version = 4;
+  string architecture = 5;
+  string hypervisor_type = 6;
+  int32 cpu_cores = 7;
+  int64 total_memory = 8;
+  int64 available_memory = 9;
+  int64 uptime_seconds = 10;
+  string agent_version = 11;
+  string ip_address = 12;
+  string mac_address = 13;
+  repeated string network_interfaces = 14;
+}
+
+message NetworkInterfaceInfo {
+  string name = 1;
+  string mac_address = 2;
+  string ip_address = 3;
+  string netmask = 4;
+  string gateway = 5;
+  repeated string dns_servers = 6;
+  bool up = 7;
+  bool managed = 8;
+  string bridge_name = 9;
+  repeated string vlans = 10;
+}
+
+message NetworkConfigResponse {
+  repeated NetworkInterfaceInfo interfaces = 1;
+  string primary_interface = 2;
+  bool dhcp_enabled = 3;
+  string hostname = 4;
+}
+
+message StorageConfigResponse {
+  repeated Datastore datastores = 1;
+  int64 total_storage = 2;
+  int64 used_storage = 3;
+  int64 available_storage = 4;
+  repeated string local_disks = 5;
+}
+
+message ServiceStatus {
+  string name = 1;
+  string status = 2;
+  bool healthy = 3;
+  string message = 4;
+}
+
+message HostHealthResponse {
+  bool overall_healthy = 1;
+  int32 cpu_usage_percent = 2;
+  int32 memory_usage_percent = 3;
+  int32 disk_usage_percent = 4;
+  repeated ServiceStatus services = 5;
+  repeated string warnings = 6;
+  repeated string errors = 7;
+  google.protobuf.Timestamp last_updated = 8;
+}
+
+message ConfigureNetworkRequest {
+  string interface_name = 1;
+  string ip_address = 2;
+  string netmask = 3;
+  string gateway = 4;
+  repeated string dns_servers = 5;
+  bool dhcp = 6;
+  string hostname = 7;
+}

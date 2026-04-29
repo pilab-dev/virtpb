@@ -1,0 +1,43 @@
+// =============================================================================
+// Job Status - Shared Message for Job/Task Progress Tracking
+// =============================================================================
+// Purpose: Common message structure used across services to represent the
+// status of a long-running job or task. Included in event streaming and
+// used for progress UI.
+//
+// Fields:
+// - job: Unique job identifier
+// - elapsed_time: Time elapsed since job start (milliseconds)
+// - remaining_time: Estimated remaining time (milliseconds)
+// - progress: 0.0 to 1.0 progress percentage
+// - message: Human-readable status message
+// - host_id: Target host (optional, can be determined from metadata)
+// - vm_id: Associated VM (optional)
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.cloud;
+
+option go_package = "go.pilab.hu/cloud/virtpb;cloudpb";
+
+// JobStatus is a message that represents the status of a Job.
+message JobStatus {
+  // JobID is the unique identifier of the Job.
+  string job = 1;
+  // ElapsedTime is the time in milliseconds that has elapsed since the Job started.
+  uint64 elapsed_time = 2;
+  // RemainingTime is the estimated time in milliseconds that the Job will take to complete.
+  uint64 remaining_time = 3;
+  // Progress is a value between 0 and 1 that represents the progress of the Job.
+  // Multiply by 100 to get a percentage.
+  float progress = 4;
+  // Message is a human-readable message that describes the status of the Job.
+  optional string message = 5;
+  // HostID is the unique identifier of the Host that is executing the Job.
+  // This is optional because some Jobs may not be associated with a Host,
+  // and the grpc metadata may be used to determine the Host.
+  optional string host_id = 6;
+  // VmID is the unique identifier of the Vm that is associated with the Job.
+  string vm_id = 7;
+}

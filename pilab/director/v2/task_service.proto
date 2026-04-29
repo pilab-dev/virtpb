@@ -1,0 +1,259 @@
+// =============================================================================
+// Task Service - Distributed Task Queue Management
+// =============================================================================
+// Purpose: Manages the ordered task queue for agent nodes. This is the central
+// orchestration service that distributes work (VM operations) to agent nodes.
+//
+// Communication: 
+// - gRPC streaming for task subscription (agent receives tasks in real-time)
+// - Unary RPC for task CRUD operations (frontend/director creates/manages tasks)
+//
+// Key Concepts:
+// - Task types: VM lifecycle (create, start, stop, delete) and advanced operations
+//   (migrate, snapshot, clone, export/import OVA)
+// - Task status: PENDING -> IN_PROGRESS -> COMPLETED/FAILED/CANCELLED
+// - Sequence numbers ensure ordered processing
+// - Priority allows important tasks to be processed first
+// - Superseded tasks: newer operations can invalidate older pending ones
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.cloud.director.v2;
+
+option go_package = "go.pilab.hu/cloud/virtpb/director/v2;directorv2";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+// TaskService manages the ordered task queue for agent nodes.
+// Communication: gRPC only (backend-backend)
+// Frontend uses REST/gRPC API
+service TaskService {
+  // Agent subscribes for tasks (gRPC streaming)
+  rpc Subscribe(SubscribeRequest) returns (stream Task);
+
+  // Create a new task
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+
+  // Get pending tasks for a specific node
+  rpc GetTasks(GetTasksRequest) returns (GetTasksResponse);
+
+  // Get a single task by ID
+  rpc GetTask(GetTaskRequest) returns (GetTaskResponse);
+
+  // Update task status (called by agents)
+  rpc UpdateTaskStatus(UpdateTaskStatusRequest) returns (UpdateTaskStatusResponse);
+
+  // Cancel a pending task
+  rpc CancelTask(CancelTaskRequest) returns (CancelTaskResponse);
+
+  // Get task history for a specific VM
+  rpc GetTaskHistory(GetTaskHistoryRequest) returns (GetTaskHistoryResponse);
+
+  // Batch update task statuses (more efficient for agents)
+  rpc BatchUpdateTasks(BatchUpdateTasksRequest) returns (BatchUpdateTasksResponse);
+}
+
+// Subscribe request for agents
+message SubscribeRequest {
+  string node_id = 1;
+  repeated TaskType task_types = 2;  // Filter by task types
+}
+
+// Task types (VM-based tasks prefixed with TASK_TYPE_VM_)
+enum TaskType {
+  TASK_TYPE_UNSPECIFIED = 0;
+  
+  // VM Lifecycle
+  TASK_TYPE_VM_CREATE = 1;
+  TASK_TYPE_VM_START = 2;
+  TASK_TYPE_VM_STOP = 3;
+  TASK_TYPE_VM_RESTART = 4;
+  TASK_TYPE_VM_PAUSE = 5;
+  TASK_TYPE_VM_UNPAUSE = 6;
+  TASK_TYPE_VM_DELETE = 7;
+  TASK_TYPE_VM_UPDATE = 8;
+  
+  // VM Advanced
+  TASK_TYPE_VM_MIGRATE = 9;
+  TASK_TYPE_VM_SNAPSHOT_CREATE = 10;
+  TASK_TYPE_VM_SNAPSHOT_DELETE = 11;
+  TASK_TYPE_VM_SNAPSHOT_RESTORE = 12;
+  TASK_TYPE_VM_REVERT = 13;
+  TASK_TYPE_VM_EXPORT_OVA = 14;
+  TASK_TYPE_VM_IMPORT_OVA = 15;
+  
+  // Network
+  TASK_TYPE_VM_ATTACH_NETWORK = 16;
+  TASK_TYPE_VM_DETACH_NETWORK = 17;
+  TASK_TYPE_VM_CLONE = 18;
+}
+
+// Task status
+enum TaskStatus {
+  TASK_STATUS_UNSPECIFIED = 0;
+  TASK_STATUS_PENDING = 1;      // Waiting to be processed
+  TASK_STATUS_IN_PROGRESS = 2;   // Currently executing
+  TASK_STATUS_COMPLETED = 3;     // Successfully finished
+  TASK_STATUS_FAILED = 4;        // Failed after retries
+  TASK_STATUS_CANCELLED = 5;     // Manually cancelled
+  TASK_STATUS_SUPERSEDED = 6;    // Invalidated by a later task
+}
+
+// Represents a task in the queue
+message Task {
+  string id = 1;
+  TaskType type = 2;
+  string vm_id = 3;
+  string vm_name = 4;
+
+  // Task-specific parameters
+  google.protobuf.Struct params = 5;
+
+  // Ordering
+  int64 sequence = 6;
+  google.protobuf.Timestamp created_at = 7;
+  string created_by = 8;
+
+  // Status
+  TaskStatus status = 9;
+  google.protobuf.Timestamp started_at = 10;
+  google.protobuf.Timestamp completed_at = 11;
+  string error_message = 12;
+  int32 attempts = 13;
+  string superseded_by = 14;
+
+  // Assignment
+  string target_node_id = 15;
+  google.protobuf.Timestamp assigned_at = 16;
+
+  // Priority (higher = more important)
+  int32 priority = 17;
+  string reason = 18;
+}
+
+// Create Task Messages
+message CreateTaskRequest {
+  TaskType type = 1;
+  string vm_id = 2;
+  string vm_name = 3;
+  google.protobuf.Struct params = 4;
+  string target_node_id = 5;
+  string created_by = 6;
+  string reason = 7;
+  int32 priority = 8;
+}
+
+message CreateTaskResponse {
+  Task task = 1;
+  repeated string superseded_task_ids = 2;
+}
+
+// Get Tasks Messages
+message GetTasksRequest {
+  string node_id = 1;
+  repeated TaskStatus statuses = 2;
+  int32 limit = 3;
+  string after_sequence = 4;  // For pagination
+}
+
+message GetTasksResponse {
+  repeated Task tasks = 1;
+  string next_sequence = 2;  // For pagination
+}
+
+// Get Single Task Messages
+message GetTaskRequest {
+  string task_id = 1;
+}
+
+message GetTaskResponse {
+  Task task = 1;
+}
+
+// Update Task Status Messages
+message UpdateTaskStatusRequest {
+  string task_id = 1;
+  string node_id = 2;
+  TaskStatus status = 3;
+  string error_message = 4;
+  google.protobuf.Timestamp completed_at = 5;
+  google.protobuf.Struct progress = 6;  // Optional progress details
+}
+
+message UpdateTaskStatusResponse {
+  Task task = 1;
+}
+
+// Batch Update Messages
+message BatchUpdateTasksRequest {
+  repeated TaskStatusUpdate updates = 1;
+}
+
+message TaskStatusUpdate {
+  string task_id = 1;
+  string node_id = 2;
+  TaskStatus status = 3;
+  string error_message = 4;
+  google.protobuf.Timestamp completed_at = 5;
+}
+
+message BatchUpdateTasksResponse {
+  repeated Task updated_tasks = 1;
+  repeated FailedUpdate errors = 2;
+}
+
+message FailedUpdate {
+  string task_id = 1;
+  string error = 2;
+}
+
+// Cancel Task Messages
+message CancelTaskRequest {
+  string task_id = 1;
+  string cancelled_by = 2;
+  string reason = 3;
+}
+
+message CancelTaskResponse {
+  Task task = 1;
+  bool cancelled = 2;
+}
+
+// Task History Messages
+message GetTaskHistoryRequest {
+  string vm_id = 1;
+  int32 limit = 2;
+  string before_sequence = 3;  // For pagination
+}
+
+message GetTaskHistoryResponse {
+  repeated Task tasks = 1;
+  string next_sequence = 2;
+}
+
+// Task Parameters (used in google.protobuf.Struct)
+message TaskParams {
+  // For Create
+  int32 cpu_cores = 1;
+  int32 memory_mb = 2;
+  int32 disk_gb = 3;
+  string image_id = 4;
+  repeated string network_ids = 5;
+
+  // For Update
+  int32 new_cpu_cores = 6;
+  int32 new_memory_mb = 7;
+
+  // For Migrate
+  string target_node_id = 8;
+
+  // For Snapshot/Revert
+  string snapshot_name = 9;
+  string snapshot_id = 10;
+
+  // Generic
+  int64 timeout_seconds = 11;
+  bool force = 12;
+}

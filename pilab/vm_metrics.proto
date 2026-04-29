@@ -1,0 +1,42 @@
+// =============================================================================
+// VM Metrics - Shared Message for VM Performance Metrics
+// =============================================================================
+// Purpose: Common message for reporting VM-level performance metrics.
+// Used in event streaming, agent-director communication, and monitoring.
+//
+// Metrics Categories:
+// - CPU: CPU utilization
+// - Disk I/O: Read/write bytes, read/write requests
+// - Network I/O: RX/TX bytes and packets
+// - Memory: Usage and total
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.cloud;
+
+option go_package = "go.pilab.hu/cloud/virtpb;cloudpb";
+
+message VmMetrics {
+  string vm_id = 1;
+  string vm_name = 2;
+
+  uint32 cpu_usage = 3;
+  uint32 disk_rd = 4;
+  uint32 disk_rd_req = 5;
+  uint32 disk_wr = 6;
+  uint64 disk_wr_req = 7;
+
+  // NetworkRxBytes is the number of bytes received by the vm.
+  uint32 network_rx_bytes = 8;
+  // NetworkRxPkt is the number of packets received by the vm.
+  uint32 network_rx_pkt = 9;
+  // NetworkTxBytes is the number of bytes transmitted by the vm.
+  uint32 network_tx_bytes = 10;
+  // NetworkTxPkt is the number of packets transmitted by the vm.
+  uint32 network_tx_pkt = 11;
+  // MemoryUsage is the amount of memory used by the vm.
+  uint32 memory_usage = 12;
+  // MemoryTotal is the total amount of memory available to the vm.
+  uint32 memory_total = 13;
+}

@@ -1,0 +1,1519 @@
+// =============================================================================
+// Network Service v2 - Comprehensive Network Management
+// =============================================================================
+// Purpose: Complete network management API supporting virtual networks,
+// ports, VLANs, VXLAN, QoS, security, firewall, IPAM, and distributed switches.
+//
+// Communication: Unary RPC for all operations
+//
+// This is the largest proto file, containing multiple service definitions
+// that cover the entire networking stack:
+//
+// SERVICES:
+// - NetworkService: Virtual networks, ports, VLAN management, virtual clouds
+// - QoSSecurityService: QoS profiles and security profiles with ACLs
+// - PublicIPService: Public IP allocation, port forwarding, firewall profiles
+// - DVSService: Distributed virtual switch management
+// - IPAMService: IP address pool management and allocation
+// - StatisticsService: Network, port, QoS, public IP statistics
+// - FlowService: OpenFlow rule debugging
+// - ClusterBridgeService: Per-cluster OVS bridge configuration
+//
+// Key Concepts:
+// - Virtual Network: Overlay network (VLAN, VXLAN, GENEVE, BRIDGE, FLAT)
+// - Virtual Port: Network attachment point for VMs
+// - VLAN Range: Pool of allocatable VLAN IDs
+// - Virtual Cloud: VXLAN tenant isolation
+// - QoS Profile: Traffic shaping (rate limiting)
+// - Security Profile: Port security, MAC/IP spoofing protection, ACLs
+// - Port Forwarding: NAT rules for public IP
+// - Firewall: Stateful firewall rules
+// - IP Pool: DHCP/static IP allocation ranges
+// - DVS: Distributed virtual switch spanning multiple hosts
+// - Cluster Bridge: OVS bridge per cluster with role (mgmt, vmotion, storage)
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.cloud.network.v2;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/network/v2;networkv2";
+option java_package = "hu.pilab.cloud.network.v2";
+option java_outer_classname = "NetworkProto";
+option java_multiple_files = true;
+
+// =============================================================================
+// SERVICES - Split into separate service files below
+// =============================================================================
+
+// NetworkService: Virtual Network, Port, VLAN, VXLAN management
+// QoSSecurityService: QoS and Security profiles  
+// PublicIPService: Public IP, NAT, Firewall
+// DVSService: Distributed Virtual Switch
+// IPAMService: IP Address Management
+// StatisticsService: Network/Port/QoS/PublicIP stats
+// FlowService: OpenFlow rules
+// ClusterBridgeService: Per-cluster OVS bridges
+
+// =============================================================================
+// COMMON TYPES (shared across all services)
+// =============================================================================
+
+message Empty {}
+
+enum Protocol {
+  PROTOCOL_UNSPECIFIED = 0;
+  PROTOCOL_ALL = 1;
+  PROTOCOL_TCP = 2;
+  PROTOCOL_UDP = 3;
+  PROTOCOL_ICMP = 4;
+  PROTOCOL_ICMPV6 = 5;
+  PROTOCOL_SCTP = 6;
+  PROTOCOL_GRE = 7;
+  PROTOCOL_VXLAN = 8;
+  PROTOCOL_ESP = 9;
+  PROTOCOL_AH = 10;
+}
+
+enum ACNAction {
+  ACN_ACTION_UNSPECIFIED = 0;
+  ACN_ACTION_ALLOW = 1;
+  ACN_ACTION_DROP = 2;
+  ACN_ACTION_REJECT = 3;
+  ACN_ACTION_LOG = 4;
+}
+
+enum Direction {
+  DIRECTION_UNSPECIFIED = 0;
+  DIRECTION_INGRESS = 1;
+  DIRECTION_EGRESS = 2;
+  DIRECTION_BOTH = 3;
+}
+
+enum NetworkType {
+  NETWORK_TYPE_UNSPECIFIED = 0;
+  NETWORK_TYPE_VLAN = 1;
+  NETWORK_TYPE_VXLAN = 2;
+  NETWORK_TYPE_BRIDGE = 3;
+  NETWORK_TYPE_FLAT = 4;
+  NETWORK_TYPE_GENEVE = 5;
+}
+
+enum NetworkStatus {
+  NETWORK_STATUS_UNSPECIFIED = 0;
+  NETWORK_STATUS_PENDING = 1;
+  NETWORK_STATUS_ACTIVE = 2;
+  NETWORK_STATUS_DEGRADED = 3;
+  NETWORK_STATUS_ERROR = 4;
+}
+
+enum NetworkRole {
+  NETWORK_ROLE_UNSPECIFIED = 0;
+  NETWORK_ROLE_VMS = 1;
+  NETWORK_ROLE_VMOTION = 2;
+  NETWORK_ROLE_UPLINK = 3;
+  NETWORK_ROLE_STORAGE = 4;
+  NETWORK_ROLE_MGMT = 5;
+}
+
+enum PortType {
+  PORT_TYPE_UNSPECIFIED = 0;
+  PORT_TYPE_NORMAL = 1;
+  PORT_TYPE_DIRECT = 2;
+  PORT_TYPE_ALLOW_PROMISCUOUS = 3;
+}
+
+enum PortStatus {
+  PORT_STATUS_UNSPECIFIED = 0;
+  PORT_STATUS_DOWN = 1;
+  PORT_STATUS_UP = 2;
+  PORT_STATUS_ERROR = 3;
+}
+
+enum VirtualCloudType {
+  VIRTUAL_CLOUD_TYPE_UNSPECIFIED = 0;
+  VIRTUAL_CLOUD_TYPE_ISOLATED = 1;
+  VIRTUAL_CLOUD_TYPE_INTERNAL = 2;
+  VIRTUAL_CLOUD_TYPE_EXTERNAL = 3;
+  VIRTUAL_CLOUD_TYPE_ROUTED = 4;
+}
+
+enum VirtualCloudStatus {
+  VIRTUAL_CLOUD_STATUS_UNSPECIFIED = 0;
+  VIRTUAL_CLOUD_STATUS_PENDING = 1;
+  VIRTUAL_CLOUD_STATUS_ACTIVE = 2;
+  VIRTUAL_CLOUD_STATUS_ERROR = 3;
+}
+
+enum PriorityClass {
+  PRIORITY_CLASS_UNSPECIFIED = 0;
+  PRIORITY_CLASS_BEST_EFFORT = 1;
+  PRIORITY_CLASS_LOW = 2;
+  PRIORITY_CLASS_NORMAL = 3;
+  PRIORITY_CLASS_HIGH = 4;
+  PRIORITY_CLASS_CRITICAL = 5;
+}
+
+enum QoSAlgorithm {
+  QOS_ALGORITHM_UNSPECIFIED = 0;
+  QOS_ALGORITHM_SFQ = 1;
+  QOS_ALGORITHM_FQ_CODEL = 2;
+  QOS_ALGORITHM_TBF = 3;
+  QOS_ALGORITHM_HTB = 4;
+  QOS_ALGORITHM_PRIO = 5;
+}
+
+enum RateLimitUnit {
+  RATE_LIMIT_UNIT_UNSPECIFIED = 0;
+  RATE_LIMIT_UNIT_BPS = 1;
+  RATE_LIMIT_UNIT_KBPS = 2;
+  RATE_LIMIT_UNIT_MBPS = 3;
+  RATE_LIMIT_UNIT_GBPS = 4;
+  RATE_LIMIT_UNIT_PPS = 5;
+}
+
+enum ApplyTarget {
+  APPLY_TARGET_UNSPECIFIED = 0;
+  APPLY_TARGET_PORT = 1;
+  APPLY_TARGET_NETWORK = 2;
+}
+
+enum AllocationMode {
+  ALLOCATION_MODE_UNSPECIFIED = 0;
+  ALLOCATION_MODE_DHCP = 1;
+  ALLOCATION_MODE_STATIC = 2;
+  ALLOCATION_MODE_DYNAMIC = 3;
+  ALLOCATION_MODE_HYBRID = 4;
+}
+
+enum AllocationType {
+  ALLOCATION_TYPE_UNSPECIFIED = 0;
+  ALLOCATION_TYPE_DHCP = 1;
+  ALLOCATION_TYPE_STATIC = 2;
+  ALLOCATION_TYPE_FIP = 3;
+}
+
+enum PublicIPType {
+  PUBLIC_IP_TYPE_UNSPECIFIED = 0;
+  PUBLIC_IP_TYPE_ELASTIC = 1;
+  PUBLIC_IP_TYPE_RESERVED = 2;
+  PUBLIC_IP_TYPE_BYOIP = 3;
+}
+
+enum PublicIPStatus {
+  PUBLIC_IP_STATUS_UNSPECIFIED = 0;
+  PUBLIC_IP_STATUS_AVAILABLE = 1;
+  PUBLIC_IP_STATUS_ASSOCIATED = 2;
+  PUBLIC_IP_STATUS_RESERVED = 3;
+  PUBLIC_IP_STATUS_RELEASING = 4;
+}
+
+enum FirewallState {
+  FIREWALL_STATE_UNSPECIFIED = 0;
+  FIREWALL_STATE_DISABLED = 1;
+  FIREWALL_STATE_ENABLED = 2;
+  FIREWALL_STATE_BYPASS = 3;
+}
+
+enum FirewallDirection {
+  FIREWALL_DIRECTION_UNSPECIFIED = 0;
+  FIREWALL_DIRECTION_INGRESS = 1;
+  FIREWALL_DIRECTION_EGRESS = 2;
+}
+
+enum DVSStatus {
+  DVS_STATUS_UNSPECIFIED = 0;
+  DVS_STATUS_PENDING = 1;
+  DVS_STATUS_ACTIVE = 2;
+  DVS_STATUS_DEGRADED = 3;
+  DVS_STATUS_ERROR = 4;
+}
+
+enum TeamingMode {
+  TEAMING_MODE_UNSPECIFIED = 0;
+  TEAMING_MODE_ACTIVE_BACKUP = 1;
+  TEAMING_MODE_LACP = 2;
+  TEAMING_MODE_SRC_DST_IP = 3;
+  TEAMING_MODE_SRC_DST_MAC = 4;
+  TEAMING_MODE_SRC_PORT = 5;
+}
+
+enum FlowDirection {
+  FLOW_DIRECTION_UNSPECIFIED = 0;
+  FLOW_DIRECTION_INGRESS = 1;
+  FLOW_DIRECTION_EGRESS = 2;
+  FLOW_DIRECTION_BIDIRECTIONAL = 3;
+}
+
+message RateLimit {
+  int64 rate = 1;
+  RateLimitUnit unit = 2;
+  int64 peak = 3;
+  int64 burst = 4;
+  int64 min_burst = 5;
+}
+
+// =============================================================================
+// NETWORK SERVICE - Network, Port, VLAN, VXLAN
+// =============================================================================
+
+service NetworkService {
+  rpc CreateNetwork(CreateNetworkRequest) returns (VirtualNetwork);
+  rpc GetNetwork(GetNetworkRequest) returns (VirtualNetwork);
+  rpc ListNetworks(ListNetworksRequest) returns (ListNetworksResponse);
+  rpc UpdateNetwork(UpdateNetworkRequest) returns (VirtualNetwork);
+  rpc DeleteNetwork(DeleteNetworkRequest) returns (Empty);
+  rpc AttachHosts(AttachHostsRequest) returns (Empty);
+  rpc DetachHosts(DetachHostsRequest) returns (Empty);
+
+  rpc CreatePort(CreatePortRequest) returns (VirtualPort);
+  rpc GetPort(GetPortRequest) returns (VirtualPort);
+  rpc ListPorts(ListPortsRequest) returns (ListPortsResponse);
+  rpc UpdatePort(UpdatePortRequest) returns (VirtualPort);
+  rpc DeletePort(DeletePortRequest) returns (Empty);
+  rpc AttachPort(AttachPortRequest) returns (Empty);
+  rpc DetachPort(DetachPortRequest) returns (Empty);
+
+  rpc CreateVLANRange(CreateVLANRangeRequest) returns (VLANRange);
+  rpc ListVLANRanges(ListVLANRangesRequest) returns (ListVLANRangesResponse);
+  rpc AllocateVLAN(AllocateVLANRequest) returns (VLANAllocation);
+  rpc ReleaseVLAN(ReleaseVLANRequest) returns (Empty);
+
+  rpc CreateVirtualCloud(CreateVirtualCloudRequest) returns (VirtualCloud);
+  rpc GetVirtualCloud(GetVirtualCloudRequest) returns (VirtualCloud);
+  rpc ListVirtualClouds(ListVirtualCloudsRequest) returns (ListVirtualCloudsResponse);
+  rpc UpdateVirtualCloud(UpdateVirtualCloudRequest) returns (VirtualCloud);
+  rpc DeleteVirtualCloud(DeleteVirtualCloudRequest) returns (Empty);
+  rpc AddVNIEndpoint(AddVNIEndpointRequest) returns (Empty);
+  rpc RemoveVNIEndpoint(RemoveVNIEndpointRequest) returns (Empty);
+  rpc AllocateVNI(AllocateVNIRequest) returns (VNIAllocation);
+  rpc ReleaseVNI(ReleaseVNIRequest) returns (Empty);
+}
+
+message VirtualNetwork {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  NetworkType type = 4;
+  uint32 segment_id = 5;
+  string cidr = 6;
+  string gateway = 7;
+  repeated string dns_servers = 8;
+  int32 mtu = 9;
+  bool enable_dhcp = 10;
+  string dhcp_range_start = 11;
+  string dhcp_range_end = 12;
+  repeated string host_ids = 13;
+  repeated string port_group_ids = 14;
+  SecurityProfile security_profile = 15;
+  QoSProfile qos_profile = 16;
+  map<string, string> metadata = 17;
+  NetworkStatus status = 18;
+  google.protobuf.Timestamp created_at = 19;
+  google.protobuf.Timestamp updated_at = 20;
+  string cluster_id = 21;
+  NetworkRole role = 22;
+  string ovs_bridge = 23;
+  repeated string uplinks = 24;
+}
+
+message VirtualPort {
+  string id = 1;
+  string name = 2;
+  string network_id = 3;
+  string tenant_id = 4;
+  string vm_id = 5;
+  int32 interface_index = 6;
+  string mac_address = 7;
+  string ip_address = 8;
+  string subnet_mask = 9;
+  PortType type = 10;
+  PortStatus status = 11;
+  string security_profile_id = 12;
+  string qos_profile_id = 13;
+  bool admin_state_up = 14;
+  map<string, string> metadata = 15;
+  google.protobuf.Timestamp created_at = 16;
+  google.protobuf.Timestamp updated_at = 17;
+}
+
+message VLANRange {
+  string id = 1;
+  string tenant_id = 2;
+  uint32 start_vlan = 3;
+  uint32 end_vlan = 4;
+  string name = 5;
+  string description = 6;
+  bool is_allocated = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message VLANAllocation {
+  uint32 vlan_id = 1;
+  string range_id = 2;
+  string tenant_id = 3;
+  string network_id = 4;
+  google.protobuf.Timestamp allocated_at = 5;
+}
+
+message VirtualCloud {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  uint32 vni = 4;
+  string description = 5;
+  VirtualCloudType type = 6;
+  bool flood_domain_enabled = 7;
+  string multicast_group = 8;
+  uint32 udp_port = 9;
+  repeated VNIEndpoint endpoints = 10;
+  bool ip_unicast_enabled = 11;
+  bool ip_multicast_enabled = 12;
+  SecurityProfile security_profile = 13;
+  QoSProfile qos_profile = 14;
+  map<string, string> metadata = 15;
+  VirtualCloudStatus status = 16;
+  google.protobuf.Timestamp created_at = 17;
+  google.protobuf.Timestamp updated_at = 18;
+}
+
+message VNIEndpoint {
+  string host_id = 1;
+  string ip_address = 2;
+  int32 port = 3;
+  string mac_address = 4;
+  bool is_primary = 5;
+  int64 version = 6;
+}
+
+message VNIAllocation {
+  uint32 vni = 1;
+  string tenant_id = 2;
+  string virtual_cloud_id = 3;
+  google.protobuf.Timestamp allocated_at = 4;
+}
+
+message CreateNetworkRequest {
+  string name = 1;
+  string tenant_id = 2;
+  NetworkType type = 3;
+  uint32 segment_id = 4;
+  string cidr = 5;
+  string gateway = 6;
+  repeated string dns_servers = 7;
+  int32 mtu = 8;
+  bool enable_dhcp = 9;
+  string dhcp_range_start = 10;
+  string dhcp_range_end = 11;
+  repeated string host_ids = 12;
+  string security_profile_id = 13;
+  string qos_profile_id = 14;
+  map<string, string> metadata = 15;
+}
+
+message GetNetworkRequest { string network_id = 1; }
+
+message ListNetworksRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+  NetworkType type = 4;
+  NetworkStatus status = 5;
+}
+
+message ListNetworksResponse {
+  repeated VirtualNetwork networks = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateNetworkRequest {
+  string network_id = 1;
+  string name = 2;
+  string gateway = 3;
+  repeated string dns_servers = 4;
+  int32 mtu = 5;
+  string security_profile_id = 6;
+  string qos_profile_id = 7;
+  map<string, string> metadata = 8;
+}
+
+message DeleteNetworkRequest {
+  string network_id = 1;
+  bool force = 2;
+}
+
+message AttachHostsRequest {
+  string network_id = 1;
+  repeated string host_ids = 2;
+}
+
+message DetachHostsRequest {
+  string network_id = 1;
+  repeated string host_ids = 2;
+}
+
+message CreatePortRequest {
+  string name = 1;
+  string network_id = 2;
+  string tenant_id = 3;
+  string vm_id = 4;
+  string mac_address = 5;
+  string ip_address = 6;
+  PortType type = 7;
+  string security_profile_id = 8;
+  string qos_profile_id = 9;
+  map<string, string> metadata = 10;
+}
+
+message GetPortRequest { string port_id = 1; }
+
+message ListPortsRequest {
+  string tenant_id = 1;
+  string network_id = 2;
+  string vm_id = 3;
+  google.protobuf.StringValue cursor = 4;
+  int32 limit = 5;
+}
+
+message ListPortsResponse {
+  repeated VirtualPort ports = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdatePortRequest {
+  string port_id = 1;
+  string name = 2;
+  string security_profile_id = 3;
+  string qos_profile_id = 4;
+  bool admin_state_up = 5;
+  map<string, string> metadata = 6;
+}
+
+message DeletePortRequest {
+  string port_id = 1;
+  bool force = 2;
+}
+
+message AttachPortRequest {
+  string port_id = 1;
+  string vm_id = 2;
+  int32 interface_index = 3;
+}
+
+message DetachPortRequest { string port_id = 1; }
+
+message CreateVLANRangeRequest {
+  string tenant_id = 1;
+  uint32 start_vlan = 2;
+  uint32 end_vlan = 3;
+  string name = 4;
+  string description = 5;
+}
+
+message ListVLANRangesRequest { string tenant_id = 1; }
+
+message ListVLANRangesResponse { repeated VLANRange ranges = 1; }
+
+message AllocateVLANRequest {
+  string tenant_id = 1;
+  string network_id = 2;
+  google.protobuf.StringValue range_id = 3;
+}
+
+message ReleaseVLANRequest { uint32 vlan_id = 1; }
+
+message CreateVirtualCloudRequest {
+  string name = 1;
+  string tenant_id = 2;
+  uint32 vni = 3;
+  string description = 4;
+  VirtualCloudType type = 5;
+  bool flood_domain_enabled = 6;
+  string multicast_group = 7;
+  uint32 udp_port = 8;
+  bool ip_unicast_enabled = 9;
+  bool ip_multicast_enabled = 10;
+  string security_profile_id = 11;
+  string qos_profile_id = 12;
+  map<string, string> metadata = 13;
+}
+
+message GetVirtualCloudRequest { string virtual_cloud_id = 1; }
+
+message ListVirtualCloudsRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+}
+
+message ListVirtualCloudsResponse {
+  repeated VirtualCloud virtual_clouds = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateVirtualCloudRequest {
+  string virtual_cloud_id = 1;
+  string name = 2;
+  string description = 3;
+  bool flood_domain_enabled = 4;
+  string security_profile_id = 5;
+  string qos_profile_id = 6;
+  map<string, string> metadata = 7;
+}
+
+message DeleteVirtualCloudRequest {
+  string virtual_cloud_id = 1;
+  bool force = 2;
+}
+
+message AddVNIEndpointRequest {
+  string virtual_cloud_id = 1;
+  string host_id = 2;
+  string ip_address = 3;
+  int32 port = 4;
+  string mac_address = 5;
+  bool is_primary = 6;
+}
+
+message RemoveVNIEndpointRequest {
+  string virtual_cloud_id = 1;
+  string host_id = 2;
+}
+
+message AllocateVNIRequest {
+  string tenant_id = 1;
+  string virtual_cloud_id = 2;
+}
+
+message ReleaseVNIRequest { uint32 vni = 1; }
+
+// =============================================================================
+// QOS & SECURITY SERVICE
+// =============================================================================
+
+service QoSSecurityService {
+  rpc CreateQoSProfile(CreateQoSProfileRequest) returns (QoSProfile);
+  rpc GetQoSProfile(GetQoSProfileRequest) returns (QoSProfile);
+  rpc ListQoSProfiles(ListQoSProfilesRequest) returns (ListQoSProfilesResponse);
+  rpc UpdateQoSProfile(UpdateQoSProfileRequest) returns (QoSProfile);
+  rpc DeleteQoSProfile(DeleteQoSProfileRequest) returns (Empty);
+  rpc ApplyQoSProfile(ApplyQoSProfileRequest) returns (Empty);
+  rpc RemoveQoSProfile(RemoveQoSProfileRequest) returns (Empty);
+
+  rpc CreateSecurityProfile(CreateSecurityProfileRequest) returns (SecurityProfile);
+  rpc GetSecurityProfile(GetSecurityProfileRequest) returns (SecurityProfile);
+  rpc ListSecurityProfiles(ListSecurityProfilesRequest) returns (ListSecurityProfilesResponse);
+  rpc UpdateSecurityProfile(UpdateSecurityProfileRequest) returns (SecurityProfile);
+  rpc DeleteSecurityProfile(DeleteSecurityProfileRequest) returns (Empty);
+  rpc ApplySecurityProfile(ApplySecurityProfileRequest) returns (Empty);
+  rpc RemoveSecurityProfile(RemoveSecurityProfileRequest) returns (Empty);
+  rpc AddACLRule(AddACLRuleRequest) returns (ACLRule);
+  rpc UpdateACLRule(UpdateACLRuleRequest) returns (ACLRule);
+  rpc RemoveACLRule(RemoveACLRuleRequest) returns (Empty);
+  rpc ReorderACLRules(ReorderACLRulesRequest) returns (Empty);
+}
+
+message QoSProfile {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  PriorityClass priority_class = 4;
+  string description = 5;
+  RateLimit ingress_limit = 6;
+  RateLimit egress_limit = 7;
+  int64 burst = 8;
+  int64 burst_buffer = 9;
+  bool enabled = 10;
+  QoSAlgorithm algorithm = 11;
+  map<string, string> metadata = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message SecurityProfile {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  string description = 4;
+  bool mac_spoof_protection_enabled = 5;
+  bool ip_spoof_protection_enabled = 6;
+  bool arp_spoof_protection_enabled = 7;
+  bool allow_promiscuous = 8;
+  bool port_security_enabled = 9;
+  repeated string allowed_mac_addresses = 10;
+  repeated string allowed_ip_addresses = 11;
+  repeated ACLRule ingress_rules = 12;
+  repeated ACLRule egress_rules = 13;
+  map<string, string> metadata = 14;
+  google.protobuf.Timestamp created_at = 15;
+  google.protobuf.Timestamp updated_at = 16;
+}
+
+message ACLRule {
+  string id = 1;
+  string name = 2;
+  int32 priority = 3;
+  Direction direction = 4;
+  ACNAction action = 5;
+  Protocol protocol = 6;
+  string src_cidr = 7;
+  string dst_cidr = 8;
+  uint32 src_port_start = 9;
+  uint32 src_port_end = 10;
+  uint32 dst_port_start = 11;
+  uint32 dst_port_end = 12;
+  string description = 13;
+  bool log_enabled = 14;
+  bool stateful = 15;
+  int64 packet_count = 16;
+  int64 byte_count = 17;
+}
+
+message CreateQoSProfileRequest {
+  string name = 1;
+  string tenant_id = 2;
+  PriorityClass priority_class = 3;
+  string description = 4;
+  RateLimit ingress_limit = 5;
+  RateLimit egress_limit = 6;
+  int64 burst = 7;
+  int64 burst_buffer = 8;
+  QoSAlgorithm algorithm = 9;
+  map<string, string> metadata = 10;
+}
+
+message GetQoSProfileRequest { string qos_profile_id = 1; }
+
+message ListQoSProfilesRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+}
+
+message ListQoSProfilesResponse {
+  repeated QoSProfile profiles = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateQoSProfileRequest {
+  string qos_profile_id = 1;
+  string name = 2;
+  RateLimit ingress_limit = 3;
+  RateLimit egress_limit = 4;
+  int64 burst = 5;
+  bool enabled = 6;
+  map<string, string> metadata = 7;
+}
+
+message DeleteQoSProfileRequest { string qos_profile_id = 1; }
+
+message ApplyQoSProfileRequest {
+  string qos_profile_id = 1;
+  string port_id = 2;
+  string network_id = 3;
+  ApplyTarget target = 4;
+}
+
+message RemoveQoSProfileRequest {
+  string qos_profile_id = 1;
+  string port_id = 2;
+  string network_id = 3;
+  ApplyTarget target = 4;
+}
+
+message CreateSecurityProfileRequest {
+  string name = 1;
+  string tenant_id = 2;
+  string description = 3;
+  bool mac_spoof_protection_enabled = 4;
+  bool ip_spoof_protection_enabled = 5;
+  bool arp_spoof_protection_enabled = 6;
+  bool allow_promiscuous = 7;
+  bool port_security_enabled = 8;
+  repeated string allowed_mac_addresses = 9;
+  repeated string allowed_ip_addresses = 10;
+  repeated ACLRule ingress_rules = 11;
+  repeated ACLRule egress_rules = 12;
+  map<string, string> metadata = 13;
+}
+
+message GetSecurityProfileRequest { string security_profile_id = 1; }
+
+message ListSecurityProfilesRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+}
+
+message ListSecurityProfilesResponse {
+  repeated SecurityProfile profiles = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateSecurityProfileRequest {
+  string security_profile_id = 1;
+  string name = 2;
+  bool mac_spoof_protection_enabled = 3;
+  bool ip_spoof_protection_enabled = 4;
+  bool arp_spoof_protection_enabled = 5;
+  repeated string allowed_mac_addresses = 6;
+  repeated string allowed_ip_addresses = 7;
+  map<string, string> metadata = 8;
+}
+
+message DeleteSecurityProfileRequest { string security_profile_id = 1; }
+
+message ApplySecurityProfileRequest {
+  string security_profile_id = 1;
+  string port_id = 2;
+}
+
+message RemoveSecurityProfileRequest { string port_id = 1; }
+
+message AddACLRuleRequest {
+  string security_profile_id = 1;
+  ACLRule rule = 2;
+}
+
+message UpdateACLRuleRequest {
+  string security_profile_id = 1;
+  ACLRule rule = 2;
+}
+
+message RemoveACLRuleRequest {
+  string security_profile_id = 1;
+  string rule_id = 2;
+}
+
+message ReorderACLRulesRequest {
+  string security_profile_id = 1;
+  repeated ACLRule rules = 2;
+}
+
+// =============================================================================
+// PUBLIC IP SERVICE
+// =============================================================================
+
+service PublicIPService {
+  rpc AllocatePublicIP(AllocatePublicIPRequest) returns (PublicIP);
+  rpc GetPublicIP(GetPublicIPRequest) returns (PublicIP);
+  rpc ListPublicIPs(ListPublicIPsRequest) returns (ListPublicIPsResponse);
+  rpc ReleasePublicIP(ReleasePublicIPRequest) returns (Empty);
+  rpc AssociatePublicIP(AssociatePublicIPRequest) returns (PublicIP);
+  rpc DisassociatePublicIP(DisassociatePublicIPRequest) returns (Empty);
+
+  rpc CreatePortForward(CreatePortForwardRequest) returns (PortForward);
+  rpc UpdatePortForward(UpdatePortForwardRequest) returns (PortForward);
+  rpc DeletePortForward(DeletePortForwardRequest) returns (Empty);
+  rpc ListPortForwards(ListPortForwardsRequest) returns (ListPortForwardsResponse);
+
+  rpc CreateFirewallProfile(CreateFirewallProfileRequest) returns (FirewallProfile);
+  rpc GetFirewallProfile(GetFirewallProfileRequest) returns (FirewallProfile);
+  rpc UpdateFirewallProfile(UpdateFirewallProfileRequest) returns (FirewallProfile);
+  rpc DeleteFirewallProfile(DeleteFirewallProfileRequest) returns (Empty);
+  rpc AddFirewallRule(AddFirewallRuleRequest) returns (FirewallRule);
+  rpc UpdateFirewallRule(UpdateFirewallRuleRequest) returns (FirewallRule);
+  rpc RemoveFirewallRule(RemoveFirewallRuleRequest) returns (Empty);
+  rpc ReorderFirewallRules(ReorderFirewallRulesRequest) returns (Empty);
+}
+
+message PublicIP {
+  string id = 1;
+  string ip_address = 2;
+  string tenant_id = 3;
+  PublicIPType type = 4;
+  PublicIPStatus status = 5;
+  string vm_id = 6;
+  string port_id = 7;
+  string associated_private_ip = 8;
+  string description = 9;
+  string reverse_dns = 10;
+  repeated PortForward port_forwards = 11;
+  string firewall_profile_id = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp allocated_at = 14;
+}
+
+message PortForward {
+  string id = 1;
+  string public_ip_id = 2;
+  Protocol protocol = 3;
+  uint32 public_port = 4;
+  uint32 private_port = 5;
+  string internal_ip = 6;
+  string description = 7;
+  repeated string allowed_cidrs = 8;
+  bool enabled = 9;
+  int64 hit_count = 10;
+  google.protobuf.Timestamp created_at = 11;
+}
+
+message FirewallProfile {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  string public_ip_id = 4;
+  FirewallState state = 5;
+  bool logging_enabled = 6;
+  bool default_ingress_action = 7;
+  bool default_egress_action = 8;
+  repeated FirewallRule ingress_rules = 9;
+  repeated FirewallRule egress_rules = 10;
+  map<string, string> metadata = 11;
+  google.protobuf.Timestamp created_at = 12;
+  google.protobuf.Timestamp updated_at = 13;
+}
+
+message FirewallRule {
+  string id = 1;
+  string name = 2;
+  int32 priority = 3;
+  FirewallDirection direction = 4;
+  ACNAction action = 5;
+  Protocol protocol = 6;
+  string source_cidr = 7;
+  string destination_cidr = 8;
+  string source_ports = 9;
+  string destination_ports = 10;
+  string description = 11;
+  bool enabled = 12;
+  bool log = 13;
+  int64 hit_count = 14;
+  google.protobuf.Timestamp created_at = 15;
+}
+
+message AllocatePublicIPRequest {
+  string tenant_id = 1;
+  PublicIPType type = 2;
+  string description = 3;
+  google.protobuf.StringValue ip_address = 4;
+  string network_id = 5;
+}
+
+message GetPublicIPRequest { string public_ip_id = 1; }
+
+message ListPublicIPsRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+  PublicIPStatus status = 4;
+  string vm_id = 5;
+}
+
+message ListPublicIPsResponse {
+  repeated PublicIP public_ips = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message ReleasePublicIPRequest { string public_ip_id = 1; }
+
+message AssociatePublicIPRequest {
+  string public_ip_id = 1;
+  string port_id = 2;
+  string internal_ip = 3;
+}
+
+message DisassociatePublicIPRequest { string public_ip_id = 1; }
+
+message CreatePortForwardRequest {
+  string public_ip_id = 1;
+  Protocol protocol = 2;
+  uint32 public_port = 3;
+  uint32 private_port = 4;
+  string internal_ip = 5;
+  string description = 6;
+  repeated string allowed_cidrs = 7;
+}
+
+message UpdatePortForwardRequest {
+  string public_ip_id = 1;
+  string port_forward_id = 2;
+  uint32 public_port = 3;
+  uint32 private_port = 4;
+  repeated string allowed_cidrs = 5;
+  bool enabled = 6;
+}
+
+message DeletePortForwardRequest {
+  string public_ip_id = 1;
+  string port_forward_id = 2;
+}
+
+message ListPortForwardsRequest { string public_ip_id = 1; }
+
+message ListPortForwardsResponse { repeated PortForward port_forwards = 1; }
+
+message CreateFirewallProfileRequest {
+  string name = 1;
+  string tenant_id = 2;
+  string public_ip_id = 3;
+  FirewallState state = 4;
+  bool logging_enabled = 5;
+  bool default_ingress_action = 6;
+  bool default_egress_action = 7;
+  map<string, string> metadata = 8;
+}
+
+message GetFirewallProfileRequest { string firewall_profile_id = 1; }
+
+message UpdateFirewallProfileRequest {
+  string firewall_profile_id = 1;
+  FirewallState state = 2;
+  bool logging_enabled = 3;
+  bool default_ingress_action = 4;
+  bool default_egress_action = 5;
+}
+
+message DeleteFirewallProfileRequest { string firewall_profile_id = 1; }
+
+message AddFirewallRuleRequest {
+  string firewall_profile_id = 1;
+  FirewallRule rule = 2;
+}
+
+message UpdateFirewallRuleRequest {
+  string firewall_profile_id = 1;
+  FirewallRule rule = 2;
+}
+
+message RemoveFirewallRuleRequest {
+  string firewall_profile_id = 1;
+  string rule_id = 2;
+}
+
+message ReorderFirewallRulesRequest {
+  string firewall_profile_id = 1;
+  repeated FirewallRule rules = 2;
+}
+
+// =============================================================================
+// DVS SERVICE
+// =============================================================================
+
+service DVSService {
+  rpc CreateDistributedSwitch(CreateDistributedSwitchRequest) returns (DistributedSwitch);
+  rpc GetDistributedSwitch(GetDistributedSwitchRequest) returns (DistributedSwitch);
+  rpc ListDistributedSwitches(ListDistributedSwitchesRequest) returns (ListDistributedSwitchesResponse);
+  rpc UpdateDistributedSwitch(UpdateDistributedSwitchRequest) returns (DistributedSwitch);
+  rpc DeleteDistributedSwitch(DeleteDistributedSwitchRequest) returns (Empty);
+  rpc AddHostToDVS(AddHostToDVSRequest) returns (Empty);
+  rpc RemoveHostFromDVS(RemoveHostFromDVSRequest) returns (Empty);
+
+  rpc CreatePortGroup(CreatePortGroupRequest) returns (PortGroup);
+  rpc GetPortGroup(GetPortGroupRequest) returns (PortGroup);
+  rpc ListPortGroups(ListPortGroupsRequest) returns (ListPortGroupsResponse);
+  rpc UpdatePortGroup(UpdatePortGroupRequest) returns (PortGroup);
+  rpc DeletePortGroup(DeletePortGroupRequest) returns (Empty);
+}
+
+message DistributedSwitch {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  string description = 4;
+  string switch_type = 5;
+  int32 mtu = 6;
+  bool enable_vlan_trunking = 7;
+  repeated uint32 allowed_vlan_ranges = 8;
+  repeated string host_ids = 9;
+  repeated string port_group_ids = 10;
+  DVSStatus status = 11;
+  map<string, string> metadata = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message PortGroup {
+  string id = 1;
+  string name = 2;
+  string switch_id = 3;
+  string tenant_id = 4;
+  string description = 5;
+  uint32 vlan_id = 6;
+  uint32 vlan_trunk_range_start = 7;
+  uint32 vlan_trunk_range_end = 8;
+  bool vlan_trunk_enabled = 9;
+  string network_id = 10;
+  string security_profile_id = 11;
+  string qos_profile_id = 12;
+  TeamingPolicy teaming_policy = 13;
+  map<string, string> metadata = 14;
+  google.protobuf.Timestamp created_at = 15;
+  google.protobuf.Timestamp updated_at = 16;
+}
+
+message TeamingPolicy {
+  TeamingMode mode = 1;
+  repeated string active_uplinks = 2;
+  repeated string standby_uplinks = 3;
+  bool notify_switches = 4;
+  bool failback = 5;
+  int32 load_balance = 6;
+}
+
+message CreateDistributedSwitchRequest {
+  string name = 1;
+  string tenant_id = 2;
+  string description = 3;
+  string switch_type = 4;
+  int32 mtu = 5;
+  bool enable_vlan_trunking = 6;
+  repeated uint32 allowed_vlan_ranges = 7;
+  repeated string host_ids = 8;
+  map<string, string> metadata = 9;
+}
+
+message GetDistributedSwitchRequest { string switch_id = 1; }
+
+message ListDistributedSwitchesRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+}
+
+message ListDistributedSwitchesResponse {
+  repeated DistributedSwitch switches = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateDistributedSwitchRequest {
+  string switch_id = 1;
+  string name = 2;
+  string description = 3;
+  int32 mtu = 4;
+  bool enable_vlan_trunking = 5;
+  repeated uint32 allowed_vlan_ranges = 6;
+  map<string, string> metadata = 7;
+}
+
+message DeleteDistributedSwitchRequest {
+  string switch_id = 1;
+  bool force = 2;
+}
+
+message AddHostToDVSRequest {
+  string switch_id = 1;
+  string host_id = 2;
+}
+
+message RemoveHostFromDVSRequest {
+  string switch_id = 1;
+  string host_id = 2;
+}
+
+message CreatePortGroupRequest {
+  string name = 1;
+  string switch_id = 2;
+  string tenant_id = 3;
+  string description = 4;
+  uint32 vlan_id = 5;
+  uint32 vlan_trunk_range_start = 6;
+  uint32 vlan_trunk_range_end = 7;
+  bool vlan_trunk_enabled = 8;
+  string security_profile_id = 9;
+  string qos_profile_id = 10;
+  TeamingPolicy teaming_policy = 11;
+  map<string, string> metadata = 12;
+}
+
+message GetPortGroupRequest { string port_group_id = 1; }
+
+message ListPortGroupsRequest {
+  string switch_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+}
+
+message ListPortGroupsResponse {
+  repeated PortGroup port_groups = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdatePortGroupRequest {
+  string port_group_id = 1;
+  string name = 2;
+  uint32 vlan_id = 3;
+  string security_profile_id = 4;
+  string qos_profile_id = 5;
+  TeamingPolicy teaming_policy = 6;
+  map<string, string> metadata = 7;
+}
+
+message DeletePortGroupRequest {
+  string port_group_id = 1;
+  bool force = 2;
+}
+
+// =============================================================================
+// IPAM SERVICE
+// =============================================================================
+
+service IPAMService {
+  rpc CreateIPPool(CreateIPPoolRequest) returns (IPPool);
+  rpc GetIPPool(GetIPPoolRequest) returns (IPPool);
+  rpc ListIPPools(ListIPPoolsRequest) returns (ListIPPoolsResponse);
+  rpc UpdateIPPool(UpdateIPPoolRequest) returns (IPPool);
+  rpc DeleteIPPool(DeleteIPPoolRequest) returns (Empty);
+  rpc AllocateIP(AllocateIPRequest) returns (IPAllocation);
+  rpc ReleaseIP(ReleaseIPRequest) returns (Empty);
+  rpc ListAllocations(ListAllocationsRequest) returns (ListAllocationsResponse);
+  rpc ReserveIP(ReserveIPRequest) returns (IPReservation);
+}
+
+message IPPool {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  string network_id = 4;
+  string cidr = 5;
+  string gateway = 6;
+  repeated string dns_servers = 7;
+  repeated string excluded_ranges = 8;
+  bool dhcp_enabled = 9;
+  string dhcp_range_start = 10;
+  string dhcp_range_end = 11;
+  AllocationMode allocation_mode = 12;
+  bool ip_version_6_enabled = 13;
+  string ipv6_cidr = 14;
+  string ipv6_gateway = 15;
+  map<string, string> metadata = 16;
+  google.protobuf.Timestamp created_at = 17;
+  google.protobuf.Timestamp updated_at = 18;
+}
+
+message IPAllocation {
+  string id = 1;
+  string pool_id = 2;
+  string ip_address = 3;
+  string tenant_id = 4;
+  string port_id = 5;
+  string vm_id = 6;
+  AllocationType type = 7;
+  google.protobuf.Timestamp allocated_at = 8;
+  google.protobuf.Timestamp expires_at = 9;
+}
+
+message IPReservation {
+  string id = 1;
+  string pool_id = 2;
+  string ip_address = 3;
+  string tenant_id = 4;
+  string reason = 5;
+  google.protobuf.Timestamp reserved_at = 6;
+}
+
+message CreateIPPoolRequest {
+  string name = 1;
+  string tenant_id = 2;
+  string network_id = 3;
+  string cidr = 4;
+  string gateway = 5;
+  repeated string dns_servers = 6;
+  repeated string excluded_ranges = 7;
+  bool dhcp_enabled = 8;
+  string dhcp_range_start = 9;
+  string dhcp_range_end = 10;
+  AllocationMode allocation_mode = 11;
+  bool ip_version_6_enabled = 12;
+  string ipv6_cidr = 13;
+  string ipv6_gateway = 14;
+  map<string, string> metadata = 15;
+}
+
+message GetIPPoolRequest { string pool_id = 1; }
+
+message ListIPPoolsRequest {
+  string tenant_id = 1;
+  string network_id = 2;
+  google.protobuf.StringValue cursor = 3;
+  int32 limit = 4;
+}
+
+message ListIPPoolsResponse {
+  repeated IPPool pools = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateIPPoolRequest {
+  string pool_id = 1;
+  string name = 2;
+  string gateway = 3;
+  repeated string dns_servers = 4;
+  repeated string excluded_ranges = 5;
+  bool dhcp_enabled = 6;
+  AllocationMode allocation_mode = 7;
+  map<string, string> metadata = 8;
+}
+
+message DeleteIPPoolRequest {
+  string pool_id = 1;
+  bool force = 2;
+}
+
+message AllocateIPRequest {
+  string pool_id = 1;
+  string tenant_id = 2;
+  string port_id = 3;
+  string vm_id = 4;
+  google.protobuf.StringValue ip_address = 5;
+}
+
+message ReleaseIPRequest {
+  string pool_id = 1;
+  string ip_address = 2;
+}
+
+message ListAllocationsRequest {
+  string pool_id = 1;
+  string network_id = 2;
+  string port_id = 3;
+  google.protobuf.StringValue cursor = 4;
+  int32 limit = 5;
+}
+
+message ListAllocationsResponse {
+  repeated IPAllocation allocations = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message ReserveIPRequest {
+  string pool_id = 1;
+  string ip_address = 2;
+  string tenant_id = 3;
+  string reason = 4;
+}
+
+// =============================================================================
+// STATISTICS SERVICE
+// =============================================================================
+
+service StatisticsService {
+  rpc GetNetworkStats(GetNetworkStatsRequest) returns (NetworkStats);
+  rpc GetPortStats(GetPortStatsRequest) returns (PortStats);
+  rpc GetQoSStats(GetQoSStatsRequest) returns (QoSStats);
+  rpc GetPublicIPUsage(GetPublicIPUsageRequest) returns (PublicIPUsage);
+}
+
+message NetworkStats {
+  string network_id = 1;
+  int64 bytes_sent = 2;
+  int64 bytes_received = 3;
+  int64 packets_sent = 4;
+  int64 packets_received = 5;
+  int64 errors_sent = 6;
+  int64 errors_received = 7;
+  int64 drops_sent = 8;
+  int64 drops_received = 9;
+  int64 broadcast_packets_sent = 10;
+  int64 broadcast_packets_received = 11;
+  int64 multicast_packets_sent = 12;
+  int64 multicast_packets_received = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message PortStats {
+  string port_id = 1;
+  int64 bytes_sent = 2;
+  int64 bytes_received = 3;
+  int64 packets_sent = 4;
+  int64 packets_received = 5;
+  int64 errors_sent = 6;
+  int64 errors_received = 7;
+  int64 drops_sent = 8;
+  int64 drops_received = 9;
+  int64 tx_dropped = 10;
+  int64 rx_dropped = 11;
+  int64 tx_rate = 12;
+  int64 rx_rate = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message QoSStats {
+  string qos_profile_id = 9;
+  int64 bytes_sent = 1;
+  int64 bytes_dropped = 2;
+  int64 packets_sent = 3;
+  int64 packets_dropped = 4;
+  int64 tokens_available = 5;
+  int64 tokens_peak = 6;
+  int64 wait_time_avg_ms = 7;
+  int64 send_time_avg_ms = 8;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+message PublicIPUsage {
+  string public_ip_id = 1;
+  int64 bytes_sent = 2;
+  int64 bytes_received = 3;
+  int64 packets_sent = 4;
+  int64 packets_received = 5;
+  int64 connections_active = 6;
+  int64 connections_total = 7;
+  int64 bandwidth_usage_bps = 8;
+  int64 bandwidth_peak_bps = 9;
+  google.protobuf.Timestamp updated_at = 10;
+  google.protobuf.Timestamp period_start = 11;
+  google.protobuf.Timestamp period_end = 12;
+}
+
+message GetNetworkStatsRequest {
+  string network_id = 1;
+  google.protobuf.Timestamp period_start = 2;
+  google.protobuf.Timestamp period_end = 3;
+}
+
+message GetPortStatsRequest {
+  string port_id = 1;
+  google.protobuf.Timestamp period_start = 2;
+  google.protobuf.Timestamp period_end = 3;
+}
+
+message GetQoSStatsRequest {
+  string qos_profile_id = 1;
+  google.protobuf.Timestamp period_start = 2;
+  google.protobuf.Timestamp period_end = 3;
+}
+
+message GetPublicIPUsageRequest {
+  string public_ip_id = 1;
+  google.protobuf.Timestamp period_start = 2;
+  google.protobuf.Timestamp period_end = 3;
+}
+
+// =============================================================================
+// FLOW SERVICE
+// =============================================================================
+
+service FlowService {
+  rpc ListFlows(ListFlowsRequest) returns (ListFlowsResponse);
+  rpc DebugFlow(DebugFlowRequest) returns (DebugFlowResponse);
+}
+
+message FlowRule {
+  string id = 1;
+  string name = 2;
+  int32 priority = 3;
+  string table = 4;
+  string match = 5;
+  repeated string actions = 6;
+  FlowDirection direction = 7;
+  bool enabled = 8;
+  string port_id = 9;
+  string network_id = 10;
+  int64 packet_count = 11;
+  int64 byte_count = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message ListFlowsRequest {
+  string port_id = 1;
+  string network_id = 2;
+  FlowDirection direction = 3;
+}
+
+message ListFlowsResponse { repeated FlowRule flows = 1; }
+
+message DebugFlowRequest {
+  string network_id = 1;
+  string src_ip = 2;
+  string dst_ip = 3;
+  uint32 src_port = 4;
+  uint32 dst_port = 5;
+  Protocol protocol = 6;
+  string direction = 7;
+}
+
+message DebugFlowResponse {
+  repeated FlowRule matched_flows = 1;
+  string verdict = 2;
+  string explanation = 3;
+}
+
+// =============================================================================
+// CLUSTER BRIDGE SERVICE
+// =============================================================================
+
+service ClusterBridgeService {
+  rpc CreateClusterBridge(CreateClusterBridgeRequest) returns (ClusterBridge);
+  rpc GetClusterBridge(GetClusterBridgeRequest) returns (ClusterBridge);
+  rpc ListClusterBridges(ListClusterBridgesRequest) returns (ListClusterBridgesResponse);
+  rpc UpdateClusterBridge(UpdateClusterBridgeRequest) returns (ClusterBridge);
+  rpc DeleteClusterBridge(DeleteClusterBridgeRequest) returns (Empty);
+  rpc AddUplink(AddUplinkRequest) returns (Empty);
+  rpc RemoveUplink(RemoveUplinkRequest) returns (Empty);
+}
+
+message ClusterBridge {
+  string id = 1;
+  string cluster_id = 2;
+  string name = 3;
+  NetworkRole role = 4;
+  int32 vlan = 5;
+  int32 mtu = 6;
+  repeated string uplinks = 7;
+  string ovs_bridge_name = 8;
+  bool uplink_bond = 9;
+  map<string, string> metadata = 10;
+  google.protobuf.Timestamp created_at = 11;
+  google.protobuf.Timestamp updated_at = 12;
+}
+
+message CreateClusterBridgeRequest {
+  string cluster_id = 1;
+  string name = 2;
+  NetworkRole role = 3;
+  int32 vlan = 4;
+  int32 mtu = 5;
+  repeated string uplinks = 6;
+  bool uplink_bond = 7;
+  map<string, string> metadata = 8;
+}
+
+message GetClusterBridgeRequest {
+  string id = 1;
+  string cluster_id = 2;
+}
+
+message ListClusterBridgesRequest { string cluster_id = 1; }
+
+message ListClusterBridgesResponse { repeated ClusterBridge bridges = 1; }
+
+message UpdateClusterBridgeRequest {
+  string id = 1;
+  string cluster_id = 2;
+  int32 vlan = 3;
+  int32 mtu = 4;
+  repeated string uplinks = 5;
+  map<string, string> metadata = 6;
+}
+
+message DeleteClusterBridgeRequest {
+  string id = 1;
+  string cluster_id = 2;
+}
+
+message AddUplinkRequest {
+  string bridge_id = 1;
+  string cluster_id = 2;
+  repeated string interfaces = 3;
+}
+
+message RemoveUplinkRequest {
+  string bridge_id = 1;
+  string cluster_id = 2;
+  repeated string interfaces = 3;
+}

@@ -1,0 +1,264 @@
+// =============================================================================
+// Agent-Director Service - Agent Reporting to Director
+// =============================================================================
+// Purpose: Enables agents to report status, metrics, events, and progress
+// back to the Director. This is the "reverse" communication channel.
+//
+// Communication: Mix of unary RPC and bidirectional streaming
+//
+// Reporting Categories:
+// - Status/Health: Heartbeat, hypervisor status, VM/disk/network status
+// - Metrics: VM metrics (CPU, memory, disk I/O, network I/O), resource usage
+// - Events: Structured event reporting (info, warning, error)
+// - Logs: Log streaming to Director
+// - Tasks: Task progress and workflow state reporting
+// - Agent Self: Update status, configuration acknowledgment
+//
+// Note: This is the service that runs on the Agent, called by the Director's
+// client to receive reports. Reverse of CloudDirectorService.
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.cloud.agent.v1;
+
+option go_package = "go.pilab.hu/cloud/virtpb/agent/v1;agentv1";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+// Service for communication between the Agent and the Director
+service AgentDirectorService {
+  // --- Status and Health Reporting ---
+  rpc ReportHeartbeat(HeartbeatRequest) returns (HeartbeatResponse) {}
+  rpc ReportHypervisorStatus(HypervisorStatus) returns (google.protobuf.Empty) {
+  }
+  rpc ReportVMStatus(VMStatusUpdate) returns (google.protobuf.Empty) {}
+  rpc ReportDiskStatus(DiskStatusUpdate) returns (google.protobuf.Empty) {}
+  rpc ReportNetworkInterfaceStatus(NetworkInterfaceStatusUpdate)
+      returns (google.protobuf.Empty) {}
+  rpc ReportHardwareStatus(HardwareStatusUpdate)
+      returns (google.protobuf.Empty) {}
+
+  // --- Metrics Collection ---
+  rpc ReportVMMetrics(VMMetrics) returns (google.protobuf.Empty) {}
+  rpc ReportHypervisorResourceUsage(HypervisorResourceUsage)
+      returns (google.protobuf.Empty) {}
+
+  // --- Event and Log Forwarding ---
+  rpc ReportEvent(Event) returns (google.protobuf.Empty) {}
+  rpc StreamLogs(stream LogRequest) returns (stream LogResponse) {}
+
+  // --- Task and Workflow Management ---
+  rpc ReportTaskProgress(TaskProgress) returns (google.protobuf.Empty) {}
+  rpc ReportWorkflowState(WorkflowState) returns (google.protobuf.Empty) {}
+
+  // --- Agent Self-Management ---
+  rpc ReportAgentUpdateStatus(AgentUpdateStatus)
+      returns (google.protobuf.Empty) {}
+  rpc AcknowledgeAgentConfiguration(AgentConfiguration)
+      returns (google.protobuf.Empty) {}
+}
+
+enum VMState {
+  VM_STATE_UNSPECIFIED = 0;
+  VM_STATE_RUNNING = 1;
+  VM_STATE_BLOCKED = 2;
+  VM_STATE_PAUSED = 3;
+  VM_STATE_SHUTDOWN = 4;
+  VM_STATE_SHUTOFF = 5;
+  VM_STATE_CRASHED = 6;
+  VM_STATE_SUSPENDED = 7;
+}
+
+// --- Status and Health Messages ---
+message HardwareStatusUpdate {
+  string device_uuid = 1;
+  string vm_uuid = 2;       //(optional)
+  string status = 3;        // "attached", "detached", etc.
+  string error_message = 4; //(optional)
+}
+
+message DiskStatusUpdate {
+  string disk_uuid = 1;
+  string vm_uuid = 2;       //(optional)
+  string status = 3;        // "active", "failed", etc.
+  string error_message = 4; //(optional)
+}
+
+message NetworkInterfaceStatusUpdate {
+  string interface_uuid = 1;
+  string vm_uuid = 2;
+  string status = 3;        // "connected", "disconnected"
+  string mac_address = 4;   //(optional)
+  string error_message = 5; //(optional)
+}
+
+message VMStatusUpdate {
+  string vm_uuid = 1;
+  VMState state = 2;
+  string error_message = 3; //(optional)
+}
+
+message HeartbeatRequest {
+  string agent_id = 1;
+  string agent_version = 2;
+}
+
+message HeartbeatResponse {
+  // Can include configuration updates, commands, or other instructions for the
+  // agent.
+  string message = 1;
+}
+
+message HypervisorStatus {
+  enum HealthStatus {
+    HEALTH_STATUS_UNSPECIFIED = 0;
+    HEALTH_STATUS_OK = 1;
+    HEALTH_STATUS_WARNING = 2;
+    HEALTH_STATUS_ERROR = 3;
+  }
+
+  float cpu_usage = 1;
+  int64 memory_total_mb = 2;
+  int64 memory_used_mb = 3;
+  int64 storage_total_mb = 4;
+  int64 storage_used_mb = 5;
+  repeated NetworkInterfaceStatus network_interfaces = 6;
+  HealthStatus health_status = 7;
+  string health_details = 8;
+  int32 running_vms = 9;
+  int32 stopped_vms = 10;
+  string hypervisor_version = 11;
+}
+
+message NetworkInterfaceStatus {
+  string name = 1;
+  bool up = 2;
+  float bandwidth_mbps = 3;
+}
+
+// --- Metrics Messages ---
+
+message VMMetrics {
+  string vm_uuid = 1;
+  repeated CPUUsage cpu_usages = 2;
+  float memory_usage_percent = 3;
+  int64 memory_usage_mb = 4;
+  DiskIOMetrics disk_io = 5;
+  NetworkIOMetrics network_io = 6;
+  google.protobuf.Timestamp timestamp = 7;
+
+  message CPUUsage {
+    uint32 vcpu_id = 1;
+    float usage_percent = 2;
+  }
+
+  message DiskIOMetrics {
+    int64 read_bytes_per_second = 1;
+    int64 write_bytes_per_second = 2;
+    int64 read_iops = 3;
+    int64 write_iops = 4;
+  }
+
+  message NetworkIOMetrics {
+    int64 receive_bytes_per_second = 1;
+    int64 transmit_bytes_per_second = 2;
+  }
+}
+
+message HypervisorResourceUsage {
+  float cpu_usage_percent = 1;
+  int64 memory_usage_mb = 2;
+  int64 disk_usage_mb = 3;
+  NetworkIOMetrics network_io = 4;
+  google.protobuf.Timestamp timestamp = 5;
+
+  message NetworkIOMetrics {
+    int64 receive_bytes_per_second = 1;
+    int64 transmit_bytes_per_second = 2;
+  }
+}
+
+// --- Event and Log Messages ---
+
+message Event {
+  google.protobuf.Timestamp timestamp = 1;
+  string vm_uuid = 2; // Optional, if the event is related to a VM
+  enum Severity {
+    SEVERITY_UNSPECIFIED = 0;
+    SEVERITY_INFO = 1;
+    SEVERITY_WARNING = 2;
+    SEVERITY_ERROR = 3;
+  }
+  Severity severity = 3;
+  string message = 4;
+  map<string, string> details = 5; // Optional structured details
+}
+
+message LogRequest {
+  string source = 1; // "hypervisor" or vm_uuid
+  enum LogLevel {
+    LOG_LEVEL_UNSPECIFIED = 0;
+    LOG_LEVEL_DEBUG = 1;
+    LOG_LEVEL_INFO = 2;
+    LOG_LEVEL_WARNING = 3;
+    LOG_LEVEL_ERROR = 4;
+  }
+  LogLevel log_level = 2;
+  string filter = 3; // Optional regex filter
+}
+
+message LogResponse {
+  google.protobuf.Timestamp timestamp = 1;
+  string source = 2;
+  string message = 3;
+}
+
+// --- Task and Workflow Messages ---
+
+message TaskProgress {
+  string task_id = 1;
+  enum TaskStatus {
+    TASK_STATUS_UNSPECIFIED = 0;
+    TASK_STATUS_PENDING = 1;
+    TASK_STATUS_RUNNING = 2;
+    TASK_STATUS_COMPLETED = 3;
+    TASK_STATUS_FAILED = 4;
+  }
+  TaskStatus status = 2;
+  float progress_percent = 3; // Optional
+  string output = 4;          // Optional output or error messages
+}
+
+message WorkflowState {
+  string workflow_id = 1;
+  string step_id = 2;
+  enum StepState {
+    STEP_STATE_UNSPECIFIED = 0;
+    STEP_STATE_PENDING = 1;
+    STEP_STATE_RUNNING = 2;
+    STEP_STATE_SUCCEEDED = 3;
+    STEP_STATE_FAILED = 4;
+  }
+  StepState state = 3;
+  map<string, string> output_data = 4; // Output data from the step
+}
+
+// --- Agent Management Messages ---
+
+message AgentUpdateStatus {
+  enum UpdateStatus {
+    UPDATE_STATUS_UNSPECIFIED = 0;
+    UPDATE_STATUS_DOWNLOADING = 1;
+    UPDATE_STATUS_INSTALLING = 2;
+    UPDATE_STATUS_SUCCESSFUL = 3;
+    UPDATE_STATUS_FAILED = 4;
+  }
+  UpdateStatus status = 1;
+  string message = 2; // Optional details or error message
+}
+
+message AgentConfiguration {
+  string config_data = 1; // Serialized configuration data (e.g., JSON, YAML)
+}

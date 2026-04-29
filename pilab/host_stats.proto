@@ -1,0 +1,25 @@
+// =============================================================================
+// Host Stats - Shared Message for Host Resource Utilization
+// =============================================================================
+// Purpose: Common message for reporting host-level resource statistics.
+// Used in event streaming and agent-director communication.
+//
+// Fields:
+// - cpu_usage: CPU utilization percentage (0.0-100.0)
+// - disk_usage: Disk utilization percentage (0.0-100.0)
+// - used_memory: Used memory in bytes
+// - total_memory: Total memory in bytes
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.cloud;
+
+option go_package = "go.pilab.hu/cloud/virtpb;cloudpb";
+
+message HostStats {
+  float cpu_usage = 2;
+  float disk_usage = 3;
+  uint64 used_memory = 4;
+  uint64 total_memory = 5;
+}

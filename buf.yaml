@@ -1,0 +1,18 @@
+version: v2
+deps:
+  - buf.build/google/googleapis
+  - buf.build/grpc/grpc
+
+modules:
+  - name: buf.build/pilab/cloud
+    path: .
+
+# Workspace-level lint and breaking change detection settings. These settings
+# are the default for all modules in the workspace unless specifically
+# replaced in the module declarations.
+lint:
+  use:
+    - STANDARD
+breaking:
+  use:
+    - PACKAGE

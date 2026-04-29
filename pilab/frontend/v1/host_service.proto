@@ -1,0 +1,376 @@
+// =============================================================================
+// Host Service - Host Management and Monitoring (Frontend API)
+// =============================================================================
+// Purpose: Provides host management and monitoring API for the web frontend.
+// Allows users to view and manage hypervisor nodes.
+//
+// Communication: Unary RPC for all operations
+//
+// Key Features:
+// - Host Overview: Summary including CPU, memory, VMs, alerts, recent tasks
+// - Monitoring: Time-series metrics (CPU, memory, network, disk)
+// - VM Listing: List VMs running on a specific host
+// - Permissions: Host access control
+// - Datastores: Storage management (mount/unmount)
+// - System Settings: NTP, timezone, DNS, routing configuration
+// - Maintenance Mode: Enter/exit maintenance mode, VM evacuation
+// - Network Interfaces: List and enable/disable NICs
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.cloud.frontend.v1;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/frontend/v1;frontendv1";
+
+import "google/protobuf/timestamp.proto";
+
+// ----------------------------------------------------------------------------
+// Enums
+// ----------------------------------------------------------------------------
+
+enum HostStatus {
+  HOST_STATUS_UNSPECIFIED = 0;
+  HOST_STATUS_CONNECTED = 1;
+  HOST_STATUS_DISCONNECTED = 2;
+  HOST_STATUS_MAINTENANCE = 3;
+}
+
+enum VMStatus {
+  VM_STATUS_UNSPECIFIED = 0;
+  VM_STATUS_RUNNING = 1;
+  VM_STATUS_STOPPED = 2;
+  VM_STATUS_PAUSED = 3;
+  VM_STATUS_SHUTTING_DOWN = 4;
+  VM_STATUS_ERROR = 5;
+}
+
+enum DatastoreType {
+  DATASTORE_TYPE_UNSPECIFIED = 0;
+  DATASTORE_TYPE_LVM = 1;
+  DATASTORE_TYPE_NFS = 2;
+  // Add other types if necessary
+}
+
+enum NetworkInterfaceStatus {
+  NIC_STATUS_UNSPECIFIED = 0;
+  NIC_STATUS_CONNECTED = 1;
+  NIC_STATUS_DISCONNECTED = 2;
+}
+
+// ----------------------------------------------------------------------------
+// Messages
+// ----------------------------------------------------------------------------
+
+message HostOverview {
+  string hostname = 1;
+  string fqdn = 2;
+  HostStatus status = 3;
+  google.protobuf.Timestamp uptime = 4;
+  string manufacturer = 5;
+  string model = 6;
+  string serial_number = 7;
+  CPUMetrics cpu_metrics = 8;
+  MemoryMetrics memory_metrics = 9;
+  int32 vm_count = 10;
+  int32 active_alert_count = 11;
+  repeated TaskSummary recent_tasks = 12;
+  ResourceAllocationSummary resource_allocation = 13;
+}
+
+message CPUMetrics {
+  double usage_percent = 1;
+}
+
+message MemoryMetrics {
+  double usage_percent = 1;
+}
+
+message TaskSummary {
+  string id = 1;
+  string type = 2;
+  string status     = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message ResourceAllocationSummary {
+  CPUAllocation cpu = 1;
+  MemoryAllocation memory = 2;
+  StorageAllocation storage = 3;
+}
+
+message CPUAllocation {
+  int32 total_cores       = 1;
+  int32 allocated_cores   = 2;
+}
+
+message MemoryAllocation {
+  int64 total_gb = 1;
+  int64 allocated_gb = 2;
+}
+
+message StorageAllocation {
+  int64 total_gb = 1;
+  int64 used_gb   = 2;
+}
+
+message MonitoringDataRequest {
+  string hostname = 1;
+  string metric =2; // e.g., "cpu_usage", "memory_usage", "network_throughput"
+  string interface = 3; // Optional for network metrics
+  string datastore = 4; // Optional for storage metrics
+  google.protobuf.Timestamp start_time = 5;
+  google.protobuf.Timestamp end_time = 6;
+}
+
+message MonitoringDataResponse {
+  repeated DataPoint data_points = 1;
+}
+
+message DataPoint {
+  google.protobuf.Timestamp timestamp = 1;
+  double value = 2;
+}
+
+message HostVMsResponse {
+  repeated VMInfo vms = 1;
+}
+
+message VMInfo {
+  string id = 1;
+  string name = 2;
+  VMStatus status = 3;
+  double cpu_usage_percent = 4;
+  int64 memory_usage_bytes = 5;
+  google.protobuf.Timestamp uptime = 6;
+}
+
+message HostPermissionsResponse {
+  repeated HostUser user_permissions = 1;
+}
+
+message HostUser {
+  string username = 1;
+  google.protobuf.Timestamp last_login = 2;
+  repeated string groups = 3;
+}
+
+message HostDatastoresResponse {
+  repeated DatastoreInfo datastores = 1;
+}
+
+message DatastoreInfo {
+  string name = 1;
+  DatastoreType type = 2;
+  int64 capacity_gb = 3;
+  int64 free_gb = 4;
+  string path = 5;
+  string status = 6; // e.g., "mounted"
+}
+
+message HostSystemSettingsResponse {
+  GeneralSettings general = 1;
+  TimeSettings time = 2;
+  DNSSettings dns = 3;
+  RoutingSettings routing = 4;
+}
+
+message GeneralSettings {
+  string hostname = 1;
+  string manufacturer = 2;
+  string model = 3;
+  string serial_number = 4;
+  string bios_version = 5;
+  string motherboard_model = 6;
+}
+
+message TimeSettings {
+  repeated string ntp_servers = 1;
+  string time_synchronization_status = 2;
+  string timezone = 3;
+}
+
+message DNSSettings {
+  repeated string dns_servers = 1;
+  repeated string search_domains = 2;
+}
+
+message RoutingSettings {
+  string default_gateway = 1;
+  repeated StaticRoute static_routes = 2;
+}
+
+message StaticRoute {
+  string destination = 1;
+  string gateway = 2;
+  string interface = 3;
+}
+
+message MaintenanceModeStatusResponse {
+  bool is_in_maintenance_mode = 1;
+}
+
+message HostNetworkInterfacesResponse {
+  repeated NetworkInterfaceInfo interfaces = 1;
+}
+
+message NetworkInterfaceInfo {
+  string name = 1;
+  NetworkInterfaceStatus status = 2;
+  string link_speed = 3;
+  string duplex = 4;
+  string mac_address = 5;
+  string driver = 6;
+  repeated string ip_addresses = 7;
+}
+
+// ----------------------------------------------------------------------------
+// Request Messages for Actions
+// ----------------------------------------------------------------------------
+
+message GetHostOverviewRequest {
+  string hostname = 1;
+}
+
+message GetMonitoringDataRequest {
+  string hostname = 1;
+  string metric = 2;
+  string interface = 3;
+  string datastore = 4;
+  google.protobuf.Timestamp start_time = 5;
+  google.protobuf.Timestamp end_time = 6;
+}
+
+message ListHostVMsRequest {
+  string hostname = 1;
+}
+
+message GetHostPermissionsRequest {
+  string hostname = 1;
+}
+
+message ListHostDatastoresRequest {
+  string hostname = 1;
+}
+
+message GetHostSystemSettingsRequest {
+  string hostname = 1;
+}
+
+message GetMaintenanceModeStatusRequest {
+  string hostname = 1;
+}
+
+message EnterMaintenanceModeRequest {
+  string hostname = 1;
+  bool evacuate_vms = 2;
+}
+
+message ExitMaintenanceModeRequest {
+  string hostname = 1;
+}
+
+message ListHostNetworkInterfacesRequest {
+  string hostname = 1;
+}
+
+message UpdateNTPConfigRequest {
+  string hostname = 1;
+  repeated string ntp_servers = 2;
+}
+
+message UpdateTimezoneRequest {
+  string hostname = 1;
+  string timezone = 2;
+}
+
+message UpdateDNSSettingsRequest {
+  string hostname = 1;
+  repeated string dns_servers = 2;
+  repeated string search_domains = 3;
+}
+
+message UpdateRoutingSettingsRequest {
+  string hostname = 1;
+  string default_gateway = 2;
+  repeated StaticRoute static_routes = 3;
+}
+
+message MountDatastoreRequest {
+  string hostname = 1;
+  string datastore_name = 2;
+}
+
+message UnmountDatastoreRequest {
+  string hostname = 1;
+  string datastore_name = 2;
+}
+
+message EnableNetworkInterfaceRequest {
+  string hostname = 1;
+  string interface_name = 2;
+}
+
+message DisableNetworkInterfaceRequest {
+  string hostname = 1;
+  string interface_name = 2;
+}
+
+// ----------------------------------------------------------------------------
+// Response Messages for Actions (mostly empty for success, can add more details)
+// ----------------------------------------------------------------------------
+
+message EmptyResponse {}
+
+message UpdateNTPConfigResponse {}
+message UpdateTimezoneResponse {}
+message UpdateDNSSettingsResponse {}
+message UpdateRoutingSettingsResponse {}
+message EnterMaintenanceModeResponse {}
+message ExitMaintenanceModeResponse {}
+message MountDatastoreResponse {}
+message UnmountDatastoreResponse {}
+message EnableNetworkInterfaceResponse {}
+message DisableNetworkInterfaceResponse {}
+
+// ----------------------------------------------------------------------------
+// Service Definition
+// ----------------------------------------------------------------------------
+
+service HostService {
+  // Host Overview
+  rpc GetHostOverview(GetHostOverviewRequest) returns (HostOverview);
+
+  // Monitoring
+  rpc GetMonitoringData(GetMonitoringDataRequest) returns (MonitoringDataResponse);
+
+  // VMs
+  rpc ListHostVMs(ListHostVMsRequest) returns (HostVMsResponse);
+
+  // Permissions
+  rpc GetHostPermissions(GetHostPermissionsRequest) returns (HostPermissionsResponse);
+
+  // Storage/Datastores
+  rpc ListHostDatastores(ListHostDatastoresRequest) returns (HostDatastoresResponse);
+  rpc MountDatastore(MountDatastoreRequest) returns (MountDatastoreResponse);
+  rpc UnmountDatastore(UnmountDatastoreRequest) returns (UnmountDatastoreResponse);
+
+  // System Settings
+  rpc GetHostSystemSettings(GetHostSystemSettingsRequest) returns (HostSystemSettingsResponse);
+  rpc UpdateNTPConfig(UpdateNTPConfigRequest) returns (UpdateNTPConfigResponse);
+  rpc UpdateTimezone(UpdateTimezoneRequest) returns (UpdateTimezoneResponse);
+  rpc UpdateDNSSettings(UpdateDNSSettingsRequest) returns (UpdateDNSSettingsResponse);
+  rpc UpdateRoutingSettings(UpdateRoutingSettingsRequest) returns (UpdateRoutingSettingsResponse);
+
+  // Maintenance Mode
+  rpc GetMaintenanceModeStatus(GetMaintenanceModeStatusRequest) returns (MaintenanceModeStatusResponse);
+  rpc EnterMaintenanceMode(EnterMaintenanceModeRequest) returns (EnterMaintenanceModeResponse);
+  rpc ExitMaintenanceMode(ExitMaintenanceModeRequest) returns (ExitMaintenanceModeResponse);
+
+  // Networking/Interfaces
+  rpc ListHostNetworkInterfaces(ListHostNetworkInterfacesRequest) returns (HostNetworkInterfacesResponse);
+  rpc EnableNetworkInterface(EnableNetworkInterfaceRequest) returns (EnableNetworkInterfaceResponse);
+  rpc DisableNetworkInterface(DisableNetworkInterfaceRequest) returns (DisableNetworkInterfaceResponse);
+}

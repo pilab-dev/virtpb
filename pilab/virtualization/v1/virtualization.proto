@@ -1,0 +1,301 @@
+// =============================================================================
+// Virtualization Service - High-Level Virtualization Abstraction
+// =============================================================================
+// Purpose: Provides a higher-level abstraction over the platform with tenant
+// isolation and logical network concepts. This is an abstraction layer above
+// the agent-level operations.
+//
+// Communication: Unary RPC for all operations
+//
+// Key Concepts:
+// - Tenant: Top-level isolation unit (organization equivalent)
+// - Port Group: Network segmentation with VLAN, security, QoS, teaming
+// - System Services: Special port group types for mgmt, vmotion, iscsi, ft
+// - Network: Logical network (maps to OVN logical switch in implementation)
+// - VM Attachment: Associate VMs with port groups
+// - Agent Status: Monitor agent health
+//
+// Use Cases: Multi-tenant cloud platforms, logical network abstraction,
+// simplified API for higher-level orchestration
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.cloud.virtualization.v1;
+
+option go_package = "go.pilab.hu/cloud/virtpb/virtualization/v1;virtualizationv1";
+
+import "google/protobuf/empty.proto";
+
+// Main Virtualization Service
+service VirtualizationService {
+  // Tenant Management
+  rpc CreateTenant (CreateTenantRequest) returns (Tenant) {}
+  rpc GetTenant (GetTenantRequest) returns (Tenant) {}
+  rpc ListTenants (ListTenantsRequest) returns (ListTenantsResponse) {}
+  rpc UpdateTenant (UpdateTenantRequest) returns (Tenant) {}
+  rpc DeleteTenant (DeleteTenantRequest) returns (google.protobuf.Empty) {}
+
+  // Port Group Management
+  rpc CreatePortGroup (CreatePortGroupRequest) returns (PortGroup) {}
+  rpc GetPortGroup (GetPortGroupRequest) returns (PortGroup) {}
+  rpc ListPortGroups (ListPortGroupsRequest) returns (ListPortGroupsResponse) {}
+  rpc UpdatePortGroup (UpdatePortGroupRequest) returns (PortGroup) {}
+  rpc DeletePortGroup (DeletePortGroupRequest) returns (google.protobuf.Empty) {}
+  rpc SetPortGroupSystemServices (SetPortGroupSystemServicesRequest) returns (PortGroup) {}
+  rpc GetPortGroupSystemServices (GetPortGroupSystemServicesRequest) returns (SystemServicesConfig) {}
+
+  // Network (Logical Switch) Management 
+  // (In OVN, a Port Group is often associated with a Logical Switch)
+  rpc CreateNetwork (CreateNetworkRequest) returns (Network) {}
+  rpc GetNetwork (GetNetworkRequest) returns (Network) {}
+  rpc ListNetworks (ListNetworksRequest) returns (ListNetworksResponse) {}
+  rpc UpdateNetwork (UpdateNetworkRequest) returns (Network) {}
+  rpc DeleteNetwork (DeleteNetworkRequest) returns (google.protobuf.Empty) {}
+  
+  // Virtual Machine Management
+  rpc AttachVMToPortGroup (AttachVMToPortGroupRequest) returns (google.protobuf.Empty) {}
+  rpc DetachVMFromPortGroup (DetachVMFromPortGroupRequest) returns (google.protobuf.Empty) {}
+
+  // Agent Management
+  rpc GetAgentStatus (GetAgentStatusRequest) returns (AgentStatusResponse) {}
+  rpc ListAgents (ListAgentsRequest) returns (ListAgentsResponse) {}
+}
+
+// --- Enums ---
+
+enum PortGroupType {
+  PORT_GROUP_TYPE_UNSPECIFIED = 0;
+  PORT_GROUP_TYPE_VM = 1; // For Virtual Machines
+  PORT_GROUP_TYPE_SYSTEM = 2; // For System Services
+}
+
+enum LoadBalancerAlgorithm {
+  LB_ALGORITHM_UNSPECIFIED = 0;
+  LB_ALGORITHM_SOURCE_MAC = 1;
+  LB_ALGORITHM_SOURCE_DEST_IP = 2;
+  LB_ALGORITHM_LACP = 3;
+  LB_ALGORITHM_ACTIVE_BACKUP = 4;
+}
+
+enum SecurityPolicyAction {
+  SECURITY_POLICY_ACTION_UNSPECIFIED = 0;
+  SECURITY_POLICY_ACTION_ALLOW = 1;
+  SECURITY_POLICY_ACTION_REJECT = 2;
+}
+
+// --- Tenant ---
+message Tenant {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message CreateTenantRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message GetTenantRequest {
+  string tenant_id = 1;
+}
+
+message ListTenantsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListTenantsResponse {
+  repeated Tenant tenants = 1;
+  string next_page_token = 2;
+}
+
+message UpdateTenantRequest {
+  string tenant_id = 1;
+  Tenant tenant = 2;
+}
+
+message DeleteTenantRequest {
+  string tenant_id = 1;
+}
+
+// --- Port Group ---
+message PortGroup {
+  string id = 1;
+  string tenant_id = 2; // FK to Tenant
+  string name = 3;
+  PortGroupType type = 4;
+  int32 vlan_id = 5; // 0 for untagged, 1-4094 for tagged
+  SecurityPolicy security_policy = 6;
+  TrafficShapingPolicy traffic_shaping_policy = 7;
+  TeamingPolicy teaming_policy = 8;
+  SystemServicesConfig system_services = 9; // Configuration for system services
+  string network_id = 10; // ID of the associated OVN network (logical switch)
+}
+
+message CreatePortGroupRequest {
+  string tenant_id = 1;
+  string name = 2;
+  PortGroupType type = 3;
+  int32 vlan_id = 4;
+  SecurityPolicy security_policy = 5;
+  TrafficShapingPolicy traffic_shaping_policy = 6;
+  TeamingPolicy teaming_policy = 7;
+  SystemServicesConfig system_services = 8;
+}
+
+message GetPortGroupRequest {
+  string tenant_id = 1;
+  string port_group_id = 2;
+}
+
+message ListPortGroupsRequest {
+  string tenant_id = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message ListPortGroupsResponse {
+  repeated PortGroup port_groups = 1;
+  string next_page_token = 2;
+}
+
+message UpdatePortGroupRequest {
+  string tenant_id = 1;
+  string port_group_id = 2;
+  PortGroup port_group = 3;
+}
+
+message DeletePortGroupRequest {
+  string tenant_id = 1;
+  string port_group_id = 2;
+}
+
+// -- System Port Group
+message SystemServicesConfig {
+  bool management_enabled = 1;
+  bool vmotion_enabled = 2;
+  bool iscsi_enabled = 3;
+  bool fault_tolerance_enabled = 4;
+  
+  // Optional: specify netns usage
+  bool use_netns_for_management = 5;
+  bool use_netns_for_iscsi = 6;
+}
+
+message SetPortGroupSystemServicesRequest {
+  string tenant_id = 1;
+  string port_group_id = 2;
+  SystemServicesConfig system_services = 3;
+}
+
+message GetPortGroupSystemServicesRequest {
+    string tenant_id = 1;
+    string port_group_id = 2;
+}
+
+// --- Security Policy ---
+message SecurityPolicy {
+  SecurityPolicyAction promiscuous_mode = 1;
+  SecurityPolicyAction mac_address_changes = 2;
+  SecurityPolicyAction forged_transmits = 3;
+}
+
+// --- Traffic Shaping Policy ---
+message TrafficShapingPolicy {
+  int32 average_bandwidth_kbps = 1;
+  int32 peak_bandwidth_kbps = 2;
+  int32 burst_size_kb = 3;
+}
+
+// --- Teaming Policy ---
+message TeamingPolicy {
+  LoadBalancerAlgorithm load_balancer_algorithm = 1;
+  repeated string uplink_ports = 2; // Names of physical NICs/ports 
+  repeated string active_uplink_ports = 3; // Names of active physical NICs/ports in active-standby mode
+  repeated string standby_uplink_ports = 4; // Names of standby physical NICs/ports in active-standby mode
+}
+
+// --- Network (Logical Switch) ---
+message Network {
+  string id = 1;
+  string tenant_id = 2; // FK to Tenant
+  string name = 3;
+  string description = 4; // Optional description
+}
+
+message CreateNetworkRequest {
+  string tenant_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message GetNetworkRequest {
+  string tenant_id = 1;
+  string network_id = 2;
+}
+
+message ListNetworksRequest {
+  string tenant_id = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message ListNetworksResponse {
+  repeated Network networks = 1;
+  string next_page_token = 2;
+}
+
+message UpdateNetworkRequest {
+  string tenant_id = 1;
+  string network_id = 2;
+  Network network = 3;
+}
+
+message DeleteNetworkRequest {
+  string tenant_id = 1;
+  string network_id = 2;
+}
+
+// --- VM Attachment ---
+message AttachVMToPortGroupRequest {
+  string tenant_id = 1;
+  string vm_id = 2; 
+  string port_group_id = 3;
+}
+
+message DetachVMFromPortGroupRequest {
+  string tenant_id = 1;
+  string vm_id = 2;
+  string port_group_id = 3; 
+}
+
+// --- Agent ---
+message Agent {
+  string id = 1;
+  string hostname = 2;
+  string status = 3; // e.g., "connected", "disconnected"
+}
+
+message GetAgentStatusRequest {
+  string agent_id = 1;
+}
+
+message AgentStatusResponse {
+  string status = 1;
+  string last_heartbeat = 2; // Timestamp
+  map<string, string> capabilities = 3; // Key-value pairs of agent capabilities
+}
+
+message ListAgentsRequest {
+    int32 page_size = 1;
+    string page_token = 2;
+}
+
+message ListAgentsResponse {
+    repeated Agent agents = 1;
+    string next_page_token = 2;
+}
+
+// --- Other ---
+message Empty {}

@@ -1,0 +1,407 @@
+// =============================================================================
+// DCUI Service - Direct Console User Interface (ESXi-like Local Management)
+// =============================================================================
+// Purpose: Provides local console operations for host configuration, similar
+// to ESXi's DCUI. Used for standalone/bare-metal host management.
+//
+// Communication: Unary RPC for all operations
+//
+// Key Components:
+// - Host Info: System information, uptime, version
+// - System Resources: CPU, memory, disk, network usage
+// - Service Status: Monitoring running services
+// - Network Config: Interface configuration, DNS, routing
+// - Storage Config: Datastore management, NFS mount/unmount
+// - Maintenance Mode: Enable/disable, VM evacuation
+// - Firewall: Rule management
+// - Time: NTP configuration
+// - Cloud Adoption: Connect/disconnect from cloud Director
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.cloud.agent.v1;
+
+option go_package = "go.pilab.hu/cloud/virtpb/agent/v1;agentv1";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+// DCUIService provides local console operations for host configuration
+// This mirrors ESXi's DCUI (Direct Console User Interface) functionality
+service DCUIService {
+  // ============================================================================
+  // Host Information
+  // ============================================================================
+
+  // Get comprehensive host information
+  rpc GetHostInfo(google.protobuf.Empty) returns (HostInfo);
+
+  // Get system resource usage
+  rpc GetSystemResources(google.protobuf.Empty) returns (SystemResources);
+
+  // Get running services status
+  rpc GetServiceStatus(google.protobuf.Empty) returns (ServiceStatusList);
+
+  // ============================================================================
+  // Network Configuration
+  // ============================================================================
+
+  // Get network configuration
+  rpc GetNetworkConfig(google.protobuf.Empty) returns (NetworkConfig);
+
+  // Configure network interface
+  rpc ConfigureNetworkInterface(ConfigureNetworkInterfaceRequest) returns (google.protobuf.Empty);
+
+  // Test network connectivity
+  rpc TestNetwork(google.protobuf.Empty) returns (NetworkTestResult);
+
+  // ============================================================================
+  // Storage Configuration
+  // ============================================================================
+
+  // Get storage configuration
+  rpc GetStorageConfig(google.protobuf.Empty) returns (StorageConfig);
+
+  // Mount NFS datastore
+  rpc MountNFS(MountNFSRequest) returns (google.protobuf.Empty);
+
+  // Unmount NFS datastore
+  rpc UnmountNFS(UnmountNFSRequest) returns (google.protobuf.Empty);
+
+  // ============================================================================
+  // System Maintenance
+  // ============================================================================
+
+  // Enable/disable maintenance mode
+  rpc SetMaintenanceMode(SetMaintenanceModeRequest) returns (google.protobuf.Empty);
+
+  // Check maintenance mode status
+  rpc GetMaintenanceMode(google.protobuf.Empty) returns (MaintenanceModeStatus);
+
+  // Restart services
+  rpc RestartService(RestartServiceRequest) returns (google.protobuf.Empty);
+
+  // ============================================================================
+  // Firewall Configuration
+  // ============================================================================
+
+  // Get firewall rules
+  rpc GetFirewallRules(google.protobuf.Empty) returns (FirewallRuleList);
+
+  // Add firewall rule
+  rpc AddFirewallRule(AddFirewallRuleRequest) returns (google.protobuf.Empty);
+
+  // Remove firewall rule
+  rpc RemoveFirewallRule(RemoveFirewallRuleRequest) returns (google.protobuf.Empty);
+
+  // ============================================================================
+  // DNS/NTP Configuration
+  // ============================================================================
+
+  // Get DNS configuration
+  rpc GetDNSConfig(google.protobuf.Empty) returns (DNSConfig);
+
+  // Set DNS configuration
+  rpc SetDNSConfig(SetDNSConfigRequest) returns (google.protobuf.Empty);
+
+  // Get NTP configuration
+  rpc GetNTPConfig(google.protobuf.Empty) returns (NTPConfig);
+
+  // Set NTP configuration
+  rpc SetNTPConfig(SetNTPConfigRequest) returns (google.protobuf.Empty);
+
+  // ============================================================================
+  // Cloud Management
+  // ============================================================================
+
+  // Get cloud adoption status
+  rpc GetCloudStatus(google.protobuf.Empty) returns (CloudStatus);
+
+  // Adopt this node to a cloud director
+  rpc AdoptToCloud(AdoptToCloudRequest) returns (google.protobuf.Empty);
+
+  // Disconnect from cloud director (standalone mode)
+  rpc DisconnectFromCloud(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
+
+// ============================================================================
+// Host Information Messages
+// ============================================================================
+
+message HostInfo {
+  string hostname = 1;
+  string machine_id = 2;
+  string os_name = 3;
+  string os_version = 4;
+  string kernel_version = 5;
+  string architecture = 6;
+  string hypervisor_type = 7;
+  string hypervisor_version = 8;
+  string agent_version = 9;
+  string api_version = 10;
+  string build_date = 11;
+  int64 uptime_seconds = 12;
+  bool maintenance_mode = 13;
+  string console_access_url = 14;
+}
+
+message SystemResources {
+  CPUResources cpu = 1;
+  MemoryResources memory = 2;
+  repeated DiskResources disks = 3;
+  repeated NetworkResources networks = 4;
+}
+
+message CPUResources {
+  int32 cores = 1;
+  int32 threads = 2;
+  int32 usage_percent = 3;
+  double load_average = 4;
+  int32 temperature_celsius = 5;
+}
+
+message MemoryResources {
+  int64 total_bytes = 1;
+  int64 used_bytes = 2;
+  int64 available_bytes = 3;
+  int32 usage_percent = 4;
+  int64 swap_total_bytes = 5;
+  int64 swap_used_bytes = 6;
+}
+
+message DiskResources {
+  string device = 1;
+  string mount_point = 2;
+  string filesystem = 3;
+  int64 total_bytes = 4;
+  int64 used_bytes = 5;
+  int64 available_bytes = 6;
+  int32 usage_percent = 7;
+  bool is_mounted = 8;
+}
+
+message NetworkResources {
+  string interface_name = 1;
+  string mac_address = 2;
+  int64 rx_bytes = 3;
+  int64 tx_bytes = 4;
+  int64 rx_packets = 5;
+  int64 tx_packets = 6;
+  bool link_up = 7;
+}
+
+message ServiceStatusList {
+  repeated ServiceStatus services = 1;
+}
+
+message ServiceStatus {
+  string name = 1;
+  string display_name = 2;
+  string status = 3;  // "running", "stopped", "error"
+  bool healthy = 4;
+  string description = 5;
+  google.protobuf.Timestamp last_started = 6;
+  int32 pid = 7;
+}
+
+// ============================================================================
+// Network Configuration Messages
+// ============================================================================
+
+message NetworkConfig {
+  string hostname = 1;
+  string domain = 2;
+  string primary_dns = 3;
+  string secondary_dns = 4;
+  repeated NetworkInterface interfaces = 5;
+  repeated Route routes = 6;
+}
+
+message NetworkInterface {
+  string name = 1;
+  string display_name = 2;
+  string mac_address = 3;
+  bool link_up = 4;
+  bool managed = 5;
+  string ip_address = 6;
+  string netmask = 7;
+  string gateway = 8;
+  repeated string dns_servers = 9;
+  repeated VlanInterface vlans = 10;
+  string bridge_name = 11;
+  repeated string bridges = 12;
+}
+
+message VlanInterface {
+  int32 vlan_id = 1;
+  string name = 2;
+  string ip_address = 3;
+  string netmask = 4;
+}
+
+message Route {
+  string destination = 1;
+  string gateway = 2;
+  string interface_name = 3;
+  int32 metric = 4;
+}
+
+message ConfigureNetworkInterfaceRequest {
+  string interface_name = 1;
+  bool dhcp = 2;
+  string ip_address = 3;
+  string netmask = 4;
+  string gateway = 5;
+  repeated string dns_servers = 6;
+}
+
+message NetworkTestResult {
+  bool dns_working = 1;
+  bool gateway_reachable = 2;
+  bool internet_reachable = 3;
+  repeated string ntp_servers_reachable = 4;
+  repeated string warnings = 5;
+}
+
+// ============================================================================
+// Storage Configuration Messages
+// ============================================================================
+
+message StorageConfig {
+  repeated DatastoreInfo datastores = 1;
+  repeated string local_disks = 2;
+  int64 total_storage_bytes = 3;
+  int64 used_storage_bytes = 4;
+  int64 available_storage_bytes = 5;
+}
+
+message DatastoreInfo {
+  string id = 1;
+  string name = 2;
+  string type = 3;  // "local", "nfs", "iscsi", "ceph"
+  string status = 4; // "mounted", "unmounted", "error"
+  string mount_path = 5;
+  string server = 6;
+  string export_path = 7;
+  int64 total_bytes = 8;
+  int64 used_bytes = 9;
+  int64 available_bytes = 10;
+  int32 usage_percent = 11;
+}
+
+message MountNFSRequest {
+  string server = 1;
+  string export_path = 2;
+  string mount_point = 3;
+  string datastore_name = 4;
+  map<string, string> options = 5;
+}
+
+message UnmountNFSRequest {
+  string datastore_id = 1;
+  bool force = 2;
+}
+
+// ============================================================================
+// Maintenance Mode Messages
+// ============================================================================
+
+message SetMaintenanceModeRequest {
+  bool enabled = 1;
+  string reason = 2;
+}
+
+message MaintenanceModeStatus {
+  bool enabled = 1;
+  string reason = 2;
+  int32 vm_count = 3;
+  repeated string running_vms = 4;
+  bool can_exit_maintenance = 5;
+}
+
+message RestartServiceRequest {
+  string service_name = 1;
+  bool force = 2;
+}
+
+// ============================================================================
+// Firewall Configuration Messages
+// ============================================================================
+
+message FirewallRuleList {
+  repeated FirewallRule rules = 1;
+}
+
+message FirewallRule {
+  string id = 1;
+  string name = 2;
+  string direction = 3;  // "in", "out"
+  string protocol = 4;   // "tcp", "udp", "icmp", "all"
+  string port = 5;       // "22", "80", "443", or "22,80,443"
+  string action = 6;     // "accept", "drop", "reject"
+  string source = 7;     // CIDR notation
+  bool enabled = 8;
+}
+
+message AddFirewallRuleRequest {
+  string name = 1;
+  string direction = 2;
+  string protocol = 3;
+  string port = 4;
+  string action = 5;
+  string source = 6;
+}
+
+message RemoveFirewallRuleRequest {
+  string rule_id = 1;
+}
+
+// ============================================================================
+// DNS/NTP Configuration Messages
+// ============================================================================
+
+message DNSConfig {
+  repeated string nameservers = 1;
+  string search_domain = 2;
+}
+
+message SetDNSConfigRequest {
+  repeated string nameservers = 1;
+  string search_domain = 2;
+}
+
+message NTPConfig {
+  repeated NtpServer servers = 1;
+  bool ntp_enabled = 2;
+  string ntp_restrict_policy = 3;
+}
+
+message NtpServer {
+  string address = 1;
+  bool reachable = 2;
+  bool synchronized = 3;
+  double offset_ms = 4;
+}
+
+message SetNTPConfigRequest {
+  repeated string servers = 1;
+  bool enabled = 2;
+}
+
+// ============================================================================
+// Cloud Management Messages
+// ============================================================================
+
+message CloudStatus {
+  bool adopted = 1;
+  string director_address = 2;
+  bool connected = 3;
+  string node_id = 4;
+  google.protobuf.Timestamp last_heartbeat = 5;
+}
+
+message AdoptToCloudRequest {
+  string director_address = 1;
+  string director_token = 2;  // Optional token for authentication
+}
