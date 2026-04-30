@@ -1,0 +1,225 @@
+// =============================================================================
+// Network Common - Shared Enums and Messages for Network Services
+// =============================================================================
+// Purpose: Common enums and messages used across all network services.
+//
+// This file provides shared definitions for:
+// - Protocol, Direction, NetworkType enums
+// - QoS, Security, Firewall enums
+// - RateLimit message
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.network.v2;
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+
+// -----------------------------------------------------------------------------
+// Common Enums
+// -----------------------------------------------------------------------------
+
+enum Protocol {
+  PROTOCOL_UNSPECIFIED = 0;
+  PROTOCOL_ALL = 1;
+  PROTOCOL_TCP = 2;
+  PROTOCOL_UDP = 3;
+  PROTOCOL_ICMP = 4;
+  PROTOCOL_ICMPV6 = 5;
+  PROTOCOL_SCTP = 6;
+  PROTOCOL_GRE = 7;
+  PROTOCOL_VXLAN = 8;
+  PROTOCOL_ESP = 9;
+  PROTOCOL_AH = 10;
+}
+
+enum ACNAction {
+  ACN_ACTION_UNSPECIFIED = 0;
+  ACN_ACTION_ALLOW = 1;
+  ACN_ACTION_DROP = 2;
+  ACN_ACTION_REJECT = 3;
+  ACN_ACTION_LOG = 4;
+}
+
+enum Direction {
+  DIRECTION_UNSPECIFIED = 0;
+  DIRECTION_INGRESS = 1;
+  DIRECTION_EGRESS = 2;
+  DIRECTION_BOTH = 3;
+}
+
+enum NetworkType {
+  NETWORK_TYPE_UNSPECIFIED = 0;
+  NETWORK_TYPE_VLAN = 1;
+  NETWORK_TYPE_VXLAN = 2;
+  NETWORK_TYPE_BRIDGE = 3;
+  NETWORK_TYPE_FLAT = 4;
+  NETWORK_TYPE_GENEVE = 5;
+}
+
+enum NetworkStatus {
+  NETWORK_STATUS_UNSPECIFIED = 0;
+  NETWORK_STATUS_PENDING = 1;
+  NETWORK_STATUS_ACTIVE = 2;
+  NETWORK_STATUS_DEGRADED = 3;
+  NETWORK_STATUS_ERROR = 4;
+}
+
+enum NetworkRole {
+  NETWORK_ROLE_UNSPECIFIED = 0;
+  NETWORK_ROLE_VMS = 1;
+  NETWORK_ROLE_VMOTION = 2;
+  NETWORK_ROLE_UPLINK = 3;
+  NETWORK_ROLE_STORAGE = 4;
+  NETWORK_ROLE_MGMT = 5;
+}
+
+enum PortType {
+  PORT_TYPE_UNSPECIFIED = 0;
+  PORT_TYPE_NORMAL = 1;
+  PORT_TYPE_DIRECT = 2;
+  PORT_TYPE_ALLOW_PROMISCUOUS = 3;
+}
+
+enum PortStatus {
+  PORT_STATUS_UNSPECIFIED = 0;
+  PORT_STATUS_DOWN = 1;
+  PORT_STATUS_UP = 2;
+  PORT_STATUS_ERROR = 3;
+}
+
+enum VirtualCloudType {
+  VIRTUAL_CLOUD_TYPE_UNSPECIFIED = 0;
+  VIRTUAL_CLOUD_TYPE_ISOLATED = 1;
+  VIRTUAL_CLOUD_TYPE_INTERNAL = 2;
+  VIRTUAL_CLOUD_TYPE_EXTERNAL = 3;
+  VIRTUAL_CLOUD_TYPE_ROUTED = 4;
+}
+
+enum VirtualCloudStatus {
+  VIRTUAL_CLOUD_STATUS_UNSPECIFIED = 0;
+  VIRTUAL_CLOUD_STATUS_PENDING = 1;
+  VIRTUAL_CLOUD_STATUS_ACTIVE = 2;
+  VIRTUAL_CLOUD_STATUS_ERROR = 3;
+}
+
+enum PriorityClass {
+  PRIORITY_CLASS_UNSPECIFIED = 0;
+  PRIORITY_CLASS_BEST_EFFORT = 1;
+  PRIORITY_CLASS_LOW = 2;
+  PRIORITY_CLASS_NORMAL = 3;
+  PRIORITY_CLASS_HIGH = 4;
+  PRIORITY_CLASS_CRITICAL = 5;
+}
+
+enum QoSAlgorithm {
+  QOS_ALGORITHM_UNSPECIFIED = 0;
+  QOS_ALGORITHM_SFQ = 1;
+  QOS_ALGORITHM_FQ_CODEL = 2;
+  QOS_ALGORITHM_TBF = 3;
+  QOS_ALGORITHM_HTB = 4;
+  QOS_ALGORITHM_PRIO = 5;
+}
+
+enum RateLimitUnit {
+  RATE_LIMIT_UNIT_UNSPECIFIED = 0;
+  RATE_LIMIT_UNIT_BPS = 1;
+  RATE_LIMIT_UNIT_KBPS = 2;
+  RATE_LIMIT_UNIT_MBPS = 3;
+  RATE_LIMIT_UNIT_GBPS = 4;
+  RATE_LIMIT_UNIT_PPS = 5;
+}
+
+enum ApplyTarget {
+  APPLY_TARGET_UNSPECIFIED = 0;
+  APPLY_TARGET_PORT = 1;
+  APPLY_TARGET_NETWORK = 2;
+}
+
+enum AllocationMode {
+  ALLOCATION_MODE_UNSPECIFIED = 0;
+  ALLOCATION_MODE_DHCP = 1;
+  ALLOCATION_MODE_STATIC = 2;
+  ALLOCATION_MODE_DYNAMIC = 3;
+  ALLOCATION_MODE_HYBRID = 4;
+}
+
+enum AllocationType {
+  ALLOCATION_TYPE_UNSPECIFIED = 0;
+  ALLOCATION_TYPE_DHCP = 1;
+  ALLOCATION_TYPE_STATIC = 2;
+  ALLOCATION_TYPE_FIP = 3;
+}
+
+enum PublicIPType {
+  PUBLIC_IP_TYPE_UNSPECIFIED = 0;
+  PUBLIC_IP_TYPE_ELASTIC = 1;
+  PUBLIC_IP_TYPE_RESERVED = 2;
+  PUBLIC_IP_TYPE_BYOIP = 3;
+}
+
+enum PublicIPStatus {
+  PUBLIC_IP_STATUS_UNSPECIFIED = 0;
+  PUBLIC_IP_STATUS_AVAILABLE = 1;
+  PUBLIC_IP_STATUS_ASSOCIATED = 2;
+  PUBLIC_IP_STATUS_RESERVED = 3;
+  PUBLIC_IP_STATUS_RELEASING = 4;
+}
+
+enum FirewallState {
+  FIREWALL_STATE_UNSPECIFIED = 0;
+  FIREWALL_STATE_DISABLED = 1;
+  FIREWALL_STATE_ENABLED = 2;
+  FIREWALL_STATE_BYPASS = 3;
+}
+
+enum FirewallDirection {
+  FIREWALL_DIRECTION_UNSPECIFIED = 0;
+  FIREWALL_DIRECTION_INGRESS = 1;
+  FIREWALL_DIRECTION_EGRESS = 2;
+}
+
+enum DVSStatus {
+  DVS_STATUS_UNSPECIFIED = 0;
+  DVS_STATUS_PENDING = 1;
+  DVS_STATUS_ACTIVE = 2;
+  DVS_STATUS_DEGRADED = 3;
+  DVS_STATUS_ERROR = 4;
+}
+
+enum TeamingMode {
+  TEAMING_MODE_UNSPECIFIED = 0;
+  TEAMING_MODE_ACTIVE_BACKUP = 1;
+  TEAMING_MODE_LACP = 2;
+  TEAMING_MODE_SRC_DST_IP = 3;
+  TEAMING_MODE_SRC_DST_MAC = 4;
+  TEAMING_MODE_SRC_PORT = 5;
+}
+
+enum FlowDirection {
+  FLOW_DIRECTION_UNSPECIFIED = 0;
+  FLOW_DIRECTION_INGRESS = 1;
+  FLOW_DIRECTION_EGRESS = 2;
+  FLOW_DIRECTION_BIDIRECTIONAL = 3;
+}
+
+// -----------------------------------------------------------------------------
+// Common Messages
+// -----------------------------------------------------------------------------
+
+message RateLimit {
+  int64 rate = 1;
+  RateLimitUnit unit = 2;
+  int64 peak = 3;
+  int64 burst = 4;
+  int64 min_burst = 5;
+}
+
+message TeamingPolicy {
+  TeamingMode mode = 1;
+  repeated string active_uplinks = 2;
+  repeated string standby_uplinks = 3;
+  bool notify_switches = 4;
+  bool failback = 5;
+  int32 load_balance = 6;
+}

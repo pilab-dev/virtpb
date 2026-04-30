@@ -1,0 +1,235 @@
+// =============================================================================
+// QoS & Security Service - QoS Profiles and Security Profiles
+// =============================================================================
+// Purpose: Manage QoS profiles (rate limiting) and security profiles
+// (port security, ACL rules).
+//
+// Services:
+// - QoS Profile CRUD + Apply/Remove
+// - Security Profile CRUD + Apply/Remove
+// - ACL Rule management
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.network.v2;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "pilab/network/v2/network_common.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+
+// -----------------------------------------------------------------------------
+// QoS & Security Service
+// -----------------------------------------------------------------------------
+
+service QoSSecurityService {
+  rpc CreateQoSProfile(CreateQoSProfileRequest) returns (QoSProfile);
+  rpc GetQoSProfile(GetQoSProfileRequest) returns (QoSProfile);
+  rpc ListQoSProfiles(ListQoSProfilesRequest) returns (ListQoSProfilesResponse);
+  rpc UpdateQoSProfile(UpdateQoSProfileRequest) returns (QoSProfile);
+  rpc DeleteQoSProfile(DeleteQoSProfileRequest) returns (google.protobuf.Empty);
+  rpc ApplyQoSProfile(ApplyQoSProfileRequest) returns (google.protobuf.Empty);
+  rpc RemoveQoSProfile(RemoveQoSProfileRequest) returns (google.protobuf.Empty);
+
+  rpc CreateSecurityProfile(CreateSecurityProfileRequest) returns (SecurityProfile);
+  rpc GetSecurityProfile(GetSecurityProfileRequest) returns (SecurityProfile);
+  rpc ListSecurityProfiles(ListSecurityProfilesRequest) returns (ListSecurityProfilesResponse);
+  rpc UpdateSecurityProfile(UpdateSecurityProfileRequest) returns (SecurityProfile);
+  rpc DeleteSecurityProfile(DeleteSecurityProfileRequest) returns (google.protobuf.Empty);
+  rpc ApplySecurityProfile(ApplySecurityProfileRequest) returns (google.protobuf.Empty);
+  rpc RemoveSecurityProfile(RemoveSecurityProfileRequest) returns (google.protobuf.Empty);
+  rpc AddACLRule(AddACLRuleRequest) returns (ACLRule);
+  rpc UpdateACLRule(UpdateACLRuleRequest) returns (ACLRule);
+  rpc RemoveACLRule(RemoveACLRuleRequest) returns (google.protobuf.Empty);
+  rpc ReorderACLRules(ReorderACLRulesRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// QoS Profile Messages
+// -----------------------------------------------------------------------------
+
+message QoSProfile {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  PriorityClass priority_class = 4;
+  string description = 5;
+  RateLimit ingress_limit = 6;
+  RateLimit egress_limit = 7;
+  int64 burst = 8;
+  int64 burst_buffer = 9;
+  bool enabled = 10;
+  QoSAlgorithm algorithm = 11;
+  map<string, string> metadata = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message CreateQoSProfileRequest {
+  string name = 1;
+  string tenant_id = 2;
+  PriorityClass priority_class = 3;
+  string description = 4;
+  RateLimit ingress_limit = 5;
+  RateLimit egress_limit = 6;
+  int64 burst = 7;
+  int64 burst_buffer = 8;
+  QoSAlgorithm algorithm = 9;
+  map<string, string> metadata = 10;
+}
+
+message GetQoSProfileRequest { string qos_profile_id = 1; }
+
+message ListQoSProfilesRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+}
+
+message ListQoSProfilesResponse {
+  repeated QoSProfile profiles = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateQoSProfileRequest {
+  string qos_profile_id = 1;
+  string name = 2;
+  RateLimit ingress_limit = 3;
+  RateLimit egress_limit = 4;
+  int64 burst = 5;
+  bool enabled = 6;
+  map<string, string> metadata = 7;
+}
+
+message DeleteQoSProfileRequest { string qos_profile_id = 1; }
+
+message ApplyQoSProfileRequest {
+  string qos_profile_id = 1;
+  string port_id = 2;
+  string network_id = 3;
+  ApplyTarget target = 4;
+}
+
+message RemoveQoSProfileRequest {
+  string qos_profile_id = 1;
+  string port_id = 2;
+  string network_id = 3;
+  ApplyTarget target = 4;
+}
+
+// -----------------------------------------------------------------------------
+// Security Profile Messages
+// -----------------------------------------------------------------------------
+
+message SecurityProfile {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  string description = 4;
+  bool mac_spoof_protection_enabled = 5;
+  bool ip_spoof_protection_enabled = 6;
+  bool arp_spoof_protection_enabled = 7;
+  bool allow_promiscuous = 8;
+  bool port_security_enabled = 9;
+  repeated string allowed_mac_addresses = 10;
+  repeated string allowed_ip_addresses = 11;
+  repeated ACLRule ingress_rules = 12;
+  repeated ACLRule egress_rules = 13;
+  map<string, string> metadata = 14;
+  google.protobuf.Timestamp created_at = 15;
+  google.protobuf.Timestamp updated_at = 16;
+}
+
+message ACLRule {
+  string id = 1;
+  string name = 2;
+  int32 priority = 3;
+  Direction direction = 4;
+  ACNAction action = 5;
+  Protocol protocol = 6;
+  string src_cidr = 7;
+  string dst_cidr = 8;
+  uint32 src_port_start = 9;
+  uint32 src_port_end = 10;
+  uint32 dst_port_start = 11;
+  uint32 dst_port_end = 12;
+  string description = 13;
+  bool log_enabled = 14;
+  bool stateful = 15;
+  int64 packet_count = 16;
+  int64 byte_count = 17;
+}
+
+message CreateSecurityProfileRequest {
+  string name = 1;
+  string tenant_id = 2;
+  string description = 3;
+  bool mac_spoof_protection_enabled = 4;
+  bool ip_spoof_protection_enabled = 5;
+  bool arp_spoof_protection_enabled = 6;
+  bool allow_promiscuous = 7;
+  bool port_security_enabled = 8;
+  repeated string allowed_mac_addresses = 9;
+  repeated string allowed_ip_addresses = 10;
+  repeated ACLRule ingress_rules = 11;
+  repeated ACLRule egress_rules = 12;
+  map<string, string> metadata = 13;
+}
+
+message GetSecurityProfileRequest { string security_profile_id = 1; }
+
+message ListSecurityProfilesRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+}
+
+message ListSecurityProfilesResponse {
+  repeated SecurityProfile profiles = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateSecurityProfileRequest {
+  string security_profile_id = 1;
+  string name = 2;
+  bool mac_spoof_protection_enabled = 3;
+  bool ip_spoof_protection_enabled = 4;
+  bool arp_spoof_protection_enabled = 5;
+  repeated string allowed_mac_addresses = 6;
+  repeated string allowed_ip_addresses = 7;
+  map<string, string> metadata = 8;
+}
+
+message DeleteSecurityProfileRequest { string security_profile_id = 1; }
+
+message ApplySecurityProfileRequest {
+  string security_profile_id = 1;
+  string port_id = 2;
+}
+
+message RemoveSecurityProfileRequest { string port_id = 1; }
+
+message AddACLRuleRequest {
+  string security_profile_id = 1;
+  ACLRule rule = 2;
+}
+
+message UpdateACLRuleRequest {
+  string security_profile_id = 1;
+  ACLRule rule = 2;
+}
+
+message RemoveACLRuleRequest {
+  string security_profile_id = 1;
+  string rule_id = 2;
+}
+
+message ReorderACLRulesRequest {
+  string security_profile_id = 1;
+  repeated ACLRule rules = 2;
+}

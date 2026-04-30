@@ -1,0 +1,227 @@
+// =============================================================================
+// Public IP Service - Public IP, Port Forwarding, Firewall
+// =============================================================================
+// Purpose: Manage public IP allocation, port forwarding (NAT),
+// and firewall profiles.
+//
+// Services:
+// - Public IP CRUD + Associate/Disassociate
+// - Port Forward CRUD
+// - Firewall Profile CRUD + Rule management
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.network.v2;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "pilab/network/v2/network_common.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+
+// -----------------------------------------------------------------------------
+// Public IP Service
+// -----------------------------------------------------------------------------
+
+service PublicIPService {
+  rpc AllocatePublicIP(AllocatePublicIPRequest) returns (PublicIP);
+  rpc GetPublicIP(GetPublicIPRequest) returns (PublicIP);
+  rpc ListPublicIPs(ListPublicIPsRequest) returns (ListPublicIPsResponse);
+  rpc ReleasePublicIP(ReleasePublicIPRequest) returns (google.protobuf.Empty);
+  rpc AssociatePublicIP(AssociatePublicIPRequest) returns (PublicIP);
+  rpc DisassociatePublicIP(DisassociatePublicIPRequest) returns (google.protobuf.Empty);
+
+  rpc CreatePortForward(CreatePortForwardRequest) returns (PortForward);
+  rpc UpdatePortForward(UpdatePortForwardRequest) returns (PortForward);
+  rpc DeletePortForward(DeletePortForwardRequest) returns (google.protobuf.Empty);
+  rpc ListPortForwards(ListPortForwardsRequest) returns (ListPortForwardsResponse);
+
+  rpc CreateFirewallProfile(CreateFirewallProfileRequest) returns (FirewallProfile);
+  rpc GetFirewallProfile(GetFirewallProfileRequest) returns (FirewallProfile);
+  rpc UpdateFirewallProfile(UpdateFirewallProfileRequest) returns (FirewallProfile);
+  rpc DeleteFirewallProfile(DeleteFirewallProfileRequest) returns (google.protobuf.Empty);
+  rpc AddFirewallRule(AddFirewallRuleRequest) returns (FirewallRule);
+  rpc UpdateFirewallRule(UpdateFirewallRuleRequest) returns (FirewallRule);
+  rpc RemoveFirewallRule(RemoveFirewallRuleRequest) returns (google.protobuf.Empty);
+  rpc ReorderFirewallRules(ReorderFirewallRulesRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// Public IP Messages
+// -----------------------------------------------------------------------------
+
+message PublicIP {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  PublicIPType type = 4;
+  PublicIPStatus status = 5;
+  string vm_id = 6;
+  string port_id = 7;
+  string associated_private_ip = 8;
+  string description = 9;
+  string reverse_dns = 10;
+  repeated PortForward port_forwards = 11;
+  string firewall_profile_id = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp allocated_at = 14;
+}
+
+message PortForward {
+  string id = 1;
+  string public_ip_id = 2;
+  Protocol protocol = 3;
+  uint32 public_port = 4;
+  uint32 private_port = 5;
+  string internal_ip = 6;
+  string description = 7;
+  repeated string allowed_cidrs = 8;
+  bool enabled = 9;
+  int64 hit_count = 10;
+  google.protobuf.Timestamp created_at = 11;
+}
+
+message FirewallProfile {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  string public_ip_id = 4;
+  FirewallState state = 5;
+  bool logging_enabled = 6;
+  bool default_ingress_action = 7;
+  bool default_egress_action = 8;
+  repeated FirewallRule ingress_rules = 9;
+  repeated FirewallRule egress_rules = 10;
+  map<string, string> metadata = 11;
+  google.protobuf.Timestamp created_at = 12;
+  google.protobuf.Timestamp updated_at = 13;
+}
+
+message FirewallRule {
+  string id = 1;
+  string name = 2;
+  int32 priority = 3;
+  FirewallDirection direction = 4;
+  ACNAction action = 5;
+  Protocol protocol = 6;
+  string source_cidr = 7;
+  string destination_cidr = 8;
+  string source_ports = 9;
+  string destination_ports = 10;
+  string description = 11;
+  bool enabled = 12;
+  bool log = 13;
+  int64 hit_count = 14;
+  google.protobuf.Timestamp created_at = 15;
+}
+
+// -----------------------------------------------------------------------------
+// Request/Response Messages
+// -----------------------------------------------------------------------------
+
+message AllocatePublicIPRequest {
+  string tenant_id = 1;
+  PublicIPType type = 2;
+  string description = 3;
+  google.protobuf.StringValue ip_address = 4;
+  string network_id = 5;
+}
+
+message GetPublicIPRequest { string public_ip_id = 1; }
+
+message ListPublicIPsRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+  PublicIPStatus status = 4;
+  string vm_id = 5;
+}
+
+message ListPublicIPsResponse {
+  repeated PublicIP public_ips = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message ReleasePublicIPRequest { string public_ip_id = 1; }
+
+message AssociatePublicIPRequest {
+  string public_ip_id = 1;
+  string port_id = 2;
+  string internal_ip = 3;
+}
+
+message DisassociatePublicIPRequest { string public_ip_id = 1; }
+
+message CreatePortForwardRequest {
+  string public_ip_id = 1;
+  Protocol protocol = 2;
+  uint32 public_port = 3;
+  uint32 private_port = 4;
+  string internal_ip = 5;
+  string description = 6;
+  repeated string allowed_cidrs = 7;
+}
+
+message UpdatePortForwardRequest {
+  string public_ip_id = 1;
+  string port_forward_id = 2;
+  uint32 public_port = 3;
+  uint32 private_port = 4;
+  repeated string allowed_cidrs = 5;
+  bool enabled = 6;
+}
+
+message DeletePortForwardRequest {
+  string public_ip_id = 1;
+  string port_forward_id = 2;
+}
+
+message ListPortForwardsRequest { string public_ip_id = 1; }
+
+message ListPortForwardsResponse { repeated PortForward port_forwards = 1; }
+
+message CreateFirewallProfileRequest {
+  string name = 1;
+  string tenant_id = 2;
+  string public_ip_id = 3;
+  FirewallState state = 4;
+  bool logging_enabled = 5;
+  bool default_ingress_action = 6;
+  bool default_egress_action = 7;
+  map<string, string> metadata = 8;
+}
+
+message GetFirewallProfileRequest { string firewall_profile_id = 1; }
+
+message UpdateFirewallProfileRequest {
+  string firewall_profile_id = 1;
+  FirewallState state = 2;
+  bool logging_enabled = 3;
+  bool default_ingress_action = 4;
+  bool default_egress_action = 5;
+}
+
+message DeleteFirewallProfileRequest { string firewall_profile_id = 1; }
+
+message AddFirewallRuleRequest {
+  string firewall_profile_id = 1;
+  FirewallRule rule = 2;
+}
+
+message UpdateFirewallRuleRequest {
+  string firewall_profile_id = 1;
+  FirewallRule rule = 2;
+}
+
+message RemoveFirewallRuleRequest {
+  string firewall_profile_id = 1;
+  string rule_id = 2;
+}
+
+message ReorderFirewallRulesRequest {
+  string firewall_profile_id = 1;
+  repeated FirewallRule rules = 2;
+}

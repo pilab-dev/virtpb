@@ -1,0 +1,121 @@
+// =============================================================================
+// Common Task/Job Messages - Shared Across All Services
+// =============================================================================
+// Purpose: Task and job tracking messages used by director, frontend,
+// WebSocket events, and other services.
+//
+// This file provides a single source of truth for:
+// - JobStatus: Job progress tracking (from agent-director communication)
+// - Task: Task queue item (from director task service)
+// - TaskType/TaskStatus: Task classification and status enums
+// - TaskSummary: Frontend task display
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.common.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1";
+
+// -----------------------------------------------------------------------------
+// Job Status (from agent-director communication)
+// -----------------------------------------------------------------------------
+
+message JobStatus {
+  string job = 1;                    // Unique job identifier
+  uint64 elapsed_time = 2;              // Elapsed time in ms
+  uint64 remaining_time = 3;           // Estimated remaining time in ms
+  float progress = 4;                  // 0.0 to 1.0
+  optional string message = 5;            // Human-readable status
+  optional string host_id = 6;           // Host executing the job
+  string vm_id = 7;                    // Associated VM
+}
+
+// -----------------------------------------------------------------------------
+// Task (from director task queue)
+// -----------------------------------------------------------------------------
+
+message Task {
+  string id = 1;
+  TaskType type = 2;
+  string vm_id = 3;
+  string vm_name = 4;
+  google.protobuf.Struct params = 5;       // Task-specific parameters
+  int64 sequence = 6;                   // Ordering
+  google.protobuf.Timestamp created_at = 7;
+  string created_by = 8;
+  TaskStatus status = 9;
+  google.protobuf.Timestamp started_at = 10;
+  google.protobuf.Timestamp completed_at = 11;
+  string error_message = 12;
+  int32 attempts = 13;
+  string superseded_by = 14;
+  string target_node_id = 15;
+  google.protobuf.Timestamp assigned_at = 16;
+  int32 priority = 17;
+  string reason = 18;
+}
+
+enum TaskType {
+  TASK_TYPE_UNSPECIFIED = 0;
+  
+  // VM Lifecycle
+  TASK_TYPE_VM_CREATE = 1;
+  TASK_TYPE_VM_START = 2;
+  TASK_TYPE_VM_STOP = 3;
+  TASK_TYPE_VM_RESTART = 4;
+  TASK_TYPE_VM_PAUSE = 5;
+  TASK_TYPE_VM_UNPAUSE = 6;
+  TASK_TYPE_VM_DELETE = 7;
+  TASK_TYPE_VM_UPDATE = 8;
+  
+  // VM Advanced
+  TASK_TYPE_VM_MIGRATE = 9;
+  TASK_TYPE_VM_SNAPSHOT_CREATE = 10;
+  TASK_TYPE_VM_SNAPSHOT_DELETE = 11;
+  TASK_TYPE_VM_SNAPSHOT_RESTORE = 12;
+  TASK_TYPE_VM_REVERT = 13;
+  TASK_TYPE_VM_EXPORT_OVA = 14;
+  TASK_TYPE_VM_IMPORT_OVA = 15;
+  
+  // Network
+  TASK_TYPE_VM_ATTACH_NETWORK = 16;
+  TASK_TYPE_VM_DETACH_NETWORK = 17;
+  TASK_TYPE_VM_CLONE = 18;
+}
+
+enum TaskStatus {
+  TASK_STATUS_UNSPECIFIED = 0;
+  TASK_STATUS_PENDING = 1;         // Waiting to be processed
+  TASK_STATUS_IN_PROGRESS = 2;     // Currently executing
+  TASK_STATUS_COMPLETED = 3;       // Successfully finished
+  TASK_STATUS_FAILED = 4;          // Failed after retries
+  TASK_STATUS_CANCELLED = 5;        // Manually cancelled
+  TASK_STATUS_SUPERSEDED = 6;      // Invalidated by later task
+}
+
+// -----------------------------------------------------------------------------
+// Task Summary (for frontend display)
+// -----------------------------------------------------------------------------
+
+message TaskSummary {
+  string id = 1;
+  string type = 2;
+  string status = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+// -----------------------------------------------------------------------------
+// Task Status Update (for batch updates)
+// -----------------------------------------------------------------------------
+
+message TaskStatusUpdate {
+  string task_id = 1;
+  string node_id = 2;
+  TaskStatus status = 3;
+  string error_message = 4;
+  google.protobuf.Timestamp completed_at = 5;
+}

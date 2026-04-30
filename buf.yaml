@@ -4,8 +4,8 @@ deps:
   - buf.build/grpc/grpc
 
 modules:
-  - name: buf.build/pilab/cloud
-    path: .
+  - name: buf.build/pilab/pivirt-cloud
+    path: proto
 
 # Workspace-level lint and breaking change detection settings. These settings
 # are the default for all modules in the workspace unless specifically

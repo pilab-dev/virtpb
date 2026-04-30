@@ -28,7 +28,7 @@
 package directorv1
 
 import (
-	pilab "go.pilab.hu/cloud/virtpb/pilab"
+	v1 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -178,7 +178,7 @@ func (x *AgentEventsRequest) GetVmDefinition() *VmDefinition {
 	return nil
 }
 
-func (x *AgentEventsRequest) GetHostStats() *pilab.HostStats {
+func (x *AgentEventsRequest) GetHostStats() *v1.HostStats {
 	if x != nil {
 		if x, ok := x.Event.(*AgentEventsRequest_HostStats); ok {
 			return x.HostStats
@@ -187,7 +187,7 @@ func (x *AgentEventsRequest) GetHostStats() *pilab.HostStats {
 	return nil
 }
 
-func (x *AgentEventsRequest) GetVmMetrics() *pilab.VmMetrics {
+func (x *AgentEventsRequest) GetVmMetrics() *v1.VmMetrics {
 	if x != nil {
 		if x, ok := x.Event.(*AgentEventsRequest_VmMetrics); ok {
 			return x.VmMetrics
@@ -196,7 +196,7 @@ func (x *AgentEventsRequest) GetVmMetrics() *pilab.VmMetrics {
 	return nil
 }
 
-func (x *AgentEventsRequest) GetJobStatus() *pilab.JobStatus {
+func (x *AgentEventsRequest) GetJobStatus() *v1.JobStatus {
 	if x != nil {
 		if x, ok := x.Event.(*AgentEventsRequest_JobStatus); ok {
 			return x.JobStatus
@@ -231,15 +231,15 @@ type AgentEventsRequest_VmDefinition struct {
 }
 
 type AgentEventsRequest_HostStats struct {
-	HostStats *pilab.HostStats `protobuf:"bytes,4,opt,name=host_stats,json=hostStats,proto3,oneof"`
+	HostStats *v1.HostStats `protobuf:"bytes,4,opt,name=host_stats,json=hostStats,proto3,oneof"`
 }
 
 type AgentEventsRequest_VmMetrics struct {
-	VmMetrics *pilab.VmMetrics `protobuf:"bytes,5,opt,name=vm_metrics,json=vmMetrics,proto3,oneof"`
+	VmMetrics *v1.VmMetrics `protobuf:"bytes,5,opt,name=vm_metrics,json=vmMetrics,proto3,oneof"`
 }
 
 type AgentEventsRequest_JobStatus struct {
-	JobStatus *pilab.JobStatus `protobuf:"bytes,6,opt,name=job_status,json=jobStatus,proto3,oneof"`
+	JobStatus *v1.JobStatus `protobuf:"bytes,6,opt,name=job_status,json=jobStatus,proto3,oneof"`
 }
 
 type AgentEventsRequest_VmGuestInfo struct {
@@ -1095,20 +1095,20 @@ var File_pilab_director_v1_clouddirector_proto protoreflect.FileDescriptor
 
 const file_pilab_director_v1_clouddirector_proto_rawDesc = "" +
 	"\n" +
-	"%pilab/director/v1/clouddirector.proto\x12\x11pilab.director.v1\x1a\x16pilab/vm_metrics.proto\x1a\x16pilab/job_status.proto\x1a\x16pilab/host_stats.proto\"6\n" +
+	"%pilab/director/v1/clouddirector.proto\x12\x11pilab.director.v1\x1a\x1apilab/common/v1/host.proto\x1a\x1apilab/common/v1/task.proto\"6\n" +
 	"\vVmGuestInfo\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x12\n" +
-	"\x04info\x18\x02 \x01(\tR\x04info\"\xd0\x03\n" +
+	"\x04info\x18\x02 \x01(\tR\x04info\"\xee\x03\n" +
 	"\x12AgentEventsRequest\x12G\n" +
 	"\x0evm_state_event\x18\x01 \x01(\v2\x1f.pilab.director.v1.VmStateEventH\x00R\fvmStateEvent\x12A\n" +
 	"\theartbeat\x18\x02 \x01(\v2!.pilab.director.v1.HeartbeatEventH\x00R\theartbeat\x12F\n" +
-	"\rvm_definition\x18\x03 \x01(\v2\x1f.pilab.director.v1.VmDefinitionH\x00R\fvmDefinition\x121\n" +
+	"\rvm_definition\x18\x03 \x01(\v2\x1f.pilab.director.v1.VmDefinitionH\x00R\fvmDefinition\x12;\n" +
 	"\n" +
-	"host_stats\x18\x04 \x01(\v2\x10.pilab.HostStatsH\x00R\thostStats\x121\n" +
+	"host_stats\x18\x04 \x01(\v2\x1a.pilab.common.v1.HostStatsH\x00R\thostStats\x12;\n" +
 	"\n" +
-	"vm_metrics\x18\x05 \x01(\v2\x10.pilab.VmMetricsH\x00R\tvmMetrics\x121\n" +
+	"vm_metrics\x18\x05 \x01(\v2\x1a.pilab.common.v1.VmMetricsH\x00R\tvmMetrics\x12;\n" +
 	"\n" +
-	"job_status\x18\x06 \x01(\v2\x10.pilab.JobStatusH\x00R\tjobStatus\x12D\n" +
+	"job_status\x18\x06 \x01(\v2\x1a.pilab.common.v1.JobStatusH\x00R\tjobStatus\x12D\n" +
 	"\rvm_guest_info\x18\a \x01(\v2\x1e.pilab.director.v1.VmGuestInfoH\x00R\vvmGuestInfoB\a\n" +
 	"\x05event\"L\n" +
 	"\x0eHeartbeatEvent\x12\x17\n" +
@@ -1210,17 +1210,17 @@ var file_pilab_director_v1_clouddirector_proto_goTypes = []any{
 	(*ClusterLeaveRequest)(nil),    // 10: pilab.director.v1.ClusterLeaveRequest
 	(*RegisterAgentRequest)(nil),   // 11: pilab.director.v1.RegisterAgentRequest
 	(*RegisterAgentResponse)(nil),  // 12: pilab.director.v1.RegisterAgentResponse
-	(*pilab.HostStats)(nil),        // 13: pilab.HostStats
-	(*pilab.VmMetrics)(nil),        // 14: pilab.VmMetrics
-	(*pilab.JobStatus)(nil),        // 15: pilab.JobStatus
+	(*v1.HostStats)(nil),           // 13: pilab.common.v1.HostStats
+	(*v1.VmMetrics)(nil),           // 14: pilab.common.v1.VmMetrics
+	(*v1.JobStatus)(nil),           // 15: pilab.common.v1.JobStatus
 }
 var file_pilab_director_v1_clouddirector_proto_depIdxs = []int32{
 	4,  // 0: pilab.director.v1.AgentEventsRequest.vm_state_event:type_name -> pilab.director.v1.VmStateEvent
 	2,  // 1: pilab.director.v1.AgentEventsRequest.heartbeat:type_name -> pilab.director.v1.HeartbeatEvent
 	3,  // 2: pilab.director.v1.AgentEventsRequest.vm_definition:type_name -> pilab.director.v1.VmDefinition
-	13, // 3: pilab.director.v1.AgentEventsRequest.host_stats:type_name -> pilab.HostStats
-	14, // 4: pilab.director.v1.AgentEventsRequest.vm_metrics:type_name -> pilab.VmMetrics
-	15, // 5: pilab.director.v1.AgentEventsRequest.job_status:type_name -> pilab.JobStatus
+	13, // 3: pilab.director.v1.AgentEventsRequest.host_stats:type_name -> pilab.common.v1.HostStats
+	14, // 4: pilab.director.v1.AgentEventsRequest.vm_metrics:type_name -> pilab.common.v1.VmMetrics
+	15, // 5: pilab.director.v1.AgentEventsRequest.job_status:type_name -> pilab.common.v1.JobStatus
 	0,  // 6: pilab.director.v1.AgentEventsRequest.vm_guest_info:type_name -> pilab.director.v1.VmGuestInfo
 	7,  // 7: pilab.director.v1.ManagerMessage.resource_refresh_request:type_name -> pilab.director.v1.ResourceRefreshRequest
 	8,  // 8: pilab.director.v1.ManagerMessage.cluster_join:type_name -> pilab.director.v1.ClusterJoinRequest

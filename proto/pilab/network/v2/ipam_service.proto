@@ -1,0 +1,170 @@
+// =============================================================================
+// IPAM Service - IP Pool Management & Allocation
+// =============================================================================
+// Purpose: Manage IP address pools and allocate/deallocate IPs.
+//
+// Services:
+// - IP Pool CRUD
+// - IP Allocation/Release
+// - IP Reservation
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.network.v2;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "pilab/network/v2/network_common.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+
+// -----------------------------------------------------------------------------
+// IPAM Service
+// -----------------------------------------------------------------------------
+
+service IPAMService {
+  rpc CreateIPPool(CreateIPPoolRequest) returns (IPPool);
+  rpc GetIPPool(GetIPPoolRequest) returns (IPPool);
+  rpc ListIPPools(ListIPPoolsRequest) returns (ListIPPoolsResponse);
+  rpc UpdateIPPool(UpdateIPPoolRequest) returns (IPPool);
+  rpc DeleteIPPool(DeleteIPPoolRequest) returns (google.protobuf.Empty);
+  rpc AllocateIP(AllocateIPRequest) returns (IPAllocation);
+  rpc ReleaseIP(ReleaseIPRequest) returns (google.protobuf.Empty);
+  rpc ListAllocations(ListAllocationsRequest) returns (ListAllocationsResponse);
+  rpc ReserveIP(ReserveIPRequest) returns (IPReservation);
+}
+
+// -----------------------------------------------------------------------------
+// IPAM Messages
+// -----------------------------------------------------------------------------
+
+message IPPool {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  string network_id = 4;
+  string cidr = 5;
+  string gateway = 6;
+  repeated string dns_servers = 7;
+  repeated string excluded_ranges = 8;
+  bool dhcp_enabled = 9;
+  string dhcp_range_start = 10;
+  string dhcp_range_end = 11;
+  AllocationMode allocation_mode = 12;
+  bool ip_version_6_enabled = 13;
+  string ipv6_cidr = 14;
+  string ipv6_gateway = 15;
+  map<string, string> metadata = 16;
+  google.protobuf.Timestamp created_at = 17;
+  google.protobuf.Timestamp updated_at = 18;
+}
+
+message IPAllocation {
+  string id = 1;
+  string pool_id = 2;
+  string ip_address = 3;
+  string tenant_id = 4;
+  string port_id = 5;
+  string vm_id = 6;
+  AllocationType type = 7;
+  google.protobuf.Timestamp allocated_at = 8;
+  google.protobuf.Timestamp expires_at = 9;
+}
+
+message IPReservation {
+  string id = 1;
+  string pool_id = 2;
+  string ip_address = 3;
+  string tenant_id = 4;
+  string reason = 5;
+  google.protobuf.Timestamp reserved_at = 6;
+}
+
+// -----------------------------------------------------------------------------
+// Request/Response Messages
+// -----------------------------------------------------------------------------
+
+message CreateIPPoolRequest {
+  string name = 1;
+  string tenant_id = 2;
+  string network_id = 3;
+  string cidr = 4;
+  string gateway = 5;
+  repeated string dns_servers = 6;
+  repeated string excluded_ranges = 7;
+  bool dhcp_enabled = 8;
+  string dhcp_range_start = 9;
+  string dhcp_range_end = 10;
+  AllocationMode allocation_mode = 11;
+  bool ip_version_6_enabled = 12;
+  string ipv6_cidr = 13;
+  string ipv6_gateway = 14;
+  map<string, string> metadata = 15;
+}
+
+message GetIPPoolRequest { string pool_id = 1; }
+
+message ListIPPoolsRequest {
+  string tenant_id = 1;
+  string network_id = 2;
+  google.protobuf.StringValue cursor = 3;
+  int32 limit = 4;
+}
+
+message ListIPPoolsResponse {
+  repeated IPPool pools = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateIPPoolRequest {
+  string pool_id = 1;
+  string name = 2;
+  string gateway = 3;
+  repeated string dns_servers = 4;
+  repeated string excluded_ranges = 5;
+  bool dhcp_enabled = 6;
+  AllocationMode allocation_mode = 7;
+  map<string, string> metadata = 8;
+}
+
+message DeleteIPPoolRequest {
+  string pool_id = 1;
+  bool force = 2;
+}
+
+message AllocateIPRequest {
+  string pool_id = 1;
+  string tenant_id = 2;
+  string port_id = 3;
+  string vm_id = 4;
+  google.protobuf.StringValue ip_address = 5;
+}
+
+message ReleaseIPRequest {
+  string pool_id = 1;
+  string ip_address = 2;
+}
+
+message ListAllocationsRequest {
+  string pool_id = 1;
+  string network_id = 2;
+  string port_id = 3;
+  google.protobuf.StringValue cursor = 4;
+  int32 limit = 5;
+}
+
+message ListAllocationsResponse {
+  repeated IPAllocation allocations = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message ReserveIPRequest {
+  string pool_id = 1;
+  string ip_address = 2;
+  string tenant_id = 3;
+  string reason = 4;
+}

@@ -1,0 +1,126 @@
+// =============================================================================
+// Statistics Service - Network & Port Statistics
+// =============================================================================
+// Purpose: Retrieve statistics for networks, ports, QoS, and public IPs.
+//
+// Services:
+// - Network Stats (bytes, packets, errors, drops)
+// - Port Stats (same metrics)
+// - QoS Stats (tokens, wait time)
+// - Public IP Usage (connections, bandwidth)
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.network.v2;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "pilab/network/v2/network_common.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+
+// -----------------------------------------------------------------------------
+// Statistics Service
+// -----------------------------------------------------------------------------
+
+service StatisticsService {
+  rpc GetNetworkStats(GetNetworkStatsRequest) returns (NetworkStats);
+  rpc GetPortStats(GetPortStatsRequest) returns (PortStats);
+  rpc GetQoSStats(GetQoSStatsRequest) returns (QoSStats);
+  rpc GetPublicIPUsage(GetPublicIPUsageRequest) returns (PublicIPUsage);
+}
+
+// -----------------------------------------------------------------------------
+// Statistics Messages
+// -----------------------------------------------------------------------------
+
+message NetworkStats {
+  string network_id = 1;
+  int64 bytes_sent = 2;
+  int64 bytes_received = 3;
+  int64 packets_sent = 4;
+  int64 packets_received = 5;
+  int64 errors_sent = 6;
+  int64 errors_received = 7;
+  int64 drops_sent = 8;
+  int64 drops_received = 9;
+  int64 broadcast_packets_sent = 10;
+  int64 broadcast_packets_received = 11;
+  int64 multicast_packets_sent = 12;
+  int64 multicast_packets_received = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message PortStats {
+  string port_id = 1;
+  int64 bytes_sent = 2;
+  int64 bytes_received = 3;
+  int64 packets_sent = 4;
+  int64 packets_received = 5;
+  int64 errors_sent = 6;
+  int64 errors_received = 7;
+  int64 drops_sent = 8;
+  int64 drops_received = 9;
+  int64 tx_dropped = 10;
+  int64 rx_dropped = 11;
+  int64 tx_rate = 12;
+  int64 rx_rate = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message QoSStats {
+  string qos_profile_id = 9;
+  int64 bytes_sent = 1;
+  int64 bytes_dropped = 2;
+  int64 packets_sent = 3;
+  int64 packets_dropped = 4;
+  int64 tokens_available = 5;
+  int64 tokens_peak = 6;
+  int64 wait_time_avg_ms = 7;
+  int64 send_time_avg_ms = 8;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+message PublicIPUsage {
+  string public_ip_id = 1;
+  int64 bytes_sent = 2;
+  int64 bytes_received = 3;
+  int64 packets_sent = 4;
+  int64 packets_received = 5;
+  int64 connections_active = 6;
+  int64 connections_total = 7;
+  int64 bandwidth_usage_bps = 8;
+  int64 bandwidth_peak_bps = 9;
+  google.protobuf.Timestamp updated_at = 10;
+  google.protobuf.Timestamp period_start = 11;
+  google.protobuf.Timestamp period_end = 12;
+}
+
+// -----------------------------------------------------------------------------
+// Request Messages
+// -----------------------------------------------------------------------------
+
+message GetNetworkStatsRequest {
+  string network_id = 1;
+  google.protobuf.Timestamp period_start = 2;
+  google.protobuf.Timestamp period_end = 3;
+}
+
+message GetPortStatsRequest {
+  string port_id = 1;
+  google.protobuf.Timestamp period_start = 2;
+  google.protobuf.Timestamp period_end = 3;
+}
+
+message GetQoSStatsRequest {
+  string qos_profile_id = 1;
+  google.protobuf.Timestamp period_start = 2;
+  google.protobuf.Timestamp period_end = 3;
+}
+
+message GetPublicIPUsageRequest {
+  string public_ip_id = 1;
+  google.protobuf.Timestamp period_start = 2;
+  google.protobuf.Timestamp period_end = 3;
+}

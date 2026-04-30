@@ -1,0 +1,138 @@
+// =============================================================================
+// Common Host & Metrics Messages - Shared Across All Services
+// =============================================================================
+// Purpose: Host-level and VM-level metrics/statistics used by multiple services.
+//
+// This file provides a single source of truth for:
+// - HostStats: Host resource utilization (CPU, memory, disk)
+// - VmMetrics: VM performance metrics (CPU, disk, network, memory)
+// - CPUMetrics, MemoryMetrics, StorageMetrics: Frontend display metrics
+// - SensorData: Hardware sensor readings
+// - DataPoint: Time-series data point for monitoring
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.common.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1";
+
+// -----------------------------------------------------------------------------
+// Host Statistics (from libvirt/hypervisor)
+// -----------------------------------------------------------------------------
+
+message HostStats {
+  float cpu_usage = 1;           // CPU utilization (0.0-100.0)
+  float disk_usage = 2;          // Disk utilization (0.0-100.0)
+  uint64 used_memory = 3;         // Used memory in bytes
+  uint64 total_memory = 4;       // Total memory in bytes
+}
+
+// -----------------------------------------------------------------------------
+// VM Performance Metrics (from libvirt/qemu-guest-agent)
+// -----------------------------------------------------------------------------
+
+message VmMetrics {
+  string vm_id = 1;              // VM UUID
+  string vm_name = 2;            // VM name
+  
+  // CPU metrics
+  uint32 cpu_usage = 3;           // CPU usage percentage
+  
+  // Disk I/O metrics
+  uint32 disk_rd = 4;            // Bytes read
+  uint32 disk_rd_req = 5;        // Read requests
+  uint32 disk_wr = 6;            // Bytes written
+  uint64 disk_wr_req = 7;        // Write requests
+    
+  // Network I/O metrics
+  uint32 network_rx_bytes = 8;     // Bytes received
+  uint32 network_rx_pkt = 9;      // Packets received
+  uint32 network_tx_bytes = 10;    // Bytes transmitted
+  uint32 network_tx_pkt = 11;     // Packets transmitted
+    
+  // Memory metrics
+  uint32 memory_usage = 12;        // Memory used (MB)
+  uint32 memory_total = 13;        // Total memory (MB)
+}
+
+// -----------------------------------------------------------------------------
+// Frontend Display Metrics
+// -----------------------------------------------------------------------------
+
+message CPUMetrics {
+  double usage_percent = 1;       // CPU usage percentage
+}
+
+message MemoryMetrics {
+  double usage_percent = 1;       // Memory usage percentage
+}
+
+message StorageMetrics {
+  int64 total_gb = 1;            // Total storage in GB
+  int64 used_gb = 2;             // Used storage in GB
+}
+
+message DataPoint {
+  google.protobuf.Timestamp timestamp = 1;
+  double value = 2;                // Metric value
+  string unit = 3;                 // Unit of measurement
+}
+
+message ResourceAllocationSummary {
+  CPUAllocation cpu = 1;
+  MemoryAllocation memory = 2;
+  StorageAllocation storage = 3;
+}
+
+message CPUAllocation {
+  int32 total_cores = 1;
+  int32 allocated_cores = 2;
+}
+
+message MemoryAllocation {
+  int64 total_gb = 1;
+  int64 allocated_gb = 2;
+}
+
+message StorageAllocation {
+  int64 total_gb = 1;
+  int64 used_gb = 2;
+}
+
+// -----------------------------------------------------------------------------
+// Hardware Sensor Data
+// -----------------------------------------------------------------------------
+
+message SensorData {
+  string name = 1;                 // Sensor name (e.g., "CPU Temp")
+  double value = 2;                // Sensor reading
+  string unit = 3;                 // Unit (C, V, RPM, etc.)
+  string status = 4;               // Status (ok, warning, critical)
+  string sensor_type = 5;           // Type (temperature, voltage, fan)
+}
+
+message HardwareHealth {
+  string overall_status = 1;        // overall status (ok, degraded, failed)
+  repeated SensorData sensors = 2;
+  string firmware_version = 3;
+  string power_status = 4;
+}
+
+// -----------------------------------------------------------------------------
+// Network Statistics (for monitoring)
+// -----------------------------------------------------------------------------
+
+message NetworkStats {
+  string interface = 1;             // Interface name
+  int64 rx_bytes = 2;              // Received bytes
+  int64 tx_bytes = 3;              // Transmitted bytes
+  int64 rx_packets = 4;            // Received packets
+  int64 tx_packets = 5;            // Transmitted packets
+  int64 rx_errors = 6;             // Receive errors
+  int64 tx_errors = 7;             // Transmit errors
+  int64 rx_drops = 8;              // Receive drops
+  int64 tx_drops = 9;              // Transmit drops
+}

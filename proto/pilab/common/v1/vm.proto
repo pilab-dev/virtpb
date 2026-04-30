@@ -1,0 +1,185 @@
+// =============================================================================
+// Common VM Messages - Shared Across All Services
+// =============================================================================
+// Purpose: Core VM-related message definitions used by pivirtd, agent,
+// director, CLI, and other services.
+//
+// This file provides a single source of truth for:
+// - VM: Virtual machine representation
+// - Disk: Disk/volume attachment
+// - NetworkInterface: VM network attachment
+// - Snapshot: VM snapshot representation
+// - VMState: Standard VM state enum
+// - Guest Info: VM guest agent data
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.common.v1;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1";
+
+// -----------------------------------------------------------------------------
+// VM State Enum
+// -----------------------------------------------------------------------------
+
+enum VMState {
+  VM_STATE_UNSPECIFIED = 0;
+  VM_STATE_PENDING = 1;      // Being created
+  VM_STATE_RUNNING = 2;      // Active and running
+  VM_STATE_STOPPED = 3;      // Stopped (graceful or forced)
+  VM_STATE_PAUSED = 4;       // Paused/suspended
+  VM_STATE_SHUTTING_DOWN = 5; // In shutdown process
+  VM_STATE_ERROR = 6;        // In error state
+  VM_STATE_DELETING = 7;     // Being deleted
+  VM_STATE_BLOCKED = 8;      // Blocked on resource
+  VM_STATE_SHUTDOWN = 9;     // Shutdown in progress (libvirt)
+  VM_STATE_SHUTOFF = 10;     // Shut off (libvirt)
+  VM_STATE_CRASHED = 11;     // Crashed
+  VM_STATE_PMSUSPENDED = 12; // Suspended by guest power management
+}
+
+// -----------------------------------------------------------------------------
+// Core VM Message
+// -----------------------------------------------------------------------------
+
+message VM {
+  string id = 1;                  // UUID of the VM
+  string name = 2;                // Human-readable name
+  VMState state = 3;              // Current state
+  int32 vcpus = 4;                // Number of virtual CPUs
+  int64 memory_mb = 5;            // Memory in MB
+  string os_type = 6;              // OS type (linux, windows, bsd)
+  string firmware = 7;             // Firmware (bios, uefi)
+  repeated Disk disks = 8;          // Attached disks
+  repeated NetworkInterface network_interfaces = 9; // Network attachments
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+  map<string, string> metadata = 12; // Arbitrary metadata
+  string description = 13;           // Optional description
+}
+
+// -----------------------------------------------------------------------------
+// Disk Message
+// -----------------------------------------------------------------------------
+
+message Disk {
+  string id = 1;                  // Unique disk ID
+  string vm_id = 2;                // VM this disk belongs to (optional)
+  string name = 3;                // Human-readable name
+  string path = 4;                // Path to disk image
+  string format = 5;              // qcow2, raw, qed
+  int64 size_gb = 6;              // Size in GB
+  string bus = 7;                 // virtio, scsi, ide, sata
+  string type = 8;                 // disk, cdrom
+  string device = 9;               // vda, hda, sda
+  string source_type = 10;          // file, block
+  DiskState state = 11;            // Disk state
+  string storage_pool = 12;         // Storage pool name
+  map<string, string> metadata = 13;
+}
+
+enum DiskState {
+  DISK_STATE_UNSPECIFIED = 0;
+  DISK_STATE_CREATING = 1;
+  DISK_STATE_READY = 2;
+  DISK_STATE_ATTACHED = 3;
+  DISK_STATE_ERROR = 4;
+  DISK_STATE_DELETING = 5;
+}
+
+// -----------------------------------------------------------------------------
+// Network Interface Message
+// -----------------------------------------------------------------------------
+
+message NetworkInterface {
+  string id = 1;                  // Unique interface ID
+  string vm_id = 2;                // VM this interface belongs to
+  string name = 3;                // Interface name
+  string mac_address = 4;          // MAC address
+  string model = 5;                // virtio, e1000, rtl8139
+  string network_name = 6;          // Network/bridge name
+  string interface_type = 7;        // bridge, nat, routed, hostdev
+  string source = 8;               // Bridge name or physical interface
+  string target = 9;               // Target device in VM (eth0)
+  string ip_address = 10;           // Assigned IP
+  string subnet_mask = 11;          // Subnet mask
+  bool admin_state_up = 12;         // Admin state
+  map<string, string> metadata = 13;
+}
+
+// -----------------------------------------------------------------------------
+// Snapshot Message
+// -----------------------------------------------------------------------------
+
+message Snapshot {
+  string id = 1;                  // Unique snapshot ID
+  string name = 2;                // Snapshot name
+  string vm_id = 3;               // VM this snapshot belongs to
+  string description = 4;           // Human-readable description
+  bool memory_snapshot = 5;        // Includes memory state
+  int64 size_gb = 6;              // Snapshot size
+  google.protobuf.Timestamp created_at = 7;
+  SnapshotState state = 8;           // Snapshot state
+  string parent_snapshot_id = 9;    // Parent for chained snapshots
+}
+
+enum SnapshotState {
+  SNAPSHOT_STATE_UNSPECIFIED = 0;
+  SNAPSHOT_STATE_CREATING = 1;
+  SNAPSHOT_STATE_READY = 2;
+  SNAPSHOT_STATE_ERROR = 3;
+  SNAPSHOT_STATE_DELETING = 4;
+}
+
+// -----------------------------------------------------------------------------
+// Guest Info Messages (from qemu-guest-agent)
+// -----------------------------------------------------------------------------
+
+message VmGuestOS {
+  string id = 1;                   // OS ID
+  string name = 2;                 // OS name
+  string pretty_name = 3;           // Pretty name (e.g., "Ubuntu 22.04 LTS")
+  string version = 4;               // OS version
+  string version_id = 5;            // Version ID
+  string machine = 6;              // Machine architecture
+  string kernel_release = 7;        // Kernel release
+  string kernel_version = 8;         // Kernel version
+}
+
+message VmGuestInterfaceAddress {
+  string type = 1;                 // IPv4, IPv6
+  string address = 2;              // IP address
+  uint32 prefix = 3;               // CIDR prefix length
+}
+
+message VmGuestNetworkInterface {
+  string name = 1;                // Interface name (eth0)
+  string hwaddr = 2;               // MAC address
+  repeated VmGuestInterfaceAddress addresses = 3;
+}
+
+message VmGuestInfo {
+  string hostname = 1;
+  VmGuestOS os = 2;
+  repeated VmGuestNetworkInterface interfaces = 3;
+}
+
+// -----------------------------------------------------------------------------
+// CPU and Memory Configuration (used in VM creation/update)
+// -----------------------------------------------------------------------------
+
+message CPUConfig {
+  int32 vcpus = 1;                // Number of vCPUs
+  string model = 2;                // CPU model (host, qemu64, etc.)
+  string topology = 3;             // Socket/core/thread topology
+  bool nested_virtualization = 4; // Enable nested virt
+}
+
+message MemoryConfig {
+  int64 allocated_mb = 1;         // Allocated memory
+  bool ballooning = 2;            // Memory balloon enabled
+  bool huge_pages = 3;            // Huge pages enabled
+}

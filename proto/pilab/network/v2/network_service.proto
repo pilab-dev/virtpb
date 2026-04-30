@@ -1,0 +1,369 @@
+// =============================================================================
+// Network Service - Virtual Network, Port, VLAN, VXLAN Management
+// =============================================================================
+// Purpose: Manage virtual networks, ports, VLAN ranges, VXLAN
+// virtual clouds, and VNI endpoints.
+//
+// Services:
+// - Network CRUD (VirtualNetwork)
+// - Port CRUD (VirtualPort)
+// - VLAN Range management and allocation
+// - Virtual Cloud (VXLAN) management
+// - VNI Endpoint management
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.network.v2;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "pilab/network/v2/network_common.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+
+// -----------------------------------------------------------------------------
+// Network Service
+// -----------------------------------------------------------------------------
+
+service NetworkService {
+  rpc CreateNetwork(CreateNetworkRequest) returns (VirtualNetwork);
+  rpc GetNetwork(GetNetworkRequest) returns (VirtualNetwork);
+  rpc ListNetworks(ListNetworksRequest) returns (ListNetworksResponse);
+  rpc UpdateNetwork(UpdateNetworkRequest) returns (VirtualNetwork);
+  rpc DeleteNetwork(DeleteNetworkRequest) returns (google.protobuf.Empty);
+  rpc AttachHosts(AttachHostsRequest) returns (google.protobuf.Empty);
+  rpc DetachHosts(DetachHostsRequest) returns (google.protobuf.Empty);
+
+  rpc CreatePort(CreatePortRequest) returns (VirtualPort);
+  rpc GetPort(GetPortRequest) returns (VirtualPort);
+  rpc ListPorts(ListPortsRequest) returns (ListPortsResponse);
+  rpc UpdatePort(UpdatePortRequest) returns (VirtualPort);
+  rpc DeletePort(DeletePortRequest) returns (google.protobuf.Empty);
+  rpc AttachPort(AttachPortRequest) returns (google.protobuf.Empty);
+  rpc DetachPort(DetachPortRequest) returns (google.protobuf.Empty);
+
+  rpc CreateVLANRange(CreateVLANRangeRequest) returns (VLANRange);
+  rpc ListVLANRanges(ListVLANRangesRequest) returns (ListVLANRangesResponse);
+  rpc AllocateVLAN(AllocateVLANRequest) returns (VLANAllocation);
+  rpc ReleaseVLAN(ReleaseVLANRequest) returns (google.protobuf.Empty);
+
+  rpc CreateVirtualCloud(CreateVirtualCloudRequest) returns (VirtualCloud);
+  rpc GetVirtualCloud(GetVirtualCloudRequest) returns (VirtualCloud);
+  rpc ListVirtualClouds(ListVirtualCloudsRequest) returns (ListVirtualCloudsResponse);
+  rpc UpdateVirtualCloud(UpdateVirtualCloudRequest) returns (VirtualCloud);
+  rpc DeleteVirtualCloud(DeleteVirtualCloudRequest) returns (google.protobuf.Empty);
+  rpc AddVNIEndpoint(AddVNIEndpointRequest) returns (google.protobuf.Empty);
+  rpc RemoveVNIEndpoint(RemoveVNIEndpointRequest) returns (google.protobuf.Empty);
+  rpc AllocateVNI(AllocateVNIRequest) returns (VNIAllocation);
+  rpc ReleaseVNI(ReleaseVNIRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// Virtual Network Messages
+// -----------------------------------------------------------------------------
+
+message VirtualNetwork {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  NetworkType type = 4;
+  uint32 segment_id = 5;
+  string cidr = 6;
+  string gateway = 7;
+  repeated string dns_servers = 8;
+  int32 mtu = 9;
+  bool enable_dhcp = 10;
+  string dhcp_range_start = 11;
+  string dhcp_range_end = 12;
+  repeated string host_ids = 13;
+  repeated string port_group_ids = 14;
+  string security_profile_id = 15;
+  string qos_profile_id = 16;
+  map<string, string> metadata = 17;
+  NetworkStatus status = 18;
+  google.protobuf.Timestamp created_at = 19;
+  google.protobuf.Timestamp updated_at = 20;
+  string cluster_id = 21;
+  NetworkRole role = 22;
+  string ovs_bridge = 23;
+  repeated string uplinks = 24;
+}
+
+message VirtualPort {
+  string id = 1;
+  string name = 2;
+  string network_id = 3;
+  string tenant_id = 4;
+  string vm_id = 5;
+  int32 interface_index = 6;
+  string mac_address = 7;
+  string ip_address = 8;
+  string subnet_mask = 9;
+  PortType type = 10;
+  PortStatus status = 11;
+  string security_profile_id = 12;
+  string qos_profile_id = 13;
+  bool admin_state_up = 14;
+  map<string, string> metadata = 15;
+  google.protobuf.Timestamp created_at = 16;
+  google.protobuf.Timestamp updated_at = 17;
+}
+
+message VLANRange {
+  string id = 1;
+  string tenant_id = 2;
+  uint32 start_vlan = 3;
+  uint32 end_vlan = 4;
+  string name = 5;
+  string description = 6;
+  bool is_allocated = 7;
+  google.protobuf.Timestamp created_at = 8;
+}
+
+message VLANAllocation {
+  uint32 vlan_id = 1;
+  string range_id = 2;
+  string tenant_id = 3;
+  string network_id = 4;
+  google.protobuf.Timestamp allocated_at = 5;
+}
+
+message VirtualCloud {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  uint32 vni = 4;
+  string description = 5;
+  VirtualCloudType type = 6;
+  bool flood_domain_enabled = 7;
+  string multicast_group = 8;
+  uint32 udp_port = 9;
+  repeated VNIEndpoint endpoints = 10;
+  bool ip_unicast_enabled = 11;
+  bool ip_multicast_enabled = 12;
+  string security_profile_id = 13;
+  string qos_profile_id = 14;
+  map<string, string> metadata = 15;
+  VirtualCloudStatus status = 16;
+  google.protobuf.Timestamp created_at = 17;
+  google.protobuf.Timestamp updated_at = 18;
+}
+
+message VNIEndpoint {
+  string host_id = 1;
+  string ip_address = 2;
+  int32 port = 3;
+  string mac_address = 4;
+  bool is_primary = 5;
+  int64 version = 6;
+}
+
+message VNIAllocation {
+  uint32 vni = 1;
+  string tenant_id = 2;
+  string virtual_cloud_id = 3;
+  google.protobuf.Timestamp allocated_at = 4;
+}
+
+// -----------------------------------------------------------------------------
+// Request/Response Messages
+// -----------------------------------------------------------------------------
+
+message CreateNetworkRequest {
+  string name = 1;
+  string tenant_id = 2;
+  NetworkType type = 3;
+  uint32 segment_id = 4;
+  string cidr = 5;
+  string gateway = 6;
+  repeated string dns_servers = 7;
+  int32 mtu = 8;
+  bool enable_dhcp = 9;
+  string dhcp_range_start = 10;
+  string dhcp_range_end = 11;
+  repeated string host_ids = 12;
+  string security_profile_id = 13;
+  string qos_profile_id = 14;
+  map<string, string> metadata = 15;
+}
+
+message GetNetworkRequest { string network_id = 1; }
+
+message ListNetworksRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+  NetworkType type = 4;
+  NetworkStatus status = 5;
+}
+
+message ListNetworksResponse {
+  repeated VirtualNetwork networks = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateNetworkRequest {
+  string network_id = 1;
+  string name = 2;
+  string gateway = 3;
+  repeated string dns_servers = 4;
+  int32 mtu = 5;
+  string security_profile_id = 6;
+  string qos_profile_id = 7;
+  map<string, string> metadata = 8;
+}
+
+message DeleteNetworkRequest {
+  string network_id = 1;
+  bool force = 2;
+}
+
+message AttachHostsRequest {
+  string network_id = 1;
+  repeated string host_ids = 2;
+}
+
+message DetachHostsRequest {
+  string network_id = 1;
+  repeated string host_ids = 2;
+}
+
+message CreatePortRequest {
+  string name = 1;
+  string network_id = 2;
+  string tenant_id = 3;
+  string vm_id = 4;
+  string mac_address = 5;
+  string ip_address = 6;
+  PortType type = 7;
+  string security_profile_id = 8;
+  string qos_profile_id = 9;
+  map<string, string> metadata = 10;
+}
+
+message GetPortRequest { string port_id = 1; }
+
+message ListPortsRequest {
+  string tenant_id = 1;
+  string network_id = 2;
+  string vm_id = 3;
+  google.protobuf.StringValue cursor = 4;
+  int32 limit = 5;
+}
+
+message ListPortsResponse {
+  repeated VirtualPort ports = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdatePortRequest {
+  string port_id = 1;
+  string name = 2;
+  string security_profile_id = 3;
+  string qos_profile_id = 4;
+  bool admin_state_up = 5;
+  map<string, string> metadata = 6;
+}
+
+message DeletePortRequest {
+  string port_id = 1;
+  bool force = 2;
+}
+
+message AttachPortRequest {
+  string port_id = 1;
+  string vm_id = 2;
+  int32 interface_index = 3;
+}
+
+message DetachPortRequest { string port_id = 1; }
+
+message CreateVLANRangeRequest {
+  string tenant_id = 1;
+  uint32 start_vlan = 2;
+  uint32 end_vlan = 3;
+  string name = 4;
+  string description = 5;
+}
+
+message ListVLANRangesRequest { string tenant_id = 1; }
+
+message ListVLANRangesResponse { repeated VLANRange ranges = 1; }
+
+message AllocateVLANRequest {
+  string tenant_id = 1;
+  string network_id = 2;
+  google.protobuf.StringValue range_id = 3;
+}
+
+message ReleaseVLANRequest { uint32 vlan_id = 1; }
+
+message CreateVirtualCloudRequest {
+  string name = 1;
+  string tenant_id = 2;
+  uint32 vni = 3;
+  string description = 4;
+  VirtualCloudType type = 5;
+  bool flood_domain_enabled = 6;
+  string multicast_group = 7;
+  uint32 udp_port = 8;
+  bool ip_unicast_enabled = 9;
+  bool ip_multicast_enabled = 10;
+  string security_profile_id = 11;
+  string qos_profile_id = 12;
+  map<string, string> metadata = 13;
+}
+
+message GetVirtualCloudRequest { string virtual_cloud_id = 1; }
+
+message ListVirtualCloudsRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+}
+
+message ListVirtualCloudsResponse {
+  repeated VirtualCloud virtual_clouds = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateVirtualCloudRequest {
+  string virtual_cloud_id = 1;
+  string name = 2;
+  string description = 3;
+  bool flood_domain_enabled = 4;
+  string security_profile_id = 5;
+  string qos_profile_id = 6;
+  map<string, string> metadata = 7;
+}
+
+message DeleteVirtualCloudRequest {
+  string virtual_cloud_id = 1;
+  bool force = 2;
+}
+
+message AddVNIEndpointRequest {
+  string virtual_cloud_id = 1;
+  string host_id = 2;
+  string ip_address = 3;
+  int32 port = 4;
+  string mac_address = 5;
+  bool is_primary = 6;
+}
+
+message RemoveVNIEndpointRequest {
+  string virtual_cloud_id = 1;
+  string host_id = 2;
+}
+
+message AllocateVNIRequest {
+  string tenant_id = 1;
+  string virtual_cloud_id = 2;
+}
+
+message ReleaseVNIRequest { uint32 vni = 1; }

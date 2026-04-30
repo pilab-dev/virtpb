@@ -1,0 +1,179 @@
+// =============================================================================
+// DVS Service - Distributed Virtual Switch Management
+// =============================================================================
+// Purpose: Manage distributed virtual switches and port groups.
+//
+// Services:
+// - Distributed Switch CRUD + Host management
+// - Port Group CRUD
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.network.v2;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "pilab/network/v2/network_common.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+
+// -----------------------------------------------------------------------------
+// DVS Service
+// -----------------------------------------------------------------------------
+
+service DVSService {
+  rpc CreateDistributedSwitch(CreateDistributedSwitchRequest) returns (DistributedSwitch);
+  rpc GetDistributedSwitch(GetDistributedSwitchRequest) returns (DistributedSwitch);
+  rpc ListDistributedSwitches(ListDistributedSwitchesRequest) returns (ListDistributedSwitchesResponse);
+  rpc UpdateDistributedSwitch(UpdateDistributedSwitchRequest) returns (DistributedSwitch);
+  rpc DeleteDistributedSwitch(DeleteDistributedSwitchRequest) returns (google.protobuf.Empty);
+  rpc AddHostToDVS(AddHostToDVSRequest) returns (google.protobuf.Empty);
+  rpc RemoveHostFromDVS(RemoveHostFromDVSRequest) returns (google.protobuf.Empty);
+
+  rpc CreatePortGroup(CreatePortGroupRequest) returns (PortGroup);
+  rpc GetPortGroup(GetPortGroupRequest) returns (PortGroup);
+  rpc ListPortGroups(ListPortGroupsRequest) returns (ListPortGroupsResponse);
+  rpc UpdatePortGroup(UpdatePortGroupRequest) returns (PortGroup);
+  rpc DeletePortGroup(DeletePortGroupRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// Distributed Switch Messages
+// -----------------------------------------------------------------------------
+
+message DistributedSwitch {
+  string id = 1;
+  string name = 2;
+  string tenant_id = 3;
+  string description = 4;
+  string switch_type = 5;
+  int32 mtu = 6;
+  bool enable_vlan_trunking = 7;
+  repeated uint32 allowed_vlan_ranges = 8;
+  repeated string host_ids = 9;
+  repeated string port_group_ids = 10;
+  DVSStatus status = 11;
+  map<string, string> metadata = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+message PortGroup {
+  string id = 1;
+  string name = 2;
+  string switch_id = 3;
+  string tenant_id = 4;
+  string description = 5;
+  uint32 vlan_id = 6;
+  uint32 vlan_trunk_range_start = 7;
+  uint32 vlan_trunk_range_end = 8;
+  bool vlan_trunk_enabled = 9;
+  string network_id = 10;
+  string security_profile_id = 11;
+  string qos_profile_id = 12;
+  TeamingPolicy teaming_policy = 13;
+  map<string, string> metadata = 14;
+  google.protobuf.Timestamp created_at = 15;
+  google.protobuf.Timestamp updated_at = 16;
+}
+
+// -----------------------------------------------------------------------------
+// Request/Response Messages
+// -----------------------------------------------------------------------------
+
+message CreateDistributedSwitchRequest {
+  string name = 1;
+  string tenant_id = 2;
+  string description = 3;
+  string switch_type = 4;
+  int32 mtu = 5;
+  bool enable_vlan_trunking = 6;
+  repeated uint32 allowed_vlan_ranges = 7;
+  repeated string host_ids = 8;
+  map<string, string> metadata = 9;
+}
+
+message GetDistributedSwitchRequest { string switch_id = 1; }
+
+message ListDistributedSwitchesRequest {
+  string tenant_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+}
+
+message ListDistributedSwitchesResponse {
+  repeated DistributedSwitch switches = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdateDistributedSwitchRequest {
+  string switch_id = 1;
+  string name = 2;
+  string description = 3;
+  int32 mtu = 4;
+  bool enable_vlan_trunking = 5;
+  repeated uint32 allowed_vlan_ranges = 6;
+  map<string, string> metadata = 7;
+}
+
+message DeleteDistributedSwitchRequest {
+  string switch_id = 1;
+  bool force = 2;
+}
+
+message AddHostToDVSRequest {
+  string switch_id = 1;
+  string host_id = 2;
+}
+
+message RemoveHostFromDVSRequest {
+  string switch_id = 1;
+  string host_id = 2;
+}
+
+message CreatePortGroupRequest {
+  string name = 1;
+  string switch_id = 2;
+  string tenant_id = 3;
+  string description = 4;
+  uint32 vlan_id = 5;
+  uint32 vlan_trunk_range_start = 6;
+  uint32 vlan_trunk_range_end = 7;
+  bool vlan_trunk_enabled = 8;
+  string security_profile_id = 9;
+  string qos_profile_id = 10;
+  TeamingPolicy teaming_policy = 11;
+  map<string, string> metadata = 12;
+}
+
+message GetPortGroupRequest { string port_group_id = 1; }
+
+message ListPortGroupsRequest {
+  string switch_id = 1;
+  google.protobuf.StringValue cursor = 2;
+  int32 limit = 3;
+}
+
+message ListPortGroupsResponse {
+  repeated PortGroup port_groups = 1;
+  google.protobuf.StringValue next_cursor = 2;
+  int32 total = 3;
+}
+
+message UpdatePortGroupRequest {
+  string port_group_id = 1;
+  string name = 2;
+  uint32 vlan_id = 3;
+  string security_profile_id = 4;
+  string qos_profile_id = 5;
+  TeamingPolicy teaming_policy = 6;
+  map<string, string> metadata = 7;
+}
+
+message DeletePortGroupRequest {
+  string port_group_id = 1;
+  bool force = 2;
+}

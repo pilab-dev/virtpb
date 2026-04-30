@@ -29,6 +29,7 @@ import (
 	context "context"
 	errors "errors"
 	v2 "go.pilab.hu/cloud/virtpb/pilab/agent/v2"
+	v1 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
 	http "net/http"
 	strings "strings"
 )
@@ -287,7 +288,7 @@ type AgentServiceClient interface {
 	// Detach a network interface from a VM
 	DetachNetworkInterface(context.Context, *connect.Request[v2.DetachNetworkInterfaceRequest]) (*connect.Response[v2.DetachNetworkInterfaceResponse], error)
 	// VNC/SPICE terminal streaming
-	Stream(context.Context) *connect.BidiStreamForClient[v2.StreamRequest, v2.StreamResponse]
+	Stream(context.Context) *connect.BidiStreamForClient[v1.StreamRequest, v1.StreamResponse]
 	// Hardware monitoring
 	GetHardwareHealth(context.Context, *connect.Request[v2.GetHardwareHealthRequest]) (*connect.Response[v2.GetHardwareHealthResponse], error)
 	GetSensorData(context.Context, *connect.Request[v2.GetSensorDataRequest]) (*connect.Response[v2.GetSensorDataResponse], error)
@@ -593,7 +594,7 @@ func NewAgentServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(agentServiceMethods.ByName("DetachNetworkInterface")),
 			connect.WithClientOptions(opts...),
 		),
-		stream: connect.NewClient[v2.StreamRequest, v2.StreamResponse](
+		stream: connect.NewClient[v1.StreamRequest, v1.StreamResponse](
 			httpClient,
 			baseURL+AgentServiceStreamProcedure,
 			connect.WithSchema(agentServiceMethods.ByName("Stream")),
@@ -722,7 +723,7 @@ type agentServiceClient struct {
 	attachCloudInit          *connect.Client[v2.AttachCloudInitRequest, v2.AttachCloudInitResponse]
 	attachNetworkInterface   *connect.Client[v2.AttachNetworkInterfaceRequest, v2.AttachNetworkInterfaceResponse]
 	detachNetworkInterface   *connect.Client[v2.DetachNetworkInterfaceRequest, v2.DetachNetworkInterfaceResponse]
-	stream                   *connect.Client[v2.StreamRequest, v2.StreamResponse]
+	stream                   *connect.Client[v1.StreamRequest, v1.StreamResponse]
 	getHardwareHealth        *connect.Client[v2.GetHardwareHealthRequest, v2.GetHardwareHealthResponse]
 	getSensorData            *connect.Client[v2.GetSensorDataRequest, v2.GetSensorDataResponse]
 	defineVM                 *connect.Client[v2.DefineVMRequest, v2.DefineVMResponse]
@@ -968,7 +969,7 @@ func (c *agentServiceClient) DetachNetworkInterface(ctx context.Context, req *co
 }
 
 // Stream calls pilab.agent.v2.AgentService.Stream.
-func (c *agentServiceClient) Stream(ctx context.Context) *connect.BidiStreamForClient[v2.StreamRequest, v2.StreamResponse] {
+func (c *agentServiceClient) Stream(ctx context.Context) *connect.BidiStreamForClient[v1.StreamRequest, v1.StreamResponse] {
 	return c.stream.CallBidiStream(ctx)
 }
 
@@ -1107,7 +1108,7 @@ type AgentServiceHandler interface {
 	// Detach a network interface from a VM
 	DetachNetworkInterface(context.Context, *connect.Request[v2.DetachNetworkInterfaceRequest]) (*connect.Response[v2.DetachNetworkInterfaceResponse], error)
 	// VNC/SPICE terminal streaming
-	Stream(context.Context, *connect.BidiStream[v2.StreamRequest, v2.StreamResponse]) error
+	Stream(context.Context, *connect.BidiStream[v1.StreamRequest, v1.StreamResponse]) error
 	// Hardware monitoring
 	GetHardwareHealth(context.Context, *connect.Request[v2.GetHardwareHealthRequest]) (*connect.Response[v2.GetHardwareHealthResponse], error)
 	GetSensorData(context.Context, *connect.Request[v2.GetSensorDataRequest]) (*connect.Response[v2.GetSensorDataResponse], error)
@@ -1800,7 +1801,7 @@ func (UnimplementedAgentServiceHandler) DetachNetworkInterface(context.Context, 
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.DetachNetworkInterface is not implemented"))
 }
 
-func (UnimplementedAgentServiceHandler) Stream(context.Context, *connect.BidiStream[v2.StreamRequest, v2.StreamResponse]) error {
+func (UnimplementedAgentServiceHandler) Stream(context.Context, *connect.BidiStream[v1.StreamRequest, v1.StreamResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.Stream is not implemented"))
 }
 

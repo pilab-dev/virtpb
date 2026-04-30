@@ -28,7 +28,7 @@
 package wsv1
 
 import (
-	pilab "go.pilab.hu/cloud/virtpb/pilab"
+	v1 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -217,7 +217,7 @@ func (x *JobFailed) GetMessage() string {
 
 type JobList struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Jobs          []*pilab.JobStatus     `protobuf:"bytes,1,rep,name=jobs,proto3" json:"jobs,omitempty"`
+	Jobs          []*v1.JobStatus        `protobuf:"bytes,1,rep,name=jobs,proto3" json:"jobs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -252,7 +252,7 @@ func (*JobList) Descriptor() ([]byte, []int) {
 	return file_pilab_ws_v1_event_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *JobList) GetJobs() []*pilab.JobStatus {
+func (x *JobList) GetJobs() []*v1.JobStatus {
 	if x != nil {
 		return x.Jobs
 	}
@@ -381,7 +381,7 @@ func (x *Event) GetPayload() isEvent_Payload {
 	return nil
 }
 
-func (x *Event) GetJobStatus() *pilab.JobStatus {
+func (x *Event) GetJobStatus() *v1.JobStatus {
 	if x != nil {
 		if x, ok := x.Payload.(*Event_JobStatus); ok {
 			return x.JobStatus
@@ -426,7 +426,7 @@ func (x *Event) GetVmEvent() *VmEvent {
 	return nil
 }
 
-func (x *Event) GetHostStatsEvent() *pilab.HostStats {
+func (x *Event) GetHostStatsEvent() *v1.HostStats {
 	if x != nil {
 		if x, ok := x.Payload.(*Event_HostStatsEvent); ok {
 			return x.HostStatsEvent
@@ -435,7 +435,7 @@ func (x *Event) GetHostStatsEvent() *pilab.HostStats {
 	return nil
 }
 
-func (x *Event) GetVmMetrics() *pilab.VmMetrics {
+func (x *Event) GetVmMetrics() *v1.VmMetrics {
 	if x != nil {
 		if x, ok := x.Payload.(*Event_VmMetrics); ok {
 			return x.VmMetrics
@@ -449,7 +449,7 @@ type isEvent_Payload interface {
 }
 
 type Event_JobStatus struct {
-	JobStatus *pilab.JobStatus `protobuf:"bytes,1,opt,name=job_status,json=jobStatus,proto3,oneof"`
+	JobStatus *v1.JobStatus `protobuf:"bytes,1,opt,name=job_status,json=jobStatus,proto3,oneof"`
 }
 
 type Event_JobCreated struct {
@@ -469,11 +469,11 @@ type Event_VmEvent struct {
 }
 
 type Event_HostStatsEvent struct {
-	HostStatsEvent *pilab.HostStats `protobuf:"bytes,6,opt,name=host_stats_event,json=hostStatsEvent,proto3,oneof"`
+	HostStatsEvent *v1.HostStats `protobuf:"bytes,6,opt,name=host_stats_event,json=hostStatsEvent,proto3,oneof"`
 }
 
 type Event_VmMetrics struct {
-	VmMetrics *pilab.VmMetrics `protobuf:"bytes,7,opt,name=vm_metrics,json=vmMetrics,proto3,oneof"`
+	VmMetrics *v1.VmMetrics `protobuf:"bytes,7,opt,name=vm_metrics,json=vmMetrics,proto3,oneof"`
 }
 
 func (*Event_JobStatus) isEvent_Payload() {}
@@ -748,7 +748,7 @@ var File_pilab_ws_v1_event_proto protoreflect.FileDescriptor
 
 const file_pilab_ws_v1_event_proto_rawDesc = "" +
 	"\n" +
-	"\x17pilab/ws/v1/event.proto\x12\vpilab.ws.v1\x1a\x16pilab/vm_metrics.proto\x1a\x16pilab/host_stats.proto\x1a\x16pilab/job_status.proto\"\x7f\n" +
+	"\x17pilab/ws/v1/event.proto\x12\vpilab.ws.v1\x1a\x1apilab/common/v1/host.proto\x1a\x1apilab/common/v1/task.proto\"\x7f\n" +
 	"\n" +
 	"JobCreated\x12\x10\n" +
 	"\x03job\x18\x01 \x01(\tR\x03job\x12\x19\n" +
@@ -761,26 +761,26 @@ const file_pilab_ws_v1_event_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"7\n" +
 	"\tJobFailed\x12\x10\n" +
 	"\x03job\x18\x01 \x01(\tR\x03job\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"/\n" +
-	"\aJobList\x12$\n" +
-	"\x04jobs\x18\x01 \x03(\v2\x10.pilab.JobStatusR\x04jobs\"b\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"9\n" +
+	"\aJobList\x12.\n" +
+	"\x04jobs\x18\x01 \x03(\v2\x1a.pilab.common.v1.JobStatusR\x04jobs\"b\n" +
 	"\aVmEvent\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x14\n" +
 	"\x05event\x18\x02 \x01(\tR\x05event\x12\x16\n" +
 	"\x06detail\x18\x03 \x01(\tR\x06detail\x12\x14\n" +
-	"\x05state\x18\x04 \x01(\tR\x05state\"\xa0\x03\n" +
-	"\x05Event\x121\n" +
+	"\x05state\x18\x04 \x01(\tR\x05state\"\xbe\x03\n" +
+	"\x05Event\x12;\n" +
 	"\n" +
-	"job_status\x18\x01 \x01(\v2\x10.pilab.JobStatusH\x00R\tjobStatus\x12:\n" +
+	"job_status\x18\x01 \x01(\v2\x1a.pilab.common.v1.JobStatusH\x00R\tjobStatus\x12:\n" +
 	"\vjob_created\x18\x02 \x01(\v2\x17.pilab.ws.v1.JobCreatedH\x00R\n" +
 	"jobCreated\x12@\n" +
 	"\rjob_completed\x18\x03 \x01(\v2\x19.pilab.ws.v1.JobCompletedH\x00R\fjobCompleted\x127\n" +
 	"\n" +
 	"job_failed\x18\x04 \x01(\v2\x16.pilab.ws.v1.JobFailedH\x00R\tjobFailed\x121\n" +
-	"\bvm_event\x18\x05 \x01(\v2\x14.pilab.ws.v1.VmEventH\x00R\avmEvent\x12<\n" +
-	"\x10host_stats_event\x18\x06 \x01(\v2\x10.pilab.HostStatsH\x00R\x0ehostStatsEvent\x121\n" +
+	"\bvm_event\x18\x05 \x01(\v2\x14.pilab.ws.v1.VmEventH\x00R\avmEvent\x12F\n" +
+	"\x10host_stats_event\x18\x06 \x01(\v2\x1a.pilab.common.v1.HostStatsH\x00R\x0ehostStatsEvent\x12;\n" +
 	"\n" +
-	"vm_metrics\x18\a \x01(\v2\x10.pilab.VmMetricsH\x00R\tvmMetricsB\t\n" +
+	"vm_metrics\x18\a \x01(\v2\x1a.pilab.common.v1.VmMetricsH\x00R\tvmMetricsB\t\n" +
 	"\apayload\"\x7f\n" +
 	"\x10SubscribeMessage\x12\x12\n" +
 	"\x03job\x18\x01 \x01(\tH\x00R\x03job\x12\x15\n" +
@@ -820,19 +820,19 @@ var file_pilab_ws_v1_event_proto_goTypes = []any{
 	(*AuthenticateMessage)(nil), // 7: pilab.ws.v1.AuthenticateMessage
 	(*JobListRequest)(nil),      // 8: pilab.ws.v1.JobListRequest
 	(*Requests)(nil),            // 9: pilab.ws.v1.Requests
-	(*pilab.JobStatus)(nil),     // 10: pilab.JobStatus
-	(*pilab.HostStats)(nil),     // 11: pilab.HostStats
-	(*pilab.VmMetrics)(nil),     // 12: pilab.VmMetrics
+	(*v1.JobStatus)(nil),        // 10: pilab.common.v1.JobStatus
+	(*v1.HostStats)(nil),        // 11: pilab.common.v1.HostStats
+	(*v1.VmMetrics)(nil),        // 12: pilab.common.v1.VmMetrics
 }
 var file_pilab_ws_v1_event_proto_depIdxs = []int32{
-	10, // 0: pilab.ws.v1.JobList.jobs:type_name -> pilab.JobStatus
-	10, // 1: pilab.ws.v1.Event.job_status:type_name -> pilab.JobStatus
+	10, // 0: pilab.ws.v1.JobList.jobs:type_name -> pilab.common.v1.JobStatus
+	10, // 1: pilab.ws.v1.Event.job_status:type_name -> pilab.common.v1.JobStatus
 	0,  // 2: pilab.ws.v1.Event.job_created:type_name -> pilab.ws.v1.JobCreated
 	1,  // 3: pilab.ws.v1.Event.job_completed:type_name -> pilab.ws.v1.JobCompleted
 	2,  // 4: pilab.ws.v1.Event.job_failed:type_name -> pilab.ws.v1.JobFailed
 	4,  // 5: pilab.ws.v1.Event.vm_event:type_name -> pilab.ws.v1.VmEvent
-	11, // 6: pilab.ws.v1.Event.host_stats_event:type_name -> pilab.HostStats
-	12, // 7: pilab.ws.v1.Event.vm_metrics:type_name -> pilab.VmMetrics
+	11, // 6: pilab.ws.v1.Event.host_stats_event:type_name -> pilab.common.v1.HostStats
+	12, // 7: pilab.ws.v1.Event.vm_metrics:type_name -> pilab.common.v1.VmMetrics
 	6,  // 8: pilab.ws.v1.Requests.subscribe:type_name -> pilab.ws.v1.SubscribeMessage
 	7,  // 9: pilab.ws.v1.Requests.authenticate:type_name -> pilab.ws.v1.AuthenticateMessage
 	10, // [10:10] is the sub-list for method output_type

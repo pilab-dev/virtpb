@@ -1,0 +1,103 @@
+// =============================================================================
+// Cluster Bridge Service - Per-Cluster OVS Bridge Configuration
+// =============================================================================
+// Purpose: Manage OVS bridges per cluster with uplink management.
+//
+// Services:
+// - Cluster Bridge CRUD
+// - Uplink management (add/remove)
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.network.v2;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "pilab/network/v2/network_common.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+
+// -----------------------------------------------------------------------------
+// Cluster Bridge Service
+// -----------------------------------------------------------------------------
+
+service ClusterBridgeService {
+  rpc CreateClusterBridge(CreateClusterBridgeRequest) returns (ClusterBridge);
+  rpc GetClusterBridge(GetClusterBridgeRequest) returns (ClusterBridge);
+  rpc ListClusterBridges(ListClusterBridgesRequest) returns (ListClusterBridgesResponse);
+  rpc UpdateClusterBridge(UpdateClusterBridgeRequest) returns (ClusterBridge);
+  rpc DeleteClusterBridge(DeleteClusterBridgeRequest) returns (google.protobuf.Empty);
+  rpc AddUplink(AddUplinkRequest) returns (google.protobuf.Empty);
+  rpc RemoveUplink(RemoveUplinkRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// Cluster Bridge Messages
+// -----------------------------------------------------------------------------
+
+message ClusterBridge {
+  string id = 1;
+  string cluster_id = 2;
+  string name = 3;
+  NetworkRole role = 4;
+  int32 vlan = 5;
+  int32 mtu = 6;
+  repeated string uplinks = 7;
+  string ovs_bridge_name = 8;
+  bool uplink_bond = 9;
+  map<string, string> metadata = 10;
+  google.protobuf.Timestamp created_at = 11;
+  google.protobuf.Timestamp updated_at = 12;
+}
+
+// -----------------------------------------------------------------------------
+// Request/Response Messages
+// -----------------------------------------------------------------------------
+
+message CreateClusterBridgeRequest {
+  string cluster_id = 1;
+  string name = 2;
+  NetworkRole role = 3;
+  int32 vlan = 4;
+  int32 mtu = 5;
+  repeated string uplinks = 6;
+  bool uplink_bond = 7;
+  map<string, string> metadata = 8;
+}
+
+message GetClusterBridgeRequest {
+  string id = 1;
+  string cluster_id = 2;
+}
+
+message ListClusterBridgesRequest { string cluster_id = 1; }
+
+message ListClusterBridgesResponse { repeated ClusterBridge bridges = 1; }
+
+message UpdateClusterBridgeRequest {
+  string id = 1;
+  string cluster_id = 2;
+  int32 vlan = 3;
+  int32 mtu = 4;
+  repeated string uplinks = 5;
+  map<string, string> metadata = 6;
+}
+
+message DeleteClusterBridgeRequest {
+  string id = 1;
+  string cluster_id = 2;
+}
+
+message AddUplinkRequest {
+  string bridge_id = 1;
+  string cluster_id = 2;
+  repeated string interfaces = 3;
+}
+
+message RemoveUplinkRequest {
+  string bridge_id = 1;
+  string cluster_id = 2;
+  repeated string interfaces = 3;
+}

@@ -1,0 +1,257 @@
+// =============================================================================
+// CLI Service - Consolidated CLI API
+// =============================================================================
+// Purpose: Complete API for the vpsctl command-line tool.
+// All services are defined here to avoid cross-file reference issues.
+//
+// Services:
+// - AuthService: Authentication & user info
+// - VMService: VM lifecycle & resource management
+// - DiskService: Disk management
+// - ImageService: Image management
+// - SnapshotService: Snapshot management
+// - NetworkService: Network, interface, vSwitch, port group
+// - PublicIPService: Public IP management
+// - SecurityService: Security group & rule management
+// - TemplateService: Instance & OS template management
+// - MonitoringService: Metrics & activity logs
+// - AdminService: Organization & user management (admin)
+// - SystemService: Datastore & system configuration
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.cli.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/wrappers.proto";
+import "pilab/cli/v1/cli_common.proto";
+import "pilab/common/v1/vm.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/cli/v1;cliv1";
+
+// -----------------------------------------------------------------------------
+// Auth Service
+// -----------------------------------------------------------------------------
+
+service AuthService {
+  // Authenticate user and return JWT token (legacy username/password)
+  rpc Login(LoginRequest) returns (LoginResponse);
+  
+  // OAuth2 Device Code Authentication
+  rpc InitiateDeviceAuth(InitiateDeviceAuthRequest) returns (InitiateDeviceAuthResponse);
+  rpc PollDeviceAuth(PollDeviceAuthRequest) returns (PollDeviceAuthResponse);
+  
+  // Invalidate user token
+  rpc Logout(LogoutRequest) returns (google.protobuf.Empty);
+  
+  // Get current user information
+  rpc GetCurrentUser(google.protobuf.Empty) returns (User);
+}
+
+// -----------------------------------------------------------------------------
+// VM Service
+// -----------------------------------------------------------------------------
+
+service VMService {
+  // VM Lifecycle Operations
+  rpc CreateVM(CreateVMRequest) returns (pilab.common.v1.VM);
+  rpc GetVM(GetVMRequest) returns (pilab.common.v1.VM);
+  rpc ListVMs(ListVMsRequest) returns (ListVMsResponse);
+  rpc UpdateVM(UpdateVMRequest) returns (pilab.common.v1.VM);
+  rpc DeleteVM(DeleteVMRequest) returns (google.protobuf.Empty);
+  
+  // VM Power Operations
+  rpc StartVM(StartVMRequest) returns (google.protobuf.Empty);
+  rpc StopVM(StopVMRequest) returns (google.protobuf.Empty);
+  rpc RestartVM(RestartVMRequest) returns (google.protobuf.Empty);
+  rpc PauseVM(PauseVMRequest) returns (google.protobuf.Empty);
+  rpc UnpauseVM(UnpauseVMRequest) returns (google.protobuf.Empty);
+   
+  // VM Advanced Operations
+  rpc MigrateVM(MigrateVMRequest) returns (google.protobuf.Empty);
+  rpc RebuildVM(RebuildVMRequest) returns (pilab.common.v1.VM);
+  rpc CloneVM(CloneVMRequest) returns (pilab.common.v1.VM);
+  rpc LinkedCloneVM(LinkedCloneVMRequest) returns (pilab.common.v1.VM);
+  rpc GetVMConsole(GetVMConsoleRequest) returns (GetVMConsoleResponse);
+   
+  // VM Resource Management (Hot-Add)
+  rpc UpdateVMResources(UpdateVMResourcesRequest) returns (UpdateVMResourcesResponse);
+  rpc GetVMResources(GetVMResourcesRequest) returns (GetVMResourcesResponse);
+}
+
+// -----------------------------------------------------------------------------
+// Disk Service
+// -----------------------------------------------------------------------------
+
+service DiskService {
+  // Disk Management
+  rpc CreateDisk(CreateDiskRequest) returns (pilab.common.v1.Disk);
+  rpc GetDisk(GetDiskRequest) returns (pilab.common.v1.Disk);
+  rpc ListDisks(ListDisksRequest) returns (ListDisksResponse);
+  rpc UpdateDisk(UpdateDiskRequest) returns (pilab.common.v1.Disk);
+  rpc DeleteDisk(DeleteDiskRequest) returns (google.protobuf.Empty);
+  rpc ExtendDisk(ExtendDiskRequest) returns (pilab.common.v1.Disk);
+  rpc AttachDisk(AttachDiskRequest) returns (google.protobuf.Empty);
+  rpc DetachDisk(DetachDiskRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// Image Service
+// -----------------------------------------------------------------------------
+
+service ImageService {
+  rpc GetImage(GetImageRequest) returns (Image);
+  rpc ListImages(ListImagesRequest) returns (ListImagesResponse);
+  rpc CreateImage(CreateImageRequest) returns (Image);
+  rpc UploadImage(UploadImageRequest) returns (Image);
+  rpc DeleteImage(DeleteImageRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// Snapshot Service
+// -----------------------------------------------------------------------------
+
+service SnapshotService {
+  rpc GetSnapshot(GetSnapshotRequest) returns (pilab.common.v1.Snapshot);
+  rpc ListSnapshots(ListSnapshotsRequest) returns (ListSnapshotsResponse);
+  rpc CreateSnapshot(CreateSnapshotRequest) returns (pilab.common.v1.Snapshot);
+  rpc RestoreSnapshot(RestoreSnapshotRequest) returns (google.protobuf.Empty);
+  rpc DeleteSnapshot(DeleteSnapshotRequest) returns (google.protobuf.Empty);
+  rpc ConsolidateSnapshot(SnapshotConsolidateRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// Network Service
+// -----------------------------------------------------------------------------
+
+service NetworkService {
+  // Network Management
+  rpc CreateNetwork(CreateNetworkRequest) returns (Network);
+  rpc GetNetwork(GetNetworkRequest) returns (Network);
+  rpc ListNetworks(ListNetworksRequest) returns (ListNetworksResponse);
+  rpc UpdateNetwork(UpdateNetworkRequest) returns (Network);
+  rpc DeleteNetwork(DeleteNetworkRequest) returns (google.protobuf.Empty);
+  
+  // Network Interface Management
+  rpc GetNetworkInterface(GetNetworkInterfaceRequest) returns (pilab.common.v1.NetworkInterface);
+  rpc ListNetworkInterfaces(ListNetworkInterfacesRequest) returns (ListNetworkInterfacesResponse);
+  rpc AddNetworkInterface(AddNetworkInterfaceRequest) returns (pilab.common.v1.NetworkInterface);
+  rpc RemoveNetworkInterface(RemoveNetworkInterfaceRequest) returns (google.protobuf.Empty);
+  
+  // vSwitch Management
+  rpc CreateVSwitch(CreateVSwitchRequest) returns (VSwitch);
+  rpc GetVSwitch(GetVSwitchRequest) returns (VSwitch);
+  rpc ListVSwitches(ListVSwitchesRequest) returns (ListVSwitchesResponse);
+  rpc DeleteVSwitch(DeleteVSwitchRequest) returns (google.protobuf.Empty);
+  
+  // Port Group Management
+  rpc CreatePortGroup(CreatePortGroupRequest) returns (PortGroup);
+  rpc GetPortGroup(GetPortGroupRequest) returns (PortGroup);
+  rpc ListPortGroups(ListPortGroupsRequest) returns (ListPortGroupsResponse);
+  rpc DeletePortGroup(DeletePortGroupRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// Public IP Service
+// -----------------------------------------------------------------------------
+
+service PublicIPService {
+  rpc CreatePublicIP(CreatePublicIPRequest) returns (PublicIP);
+  rpc GetPublicIP(GetPublicIPRequest) returns (PublicIP);
+  rpc ListPublicIPs(ListPublicIPsRequest) returns (ListPublicIPsResponse);
+  rpc UpdatePublicIP(UpdatePublicIPRequest) returns (PublicIP);
+  rpc DeletePublicIP(DeletePublicIPRequest) returns (google.protobuf.Empty);
+  rpc AssignPublicIP(AssignPublicIPRequest) returns (google.protobuf.Empty);
+  rpc UnassignPublicIP(UnassignPublicIPRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// Security Service
+// -----------------------------------------------------------------------------
+
+service SecurityService {
+  // Security Group Management
+  rpc CreateSecurityGroup(CreateSecurityGroupRequest) returns (SecurityGroup);
+  rpc GetSecurityGroup(GetSecurityGroupRequest) returns (SecurityGroup);
+  rpc ListSecurityGroups(ListSecurityGroupsRequest) returns (ListSecurityGroupsResponse);
+  rpc UpdateSecurityGroup(UpdateSecurityGroupRequest) returns (SecurityGroup);
+  rpc DeleteSecurityGroup(DeleteSecurityGroupRequest) returns (google.protobuf.Empty);
+  
+  // Security Rule Management
+  rpc AddSecurityRule(AddSecurityRuleRequest) returns (SecurityRule);
+  rpc RemoveSecurityRule(RemoveSecurityRuleRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// Template Service
+// -----------------------------------------------------------------------------
+
+service TemplateService {
+  // Instance Template Management
+  rpc CreateTemplate(CreateTemplateRequest) returns (Template);
+  rpc GetTemplate(GetTemplateRequest) returns (Template);
+  rpc ListTemplates(ListTemplatesRequest) returns (ListTemplatesResponse);
+  rpc DeleteTemplate(DeleteTemplateRequest) returns (google.protobuf.Empty);
+  
+  // OS Template Management (from osinfodb)
+  rpc ListOSTemplates(ListOSTemplatesRequest) returns (ListOSTemplatesResponse);
+  rpc GetOSTemplate(GetOSTemplateRequest) returns (OSTemplate);
+  rpc SyncOSTemplates(SyncOSTemplatesRequest) returns (SyncOSTemplatesResponse);
+  rpc CreateVMFromOSTemplate(CreateVMFromOSTemplateRequest) returns (pilab.common.v1.VM);
+}
+
+// -----------------------------------------------------------------------------
+// Monitoring Service
+// -----------------------------------------------------------------------------
+
+service MonitoringService {
+  rpc GetMetrics(GetMetricsRequest) returns (GetMetricsResponse);
+  rpc GetActivity(GetActivityRequest) returns (GetActivityResponse);
+}
+
+// -----------------------------------------------------------------------------
+// Admin Service
+// -----------------------------------------------------------------------------
+
+service AdminService {
+  // Organization Management (Admin Only)
+  rpc CreateOrganization(CreateOrganizationRequest) returns (Organization);
+  rpc GetOrganization(GetOrganizationRequest) returns (Organization);
+  rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse);
+  rpc UpdateOrganization(UpdateOrganizationRequest) returns (Organization);
+  rpc DeleteOrganization(DeleteOrganizationRequest) returns (google.protobuf.Empty);
+  
+  // User Management (Admin Only)
+  rpc CreateUser(CreateUserRequest) returns (User);
+  rpc GetUser(GetUserRequest) returns (User);
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (User);
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
+}
+
+// -----------------------------------------------------------------------------
+// System Service
+// -----------------------------------------------------------------------------
+
+service SystemService {
+  // Version
+  rpc GetVersion(google.protobuf.Empty) returns (VersionResponse);
+  
+  // Datastore Management (DCUI/Local Console)
+  rpc CreateDatastore(CreateDatastoreRequest) returns (Datastore);
+  rpc GetDatastore(GetDatastoreRequest) returns (Datastore);
+  rpc ListDatastores(ListDatastoresRequest) returns (ListDatastoresResponse);
+  rpc DeleteDatastore(DeleteDatastoreRequest) returns (google.protobuf.Empty);
+  rpc MountDatastore(MountDatastoreRequest) returns (google.protobuf.Empty);
+  rpc UnmountDatastore(UnmountDatastoreRequest) returns (google.protobuf.Empty);
+  
+  // System Configuration (DCUI/Local Console)
+  rpc GetHostInfo(google.protobuf.Empty) returns (HostInfo);
+  rpc GetNetworkConfig(google.protobuf.Empty) returns (NetworkConfigResponse);
+  rpc GetStorageConfig(google.protobuf.Empty) returns (StorageConfigResponse);
+  rpc GetHostHealth(google.protobuf.Empty) returns (HostHealthResponse);
+  rpc ConfigureNetwork(ConfigureNetworkRequest) returns (google.protobuf.Empty);
+}

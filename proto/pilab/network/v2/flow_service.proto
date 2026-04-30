@@ -1,0 +1,77 @@
+// =============================================================================
+// Flow Service - OpenFlow Rule Debugging
+// =============================================================================
+// Purpose: List and debug OpenFlow rules.
+//
+// Services:
+// - List flows (with filters)
+// - Debug flow (simulate packet matching)
+// =============================================================================
+
+syntax = "proto3";
+
+package pilab.network.v2;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "pilab/network/v2/network_common.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+
+// -----------------------------------------------------------------------------
+// Flow Service
+// -----------------------------------------------------------------------------
+
+service FlowService {
+  rpc ListFlows(ListFlowsRequest) returns (ListFlowsResponse);
+  rpc DebugFlow(DebugFlowRequest) returns (DebugFlowResponse);
+}
+
+// -----------------------------------------------------------------------------
+// Flow Messages
+// -----------------------------------------------------------------------------
+
+message FlowRule {
+  string id = 1;
+  string name = 2;
+  int32 priority = 3;
+  string table = 4;
+  string match = 5;
+  repeated string actions = 6;
+  FlowDirection direction = 7;
+  bool enabled = 8;
+  string port_id = 9;
+  string network_id = 10;
+  int64 packet_count = 11;
+  int64 byte_count = 12;
+  google.protobuf.Timestamp created_at = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
+
+// -----------------------------------------------------------------------------
+// Request/Response Messages
+// -----------------------------------------------------------------------------
+
+message ListFlowsRequest {
+  string port_id = 1;
+  string network_id = 2;
+  FlowDirection direction = 3;
+}
+
+message ListFlowsResponse { repeated FlowRule flows = 1; }
+
+message DebugFlowRequest {
+  string network_id = 1;
+  string src_ip = 2;
+  string dst_ip = 3;
+  uint32 src_port = 4;
+  uint32 dst_port = 5;
+  Protocol protocol = 6;
+  string direction = 7;
+}
+
+message DebugFlowResponse {
+  repeated FlowRule matched_flows = 1;
+  string verdict = 2;
+  string explanation = 3;
+}

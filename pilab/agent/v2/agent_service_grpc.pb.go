@@ -28,6 +28,7 @@ package agentv2
 
 import (
 	context "context"
+	v1 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -179,7 +180,7 @@ type AgentServiceClient interface {
 	// Detach a network interface from a VM
 	DetachNetworkInterface(ctx context.Context, in *DetachNetworkInterfaceRequest, opts ...grpc.CallOption) (*DetachNetworkInterfaceResponse, error)
 	// VNC/SPICE terminal streaming
-	Stream(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[StreamRequest, StreamResponse], error)
+	Stream(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[v1.StreamRequest, v1.StreamResponse], error)
 	// Hardware monitoring
 	GetHardwareHealth(ctx context.Context, in *GetHardwareHealthRequest, opts ...grpc.CallOption) (*GetHardwareHealthResponse, error)
 	GetSensorData(ctx context.Context, in *GetSensorDataRequest, opts ...grpc.CallOption) (*GetSensorDataResponse, error)
@@ -681,18 +682,18 @@ func (c *agentServiceClient) DetachNetworkInterface(ctx context.Context, in *Det
 	return out, nil
 }
 
-func (c *agentServiceClient) Stream(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[StreamRequest, StreamResponse], error) {
+func (c *agentServiceClient) Stream(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[v1.StreamRequest, v1.StreamResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &AgentService_ServiceDesc.Streams[3], AgentService_Stream_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[StreamRequest, StreamResponse]{ClientStream: stream}
+	x := &grpc.GenericClientStream[v1.StreamRequest, v1.StreamResponse]{ClientStream: stream}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AgentService_StreamClient = grpc.BidiStreamingClient[StreamRequest, StreamResponse]
+type AgentService_StreamClient = grpc.BidiStreamingClient[v1.StreamRequest, v1.StreamResponse]
 
 func (c *agentServiceClient) GetHardwareHealth(ctx context.Context, in *GetHardwareHealthRequest, opts ...grpc.CallOption) (*GetHardwareHealthResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -893,7 +894,7 @@ type AgentServiceServer interface {
 	// Detach a network interface from a VM
 	DetachNetworkInterface(context.Context, *DetachNetworkInterfaceRequest) (*DetachNetworkInterfaceResponse, error)
 	// VNC/SPICE terminal streaming
-	Stream(grpc.BidiStreamingServer[StreamRequest, StreamResponse]) error
+	Stream(grpc.BidiStreamingServer[v1.StreamRequest, v1.StreamResponse]) error
 	// Hardware monitoring
 	GetHardwareHealth(context.Context, *GetHardwareHealthRequest) (*GetHardwareHealthResponse, error)
 	GetSensorData(context.Context, *GetSensorDataRequest) (*GetSensorDataResponse, error)
@@ -1058,7 +1059,7 @@ func (UnimplementedAgentServiceServer) AttachNetworkInterface(context.Context, *
 func (UnimplementedAgentServiceServer) DetachNetworkInterface(context.Context, *DetachNetworkInterfaceRequest) (*DetachNetworkInterfaceResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DetachNetworkInterface not implemented")
 }
-func (UnimplementedAgentServiceServer) Stream(grpc.BidiStreamingServer[StreamRequest, StreamResponse]) error {
+func (UnimplementedAgentServiceServer) Stream(grpc.BidiStreamingServer[v1.StreamRequest, v1.StreamResponse]) error {
 	return status.Error(codes.Unimplemented, "method Stream not implemented")
 }
 func (UnimplementedAgentServiceServer) GetHardwareHealth(context.Context, *GetHardwareHealthRequest) (*GetHardwareHealthResponse, error) {
@@ -1918,11 +1919,11 @@ func _AgentService_DetachNetworkInterface_Handler(srv interface{}, ctx context.C
 }
 
 func _AgentService_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(AgentServiceServer).Stream(&grpc.GenericServerStream[StreamRequest, StreamResponse]{ServerStream: stream})
+	return srv.(AgentServiceServer).Stream(&grpc.GenericServerStream[v1.StreamRequest, v1.StreamResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AgentService_StreamServer = grpc.BidiStreamingServer[StreamRequest, StreamResponse]
+type AgentService_StreamServer = grpc.BidiStreamingServer[v1.StreamRequest, v1.StreamResponse]
 
 func _AgentService_GetHardwareHealth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetHardwareHealthRequest)
