@@ -184,7 +184,7 @@ var File_pilab_vm_metrics_proto protoreflect.FileDescriptor
 
 const file_pilab_vm_metrics_proto_rawDesc = "" +
 	"\n" +
-	"\x16pilab/vm_metrics.proto\x12\vpilab.cloud\"\xae\x03\n" +
+	"\x16pilab/vm_metrics.proto\x12\x05pilab\"\xae\x03\n" +
 	"\tVmMetrics\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x17\n" +
 	"\avm_name\x18\x02 \x01(\tR\x06vmName\x12\x1b\n" +
@@ -215,7 +215,7 @@ func file_pilab_vm_metrics_proto_rawDescGZIP() []byte {
 
 var file_pilab_vm_metrics_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_pilab_vm_metrics_proto_goTypes = []any{
-	(*VmMetrics)(nil), // 0: pilab.cloud.VmMetrics
+	(*VmMetrics)(nil), // 0: pilab.VmMetrics
 }
 var file_pilab_vm_metrics_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

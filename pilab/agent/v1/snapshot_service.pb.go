@@ -690,7 +690,7 @@ var File_pilab_agent_v1_snapshot_service_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_snapshot_service_proto_rawDesc = "" +
 	"\n" +
-	"%pilab/agent/v1/snapshot_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/agent/v1/stream.proto\"Q\n" +
+	"%pilab/agent/v1/snapshot_service.proto\x12\x0epilab.agent.v1\"Q\n" +
 	"\x1aSnapshotConsolidateRequest\x12\x0e\n" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12#\n" +
 	"\rsnapshot_name\x18\x02 \x01(\tR\fsnapshotName\"\x1d\n" +
@@ -703,9 +703,9 @@ const file_pilab_agent_v1_snapshot_service_proto_rawDesc = "" +
 	"\x0fmemory_snapshot\x18\x03 \x01(\bR\x0ememorySnapshot\x12#\n" +
 	"\rcreation_time\x18\x04 \x01(\x03R\fcreationTime\x12\x1f\n" +
 	"\vparent_name\x18\x05 \x01(\tR\n" +
-	"parentName\"X\n" +
-	"\x14SnapshotListResponse\x12@\n" +
-	"\tsnapshots\x18\x01 \x03(\v2\".pilab.cloud.agent.v1.SnapshotInfoR\tsnapshots\"M\n" +
+	"parentName\"R\n" +
+	"\x14SnapshotListResponse\x12:\n" +
+	"\tsnapshots\x18\x01 \x03(\v2\x1c.pilab.agent.v1.SnapshotInfoR\tsnapshots\"M\n" +
 	"\x16SnapshotRestoreRequest\x12\x0e\n" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12#\n" +
 	"\rsnapshot_name\x18\x04 \x01(\tR\fsnapshotName\"\x19\n" +
@@ -728,14 +728,14 @@ const file_pilab_agent_v1_snapshot_service_proto_rawDesc = "" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12#\n" +
 	"\rsnapshot_name\x18\x03 \x01(\tR\fsnapshotName\x12\x1e\n" +
 	"\vnew_vm_name\x18\x04 \x01(\tR\tnewVmName\"\x17\n" +
-	"\x15SnapshotCloneResponse2\xfa\x04\n" +
-	"\x0fSnapshotService\x12e\n" +
-	"\x06Create\x12+.pilab.cloud.agent.v1.SnapshotCreateRequest\x1a,.pilab.cloud.agent.v1.SnapshotCreateResponse0\x01\x12f\n" +
-	"\aRestore\x12,.pilab.cloud.agent.v1.SnapshotRestoreRequest\x1a-.pilab.cloud.agent.v1.SnapshotRestoreResponse\x12c\n" +
-	"\x06Delete\x12+.pilab.cloud.agent.v1.SnapshotDeleteRequest\x1a,.pilab.cloud.agent.v1.SnapshotDeleteResponse\x12`\n" +
-	"\x05Clone\x12*.pilab.cloud.agent.v1.SnapshotCloneRequest\x1a+.pilab.cloud.agent.v1.SnapshotCloneResponse\x12r\n" +
-	"\vConsolidate\x120.pilab.cloud.agent.v1.SnapshotConsolidateRequest\x1a1.pilab.cloud.agent.v1.SnapshotConsolidateResponse\x12]\n" +
-	"\x04List\x12).pilab.cloud.agent.v1.SnapshotListRequest\x1a*.pilab.cloud.agent.v1.SnapshotListResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\x15SnapshotCloneResponse2\xb2\x04\n" +
+	"\x0fSnapshotService\x12Y\n" +
+	"\x06Create\x12%.pilab.agent.v1.SnapshotCreateRequest\x1a&.pilab.agent.v1.SnapshotCreateResponse0\x01\x12Z\n" +
+	"\aRestore\x12&.pilab.agent.v1.SnapshotRestoreRequest\x1a'.pilab.agent.v1.SnapshotRestoreResponse\x12W\n" +
+	"\x06Delete\x12%.pilab.agent.v1.SnapshotDeleteRequest\x1a&.pilab.agent.v1.SnapshotDeleteResponse\x12T\n" +
+	"\x05Clone\x12$.pilab.agent.v1.SnapshotCloneRequest\x1a%.pilab.agent.v1.SnapshotCloneResponse\x12f\n" +
+	"\vConsolidate\x12*.pilab.agent.v1.SnapshotConsolidateRequest\x1a+.pilab.agent.v1.SnapshotConsolidateResponse\x12Q\n" +
+	"\x04List\x12#.pilab.agent.v1.SnapshotListRequest\x1a$.pilab.agent.v1.SnapshotListResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_snapshot_service_proto_rawDescOnce sync.Once
@@ -751,34 +751,34 @@ func file_pilab_agent_v1_snapshot_service_proto_rawDescGZIP() []byte {
 
 var file_pilab_agent_v1_snapshot_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_pilab_agent_v1_snapshot_service_proto_goTypes = []any{
-	(*SnapshotConsolidateRequest)(nil),  // 0: pilab.cloud.agent.v1.SnapshotConsolidateRequest
-	(*SnapshotConsolidateResponse)(nil), // 1: pilab.cloud.agent.v1.SnapshotConsolidateResponse
-	(*SnapshotListRequest)(nil),         // 2: pilab.cloud.agent.v1.SnapshotListRequest
-	(*SnapshotInfo)(nil),                // 3: pilab.cloud.agent.v1.SnapshotInfo
-	(*SnapshotListResponse)(nil),        // 4: pilab.cloud.agent.v1.SnapshotListResponse
-	(*SnapshotRestoreRequest)(nil),      // 5: pilab.cloud.agent.v1.SnapshotRestoreRequest
-	(*SnapshotRestoreResponse)(nil),     // 6: pilab.cloud.agent.v1.SnapshotRestoreResponse
-	(*SnapshotCreateRequest)(nil),       // 7: pilab.cloud.agent.v1.SnapshotCreateRequest
-	(*SnapshotCreateResponse)(nil),      // 8: pilab.cloud.agent.v1.SnapshotCreateResponse
-	(*SnapshotDeleteRequest)(nil),       // 9: pilab.cloud.agent.v1.SnapshotDeleteRequest
-	(*SnapshotDeleteResponse)(nil),      // 10: pilab.cloud.agent.v1.SnapshotDeleteResponse
-	(*SnapshotCloneRequest)(nil),        // 11: pilab.cloud.agent.v1.SnapshotCloneRequest
-	(*SnapshotCloneResponse)(nil),       // 12: pilab.cloud.agent.v1.SnapshotCloneResponse
+	(*SnapshotConsolidateRequest)(nil),  // 0: pilab.agent.v1.SnapshotConsolidateRequest
+	(*SnapshotConsolidateResponse)(nil), // 1: pilab.agent.v1.SnapshotConsolidateResponse
+	(*SnapshotListRequest)(nil),         // 2: pilab.agent.v1.SnapshotListRequest
+	(*SnapshotInfo)(nil),                // 3: pilab.agent.v1.SnapshotInfo
+	(*SnapshotListResponse)(nil),        // 4: pilab.agent.v1.SnapshotListResponse
+	(*SnapshotRestoreRequest)(nil),      // 5: pilab.agent.v1.SnapshotRestoreRequest
+	(*SnapshotRestoreResponse)(nil),     // 6: pilab.agent.v1.SnapshotRestoreResponse
+	(*SnapshotCreateRequest)(nil),       // 7: pilab.agent.v1.SnapshotCreateRequest
+	(*SnapshotCreateResponse)(nil),      // 8: pilab.agent.v1.SnapshotCreateResponse
+	(*SnapshotDeleteRequest)(nil),       // 9: pilab.agent.v1.SnapshotDeleteRequest
+	(*SnapshotDeleteResponse)(nil),      // 10: pilab.agent.v1.SnapshotDeleteResponse
+	(*SnapshotCloneRequest)(nil),        // 11: pilab.agent.v1.SnapshotCloneRequest
+	(*SnapshotCloneResponse)(nil),       // 12: pilab.agent.v1.SnapshotCloneResponse
 }
 var file_pilab_agent_v1_snapshot_service_proto_depIdxs = []int32{
-	3,  // 0: pilab.cloud.agent.v1.SnapshotListResponse.snapshots:type_name -> pilab.cloud.agent.v1.SnapshotInfo
-	7,  // 1: pilab.cloud.agent.v1.SnapshotService.Create:input_type -> pilab.cloud.agent.v1.SnapshotCreateRequest
-	5,  // 2: pilab.cloud.agent.v1.SnapshotService.Restore:input_type -> pilab.cloud.agent.v1.SnapshotRestoreRequest
-	9,  // 3: pilab.cloud.agent.v1.SnapshotService.Delete:input_type -> pilab.cloud.agent.v1.SnapshotDeleteRequest
-	11, // 4: pilab.cloud.agent.v1.SnapshotService.Clone:input_type -> pilab.cloud.agent.v1.SnapshotCloneRequest
-	0,  // 5: pilab.cloud.agent.v1.SnapshotService.Consolidate:input_type -> pilab.cloud.agent.v1.SnapshotConsolidateRequest
-	2,  // 6: pilab.cloud.agent.v1.SnapshotService.List:input_type -> pilab.cloud.agent.v1.SnapshotListRequest
-	8,  // 7: pilab.cloud.agent.v1.SnapshotService.Create:output_type -> pilab.cloud.agent.v1.SnapshotCreateResponse
-	6,  // 8: pilab.cloud.agent.v1.SnapshotService.Restore:output_type -> pilab.cloud.agent.v1.SnapshotRestoreResponse
-	10, // 9: pilab.cloud.agent.v1.SnapshotService.Delete:output_type -> pilab.cloud.agent.v1.SnapshotDeleteResponse
-	12, // 10: pilab.cloud.agent.v1.SnapshotService.Clone:output_type -> pilab.cloud.agent.v1.SnapshotCloneResponse
-	1,  // 11: pilab.cloud.agent.v1.SnapshotService.Consolidate:output_type -> pilab.cloud.agent.v1.SnapshotConsolidateResponse
-	4,  // 12: pilab.cloud.agent.v1.SnapshotService.List:output_type -> pilab.cloud.agent.v1.SnapshotListResponse
+	3,  // 0: pilab.agent.v1.SnapshotListResponse.snapshots:type_name -> pilab.agent.v1.SnapshotInfo
+	7,  // 1: pilab.agent.v1.SnapshotService.Create:input_type -> pilab.agent.v1.SnapshotCreateRequest
+	5,  // 2: pilab.agent.v1.SnapshotService.Restore:input_type -> pilab.agent.v1.SnapshotRestoreRequest
+	9,  // 3: pilab.agent.v1.SnapshotService.Delete:input_type -> pilab.agent.v1.SnapshotDeleteRequest
+	11, // 4: pilab.agent.v1.SnapshotService.Clone:input_type -> pilab.agent.v1.SnapshotCloneRequest
+	0,  // 5: pilab.agent.v1.SnapshotService.Consolidate:input_type -> pilab.agent.v1.SnapshotConsolidateRequest
+	2,  // 6: pilab.agent.v1.SnapshotService.List:input_type -> pilab.agent.v1.SnapshotListRequest
+	8,  // 7: pilab.agent.v1.SnapshotService.Create:output_type -> pilab.agent.v1.SnapshotCreateResponse
+	6,  // 8: pilab.agent.v1.SnapshotService.Restore:output_type -> pilab.agent.v1.SnapshotRestoreResponse
+	10, // 9: pilab.agent.v1.SnapshotService.Delete:output_type -> pilab.agent.v1.SnapshotDeleteResponse
+	12, // 10: pilab.agent.v1.SnapshotService.Clone:output_type -> pilab.agent.v1.SnapshotCloneResponse
+	1,  // 11: pilab.agent.v1.SnapshotService.Consolidate:output_type -> pilab.agent.v1.SnapshotConsolidateResponse
+	4,  // 12: pilab.agent.v1.SnapshotService.List:output_type -> pilab.agent.v1.SnapshotListResponse
 	7,  // [7:13] is the sub-list for method output_type
 	1,  // [1:7] is the sub-list for method input_type
 	1,  // [1:1] is the sub-list for extension type_name
@@ -791,7 +791,6 @@ func file_pilab_agent_v1_snapshot_service_proto_init() {
 	if File_pilab_agent_v1_snapshot_service_proto != nil {
 		return
 	}
-	file_pilab_agent_v1_stream_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

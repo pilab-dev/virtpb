@@ -21,7 +21,7 @@
 
 syntax = "proto3";
 
-package pilab.cloud.ws.v1;
+package pilab.ws.v1;
 
 import "pilab/vm_metrics.proto";
 import "pilab/host_stats.proto";

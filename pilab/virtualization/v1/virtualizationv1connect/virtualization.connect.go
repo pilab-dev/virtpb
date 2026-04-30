@@ -44,7 +44,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// VirtualizationServiceName is the fully-qualified name of the VirtualizationService service.
-	VirtualizationServiceName = "pilab.cloud.virtualization.v1.VirtualizationService"
+	VirtualizationServiceName = "pilab.virtualization.v1.VirtualizationService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -57,71 +57,71 @@ const (
 const (
 	// VirtualizationServiceCreateTenantProcedure is the fully-qualified name of the
 	// VirtualizationService's CreateTenant RPC.
-	VirtualizationServiceCreateTenantProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/CreateTenant"
+	VirtualizationServiceCreateTenantProcedure = "/pilab.virtualization.v1.VirtualizationService/CreateTenant"
 	// VirtualizationServiceGetTenantProcedure is the fully-qualified name of the
 	// VirtualizationService's GetTenant RPC.
-	VirtualizationServiceGetTenantProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/GetTenant"
+	VirtualizationServiceGetTenantProcedure = "/pilab.virtualization.v1.VirtualizationService/GetTenant"
 	// VirtualizationServiceListTenantsProcedure is the fully-qualified name of the
 	// VirtualizationService's ListTenants RPC.
-	VirtualizationServiceListTenantsProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/ListTenants"
+	VirtualizationServiceListTenantsProcedure = "/pilab.virtualization.v1.VirtualizationService/ListTenants"
 	// VirtualizationServiceUpdateTenantProcedure is the fully-qualified name of the
 	// VirtualizationService's UpdateTenant RPC.
-	VirtualizationServiceUpdateTenantProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/UpdateTenant"
+	VirtualizationServiceUpdateTenantProcedure = "/pilab.virtualization.v1.VirtualizationService/UpdateTenant"
 	// VirtualizationServiceDeleteTenantProcedure is the fully-qualified name of the
 	// VirtualizationService's DeleteTenant RPC.
-	VirtualizationServiceDeleteTenantProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/DeleteTenant"
+	VirtualizationServiceDeleteTenantProcedure = "/pilab.virtualization.v1.VirtualizationService/DeleteTenant"
 	// VirtualizationServiceCreatePortGroupProcedure is the fully-qualified name of the
 	// VirtualizationService's CreatePortGroup RPC.
-	VirtualizationServiceCreatePortGroupProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/CreatePortGroup"
+	VirtualizationServiceCreatePortGroupProcedure = "/pilab.virtualization.v1.VirtualizationService/CreatePortGroup"
 	// VirtualizationServiceGetPortGroupProcedure is the fully-qualified name of the
 	// VirtualizationService's GetPortGroup RPC.
-	VirtualizationServiceGetPortGroupProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/GetPortGroup"
+	VirtualizationServiceGetPortGroupProcedure = "/pilab.virtualization.v1.VirtualizationService/GetPortGroup"
 	// VirtualizationServiceListPortGroupsProcedure is the fully-qualified name of the
 	// VirtualizationService's ListPortGroups RPC.
-	VirtualizationServiceListPortGroupsProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/ListPortGroups"
+	VirtualizationServiceListPortGroupsProcedure = "/pilab.virtualization.v1.VirtualizationService/ListPortGroups"
 	// VirtualizationServiceUpdatePortGroupProcedure is the fully-qualified name of the
 	// VirtualizationService's UpdatePortGroup RPC.
-	VirtualizationServiceUpdatePortGroupProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/UpdatePortGroup"
+	VirtualizationServiceUpdatePortGroupProcedure = "/pilab.virtualization.v1.VirtualizationService/UpdatePortGroup"
 	// VirtualizationServiceDeletePortGroupProcedure is the fully-qualified name of the
 	// VirtualizationService's DeletePortGroup RPC.
-	VirtualizationServiceDeletePortGroupProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/DeletePortGroup"
+	VirtualizationServiceDeletePortGroupProcedure = "/pilab.virtualization.v1.VirtualizationService/DeletePortGroup"
 	// VirtualizationServiceSetPortGroupSystemServicesProcedure is the fully-qualified name of the
 	// VirtualizationService's SetPortGroupSystemServices RPC.
-	VirtualizationServiceSetPortGroupSystemServicesProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/SetPortGroupSystemServices"
+	VirtualizationServiceSetPortGroupSystemServicesProcedure = "/pilab.virtualization.v1.VirtualizationService/SetPortGroupSystemServices"
 	// VirtualizationServiceGetPortGroupSystemServicesProcedure is the fully-qualified name of the
 	// VirtualizationService's GetPortGroupSystemServices RPC.
-	VirtualizationServiceGetPortGroupSystemServicesProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/GetPortGroupSystemServices"
+	VirtualizationServiceGetPortGroupSystemServicesProcedure = "/pilab.virtualization.v1.VirtualizationService/GetPortGroupSystemServices"
 	// VirtualizationServiceCreateNetworkProcedure is the fully-qualified name of the
 	// VirtualizationService's CreateNetwork RPC.
-	VirtualizationServiceCreateNetworkProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/CreateNetwork"
+	VirtualizationServiceCreateNetworkProcedure = "/pilab.virtualization.v1.VirtualizationService/CreateNetwork"
 	// VirtualizationServiceGetNetworkProcedure is the fully-qualified name of the
 	// VirtualizationService's GetNetwork RPC.
-	VirtualizationServiceGetNetworkProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/GetNetwork"
+	VirtualizationServiceGetNetworkProcedure = "/pilab.virtualization.v1.VirtualizationService/GetNetwork"
 	// VirtualizationServiceListNetworksProcedure is the fully-qualified name of the
 	// VirtualizationService's ListNetworks RPC.
-	VirtualizationServiceListNetworksProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/ListNetworks"
+	VirtualizationServiceListNetworksProcedure = "/pilab.virtualization.v1.VirtualizationService/ListNetworks"
 	// VirtualizationServiceUpdateNetworkProcedure is the fully-qualified name of the
 	// VirtualizationService's UpdateNetwork RPC.
-	VirtualizationServiceUpdateNetworkProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/UpdateNetwork"
+	VirtualizationServiceUpdateNetworkProcedure = "/pilab.virtualization.v1.VirtualizationService/UpdateNetwork"
 	// VirtualizationServiceDeleteNetworkProcedure is the fully-qualified name of the
 	// VirtualizationService's DeleteNetwork RPC.
-	VirtualizationServiceDeleteNetworkProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/DeleteNetwork"
+	VirtualizationServiceDeleteNetworkProcedure = "/pilab.virtualization.v1.VirtualizationService/DeleteNetwork"
 	// VirtualizationServiceAttachVMToPortGroupProcedure is the fully-qualified name of the
 	// VirtualizationService's AttachVMToPortGroup RPC.
-	VirtualizationServiceAttachVMToPortGroupProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/AttachVMToPortGroup"
+	VirtualizationServiceAttachVMToPortGroupProcedure = "/pilab.virtualization.v1.VirtualizationService/AttachVMToPortGroup"
 	// VirtualizationServiceDetachVMFromPortGroupProcedure is the fully-qualified name of the
 	// VirtualizationService's DetachVMFromPortGroup RPC.
-	VirtualizationServiceDetachVMFromPortGroupProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/DetachVMFromPortGroup"
+	VirtualizationServiceDetachVMFromPortGroupProcedure = "/pilab.virtualization.v1.VirtualizationService/DetachVMFromPortGroup"
 	// VirtualizationServiceGetAgentStatusProcedure is the fully-qualified name of the
 	// VirtualizationService's GetAgentStatus RPC.
-	VirtualizationServiceGetAgentStatusProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/GetAgentStatus"
+	VirtualizationServiceGetAgentStatusProcedure = "/pilab.virtualization.v1.VirtualizationService/GetAgentStatus"
 	// VirtualizationServiceListAgentsProcedure is the fully-qualified name of the
 	// VirtualizationService's ListAgents RPC.
-	VirtualizationServiceListAgentsProcedure = "/pilab.cloud.virtualization.v1.VirtualizationService/ListAgents"
+	VirtualizationServiceListAgentsProcedure = "/pilab.virtualization.v1.VirtualizationService/ListAgents"
 )
 
-// VirtualizationServiceClient is a client for the
-// pilab.cloud.virtualization.v1.VirtualizationService service.
+// VirtualizationServiceClient is a client for the pilab.virtualization.v1.VirtualizationService
+// service.
 type VirtualizationServiceClient interface {
 	// Tenant Management
 	CreateTenant(context.Context, *connect.Request[v1.CreateTenantRequest]) (*connect.Response[v1.Tenant], error)
@@ -153,10 +153,10 @@ type VirtualizationServiceClient interface {
 }
 
 // NewVirtualizationServiceClient constructs a client for the
-// pilab.cloud.virtualization.v1.VirtualizationService service. By default, it uses the Connect
-// protocol with the binary Protobuf Codec, asks for gzipped responses, and sends uncompressed
-// requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
-// connect.WithGRPCWeb() options.
+// pilab.virtualization.v1.VirtualizationService service. By default, it uses the Connect protocol
+// with the binary Protobuf Codec, asks for gzipped responses, and sends uncompressed requests. To
+// use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or connect.WithGRPCWeb()
+// options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -318,117 +318,115 @@ type virtualizationServiceClient struct {
 	listAgents                 *connect.Client[v1.ListAgentsRequest, v1.ListAgentsResponse]
 }
 
-// CreateTenant calls pilab.cloud.virtualization.v1.VirtualizationService.CreateTenant.
+// CreateTenant calls pilab.virtualization.v1.VirtualizationService.CreateTenant.
 func (c *virtualizationServiceClient) CreateTenant(ctx context.Context, req *connect.Request[v1.CreateTenantRequest]) (*connect.Response[v1.Tenant], error) {
 	return c.createTenant.CallUnary(ctx, req)
 }
 
-// GetTenant calls pilab.cloud.virtualization.v1.VirtualizationService.GetTenant.
+// GetTenant calls pilab.virtualization.v1.VirtualizationService.GetTenant.
 func (c *virtualizationServiceClient) GetTenant(ctx context.Context, req *connect.Request[v1.GetTenantRequest]) (*connect.Response[v1.Tenant], error) {
 	return c.getTenant.CallUnary(ctx, req)
 }
 
-// ListTenants calls pilab.cloud.virtualization.v1.VirtualizationService.ListTenants.
+// ListTenants calls pilab.virtualization.v1.VirtualizationService.ListTenants.
 func (c *virtualizationServiceClient) ListTenants(ctx context.Context, req *connect.Request[v1.ListTenantsRequest]) (*connect.Response[v1.ListTenantsResponse], error) {
 	return c.listTenants.CallUnary(ctx, req)
 }
 
-// UpdateTenant calls pilab.cloud.virtualization.v1.VirtualizationService.UpdateTenant.
+// UpdateTenant calls pilab.virtualization.v1.VirtualizationService.UpdateTenant.
 func (c *virtualizationServiceClient) UpdateTenant(ctx context.Context, req *connect.Request[v1.UpdateTenantRequest]) (*connect.Response[v1.Tenant], error) {
 	return c.updateTenant.CallUnary(ctx, req)
 }
 
-// DeleteTenant calls pilab.cloud.virtualization.v1.VirtualizationService.DeleteTenant.
+// DeleteTenant calls pilab.virtualization.v1.VirtualizationService.DeleteTenant.
 func (c *virtualizationServiceClient) DeleteTenant(ctx context.Context, req *connect.Request[v1.DeleteTenantRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteTenant.CallUnary(ctx, req)
 }
 
-// CreatePortGroup calls pilab.cloud.virtualization.v1.VirtualizationService.CreatePortGroup.
+// CreatePortGroup calls pilab.virtualization.v1.VirtualizationService.CreatePortGroup.
 func (c *virtualizationServiceClient) CreatePortGroup(ctx context.Context, req *connect.Request[v1.CreatePortGroupRequest]) (*connect.Response[v1.PortGroup], error) {
 	return c.createPortGroup.CallUnary(ctx, req)
 }
 
-// GetPortGroup calls pilab.cloud.virtualization.v1.VirtualizationService.GetPortGroup.
+// GetPortGroup calls pilab.virtualization.v1.VirtualizationService.GetPortGroup.
 func (c *virtualizationServiceClient) GetPortGroup(ctx context.Context, req *connect.Request[v1.GetPortGroupRequest]) (*connect.Response[v1.PortGroup], error) {
 	return c.getPortGroup.CallUnary(ctx, req)
 }
 
-// ListPortGroups calls pilab.cloud.virtualization.v1.VirtualizationService.ListPortGroups.
+// ListPortGroups calls pilab.virtualization.v1.VirtualizationService.ListPortGroups.
 func (c *virtualizationServiceClient) ListPortGroups(ctx context.Context, req *connect.Request[v1.ListPortGroupsRequest]) (*connect.Response[v1.ListPortGroupsResponse], error) {
 	return c.listPortGroups.CallUnary(ctx, req)
 }
 
-// UpdatePortGroup calls pilab.cloud.virtualization.v1.VirtualizationService.UpdatePortGroup.
+// UpdatePortGroup calls pilab.virtualization.v1.VirtualizationService.UpdatePortGroup.
 func (c *virtualizationServiceClient) UpdatePortGroup(ctx context.Context, req *connect.Request[v1.UpdatePortGroupRequest]) (*connect.Response[v1.PortGroup], error) {
 	return c.updatePortGroup.CallUnary(ctx, req)
 }
 
-// DeletePortGroup calls pilab.cloud.virtualization.v1.VirtualizationService.DeletePortGroup.
+// DeletePortGroup calls pilab.virtualization.v1.VirtualizationService.DeletePortGroup.
 func (c *virtualizationServiceClient) DeletePortGroup(ctx context.Context, req *connect.Request[v1.DeletePortGroupRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deletePortGroup.CallUnary(ctx, req)
 }
 
 // SetPortGroupSystemServices calls
-// pilab.cloud.virtualization.v1.VirtualizationService.SetPortGroupSystemServices.
+// pilab.virtualization.v1.VirtualizationService.SetPortGroupSystemServices.
 func (c *virtualizationServiceClient) SetPortGroupSystemServices(ctx context.Context, req *connect.Request[v1.SetPortGroupSystemServicesRequest]) (*connect.Response[v1.PortGroup], error) {
 	return c.setPortGroupSystemServices.CallUnary(ctx, req)
 }
 
 // GetPortGroupSystemServices calls
-// pilab.cloud.virtualization.v1.VirtualizationService.GetPortGroupSystemServices.
+// pilab.virtualization.v1.VirtualizationService.GetPortGroupSystemServices.
 func (c *virtualizationServiceClient) GetPortGroupSystemServices(ctx context.Context, req *connect.Request[v1.GetPortGroupSystemServicesRequest]) (*connect.Response[v1.SystemServicesConfig], error) {
 	return c.getPortGroupSystemServices.CallUnary(ctx, req)
 }
 
-// CreateNetwork calls pilab.cloud.virtualization.v1.VirtualizationService.CreateNetwork.
+// CreateNetwork calls pilab.virtualization.v1.VirtualizationService.CreateNetwork.
 func (c *virtualizationServiceClient) CreateNetwork(ctx context.Context, req *connect.Request[v1.CreateNetworkRequest]) (*connect.Response[v1.Network], error) {
 	return c.createNetwork.CallUnary(ctx, req)
 }
 
-// GetNetwork calls pilab.cloud.virtualization.v1.VirtualizationService.GetNetwork.
+// GetNetwork calls pilab.virtualization.v1.VirtualizationService.GetNetwork.
 func (c *virtualizationServiceClient) GetNetwork(ctx context.Context, req *connect.Request[v1.GetNetworkRequest]) (*connect.Response[v1.Network], error) {
 	return c.getNetwork.CallUnary(ctx, req)
 }
 
-// ListNetworks calls pilab.cloud.virtualization.v1.VirtualizationService.ListNetworks.
+// ListNetworks calls pilab.virtualization.v1.VirtualizationService.ListNetworks.
 func (c *virtualizationServiceClient) ListNetworks(ctx context.Context, req *connect.Request[v1.ListNetworksRequest]) (*connect.Response[v1.ListNetworksResponse], error) {
 	return c.listNetworks.CallUnary(ctx, req)
 }
 
-// UpdateNetwork calls pilab.cloud.virtualization.v1.VirtualizationService.UpdateNetwork.
+// UpdateNetwork calls pilab.virtualization.v1.VirtualizationService.UpdateNetwork.
 func (c *virtualizationServiceClient) UpdateNetwork(ctx context.Context, req *connect.Request[v1.UpdateNetworkRequest]) (*connect.Response[v1.Network], error) {
 	return c.updateNetwork.CallUnary(ctx, req)
 }
 
-// DeleteNetwork calls pilab.cloud.virtualization.v1.VirtualizationService.DeleteNetwork.
+// DeleteNetwork calls pilab.virtualization.v1.VirtualizationService.DeleteNetwork.
 func (c *virtualizationServiceClient) DeleteNetwork(ctx context.Context, req *connect.Request[v1.DeleteNetworkRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteNetwork.CallUnary(ctx, req)
 }
 
-// AttachVMToPortGroup calls
-// pilab.cloud.virtualization.v1.VirtualizationService.AttachVMToPortGroup.
+// AttachVMToPortGroup calls pilab.virtualization.v1.VirtualizationService.AttachVMToPortGroup.
 func (c *virtualizationServiceClient) AttachVMToPortGroup(ctx context.Context, req *connect.Request[v1.AttachVMToPortGroupRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.attachVMToPortGroup.CallUnary(ctx, req)
 }
 
-// DetachVMFromPortGroup calls
-// pilab.cloud.virtualization.v1.VirtualizationService.DetachVMFromPortGroup.
+// DetachVMFromPortGroup calls pilab.virtualization.v1.VirtualizationService.DetachVMFromPortGroup.
 func (c *virtualizationServiceClient) DetachVMFromPortGroup(ctx context.Context, req *connect.Request[v1.DetachVMFromPortGroupRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.detachVMFromPortGroup.CallUnary(ctx, req)
 }
 
-// GetAgentStatus calls pilab.cloud.virtualization.v1.VirtualizationService.GetAgentStatus.
+// GetAgentStatus calls pilab.virtualization.v1.VirtualizationService.GetAgentStatus.
 func (c *virtualizationServiceClient) GetAgentStatus(ctx context.Context, req *connect.Request[v1.GetAgentStatusRequest]) (*connect.Response[v1.AgentStatusResponse], error) {
 	return c.getAgentStatus.CallUnary(ctx, req)
 }
 
-// ListAgents calls pilab.cloud.virtualization.v1.VirtualizationService.ListAgents.
+// ListAgents calls pilab.virtualization.v1.VirtualizationService.ListAgents.
 func (c *virtualizationServiceClient) ListAgents(ctx context.Context, req *connect.Request[v1.ListAgentsRequest]) (*connect.Response[v1.ListAgentsResponse], error) {
 	return c.listAgents.CallUnary(ctx, req)
 }
 
 // VirtualizationServiceHandler is an implementation of the
-// pilab.cloud.virtualization.v1.VirtualizationService service.
+// pilab.virtualization.v1.VirtualizationService service.
 type VirtualizationServiceHandler interface {
 	// Tenant Management
 	CreateTenant(context.Context, *connect.Request[v1.CreateTenantRequest]) (*connect.Response[v1.Tenant], error)
@@ -592,7 +590,7 @@ func NewVirtualizationServiceHandler(svc VirtualizationServiceHandler, opts ...c
 		connect.WithSchema(virtualizationServiceMethods.ByName("ListAgents")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.virtualization.v1.VirtualizationService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.virtualization.v1.VirtualizationService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case VirtualizationServiceCreateTenantProcedure:
 			virtualizationServiceCreateTenantHandler.ServeHTTP(w, r)
@@ -646,85 +644,85 @@ func NewVirtualizationServiceHandler(svc VirtualizationServiceHandler, opts ...c
 type UnimplementedVirtualizationServiceHandler struct{}
 
 func (UnimplementedVirtualizationServiceHandler) CreateTenant(context.Context, *connect.Request[v1.CreateTenantRequest]) (*connect.Response[v1.Tenant], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.CreateTenant is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.CreateTenant is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) GetTenant(context.Context, *connect.Request[v1.GetTenantRequest]) (*connect.Response[v1.Tenant], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.GetTenant is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.GetTenant is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) ListTenants(context.Context, *connect.Request[v1.ListTenantsRequest]) (*connect.Response[v1.ListTenantsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.ListTenants is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.ListTenants is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) UpdateTenant(context.Context, *connect.Request[v1.UpdateTenantRequest]) (*connect.Response[v1.Tenant], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.UpdateTenant is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.UpdateTenant is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) DeleteTenant(context.Context, *connect.Request[v1.DeleteTenantRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.DeleteTenant is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.DeleteTenant is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) CreatePortGroup(context.Context, *connect.Request[v1.CreatePortGroupRequest]) (*connect.Response[v1.PortGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.CreatePortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.CreatePortGroup is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) GetPortGroup(context.Context, *connect.Request[v1.GetPortGroupRequest]) (*connect.Response[v1.PortGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.GetPortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.GetPortGroup is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) ListPortGroups(context.Context, *connect.Request[v1.ListPortGroupsRequest]) (*connect.Response[v1.ListPortGroupsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.ListPortGroups is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.ListPortGroups is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) UpdatePortGroup(context.Context, *connect.Request[v1.UpdatePortGroupRequest]) (*connect.Response[v1.PortGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.UpdatePortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.UpdatePortGroup is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) DeletePortGroup(context.Context, *connect.Request[v1.DeletePortGroupRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.DeletePortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.DeletePortGroup is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) SetPortGroupSystemServices(context.Context, *connect.Request[v1.SetPortGroupSystemServicesRequest]) (*connect.Response[v1.PortGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.SetPortGroupSystemServices is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.SetPortGroupSystemServices is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) GetPortGroupSystemServices(context.Context, *connect.Request[v1.GetPortGroupSystemServicesRequest]) (*connect.Response[v1.SystemServicesConfig], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.GetPortGroupSystemServices is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.GetPortGroupSystemServices is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) CreateNetwork(context.Context, *connect.Request[v1.CreateNetworkRequest]) (*connect.Response[v1.Network], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.CreateNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.CreateNetwork is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) GetNetwork(context.Context, *connect.Request[v1.GetNetworkRequest]) (*connect.Response[v1.Network], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.GetNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.GetNetwork is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) ListNetworks(context.Context, *connect.Request[v1.ListNetworksRequest]) (*connect.Response[v1.ListNetworksResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.ListNetworks is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.ListNetworks is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) UpdateNetwork(context.Context, *connect.Request[v1.UpdateNetworkRequest]) (*connect.Response[v1.Network], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.UpdateNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.UpdateNetwork is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) DeleteNetwork(context.Context, *connect.Request[v1.DeleteNetworkRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.DeleteNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.DeleteNetwork is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) AttachVMToPortGroup(context.Context, *connect.Request[v1.AttachVMToPortGroupRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.AttachVMToPortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.AttachVMToPortGroup is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) DetachVMFromPortGroup(context.Context, *connect.Request[v1.DetachVMFromPortGroupRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.DetachVMFromPortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.DetachVMFromPortGroup is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) GetAgentStatus(context.Context, *connect.Request[v1.GetAgentStatusRequest]) (*connect.Response[v1.AgentStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.GetAgentStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.GetAgentStatus is not implemented"))
 }
 
 func (UnimplementedVirtualizationServiceHandler) ListAgents(context.Context, *connect.Request[v1.ListAgentsRequest]) (*connect.Response[v1.ListAgentsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.virtualization.v1.VirtualizationService.ListAgents is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.VirtualizationService.ListAgents is not implemented"))
 }

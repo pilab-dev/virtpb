@@ -19,7 +19,7 @@
 
 syntax = "proto3";
 
-package pilab.cloud.frontend.v1;
+package pilab.frontend.v1;
 
 import "google/protobuf/empty.proto";
 

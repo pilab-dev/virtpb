@@ -21,9 +21,7 @@
 
 syntax = "proto3";
 
-package pilab.cloud.agent.v1;
-
-import "pilab/agent/v1/stream.proto";
+package pilab.agent.v1;
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
 

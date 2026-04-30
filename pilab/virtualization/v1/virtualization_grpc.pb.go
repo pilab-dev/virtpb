@@ -41,27 +41,27 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	VirtualizationService_CreateTenant_FullMethodName               = "/pilab.cloud.virtualization.v1.VirtualizationService/CreateTenant"
-	VirtualizationService_GetTenant_FullMethodName                  = "/pilab.cloud.virtualization.v1.VirtualizationService/GetTenant"
-	VirtualizationService_ListTenants_FullMethodName                = "/pilab.cloud.virtualization.v1.VirtualizationService/ListTenants"
-	VirtualizationService_UpdateTenant_FullMethodName               = "/pilab.cloud.virtualization.v1.VirtualizationService/UpdateTenant"
-	VirtualizationService_DeleteTenant_FullMethodName               = "/pilab.cloud.virtualization.v1.VirtualizationService/DeleteTenant"
-	VirtualizationService_CreatePortGroup_FullMethodName            = "/pilab.cloud.virtualization.v1.VirtualizationService/CreatePortGroup"
-	VirtualizationService_GetPortGroup_FullMethodName               = "/pilab.cloud.virtualization.v1.VirtualizationService/GetPortGroup"
-	VirtualizationService_ListPortGroups_FullMethodName             = "/pilab.cloud.virtualization.v1.VirtualizationService/ListPortGroups"
-	VirtualizationService_UpdatePortGroup_FullMethodName            = "/pilab.cloud.virtualization.v1.VirtualizationService/UpdatePortGroup"
-	VirtualizationService_DeletePortGroup_FullMethodName            = "/pilab.cloud.virtualization.v1.VirtualizationService/DeletePortGroup"
-	VirtualizationService_SetPortGroupSystemServices_FullMethodName = "/pilab.cloud.virtualization.v1.VirtualizationService/SetPortGroupSystemServices"
-	VirtualizationService_GetPortGroupSystemServices_FullMethodName = "/pilab.cloud.virtualization.v1.VirtualizationService/GetPortGroupSystemServices"
-	VirtualizationService_CreateNetwork_FullMethodName              = "/pilab.cloud.virtualization.v1.VirtualizationService/CreateNetwork"
-	VirtualizationService_GetNetwork_FullMethodName                 = "/pilab.cloud.virtualization.v1.VirtualizationService/GetNetwork"
-	VirtualizationService_ListNetworks_FullMethodName               = "/pilab.cloud.virtualization.v1.VirtualizationService/ListNetworks"
-	VirtualizationService_UpdateNetwork_FullMethodName              = "/pilab.cloud.virtualization.v1.VirtualizationService/UpdateNetwork"
-	VirtualizationService_DeleteNetwork_FullMethodName              = "/pilab.cloud.virtualization.v1.VirtualizationService/DeleteNetwork"
-	VirtualizationService_AttachVMToPortGroup_FullMethodName        = "/pilab.cloud.virtualization.v1.VirtualizationService/AttachVMToPortGroup"
-	VirtualizationService_DetachVMFromPortGroup_FullMethodName      = "/pilab.cloud.virtualization.v1.VirtualizationService/DetachVMFromPortGroup"
-	VirtualizationService_GetAgentStatus_FullMethodName             = "/pilab.cloud.virtualization.v1.VirtualizationService/GetAgentStatus"
-	VirtualizationService_ListAgents_FullMethodName                 = "/pilab.cloud.virtualization.v1.VirtualizationService/ListAgents"
+	VirtualizationService_CreateTenant_FullMethodName               = "/pilab.virtualization.v1.VirtualizationService/CreateTenant"
+	VirtualizationService_GetTenant_FullMethodName                  = "/pilab.virtualization.v1.VirtualizationService/GetTenant"
+	VirtualizationService_ListTenants_FullMethodName                = "/pilab.virtualization.v1.VirtualizationService/ListTenants"
+	VirtualizationService_UpdateTenant_FullMethodName               = "/pilab.virtualization.v1.VirtualizationService/UpdateTenant"
+	VirtualizationService_DeleteTenant_FullMethodName               = "/pilab.virtualization.v1.VirtualizationService/DeleteTenant"
+	VirtualizationService_CreatePortGroup_FullMethodName            = "/pilab.virtualization.v1.VirtualizationService/CreatePortGroup"
+	VirtualizationService_GetPortGroup_FullMethodName               = "/pilab.virtualization.v1.VirtualizationService/GetPortGroup"
+	VirtualizationService_ListPortGroups_FullMethodName             = "/pilab.virtualization.v1.VirtualizationService/ListPortGroups"
+	VirtualizationService_UpdatePortGroup_FullMethodName            = "/pilab.virtualization.v1.VirtualizationService/UpdatePortGroup"
+	VirtualizationService_DeletePortGroup_FullMethodName            = "/pilab.virtualization.v1.VirtualizationService/DeletePortGroup"
+	VirtualizationService_SetPortGroupSystemServices_FullMethodName = "/pilab.virtualization.v1.VirtualizationService/SetPortGroupSystemServices"
+	VirtualizationService_GetPortGroupSystemServices_FullMethodName = "/pilab.virtualization.v1.VirtualizationService/GetPortGroupSystemServices"
+	VirtualizationService_CreateNetwork_FullMethodName              = "/pilab.virtualization.v1.VirtualizationService/CreateNetwork"
+	VirtualizationService_GetNetwork_FullMethodName                 = "/pilab.virtualization.v1.VirtualizationService/GetNetwork"
+	VirtualizationService_ListNetworks_FullMethodName               = "/pilab.virtualization.v1.VirtualizationService/ListNetworks"
+	VirtualizationService_UpdateNetwork_FullMethodName              = "/pilab.virtualization.v1.VirtualizationService/UpdateNetwork"
+	VirtualizationService_DeleteNetwork_FullMethodName              = "/pilab.virtualization.v1.VirtualizationService/DeleteNetwork"
+	VirtualizationService_AttachVMToPortGroup_FullMethodName        = "/pilab.virtualization.v1.VirtualizationService/AttachVMToPortGroup"
+	VirtualizationService_DetachVMFromPortGroup_FullMethodName      = "/pilab.virtualization.v1.VirtualizationService/DetachVMFromPortGroup"
+	VirtualizationService_GetAgentStatus_FullMethodName             = "/pilab.virtualization.v1.VirtualizationService/GetAgentStatus"
+	VirtualizationService_ListAgents_FullMethodName                 = "/pilab.virtualization.v1.VirtualizationService/ListAgents"
 )
 
 // VirtualizationServiceClient is the client API for VirtualizationService service.
@@ -826,7 +826,7 @@ func _VirtualizationService_ListAgents_Handler(srv interface{}, ctx context.Cont
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var VirtualizationService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.virtualization.v1.VirtualizationService",
+	ServiceName: "pilab.virtualization.v1.VirtualizationService",
 	HandlerType: (*VirtualizationServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

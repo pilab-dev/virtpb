@@ -647,7 +647,7 @@ func (x *NetworkInterfaceStatusUpdate) GetErrorMessage() string {
 type VMStatusUpdate struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	VmUuid        string                 `protobuf:"bytes,1,opt,name=vm_uuid,json=vmUuid,proto3" json:"vm_uuid,omitempty"`
-	State         VMState                `protobuf:"varint,2,opt,name=state,proto3,enum=pilab.cloud.agent.v1.VMState" json:"state,omitempty"`
+	State         VMState                `protobuf:"varint,2,opt,name=state,proto3,enum=pilab.agent.v1.VMState" json:"state,omitempty"`
 	ErrorMessage  string                 `protobuf:"bytes,3,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"` //(optional)
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -810,7 +810,7 @@ type HypervisorStatus struct {
 	StorageTotalMb    int64                         `protobuf:"varint,4,opt,name=storage_total_mb,json=storageTotalMb,proto3" json:"storage_total_mb,omitempty"`
 	StorageUsedMb     int64                         `protobuf:"varint,5,opt,name=storage_used_mb,json=storageUsedMb,proto3" json:"storage_used_mb,omitempty"`
 	NetworkInterfaces []*NetworkInterfaceStatus     `protobuf:"bytes,6,rep,name=network_interfaces,json=networkInterfaces,proto3" json:"network_interfaces,omitempty"`
-	HealthStatus      HypervisorStatus_HealthStatus `protobuf:"varint,7,opt,name=health_status,json=healthStatus,proto3,enum=pilab.cloud.agent.v1.HypervisorStatus_HealthStatus" json:"health_status,omitempty"`
+	HealthStatus      HypervisorStatus_HealthStatus `protobuf:"varint,7,opt,name=health_status,json=healthStatus,proto3,enum=pilab.agent.v1.HypervisorStatus_HealthStatus" json:"health_status,omitempty"`
 	HealthDetails     string                        `protobuf:"bytes,8,opt,name=health_details,json=healthDetails,proto3" json:"health_details,omitempty"`
 	RunningVms        int32                         `protobuf:"varint,9,opt,name=running_vms,json=runningVms,proto3" json:"running_vms,omitempty"`
 	StoppedVms        int32                         `protobuf:"varint,10,opt,name=stopped_vms,json=stoppedVms,proto3" json:"stopped_vms,omitempty"`
@@ -1158,7 +1158,7 @@ type Event struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
 	VmUuid        string                 `protobuf:"bytes,2,opt,name=vm_uuid,json=vmUuid,proto3" json:"vm_uuid,omitempty"` // Optional, if the event is related to a VM
-	Severity      Event_Severity         `protobuf:"varint,3,opt,name=severity,proto3,enum=pilab.cloud.agent.v1.Event_Severity" json:"severity,omitempty"`
+	Severity      Event_Severity         `protobuf:"varint,3,opt,name=severity,proto3,enum=pilab.agent.v1.Event_Severity" json:"severity,omitempty"`
 	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
 	Details       map[string]string      `protobuf:"bytes,5,rep,name=details,proto3" json:"details,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Optional structured details
 	unknownFields protoimpl.UnknownFields
@@ -1233,7 +1233,7 @@ func (x *Event) GetDetails() map[string]string {
 type LogRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Source        string                 `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"` // "hypervisor" or vm_uuid
-	LogLevel      LogRequest_LogLevel    `protobuf:"varint,2,opt,name=log_level,json=logLevel,proto3,enum=pilab.cloud.agent.v1.LogRequest_LogLevel" json:"log_level,omitempty"`
+	LogLevel      LogRequest_LogLevel    `protobuf:"varint,2,opt,name=log_level,json=logLevel,proto3,enum=pilab.agent.v1.LogRequest_LogLevel" json:"log_level,omitempty"`
 	Filter        string                 `protobuf:"bytes,3,opt,name=filter,proto3" json:"filter,omitempty"` // Optional regex filter
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1353,7 +1353,7 @@ func (x *LogResponse) GetMessage() string {
 type TaskProgress struct {
 	state           protoimpl.MessageState  `protogen:"open.v1"`
 	TaskId          string                  `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
-	Status          TaskProgress_TaskStatus `protobuf:"varint,2,opt,name=status,proto3,enum=pilab.cloud.agent.v1.TaskProgress_TaskStatus" json:"status,omitempty"`
+	Status          TaskProgress_TaskStatus `protobuf:"varint,2,opt,name=status,proto3,enum=pilab.agent.v1.TaskProgress_TaskStatus" json:"status,omitempty"`
 	ProgressPercent float32                 `protobuf:"fixed32,3,opt,name=progress_percent,json=progressPercent,proto3" json:"progress_percent,omitempty"` // Optional
 	Output          string                  `protobuf:"bytes,4,opt,name=output,proto3" json:"output,omitempty"`                                            // Optional output or error messages
 	unknownFields   protoimpl.UnknownFields
@@ -1422,7 +1422,7 @@ type WorkflowState struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
 	WorkflowId    string                  `protobuf:"bytes,1,opt,name=workflow_id,json=workflowId,proto3" json:"workflow_id,omitempty"`
 	StepId        string                  `protobuf:"bytes,2,opt,name=step_id,json=stepId,proto3" json:"step_id,omitempty"`
-	State         WorkflowState_StepState `protobuf:"varint,3,opt,name=state,proto3,enum=pilab.cloud.agent.v1.WorkflowState_StepState" json:"state,omitempty"`
+	State         WorkflowState_StepState `protobuf:"varint,3,opt,name=state,proto3,enum=pilab.agent.v1.WorkflowState_StepState" json:"state,omitempty"`
 	OutputData    map[string]string       `protobuf:"bytes,4,rep,name=output_data,json=outputData,proto3" json:"output_data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Output data from the step
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1488,7 +1488,7 @@ func (x *WorkflowState) GetOutputData() map[string]string {
 
 type AgentUpdateStatus struct {
 	state         protoimpl.MessageState         `protogen:"open.v1"`
-	Status        AgentUpdateStatus_UpdateStatus `protobuf:"varint,1,opt,name=status,proto3,enum=pilab.cloud.agent.v1.AgentUpdateStatus_UpdateStatus" json:"status,omitempty"`
+	Status        AgentUpdateStatus_UpdateStatus `protobuf:"varint,1,opt,name=status,proto3,enum=pilab.agent.v1.AgentUpdateStatus_UpdateStatus" json:"status,omitempty"`
 	Message       string                         `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"` // Optional details or error message
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1810,7 +1810,7 @@ var File_pilab_agent_v1_agent_director_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_agent_director_proto_rawDesc = "" +
 	"\n" +
-	"#pilab/agent/v1/agent_director.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8d\x01\n" +
+	"#pilab/agent/v1/agent_director.proto\x12\x0epilab.agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8d\x01\n" +
 	"\x14HardwareStatusUpdate\x12\x1f\n" +
 	"\vdevice_uuid\x18\x01 \x01(\tR\n" +
 	"deviceUuid\x12\x17\n" +
@@ -1828,24 +1828,24 @@ const file_pilab_agent_v1_agent_director_proto_rawDesc = "" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x12\x1f\n" +
 	"\vmac_address\x18\x04 \x01(\tR\n" +
 	"macAddress\x12#\n" +
-	"\rerror_message\x18\x05 \x01(\tR\ferrorMessage\"\x83\x01\n" +
+	"\rerror_message\x18\x05 \x01(\tR\ferrorMessage\"}\n" +
 	"\x0eVMStatusUpdate\x12\x17\n" +
-	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x123\n" +
-	"\x05state\x18\x02 \x01(\x0e2\x1d.pilab.cloud.agent.v1.VMStateR\x05state\x12#\n" +
+	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x12-\n" +
+	"\x05state\x18\x02 \x01(\x0e2\x17.pilab.agent.v1.VMStateR\x05state\x12#\n" +
 	"\rerror_message\x18\x03 \x01(\tR\ferrorMessage\"R\n" +
 	"\x10HeartbeatRequest\x12\x19\n" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x12#\n" +
 	"\ragent_version\x18\x02 \x01(\tR\fagentVersion\"-\n" +
 	"\x11HeartbeatResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\x97\x05\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\x8b\x05\n" +
 	"\x10HypervisorStatus\x12\x1b\n" +
 	"\tcpu_usage\x18\x01 \x01(\x02R\bcpuUsage\x12&\n" +
 	"\x0fmemory_total_mb\x18\x02 \x01(\x03R\rmemoryTotalMb\x12$\n" +
 	"\x0ememory_used_mb\x18\x03 \x01(\x03R\fmemoryUsedMb\x12(\n" +
 	"\x10storage_total_mb\x18\x04 \x01(\x03R\x0estorageTotalMb\x12&\n" +
-	"\x0fstorage_used_mb\x18\x05 \x01(\x03R\rstorageUsedMb\x12[\n" +
-	"\x12network_interfaces\x18\x06 \x03(\v2,.pilab.cloud.agent.v1.NetworkInterfaceStatusR\x11networkInterfaces\x12X\n" +
-	"\rhealth_status\x18\a \x01(\x0e23.pilab.cloud.agent.v1.HypervisorStatus.HealthStatusR\fhealthStatus\x12%\n" +
+	"\x0fstorage_used_mb\x18\x05 \x01(\x03R\rstorageUsedMb\x12U\n" +
+	"\x12network_interfaces\x18\x06 \x03(\v2&.pilab.agent.v1.NetworkInterfaceStatusR\x11networkInterfaces\x12R\n" +
+	"\rhealth_status\x18\a \x01(\x0e2-.pilab.agent.v1.HypervisorStatus.HealthStatusR\fhealthStatus\x12%\n" +
 	"\x0ehealth_details\x18\b \x01(\tR\rhealthDetails\x12\x1f\n" +
 	"\vrunning_vms\x18\t \x01(\x05R\n" +
 	"runningVms\x12\x1f\n" +
@@ -1861,16 +1861,16 @@ const file_pilab_agent_v1_agent_director_proto_rawDesc = "" +
 	"\x16NetworkInterfaceStatus\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x0e\n" +
 	"\x02up\x18\x02 \x01(\bR\x02up\x12%\n" +
-	"\x0ebandwidth_mbps\x18\x03 \x01(\x02R\rbandwidthMbps\"\xa3\x06\n" +
+	"\x0ebandwidth_mbps\x18\x03 \x01(\x02R\rbandwidthMbps\"\x91\x06\n" +
 	"\tVMMetrics\x12\x17\n" +
-	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x12G\n" +
+	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x12A\n" +
 	"\n" +
-	"cpu_usages\x18\x02 \x03(\v2(.pilab.cloud.agent.v1.VMMetrics.CPUUsageR\tcpuUsages\x120\n" +
+	"cpu_usages\x18\x02 \x03(\v2\".pilab.agent.v1.VMMetrics.CPUUsageR\tcpuUsages\x120\n" +
 	"\x14memory_usage_percent\x18\x03 \x01(\x02R\x12memoryUsagePercent\x12&\n" +
-	"\x0fmemory_usage_mb\x18\x04 \x01(\x03R\rmemoryUsageMb\x12F\n" +
-	"\adisk_io\x18\x05 \x01(\v2-.pilab.cloud.agent.v1.VMMetrics.DiskIOMetricsR\x06diskIo\x12O\n" +
+	"\x0fmemory_usage_mb\x18\x04 \x01(\x03R\rmemoryUsageMb\x12@\n" +
+	"\adisk_io\x18\x05 \x01(\v2'.pilab.agent.v1.VMMetrics.DiskIOMetricsR\x06diskIo\x12I\n" +
 	"\n" +
-	"network_io\x18\x06 \x01(\v20.pilab.cloud.agent.v1.VMMetrics.NetworkIOMetricsR\tnetworkIo\x128\n" +
+	"network_io\x18\x06 \x01(\v2*.pilab.agent.v1.VMMetrics.NetworkIOMetricsR\tnetworkIo\x128\n" +
 	"\ttimestamp\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x1aH\n" +
 	"\bCPUUsage\x12\x17\n" +
 	"\avcpu_id\x18\x01 \x01(\rR\x06vcpuId\x12#\n" +
@@ -1883,23 +1883,23 @@ const file_pilab_agent_v1_agent_director_proto_rawDesc = "" +
 	"write_iops\x18\x04 \x01(\x03R\twriteIops\x1a\x86\x01\n" +
 	"\x10NetworkIOMetrics\x127\n" +
 	"\x18receive_bytes_per_second\x18\x01 \x01(\x03R\x15receiveBytesPerSecond\x129\n" +
-	"\x19transmit_bytes_per_second\x18\x02 \x01(\x03R\x16transmitBytesPerSecond\"\xb3\x03\n" +
+	"\x19transmit_bytes_per_second\x18\x02 \x01(\x03R\x16transmitBytesPerSecond\"\xad\x03\n" +
 	"\x17HypervisorResourceUsage\x12*\n" +
 	"\x11cpu_usage_percent\x18\x01 \x01(\x02R\x0fcpuUsagePercent\x12&\n" +
 	"\x0fmemory_usage_mb\x18\x02 \x01(\x03R\rmemoryUsageMb\x12\"\n" +
-	"\rdisk_usage_mb\x18\x03 \x01(\x03R\vdiskUsageMb\x12]\n" +
+	"\rdisk_usage_mb\x18\x03 \x01(\x03R\vdiskUsageMb\x12W\n" +
 	"\n" +
-	"network_io\x18\x04 \x01(\v2>.pilab.cloud.agent.v1.HypervisorResourceUsage.NetworkIOMetricsR\tnetworkIo\x128\n" +
+	"network_io\x18\x04 \x01(\v28.pilab.agent.v1.HypervisorResourceUsage.NetworkIOMetricsR\tnetworkIo\x128\n" +
 	"\ttimestamp\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x1a\x86\x01\n" +
 	"\x10NetworkIOMetrics\x127\n" +
 	"\x18receive_bytes_per_second\x18\x01 \x01(\x03R\x15receiveBytesPerSecond\x129\n" +
-	"\x19transmit_bytes_per_second\x18\x02 \x01(\x03R\x16transmitBytesPerSecond\"\x99\x03\n" +
+	"\x19transmit_bytes_per_second\x18\x02 \x01(\x03R\x16transmitBytesPerSecond\"\x8d\x03\n" +
 	"\x05Event\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12\x17\n" +
-	"\avm_uuid\x18\x02 \x01(\tR\x06vmUuid\x12@\n" +
-	"\bseverity\x18\x03 \x01(\x0e2$.pilab.cloud.agent.v1.Event.SeverityR\bseverity\x12\x18\n" +
-	"\amessage\x18\x04 \x01(\tR\amessage\x12B\n" +
-	"\adetails\x18\x05 \x03(\v2(.pilab.cloud.agent.v1.Event.DetailsEntryR\adetails\x1a:\n" +
+	"\avm_uuid\x18\x02 \x01(\tR\x06vmUuid\x12:\n" +
+	"\bseverity\x18\x03 \x01(\x0e2\x1e.pilab.agent.v1.Event.SeverityR\bseverity\x12\x18\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\x12<\n" +
+	"\adetails\x18\x05 \x03(\v2\".pilab.agent.v1.Event.DetailsEntryR\adetails\x1a:\n" +
 	"\fDetailsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"a\n" +
@@ -1907,11 +1907,11 @@ const file_pilab_agent_v1_agent_director_proto_rawDesc = "" +
 	"\x14SEVERITY_UNSPECIFIED\x10\x00\x12\x11\n" +
 	"\rSEVERITY_INFO\x10\x01\x12\x14\n" +
 	"\x10SEVERITY_WARNING\x10\x02\x12\x12\n" +
-	"\x0eSEVERITY_ERROR\x10\x03\"\x80\x02\n" +
+	"\x0eSEVERITY_ERROR\x10\x03\"\xfa\x01\n" +
 	"\n" +
 	"LogRequest\x12\x16\n" +
-	"\x06source\x18\x01 \x01(\tR\x06source\x12F\n" +
-	"\tlog_level\x18\x02 \x01(\x0e2).pilab.cloud.agent.v1.LogRequest.LogLevelR\blogLevel\x12\x16\n" +
+	"\x06source\x18\x01 \x01(\tR\x06source\x12@\n" +
+	"\tlog_level\x18\x02 \x01(\x0e2#.pilab.agent.v1.LogRequest.LogLevelR\blogLevel\x12\x16\n" +
 	"\x06filter\x18\x03 \x01(\tR\x06filter\"z\n" +
 	"\bLogLevel\x12\x19\n" +
 	"\x15LOG_LEVEL_UNSPECIFIED\x10\x00\x12\x13\n" +
@@ -1922,10 +1922,10 @@ const file_pilab_agent_v1_agent_director_proto_rawDesc = "" +
 	"\vLogResponse\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12\x16\n" +
 	"\x06source\x18\x02 \x01(\tR\x06source\x12\x18\n" +
-	"\amessage\x18\x03 \x01(\tR\amessage\"\xc2\x02\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"\xbc\x02\n" +
 	"\fTaskProgress\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12E\n" +
-	"\x06status\x18\x02 \x01(\x0e2-.pilab.cloud.agent.v1.TaskProgress.TaskStatusR\x06status\x12)\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12?\n" +
+	"\x06status\x18\x02 \x01(\x0e2'.pilab.agent.v1.TaskProgress.TaskStatusR\x06status\x12)\n" +
 	"\x10progress_percent\x18\x03 \x01(\x02R\x0fprogressPercent\x12\x16\n" +
 	"\x06output\x18\x04 \x01(\tR\x06output\"\x8e\x01\n" +
 	"\n" +
@@ -1934,13 +1934,13 @@ const file_pilab_agent_v1_agent_director_proto_rawDesc = "" +
 	"\x13TASK_STATUS_PENDING\x10\x01\x12\x17\n" +
 	"\x13TASK_STATUS_RUNNING\x10\x02\x12\x19\n" +
 	"\x15TASK_STATUS_COMPLETED\x10\x03\x12\x16\n" +
-	"\x12TASK_STATUS_FAILED\x10\x04\"\xae\x03\n" +
+	"\x12TASK_STATUS_FAILED\x10\x04\"\xa2\x03\n" +
 	"\rWorkflowState\x12\x1f\n" +
 	"\vworkflow_id\x18\x01 \x01(\tR\n" +
 	"workflowId\x12\x17\n" +
-	"\astep_id\x18\x02 \x01(\tR\x06stepId\x12C\n" +
-	"\x05state\x18\x03 \x01(\x0e2-.pilab.cloud.agent.v1.WorkflowState.StepStateR\x05state\x12T\n" +
-	"\voutput_data\x18\x04 \x03(\v23.pilab.cloud.agent.v1.WorkflowState.OutputDataEntryR\n" +
+	"\astep_id\x18\x02 \x01(\tR\x06stepId\x12=\n" +
+	"\x05state\x18\x03 \x01(\x0e2'.pilab.agent.v1.WorkflowState.StepStateR\x05state\x12N\n" +
+	"\voutput_data\x18\x04 \x03(\v2-.pilab.agent.v1.WorkflowState.OutputDataEntryR\n" +
 	"outputData\x1a=\n" +
 	"\x0fOutputDataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -1950,9 +1950,9 @@ const file_pilab_agent_v1_agent_director_proto_rawDesc = "" +
 	"\x12STEP_STATE_PENDING\x10\x01\x12\x16\n" +
 	"\x12STEP_STATE_RUNNING\x10\x02\x12\x18\n" +
 	"\x14STEP_STATE_SUCCEEDED\x10\x03\x12\x15\n" +
-	"\x11STEP_STATE_FAILED\x10\x04\"\xa0\x02\n" +
-	"\x11AgentUpdateStatus\x12L\n" +
-	"\x06status\x18\x01 \x01(\x0e24.pilab.cloud.agent.v1.AgentUpdateStatus.UpdateStatusR\x06status\x12\x18\n" +
+	"\x11STEP_STATE_FAILED\x10\x04\"\x9a\x02\n" +
+	"\x11AgentUpdateStatus\x12F\n" +
+	"\x06status\x18\x01 \x01(\x0e2..pilab.agent.v1.AgentUpdateStatus.UpdateStatusR\x06status\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"\xa2\x01\n" +
 	"\fUpdateStatus\x12\x1d\n" +
 	"\x19UPDATE_STATUS_UNSPECIFIED\x10\x00\x12\x1d\n" +
@@ -1971,24 +1971,23 @@ const file_pilab_agent_v1_agent_director_proto_rawDesc = "" +
 	"\x11VM_STATE_SHUTDOWN\x10\x04\x12\x14\n" +
 	"\x10VM_STATE_SHUTOFF\x10\x05\x12\x14\n" +
 	"\x10VM_STATE_CRASHED\x10\x06\x12\x16\n" +
-	"\x12VM_STATE_SUSPENDED\x10\a2\x90\n" +
+	"\x12VM_STATE_SUSPENDED\x10\a2\xb0\t\n" +
+	"\x14AgentDirectorService\x12X\n" +
+	"\x0fReportHeartbeat\x12 .pilab.agent.v1.HeartbeatRequest\x1a!.pilab.agent.v1.HeartbeatResponse\"\x00\x12T\n" +
+	"\x16ReportHypervisorStatus\x12 .pilab.agent.v1.HypervisorStatus\x1a\x16.google.protobuf.Empty\"\x00\x12J\n" +
+	"\x0eReportVMStatus\x12\x1e.pilab.agent.v1.VMStatusUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12N\n" +
+	"\x10ReportDiskStatus\x12 .pilab.agent.v1.DiskStatusUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12f\n" +
+	"\x1cReportNetworkInterfaceStatus\x12,.pilab.agent.v1.NetworkInterfaceStatusUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12V\n" +
+	"\x14ReportHardwareStatus\x12$.pilab.agent.v1.HardwareStatusUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12F\n" +
+	"\x0fReportVMMetrics\x12\x19.pilab.agent.v1.VMMetrics\x1a\x16.google.protobuf.Empty\"\x00\x12b\n" +
+	"\x1dReportHypervisorResourceUsage\x12'.pilab.agent.v1.HypervisorResourceUsage\x1a\x16.google.protobuf.Empty\"\x00\x12>\n" +
+	"\vReportEvent\x12\x15.pilab.agent.v1.Event\x1a\x16.google.protobuf.Empty\"\x00\x12K\n" +
 	"\n" +
-	"\x14AgentDirectorService\x12d\n" +
-	"\x0fReportHeartbeat\x12&.pilab.cloud.agent.v1.HeartbeatRequest\x1a'.pilab.cloud.agent.v1.HeartbeatResponse\"\x00\x12Z\n" +
-	"\x16ReportHypervisorStatus\x12&.pilab.cloud.agent.v1.HypervisorStatus\x1a\x16.google.protobuf.Empty\"\x00\x12P\n" +
-	"\x0eReportVMStatus\x12$.pilab.cloud.agent.v1.VMStatusUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12T\n" +
-	"\x10ReportDiskStatus\x12&.pilab.cloud.agent.v1.DiskStatusUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12l\n" +
-	"\x1cReportNetworkInterfaceStatus\x122.pilab.cloud.agent.v1.NetworkInterfaceStatusUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12\\\n" +
-	"\x14ReportHardwareStatus\x12*.pilab.cloud.agent.v1.HardwareStatusUpdate\x1a\x16.google.protobuf.Empty\"\x00\x12L\n" +
-	"\x0fReportVMMetrics\x12\x1f.pilab.cloud.agent.v1.VMMetrics\x1a\x16.google.protobuf.Empty\"\x00\x12h\n" +
-	"\x1dReportHypervisorResourceUsage\x12-.pilab.cloud.agent.v1.HypervisorResourceUsage\x1a\x16.google.protobuf.Empty\"\x00\x12D\n" +
-	"\vReportEvent\x12\x1b.pilab.cloud.agent.v1.Event\x1a\x16.google.protobuf.Empty\"\x00\x12W\n" +
-	"\n" +
-	"StreamLogs\x12 .pilab.cloud.agent.v1.LogRequest\x1a!.pilab.cloud.agent.v1.LogResponse\"\x00(\x010\x01\x12R\n" +
-	"\x12ReportTaskProgress\x12\".pilab.cloud.agent.v1.TaskProgress\x1a\x16.google.protobuf.Empty\"\x00\x12T\n" +
-	"\x13ReportWorkflowState\x12#.pilab.cloud.agent.v1.WorkflowState\x1a\x16.google.protobuf.Empty\"\x00\x12\\\n" +
-	"\x17ReportAgentUpdateStatus\x12'.pilab.cloud.agent.v1.AgentUpdateStatus\x1a\x16.google.protobuf.Empty\"\x00\x12c\n" +
-	"\x1dAcknowledgeAgentConfiguration\x12(.pilab.cloud.agent.v1.AgentConfiguration\x1a\x16.google.protobuf.Empty\"\x00B1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"StreamLogs\x12\x1a.pilab.agent.v1.LogRequest\x1a\x1b.pilab.agent.v1.LogResponse\"\x00(\x010\x01\x12L\n" +
+	"\x12ReportTaskProgress\x12\x1c.pilab.agent.v1.TaskProgress\x1a\x16.google.protobuf.Empty\"\x00\x12N\n" +
+	"\x13ReportWorkflowState\x12\x1d.pilab.agent.v1.WorkflowState\x1a\x16.google.protobuf.Empty\"\x00\x12V\n" +
+	"\x17ReportAgentUpdateStatus\x12!.pilab.agent.v1.AgentUpdateStatus\x1a\x16.google.protobuf.Empty\"\x00\x12]\n" +
+	"\x1dAcknowledgeAgentConfiguration\x12\".pilab.agent.v1.AgentConfiguration\x1a\x16.google.protobuf.Empty\"\x00B1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_agent_director_proto_rawDescOnce sync.Once
@@ -2005,86 +2004,86 @@ func file_pilab_agent_v1_agent_director_proto_rawDescGZIP() []byte {
 var file_pilab_agent_v1_agent_director_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
 var file_pilab_agent_v1_agent_director_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_pilab_agent_v1_agent_director_proto_goTypes = []any{
-	(VMState)(0),                                     // 0: pilab.cloud.agent.v1.VMState
-	(HypervisorStatus_HealthStatus)(0),               // 1: pilab.cloud.agent.v1.HypervisorStatus.HealthStatus
-	(Event_Severity)(0),                              // 2: pilab.cloud.agent.v1.Event.Severity
-	(LogRequest_LogLevel)(0),                         // 3: pilab.cloud.agent.v1.LogRequest.LogLevel
-	(TaskProgress_TaskStatus)(0),                     // 4: pilab.cloud.agent.v1.TaskProgress.TaskStatus
-	(WorkflowState_StepState)(0),                     // 5: pilab.cloud.agent.v1.WorkflowState.StepState
-	(AgentUpdateStatus_UpdateStatus)(0),              // 6: pilab.cloud.agent.v1.AgentUpdateStatus.UpdateStatus
-	(*HardwareStatusUpdate)(nil),                     // 7: pilab.cloud.agent.v1.HardwareStatusUpdate
-	(*DiskStatusUpdate)(nil),                         // 8: pilab.cloud.agent.v1.DiskStatusUpdate
-	(*NetworkInterfaceStatusUpdate)(nil),             // 9: pilab.cloud.agent.v1.NetworkInterfaceStatusUpdate
-	(*VMStatusUpdate)(nil),                           // 10: pilab.cloud.agent.v1.VMStatusUpdate
-	(*HeartbeatRequest)(nil),                         // 11: pilab.cloud.agent.v1.HeartbeatRequest
-	(*HeartbeatResponse)(nil),                        // 12: pilab.cloud.agent.v1.HeartbeatResponse
-	(*HypervisorStatus)(nil),                         // 13: pilab.cloud.agent.v1.HypervisorStatus
-	(*NetworkInterfaceStatus)(nil),                   // 14: pilab.cloud.agent.v1.NetworkInterfaceStatus
-	(*VMMetrics)(nil),                                // 15: pilab.cloud.agent.v1.VMMetrics
-	(*HypervisorResourceUsage)(nil),                  // 16: pilab.cloud.agent.v1.HypervisorResourceUsage
-	(*Event)(nil),                                    // 17: pilab.cloud.agent.v1.Event
-	(*LogRequest)(nil),                               // 18: pilab.cloud.agent.v1.LogRequest
-	(*LogResponse)(nil),                              // 19: pilab.cloud.agent.v1.LogResponse
-	(*TaskProgress)(nil),                             // 20: pilab.cloud.agent.v1.TaskProgress
-	(*WorkflowState)(nil),                            // 21: pilab.cloud.agent.v1.WorkflowState
-	(*AgentUpdateStatus)(nil),                        // 22: pilab.cloud.agent.v1.AgentUpdateStatus
-	(*AgentConfiguration)(nil),                       // 23: pilab.cloud.agent.v1.AgentConfiguration
-	(*VMMetrics_CPUUsage)(nil),                       // 24: pilab.cloud.agent.v1.VMMetrics.CPUUsage
-	(*VMMetrics_DiskIOMetrics)(nil),                  // 25: pilab.cloud.agent.v1.VMMetrics.DiskIOMetrics
-	(*VMMetrics_NetworkIOMetrics)(nil),               // 26: pilab.cloud.agent.v1.VMMetrics.NetworkIOMetrics
-	(*HypervisorResourceUsage_NetworkIOMetrics)(nil), // 27: pilab.cloud.agent.v1.HypervisorResourceUsage.NetworkIOMetrics
-	nil,                           // 28: pilab.cloud.agent.v1.Event.DetailsEntry
-	nil,                           // 29: pilab.cloud.agent.v1.WorkflowState.OutputDataEntry
+	(VMState)(0),                                     // 0: pilab.agent.v1.VMState
+	(HypervisorStatus_HealthStatus)(0),               // 1: pilab.agent.v1.HypervisorStatus.HealthStatus
+	(Event_Severity)(0),                              // 2: pilab.agent.v1.Event.Severity
+	(LogRequest_LogLevel)(0),                         // 3: pilab.agent.v1.LogRequest.LogLevel
+	(TaskProgress_TaskStatus)(0),                     // 4: pilab.agent.v1.TaskProgress.TaskStatus
+	(WorkflowState_StepState)(0),                     // 5: pilab.agent.v1.WorkflowState.StepState
+	(AgentUpdateStatus_UpdateStatus)(0),              // 6: pilab.agent.v1.AgentUpdateStatus.UpdateStatus
+	(*HardwareStatusUpdate)(nil),                     // 7: pilab.agent.v1.HardwareStatusUpdate
+	(*DiskStatusUpdate)(nil),                         // 8: pilab.agent.v1.DiskStatusUpdate
+	(*NetworkInterfaceStatusUpdate)(nil),             // 9: pilab.agent.v1.NetworkInterfaceStatusUpdate
+	(*VMStatusUpdate)(nil),                           // 10: pilab.agent.v1.VMStatusUpdate
+	(*HeartbeatRequest)(nil),                         // 11: pilab.agent.v1.HeartbeatRequest
+	(*HeartbeatResponse)(nil),                        // 12: pilab.agent.v1.HeartbeatResponse
+	(*HypervisorStatus)(nil),                         // 13: pilab.agent.v1.HypervisorStatus
+	(*NetworkInterfaceStatus)(nil),                   // 14: pilab.agent.v1.NetworkInterfaceStatus
+	(*VMMetrics)(nil),                                // 15: pilab.agent.v1.VMMetrics
+	(*HypervisorResourceUsage)(nil),                  // 16: pilab.agent.v1.HypervisorResourceUsage
+	(*Event)(nil),                                    // 17: pilab.agent.v1.Event
+	(*LogRequest)(nil),                               // 18: pilab.agent.v1.LogRequest
+	(*LogResponse)(nil),                              // 19: pilab.agent.v1.LogResponse
+	(*TaskProgress)(nil),                             // 20: pilab.agent.v1.TaskProgress
+	(*WorkflowState)(nil),                            // 21: pilab.agent.v1.WorkflowState
+	(*AgentUpdateStatus)(nil),                        // 22: pilab.agent.v1.AgentUpdateStatus
+	(*AgentConfiguration)(nil),                       // 23: pilab.agent.v1.AgentConfiguration
+	(*VMMetrics_CPUUsage)(nil),                       // 24: pilab.agent.v1.VMMetrics.CPUUsage
+	(*VMMetrics_DiskIOMetrics)(nil),                  // 25: pilab.agent.v1.VMMetrics.DiskIOMetrics
+	(*VMMetrics_NetworkIOMetrics)(nil),               // 26: pilab.agent.v1.VMMetrics.NetworkIOMetrics
+	(*HypervisorResourceUsage_NetworkIOMetrics)(nil), // 27: pilab.agent.v1.HypervisorResourceUsage.NetworkIOMetrics
+	nil,                           // 28: pilab.agent.v1.Event.DetailsEntry
+	nil,                           // 29: pilab.agent.v1.WorkflowState.OutputDataEntry
 	(*timestamppb.Timestamp)(nil), // 30: google.protobuf.Timestamp
 	(*emptypb.Empty)(nil),         // 31: google.protobuf.Empty
 }
 var file_pilab_agent_v1_agent_director_proto_depIdxs = []int32{
-	0,  // 0: pilab.cloud.agent.v1.VMStatusUpdate.state:type_name -> pilab.cloud.agent.v1.VMState
-	14, // 1: pilab.cloud.agent.v1.HypervisorStatus.network_interfaces:type_name -> pilab.cloud.agent.v1.NetworkInterfaceStatus
-	1,  // 2: pilab.cloud.agent.v1.HypervisorStatus.health_status:type_name -> pilab.cloud.agent.v1.HypervisorStatus.HealthStatus
-	24, // 3: pilab.cloud.agent.v1.VMMetrics.cpu_usages:type_name -> pilab.cloud.agent.v1.VMMetrics.CPUUsage
-	25, // 4: pilab.cloud.agent.v1.VMMetrics.disk_io:type_name -> pilab.cloud.agent.v1.VMMetrics.DiskIOMetrics
-	26, // 5: pilab.cloud.agent.v1.VMMetrics.network_io:type_name -> pilab.cloud.agent.v1.VMMetrics.NetworkIOMetrics
-	30, // 6: pilab.cloud.agent.v1.VMMetrics.timestamp:type_name -> google.protobuf.Timestamp
-	27, // 7: pilab.cloud.agent.v1.HypervisorResourceUsage.network_io:type_name -> pilab.cloud.agent.v1.HypervisorResourceUsage.NetworkIOMetrics
-	30, // 8: pilab.cloud.agent.v1.HypervisorResourceUsage.timestamp:type_name -> google.protobuf.Timestamp
-	30, // 9: pilab.cloud.agent.v1.Event.timestamp:type_name -> google.protobuf.Timestamp
-	2,  // 10: pilab.cloud.agent.v1.Event.severity:type_name -> pilab.cloud.agent.v1.Event.Severity
-	28, // 11: pilab.cloud.agent.v1.Event.details:type_name -> pilab.cloud.agent.v1.Event.DetailsEntry
-	3,  // 12: pilab.cloud.agent.v1.LogRequest.log_level:type_name -> pilab.cloud.agent.v1.LogRequest.LogLevel
-	30, // 13: pilab.cloud.agent.v1.LogResponse.timestamp:type_name -> google.protobuf.Timestamp
-	4,  // 14: pilab.cloud.agent.v1.TaskProgress.status:type_name -> pilab.cloud.agent.v1.TaskProgress.TaskStatus
-	5,  // 15: pilab.cloud.agent.v1.WorkflowState.state:type_name -> pilab.cloud.agent.v1.WorkflowState.StepState
-	29, // 16: pilab.cloud.agent.v1.WorkflowState.output_data:type_name -> pilab.cloud.agent.v1.WorkflowState.OutputDataEntry
-	6,  // 17: pilab.cloud.agent.v1.AgentUpdateStatus.status:type_name -> pilab.cloud.agent.v1.AgentUpdateStatus.UpdateStatus
-	11, // 18: pilab.cloud.agent.v1.AgentDirectorService.ReportHeartbeat:input_type -> pilab.cloud.agent.v1.HeartbeatRequest
-	13, // 19: pilab.cloud.agent.v1.AgentDirectorService.ReportHypervisorStatus:input_type -> pilab.cloud.agent.v1.HypervisorStatus
-	10, // 20: pilab.cloud.agent.v1.AgentDirectorService.ReportVMStatus:input_type -> pilab.cloud.agent.v1.VMStatusUpdate
-	8,  // 21: pilab.cloud.agent.v1.AgentDirectorService.ReportDiskStatus:input_type -> pilab.cloud.agent.v1.DiskStatusUpdate
-	9,  // 22: pilab.cloud.agent.v1.AgentDirectorService.ReportNetworkInterfaceStatus:input_type -> pilab.cloud.agent.v1.NetworkInterfaceStatusUpdate
-	7,  // 23: pilab.cloud.agent.v1.AgentDirectorService.ReportHardwareStatus:input_type -> pilab.cloud.agent.v1.HardwareStatusUpdate
-	15, // 24: pilab.cloud.agent.v1.AgentDirectorService.ReportVMMetrics:input_type -> pilab.cloud.agent.v1.VMMetrics
-	16, // 25: pilab.cloud.agent.v1.AgentDirectorService.ReportHypervisorResourceUsage:input_type -> pilab.cloud.agent.v1.HypervisorResourceUsage
-	17, // 26: pilab.cloud.agent.v1.AgentDirectorService.ReportEvent:input_type -> pilab.cloud.agent.v1.Event
-	18, // 27: pilab.cloud.agent.v1.AgentDirectorService.StreamLogs:input_type -> pilab.cloud.agent.v1.LogRequest
-	20, // 28: pilab.cloud.agent.v1.AgentDirectorService.ReportTaskProgress:input_type -> pilab.cloud.agent.v1.TaskProgress
-	21, // 29: pilab.cloud.agent.v1.AgentDirectorService.ReportWorkflowState:input_type -> pilab.cloud.agent.v1.WorkflowState
-	22, // 30: pilab.cloud.agent.v1.AgentDirectorService.ReportAgentUpdateStatus:input_type -> pilab.cloud.agent.v1.AgentUpdateStatus
-	23, // 31: pilab.cloud.agent.v1.AgentDirectorService.AcknowledgeAgentConfiguration:input_type -> pilab.cloud.agent.v1.AgentConfiguration
-	12, // 32: pilab.cloud.agent.v1.AgentDirectorService.ReportHeartbeat:output_type -> pilab.cloud.agent.v1.HeartbeatResponse
-	31, // 33: pilab.cloud.agent.v1.AgentDirectorService.ReportHypervisorStatus:output_type -> google.protobuf.Empty
-	31, // 34: pilab.cloud.agent.v1.AgentDirectorService.ReportVMStatus:output_type -> google.protobuf.Empty
-	31, // 35: pilab.cloud.agent.v1.AgentDirectorService.ReportDiskStatus:output_type -> google.protobuf.Empty
-	31, // 36: pilab.cloud.agent.v1.AgentDirectorService.ReportNetworkInterfaceStatus:output_type -> google.protobuf.Empty
-	31, // 37: pilab.cloud.agent.v1.AgentDirectorService.ReportHardwareStatus:output_type -> google.protobuf.Empty
-	31, // 38: pilab.cloud.agent.v1.AgentDirectorService.ReportVMMetrics:output_type -> google.protobuf.Empty
-	31, // 39: pilab.cloud.agent.v1.AgentDirectorService.ReportHypervisorResourceUsage:output_type -> google.protobuf.Empty
-	31, // 40: pilab.cloud.agent.v1.AgentDirectorService.ReportEvent:output_type -> google.protobuf.Empty
-	19, // 41: pilab.cloud.agent.v1.AgentDirectorService.StreamLogs:output_type -> pilab.cloud.agent.v1.LogResponse
-	31, // 42: pilab.cloud.agent.v1.AgentDirectorService.ReportTaskProgress:output_type -> google.protobuf.Empty
-	31, // 43: pilab.cloud.agent.v1.AgentDirectorService.ReportWorkflowState:output_type -> google.protobuf.Empty
-	31, // 44: pilab.cloud.agent.v1.AgentDirectorService.ReportAgentUpdateStatus:output_type -> google.protobuf.Empty
-	31, // 45: pilab.cloud.agent.v1.AgentDirectorService.AcknowledgeAgentConfiguration:output_type -> google.protobuf.Empty
+	0,  // 0: pilab.agent.v1.VMStatusUpdate.state:type_name -> pilab.agent.v1.VMState
+	14, // 1: pilab.agent.v1.HypervisorStatus.network_interfaces:type_name -> pilab.agent.v1.NetworkInterfaceStatus
+	1,  // 2: pilab.agent.v1.HypervisorStatus.health_status:type_name -> pilab.agent.v1.HypervisorStatus.HealthStatus
+	24, // 3: pilab.agent.v1.VMMetrics.cpu_usages:type_name -> pilab.agent.v1.VMMetrics.CPUUsage
+	25, // 4: pilab.agent.v1.VMMetrics.disk_io:type_name -> pilab.agent.v1.VMMetrics.DiskIOMetrics
+	26, // 5: pilab.agent.v1.VMMetrics.network_io:type_name -> pilab.agent.v1.VMMetrics.NetworkIOMetrics
+	30, // 6: pilab.agent.v1.VMMetrics.timestamp:type_name -> google.protobuf.Timestamp
+	27, // 7: pilab.agent.v1.HypervisorResourceUsage.network_io:type_name -> pilab.agent.v1.HypervisorResourceUsage.NetworkIOMetrics
+	30, // 8: pilab.agent.v1.HypervisorResourceUsage.timestamp:type_name -> google.protobuf.Timestamp
+	30, // 9: pilab.agent.v1.Event.timestamp:type_name -> google.protobuf.Timestamp
+	2,  // 10: pilab.agent.v1.Event.severity:type_name -> pilab.agent.v1.Event.Severity
+	28, // 11: pilab.agent.v1.Event.details:type_name -> pilab.agent.v1.Event.DetailsEntry
+	3,  // 12: pilab.agent.v1.LogRequest.log_level:type_name -> pilab.agent.v1.LogRequest.LogLevel
+	30, // 13: pilab.agent.v1.LogResponse.timestamp:type_name -> google.protobuf.Timestamp
+	4,  // 14: pilab.agent.v1.TaskProgress.status:type_name -> pilab.agent.v1.TaskProgress.TaskStatus
+	5,  // 15: pilab.agent.v1.WorkflowState.state:type_name -> pilab.agent.v1.WorkflowState.StepState
+	29, // 16: pilab.agent.v1.WorkflowState.output_data:type_name -> pilab.agent.v1.WorkflowState.OutputDataEntry
+	6,  // 17: pilab.agent.v1.AgentUpdateStatus.status:type_name -> pilab.agent.v1.AgentUpdateStatus.UpdateStatus
+	11, // 18: pilab.agent.v1.AgentDirectorService.ReportHeartbeat:input_type -> pilab.agent.v1.HeartbeatRequest
+	13, // 19: pilab.agent.v1.AgentDirectorService.ReportHypervisorStatus:input_type -> pilab.agent.v1.HypervisorStatus
+	10, // 20: pilab.agent.v1.AgentDirectorService.ReportVMStatus:input_type -> pilab.agent.v1.VMStatusUpdate
+	8,  // 21: pilab.agent.v1.AgentDirectorService.ReportDiskStatus:input_type -> pilab.agent.v1.DiskStatusUpdate
+	9,  // 22: pilab.agent.v1.AgentDirectorService.ReportNetworkInterfaceStatus:input_type -> pilab.agent.v1.NetworkInterfaceStatusUpdate
+	7,  // 23: pilab.agent.v1.AgentDirectorService.ReportHardwareStatus:input_type -> pilab.agent.v1.HardwareStatusUpdate
+	15, // 24: pilab.agent.v1.AgentDirectorService.ReportVMMetrics:input_type -> pilab.agent.v1.VMMetrics
+	16, // 25: pilab.agent.v1.AgentDirectorService.ReportHypervisorResourceUsage:input_type -> pilab.agent.v1.HypervisorResourceUsage
+	17, // 26: pilab.agent.v1.AgentDirectorService.ReportEvent:input_type -> pilab.agent.v1.Event
+	18, // 27: pilab.agent.v1.AgentDirectorService.StreamLogs:input_type -> pilab.agent.v1.LogRequest
+	20, // 28: pilab.agent.v1.AgentDirectorService.ReportTaskProgress:input_type -> pilab.agent.v1.TaskProgress
+	21, // 29: pilab.agent.v1.AgentDirectorService.ReportWorkflowState:input_type -> pilab.agent.v1.WorkflowState
+	22, // 30: pilab.agent.v1.AgentDirectorService.ReportAgentUpdateStatus:input_type -> pilab.agent.v1.AgentUpdateStatus
+	23, // 31: pilab.agent.v1.AgentDirectorService.AcknowledgeAgentConfiguration:input_type -> pilab.agent.v1.AgentConfiguration
+	12, // 32: pilab.agent.v1.AgentDirectorService.ReportHeartbeat:output_type -> pilab.agent.v1.HeartbeatResponse
+	31, // 33: pilab.agent.v1.AgentDirectorService.ReportHypervisorStatus:output_type -> google.protobuf.Empty
+	31, // 34: pilab.agent.v1.AgentDirectorService.ReportVMStatus:output_type -> google.protobuf.Empty
+	31, // 35: pilab.agent.v1.AgentDirectorService.ReportDiskStatus:output_type -> google.protobuf.Empty
+	31, // 36: pilab.agent.v1.AgentDirectorService.ReportNetworkInterfaceStatus:output_type -> google.protobuf.Empty
+	31, // 37: pilab.agent.v1.AgentDirectorService.ReportHardwareStatus:output_type -> google.protobuf.Empty
+	31, // 38: pilab.agent.v1.AgentDirectorService.ReportVMMetrics:output_type -> google.protobuf.Empty
+	31, // 39: pilab.agent.v1.AgentDirectorService.ReportHypervisorResourceUsage:output_type -> google.protobuf.Empty
+	31, // 40: pilab.agent.v1.AgentDirectorService.ReportEvent:output_type -> google.protobuf.Empty
+	19, // 41: pilab.agent.v1.AgentDirectorService.StreamLogs:output_type -> pilab.agent.v1.LogResponse
+	31, // 42: pilab.agent.v1.AgentDirectorService.ReportTaskProgress:output_type -> google.protobuf.Empty
+	31, // 43: pilab.agent.v1.AgentDirectorService.ReportWorkflowState:output_type -> google.protobuf.Empty
+	31, // 44: pilab.agent.v1.AgentDirectorService.ReportAgentUpdateStatus:output_type -> google.protobuf.Empty
+	31, // 45: pilab.agent.v1.AgentDirectorService.AcknowledgeAgentConfiguration:output_type -> google.protobuf.Empty
 	32, // [32:46] is the sub-list for method output_type
 	18, // [18:32] is the sub-list for method input_type
 	18, // [18:18] is the sub-list for extension type_name

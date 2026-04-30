@@ -7842,7 +7842,7 @@ func (x *GetVMDefinitionResponse) GetVmDefinition() string {
 type ControlVMRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	VmId          string                 `protobuf:"bytes,1,opt,name=vm_id,json=vmId,proto3" json:"vm_id,omitempty"`
-	Command       ControlCommand         `protobuf:"varint,2,opt,name=command,proto3,enum=pilab.cloud.agent.v2.ControlCommand" json:"command,omitempty"`
+	Command       ControlCommand         `protobuf:"varint,2,opt,name=command,proto3,enum=pilab.agent.v2.ControlCommand" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -8367,8 +8367,8 @@ type PowerSchedule struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	VmUuid        string                 `protobuf:"bytes,2,opt,name=vm_uuid,json=vmUuid,proto3" json:"vm_uuid,omitempty"`
-	Action        PowerAction            `protobuf:"varint,3,opt,name=action,proto3,enum=pilab.cloud.agent.v2.PowerAction" json:"action,omitempty"`
-	Recurrence    RecurrenceType         `protobuf:"varint,4,opt,name=recurrence,proto3,enum=pilab.cloud.agent.v2.RecurrenceType" json:"recurrence,omitempty"`
+	Action        PowerAction            `protobuf:"varint,3,opt,name=action,proto3,enum=pilab.agent.v2.PowerAction" json:"action,omitempty"`
+	Recurrence    RecurrenceType         `protobuf:"varint,4,opt,name=recurrence,proto3,enum=pilab.agent.v2.RecurrenceType" json:"recurrence,omitempty"`
 	CronSpec      string                 `protobuf:"bytes,5,opt,name=cron_spec,json=cronSpec,proto3" json:"cron_spec,omitempty"`
 	DayOfWeek     int32                  `protobuf:"varint,6,opt,name=day_of_week,json=dayOfWeek,proto3" json:"day_of_week,omitempty"`
 	DayOfMonth    int32                  `protobuf:"varint,7,opt,name=day_of_month,json=dayOfMonth,proto3" json:"day_of_month,omitempty"`
@@ -8490,8 +8490,8 @@ func (x *PowerSchedule) GetUpdatedAt() int64 {
 type CreatePowerScheduleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	VmUuid        string                 `protobuf:"bytes,1,opt,name=vm_uuid,json=vmUuid,proto3" json:"vm_uuid,omitempty"`
-	Action        PowerAction            `protobuf:"varint,2,opt,name=action,proto3,enum=pilab.cloud.agent.v2.PowerAction" json:"action,omitempty"`
-	Recurrence    RecurrenceType         `protobuf:"varint,3,opt,name=recurrence,proto3,enum=pilab.cloud.agent.v2.RecurrenceType" json:"recurrence,omitempty"`
+	Action        PowerAction            `protobuf:"varint,2,opt,name=action,proto3,enum=pilab.agent.v2.PowerAction" json:"action,omitempty"`
+	Recurrence    RecurrenceType         `protobuf:"varint,3,opt,name=recurrence,proto3,enum=pilab.agent.v2.RecurrenceType" json:"recurrence,omitempty"`
 	CronSpec      string                 `protobuf:"bytes,4,opt,name=cron_spec,json=cronSpec,proto3" json:"cron_spec,omitempty"`
 	DayOfWeek     int32                  `protobuf:"varint,5,opt,name=day_of_week,json=dayOfWeek,proto3" json:"day_of_week,omitempty"`
 	DayOfMonth    int32                  `protobuf:"varint,6,opt,name=day_of_month,json=dayOfMonth,proto3" json:"day_of_month,omitempty"`
@@ -8754,8 +8754,8 @@ func (x *ListPowerSchedulesResponse) GetError() *Error {
 type UpdatePowerScheduleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ScheduleId    string                 `protobuf:"bytes,1,opt,name=schedule_id,json=scheduleId,proto3" json:"schedule_id,omitempty"`
-	Action        *PowerAction           `protobuf:"varint,2,opt,name=action,proto3,enum=pilab.cloud.agent.v2.PowerAction,oneof" json:"action,omitempty"`
-	Recurrence    *RecurrenceType        `protobuf:"varint,3,opt,name=recurrence,proto3,enum=pilab.cloud.agent.v2.RecurrenceType,oneof" json:"recurrence,omitempty"`
+	Action        *PowerAction           `protobuf:"varint,2,opt,name=action,proto3,enum=pilab.agent.v2.PowerAction,oneof" json:"action,omitempty"`
+	Recurrence    *RecurrenceType        `protobuf:"varint,3,opt,name=recurrence,proto3,enum=pilab.agent.v2.RecurrenceType,oneof" json:"recurrence,omitempty"`
 	CronSpec      *string                `protobuf:"bytes,4,opt,name=cron_spec,json=cronSpec,proto3,oneof" json:"cron_spec,omitempty"`
 	DayOfWeek     *int32                 `protobuf:"varint,5,opt,name=day_of_week,json=dayOfWeek,proto3,oneof" json:"day_of_week,omitempty"`
 	DayOfMonth    *int32                 `protobuf:"varint,6,opt,name=day_of_month,json=dayOfMonth,proto3,oneof" json:"day_of_month,omitempty"`
@@ -9477,7 +9477,7 @@ var File_pilab_agent_v2_agent_service_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\n" +
-	"\"pilab/agent/v2/agent_service.proto\x12\x14pilab.cloud.agent.v2\x1a\x1bgoogle/protobuf/empty.proto\"\xa3\x01\n" +
+	"\"pilab/agent/v2/agent_service.proto\x12\x0epilab.agent.v2\x1a\x1bgoogle/protobuf/empty.proto\"\xa3\x01\n" +
 	"\x04Task\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1a\n" +
@@ -9498,22 +9498,22 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\x04node\x18\x01 \x01(\rR\x04node\x12\x12\n" +
 	"\x04cpus\x18\x02 \x01(\tR\x04cpus\x12\x16\n" +
 	"\x06memory\x18\x03 \x01(\tR\x06memory\x12\x17\n" +
-	"\asize_mb\x18\x04 \x01(\x04R\x06sizeMb\"\x98\x02\n" +
+	"\asize_mb\x18\x04 \x01(\x04R\x06sizeMb\"\x86\x02\n" +
 	"\x03CPU\x12\x14\n" +
-	"\x05vcpus\x18\x01 \x01(\rR\x05vcpus\x12=\n" +
-	"\btopology\x18\x02 \x01(\v2!.pilab.cloud.agent.v2.CPUTopologyR\btopology\x12:\n" +
-	"\apinning\x18\x03 \x03(\v2 .pilab.cloud.agent.v2.CPUPinningR\apinning\x12\x12\n" +
+	"\x05vcpus\x18\x01 \x01(\rR\x05vcpus\x127\n" +
+	"\btopology\x18\x02 \x01(\v2\x1b.pilab.agent.v2.CPUTopologyR\btopology\x124\n" +
+	"\apinning\x18\x03 \x03(\v2\x1a.pilab.agent.v2.CPUPinningR\apinning\x12\x12\n" +
 	"\x04mode\x18\x04 \x01(\tR\x04mode\x12#\n" +
-	"\rfeature_flags\x18\x05 \x03(\tR\ffeatureFlags\x12G\n" +
-	"\rnuma_affinity\x18\x06 \x03(\v2\".pilab.cloud.agent.v2.NUMAAffinityR\fnumaAffinity\"\xb3\x01\n" +
+	"\rfeature_flags\x18\x05 \x03(\tR\ffeatureFlags\x12A\n" +
+	"\rnuma_affinity\x18\x06 \x03(\v2\x1c.pilab.agent.v2.NUMAAffinityR\fnumaAffinity\"\xad\x01\n" +
 	"\x06Memory\x12!\n" +
 	"\fallocated_mb\x18\x01 \x01(\x04R\vallocatedMb\x12\x1e\n" +
 	"\n" +
 	"ballooning\x18\x02 \x01(\bR\n" +
 	"ballooning\x12\x1d\n" +
 	"\n" +
-	"huge_pages\x18\x03 \x01(\bR\thugePages\x12G\n" +
-	"\rnuma_affinity\x18\x04 \x03(\v2\".pilab.cloud.agent.v2.NUMAAffinityR\fnumaAffinity\"\xa1\x01\n" +
+	"huge_pages\x18\x03 \x01(\bR\thugePages\x12A\n" +
+	"\rnuma_affinity\x18\x04 \x03(\v2\x1c.pilab.agent.v2.NUMAAffinityR\fnumaAffinity\"\xa1\x01\n" +
 	"\vQOSSettings\x12\x1b\n" +
 	"\tread_iops\x18\x01 \x01(\x04R\breadIops\x12\x1d\n" +
 	"\n" +
@@ -9521,7 +9521,7 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\x11ingress_bandwidth\x18\x03 \x01(\tR\x10ingressBandwidth\x12)\n" +
 	"\x10egress_bandwidth\x18\x04 \x01(\tR\x0fegressBandwidth\"*\n" +
 	"\x0eDiskEncryption\x12\x18\n" +
-	"\aenabled\x18\x01 \x01(\bR\aenabled\"\xc5\x02\n" +
+	"\aenabled\x18\x01 \x01(\bR\aenabled\"\xb9\x02\n" +
 	"\x04Disk\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1c\n" +
 	"\tdatastore\x18\x02 \x01(\tR\tdatastore\x12\x16\n" +
@@ -9529,30 +9529,30 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\asize_gb\x18\x04 \x01(\x04R\x06sizeGb\x12\x10\n" +
 	"\x03bus\x18\x05 \x01(\tR\x03bus\x12\x1d\n" +
 	"\n" +
-	"iops_limit\x18\x06 \x01(\x04R\tiopsLimit\x12D\n" +
-	"\fqos_settings\x18\a \x01(\v2!.pilab.cloud.agent.v2.QOSSettingsR\vqosSettings\x12D\n" +
+	"iops_limit\x18\x06 \x01(\x04R\tiopsLimit\x12>\n" +
+	"\fqos_settings\x18\a \x01(\v2\x1b.pilab.agent.v2.QOSSettingsR\vqosSettings\x12>\n" +
 	"\n" +
-	"encryption\x18\b \x01(\v2$.pilab.cloud.agent.v2.DiskEncryptionR\n" +
+	"encryption\x18\b \x01(\v2\x1e.pilab.agent.v2.DiskEncryptionR\n" +
 	"encryption\x12!\n" +
 	"\fbacking_file\x18\t \x01(\tR\vbackingFile\"o\n" +
 	"\x0eStorageAdapter\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12 \n" +
 	"\vcontrollers\x18\x02 \x01(\rR\vcontrollers\x12'\n" +
-	"\x0fcontroller_type\x18\x03 \x01(\tR\x0econtrollerType\"}\n" +
-	"\aStorage\x120\n" +
-	"\x05disks\x18\x01 \x03(\v2\x1a.pilab.cloud.agent.v2.DiskR\x05disks\x12@\n" +
-	"\badapters\x18\x02 \x03(\v2$.pilab.cloud.agent.v2.StorageAdapterR\badapters\"\xf1\x01\n" +
+	"\x0fcontroller_type\x18\x03 \x01(\tR\x0econtrollerType\"q\n" +
+	"\aStorage\x12*\n" +
+	"\x05disks\x18\x01 \x03(\v2\x14.pilab.agent.v2.DiskR\x05disks\x12:\n" +
+	"\badapters\x18\x02 \x03(\v2\x1e.pilab.agent.v2.StorageAdapterR\badapters\"\xeb\x01\n" +
 	"\x10NetworkInterface\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12'\n" +
 	"\x0fvirtual_network\x18\x02 \x01(\tR\x0evirtualNetwork\x12\x1f\n" +
 	"\vmac_address\x18\x03 \x01(\tR\n" +
 	"macAddress\x12\x14\n" +
-	"\x05model\x18\x04 \x01(\tR\x05model\x12D\n" +
-	"\fqos_settings\x18\x05 \x01(\v2!.pilab.cloud.agent.v2.QOSSettingsR\vqosSettings\x12'\n" +
-	"\x0fpci_passthrough\x18\x06 \x01(\tR\x0epciPassthrough\"Q\n" +
-	"\aNetwork\x12F\n" +
+	"\x05model\x18\x04 \x01(\tR\x05model\x12>\n" +
+	"\fqos_settings\x18\x05 \x01(\v2\x1b.pilab.agent.v2.QOSSettingsR\vqosSettings\x12'\n" +
+	"\x0fpci_passthrough\x18\x06 \x01(\tR\x0epciPassthrough\"K\n" +
+	"\aNetwork\x12@\n" +
 	"\n" +
-	"interfaces\x18\x01 \x03(\v2&.pilab.cloud.agent.v2.NetworkInterfaceR\n" +
+	"interfaces\x18\x01 \x03(\v2 .pilab.agent.v2.NetworkInterfaceR\n" +
 	"interfaces\"n\n" +
 	"\x04BIOS\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x1d\n" +
@@ -9562,12 +9562,12 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"secureBoot\x12\x12\n" +
 	"\x04vtpm\x18\x04 \x01(\bR\x04vtpm\"!\n" +
 	"\vInputDevice\x12\x12\n" +
-	"\x04type\x18\x01 \x01(\tR\x04type\"\xa3\x02\n" +
-	"\x05Input\x12=\n" +
-	"\bkeyboard\x18\x01 \x01(\v2!.pilab.cloud.agent.v2.InputDeviceR\bkeyboard\x127\n" +
-	"\x05mouse\x18\x02 \x01(\v2!.pilab.cloud.agent.v2.InputDeviceR\x05mouse\x126\n" +
-	"\x17usb_passthrough_devices\x18\x03 \x03(\tR\x15usbPassthroughDevices\x12C\n" +
-	"\fserial_ports\x18\x04 \x03(\v2 .pilab.cloud.agent.v2.SerialPortR\vserialPorts\x12%\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\"\x91\x02\n" +
+	"\x05Input\x127\n" +
+	"\bkeyboard\x18\x01 \x01(\v2\x1b.pilab.agent.v2.InputDeviceR\bkeyboard\x121\n" +
+	"\x05mouse\x18\x02 \x01(\v2\x1b.pilab.agent.v2.InputDeviceR\x05mouse\x126\n" +
+	"\x17usb_passthrough_devices\x18\x03 \x03(\tR\x15usbPassthroughDevices\x12=\n" +
+	"\fserial_ports\x18\x04 \x03(\v2\x1a.pilab.agent.v2.SerialPortR\vserialPorts\x12%\n" +
 	"\x0eparallel_ports\x18\x05 \x03(\tR\rparallelPorts\"$\n" +
 	"\n" +
 	"SerialPort\x12\x16\n" +
@@ -9584,42 +9584,42 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\x0fNetworkQOSLimit\x12!\n" +
 	"\finterface_id\x18\x01 \x01(\tR\vinterfaceId\x12+\n" +
 	"\x11ingress_bandwidth\x18\x02 \x01(\tR\x10ingressBandwidth\x12)\n" +
-	"\x10egress_bandwidth\x18\x03 \x01(\tR\x0fegressBandwidth\"\xdf\x01\n" +
+	"\x10egress_bandwidth\x18\x03 \x01(\tR\x0fegressBandwidth\"\xd3\x01\n" +
 	"\x03QoS\x12\x1d\n" +
 	"\n" +
 	"cpu_shares\x18\x01 \x01(\rR\tcpuShares\x12&\n" +
-	"\x0fmemory_limit_mb\x18\x02 \x01(\x04R\rmemoryLimitMb\x12C\n" +
-	"\vdisk_limits\x18\x03 \x03(\v2\".pilab.cloud.agent.v2.DiskQOSLimitR\n" +
-	"diskLimits\x12L\n" +
-	"\x0enetwork_limits\x18\x04 \x03(\v2%.pilab.cloud.agent.v2.NetworkQOSLimitR\rnetworkLimits\"\xb3\x05\n" +
+	"\x0fmemory_limit_mb\x18\x02 \x01(\x04R\rmemoryLimitMb\x12=\n" +
+	"\vdisk_limits\x18\x03 \x03(\v2\x1c.pilab.agent.v2.DiskQOSLimitR\n" +
+	"diskLimits\x12F\n" +
+	"\x0enetwork_limits\x18\x04 \x03(\v2\x1f.pilab.agent.v2.NetworkQOSLimitR\rnetworkLimits\"\xfd\x04\n" +
 	"\x0eVirtualMachine\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x17\n" +
 	"\aos_type\x18\x04 \x01(\tR\x06osType\x12\x1d\n" +
 	"\n" +
-	"os_version\x18\x05 \x01(\tR\tosVersion\x12+\n" +
-	"\x03cpu\x18\x06 \x01(\v2\x19.pilab.cloud.agent.v2.CPUR\x03cpu\x124\n" +
-	"\x06memory\x18\a \x01(\v2\x1c.pilab.cloud.agent.v2.MemoryR\x06memory\x127\n" +
-	"\astorage\x18\b \x01(\v2\x1d.pilab.cloud.agent.v2.StorageR\astorage\x127\n" +
-	"\anetwork\x18\t \x01(\v2\x1d.pilab.cloud.agent.v2.NetworkR\anetwork\x12.\n" +
+	"os_version\x18\x05 \x01(\tR\tosVersion\x12%\n" +
+	"\x03cpu\x18\x06 \x01(\v2\x13.pilab.agent.v2.CPUR\x03cpu\x12.\n" +
+	"\x06memory\x18\a \x01(\v2\x16.pilab.agent.v2.MemoryR\x06memory\x121\n" +
+	"\astorage\x18\b \x01(\v2\x17.pilab.agent.v2.StorageR\astorage\x121\n" +
+	"\anetwork\x18\t \x01(\v2\x17.pilab.agent.v2.NetworkR\anetwork\x12(\n" +
 	"\x04bios\x18\n" +
-	" \x01(\v2\x1a.pilab.cloud.agent.v2.BIOSR\x04bios\x121\n" +
-	"\x05input\x18\v \x01(\v2\x1b.pilab.cloud.agent.v2.InputR\x05input\x121\n" +
-	"\x05video\x18\f \x01(\v2\x1b.pilab.cloud.agent.v2.VideoR\x05video\x12+\n" +
-	"\x03qos\x18\r \x01(\v2\x19.pilab.cloud.agent.v2.QoSR\x03qos\x12N\n" +
-	"\bmetadata\x18\x0e \x03(\v22.pilab.cloud.agent.v2.VirtualMachine.MetadataEntryR\bmetadata\x1a;\n" +
+	" \x01(\v2\x14.pilab.agent.v2.BIOSR\x04bios\x12+\n" +
+	"\x05input\x18\v \x01(\v2\x15.pilab.agent.v2.InputR\x05input\x12+\n" +
+	"\x05video\x18\f \x01(\v2\x15.pilab.agent.v2.VideoR\x05video\x12%\n" +
+	"\x03qos\x18\r \x01(\v2\x13.pilab.agent.v2.QoSR\x03qos\x12H\n" +
+	"\bmetadata\x18\x0e \x03(\v2,.pilab.agent.v2.VirtualMachine.MetadataEntryR\bmetadata\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd2\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xcc\x02\n" +
 	"\n" +
 	"HostStatus\x12\x19\n" +
 	"\bcpu_load\x18\x01 \x01(\x02R\acpuLoad\x12&\n" +
 	"\x0fmemory_usage_mb\x18\x02 \x01(\x04R\rmemoryUsageMb\x12/\n" +
 	"\x13network_utilization\x18\x03 \x01(\x02R\x12networkUtilization\x12/\n" +
 	"\x13storage_utilization\x18\x04 \x01(\x02R\x12storageUtilization\x12\x16\n" +
-	"\x06uptime\x18\x05 \x01(\x04R\x06uptime\x12J\n" +
-	"\bmetadata\x18\x06 \x03(\v2..pilab.cloud.agent.v2.HostStatus.MetadataEntryR\bmetadata\x1a;\n" +
+	"\x06uptime\x18\x05 \x01(\x04R\x06uptime\x12D\n" +
+	"\bmetadata\x18\x06 \x03(\v2(.pilab.agent.v2.HostStatus.MetadataEntryR\bmetadata\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"d\n" +
@@ -9627,14 +9627,14 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\fminio_bucket\x18\x01 \x01(\tR\vminioBucket\x12!\n" +
 	"\fminio_object\x18\x02 \x01(\tR\vminioObject\"9\n" +
 	"\x1dCloneVMImageFromMinioResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\xa9\x02\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\xa3\x02\n" +
 	"\x13RegisterHostRequest\x12)\n" +
 	"\x10director_address\x18\x01 \x01(\tR\x0fdirectorAddress\x12\x1d\n" +
 	"\n" +
 	"ip_address\x18\x02 \x01(\tR\tipAddress\x12\x1a\n" +
 	"\busername\x18\x04 \x01(\tR\busername\x12\x1a\n" +
-	"\bpassword\x18\x05 \x01(\tR\bpassword\x12S\n" +
-	"\bmetadata\x18\x06 \x03(\v27.pilab.cloud.agent.v2.RegisterHostRequest.MetadataEntryR\bmetadata\x1a;\n" +
+	"\bpassword\x18\x05 \x01(\tR\bpassword\x12M\n" +
+	"\bmetadata\x18\x06 \x03(\v21.pilab.agent.v2.RegisterHostRequest.MetadataEntryR\bmetadata\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"n\n" +
@@ -9643,24 +9643,24 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12#\n" +
 	"\ragent_welcome\x18\x03 \x01(\tR\fagentWelcome\"+\n" +
 	"\x10HeartbeatRequest\x12\x17\n" +
-	"\ahost_id\x18\x01 \x01(\tR\x06hostId\"]\n" +
+	"\ahost_id\x18\x01 \x01(\tR\x06hostId\"W\n" +
 	"\x11HeartbeatResponse\x12\x16\n" +
-	"\x06status\x18\x01 \x01(\tR\x06status\x120\n" +
-	"\x05tasks\x18\x02 \x03(\v2\x1a.pilab.cloud.agent.v2.TaskR\x05tasks\"/\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\x12*\n" +
+	"\x05tasks\x18\x02 \x03(\v2\x14.pilab.agent.v2.TaskR\x05tasks\"/\n" +
 	"\x14GetHostStatusRequest\x12\x17\n" +
-	"\ahost_id\x18\x01 \x01(\tR\x06hostId\"G\n" +
-	"\x0fCreateVMRequest\x124\n" +
-	"\x02vm\x18\x01 \x01(\v2$.pilab.cloud.agent.v2.VirtualMachineR\x02vm\"A\n" +
+	"\ahost_id\x18\x01 \x01(\tR\x06hostId\"A\n" +
+	"\x0fCreateVMRequest\x12.\n" +
+	"\x02vm\x18\x01 \x01(\v2\x1e.pilab.agent.v2.VirtualMachineR\x02vm\"A\n" +
 	"\x10CreateVMResponse\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"*\n" +
 	"\x13GetVMDetailsRequest\x12\x13\n" +
-	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\"L\n" +
-	"\x14GetVMDetailsResponse\x124\n" +
-	"\x02vm\x18\x01 \x01(\v2$.pilab.cloud.agent.v2.VirtualMachineR\x02vm\"i\n" +
+	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\"F\n" +
+	"\x14GetVMDetailsResponse\x12.\n" +
+	"\x02vm\x18\x01 \x01(\v2\x1e.pilab.agent.v2.VirtualMachineR\x02vm\"c\n" +
 	"\x0fUpdateVMRequest\x12\x13\n" +
-	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12A\n" +
-	"\tvm_object\x18\x02 \x01(\v2$.pilab.cloud.agent.v2.VirtualMachineR\bvmObject\"D\n" +
+	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12;\n" +
+	"\tvm_object\x18\x02 \x01(\v2\x1e.pilab.agent.v2.VirtualMachineR\bvmObject\"D\n" +
 	"\x10UpdateVMResponse\x120\n" +
 	"\amessage\x18\x01 \x01(\v2\x16.google.protobuf.EmptyR\amessage\"&\n" +
 	"\x0fDeleteVMRequest\x12\x13\n" +
@@ -9729,21 +9729,21 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\x11CancelTaskRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\"F\n" +
 	"\x12CancelTaskResponse\x120\n" +
-	"\amessage\x18\x01 \x01(\v2\x16.google.protobuf.EmptyR\amessage\"\xb9\x01\n" +
+	"\amessage\x18\x01 \x01(\v2\x16.google.protobuf.EmptyR\amessage\"\xb3\x01\n" +
 	"\x17ConfigureNetworkRequest\x12\x17\n" +
-	"\ahost_id\x18\x01 \x01(\tR\x06hostId\x12U\n" +
-	"\x11network_interface\x18\x02 \x01(\v2&.pilab.cloud.agent.v2.NetworkInterfaceH\x00R\x10networkInterface\x12\x1f\n" +
+	"\ahost_id\x18\x01 \x01(\tR\x06hostId\x12O\n" +
+	"\x11network_interface\x18\x02 \x01(\v2 .pilab.agent.v2.NetworkInterfaceH\x00R\x10networkInterface\x12\x1f\n" +
 	"\n" +
 	"ovs_config\x18\x03 \x01(\tH\x00R\tovsConfigB\r\n" +
 	"\vconfig_type\"L\n" +
 	"\x18ConfigureNetworkResponse\x120\n" +
-	"\amessage\x18\x01 \x01(\v2\x16.google.protobuf.EmptyR\amessage\"\x8a\x02\n" +
+	"\amessage\x18\x01 \x01(\v2\x16.google.protobuf.EmptyR\amessage\"\xf8\x01\n" +
 	"\x17ConfigureStorageRequest\x12\x17\n" +
-	"\ahost_id\x18\x01 \x01(\tR\x06hostId\x12@\n" +
+	"\ahost_id\x18\x01 \x01(\tR\x06hostId\x12:\n" +
 	"\n" +
-	"lvm_volume\x18\x02 \x01(\v2\x1f.pilab.cloud.agent.v2.LVMVolumeH\x00R\tlvmVolume\x12=\n" +
-	"\tnfs_share\x18\x03 \x01(\v2\x1e.pilab.cloud.agent.v2.NFSShareH\x00R\bnfsShare\x12F\n" +
-	"\fiscsi_target\x18\x04 \x01(\v2!.pilab.cloud.agent.v2.ISCSITargetH\x00R\viscsiTargetB\r\n" +
+	"lvm_volume\x18\x02 \x01(\v2\x19.pilab.agent.v2.LVMVolumeH\x00R\tlvmVolume\x127\n" +
+	"\tnfs_share\x18\x03 \x01(\v2\x18.pilab.agent.v2.NFSShareH\x00R\bnfsShare\x12@\n" +
+	"\fiscsi_target\x18\x04 \x01(\v2\x1b.pilab.agent.v2.ISCSITargetH\x00R\viscsiTargetB\r\n" +
 	"\vconfig_type\"L\n" +
 	"\x18ConfigureStorageResponse\x120\n" +
 	"\amessage\x18\x01 \x01(\v2\x16.google.protobuf.EmptyR\amessage\"}\n" +
@@ -9777,22 +9777,22 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\vISCSITarget\x12\x16\n" +
 	"\x06portal\x18\x01 \x01(\tR\x06portal\x12\x16\n" +
 	"\x06target\x18\x02 \x01(\tR\x06target\x12\x10\n" +
-	"\x03lun\x18\x03 \x01(\tR\x03lun\"\xf5\x02\n" +
-	"\x1dGetContentLibraryItemsRequest\x12R\n" +
-	"\x06filter\x18\x01 \x01(\v2:.pilab.cloud.agent.v2.GetContentLibraryItemsRequest.FilterR\x06filter\x12\x1b\n" +
+	"\x03lun\x18\x03 \x01(\tR\x03lun\"\xe9\x02\n" +
+	"\x1dGetContentLibraryItemsRequest\x12L\n" +
+	"\x06filter\x18\x01 \x01(\v24.pilab.agent.v2.GetContentLibraryItemsRequest.FilterR\x06filter\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tR\tpageToken\x1a\xc3\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\x1a\xbd\x01\n" +
 	"\x06Filter\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12X\n" +
-	"\x04tags\x18\x03 \x03(\v2D.pilab.cloud.agent.v2.GetContentLibraryItemsRequest.Filter.TagsEntryR\x04tags\x1a7\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12R\n" +
+	"\x04tags\x18\x03 \x03(\v2>.pilab.agent.v2.GetContentLibraryItemsRequest.Filter.TagsEntryR\x04tags\x1a7\n" +
 	"\tTagsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x84\x04\n" +
-	"\x1eGetContentLibraryItemsResponse\x12]\n" +
-	"\x05items\x18\x01 \x03(\v2G.pilab.cloud.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItemR\x05items\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x1a\xda\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf8\x03\n" +
+	"\x1eGetContentLibraryItemsResponse\x12W\n" +
+	"\x05items\x18\x01 \x03(\v2A.pilab.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItemR\x05items\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x1a\xd4\x02\n" +
 	"\x12ContentLibraryItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
@@ -9801,41 +9801,41 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x05 \x01(\tR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\tR\tupdatedAt\x12e\n" +
-	"\x04tags\x18\a \x03(\v2Q.pilab.cloud.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem.TagsEntryR\x04tags\x12\x1a\n" +
+	"updated_at\x18\x06 \x01(\tR\tupdatedAt\x12_\n" +
+	"\x04tags\x18\a \x03(\v2K.pilab.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem.TagsEntryR\x04tags\x12\x1a\n" +
 	"\bchecksum\x18\b \x01(\tR\bchecksum\x1a7\n" +
 	"\tTagsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x99\x01\n" +
-	"\x1fUploadContentLibraryItemRequest\x12J\n" +
-	"\bmetadata\x18\x01 \x01(\v2,.pilab.cloud.agent.v2.ContentLibraryItemInfoH\x00R\bmetadata\x12\x1f\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x93\x01\n" +
+	"\x1fUploadContentLibraryItemRequest\x12D\n" +
+	"\bmetadata\x18\x01 \x01(\v2&.pilab.agent.v2.ContentLibraryItemInfoH\x00R\bmetadata\x12\x1f\n" +
 	"\n" +
 	"chunk_data\x18\x02 \x01(\fH\x00R\tchunkDataB\t\n" +
-	"\arequest\"\xc5\x01\n" +
+	"\arequest\"\xbf\x01\n" +
 	"\x16ContentLibraryItemInfo\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type\x12J\n" +
-	"\x04tags\x18\x03 \x03(\v26.pilab.cloud.agent.v2.ContentLibraryItemInfo.TagsEntryR\x04tags\x1a7\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12D\n" +
+	"\x04tags\x18\x03 \x03(\v20.pilab.agent.v2.ContentLibraryItemInfo.TagsEntryR\x04tags\x1a7\n" +
 	"\tTagsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x81\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"{\n" +
 	" UploadContentLibraryItemResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
-	"\bchecksum\x18\x02 \x01(\tR\bchecksum\x121\n" +
-	"\x05error\x18\x03 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"1\n" +
+	"\bchecksum\x18\x02 \x01(\tR\bchecksum\x12+\n" +
+	"\x05error\x18\x03 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"1\n" +
 	"\x1fDeleteContentLibraryItemRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"U\n" +
-	" DeleteContentLibraryItemResponse\x121\n" +
-	"\x05error\x18\x01 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"R\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"O\n" +
+	" DeleteContentLibraryItemResponse\x12+\n" +
+	"\x05error\x18\x01 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"R\n" +
 	"\x14GetDatastoresRequest\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\xb1\x04\n" +
-	"\x15GetDatastoresResponse\x12U\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\xa5\x04\n" +
+	"\x15GetDatastoresResponse\x12O\n" +
 	"\n" +
-	"datastores\x18\x01 \x03(\v25.pilab.cloud.agent.v2.GetDatastoresResponse.DatastoreR\n" +
+	"datastores\x18\x01 \x03(\v2/.pilab.agent.v2.GetDatastoresResponse.DatastoreR\n" +
 	"datastores\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x1a\x98\x03\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x1a\x92\x03\n" +
 	"\tDatastore\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
@@ -9843,16 +9843,16 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\x0etotal_capacity\x18\x04 \x01(\x03R\rtotalCapacity\x12-\n" +
 	"\x12available_capacity\x18\x05 \x01(\x03R\x11availableCapacity\x12+\n" +
 	"\x11supported_formats\x18\x06 \x03(\tR\x10supportedFormats\x12\x19\n" +
-	"\bis_local\x18\a \x01(\bR\aisLocal\x12r\n" +
-	"\x0fconnection_info\x18\b \x03(\v2I.pilab.cloud.agent.v2.GetDatastoresResponse.Datastore.ConnectionInfoEntryR\x0econnectionInfo\x1aA\n" +
+	"\bis_local\x18\a \x01(\bR\aisLocal\x12l\n" +
+	"\x0fconnection_info\x18\b \x03(\v2C.pilab.agent.v2.GetDatastoresResponse.Datastore.ConnectionInfoEntryR\x0econnectionInfo\x1aA\n" +
 	"\x13ConnectionInfoEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"%\n" +
 	"\x13GetDatastoreRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\xb7\x04\n" +
-	"\x14GetDatastoreResponse\x12R\n" +
-	"\tdatastore\x18\x01 \x01(\v24.pilab.cloud.agent.v2.GetDatastoreResponse.DatastoreR\tdatastore\x121\n" +
-	"\x05error\x18\x02 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\x1a\x97\x03\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"\xa5\x04\n" +
+	"\x14GetDatastoreResponse\x12L\n" +
+	"\tdatastore\x18\x01 \x01(\v2..pilab.agent.v2.GetDatastoreResponse.DatastoreR\tdatastore\x12+\n" +
+	"\x05error\x18\x02 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\x1a\x91\x03\n" +
 	"\tDatastore\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
@@ -9860,81 +9860,81 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\x0etotal_capacity\x18\x04 \x01(\x03R\rtotalCapacity\x12-\n" +
 	"\x12available_capacity\x18\x05 \x01(\x03R\x11availableCapacity\x12+\n" +
 	"\x11supported_formats\x18\x06 \x03(\tR\x10supportedFormats\x12\x19\n" +
-	"\bis_local\x18\a \x01(\bR\aisLocal\x12q\n" +
-	"\x0fconnection_info\x18\b \x03(\v2H.pilab.cloud.agent.v2.GetDatastoreResponse.Datastore.ConnectionInfoEntryR\x0econnectionInfo\x1aA\n" +
+	"\bis_local\x18\a \x01(\bR\aisLocal\x12k\n" +
+	"\x0fconnection_info\x18\b \x03(\v2B.pilab.agent.v2.GetDatastoreResponse.Datastore.ConnectionInfoEntryR\x0econnectionInfo\x1aA\n" +
 	"\x13ConnectionInfoEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xee\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xe8\x01\n" +
 	"\x16CreateDatastoreRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04type\x12i\n" +
-	"\x0fconnection_info\x18\x03 \x03(\v2@.pilab.cloud.agent.v2.CreateDatastoreRequest.ConnectionInfoEntryR\x0econnectionInfo\x1aA\n" +
+	"\x04type\x18\x02 \x01(\tR\x04type\x12c\n" +
+	"\x0fconnection_info\x18\x03 \x03(\v2:.pilab.agent.v2.CreateDatastoreRequest.ConnectionInfoEntryR\x0econnectionInfo\x1aA\n" +
 	"\x13ConnectionInfoEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\\\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"V\n" +
 	"\x17CreateDatastoreResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x121\n" +
-	"\x05error\x18\x02 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"(\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12+\n" +
+	"\x05error\x18\x02 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"(\n" +
 	"\x16DeleteDatastoreRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"L\n" +
-	"\x17DeleteDatastoreResponse\x121\n" +
-	"\x05error\x18\x01 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"P\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"F\n" +
+	"\x17DeleteDatastoreResponse\x12+\n" +
+	"\x05error\x18\x01 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"P\n" +
 	"\x12GetNetworksRequest\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\x95\x02\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\x8f\x02\n" +
 	"\x11NetworkDefinition\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1f\n" +
 	"\vbridge_name\x18\x04 \x01(\tR\n" +
-	"bridgeName\x12d\n" +
-	"\x0fconnection_info\x18\x05 \x03(\v2;.pilab.cloud.agent.v2.NetworkDefinition.ConnectionInfoEntryR\x0econnectionInfo\x1aA\n" +
+	"bridgeName\x12^\n" +
+	"\x0fconnection_info\x18\x05 \x03(\v25.pilab.agent.v2.NetworkDefinition.ConnectionInfoEntryR\x0econnectionInfo\x1aA\n" +
 	"\x13ConnectionInfoEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x82\x01\n" +
-	"\x13GetNetworksResponse\x12C\n" +
-	"\bnetworks\x18\x01 \x03(\v2'.pilab.cloud.agent.v2.NetworkDefinitionR\bnetworks\x12&\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"|\n" +
+	"\x13GetNetworksResponse\x12=\n" +
+	"\bnetworks\x18\x01 \x03(\v2!.pilab.agent.v2.NetworkDefinitionR\bnetworks\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"#\n" +
 	"\x11GetNetworkRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\x8a\x01\n" +
-	"\x12GetNetworkResponse\x12A\n" +
-	"\anetwork\x18\x01 \x01(\v2'.pilab.cloud.agent.v2.NetworkDefinitionR\anetwork\x121\n" +
-	"\x05error\x18\x02 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"_\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"~\n" +
+	"\x12GetNetworkResponse\x12;\n" +
+	"\anetwork\x18\x01 \x01(\v2!.pilab.agent.v2.NetworkDefinitionR\anetwork\x12+\n" +
+	"\x05error\x18\x02 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"_\n" +
 	"\x14CreateNetworkRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x1f\n" +
 	"\vbridge_name\x18\x03 \x01(\tR\n" +
-	"bridgeName\"Z\n" +
+	"bridgeName\"T\n" +
 	"\x15CreateNetworkResponse\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x121\n" +
-	"\x05error\x18\x02 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"&\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12+\n" +
+	"\x05error\x18\x02 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"&\n" +
 	"\x14DeleteNetworkRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"J\n" +
-	"\x15DeleteNetworkResponse\x121\n" +
-	"\x05error\x18\x01 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\">\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"D\n" +
+	"\x15DeleteNetworkResponse\x12+\n" +
+	"\x05error\x18\x01 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\">\n" +
 	"\x10AttachIsoRequest\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x15\n" +
-	"\x06iso_id\x18\x02 \x01(\tR\x05isoId\"F\n" +
-	"\x11AttachIsoResponse\x121\n" +
-	"\x05error\x18\x01 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\">\n" +
+	"\x06iso_id\x18\x02 \x01(\tR\x05isoId\"@\n" +
+	"\x11AttachIsoResponse\x12+\n" +
+	"\x05error\x18\x01 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\">\n" +
 	"\x10DetachIsoRequest\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x15\n" +
-	"\x06iso_id\x18\x02 \x01(\tR\x05isoId\"F\n" +
-	"\x11DetachIsoResponse\x121\n" +
-	"\x05error\x18\x01 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"\x9f\x02\n" +
+	"\x06iso_id\x18\x02 \x01(\tR\x05isoId\"@\n" +
+	"\x11DetachIsoResponse\x12+\n" +
+	"\x05error\x18\x01 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"\x99\x02\n" +
 	"\x1aCloneVmFromTemplateRequest\x12\x1f\n" +
 	"\vtemplate_id\x18\x01 \x01(\tR\n" +
 	"templateId\x12\x17\n" +
 	"\avm_name\x18\x02 \x01(\tR\x06vmName\x12!\n" +
-	"\fdatastore_id\x18\x03 \x01(\tR\vdatastoreId\x12d\n" +
-	"\fvm_overrides\x18\x04 \x03(\v2A.pilab.cloud.agent.v2.CloneVmFromTemplateRequest.VmOverridesEntryR\vvmOverrides\x1a>\n" +
+	"\fdatastore_id\x18\x03 \x01(\tR\vdatastoreId\x12^\n" +
+	"\fvm_overrides\x18\x04 \x03(\v2;.pilab.agent.v2.CloneVmFromTemplateRequest.VmOverridesEntryR\vvmOverrides\x1a>\n" +
 	"\x10VmOverridesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"e\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"_\n" +
 	"\x1bCloneVmFromTemplateResponse\x12\x13\n" +
-	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x121\n" +
-	"\x05error\x18\x02 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"O\n" +
+	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12+\n" +
+	"\x05error\x18\x02 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"O\n" +
 	"\x05Error\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
@@ -9946,89 +9946,89 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\n" +
 	"chunk_data\x18\x01 \x01(\fR\tchunkData\x12\x1a\n" +
 	"\bprogress\x18\x02 \x01(\x02R\bprogress\x12\x1a\n" +
-	"\bfilename\x18\x03 \x01(\tR\bfilename\"\x81\x01\n" +
-	"\x10ImportOVARequest\x12A\n" +
-	"\bmetadata\x18\x01 \x01(\v2#.pilab.cloud.agent.v2.ImportOVAInfoH\x00R\bmetadata\x12\x1f\n" +
+	"\bfilename\x18\x03 \x01(\tR\bfilename\"{\n" +
+	"\x10ImportOVARequest\x12;\n" +
+	"\bmetadata\x18\x01 \x01(\v2\x1d.pilab.agent.v2.ImportOVAInfoH\x00R\bmetadata\x12\x1f\n" +
 	"\n" +
 	"chunk_data\x18\x02 \x01(\fH\x00R\tchunkDataB\t\n" +
-	"\arequest\"\xf9\x01\n" +
+	"\arequest\"\xf3\x01\n" +
 	"\rImportOVAInfo\x12\x17\n" +
 	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12!\n" +
 	"\fdatastore_id\x18\x02 \x01(\tR\vdatastoreId\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12M\n" +
-	"\bmetadata\x18\x04 \x03(\v21.pilab.cloud.agent.v2.ImportOVAInfo.MetadataEntryR\bmetadata\x1a;\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12G\n" +
+	"\bmetadata\x18\x04 \x03(\v2+.pilab.agent.v2.ImportOVAInfo.MetadataEntryR\bmetadata\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"u\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"o\n" +
 	"\x11ImportOVAResponse\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x121\n" +
-	"\x05error\x18\x03 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"+\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12+\n" +
+	"\x05error\x18\x03 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"+\n" +
 	"\x14GetVMGuestIPsRequest\x12\x13\n" +
-	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\"]\n" +
-	"\x15GetVMGuestIPsResponse\x12D\n" +
-	"\taddresses\x18\x01 \x03(\v2&.pilab.cloud.agent.v2.InterfaceAddressR\taddresses\"4\n" +
+	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\"W\n" +
+	"\x15GetVMGuestIPsResponse\x12>\n" +
+	"\taddresses\x18\x01 \x03(\v2 .pilab.agent.v2.InterfaceAddressR\taddresses\"4\n" +
 	"\x10InterfaceAddress\x12\x10\n" +
 	"\x03mac\x18\x01 \x01(\tR\x03mac\x12\x0e\n" +
 	"\x02ip\x18\x02 \x03(\tR\x02ip\"j\n" +
 	"\x1bChangeVMUserPasswordRequest\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\"Q\n" +
-	"\x1cChangeVMUserPasswordResponse\x121\n" +
-	"\x05error\x18\x01 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"S\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\"K\n" +
+	"\x1cChangeVMUserPasswordResponse\x12+\n" +
+	"\x05error\x18\x01 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"S\n" +
 	"\x16AttachCloudInitRequest\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12$\n" +
-	"\x0ecloud_init_iso\x18\x02 \x01(\fR\fcloudInitIso\"L\n" +
-	"\x17AttachCloudInitResponse\x121\n" +
-	"\x05error\x18\x01 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"\xa5\x02\n" +
+	"\x0ecloud_init_iso\x18\x02 \x01(\fR\fcloudInitIso\"F\n" +
+	"\x17AttachCloudInitResponse\x12+\n" +
+	"\x05error\x18\x01 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"\x9f\x02\n" +
 	"\x1dAttachNetworkInterfaceRequest\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12!\n" +
 	"\fnetwork_name\x18\x02 \x01(\tR\vnetworkName\x12$\n" +
 	"\vmac_address\x18\x03 \x01(\tH\x00R\n" +
-	"macAddress\x88\x01\x01\x12Z\n" +
-	"\aoptions\x18\x04 \x03(\v2@.pilab.cloud.agent.v2.AttachNetworkInterfaceRequest.OptionsEntryR\aoptions\x1a:\n" +
+	"macAddress\x88\x01\x01\x12T\n" +
+	"\aoptions\x18\x04 \x03(\v2:.pilab.agent.v2.AttachNetworkInterfaceRequest.OptionsEntryR\aoptions\x1a:\n" +
 	"\fOptionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
-	"\f_mac_address\"m\n" +
+	"\f_mac_address\"g\n" +
 	"\x1eAttachNetworkInterfaceResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x121\n" +
-	"\x05error\x18\x02 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"U\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12+\n" +
+	"\x05error\x18\x02 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"U\n" +
 	"\x1dDetachNetworkInterfaceRequest\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x1f\n" +
 	"\vmac_address\x18\x02 \x01(\tR\n" +
-	"macAddress\"m\n" +
+	"macAddress\"g\n" +
 	"\x1eDetachNetworkInterfaceResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x121\n" +
-	"\x05error\x18\x02 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"\xb7\x01\n" +
-	"\rStreamRequest\x12=\n" +
-	"\x04open\x18\x01 \x01(\v2'.pilab.cloud.agent.v2.OpenStreamMessageH\x00R\x04open\x12\x1a\n" +
-	"\apayload\x18\x02 \x01(\fH\x00R\apayload\x12@\n" +
-	"\x05close\x18\x03 \x01(\v2(.pilab.cloud.agent.v2.CloseStreamMessageH\x00R\x05closeB\t\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12+\n" +
+	"\x05error\x18\x02 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"\xab\x01\n" +
+	"\rStreamRequest\x127\n" +
+	"\x04open\x18\x01 \x01(\v2!.pilab.agent.v2.OpenStreamMessageH\x00R\x04open\x12\x1a\n" +
+	"\apayload\x18\x02 \x01(\fH\x00R\apayload\x12:\n" +
+	"\x05close\x18\x03 \x01(\v2\".pilab.agent.v2.CloseStreamMessageH\x00R\x05closeB\t\n" +
 	"\amessage\"Z\n" +
 	"\x11OpenStreamMessage\x12\x1a\n" +
 	"\bresource\x18\x01 \x01(\tR\bresource\x12)\n" +
 	"\x10resource_variant\x18\x02 \x01(\tR\x0fresourceVariant\"\x14\n" +
-	"\x12CloseStreamMessage\"y\n" +
+	"\x12CloseStreamMessage\"s\n" +
 	"\x0eStreamResponse\x12\x1a\n" +
-	"\apayload\x18\x01 \x01(\fH\x00R\apayload\x12@\n" +
-	"\x05close\x18\x02 \x01(\v2(.pilab.cloud.agent.v2.CloseStreamMessageH\x00R\x05closeB\t\n" +
+	"\apayload\x18\x01 \x01(\fH\x00R\apayload\x12:\n" +
+	"\x05close\x18\x02 \x01(\v2\".pilab.agent.v2.CloseStreamMessageH\x00R\x05closeB\t\n" +
 	"\amessage\"\x1a\n" +
-	"\x18GetHardwareHealthRequest\"\xff\x01\n" +
+	"\x18GetHardwareHealthRequest\"\xf3\x01\n" +
 	"\x19GetHardwareHealthResponse\x12%\n" +
-	"\x0eoverall_status\x18\x01 \x01(\tR\roverallStatus\x12:\n" +
-	"\asensors\x18\x02 \x03(\v2 .pilab.cloud.agent.v2.SensorDataR\asensors\x12)\n" +
+	"\x0eoverall_status\x18\x01 \x01(\tR\roverallStatus\x124\n" +
+	"\asensors\x18\x02 \x03(\v2\x1a.pilab.agent.v2.SensorDataR\asensors\x12)\n" +
 	"\x10firmware_version\x18\x03 \x01(\tR\x0ffirmwareVersion\x12!\n" +
-	"\fpower_status\x18\x04 \x01(\tR\vpowerStatus\x121\n" +
-	"\x05error\x18\x05 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"L\n" +
+	"\fpower_status\x18\x04 \x01(\tR\vpowerStatus\x12+\n" +
+	"\x05error\x18\x05 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"L\n" +
 	"\x14GetSensorDataRequest\x12$\n" +
 	"\vsensor_name\x18\x01 \x01(\tH\x00R\n" +
 	"sensorName\x88\x01\x01B\x0e\n" +
-	"\f_sensor_name\"\x86\x01\n" +
-	"\x15GetSensorDataResponse\x12:\n" +
-	"\asensors\x18\x01 \x03(\v2 .pilab.cloud.agent.v2.SensorDataR\asensors\x121\n" +
-	"\x05error\x18\x02 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"\x83\x01\n" +
+	"\f_sensor_name\"z\n" +
+	"\x15GetSensorDataResponse\x124\n" +
+	"\asensors\x18\x01 \x03(\v2\x1a.pilab.agent.v2.SensorDataR\asensors\x12+\n" +
+	"\x05error\x18\x02 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"\x83\x01\n" +
 	"\n" +
 	"SensorData\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
@@ -10040,25 +10040,25 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\x0fDefineVMRequest\x12#\n" +
 	"\rvm_definition\x18\x01 \x01(\tR\fvmDefinition\x12)\n" +
 	"\x0eboot_on_create\x18\x02 \x01(\bH\x00R\fbootOnCreate\x88\x01\x01B\x11\n" +
-	"\x0f_boot_on_create\"\x92\x01\n" +
+	"\x0f_boot_on_create\"\x8c\x01\n" +
 	"\x10DefineVMResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x121\n" +
-	"\x05error\x18\x03 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\x12\x17\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12+\n" +
+	"\x05error\x18\x03 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\x12\x17\n" +
 	"\avm_uuid\x18\x04 \x01(\tR\x06vmUuid\"N\n" +
 	"\x16GetVMDefinitionRequest\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x1f\n" +
 	"\vforce_fetch\x18\x02 \x01(\bR\n" +
 	"forceFetch\">\n" +
 	"\x17GetVMDefinitionResponse\x12#\n" +
-	"\rvm_definition\x18\x01 \x01(\tR\fvmDefinition\"g\n" +
+	"\rvm_definition\x18\x01 \x01(\tR\fvmDefinition\"a\n" +
 	"\x10ControlVMRequest\x12\x13\n" +
-	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12>\n" +
-	"\acommand\x18\x02 \x01(\x0e2$.pilab.cloud.agent.v2.ControlCommandR\acommand\"z\n" +
+	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x128\n" +
+	"\acommand\x18\x02 \x01(\x0e2\x1e.pilab.agent.v2.ControlCommandR\acommand\"t\n" +
 	"\x11ControlVMResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x121\n" +
-	"\x05error\x18\x03 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\")\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12+\n" +
+	"\x05error\x18\x03 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\")\n" +
 	"\x12GetVMStatusRequest\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\"-\n" +
 	"\x13GetVMStatusResponse\x12\x16\n" +
@@ -10079,23 +10079,23 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\x17VmGuestInterfaceAddress\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\x12\x16\n" +
-	"\x06prefix\x18\x03 \x01(\rR\x06prefix\"\x92\x01\n" +
+	"\x06prefix\x18\x03 \x01(\rR\x06prefix\"\x8c\x01\n" +
 	"\x17VmGuestNetworkInterface\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
-	"\x06hwaddr\x18\x02 \x01(\tR\x06hwaddr\x12K\n" +
-	"\taddresses\x18\x03 \x03(\v2-.pilab.cloud.agent.v2.VmGuestInterfaceAddressR\taddresses\"\xb4\x01\n" +
+	"\x06hwaddr\x18\x02 \x01(\tR\x06hwaddr\x12E\n" +
+	"\taddresses\x18\x03 \x03(\v2'.pilab.agent.v2.VmGuestInterfaceAddressR\taddresses\"\xa8\x01\n" +
 	"\x16GetVMGuestInfoResponse\x12\x1a\n" +
-	"\bhostname\x18\x01 \x01(\tR\bhostname\x12/\n" +
-	"\x02os\x18\x02 \x01(\v2\x1f.pilab.cloud.agent.v2.VmGuestOSR\x02os\x12M\n" +
+	"\bhostname\x18\x01 \x01(\tR\bhostname\x12)\n" +
+	"\x02os\x18\x02 \x01(\v2\x19.pilab.agent.v2.VmGuestOSR\x02os\x12G\n" +
 	"\n" +
-	"interfaces\x18\x03 \x03(\v2-.pilab.cloud.agent.v2.VmGuestNetworkInterfaceR\n" +
-	"interfaces\"\x84\x03\n" +
+	"interfaces\x18\x03 \x03(\v2'.pilab.agent.v2.VmGuestNetworkInterfaceR\n" +
+	"interfaces\"\xf8\x02\n" +
 	"\rPowerSchedule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
-	"\avm_uuid\x18\x02 \x01(\tR\x06vmUuid\x129\n" +
-	"\x06action\x18\x03 \x01(\x0e2!.pilab.cloud.agent.v2.PowerActionR\x06action\x12D\n" +
+	"\avm_uuid\x18\x02 \x01(\tR\x06vmUuid\x123\n" +
+	"\x06action\x18\x03 \x01(\x0e2\x1b.pilab.agent.v2.PowerActionR\x06action\x12>\n" +
 	"\n" +
-	"recurrence\x18\x04 \x01(\x0e2$.pilab.cloud.agent.v2.RecurrenceTypeR\n" +
+	"recurrence\x18\x04 \x01(\x0e2\x1e.pilab.agent.v2.RecurrenceTypeR\n" +
 	"recurrence\x12\x1b\n" +
 	"\tcron_spec\x18\x05 \x01(\tR\bcronSpec\x12\x1e\n" +
 	"\vday_of_week\x18\x06 \x01(\x05R\tdayOfWeek\x12 \n" +
@@ -10107,36 +10107,36 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"created_at\x18\n" +
 	" \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\v \x01(\x03R\tupdatedAt\"\xc3\x02\n" +
+	"updated_at\x18\v \x01(\x03R\tupdatedAt\"\xb7\x02\n" +
 	"\x1aCreatePowerScheduleRequest\x12\x17\n" +
-	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x129\n" +
-	"\x06action\x18\x02 \x01(\x0e2!.pilab.cloud.agent.v2.PowerActionR\x06action\x12D\n" +
+	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x123\n" +
+	"\x06action\x18\x02 \x01(\x0e2\x1b.pilab.agent.v2.PowerActionR\x06action\x12>\n" +
 	"\n" +
-	"recurrence\x18\x03 \x01(\x0e2$.pilab.cloud.agent.v2.RecurrenceTypeR\n" +
+	"recurrence\x18\x03 \x01(\x0e2\x1e.pilab.agent.v2.RecurrenceTypeR\n" +
 	"recurrence\x12\x1b\n" +
 	"\tcron_spec\x18\x04 \x01(\tR\bcronSpec\x12\x1e\n" +
 	"\vday_of_week\x18\x05 \x01(\x05R\tdayOfWeek\x12 \n" +
 	"\fday_of_month\x18\x06 \x01(\x05R\n" +
 	"dayOfMonth\x12\x12\n" +
 	"\x04time\x18\a \x01(\tR\x04time\x12\x18\n" +
-	"\aenabled\x18\b \x01(\bR\aenabled\"\x8b\x01\n" +
+	"\aenabled\x18\b \x01(\bR\aenabled\"\x85\x01\n" +
 	"\x1bCreatePowerScheduleResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1f\n" +
 	"\vschedule_id\x18\x02 \x01(\tR\n" +
-	"scheduleId\x121\n" +
-	"\x05error\x18\x03 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"W\n" +
+	"scheduleId\x12+\n" +
+	"\x05error\x18\x03 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"W\n" +
 	"\x19ListPowerSchedulesRequest\x12\x17\n" +
 	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x12!\n" +
-	"\fenabled_only\x18\x02 \x01(\bR\venabledOnly\"\x92\x01\n" +
-	"\x1aListPowerSchedulesResponse\x12A\n" +
-	"\tschedules\x18\x01 \x03(\v2#.pilab.cloud.agent.v2.PowerScheduleR\tschedules\x121\n" +
-	"\x05error\x18\x02 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"\xcc\x03\n" +
+	"\fenabled_only\x18\x02 \x01(\bR\venabledOnly\"\x86\x01\n" +
+	"\x1aListPowerSchedulesResponse\x12;\n" +
+	"\tschedules\x18\x01 \x03(\v2\x1d.pilab.agent.v2.PowerScheduleR\tschedules\x12+\n" +
+	"\x05error\x18\x02 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"\xc0\x03\n" +
 	"\x1aUpdatePowerScheduleRequest\x12\x1f\n" +
 	"\vschedule_id\x18\x01 \x01(\tR\n" +
-	"scheduleId\x12>\n" +
-	"\x06action\x18\x02 \x01(\x0e2!.pilab.cloud.agent.v2.PowerActionH\x00R\x06action\x88\x01\x01\x12I\n" +
+	"scheduleId\x128\n" +
+	"\x06action\x18\x02 \x01(\x0e2\x1b.pilab.agent.v2.PowerActionH\x00R\x06action\x88\x01\x01\x12C\n" +
 	"\n" +
-	"recurrence\x18\x03 \x01(\x0e2$.pilab.cloud.agent.v2.RecurrenceTypeH\x01R\n" +
+	"recurrence\x18\x03 \x01(\x0e2\x1e.pilab.agent.v2.RecurrenceTypeH\x01R\n" +
 	"recurrence\x88\x01\x01\x12 \n" +
 	"\tcron_spec\x18\x04 \x01(\tH\x02R\bcronSpec\x88\x01\x01\x12#\n" +
 	"\vday_of_week\x18\x05 \x01(\x05H\x03R\tdayOfWeek\x88\x01\x01\x12%\n" +
@@ -10152,24 +10152,24 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\r_day_of_monthB\a\n" +
 	"\x05_timeB\n" +
 	"\n" +
-	"\b_enabled\"j\n" +
+	"\b_enabled\"d\n" +
 	"\x1bUpdatePowerScheduleResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x121\n" +
-	"\x05error\x18\x02 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"=\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12+\n" +
+	"\x05error\x18\x02 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"=\n" +
 	"\x1aDeletePowerScheduleRequest\x12\x1f\n" +
 	"\vschedule_id\x18\x01 \x01(\tR\n" +
-	"scheduleId\"j\n" +
+	"scheduleId\"d\n" +
 	"\x1bDeletePowerScheduleResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x121\n" +
-	"\x05error\x18\x02 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error\"H\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12+\n" +
+	"\x05error\x18\x02 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error\"H\n" +
 	"\x10WakeOnLANRequest\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x1f\n" +
 	"\vmac_address\x18\x02 \x01(\tR\n" +
-	"macAddress\"z\n" +
+	"macAddress\"t\n" +
 	"\x11WakeOnLANResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x121\n" +
-	"\x05error\x18\x03 \x01(\v2\x1b.pilab.cloud.agent.v2.ErrorR\x05error*\xf3\x01\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12+\n" +
+	"\x05error\x18\x03 \x01(\v2\x15.pilab.agent.v2.ErrorR\x05error*\xf3\x01\n" +
 	"\x0eControlCommand\x12\x1f\n" +
 	"\x1bCONTROL_COMMAND_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14CONTROL_COMMAND_STOP\x10\x01\x12\x18\n" +
@@ -10188,70 +10188,70 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\x1bRECURRENCE_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15RECURRENCE_TYPE_DAILY\x10\x01\x12\x1a\n" +
 	"\x16RECURRENCE_TYPE_WEEKLY\x10\x02\x12\x1b\n" +
-	"\x17RECURRENCE_TYPE_MONTHLY\x10\x032\xa72\n" +
-	"\fAgentService\x12g\n" +
-	"\fRegisterHost\x12).pilab.cloud.agent.v2.RegisterHostRequest\x1a*.pilab.cloud.agent.v2.RegisterHostResponse\"\x00\x12^\n" +
-	"\tHeartbeat\x12&.pilab.cloud.agent.v2.HeartbeatRequest\x1a'.pilab.cloud.agent.v2.HeartbeatResponse\"\x00\x12_\n" +
-	"\rGetHostStatus\x12*.pilab.cloud.agent.v2.GetHostStatusRequest\x1a .pilab.cloud.agent.v2.HostStatus\"\x00\x12[\n" +
-	"\bCreateVM\x12%.pilab.cloud.agent.v2.CreateVMRequest\x1a&.pilab.cloud.agent.v2.CreateVMResponse\"\x00\x12g\n" +
-	"\fGetVMDetails\x12).pilab.cloud.agent.v2.GetVMDetailsRequest\x1a*.pilab.cloud.agent.v2.GetVMDetailsResponse\"\x00\x12[\n" +
-	"\bUpdateVM\x12%.pilab.cloud.agent.v2.UpdateVMRequest\x1a&.pilab.cloud.agent.v2.UpdateVMResponse\"\x00\x12[\n" +
-	"\bDeleteVM\x12%.pilab.cloud.agent.v2.DeleteVMRequest\x1a&.pilab.cloud.agent.v2.DeleteVMResponse\"\x00\x12X\n" +
-	"\aStartVM\x12$.pilab.cloud.agent.v2.StartVMRequest\x1a%.pilab.cloud.agent.v2.StartVMResponse\"\x00\x12U\n" +
-	"\x06StopVM\x12#.pilab.cloud.agent.v2.StopVMRequest\x1a$.pilab.cloud.agent.v2.StopVMResponse\"\x00\x12d\n" +
-	"\vForceStopVM\x12(.pilab.cloud.agent.v2.ForceStopVMRequest\x1a).pilab.cloud.agent.v2.ForceStopVMResponse\"\x00\x12[\n" +
-	"\bRebootVM\x12%.pilab.cloud.agent.v2.RebootVMRequest\x1a&.pilab.cloud.agent.v2.RebootVMResponse\"\x00\x12X\n" +
-	"\aPauseVM\x12$.pilab.cloud.agent.v2.PauseVMRequest\x1a%.pilab.cloud.agent.v2.PauseVMResponse\"\x00\x12[\n" +
-	"\bResumeVM\x12%.pilab.cloud.agent.v2.ResumeVMRequest\x1a&.pilab.cloud.agent.v2.ResumeVMResponse\"\x00\x12v\n" +
-	"\x11InitiateMigration\x12..pilab.cloud.agent.v2.InitiateMigrationRequest\x1a/.pilab.cloud.agent.v2.InitiateMigrationResponse\"\x00\x12|\n" +
-	"\x13PrepareForMigration\x120.pilab.cloud.agent.v2.PrepareForMigrationRequest\x1a1.pilab.cloud.agent.v2.PrepareForMigrationResponse\"\x00\x12m\n" +
-	"\x0eCreateSnapshot\x12+.pilab.cloud.agent.v2.CreateSnapshotRequest\x1a,.pilab.cloud.agent.v2.CreateSnapshotResponse\"\x00\x12s\n" +
-	"\x10RevertToSnapshot\x12-.pilab.cloud.agent.v2.RevertToSnapshotRequest\x1a..pilab.cloud.agent.v2.RevertToSnapshotResponse\"\x00\x12m\n" +
-	"\x0eDeleteSnapshot\x12+.pilab.cloud.agent.v2.DeleteSnapshotRequest\x1a,.pilab.cloud.agent.v2.DeleteSnapshotResponse\"\x00\x12Y\n" +
-	"\rGetTaskStatus\x12*.pilab.cloud.agent.v2.GetTaskStatusRequest\x1a\x1a.pilab.cloud.agent.v2.Task\"\x00\x12a\n" +
+	"\x17RECURRENCE_TYPE_MONTHLY\x10\x032\xdf,\n" +
+	"\fAgentService\x12[\n" +
+	"\fRegisterHost\x12#.pilab.agent.v2.RegisterHostRequest\x1a$.pilab.agent.v2.RegisterHostResponse\"\x00\x12R\n" +
+	"\tHeartbeat\x12 .pilab.agent.v2.HeartbeatRequest\x1a!.pilab.agent.v2.HeartbeatResponse\"\x00\x12S\n" +
+	"\rGetHostStatus\x12$.pilab.agent.v2.GetHostStatusRequest\x1a\x1a.pilab.agent.v2.HostStatus\"\x00\x12O\n" +
+	"\bCreateVM\x12\x1f.pilab.agent.v2.CreateVMRequest\x1a .pilab.agent.v2.CreateVMResponse\"\x00\x12[\n" +
+	"\fGetVMDetails\x12#.pilab.agent.v2.GetVMDetailsRequest\x1a$.pilab.agent.v2.GetVMDetailsResponse\"\x00\x12O\n" +
+	"\bUpdateVM\x12\x1f.pilab.agent.v2.UpdateVMRequest\x1a .pilab.agent.v2.UpdateVMResponse\"\x00\x12O\n" +
+	"\bDeleteVM\x12\x1f.pilab.agent.v2.DeleteVMRequest\x1a .pilab.agent.v2.DeleteVMResponse\"\x00\x12L\n" +
+	"\aStartVM\x12\x1e.pilab.agent.v2.StartVMRequest\x1a\x1f.pilab.agent.v2.StartVMResponse\"\x00\x12I\n" +
+	"\x06StopVM\x12\x1d.pilab.agent.v2.StopVMRequest\x1a\x1e.pilab.agent.v2.StopVMResponse\"\x00\x12X\n" +
+	"\vForceStopVM\x12\".pilab.agent.v2.ForceStopVMRequest\x1a#.pilab.agent.v2.ForceStopVMResponse\"\x00\x12O\n" +
+	"\bRebootVM\x12\x1f.pilab.agent.v2.RebootVMRequest\x1a .pilab.agent.v2.RebootVMResponse\"\x00\x12L\n" +
+	"\aPauseVM\x12\x1e.pilab.agent.v2.PauseVMRequest\x1a\x1f.pilab.agent.v2.PauseVMResponse\"\x00\x12O\n" +
+	"\bResumeVM\x12\x1f.pilab.agent.v2.ResumeVMRequest\x1a .pilab.agent.v2.ResumeVMResponse\"\x00\x12j\n" +
+	"\x11InitiateMigration\x12(.pilab.agent.v2.InitiateMigrationRequest\x1a).pilab.agent.v2.InitiateMigrationResponse\"\x00\x12p\n" +
+	"\x13PrepareForMigration\x12*.pilab.agent.v2.PrepareForMigrationRequest\x1a+.pilab.agent.v2.PrepareForMigrationResponse\"\x00\x12a\n" +
+	"\x0eCreateSnapshot\x12%.pilab.agent.v2.CreateSnapshotRequest\x1a&.pilab.agent.v2.CreateSnapshotResponse\"\x00\x12g\n" +
+	"\x10RevertToSnapshot\x12'.pilab.agent.v2.RevertToSnapshotRequest\x1a(.pilab.agent.v2.RevertToSnapshotResponse\"\x00\x12a\n" +
+	"\x0eDeleteSnapshot\x12%.pilab.agent.v2.DeleteSnapshotRequest\x1a&.pilab.agent.v2.DeleteSnapshotResponse\"\x00\x12M\n" +
+	"\rGetTaskStatus\x12$.pilab.agent.v2.GetTaskStatusRequest\x1a\x14.pilab.agent.v2.Task\"\x00\x12U\n" +
 	"\n" +
-	"CancelTask\x12'.pilab.cloud.agent.v2.CancelTaskRequest\x1a(.pilab.cloud.agent.v2.CancelTaskResponse\"\x00\x12s\n" +
-	"\x10ConfigureNetwork\x12-.pilab.cloud.agent.v2.ConfigureNetworkRequest\x1a..pilab.cloud.agent.v2.ConfigureNetworkResponse\"\x00\x12s\n" +
-	"\x10ConfigureStorage\x12-.pilab.cloud.agent.v2.ConfigureStorageRequest\x1a..pilab.cloud.agent.v2.ConfigureStorageResponse\"\x00\x12j\n" +
-	"\rConfigureTime\x12*.pilab.cloud.agent.v2.ConfigureTimeRequest\x1a+.pilab.cloud.agent.v2.ConfigureTimeResponse\"\x00\x12y\n" +
-	"\x12SetMaintenanceMode\x12/.pilab.cloud.agent.v2.SetMaintenanceModeRequest\x1a0.pilab.cloud.agent.v2.SetMaintenanceModeResponse\"\x00\x12a\n" +
+	"CancelTask\x12!.pilab.agent.v2.CancelTaskRequest\x1a\".pilab.agent.v2.CancelTaskResponse\"\x00\x12g\n" +
+	"\x10ConfigureNetwork\x12'.pilab.agent.v2.ConfigureNetworkRequest\x1a(.pilab.agent.v2.ConfigureNetworkResponse\"\x00\x12g\n" +
+	"\x10ConfigureStorage\x12'.pilab.agent.v2.ConfigureStorageRequest\x1a(.pilab.agent.v2.ConfigureStorageResponse\"\x00\x12^\n" +
+	"\rConfigureTime\x12$.pilab.agent.v2.ConfigureTimeRequest\x1a%.pilab.agent.v2.ConfigureTimeResponse\"\x00\x12m\n" +
+	"\x12SetMaintenanceMode\x12).pilab.agent.v2.SetMaintenanceModeRequest\x1a*.pilab.agent.v2.SetMaintenanceModeResponse\"\x00\x12U\n" +
 	"\n" +
-	"UpdateHost\x12'.pilab.cloud.agent.v2.UpdateHostRequest\x1a(.pilab.cloud.agent.v2.UpdateHostResponse\"\x00\x12\x85\x01\n" +
-	"\x16GetContentLibraryItems\x123.pilab.cloud.agent.v2.GetContentLibraryItemsRequest\x1a4.pilab.cloud.agent.v2.GetContentLibraryItemsResponse\"\x00\x12\x8d\x01\n" +
-	"\x18UploadContentLibraryItem\x125.pilab.cloud.agent.v2.UploadContentLibraryItemRequest\x1a6.pilab.cloud.agent.v2.UploadContentLibraryItemResponse\"\x00(\x01\x12`\n" +
-	"\tExportOVA\x12&.pilab.cloud.agent.v2.ExportOVARequest\x1a'.pilab.cloud.agent.v2.ExportOVAResponse\"\x000\x01\x12`\n" +
-	"\tImportOVA\x12&.pilab.cloud.agent.v2.ImportOVARequest\x1a'.pilab.cloud.agent.v2.ImportOVAResponse\"\x00(\x01\x12\x8b\x01\n" +
-	"\x18DeleteContentLibraryItem\x125.pilab.cloud.agent.v2.DeleteContentLibraryItemRequest\x1a6.pilab.cloud.agent.v2.DeleteContentLibraryItemResponse\"\x00\x12j\n" +
-	"\rGetDatastores\x12*.pilab.cloud.agent.v2.GetDatastoresRequest\x1a+.pilab.cloud.agent.v2.GetDatastoresResponse\"\x00\x12g\n" +
-	"\fGetDatastore\x12).pilab.cloud.agent.v2.GetDatastoreRequest\x1a*.pilab.cloud.agent.v2.GetDatastoreResponse\"\x00\x12p\n" +
-	"\x0fCreateDatastore\x12,.pilab.cloud.agent.v2.CreateDatastoreRequest\x1a-.pilab.cloud.agent.v2.CreateDatastoreResponse\"\x00\x12p\n" +
-	"\x0fDeleteDatastore\x12,.pilab.cloud.agent.v2.DeleteDatastoreRequest\x1a-.pilab.cloud.agent.v2.DeleteDatastoreResponse\"\x00\x12d\n" +
-	"\vGetNetworks\x12(.pilab.cloud.agent.v2.GetNetworksRequest\x1a).pilab.cloud.agent.v2.GetNetworksResponse\"\x00\x12a\n" +
+	"UpdateHost\x12!.pilab.agent.v2.UpdateHostRequest\x1a\".pilab.agent.v2.UpdateHostResponse\"\x00\x12y\n" +
+	"\x16GetContentLibraryItems\x12-.pilab.agent.v2.GetContentLibraryItemsRequest\x1a..pilab.agent.v2.GetContentLibraryItemsResponse\"\x00\x12\x81\x01\n" +
+	"\x18UploadContentLibraryItem\x12/.pilab.agent.v2.UploadContentLibraryItemRequest\x1a0.pilab.agent.v2.UploadContentLibraryItemResponse\"\x00(\x01\x12T\n" +
+	"\tExportOVA\x12 .pilab.agent.v2.ExportOVARequest\x1a!.pilab.agent.v2.ExportOVAResponse\"\x000\x01\x12T\n" +
+	"\tImportOVA\x12 .pilab.agent.v2.ImportOVARequest\x1a!.pilab.agent.v2.ImportOVAResponse\"\x00(\x01\x12\x7f\n" +
+	"\x18DeleteContentLibraryItem\x12/.pilab.agent.v2.DeleteContentLibraryItemRequest\x1a0.pilab.agent.v2.DeleteContentLibraryItemResponse\"\x00\x12^\n" +
+	"\rGetDatastores\x12$.pilab.agent.v2.GetDatastoresRequest\x1a%.pilab.agent.v2.GetDatastoresResponse\"\x00\x12[\n" +
+	"\fGetDatastore\x12#.pilab.agent.v2.GetDatastoreRequest\x1a$.pilab.agent.v2.GetDatastoreResponse\"\x00\x12d\n" +
+	"\x0fCreateDatastore\x12&.pilab.agent.v2.CreateDatastoreRequest\x1a'.pilab.agent.v2.CreateDatastoreResponse\"\x00\x12d\n" +
+	"\x0fDeleteDatastore\x12&.pilab.agent.v2.DeleteDatastoreRequest\x1a'.pilab.agent.v2.DeleteDatastoreResponse\"\x00\x12X\n" +
+	"\vGetNetworks\x12\".pilab.agent.v2.GetNetworksRequest\x1a#.pilab.agent.v2.GetNetworksResponse\"\x00\x12U\n" +
 	"\n" +
-	"GetNetwork\x12'.pilab.cloud.agent.v2.GetNetworkRequest\x1a(.pilab.cloud.agent.v2.GetNetworkResponse\"\x00\x12j\n" +
-	"\rCreateNetwork\x12*.pilab.cloud.agent.v2.CreateNetworkRequest\x1a+.pilab.cloud.agent.v2.CreateNetworkResponse\"\x00\x12j\n" +
-	"\rDeleteNetwork\x12*.pilab.cloud.agent.v2.DeleteNetworkRequest\x1a+.pilab.cloud.agent.v2.DeleteNetworkResponse\"\x00\x12^\n" +
-	"\tAttachIso\x12&.pilab.cloud.agent.v2.AttachIsoRequest\x1a'.pilab.cloud.agent.v2.AttachIsoResponse\"\x00\x12^\n" +
-	"\tDetachIso\x12&.pilab.cloud.agent.v2.DetachIsoRequest\x1a'.pilab.cloud.agent.v2.DetachIsoResponse\"\x00\x12|\n" +
-	"\x13CloneVmFromTemplate\x120.pilab.cloud.agent.v2.CloneVmFromTemplateRequest\x1a1.pilab.cloud.agent.v2.CloneVmFromTemplateResponse\"\x00\x12j\n" +
-	"\rGetVMGuestIPs\x12*.pilab.cloud.agent.v2.GetVMGuestIPsRequest\x1a+.pilab.cloud.agent.v2.GetVMGuestIPsResponse\"\x00\x12\x7f\n" +
-	"\x14ChangeVMUserPassword\x121.pilab.cloud.agent.v2.ChangeVMUserPasswordRequest\x1a2.pilab.cloud.agent.v2.ChangeVMUserPasswordResponse\"\x00\x12p\n" +
-	"\x0fAttachCloudInit\x12,.pilab.cloud.agent.v2.AttachCloudInitRequest\x1a-.pilab.cloud.agent.v2.AttachCloudInitResponse\"\x00\x12\x85\x01\n" +
-	"\x16AttachNetworkInterface\x123.pilab.cloud.agent.v2.AttachNetworkInterfaceRequest\x1a4.pilab.cloud.agent.v2.AttachNetworkInterfaceResponse\"\x00\x12\x85\x01\n" +
-	"\x16DetachNetworkInterface\x123.pilab.cloud.agent.v2.DetachNetworkInterfaceRequest\x1a4.pilab.cloud.agent.v2.DetachNetworkInterfaceResponse\"\x00\x12Y\n" +
-	"\x06Stream\x12#.pilab.cloud.agent.v2.StreamRequest\x1a$.pilab.cloud.agent.v2.StreamResponse\"\x00(\x010\x01\x12v\n" +
-	"\x11GetHardwareHealth\x12..pilab.cloud.agent.v2.GetHardwareHealthRequest\x1a/.pilab.cloud.agent.v2.GetHardwareHealthResponse\"\x00\x12j\n" +
-	"\rGetSensorData\x12*.pilab.cloud.agent.v2.GetSensorDataRequest\x1a+.pilab.cloud.agent.v2.GetSensorDataResponse\"\x00\x12[\n" +
-	"\bDefineVM\x12%.pilab.cloud.agent.v2.DefineVMRequest\x1a&.pilab.cloud.agent.v2.DefineVMResponse\"\x00\x12p\n" +
-	"\x0fGetVMDefinition\x12,.pilab.cloud.agent.v2.GetVMDefinitionRequest\x1a-.pilab.cloud.agent.v2.GetVMDefinitionResponse\"\x00\x12^\n" +
-	"\tControlVM\x12&.pilab.cloud.agent.v2.ControlVMRequest\x1a'.pilab.cloud.agent.v2.ControlVMResponse\"\x00\x12d\n" +
-	"\vGetVMStatus\x12(.pilab.cloud.agent.v2.GetVMStatusRequest\x1a).pilab.cloud.agent.v2.GetVMStatusResponse\"\x00\x12m\n" +
-	"\x0eGetVMGuestInfo\x12+.pilab.cloud.agent.v2.GetVMGuestInfoRequest\x1a,.pilab.cloud.agent.v2.GetVMGuestInfoResponse\"\x00\x12|\n" +
-	"\x13CreatePowerSchedule\x120.pilab.cloud.agent.v2.CreatePowerScheduleRequest\x1a1.pilab.cloud.agent.v2.CreatePowerScheduleResponse\"\x00\x12y\n" +
-	"\x12ListPowerSchedules\x12/.pilab.cloud.agent.v2.ListPowerSchedulesRequest\x1a0.pilab.cloud.agent.v2.ListPowerSchedulesResponse\"\x00\x12|\n" +
-	"\x13UpdatePowerSchedule\x120.pilab.cloud.agent.v2.UpdatePowerScheduleRequest\x1a1.pilab.cloud.agent.v2.UpdatePowerScheduleResponse\"\x00\x12|\n" +
-	"\x13DeletePowerSchedule\x120.pilab.cloud.agent.v2.DeletePowerScheduleRequest\x1a1.pilab.cloud.agent.v2.DeletePowerScheduleResponse\"\x00\x12^\n" +
-	"\tWakeOnLAN\x12&.pilab.cloud.agent.v2.WakeOnLANRequest\x1a'.pilab.cloud.agent.v2.WakeOnLANResponse\"\x00B1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v2;agentv2b\x06proto3"
+	"GetNetwork\x12!.pilab.agent.v2.GetNetworkRequest\x1a\".pilab.agent.v2.GetNetworkResponse\"\x00\x12^\n" +
+	"\rCreateNetwork\x12$.pilab.agent.v2.CreateNetworkRequest\x1a%.pilab.agent.v2.CreateNetworkResponse\"\x00\x12^\n" +
+	"\rDeleteNetwork\x12$.pilab.agent.v2.DeleteNetworkRequest\x1a%.pilab.agent.v2.DeleteNetworkResponse\"\x00\x12R\n" +
+	"\tAttachIso\x12 .pilab.agent.v2.AttachIsoRequest\x1a!.pilab.agent.v2.AttachIsoResponse\"\x00\x12R\n" +
+	"\tDetachIso\x12 .pilab.agent.v2.DetachIsoRequest\x1a!.pilab.agent.v2.DetachIsoResponse\"\x00\x12p\n" +
+	"\x13CloneVmFromTemplate\x12*.pilab.agent.v2.CloneVmFromTemplateRequest\x1a+.pilab.agent.v2.CloneVmFromTemplateResponse\"\x00\x12^\n" +
+	"\rGetVMGuestIPs\x12$.pilab.agent.v2.GetVMGuestIPsRequest\x1a%.pilab.agent.v2.GetVMGuestIPsResponse\"\x00\x12s\n" +
+	"\x14ChangeVMUserPassword\x12+.pilab.agent.v2.ChangeVMUserPasswordRequest\x1a,.pilab.agent.v2.ChangeVMUserPasswordResponse\"\x00\x12d\n" +
+	"\x0fAttachCloudInit\x12&.pilab.agent.v2.AttachCloudInitRequest\x1a'.pilab.agent.v2.AttachCloudInitResponse\"\x00\x12y\n" +
+	"\x16AttachNetworkInterface\x12-.pilab.agent.v2.AttachNetworkInterfaceRequest\x1a..pilab.agent.v2.AttachNetworkInterfaceResponse\"\x00\x12y\n" +
+	"\x16DetachNetworkInterface\x12-.pilab.agent.v2.DetachNetworkInterfaceRequest\x1a..pilab.agent.v2.DetachNetworkInterfaceResponse\"\x00\x12M\n" +
+	"\x06Stream\x12\x1d.pilab.agent.v2.StreamRequest\x1a\x1e.pilab.agent.v2.StreamResponse\"\x00(\x010\x01\x12j\n" +
+	"\x11GetHardwareHealth\x12(.pilab.agent.v2.GetHardwareHealthRequest\x1a).pilab.agent.v2.GetHardwareHealthResponse\"\x00\x12^\n" +
+	"\rGetSensorData\x12$.pilab.agent.v2.GetSensorDataRequest\x1a%.pilab.agent.v2.GetSensorDataResponse\"\x00\x12O\n" +
+	"\bDefineVM\x12\x1f.pilab.agent.v2.DefineVMRequest\x1a .pilab.agent.v2.DefineVMResponse\"\x00\x12d\n" +
+	"\x0fGetVMDefinition\x12&.pilab.agent.v2.GetVMDefinitionRequest\x1a'.pilab.agent.v2.GetVMDefinitionResponse\"\x00\x12R\n" +
+	"\tControlVM\x12 .pilab.agent.v2.ControlVMRequest\x1a!.pilab.agent.v2.ControlVMResponse\"\x00\x12X\n" +
+	"\vGetVMStatus\x12\".pilab.agent.v2.GetVMStatusRequest\x1a#.pilab.agent.v2.GetVMStatusResponse\"\x00\x12a\n" +
+	"\x0eGetVMGuestInfo\x12%.pilab.agent.v2.GetVMGuestInfoRequest\x1a&.pilab.agent.v2.GetVMGuestInfoResponse\"\x00\x12p\n" +
+	"\x13CreatePowerSchedule\x12*.pilab.agent.v2.CreatePowerScheduleRequest\x1a+.pilab.agent.v2.CreatePowerScheduleResponse\"\x00\x12m\n" +
+	"\x12ListPowerSchedules\x12).pilab.agent.v2.ListPowerSchedulesRequest\x1a*.pilab.agent.v2.ListPowerSchedulesResponse\"\x00\x12p\n" +
+	"\x13UpdatePowerSchedule\x12*.pilab.agent.v2.UpdatePowerScheduleRequest\x1a+.pilab.agent.v2.UpdatePowerScheduleResponse\"\x00\x12p\n" +
+	"\x13DeletePowerSchedule\x12*.pilab.agent.v2.DeletePowerScheduleRequest\x1a+.pilab.agent.v2.DeletePowerScheduleResponse\"\x00\x12R\n" +
+	"\tWakeOnLAN\x12 .pilab.agent.v2.WakeOnLANRequest\x1a!.pilab.agent.v2.WakeOnLANResponse\"\x00B1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v2;agentv2b\x06proto3"
 
 var (
 	file_pilab_agent_v2_agent_service_proto_rawDescOnce sync.Once
@@ -10268,415 +10268,415 @@ func file_pilab_agent_v2_agent_service_proto_rawDescGZIP() []byte {
 var file_pilab_agent_v2_agent_service_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_pilab_agent_v2_agent_service_proto_msgTypes = make([]protoimpl.MessageInfo, 173)
 var file_pilab_agent_v2_agent_service_proto_goTypes = []any{
-	(ControlCommand)(0),                          // 0: pilab.cloud.agent.v2.ControlCommand
-	(PowerAction)(0),                             // 1: pilab.cloud.agent.v2.PowerAction
-	(RecurrenceType)(0),                          // 2: pilab.cloud.agent.v2.RecurrenceType
-	(*Task)(nil),                                 // 3: pilab.cloud.agent.v2.Task
-	(*CPUTopology)(nil),                          // 4: pilab.cloud.agent.v2.CPUTopology
-	(*CPUPinning)(nil),                           // 5: pilab.cloud.agent.v2.CPUPinning
-	(*NUMAAffinity)(nil),                         // 6: pilab.cloud.agent.v2.NUMAAffinity
-	(*CPU)(nil),                                  // 7: pilab.cloud.agent.v2.CPU
-	(*Memory)(nil),                               // 8: pilab.cloud.agent.v2.Memory
-	(*QOSSettings)(nil),                          // 9: pilab.cloud.agent.v2.QOSSettings
-	(*DiskEncryption)(nil),                       // 10: pilab.cloud.agent.v2.DiskEncryption
-	(*Disk)(nil),                                 // 11: pilab.cloud.agent.v2.Disk
-	(*StorageAdapter)(nil),                       // 12: pilab.cloud.agent.v2.StorageAdapter
-	(*Storage)(nil),                              // 13: pilab.cloud.agent.v2.Storage
-	(*NetworkInterface)(nil),                     // 14: pilab.cloud.agent.v2.NetworkInterface
-	(*Network)(nil),                              // 15: pilab.cloud.agent.v2.Network
-	(*BIOS)(nil),                                 // 16: pilab.cloud.agent.v2.BIOS
-	(*InputDevice)(nil),                          // 17: pilab.cloud.agent.v2.InputDevice
-	(*Input)(nil),                                // 18: pilab.cloud.agent.v2.Input
-	(*SerialPort)(nil),                           // 19: pilab.cloud.agent.v2.SerialPort
-	(*Video)(nil),                                // 20: pilab.cloud.agent.v2.Video
-	(*DiskQOSLimit)(nil),                         // 21: pilab.cloud.agent.v2.DiskQOSLimit
-	(*NetworkQOSLimit)(nil),                      // 22: pilab.cloud.agent.v2.NetworkQOSLimit
-	(*QoS)(nil),                                  // 23: pilab.cloud.agent.v2.QoS
-	(*VirtualMachine)(nil),                       // 24: pilab.cloud.agent.v2.VirtualMachine
-	(*HostStatus)(nil),                           // 25: pilab.cloud.agent.v2.HostStatus
-	(*CloneVMImageFromMinioRequest)(nil),         // 26: pilab.cloud.agent.v2.CloneVMImageFromMinioRequest
-	(*CloneVMImageFromMinioResponse)(nil),        // 27: pilab.cloud.agent.v2.CloneVMImageFromMinioResponse
-	(*RegisterHostRequest)(nil),                  // 28: pilab.cloud.agent.v2.RegisterHostRequest
-	(*RegisterHostResponse)(nil),                 // 29: pilab.cloud.agent.v2.RegisterHostResponse
-	(*HeartbeatRequest)(nil),                     // 30: pilab.cloud.agent.v2.HeartbeatRequest
-	(*HeartbeatResponse)(nil),                    // 31: pilab.cloud.agent.v2.HeartbeatResponse
-	(*GetHostStatusRequest)(nil),                 // 32: pilab.cloud.agent.v2.GetHostStatusRequest
-	(*CreateVMRequest)(nil),                      // 33: pilab.cloud.agent.v2.CreateVMRequest
-	(*CreateVMResponse)(nil),                     // 34: pilab.cloud.agent.v2.CreateVMResponse
-	(*GetVMDetailsRequest)(nil),                  // 35: pilab.cloud.agent.v2.GetVMDetailsRequest
-	(*GetVMDetailsResponse)(nil),                 // 36: pilab.cloud.agent.v2.GetVMDetailsResponse
-	(*UpdateVMRequest)(nil),                      // 37: pilab.cloud.agent.v2.UpdateVMRequest
-	(*UpdateVMResponse)(nil),                     // 38: pilab.cloud.agent.v2.UpdateVMResponse
-	(*DeleteVMRequest)(nil),                      // 39: pilab.cloud.agent.v2.DeleteVMRequest
-	(*DeleteVMResponse)(nil),                     // 40: pilab.cloud.agent.v2.DeleteVMResponse
-	(*StartVMRequest)(nil),                       // 41: pilab.cloud.agent.v2.StartVMRequest
-	(*StartVMResponse)(nil),                      // 42: pilab.cloud.agent.v2.StartVMResponse
-	(*StopVMRequest)(nil),                        // 43: pilab.cloud.agent.v2.StopVMRequest
-	(*StopVMResponse)(nil),                       // 44: pilab.cloud.agent.v2.StopVMResponse
-	(*ForceStopVMRequest)(nil),                   // 45: pilab.cloud.agent.v2.ForceStopVMRequest
-	(*ForceStopVMResponse)(nil),                  // 46: pilab.cloud.agent.v2.ForceStopVMResponse
-	(*RebootVMRequest)(nil),                      // 47: pilab.cloud.agent.v2.RebootVMRequest
-	(*RebootVMResponse)(nil),                     // 48: pilab.cloud.agent.v2.RebootVMResponse
-	(*PauseVMRequest)(nil),                       // 49: pilab.cloud.agent.v2.PauseVMRequest
-	(*PauseVMResponse)(nil),                      // 50: pilab.cloud.agent.v2.PauseVMResponse
-	(*ResumeVMRequest)(nil),                      // 51: pilab.cloud.agent.v2.ResumeVMRequest
-	(*ResumeVMResponse)(nil),                     // 52: pilab.cloud.agent.v2.ResumeVMResponse
-	(*InitiateMigrationRequest)(nil),             // 53: pilab.cloud.agent.v2.InitiateMigrationRequest
-	(*InitiateMigrationResponse)(nil),            // 54: pilab.cloud.agent.v2.InitiateMigrationResponse
-	(*PrepareForMigrationRequest)(nil),           // 55: pilab.cloud.agent.v2.PrepareForMigrationRequest
-	(*PrepareForMigrationResponse)(nil),          // 56: pilab.cloud.agent.v2.PrepareForMigrationResponse
-	(*CreateSnapshotRequest)(nil),                // 57: pilab.cloud.agent.v2.CreateSnapshotRequest
-	(*CreateSnapshotResponse)(nil),               // 58: pilab.cloud.agent.v2.CreateSnapshotResponse
-	(*RevertToSnapshotRequest)(nil),              // 59: pilab.cloud.agent.v2.RevertToSnapshotRequest
-	(*RevertToSnapshotResponse)(nil),             // 60: pilab.cloud.agent.v2.RevertToSnapshotResponse
-	(*DeleteSnapshotRequest)(nil),                // 61: pilab.cloud.agent.v2.DeleteSnapshotRequest
-	(*DeleteSnapshotResponse)(nil),               // 62: pilab.cloud.agent.v2.DeleteSnapshotResponse
-	(*GetTaskStatusRequest)(nil),                 // 63: pilab.cloud.agent.v2.GetTaskStatusRequest
-	(*CancelTaskRequest)(nil),                    // 64: pilab.cloud.agent.v2.CancelTaskRequest
-	(*CancelTaskResponse)(nil),                   // 65: pilab.cloud.agent.v2.CancelTaskResponse
-	(*ConfigureNetworkRequest)(nil),              // 66: pilab.cloud.agent.v2.ConfigureNetworkRequest
-	(*ConfigureNetworkResponse)(nil),             // 67: pilab.cloud.agent.v2.ConfigureNetworkResponse
-	(*ConfigureStorageRequest)(nil),              // 68: pilab.cloud.agent.v2.ConfigureStorageRequest
-	(*ConfigureStorageResponse)(nil),             // 69: pilab.cloud.agent.v2.ConfigureStorageResponse
-	(*ConfigureTimeRequest)(nil),                 // 70: pilab.cloud.agent.v2.ConfigureTimeRequest
-	(*ConfigureTimeResponse)(nil),                // 71: pilab.cloud.agent.v2.ConfigureTimeResponse
-	(*SetMaintenanceModeRequest)(nil),            // 72: pilab.cloud.agent.v2.SetMaintenanceModeRequest
-	(*SetMaintenanceModeResponse)(nil),           // 73: pilab.cloud.agent.v2.SetMaintenanceModeResponse
-	(*UpdateHostRequest)(nil),                    // 74: pilab.cloud.agent.v2.UpdateHostRequest
-	(*UpdateHostResponse)(nil),                   // 75: pilab.cloud.agent.v2.UpdateHostResponse
-	(*LVMVolume)(nil),                            // 76: pilab.cloud.agent.v2.LVMVolume
-	(*NFSShare)(nil),                             // 77: pilab.cloud.agent.v2.NFSShare
-	(*ISCSITarget)(nil),                          // 78: pilab.cloud.agent.v2.ISCSITarget
-	(*GetContentLibraryItemsRequest)(nil),        // 79: pilab.cloud.agent.v2.GetContentLibraryItemsRequest
-	(*GetContentLibraryItemsResponse)(nil),       // 80: pilab.cloud.agent.v2.GetContentLibraryItemsResponse
-	(*UploadContentLibraryItemRequest)(nil),      // 81: pilab.cloud.agent.v2.UploadContentLibraryItemRequest
-	(*ContentLibraryItemInfo)(nil),               // 82: pilab.cloud.agent.v2.ContentLibraryItemInfo
-	(*UploadContentLibraryItemResponse)(nil),     // 83: pilab.cloud.agent.v2.UploadContentLibraryItemResponse
-	(*DeleteContentLibraryItemRequest)(nil),      // 84: pilab.cloud.agent.v2.DeleteContentLibraryItemRequest
-	(*DeleteContentLibraryItemResponse)(nil),     // 85: pilab.cloud.agent.v2.DeleteContentLibraryItemResponse
-	(*GetDatastoresRequest)(nil),                 // 86: pilab.cloud.agent.v2.GetDatastoresRequest
-	(*GetDatastoresResponse)(nil),                // 87: pilab.cloud.agent.v2.GetDatastoresResponse
-	(*GetDatastoreRequest)(nil),                  // 88: pilab.cloud.agent.v2.GetDatastoreRequest
-	(*GetDatastoreResponse)(nil),                 // 89: pilab.cloud.agent.v2.GetDatastoreResponse
-	(*CreateDatastoreRequest)(nil),               // 90: pilab.cloud.agent.v2.CreateDatastoreRequest
-	(*CreateDatastoreResponse)(nil),              // 91: pilab.cloud.agent.v2.CreateDatastoreResponse
-	(*DeleteDatastoreRequest)(nil),               // 92: pilab.cloud.agent.v2.DeleteDatastoreRequest
-	(*DeleteDatastoreResponse)(nil),              // 93: pilab.cloud.agent.v2.DeleteDatastoreResponse
-	(*GetNetworksRequest)(nil),                   // 94: pilab.cloud.agent.v2.GetNetworksRequest
-	(*NetworkDefinition)(nil),                    // 95: pilab.cloud.agent.v2.NetworkDefinition
-	(*GetNetworksResponse)(nil),                  // 96: pilab.cloud.agent.v2.GetNetworksResponse
-	(*GetNetworkRequest)(nil),                    // 97: pilab.cloud.agent.v2.GetNetworkRequest
-	(*GetNetworkResponse)(nil),                   // 98: pilab.cloud.agent.v2.GetNetworkResponse
-	(*CreateNetworkRequest)(nil),                 // 99: pilab.cloud.agent.v2.CreateNetworkRequest
-	(*CreateNetworkResponse)(nil),                // 100: pilab.cloud.agent.v2.CreateNetworkResponse
-	(*DeleteNetworkRequest)(nil),                 // 101: pilab.cloud.agent.v2.DeleteNetworkRequest
-	(*DeleteNetworkResponse)(nil),                // 102: pilab.cloud.agent.v2.DeleteNetworkResponse
-	(*AttachIsoRequest)(nil),                     // 103: pilab.cloud.agent.v2.AttachIsoRequest
-	(*AttachIsoResponse)(nil),                    // 104: pilab.cloud.agent.v2.AttachIsoResponse
-	(*DetachIsoRequest)(nil),                     // 105: pilab.cloud.agent.v2.DetachIsoRequest
-	(*DetachIsoResponse)(nil),                    // 106: pilab.cloud.agent.v2.DetachIsoResponse
-	(*CloneVmFromTemplateRequest)(nil),           // 107: pilab.cloud.agent.v2.CloneVmFromTemplateRequest
-	(*CloneVmFromTemplateResponse)(nil),          // 108: pilab.cloud.agent.v2.CloneVmFromTemplateResponse
-	(*Error)(nil),                                // 109: pilab.cloud.agent.v2.Error
-	(*ExportOVARequest)(nil),                     // 110: pilab.cloud.agent.v2.ExportOVARequest
-	(*ExportOVAResponse)(nil),                    // 111: pilab.cloud.agent.v2.ExportOVAResponse
-	(*ImportOVARequest)(nil),                     // 112: pilab.cloud.agent.v2.ImportOVARequest
-	(*ImportOVAInfo)(nil),                        // 113: pilab.cloud.agent.v2.ImportOVAInfo
-	(*ImportOVAResponse)(nil),                    // 114: pilab.cloud.agent.v2.ImportOVAResponse
-	(*GetVMGuestIPsRequest)(nil),                 // 115: pilab.cloud.agent.v2.GetVMGuestIPsRequest
-	(*GetVMGuestIPsResponse)(nil),                // 116: pilab.cloud.agent.v2.GetVMGuestIPsResponse
-	(*InterfaceAddress)(nil),                     // 117: pilab.cloud.agent.v2.InterfaceAddress
-	(*ChangeVMUserPasswordRequest)(nil),          // 118: pilab.cloud.agent.v2.ChangeVMUserPasswordRequest
-	(*ChangeVMUserPasswordResponse)(nil),         // 119: pilab.cloud.agent.v2.ChangeVMUserPasswordResponse
-	(*AttachCloudInitRequest)(nil),               // 120: pilab.cloud.agent.v2.AttachCloudInitRequest
-	(*AttachCloudInitResponse)(nil),              // 121: pilab.cloud.agent.v2.AttachCloudInitResponse
-	(*AttachNetworkInterfaceRequest)(nil),        // 122: pilab.cloud.agent.v2.AttachNetworkInterfaceRequest
-	(*AttachNetworkInterfaceResponse)(nil),       // 123: pilab.cloud.agent.v2.AttachNetworkInterfaceResponse
-	(*DetachNetworkInterfaceRequest)(nil),        // 124: pilab.cloud.agent.v2.DetachNetworkInterfaceRequest
-	(*DetachNetworkInterfaceResponse)(nil),       // 125: pilab.cloud.agent.v2.DetachNetworkInterfaceResponse
-	(*StreamRequest)(nil),                        // 126: pilab.cloud.agent.v2.StreamRequest
-	(*OpenStreamMessage)(nil),                    // 127: pilab.cloud.agent.v2.OpenStreamMessage
-	(*CloseStreamMessage)(nil),                   // 128: pilab.cloud.agent.v2.CloseStreamMessage
-	(*StreamResponse)(nil),                       // 129: pilab.cloud.agent.v2.StreamResponse
-	(*GetHardwareHealthRequest)(nil),             // 130: pilab.cloud.agent.v2.GetHardwareHealthRequest
-	(*GetHardwareHealthResponse)(nil),            // 131: pilab.cloud.agent.v2.GetHardwareHealthResponse
-	(*GetSensorDataRequest)(nil),                 // 132: pilab.cloud.agent.v2.GetSensorDataRequest
-	(*GetSensorDataResponse)(nil),                // 133: pilab.cloud.agent.v2.GetSensorDataResponse
-	(*SensorData)(nil),                           // 134: pilab.cloud.agent.v2.SensorData
-	(*DefineVMRequest)(nil),                      // 135: pilab.cloud.agent.v2.DefineVMRequest
-	(*DefineVMResponse)(nil),                     // 136: pilab.cloud.agent.v2.DefineVMResponse
-	(*GetVMDefinitionRequest)(nil),               // 137: pilab.cloud.agent.v2.GetVMDefinitionRequest
-	(*GetVMDefinitionResponse)(nil),              // 138: pilab.cloud.agent.v2.GetVMDefinitionResponse
-	(*ControlVMRequest)(nil),                     // 139: pilab.cloud.agent.v2.ControlVMRequest
-	(*ControlVMResponse)(nil),                    // 140: pilab.cloud.agent.v2.ControlVMResponse
-	(*GetVMStatusRequest)(nil),                   // 141: pilab.cloud.agent.v2.GetVMStatusRequest
-	(*GetVMStatusResponse)(nil),                  // 142: pilab.cloud.agent.v2.GetVMStatusResponse
-	(*GetVMGuestInfoRequest)(nil),                // 143: pilab.cloud.agent.v2.GetVMGuestInfoRequest
-	(*VmGuestOS)(nil),                            // 144: pilab.cloud.agent.v2.VmGuestOS
-	(*VmGuestInterfaceAddress)(nil),              // 145: pilab.cloud.agent.v2.VmGuestInterfaceAddress
-	(*VmGuestNetworkInterface)(nil),              // 146: pilab.cloud.agent.v2.VmGuestNetworkInterface
-	(*GetVMGuestInfoResponse)(nil),               // 147: pilab.cloud.agent.v2.GetVMGuestInfoResponse
-	(*PowerSchedule)(nil),                        // 148: pilab.cloud.agent.v2.PowerSchedule
-	(*CreatePowerScheduleRequest)(nil),           // 149: pilab.cloud.agent.v2.CreatePowerScheduleRequest
-	(*CreatePowerScheduleResponse)(nil),          // 150: pilab.cloud.agent.v2.CreatePowerScheduleResponse
-	(*ListPowerSchedulesRequest)(nil),            // 151: pilab.cloud.agent.v2.ListPowerSchedulesRequest
-	(*ListPowerSchedulesResponse)(nil),           // 152: pilab.cloud.agent.v2.ListPowerSchedulesResponse
-	(*UpdatePowerScheduleRequest)(nil),           // 153: pilab.cloud.agent.v2.UpdatePowerScheduleRequest
-	(*UpdatePowerScheduleResponse)(nil),          // 154: pilab.cloud.agent.v2.UpdatePowerScheduleResponse
-	(*DeletePowerScheduleRequest)(nil),           // 155: pilab.cloud.agent.v2.DeletePowerScheduleRequest
-	(*DeletePowerScheduleResponse)(nil),          // 156: pilab.cloud.agent.v2.DeletePowerScheduleResponse
-	(*WakeOnLANRequest)(nil),                     // 157: pilab.cloud.agent.v2.WakeOnLANRequest
-	(*WakeOnLANResponse)(nil),                    // 158: pilab.cloud.agent.v2.WakeOnLANResponse
-	nil,                                          // 159: pilab.cloud.agent.v2.VirtualMachine.MetadataEntry
-	nil,                                          // 160: pilab.cloud.agent.v2.HostStatus.MetadataEntry
-	nil,                                          // 161: pilab.cloud.agent.v2.RegisterHostRequest.MetadataEntry
-	(*GetContentLibraryItemsRequest_Filter)(nil), // 162: pilab.cloud.agent.v2.GetContentLibraryItemsRequest.Filter
-	nil, // 163: pilab.cloud.agent.v2.GetContentLibraryItemsRequest.Filter.TagsEntry
-	(*GetContentLibraryItemsResponse_ContentLibraryItem)(nil), // 164: pilab.cloud.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem
-	nil,                                     // 165: pilab.cloud.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem.TagsEntry
-	nil,                                     // 166: pilab.cloud.agent.v2.ContentLibraryItemInfo.TagsEntry
-	(*GetDatastoresResponse_Datastore)(nil), // 167: pilab.cloud.agent.v2.GetDatastoresResponse.Datastore
-	nil,                                     // 168: pilab.cloud.agent.v2.GetDatastoresResponse.Datastore.ConnectionInfoEntry
-	(*GetDatastoreResponse_Datastore)(nil),  // 169: pilab.cloud.agent.v2.GetDatastoreResponse.Datastore
-	nil,                                     // 170: pilab.cloud.agent.v2.GetDatastoreResponse.Datastore.ConnectionInfoEntry
-	nil,                                     // 171: pilab.cloud.agent.v2.CreateDatastoreRequest.ConnectionInfoEntry
-	nil,                                     // 172: pilab.cloud.agent.v2.NetworkDefinition.ConnectionInfoEntry
-	nil,                                     // 173: pilab.cloud.agent.v2.CloneVmFromTemplateRequest.VmOverridesEntry
-	nil,                                     // 174: pilab.cloud.agent.v2.ImportOVAInfo.MetadataEntry
-	nil,                                     // 175: pilab.cloud.agent.v2.AttachNetworkInterfaceRequest.OptionsEntry
+	(ControlCommand)(0),                          // 0: pilab.agent.v2.ControlCommand
+	(PowerAction)(0),                             // 1: pilab.agent.v2.PowerAction
+	(RecurrenceType)(0),                          // 2: pilab.agent.v2.RecurrenceType
+	(*Task)(nil),                                 // 3: pilab.agent.v2.Task
+	(*CPUTopology)(nil),                          // 4: pilab.agent.v2.CPUTopology
+	(*CPUPinning)(nil),                           // 5: pilab.agent.v2.CPUPinning
+	(*NUMAAffinity)(nil),                         // 6: pilab.agent.v2.NUMAAffinity
+	(*CPU)(nil),                                  // 7: pilab.agent.v2.CPU
+	(*Memory)(nil),                               // 8: pilab.agent.v2.Memory
+	(*QOSSettings)(nil),                          // 9: pilab.agent.v2.QOSSettings
+	(*DiskEncryption)(nil),                       // 10: pilab.agent.v2.DiskEncryption
+	(*Disk)(nil),                                 // 11: pilab.agent.v2.Disk
+	(*StorageAdapter)(nil),                       // 12: pilab.agent.v2.StorageAdapter
+	(*Storage)(nil),                              // 13: pilab.agent.v2.Storage
+	(*NetworkInterface)(nil),                     // 14: pilab.agent.v2.NetworkInterface
+	(*Network)(nil),                              // 15: pilab.agent.v2.Network
+	(*BIOS)(nil),                                 // 16: pilab.agent.v2.BIOS
+	(*InputDevice)(nil),                          // 17: pilab.agent.v2.InputDevice
+	(*Input)(nil),                                // 18: pilab.agent.v2.Input
+	(*SerialPort)(nil),                           // 19: pilab.agent.v2.SerialPort
+	(*Video)(nil),                                // 20: pilab.agent.v2.Video
+	(*DiskQOSLimit)(nil),                         // 21: pilab.agent.v2.DiskQOSLimit
+	(*NetworkQOSLimit)(nil),                      // 22: pilab.agent.v2.NetworkQOSLimit
+	(*QoS)(nil),                                  // 23: pilab.agent.v2.QoS
+	(*VirtualMachine)(nil),                       // 24: pilab.agent.v2.VirtualMachine
+	(*HostStatus)(nil),                           // 25: pilab.agent.v2.HostStatus
+	(*CloneVMImageFromMinioRequest)(nil),         // 26: pilab.agent.v2.CloneVMImageFromMinioRequest
+	(*CloneVMImageFromMinioResponse)(nil),        // 27: pilab.agent.v2.CloneVMImageFromMinioResponse
+	(*RegisterHostRequest)(nil),                  // 28: pilab.agent.v2.RegisterHostRequest
+	(*RegisterHostResponse)(nil),                 // 29: pilab.agent.v2.RegisterHostResponse
+	(*HeartbeatRequest)(nil),                     // 30: pilab.agent.v2.HeartbeatRequest
+	(*HeartbeatResponse)(nil),                    // 31: pilab.agent.v2.HeartbeatResponse
+	(*GetHostStatusRequest)(nil),                 // 32: pilab.agent.v2.GetHostStatusRequest
+	(*CreateVMRequest)(nil),                      // 33: pilab.agent.v2.CreateVMRequest
+	(*CreateVMResponse)(nil),                     // 34: pilab.agent.v2.CreateVMResponse
+	(*GetVMDetailsRequest)(nil),                  // 35: pilab.agent.v2.GetVMDetailsRequest
+	(*GetVMDetailsResponse)(nil),                 // 36: pilab.agent.v2.GetVMDetailsResponse
+	(*UpdateVMRequest)(nil),                      // 37: pilab.agent.v2.UpdateVMRequest
+	(*UpdateVMResponse)(nil),                     // 38: pilab.agent.v2.UpdateVMResponse
+	(*DeleteVMRequest)(nil),                      // 39: pilab.agent.v2.DeleteVMRequest
+	(*DeleteVMResponse)(nil),                     // 40: pilab.agent.v2.DeleteVMResponse
+	(*StartVMRequest)(nil),                       // 41: pilab.agent.v2.StartVMRequest
+	(*StartVMResponse)(nil),                      // 42: pilab.agent.v2.StartVMResponse
+	(*StopVMRequest)(nil),                        // 43: pilab.agent.v2.StopVMRequest
+	(*StopVMResponse)(nil),                       // 44: pilab.agent.v2.StopVMResponse
+	(*ForceStopVMRequest)(nil),                   // 45: pilab.agent.v2.ForceStopVMRequest
+	(*ForceStopVMResponse)(nil),                  // 46: pilab.agent.v2.ForceStopVMResponse
+	(*RebootVMRequest)(nil),                      // 47: pilab.agent.v2.RebootVMRequest
+	(*RebootVMResponse)(nil),                     // 48: pilab.agent.v2.RebootVMResponse
+	(*PauseVMRequest)(nil),                       // 49: pilab.agent.v2.PauseVMRequest
+	(*PauseVMResponse)(nil),                      // 50: pilab.agent.v2.PauseVMResponse
+	(*ResumeVMRequest)(nil),                      // 51: pilab.agent.v2.ResumeVMRequest
+	(*ResumeVMResponse)(nil),                     // 52: pilab.agent.v2.ResumeVMResponse
+	(*InitiateMigrationRequest)(nil),             // 53: pilab.agent.v2.InitiateMigrationRequest
+	(*InitiateMigrationResponse)(nil),            // 54: pilab.agent.v2.InitiateMigrationResponse
+	(*PrepareForMigrationRequest)(nil),           // 55: pilab.agent.v2.PrepareForMigrationRequest
+	(*PrepareForMigrationResponse)(nil),          // 56: pilab.agent.v2.PrepareForMigrationResponse
+	(*CreateSnapshotRequest)(nil),                // 57: pilab.agent.v2.CreateSnapshotRequest
+	(*CreateSnapshotResponse)(nil),               // 58: pilab.agent.v2.CreateSnapshotResponse
+	(*RevertToSnapshotRequest)(nil),              // 59: pilab.agent.v2.RevertToSnapshotRequest
+	(*RevertToSnapshotResponse)(nil),             // 60: pilab.agent.v2.RevertToSnapshotResponse
+	(*DeleteSnapshotRequest)(nil),                // 61: pilab.agent.v2.DeleteSnapshotRequest
+	(*DeleteSnapshotResponse)(nil),               // 62: pilab.agent.v2.DeleteSnapshotResponse
+	(*GetTaskStatusRequest)(nil),                 // 63: pilab.agent.v2.GetTaskStatusRequest
+	(*CancelTaskRequest)(nil),                    // 64: pilab.agent.v2.CancelTaskRequest
+	(*CancelTaskResponse)(nil),                   // 65: pilab.agent.v2.CancelTaskResponse
+	(*ConfigureNetworkRequest)(nil),              // 66: pilab.agent.v2.ConfigureNetworkRequest
+	(*ConfigureNetworkResponse)(nil),             // 67: pilab.agent.v2.ConfigureNetworkResponse
+	(*ConfigureStorageRequest)(nil),              // 68: pilab.agent.v2.ConfigureStorageRequest
+	(*ConfigureStorageResponse)(nil),             // 69: pilab.agent.v2.ConfigureStorageResponse
+	(*ConfigureTimeRequest)(nil),                 // 70: pilab.agent.v2.ConfigureTimeRequest
+	(*ConfigureTimeResponse)(nil),                // 71: pilab.agent.v2.ConfigureTimeResponse
+	(*SetMaintenanceModeRequest)(nil),            // 72: pilab.agent.v2.SetMaintenanceModeRequest
+	(*SetMaintenanceModeResponse)(nil),           // 73: pilab.agent.v2.SetMaintenanceModeResponse
+	(*UpdateHostRequest)(nil),                    // 74: pilab.agent.v2.UpdateHostRequest
+	(*UpdateHostResponse)(nil),                   // 75: pilab.agent.v2.UpdateHostResponse
+	(*LVMVolume)(nil),                            // 76: pilab.agent.v2.LVMVolume
+	(*NFSShare)(nil),                             // 77: pilab.agent.v2.NFSShare
+	(*ISCSITarget)(nil),                          // 78: pilab.agent.v2.ISCSITarget
+	(*GetContentLibraryItemsRequest)(nil),        // 79: pilab.agent.v2.GetContentLibraryItemsRequest
+	(*GetContentLibraryItemsResponse)(nil),       // 80: pilab.agent.v2.GetContentLibraryItemsResponse
+	(*UploadContentLibraryItemRequest)(nil),      // 81: pilab.agent.v2.UploadContentLibraryItemRequest
+	(*ContentLibraryItemInfo)(nil),               // 82: pilab.agent.v2.ContentLibraryItemInfo
+	(*UploadContentLibraryItemResponse)(nil),     // 83: pilab.agent.v2.UploadContentLibraryItemResponse
+	(*DeleteContentLibraryItemRequest)(nil),      // 84: pilab.agent.v2.DeleteContentLibraryItemRequest
+	(*DeleteContentLibraryItemResponse)(nil),     // 85: pilab.agent.v2.DeleteContentLibraryItemResponse
+	(*GetDatastoresRequest)(nil),                 // 86: pilab.agent.v2.GetDatastoresRequest
+	(*GetDatastoresResponse)(nil),                // 87: pilab.agent.v2.GetDatastoresResponse
+	(*GetDatastoreRequest)(nil),                  // 88: pilab.agent.v2.GetDatastoreRequest
+	(*GetDatastoreResponse)(nil),                 // 89: pilab.agent.v2.GetDatastoreResponse
+	(*CreateDatastoreRequest)(nil),               // 90: pilab.agent.v2.CreateDatastoreRequest
+	(*CreateDatastoreResponse)(nil),              // 91: pilab.agent.v2.CreateDatastoreResponse
+	(*DeleteDatastoreRequest)(nil),               // 92: pilab.agent.v2.DeleteDatastoreRequest
+	(*DeleteDatastoreResponse)(nil),              // 93: pilab.agent.v2.DeleteDatastoreResponse
+	(*GetNetworksRequest)(nil),                   // 94: pilab.agent.v2.GetNetworksRequest
+	(*NetworkDefinition)(nil),                    // 95: pilab.agent.v2.NetworkDefinition
+	(*GetNetworksResponse)(nil),                  // 96: pilab.agent.v2.GetNetworksResponse
+	(*GetNetworkRequest)(nil),                    // 97: pilab.agent.v2.GetNetworkRequest
+	(*GetNetworkResponse)(nil),                   // 98: pilab.agent.v2.GetNetworkResponse
+	(*CreateNetworkRequest)(nil),                 // 99: pilab.agent.v2.CreateNetworkRequest
+	(*CreateNetworkResponse)(nil),                // 100: pilab.agent.v2.CreateNetworkResponse
+	(*DeleteNetworkRequest)(nil),                 // 101: pilab.agent.v2.DeleteNetworkRequest
+	(*DeleteNetworkResponse)(nil),                // 102: pilab.agent.v2.DeleteNetworkResponse
+	(*AttachIsoRequest)(nil),                     // 103: pilab.agent.v2.AttachIsoRequest
+	(*AttachIsoResponse)(nil),                    // 104: pilab.agent.v2.AttachIsoResponse
+	(*DetachIsoRequest)(nil),                     // 105: pilab.agent.v2.DetachIsoRequest
+	(*DetachIsoResponse)(nil),                    // 106: pilab.agent.v2.DetachIsoResponse
+	(*CloneVmFromTemplateRequest)(nil),           // 107: pilab.agent.v2.CloneVmFromTemplateRequest
+	(*CloneVmFromTemplateResponse)(nil),          // 108: pilab.agent.v2.CloneVmFromTemplateResponse
+	(*Error)(nil),                                // 109: pilab.agent.v2.Error
+	(*ExportOVARequest)(nil),                     // 110: pilab.agent.v2.ExportOVARequest
+	(*ExportOVAResponse)(nil),                    // 111: pilab.agent.v2.ExportOVAResponse
+	(*ImportOVARequest)(nil),                     // 112: pilab.agent.v2.ImportOVARequest
+	(*ImportOVAInfo)(nil),                        // 113: pilab.agent.v2.ImportOVAInfo
+	(*ImportOVAResponse)(nil),                    // 114: pilab.agent.v2.ImportOVAResponse
+	(*GetVMGuestIPsRequest)(nil),                 // 115: pilab.agent.v2.GetVMGuestIPsRequest
+	(*GetVMGuestIPsResponse)(nil),                // 116: pilab.agent.v2.GetVMGuestIPsResponse
+	(*InterfaceAddress)(nil),                     // 117: pilab.agent.v2.InterfaceAddress
+	(*ChangeVMUserPasswordRequest)(nil),          // 118: pilab.agent.v2.ChangeVMUserPasswordRequest
+	(*ChangeVMUserPasswordResponse)(nil),         // 119: pilab.agent.v2.ChangeVMUserPasswordResponse
+	(*AttachCloudInitRequest)(nil),               // 120: pilab.agent.v2.AttachCloudInitRequest
+	(*AttachCloudInitResponse)(nil),              // 121: pilab.agent.v2.AttachCloudInitResponse
+	(*AttachNetworkInterfaceRequest)(nil),        // 122: pilab.agent.v2.AttachNetworkInterfaceRequest
+	(*AttachNetworkInterfaceResponse)(nil),       // 123: pilab.agent.v2.AttachNetworkInterfaceResponse
+	(*DetachNetworkInterfaceRequest)(nil),        // 124: pilab.agent.v2.DetachNetworkInterfaceRequest
+	(*DetachNetworkInterfaceResponse)(nil),       // 125: pilab.agent.v2.DetachNetworkInterfaceResponse
+	(*StreamRequest)(nil),                        // 126: pilab.agent.v2.StreamRequest
+	(*OpenStreamMessage)(nil),                    // 127: pilab.agent.v2.OpenStreamMessage
+	(*CloseStreamMessage)(nil),                   // 128: pilab.agent.v2.CloseStreamMessage
+	(*StreamResponse)(nil),                       // 129: pilab.agent.v2.StreamResponse
+	(*GetHardwareHealthRequest)(nil),             // 130: pilab.agent.v2.GetHardwareHealthRequest
+	(*GetHardwareHealthResponse)(nil),            // 131: pilab.agent.v2.GetHardwareHealthResponse
+	(*GetSensorDataRequest)(nil),                 // 132: pilab.agent.v2.GetSensorDataRequest
+	(*GetSensorDataResponse)(nil),                // 133: pilab.agent.v2.GetSensorDataResponse
+	(*SensorData)(nil),                           // 134: pilab.agent.v2.SensorData
+	(*DefineVMRequest)(nil),                      // 135: pilab.agent.v2.DefineVMRequest
+	(*DefineVMResponse)(nil),                     // 136: pilab.agent.v2.DefineVMResponse
+	(*GetVMDefinitionRequest)(nil),               // 137: pilab.agent.v2.GetVMDefinitionRequest
+	(*GetVMDefinitionResponse)(nil),              // 138: pilab.agent.v2.GetVMDefinitionResponse
+	(*ControlVMRequest)(nil),                     // 139: pilab.agent.v2.ControlVMRequest
+	(*ControlVMResponse)(nil),                    // 140: pilab.agent.v2.ControlVMResponse
+	(*GetVMStatusRequest)(nil),                   // 141: pilab.agent.v2.GetVMStatusRequest
+	(*GetVMStatusResponse)(nil),                  // 142: pilab.agent.v2.GetVMStatusResponse
+	(*GetVMGuestInfoRequest)(nil),                // 143: pilab.agent.v2.GetVMGuestInfoRequest
+	(*VmGuestOS)(nil),                            // 144: pilab.agent.v2.VmGuestOS
+	(*VmGuestInterfaceAddress)(nil),              // 145: pilab.agent.v2.VmGuestInterfaceAddress
+	(*VmGuestNetworkInterface)(nil),              // 146: pilab.agent.v2.VmGuestNetworkInterface
+	(*GetVMGuestInfoResponse)(nil),               // 147: pilab.agent.v2.GetVMGuestInfoResponse
+	(*PowerSchedule)(nil),                        // 148: pilab.agent.v2.PowerSchedule
+	(*CreatePowerScheduleRequest)(nil),           // 149: pilab.agent.v2.CreatePowerScheduleRequest
+	(*CreatePowerScheduleResponse)(nil),          // 150: pilab.agent.v2.CreatePowerScheduleResponse
+	(*ListPowerSchedulesRequest)(nil),            // 151: pilab.agent.v2.ListPowerSchedulesRequest
+	(*ListPowerSchedulesResponse)(nil),           // 152: pilab.agent.v2.ListPowerSchedulesResponse
+	(*UpdatePowerScheduleRequest)(nil),           // 153: pilab.agent.v2.UpdatePowerScheduleRequest
+	(*UpdatePowerScheduleResponse)(nil),          // 154: pilab.agent.v2.UpdatePowerScheduleResponse
+	(*DeletePowerScheduleRequest)(nil),           // 155: pilab.agent.v2.DeletePowerScheduleRequest
+	(*DeletePowerScheduleResponse)(nil),          // 156: pilab.agent.v2.DeletePowerScheduleResponse
+	(*WakeOnLANRequest)(nil),                     // 157: pilab.agent.v2.WakeOnLANRequest
+	(*WakeOnLANResponse)(nil),                    // 158: pilab.agent.v2.WakeOnLANResponse
+	nil,                                          // 159: pilab.agent.v2.VirtualMachine.MetadataEntry
+	nil,                                          // 160: pilab.agent.v2.HostStatus.MetadataEntry
+	nil,                                          // 161: pilab.agent.v2.RegisterHostRequest.MetadataEntry
+	(*GetContentLibraryItemsRequest_Filter)(nil), // 162: pilab.agent.v2.GetContentLibraryItemsRequest.Filter
+	nil, // 163: pilab.agent.v2.GetContentLibraryItemsRequest.Filter.TagsEntry
+	(*GetContentLibraryItemsResponse_ContentLibraryItem)(nil), // 164: pilab.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem
+	nil,                                     // 165: pilab.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem.TagsEntry
+	nil,                                     // 166: pilab.agent.v2.ContentLibraryItemInfo.TagsEntry
+	(*GetDatastoresResponse_Datastore)(nil), // 167: pilab.agent.v2.GetDatastoresResponse.Datastore
+	nil,                                     // 168: pilab.agent.v2.GetDatastoresResponse.Datastore.ConnectionInfoEntry
+	(*GetDatastoreResponse_Datastore)(nil),  // 169: pilab.agent.v2.GetDatastoreResponse.Datastore
+	nil,                                     // 170: pilab.agent.v2.GetDatastoreResponse.Datastore.ConnectionInfoEntry
+	nil,                                     // 171: pilab.agent.v2.CreateDatastoreRequest.ConnectionInfoEntry
+	nil,                                     // 172: pilab.agent.v2.NetworkDefinition.ConnectionInfoEntry
+	nil,                                     // 173: pilab.agent.v2.CloneVmFromTemplateRequest.VmOverridesEntry
+	nil,                                     // 174: pilab.agent.v2.ImportOVAInfo.MetadataEntry
+	nil,                                     // 175: pilab.agent.v2.AttachNetworkInterfaceRequest.OptionsEntry
 	(*emptypb.Empty)(nil),                   // 176: google.protobuf.Empty
 }
 var file_pilab_agent_v2_agent_service_proto_depIdxs = []int32{
-	4,   // 0: pilab.cloud.agent.v2.CPU.topology:type_name -> pilab.cloud.agent.v2.CPUTopology
-	5,   // 1: pilab.cloud.agent.v2.CPU.pinning:type_name -> pilab.cloud.agent.v2.CPUPinning
-	6,   // 2: pilab.cloud.agent.v2.CPU.numa_affinity:type_name -> pilab.cloud.agent.v2.NUMAAffinity
-	6,   // 3: pilab.cloud.agent.v2.Memory.numa_affinity:type_name -> pilab.cloud.agent.v2.NUMAAffinity
-	9,   // 4: pilab.cloud.agent.v2.Disk.qos_settings:type_name -> pilab.cloud.agent.v2.QOSSettings
-	10,  // 5: pilab.cloud.agent.v2.Disk.encryption:type_name -> pilab.cloud.agent.v2.DiskEncryption
-	11,  // 6: pilab.cloud.agent.v2.Storage.disks:type_name -> pilab.cloud.agent.v2.Disk
-	12,  // 7: pilab.cloud.agent.v2.Storage.adapters:type_name -> pilab.cloud.agent.v2.StorageAdapter
-	9,   // 8: pilab.cloud.agent.v2.NetworkInterface.qos_settings:type_name -> pilab.cloud.agent.v2.QOSSettings
-	14,  // 9: pilab.cloud.agent.v2.Network.interfaces:type_name -> pilab.cloud.agent.v2.NetworkInterface
-	17,  // 10: pilab.cloud.agent.v2.Input.keyboard:type_name -> pilab.cloud.agent.v2.InputDevice
-	17,  // 11: pilab.cloud.agent.v2.Input.mouse:type_name -> pilab.cloud.agent.v2.InputDevice
-	19,  // 12: pilab.cloud.agent.v2.Input.serial_ports:type_name -> pilab.cloud.agent.v2.SerialPort
-	21,  // 13: pilab.cloud.agent.v2.QoS.disk_limits:type_name -> pilab.cloud.agent.v2.DiskQOSLimit
-	22,  // 14: pilab.cloud.agent.v2.QoS.network_limits:type_name -> pilab.cloud.agent.v2.NetworkQOSLimit
-	7,   // 15: pilab.cloud.agent.v2.VirtualMachine.cpu:type_name -> pilab.cloud.agent.v2.CPU
-	8,   // 16: pilab.cloud.agent.v2.VirtualMachine.memory:type_name -> pilab.cloud.agent.v2.Memory
-	13,  // 17: pilab.cloud.agent.v2.VirtualMachine.storage:type_name -> pilab.cloud.agent.v2.Storage
-	15,  // 18: pilab.cloud.agent.v2.VirtualMachine.network:type_name -> pilab.cloud.agent.v2.Network
-	16,  // 19: pilab.cloud.agent.v2.VirtualMachine.bios:type_name -> pilab.cloud.agent.v2.BIOS
-	18,  // 20: pilab.cloud.agent.v2.VirtualMachine.input:type_name -> pilab.cloud.agent.v2.Input
-	20,  // 21: pilab.cloud.agent.v2.VirtualMachine.video:type_name -> pilab.cloud.agent.v2.Video
-	23,  // 22: pilab.cloud.agent.v2.VirtualMachine.qos:type_name -> pilab.cloud.agent.v2.QoS
-	159, // 23: pilab.cloud.agent.v2.VirtualMachine.metadata:type_name -> pilab.cloud.agent.v2.VirtualMachine.MetadataEntry
-	160, // 24: pilab.cloud.agent.v2.HostStatus.metadata:type_name -> pilab.cloud.agent.v2.HostStatus.MetadataEntry
-	161, // 25: pilab.cloud.agent.v2.RegisterHostRequest.metadata:type_name -> pilab.cloud.agent.v2.RegisterHostRequest.MetadataEntry
-	3,   // 26: pilab.cloud.agent.v2.HeartbeatResponse.tasks:type_name -> pilab.cloud.agent.v2.Task
-	24,  // 27: pilab.cloud.agent.v2.CreateVMRequest.vm:type_name -> pilab.cloud.agent.v2.VirtualMachine
-	24,  // 28: pilab.cloud.agent.v2.GetVMDetailsResponse.vm:type_name -> pilab.cloud.agent.v2.VirtualMachine
-	24,  // 29: pilab.cloud.agent.v2.UpdateVMRequest.vm_object:type_name -> pilab.cloud.agent.v2.VirtualMachine
-	176, // 30: pilab.cloud.agent.v2.UpdateVMResponse.message:type_name -> google.protobuf.Empty
-	176, // 31: pilab.cloud.agent.v2.DeleteVMResponse.message:type_name -> google.protobuf.Empty
-	176, // 32: pilab.cloud.agent.v2.StartVMResponse.message:type_name -> google.protobuf.Empty
-	176, // 33: pilab.cloud.agent.v2.StopVMResponse.message:type_name -> google.protobuf.Empty
-	176, // 34: pilab.cloud.agent.v2.ForceStopVMResponse.message:type_name -> google.protobuf.Empty
-	176, // 35: pilab.cloud.agent.v2.RebootVMResponse.message:type_name -> google.protobuf.Empty
-	176, // 36: pilab.cloud.agent.v2.PauseVMResponse.message:type_name -> google.protobuf.Empty
-	176, // 37: pilab.cloud.agent.v2.ResumeVMResponse.message:type_name -> google.protobuf.Empty
-	176, // 38: pilab.cloud.agent.v2.InitiateMigrationResponse.message:type_name -> google.protobuf.Empty
-	176, // 39: pilab.cloud.agent.v2.PrepareForMigrationResponse.message:type_name -> google.protobuf.Empty
-	176, // 40: pilab.cloud.agent.v2.RevertToSnapshotResponse.message:type_name -> google.protobuf.Empty
-	176, // 41: pilab.cloud.agent.v2.DeleteSnapshotResponse.message:type_name -> google.protobuf.Empty
-	176, // 42: pilab.cloud.agent.v2.CancelTaskResponse.message:type_name -> google.protobuf.Empty
-	14,  // 43: pilab.cloud.agent.v2.ConfigureNetworkRequest.network_interface:type_name -> pilab.cloud.agent.v2.NetworkInterface
-	176, // 44: pilab.cloud.agent.v2.ConfigureNetworkResponse.message:type_name -> google.protobuf.Empty
-	76,  // 45: pilab.cloud.agent.v2.ConfigureStorageRequest.lvm_volume:type_name -> pilab.cloud.agent.v2.LVMVolume
-	77,  // 46: pilab.cloud.agent.v2.ConfigureStorageRequest.nfs_share:type_name -> pilab.cloud.agent.v2.NFSShare
-	78,  // 47: pilab.cloud.agent.v2.ConfigureStorageRequest.iscsi_target:type_name -> pilab.cloud.agent.v2.ISCSITarget
-	176, // 48: pilab.cloud.agent.v2.ConfigureStorageResponse.message:type_name -> google.protobuf.Empty
-	176, // 49: pilab.cloud.agent.v2.ConfigureTimeResponse.message:type_name -> google.protobuf.Empty
-	176, // 50: pilab.cloud.agent.v2.SetMaintenanceModeResponse.message:type_name -> google.protobuf.Empty
-	176, // 51: pilab.cloud.agent.v2.UpdateHostResponse.message:type_name -> google.protobuf.Empty
-	162, // 52: pilab.cloud.agent.v2.GetContentLibraryItemsRequest.filter:type_name -> pilab.cloud.agent.v2.GetContentLibraryItemsRequest.Filter
-	164, // 53: pilab.cloud.agent.v2.GetContentLibraryItemsResponse.items:type_name -> pilab.cloud.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem
-	82,  // 54: pilab.cloud.agent.v2.UploadContentLibraryItemRequest.metadata:type_name -> pilab.cloud.agent.v2.ContentLibraryItemInfo
-	166, // 55: pilab.cloud.agent.v2.ContentLibraryItemInfo.tags:type_name -> pilab.cloud.agent.v2.ContentLibraryItemInfo.TagsEntry
-	109, // 56: pilab.cloud.agent.v2.UploadContentLibraryItemResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	109, // 57: pilab.cloud.agent.v2.DeleteContentLibraryItemResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	167, // 58: pilab.cloud.agent.v2.GetDatastoresResponse.datastores:type_name -> pilab.cloud.agent.v2.GetDatastoresResponse.Datastore
-	169, // 59: pilab.cloud.agent.v2.GetDatastoreResponse.datastore:type_name -> pilab.cloud.agent.v2.GetDatastoreResponse.Datastore
-	109, // 60: pilab.cloud.agent.v2.GetDatastoreResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	171, // 61: pilab.cloud.agent.v2.CreateDatastoreRequest.connection_info:type_name -> pilab.cloud.agent.v2.CreateDatastoreRequest.ConnectionInfoEntry
-	109, // 62: pilab.cloud.agent.v2.CreateDatastoreResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	109, // 63: pilab.cloud.agent.v2.DeleteDatastoreResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	172, // 64: pilab.cloud.agent.v2.NetworkDefinition.connection_info:type_name -> pilab.cloud.agent.v2.NetworkDefinition.ConnectionInfoEntry
-	95,  // 65: pilab.cloud.agent.v2.GetNetworksResponse.networks:type_name -> pilab.cloud.agent.v2.NetworkDefinition
-	95,  // 66: pilab.cloud.agent.v2.GetNetworkResponse.network:type_name -> pilab.cloud.agent.v2.NetworkDefinition
-	109, // 67: pilab.cloud.agent.v2.GetNetworkResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	109, // 68: pilab.cloud.agent.v2.CreateNetworkResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	109, // 69: pilab.cloud.agent.v2.DeleteNetworkResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	109, // 70: pilab.cloud.agent.v2.AttachIsoResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	109, // 71: pilab.cloud.agent.v2.DetachIsoResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	173, // 72: pilab.cloud.agent.v2.CloneVmFromTemplateRequest.vm_overrides:type_name -> pilab.cloud.agent.v2.CloneVmFromTemplateRequest.VmOverridesEntry
-	109, // 73: pilab.cloud.agent.v2.CloneVmFromTemplateResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	113, // 74: pilab.cloud.agent.v2.ImportOVARequest.metadata:type_name -> pilab.cloud.agent.v2.ImportOVAInfo
-	174, // 75: pilab.cloud.agent.v2.ImportOVAInfo.metadata:type_name -> pilab.cloud.agent.v2.ImportOVAInfo.MetadataEntry
-	109, // 76: pilab.cloud.agent.v2.ImportOVAResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	117, // 77: pilab.cloud.agent.v2.GetVMGuestIPsResponse.addresses:type_name -> pilab.cloud.agent.v2.InterfaceAddress
-	109, // 78: pilab.cloud.agent.v2.ChangeVMUserPasswordResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	109, // 79: pilab.cloud.agent.v2.AttachCloudInitResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	175, // 80: pilab.cloud.agent.v2.AttachNetworkInterfaceRequest.options:type_name -> pilab.cloud.agent.v2.AttachNetworkInterfaceRequest.OptionsEntry
-	109, // 81: pilab.cloud.agent.v2.AttachNetworkInterfaceResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	109, // 82: pilab.cloud.agent.v2.DetachNetworkInterfaceResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	127, // 83: pilab.cloud.agent.v2.StreamRequest.open:type_name -> pilab.cloud.agent.v2.OpenStreamMessage
-	128, // 84: pilab.cloud.agent.v2.StreamRequest.close:type_name -> pilab.cloud.agent.v2.CloseStreamMessage
-	128, // 85: pilab.cloud.agent.v2.StreamResponse.close:type_name -> pilab.cloud.agent.v2.CloseStreamMessage
-	134, // 86: pilab.cloud.agent.v2.GetHardwareHealthResponse.sensors:type_name -> pilab.cloud.agent.v2.SensorData
-	109, // 87: pilab.cloud.agent.v2.GetHardwareHealthResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	134, // 88: pilab.cloud.agent.v2.GetSensorDataResponse.sensors:type_name -> pilab.cloud.agent.v2.SensorData
-	109, // 89: pilab.cloud.agent.v2.GetSensorDataResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	109, // 90: pilab.cloud.agent.v2.DefineVMResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	0,   // 91: pilab.cloud.agent.v2.ControlVMRequest.command:type_name -> pilab.cloud.agent.v2.ControlCommand
-	109, // 92: pilab.cloud.agent.v2.ControlVMResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	145, // 93: pilab.cloud.agent.v2.VmGuestNetworkInterface.addresses:type_name -> pilab.cloud.agent.v2.VmGuestInterfaceAddress
-	144, // 94: pilab.cloud.agent.v2.GetVMGuestInfoResponse.os:type_name -> pilab.cloud.agent.v2.VmGuestOS
-	146, // 95: pilab.cloud.agent.v2.GetVMGuestInfoResponse.interfaces:type_name -> pilab.cloud.agent.v2.VmGuestNetworkInterface
-	1,   // 96: pilab.cloud.agent.v2.PowerSchedule.action:type_name -> pilab.cloud.agent.v2.PowerAction
-	2,   // 97: pilab.cloud.agent.v2.PowerSchedule.recurrence:type_name -> pilab.cloud.agent.v2.RecurrenceType
-	1,   // 98: pilab.cloud.agent.v2.CreatePowerScheduleRequest.action:type_name -> pilab.cloud.agent.v2.PowerAction
-	2,   // 99: pilab.cloud.agent.v2.CreatePowerScheduleRequest.recurrence:type_name -> pilab.cloud.agent.v2.RecurrenceType
-	109, // 100: pilab.cloud.agent.v2.CreatePowerScheduleResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	148, // 101: pilab.cloud.agent.v2.ListPowerSchedulesResponse.schedules:type_name -> pilab.cloud.agent.v2.PowerSchedule
-	109, // 102: pilab.cloud.agent.v2.ListPowerSchedulesResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	1,   // 103: pilab.cloud.agent.v2.UpdatePowerScheduleRequest.action:type_name -> pilab.cloud.agent.v2.PowerAction
-	2,   // 104: pilab.cloud.agent.v2.UpdatePowerScheduleRequest.recurrence:type_name -> pilab.cloud.agent.v2.RecurrenceType
-	109, // 105: pilab.cloud.agent.v2.UpdatePowerScheduleResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	109, // 106: pilab.cloud.agent.v2.DeletePowerScheduleResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	109, // 107: pilab.cloud.agent.v2.WakeOnLANResponse.error:type_name -> pilab.cloud.agent.v2.Error
-	163, // 108: pilab.cloud.agent.v2.GetContentLibraryItemsRequest.Filter.tags:type_name -> pilab.cloud.agent.v2.GetContentLibraryItemsRequest.Filter.TagsEntry
-	165, // 109: pilab.cloud.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem.tags:type_name -> pilab.cloud.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem.TagsEntry
-	168, // 110: pilab.cloud.agent.v2.GetDatastoresResponse.Datastore.connection_info:type_name -> pilab.cloud.agent.v2.GetDatastoresResponse.Datastore.ConnectionInfoEntry
-	170, // 111: pilab.cloud.agent.v2.GetDatastoreResponse.Datastore.connection_info:type_name -> pilab.cloud.agent.v2.GetDatastoreResponse.Datastore.ConnectionInfoEntry
-	28,  // 112: pilab.cloud.agent.v2.AgentService.RegisterHost:input_type -> pilab.cloud.agent.v2.RegisterHostRequest
-	30,  // 113: pilab.cloud.agent.v2.AgentService.Heartbeat:input_type -> pilab.cloud.agent.v2.HeartbeatRequest
-	32,  // 114: pilab.cloud.agent.v2.AgentService.GetHostStatus:input_type -> pilab.cloud.agent.v2.GetHostStatusRequest
-	33,  // 115: pilab.cloud.agent.v2.AgentService.CreateVM:input_type -> pilab.cloud.agent.v2.CreateVMRequest
-	35,  // 116: pilab.cloud.agent.v2.AgentService.GetVMDetails:input_type -> pilab.cloud.agent.v2.GetVMDetailsRequest
-	37,  // 117: pilab.cloud.agent.v2.AgentService.UpdateVM:input_type -> pilab.cloud.agent.v2.UpdateVMRequest
-	39,  // 118: pilab.cloud.agent.v2.AgentService.DeleteVM:input_type -> pilab.cloud.agent.v2.DeleteVMRequest
-	41,  // 119: pilab.cloud.agent.v2.AgentService.StartVM:input_type -> pilab.cloud.agent.v2.StartVMRequest
-	43,  // 120: pilab.cloud.agent.v2.AgentService.StopVM:input_type -> pilab.cloud.agent.v2.StopVMRequest
-	45,  // 121: pilab.cloud.agent.v2.AgentService.ForceStopVM:input_type -> pilab.cloud.agent.v2.ForceStopVMRequest
-	47,  // 122: pilab.cloud.agent.v2.AgentService.RebootVM:input_type -> pilab.cloud.agent.v2.RebootVMRequest
-	49,  // 123: pilab.cloud.agent.v2.AgentService.PauseVM:input_type -> pilab.cloud.agent.v2.PauseVMRequest
-	51,  // 124: pilab.cloud.agent.v2.AgentService.ResumeVM:input_type -> pilab.cloud.agent.v2.ResumeVMRequest
-	53,  // 125: pilab.cloud.agent.v2.AgentService.InitiateMigration:input_type -> pilab.cloud.agent.v2.InitiateMigrationRequest
-	55,  // 126: pilab.cloud.agent.v2.AgentService.PrepareForMigration:input_type -> pilab.cloud.agent.v2.PrepareForMigrationRequest
-	57,  // 127: pilab.cloud.agent.v2.AgentService.CreateSnapshot:input_type -> pilab.cloud.agent.v2.CreateSnapshotRequest
-	59,  // 128: pilab.cloud.agent.v2.AgentService.RevertToSnapshot:input_type -> pilab.cloud.agent.v2.RevertToSnapshotRequest
-	61,  // 129: pilab.cloud.agent.v2.AgentService.DeleteSnapshot:input_type -> pilab.cloud.agent.v2.DeleteSnapshotRequest
-	63,  // 130: pilab.cloud.agent.v2.AgentService.GetTaskStatus:input_type -> pilab.cloud.agent.v2.GetTaskStatusRequest
-	64,  // 131: pilab.cloud.agent.v2.AgentService.CancelTask:input_type -> pilab.cloud.agent.v2.CancelTaskRequest
-	66,  // 132: pilab.cloud.agent.v2.AgentService.ConfigureNetwork:input_type -> pilab.cloud.agent.v2.ConfigureNetworkRequest
-	68,  // 133: pilab.cloud.agent.v2.AgentService.ConfigureStorage:input_type -> pilab.cloud.agent.v2.ConfigureStorageRequest
-	70,  // 134: pilab.cloud.agent.v2.AgentService.ConfigureTime:input_type -> pilab.cloud.agent.v2.ConfigureTimeRequest
-	72,  // 135: pilab.cloud.agent.v2.AgentService.SetMaintenanceMode:input_type -> pilab.cloud.agent.v2.SetMaintenanceModeRequest
-	74,  // 136: pilab.cloud.agent.v2.AgentService.UpdateHost:input_type -> pilab.cloud.agent.v2.UpdateHostRequest
-	79,  // 137: pilab.cloud.agent.v2.AgentService.GetContentLibraryItems:input_type -> pilab.cloud.agent.v2.GetContentLibraryItemsRequest
-	81,  // 138: pilab.cloud.agent.v2.AgentService.UploadContentLibraryItem:input_type -> pilab.cloud.agent.v2.UploadContentLibraryItemRequest
-	110, // 139: pilab.cloud.agent.v2.AgentService.ExportOVA:input_type -> pilab.cloud.agent.v2.ExportOVARequest
-	112, // 140: pilab.cloud.agent.v2.AgentService.ImportOVA:input_type -> pilab.cloud.agent.v2.ImportOVARequest
-	84,  // 141: pilab.cloud.agent.v2.AgentService.DeleteContentLibraryItem:input_type -> pilab.cloud.agent.v2.DeleteContentLibraryItemRequest
-	86,  // 142: pilab.cloud.agent.v2.AgentService.GetDatastores:input_type -> pilab.cloud.agent.v2.GetDatastoresRequest
-	88,  // 143: pilab.cloud.agent.v2.AgentService.GetDatastore:input_type -> pilab.cloud.agent.v2.GetDatastoreRequest
-	90,  // 144: pilab.cloud.agent.v2.AgentService.CreateDatastore:input_type -> pilab.cloud.agent.v2.CreateDatastoreRequest
-	92,  // 145: pilab.cloud.agent.v2.AgentService.DeleteDatastore:input_type -> pilab.cloud.agent.v2.DeleteDatastoreRequest
-	94,  // 146: pilab.cloud.agent.v2.AgentService.GetNetworks:input_type -> pilab.cloud.agent.v2.GetNetworksRequest
-	97,  // 147: pilab.cloud.agent.v2.AgentService.GetNetwork:input_type -> pilab.cloud.agent.v2.GetNetworkRequest
-	99,  // 148: pilab.cloud.agent.v2.AgentService.CreateNetwork:input_type -> pilab.cloud.agent.v2.CreateNetworkRequest
-	101, // 149: pilab.cloud.agent.v2.AgentService.DeleteNetwork:input_type -> pilab.cloud.agent.v2.DeleteNetworkRequest
-	103, // 150: pilab.cloud.agent.v2.AgentService.AttachIso:input_type -> pilab.cloud.agent.v2.AttachIsoRequest
-	105, // 151: pilab.cloud.agent.v2.AgentService.DetachIso:input_type -> pilab.cloud.agent.v2.DetachIsoRequest
-	107, // 152: pilab.cloud.agent.v2.AgentService.CloneVmFromTemplate:input_type -> pilab.cloud.agent.v2.CloneVmFromTemplateRequest
-	115, // 153: pilab.cloud.agent.v2.AgentService.GetVMGuestIPs:input_type -> pilab.cloud.agent.v2.GetVMGuestIPsRequest
-	118, // 154: pilab.cloud.agent.v2.AgentService.ChangeVMUserPassword:input_type -> pilab.cloud.agent.v2.ChangeVMUserPasswordRequest
-	120, // 155: pilab.cloud.agent.v2.AgentService.AttachCloudInit:input_type -> pilab.cloud.agent.v2.AttachCloudInitRequest
-	122, // 156: pilab.cloud.agent.v2.AgentService.AttachNetworkInterface:input_type -> pilab.cloud.agent.v2.AttachNetworkInterfaceRequest
-	124, // 157: pilab.cloud.agent.v2.AgentService.DetachNetworkInterface:input_type -> pilab.cloud.agent.v2.DetachNetworkInterfaceRequest
-	126, // 158: pilab.cloud.agent.v2.AgentService.Stream:input_type -> pilab.cloud.agent.v2.StreamRequest
-	130, // 159: pilab.cloud.agent.v2.AgentService.GetHardwareHealth:input_type -> pilab.cloud.agent.v2.GetHardwareHealthRequest
-	132, // 160: pilab.cloud.agent.v2.AgentService.GetSensorData:input_type -> pilab.cloud.agent.v2.GetSensorDataRequest
-	135, // 161: pilab.cloud.agent.v2.AgentService.DefineVM:input_type -> pilab.cloud.agent.v2.DefineVMRequest
-	137, // 162: pilab.cloud.agent.v2.AgentService.GetVMDefinition:input_type -> pilab.cloud.agent.v2.GetVMDefinitionRequest
-	139, // 163: pilab.cloud.agent.v2.AgentService.ControlVM:input_type -> pilab.cloud.agent.v2.ControlVMRequest
-	141, // 164: pilab.cloud.agent.v2.AgentService.GetVMStatus:input_type -> pilab.cloud.agent.v2.GetVMStatusRequest
-	143, // 165: pilab.cloud.agent.v2.AgentService.GetVMGuestInfo:input_type -> pilab.cloud.agent.v2.GetVMGuestInfoRequest
-	149, // 166: pilab.cloud.agent.v2.AgentService.CreatePowerSchedule:input_type -> pilab.cloud.agent.v2.CreatePowerScheduleRequest
-	151, // 167: pilab.cloud.agent.v2.AgentService.ListPowerSchedules:input_type -> pilab.cloud.agent.v2.ListPowerSchedulesRequest
-	153, // 168: pilab.cloud.agent.v2.AgentService.UpdatePowerSchedule:input_type -> pilab.cloud.agent.v2.UpdatePowerScheduleRequest
-	155, // 169: pilab.cloud.agent.v2.AgentService.DeletePowerSchedule:input_type -> pilab.cloud.agent.v2.DeletePowerScheduleRequest
-	157, // 170: pilab.cloud.agent.v2.AgentService.WakeOnLAN:input_type -> pilab.cloud.agent.v2.WakeOnLANRequest
-	29,  // 171: pilab.cloud.agent.v2.AgentService.RegisterHost:output_type -> pilab.cloud.agent.v2.RegisterHostResponse
-	31,  // 172: pilab.cloud.agent.v2.AgentService.Heartbeat:output_type -> pilab.cloud.agent.v2.HeartbeatResponse
-	25,  // 173: pilab.cloud.agent.v2.AgentService.GetHostStatus:output_type -> pilab.cloud.agent.v2.HostStatus
-	34,  // 174: pilab.cloud.agent.v2.AgentService.CreateVM:output_type -> pilab.cloud.agent.v2.CreateVMResponse
-	36,  // 175: pilab.cloud.agent.v2.AgentService.GetVMDetails:output_type -> pilab.cloud.agent.v2.GetVMDetailsResponse
-	38,  // 176: pilab.cloud.agent.v2.AgentService.UpdateVM:output_type -> pilab.cloud.agent.v2.UpdateVMResponse
-	40,  // 177: pilab.cloud.agent.v2.AgentService.DeleteVM:output_type -> pilab.cloud.agent.v2.DeleteVMResponse
-	42,  // 178: pilab.cloud.agent.v2.AgentService.StartVM:output_type -> pilab.cloud.agent.v2.StartVMResponse
-	44,  // 179: pilab.cloud.agent.v2.AgentService.StopVM:output_type -> pilab.cloud.agent.v2.StopVMResponse
-	46,  // 180: pilab.cloud.agent.v2.AgentService.ForceStopVM:output_type -> pilab.cloud.agent.v2.ForceStopVMResponse
-	48,  // 181: pilab.cloud.agent.v2.AgentService.RebootVM:output_type -> pilab.cloud.agent.v2.RebootVMResponse
-	50,  // 182: pilab.cloud.agent.v2.AgentService.PauseVM:output_type -> pilab.cloud.agent.v2.PauseVMResponse
-	52,  // 183: pilab.cloud.agent.v2.AgentService.ResumeVM:output_type -> pilab.cloud.agent.v2.ResumeVMResponse
-	54,  // 184: pilab.cloud.agent.v2.AgentService.InitiateMigration:output_type -> pilab.cloud.agent.v2.InitiateMigrationResponse
-	56,  // 185: pilab.cloud.agent.v2.AgentService.PrepareForMigration:output_type -> pilab.cloud.agent.v2.PrepareForMigrationResponse
-	58,  // 186: pilab.cloud.agent.v2.AgentService.CreateSnapshot:output_type -> pilab.cloud.agent.v2.CreateSnapshotResponse
-	60,  // 187: pilab.cloud.agent.v2.AgentService.RevertToSnapshot:output_type -> pilab.cloud.agent.v2.RevertToSnapshotResponse
-	62,  // 188: pilab.cloud.agent.v2.AgentService.DeleteSnapshot:output_type -> pilab.cloud.agent.v2.DeleteSnapshotResponse
-	3,   // 189: pilab.cloud.agent.v2.AgentService.GetTaskStatus:output_type -> pilab.cloud.agent.v2.Task
-	65,  // 190: pilab.cloud.agent.v2.AgentService.CancelTask:output_type -> pilab.cloud.agent.v2.CancelTaskResponse
-	67,  // 191: pilab.cloud.agent.v2.AgentService.ConfigureNetwork:output_type -> pilab.cloud.agent.v2.ConfigureNetworkResponse
-	69,  // 192: pilab.cloud.agent.v2.AgentService.ConfigureStorage:output_type -> pilab.cloud.agent.v2.ConfigureStorageResponse
-	71,  // 193: pilab.cloud.agent.v2.AgentService.ConfigureTime:output_type -> pilab.cloud.agent.v2.ConfigureTimeResponse
-	73,  // 194: pilab.cloud.agent.v2.AgentService.SetMaintenanceMode:output_type -> pilab.cloud.agent.v2.SetMaintenanceModeResponse
-	75,  // 195: pilab.cloud.agent.v2.AgentService.UpdateHost:output_type -> pilab.cloud.agent.v2.UpdateHostResponse
-	80,  // 196: pilab.cloud.agent.v2.AgentService.GetContentLibraryItems:output_type -> pilab.cloud.agent.v2.GetContentLibraryItemsResponse
-	83,  // 197: pilab.cloud.agent.v2.AgentService.UploadContentLibraryItem:output_type -> pilab.cloud.agent.v2.UploadContentLibraryItemResponse
-	111, // 198: pilab.cloud.agent.v2.AgentService.ExportOVA:output_type -> pilab.cloud.agent.v2.ExportOVAResponse
-	114, // 199: pilab.cloud.agent.v2.AgentService.ImportOVA:output_type -> pilab.cloud.agent.v2.ImportOVAResponse
-	85,  // 200: pilab.cloud.agent.v2.AgentService.DeleteContentLibraryItem:output_type -> pilab.cloud.agent.v2.DeleteContentLibraryItemResponse
-	87,  // 201: pilab.cloud.agent.v2.AgentService.GetDatastores:output_type -> pilab.cloud.agent.v2.GetDatastoresResponse
-	89,  // 202: pilab.cloud.agent.v2.AgentService.GetDatastore:output_type -> pilab.cloud.agent.v2.GetDatastoreResponse
-	91,  // 203: pilab.cloud.agent.v2.AgentService.CreateDatastore:output_type -> pilab.cloud.agent.v2.CreateDatastoreResponse
-	93,  // 204: pilab.cloud.agent.v2.AgentService.DeleteDatastore:output_type -> pilab.cloud.agent.v2.DeleteDatastoreResponse
-	96,  // 205: pilab.cloud.agent.v2.AgentService.GetNetworks:output_type -> pilab.cloud.agent.v2.GetNetworksResponse
-	98,  // 206: pilab.cloud.agent.v2.AgentService.GetNetwork:output_type -> pilab.cloud.agent.v2.GetNetworkResponse
-	100, // 207: pilab.cloud.agent.v2.AgentService.CreateNetwork:output_type -> pilab.cloud.agent.v2.CreateNetworkResponse
-	102, // 208: pilab.cloud.agent.v2.AgentService.DeleteNetwork:output_type -> pilab.cloud.agent.v2.DeleteNetworkResponse
-	104, // 209: pilab.cloud.agent.v2.AgentService.AttachIso:output_type -> pilab.cloud.agent.v2.AttachIsoResponse
-	106, // 210: pilab.cloud.agent.v2.AgentService.DetachIso:output_type -> pilab.cloud.agent.v2.DetachIsoResponse
-	108, // 211: pilab.cloud.agent.v2.AgentService.CloneVmFromTemplate:output_type -> pilab.cloud.agent.v2.CloneVmFromTemplateResponse
-	116, // 212: pilab.cloud.agent.v2.AgentService.GetVMGuestIPs:output_type -> pilab.cloud.agent.v2.GetVMGuestIPsResponse
-	119, // 213: pilab.cloud.agent.v2.AgentService.ChangeVMUserPassword:output_type -> pilab.cloud.agent.v2.ChangeVMUserPasswordResponse
-	121, // 214: pilab.cloud.agent.v2.AgentService.AttachCloudInit:output_type -> pilab.cloud.agent.v2.AttachCloudInitResponse
-	123, // 215: pilab.cloud.agent.v2.AgentService.AttachNetworkInterface:output_type -> pilab.cloud.agent.v2.AttachNetworkInterfaceResponse
-	125, // 216: pilab.cloud.agent.v2.AgentService.DetachNetworkInterface:output_type -> pilab.cloud.agent.v2.DetachNetworkInterfaceResponse
-	129, // 217: pilab.cloud.agent.v2.AgentService.Stream:output_type -> pilab.cloud.agent.v2.StreamResponse
-	131, // 218: pilab.cloud.agent.v2.AgentService.GetHardwareHealth:output_type -> pilab.cloud.agent.v2.GetHardwareHealthResponse
-	133, // 219: pilab.cloud.agent.v2.AgentService.GetSensorData:output_type -> pilab.cloud.agent.v2.GetSensorDataResponse
-	136, // 220: pilab.cloud.agent.v2.AgentService.DefineVM:output_type -> pilab.cloud.agent.v2.DefineVMResponse
-	138, // 221: pilab.cloud.agent.v2.AgentService.GetVMDefinition:output_type -> pilab.cloud.agent.v2.GetVMDefinitionResponse
-	140, // 222: pilab.cloud.agent.v2.AgentService.ControlVM:output_type -> pilab.cloud.agent.v2.ControlVMResponse
-	142, // 223: pilab.cloud.agent.v2.AgentService.GetVMStatus:output_type -> pilab.cloud.agent.v2.GetVMStatusResponse
-	147, // 224: pilab.cloud.agent.v2.AgentService.GetVMGuestInfo:output_type -> pilab.cloud.agent.v2.GetVMGuestInfoResponse
-	150, // 225: pilab.cloud.agent.v2.AgentService.CreatePowerSchedule:output_type -> pilab.cloud.agent.v2.CreatePowerScheduleResponse
-	152, // 226: pilab.cloud.agent.v2.AgentService.ListPowerSchedules:output_type -> pilab.cloud.agent.v2.ListPowerSchedulesResponse
-	154, // 227: pilab.cloud.agent.v2.AgentService.UpdatePowerSchedule:output_type -> pilab.cloud.agent.v2.UpdatePowerScheduleResponse
-	156, // 228: pilab.cloud.agent.v2.AgentService.DeletePowerSchedule:output_type -> pilab.cloud.agent.v2.DeletePowerScheduleResponse
-	158, // 229: pilab.cloud.agent.v2.AgentService.WakeOnLAN:output_type -> pilab.cloud.agent.v2.WakeOnLANResponse
+	4,   // 0: pilab.agent.v2.CPU.topology:type_name -> pilab.agent.v2.CPUTopology
+	5,   // 1: pilab.agent.v2.CPU.pinning:type_name -> pilab.agent.v2.CPUPinning
+	6,   // 2: pilab.agent.v2.CPU.numa_affinity:type_name -> pilab.agent.v2.NUMAAffinity
+	6,   // 3: pilab.agent.v2.Memory.numa_affinity:type_name -> pilab.agent.v2.NUMAAffinity
+	9,   // 4: pilab.agent.v2.Disk.qos_settings:type_name -> pilab.agent.v2.QOSSettings
+	10,  // 5: pilab.agent.v2.Disk.encryption:type_name -> pilab.agent.v2.DiskEncryption
+	11,  // 6: pilab.agent.v2.Storage.disks:type_name -> pilab.agent.v2.Disk
+	12,  // 7: pilab.agent.v2.Storage.adapters:type_name -> pilab.agent.v2.StorageAdapter
+	9,   // 8: pilab.agent.v2.NetworkInterface.qos_settings:type_name -> pilab.agent.v2.QOSSettings
+	14,  // 9: pilab.agent.v2.Network.interfaces:type_name -> pilab.agent.v2.NetworkInterface
+	17,  // 10: pilab.agent.v2.Input.keyboard:type_name -> pilab.agent.v2.InputDevice
+	17,  // 11: pilab.agent.v2.Input.mouse:type_name -> pilab.agent.v2.InputDevice
+	19,  // 12: pilab.agent.v2.Input.serial_ports:type_name -> pilab.agent.v2.SerialPort
+	21,  // 13: pilab.agent.v2.QoS.disk_limits:type_name -> pilab.agent.v2.DiskQOSLimit
+	22,  // 14: pilab.agent.v2.QoS.network_limits:type_name -> pilab.agent.v2.NetworkQOSLimit
+	7,   // 15: pilab.agent.v2.VirtualMachine.cpu:type_name -> pilab.agent.v2.CPU
+	8,   // 16: pilab.agent.v2.VirtualMachine.memory:type_name -> pilab.agent.v2.Memory
+	13,  // 17: pilab.agent.v2.VirtualMachine.storage:type_name -> pilab.agent.v2.Storage
+	15,  // 18: pilab.agent.v2.VirtualMachine.network:type_name -> pilab.agent.v2.Network
+	16,  // 19: pilab.agent.v2.VirtualMachine.bios:type_name -> pilab.agent.v2.BIOS
+	18,  // 20: pilab.agent.v2.VirtualMachine.input:type_name -> pilab.agent.v2.Input
+	20,  // 21: pilab.agent.v2.VirtualMachine.video:type_name -> pilab.agent.v2.Video
+	23,  // 22: pilab.agent.v2.VirtualMachine.qos:type_name -> pilab.agent.v2.QoS
+	159, // 23: pilab.agent.v2.VirtualMachine.metadata:type_name -> pilab.agent.v2.VirtualMachine.MetadataEntry
+	160, // 24: pilab.agent.v2.HostStatus.metadata:type_name -> pilab.agent.v2.HostStatus.MetadataEntry
+	161, // 25: pilab.agent.v2.RegisterHostRequest.metadata:type_name -> pilab.agent.v2.RegisterHostRequest.MetadataEntry
+	3,   // 26: pilab.agent.v2.HeartbeatResponse.tasks:type_name -> pilab.agent.v2.Task
+	24,  // 27: pilab.agent.v2.CreateVMRequest.vm:type_name -> pilab.agent.v2.VirtualMachine
+	24,  // 28: pilab.agent.v2.GetVMDetailsResponse.vm:type_name -> pilab.agent.v2.VirtualMachine
+	24,  // 29: pilab.agent.v2.UpdateVMRequest.vm_object:type_name -> pilab.agent.v2.VirtualMachine
+	176, // 30: pilab.agent.v2.UpdateVMResponse.message:type_name -> google.protobuf.Empty
+	176, // 31: pilab.agent.v2.DeleteVMResponse.message:type_name -> google.protobuf.Empty
+	176, // 32: pilab.agent.v2.StartVMResponse.message:type_name -> google.protobuf.Empty
+	176, // 33: pilab.agent.v2.StopVMResponse.message:type_name -> google.protobuf.Empty
+	176, // 34: pilab.agent.v2.ForceStopVMResponse.message:type_name -> google.protobuf.Empty
+	176, // 35: pilab.agent.v2.RebootVMResponse.message:type_name -> google.protobuf.Empty
+	176, // 36: pilab.agent.v2.PauseVMResponse.message:type_name -> google.protobuf.Empty
+	176, // 37: pilab.agent.v2.ResumeVMResponse.message:type_name -> google.protobuf.Empty
+	176, // 38: pilab.agent.v2.InitiateMigrationResponse.message:type_name -> google.protobuf.Empty
+	176, // 39: pilab.agent.v2.PrepareForMigrationResponse.message:type_name -> google.protobuf.Empty
+	176, // 40: pilab.agent.v2.RevertToSnapshotResponse.message:type_name -> google.protobuf.Empty
+	176, // 41: pilab.agent.v2.DeleteSnapshotResponse.message:type_name -> google.protobuf.Empty
+	176, // 42: pilab.agent.v2.CancelTaskResponse.message:type_name -> google.protobuf.Empty
+	14,  // 43: pilab.agent.v2.ConfigureNetworkRequest.network_interface:type_name -> pilab.agent.v2.NetworkInterface
+	176, // 44: pilab.agent.v2.ConfigureNetworkResponse.message:type_name -> google.protobuf.Empty
+	76,  // 45: pilab.agent.v2.ConfigureStorageRequest.lvm_volume:type_name -> pilab.agent.v2.LVMVolume
+	77,  // 46: pilab.agent.v2.ConfigureStorageRequest.nfs_share:type_name -> pilab.agent.v2.NFSShare
+	78,  // 47: pilab.agent.v2.ConfigureStorageRequest.iscsi_target:type_name -> pilab.agent.v2.ISCSITarget
+	176, // 48: pilab.agent.v2.ConfigureStorageResponse.message:type_name -> google.protobuf.Empty
+	176, // 49: pilab.agent.v2.ConfigureTimeResponse.message:type_name -> google.protobuf.Empty
+	176, // 50: pilab.agent.v2.SetMaintenanceModeResponse.message:type_name -> google.protobuf.Empty
+	176, // 51: pilab.agent.v2.UpdateHostResponse.message:type_name -> google.protobuf.Empty
+	162, // 52: pilab.agent.v2.GetContentLibraryItemsRequest.filter:type_name -> pilab.agent.v2.GetContentLibraryItemsRequest.Filter
+	164, // 53: pilab.agent.v2.GetContentLibraryItemsResponse.items:type_name -> pilab.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem
+	82,  // 54: pilab.agent.v2.UploadContentLibraryItemRequest.metadata:type_name -> pilab.agent.v2.ContentLibraryItemInfo
+	166, // 55: pilab.agent.v2.ContentLibraryItemInfo.tags:type_name -> pilab.agent.v2.ContentLibraryItemInfo.TagsEntry
+	109, // 56: pilab.agent.v2.UploadContentLibraryItemResponse.error:type_name -> pilab.agent.v2.Error
+	109, // 57: pilab.agent.v2.DeleteContentLibraryItemResponse.error:type_name -> pilab.agent.v2.Error
+	167, // 58: pilab.agent.v2.GetDatastoresResponse.datastores:type_name -> pilab.agent.v2.GetDatastoresResponse.Datastore
+	169, // 59: pilab.agent.v2.GetDatastoreResponse.datastore:type_name -> pilab.agent.v2.GetDatastoreResponse.Datastore
+	109, // 60: pilab.agent.v2.GetDatastoreResponse.error:type_name -> pilab.agent.v2.Error
+	171, // 61: pilab.agent.v2.CreateDatastoreRequest.connection_info:type_name -> pilab.agent.v2.CreateDatastoreRequest.ConnectionInfoEntry
+	109, // 62: pilab.agent.v2.CreateDatastoreResponse.error:type_name -> pilab.agent.v2.Error
+	109, // 63: pilab.agent.v2.DeleteDatastoreResponse.error:type_name -> pilab.agent.v2.Error
+	172, // 64: pilab.agent.v2.NetworkDefinition.connection_info:type_name -> pilab.agent.v2.NetworkDefinition.ConnectionInfoEntry
+	95,  // 65: pilab.agent.v2.GetNetworksResponse.networks:type_name -> pilab.agent.v2.NetworkDefinition
+	95,  // 66: pilab.agent.v2.GetNetworkResponse.network:type_name -> pilab.agent.v2.NetworkDefinition
+	109, // 67: pilab.agent.v2.GetNetworkResponse.error:type_name -> pilab.agent.v2.Error
+	109, // 68: pilab.agent.v2.CreateNetworkResponse.error:type_name -> pilab.agent.v2.Error
+	109, // 69: pilab.agent.v2.DeleteNetworkResponse.error:type_name -> pilab.agent.v2.Error
+	109, // 70: pilab.agent.v2.AttachIsoResponse.error:type_name -> pilab.agent.v2.Error
+	109, // 71: pilab.agent.v2.DetachIsoResponse.error:type_name -> pilab.agent.v2.Error
+	173, // 72: pilab.agent.v2.CloneVmFromTemplateRequest.vm_overrides:type_name -> pilab.agent.v2.CloneVmFromTemplateRequest.VmOverridesEntry
+	109, // 73: pilab.agent.v2.CloneVmFromTemplateResponse.error:type_name -> pilab.agent.v2.Error
+	113, // 74: pilab.agent.v2.ImportOVARequest.metadata:type_name -> pilab.agent.v2.ImportOVAInfo
+	174, // 75: pilab.agent.v2.ImportOVAInfo.metadata:type_name -> pilab.agent.v2.ImportOVAInfo.MetadataEntry
+	109, // 76: pilab.agent.v2.ImportOVAResponse.error:type_name -> pilab.agent.v2.Error
+	117, // 77: pilab.agent.v2.GetVMGuestIPsResponse.addresses:type_name -> pilab.agent.v2.InterfaceAddress
+	109, // 78: pilab.agent.v2.ChangeVMUserPasswordResponse.error:type_name -> pilab.agent.v2.Error
+	109, // 79: pilab.agent.v2.AttachCloudInitResponse.error:type_name -> pilab.agent.v2.Error
+	175, // 80: pilab.agent.v2.AttachNetworkInterfaceRequest.options:type_name -> pilab.agent.v2.AttachNetworkInterfaceRequest.OptionsEntry
+	109, // 81: pilab.agent.v2.AttachNetworkInterfaceResponse.error:type_name -> pilab.agent.v2.Error
+	109, // 82: pilab.agent.v2.DetachNetworkInterfaceResponse.error:type_name -> pilab.agent.v2.Error
+	127, // 83: pilab.agent.v2.StreamRequest.open:type_name -> pilab.agent.v2.OpenStreamMessage
+	128, // 84: pilab.agent.v2.StreamRequest.close:type_name -> pilab.agent.v2.CloseStreamMessage
+	128, // 85: pilab.agent.v2.StreamResponse.close:type_name -> pilab.agent.v2.CloseStreamMessage
+	134, // 86: pilab.agent.v2.GetHardwareHealthResponse.sensors:type_name -> pilab.agent.v2.SensorData
+	109, // 87: pilab.agent.v2.GetHardwareHealthResponse.error:type_name -> pilab.agent.v2.Error
+	134, // 88: pilab.agent.v2.GetSensorDataResponse.sensors:type_name -> pilab.agent.v2.SensorData
+	109, // 89: pilab.agent.v2.GetSensorDataResponse.error:type_name -> pilab.agent.v2.Error
+	109, // 90: pilab.agent.v2.DefineVMResponse.error:type_name -> pilab.agent.v2.Error
+	0,   // 91: pilab.agent.v2.ControlVMRequest.command:type_name -> pilab.agent.v2.ControlCommand
+	109, // 92: pilab.agent.v2.ControlVMResponse.error:type_name -> pilab.agent.v2.Error
+	145, // 93: pilab.agent.v2.VmGuestNetworkInterface.addresses:type_name -> pilab.agent.v2.VmGuestInterfaceAddress
+	144, // 94: pilab.agent.v2.GetVMGuestInfoResponse.os:type_name -> pilab.agent.v2.VmGuestOS
+	146, // 95: pilab.agent.v2.GetVMGuestInfoResponse.interfaces:type_name -> pilab.agent.v2.VmGuestNetworkInterface
+	1,   // 96: pilab.agent.v2.PowerSchedule.action:type_name -> pilab.agent.v2.PowerAction
+	2,   // 97: pilab.agent.v2.PowerSchedule.recurrence:type_name -> pilab.agent.v2.RecurrenceType
+	1,   // 98: pilab.agent.v2.CreatePowerScheduleRequest.action:type_name -> pilab.agent.v2.PowerAction
+	2,   // 99: pilab.agent.v2.CreatePowerScheduleRequest.recurrence:type_name -> pilab.agent.v2.RecurrenceType
+	109, // 100: pilab.agent.v2.CreatePowerScheduleResponse.error:type_name -> pilab.agent.v2.Error
+	148, // 101: pilab.agent.v2.ListPowerSchedulesResponse.schedules:type_name -> pilab.agent.v2.PowerSchedule
+	109, // 102: pilab.agent.v2.ListPowerSchedulesResponse.error:type_name -> pilab.agent.v2.Error
+	1,   // 103: pilab.agent.v2.UpdatePowerScheduleRequest.action:type_name -> pilab.agent.v2.PowerAction
+	2,   // 104: pilab.agent.v2.UpdatePowerScheduleRequest.recurrence:type_name -> pilab.agent.v2.RecurrenceType
+	109, // 105: pilab.agent.v2.UpdatePowerScheduleResponse.error:type_name -> pilab.agent.v2.Error
+	109, // 106: pilab.agent.v2.DeletePowerScheduleResponse.error:type_name -> pilab.agent.v2.Error
+	109, // 107: pilab.agent.v2.WakeOnLANResponse.error:type_name -> pilab.agent.v2.Error
+	163, // 108: pilab.agent.v2.GetContentLibraryItemsRequest.Filter.tags:type_name -> pilab.agent.v2.GetContentLibraryItemsRequest.Filter.TagsEntry
+	165, // 109: pilab.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem.tags:type_name -> pilab.agent.v2.GetContentLibraryItemsResponse.ContentLibraryItem.TagsEntry
+	168, // 110: pilab.agent.v2.GetDatastoresResponse.Datastore.connection_info:type_name -> pilab.agent.v2.GetDatastoresResponse.Datastore.ConnectionInfoEntry
+	170, // 111: pilab.agent.v2.GetDatastoreResponse.Datastore.connection_info:type_name -> pilab.agent.v2.GetDatastoreResponse.Datastore.ConnectionInfoEntry
+	28,  // 112: pilab.agent.v2.AgentService.RegisterHost:input_type -> pilab.agent.v2.RegisterHostRequest
+	30,  // 113: pilab.agent.v2.AgentService.Heartbeat:input_type -> pilab.agent.v2.HeartbeatRequest
+	32,  // 114: pilab.agent.v2.AgentService.GetHostStatus:input_type -> pilab.agent.v2.GetHostStatusRequest
+	33,  // 115: pilab.agent.v2.AgentService.CreateVM:input_type -> pilab.agent.v2.CreateVMRequest
+	35,  // 116: pilab.agent.v2.AgentService.GetVMDetails:input_type -> pilab.agent.v2.GetVMDetailsRequest
+	37,  // 117: pilab.agent.v2.AgentService.UpdateVM:input_type -> pilab.agent.v2.UpdateVMRequest
+	39,  // 118: pilab.agent.v2.AgentService.DeleteVM:input_type -> pilab.agent.v2.DeleteVMRequest
+	41,  // 119: pilab.agent.v2.AgentService.StartVM:input_type -> pilab.agent.v2.StartVMRequest
+	43,  // 120: pilab.agent.v2.AgentService.StopVM:input_type -> pilab.agent.v2.StopVMRequest
+	45,  // 121: pilab.agent.v2.AgentService.ForceStopVM:input_type -> pilab.agent.v2.ForceStopVMRequest
+	47,  // 122: pilab.agent.v2.AgentService.RebootVM:input_type -> pilab.agent.v2.RebootVMRequest
+	49,  // 123: pilab.agent.v2.AgentService.PauseVM:input_type -> pilab.agent.v2.PauseVMRequest
+	51,  // 124: pilab.agent.v2.AgentService.ResumeVM:input_type -> pilab.agent.v2.ResumeVMRequest
+	53,  // 125: pilab.agent.v2.AgentService.InitiateMigration:input_type -> pilab.agent.v2.InitiateMigrationRequest
+	55,  // 126: pilab.agent.v2.AgentService.PrepareForMigration:input_type -> pilab.agent.v2.PrepareForMigrationRequest
+	57,  // 127: pilab.agent.v2.AgentService.CreateSnapshot:input_type -> pilab.agent.v2.CreateSnapshotRequest
+	59,  // 128: pilab.agent.v2.AgentService.RevertToSnapshot:input_type -> pilab.agent.v2.RevertToSnapshotRequest
+	61,  // 129: pilab.agent.v2.AgentService.DeleteSnapshot:input_type -> pilab.agent.v2.DeleteSnapshotRequest
+	63,  // 130: pilab.agent.v2.AgentService.GetTaskStatus:input_type -> pilab.agent.v2.GetTaskStatusRequest
+	64,  // 131: pilab.agent.v2.AgentService.CancelTask:input_type -> pilab.agent.v2.CancelTaskRequest
+	66,  // 132: pilab.agent.v2.AgentService.ConfigureNetwork:input_type -> pilab.agent.v2.ConfigureNetworkRequest
+	68,  // 133: pilab.agent.v2.AgentService.ConfigureStorage:input_type -> pilab.agent.v2.ConfigureStorageRequest
+	70,  // 134: pilab.agent.v2.AgentService.ConfigureTime:input_type -> pilab.agent.v2.ConfigureTimeRequest
+	72,  // 135: pilab.agent.v2.AgentService.SetMaintenanceMode:input_type -> pilab.agent.v2.SetMaintenanceModeRequest
+	74,  // 136: pilab.agent.v2.AgentService.UpdateHost:input_type -> pilab.agent.v2.UpdateHostRequest
+	79,  // 137: pilab.agent.v2.AgentService.GetContentLibraryItems:input_type -> pilab.agent.v2.GetContentLibraryItemsRequest
+	81,  // 138: pilab.agent.v2.AgentService.UploadContentLibraryItem:input_type -> pilab.agent.v2.UploadContentLibraryItemRequest
+	110, // 139: pilab.agent.v2.AgentService.ExportOVA:input_type -> pilab.agent.v2.ExportOVARequest
+	112, // 140: pilab.agent.v2.AgentService.ImportOVA:input_type -> pilab.agent.v2.ImportOVARequest
+	84,  // 141: pilab.agent.v2.AgentService.DeleteContentLibraryItem:input_type -> pilab.agent.v2.DeleteContentLibraryItemRequest
+	86,  // 142: pilab.agent.v2.AgentService.GetDatastores:input_type -> pilab.agent.v2.GetDatastoresRequest
+	88,  // 143: pilab.agent.v2.AgentService.GetDatastore:input_type -> pilab.agent.v2.GetDatastoreRequest
+	90,  // 144: pilab.agent.v2.AgentService.CreateDatastore:input_type -> pilab.agent.v2.CreateDatastoreRequest
+	92,  // 145: pilab.agent.v2.AgentService.DeleteDatastore:input_type -> pilab.agent.v2.DeleteDatastoreRequest
+	94,  // 146: pilab.agent.v2.AgentService.GetNetworks:input_type -> pilab.agent.v2.GetNetworksRequest
+	97,  // 147: pilab.agent.v2.AgentService.GetNetwork:input_type -> pilab.agent.v2.GetNetworkRequest
+	99,  // 148: pilab.agent.v2.AgentService.CreateNetwork:input_type -> pilab.agent.v2.CreateNetworkRequest
+	101, // 149: pilab.agent.v2.AgentService.DeleteNetwork:input_type -> pilab.agent.v2.DeleteNetworkRequest
+	103, // 150: pilab.agent.v2.AgentService.AttachIso:input_type -> pilab.agent.v2.AttachIsoRequest
+	105, // 151: pilab.agent.v2.AgentService.DetachIso:input_type -> pilab.agent.v2.DetachIsoRequest
+	107, // 152: pilab.agent.v2.AgentService.CloneVmFromTemplate:input_type -> pilab.agent.v2.CloneVmFromTemplateRequest
+	115, // 153: pilab.agent.v2.AgentService.GetVMGuestIPs:input_type -> pilab.agent.v2.GetVMGuestIPsRequest
+	118, // 154: pilab.agent.v2.AgentService.ChangeVMUserPassword:input_type -> pilab.agent.v2.ChangeVMUserPasswordRequest
+	120, // 155: pilab.agent.v2.AgentService.AttachCloudInit:input_type -> pilab.agent.v2.AttachCloudInitRequest
+	122, // 156: pilab.agent.v2.AgentService.AttachNetworkInterface:input_type -> pilab.agent.v2.AttachNetworkInterfaceRequest
+	124, // 157: pilab.agent.v2.AgentService.DetachNetworkInterface:input_type -> pilab.agent.v2.DetachNetworkInterfaceRequest
+	126, // 158: pilab.agent.v2.AgentService.Stream:input_type -> pilab.agent.v2.StreamRequest
+	130, // 159: pilab.agent.v2.AgentService.GetHardwareHealth:input_type -> pilab.agent.v2.GetHardwareHealthRequest
+	132, // 160: pilab.agent.v2.AgentService.GetSensorData:input_type -> pilab.agent.v2.GetSensorDataRequest
+	135, // 161: pilab.agent.v2.AgentService.DefineVM:input_type -> pilab.agent.v2.DefineVMRequest
+	137, // 162: pilab.agent.v2.AgentService.GetVMDefinition:input_type -> pilab.agent.v2.GetVMDefinitionRequest
+	139, // 163: pilab.agent.v2.AgentService.ControlVM:input_type -> pilab.agent.v2.ControlVMRequest
+	141, // 164: pilab.agent.v2.AgentService.GetVMStatus:input_type -> pilab.agent.v2.GetVMStatusRequest
+	143, // 165: pilab.agent.v2.AgentService.GetVMGuestInfo:input_type -> pilab.agent.v2.GetVMGuestInfoRequest
+	149, // 166: pilab.agent.v2.AgentService.CreatePowerSchedule:input_type -> pilab.agent.v2.CreatePowerScheduleRequest
+	151, // 167: pilab.agent.v2.AgentService.ListPowerSchedules:input_type -> pilab.agent.v2.ListPowerSchedulesRequest
+	153, // 168: pilab.agent.v2.AgentService.UpdatePowerSchedule:input_type -> pilab.agent.v2.UpdatePowerScheduleRequest
+	155, // 169: pilab.agent.v2.AgentService.DeletePowerSchedule:input_type -> pilab.agent.v2.DeletePowerScheduleRequest
+	157, // 170: pilab.agent.v2.AgentService.WakeOnLAN:input_type -> pilab.agent.v2.WakeOnLANRequest
+	29,  // 171: pilab.agent.v2.AgentService.RegisterHost:output_type -> pilab.agent.v2.RegisterHostResponse
+	31,  // 172: pilab.agent.v2.AgentService.Heartbeat:output_type -> pilab.agent.v2.HeartbeatResponse
+	25,  // 173: pilab.agent.v2.AgentService.GetHostStatus:output_type -> pilab.agent.v2.HostStatus
+	34,  // 174: pilab.agent.v2.AgentService.CreateVM:output_type -> pilab.agent.v2.CreateVMResponse
+	36,  // 175: pilab.agent.v2.AgentService.GetVMDetails:output_type -> pilab.agent.v2.GetVMDetailsResponse
+	38,  // 176: pilab.agent.v2.AgentService.UpdateVM:output_type -> pilab.agent.v2.UpdateVMResponse
+	40,  // 177: pilab.agent.v2.AgentService.DeleteVM:output_type -> pilab.agent.v2.DeleteVMResponse
+	42,  // 178: pilab.agent.v2.AgentService.StartVM:output_type -> pilab.agent.v2.StartVMResponse
+	44,  // 179: pilab.agent.v2.AgentService.StopVM:output_type -> pilab.agent.v2.StopVMResponse
+	46,  // 180: pilab.agent.v2.AgentService.ForceStopVM:output_type -> pilab.agent.v2.ForceStopVMResponse
+	48,  // 181: pilab.agent.v2.AgentService.RebootVM:output_type -> pilab.agent.v2.RebootVMResponse
+	50,  // 182: pilab.agent.v2.AgentService.PauseVM:output_type -> pilab.agent.v2.PauseVMResponse
+	52,  // 183: pilab.agent.v2.AgentService.ResumeVM:output_type -> pilab.agent.v2.ResumeVMResponse
+	54,  // 184: pilab.agent.v2.AgentService.InitiateMigration:output_type -> pilab.agent.v2.InitiateMigrationResponse
+	56,  // 185: pilab.agent.v2.AgentService.PrepareForMigration:output_type -> pilab.agent.v2.PrepareForMigrationResponse
+	58,  // 186: pilab.agent.v2.AgentService.CreateSnapshot:output_type -> pilab.agent.v2.CreateSnapshotResponse
+	60,  // 187: pilab.agent.v2.AgentService.RevertToSnapshot:output_type -> pilab.agent.v2.RevertToSnapshotResponse
+	62,  // 188: pilab.agent.v2.AgentService.DeleteSnapshot:output_type -> pilab.agent.v2.DeleteSnapshotResponse
+	3,   // 189: pilab.agent.v2.AgentService.GetTaskStatus:output_type -> pilab.agent.v2.Task
+	65,  // 190: pilab.agent.v2.AgentService.CancelTask:output_type -> pilab.agent.v2.CancelTaskResponse
+	67,  // 191: pilab.agent.v2.AgentService.ConfigureNetwork:output_type -> pilab.agent.v2.ConfigureNetworkResponse
+	69,  // 192: pilab.agent.v2.AgentService.ConfigureStorage:output_type -> pilab.agent.v2.ConfigureStorageResponse
+	71,  // 193: pilab.agent.v2.AgentService.ConfigureTime:output_type -> pilab.agent.v2.ConfigureTimeResponse
+	73,  // 194: pilab.agent.v2.AgentService.SetMaintenanceMode:output_type -> pilab.agent.v2.SetMaintenanceModeResponse
+	75,  // 195: pilab.agent.v2.AgentService.UpdateHost:output_type -> pilab.agent.v2.UpdateHostResponse
+	80,  // 196: pilab.agent.v2.AgentService.GetContentLibraryItems:output_type -> pilab.agent.v2.GetContentLibraryItemsResponse
+	83,  // 197: pilab.agent.v2.AgentService.UploadContentLibraryItem:output_type -> pilab.agent.v2.UploadContentLibraryItemResponse
+	111, // 198: pilab.agent.v2.AgentService.ExportOVA:output_type -> pilab.agent.v2.ExportOVAResponse
+	114, // 199: pilab.agent.v2.AgentService.ImportOVA:output_type -> pilab.agent.v2.ImportOVAResponse
+	85,  // 200: pilab.agent.v2.AgentService.DeleteContentLibraryItem:output_type -> pilab.agent.v2.DeleteContentLibraryItemResponse
+	87,  // 201: pilab.agent.v2.AgentService.GetDatastores:output_type -> pilab.agent.v2.GetDatastoresResponse
+	89,  // 202: pilab.agent.v2.AgentService.GetDatastore:output_type -> pilab.agent.v2.GetDatastoreResponse
+	91,  // 203: pilab.agent.v2.AgentService.CreateDatastore:output_type -> pilab.agent.v2.CreateDatastoreResponse
+	93,  // 204: pilab.agent.v2.AgentService.DeleteDatastore:output_type -> pilab.agent.v2.DeleteDatastoreResponse
+	96,  // 205: pilab.agent.v2.AgentService.GetNetworks:output_type -> pilab.agent.v2.GetNetworksResponse
+	98,  // 206: pilab.agent.v2.AgentService.GetNetwork:output_type -> pilab.agent.v2.GetNetworkResponse
+	100, // 207: pilab.agent.v2.AgentService.CreateNetwork:output_type -> pilab.agent.v2.CreateNetworkResponse
+	102, // 208: pilab.agent.v2.AgentService.DeleteNetwork:output_type -> pilab.agent.v2.DeleteNetworkResponse
+	104, // 209: pilab.agent.v2.AgentService.AttachIso:output_type -> pilab.agent.v2.AttachIsoResponse
+	106, // 210: pilab.agent.v2.AgentService.DetachIso:output_type -> pilab.agent.v2.DetachIsoResponse
+	108, // 211: pilab.agent.v2.AgentService.CloneVmFromTemplate:output_type -> pilab.agent.v2.CloneVmFromTemplateResponse
+	116, // 212: pilab.agent.v2.AgentService.GetVMGuestIPs:output_type -> pilab.agent.v2.GetVMGuestIPsResponse
+	119, // 213: pilab.agent.v2.AgentService.ChangeVMUserPassword:output_type -> pilab.agent.v2.ChangeVMUserPasswordResponse
+	121, // 214: pilab.agent.v2.AgentService.AttachCloudInit:output_type -> pilab.agent.v2.AttachCloudInitResponse
+	123, // 215: pilab.agent.v2.AgentService.AttachNetworkInterface:output_type -> pilab.agent.v2.AttachNetworkInterfaceResponse
+	125, // 216: pilab.agent.v2.AgentService.DetachNetworkInterface:output_type -> pilab.agent.v2.DetachNetworkInterfaceResponse
+	129, // 217: pilab.agent.v2.AgentService.Stream:output_type -> pilab.agent.v2.StreamResponse
+	131, // 218: pilab.agent.v2.AgentService.GetHardwareHealth:output_type -> pilab.agent.v2.GetHardwareHealthResponse
+	133, // 219: pilab.agent.v2.AgentService.GetSensorData:output_type -> pilab.agent.v2.GetSensorDataResponse
+	136, // 220: pilab.agent.v2.AgentService.DefineVM:output_type -> pilab.agent.v2.DefineVMResponse
+	138, // 221: pilab.agent.v2.AgentService.GetVMDefinition:output_type -> pilab.agent.v2.GetVMDefinitionResponse
+	140, // 222: pilab.agent.v2.AgentService.ControlVM:output_type -> pilab.agent.v2.ControlVMResponse
+	142, // 223: pilab.agent.v2.AgentService.GetVMStatus:output_type -> pilab.agent.v2.GetVMStatusResponse
+	147, // 224: pilab.agent.v2.AgentService.GetVMGuestInfo:output_type -> pilab.agent.v2.GetVMGuestInfoResponse
+	150, // 225: pilab.agent.v2.AgentService.CreatePowerSchedule:output_type -> pilab.agent.v2.CreatePowerScheduleResponse
+	152, // 226: pilab.agent.v2.AgentService.ListPowerSchedules:output_type -> pilab.agent.v2.ListPowerSchedulesResponse
+	154, // 227: pilab.agent.v2.AgentService.UpdatePowerSchedule:output_type -> pilab.agent.v2.UpdatePowerScheduleResponse
+	156, // 228: pilab.agent.v2.AgentService.DeletePowerSchedule:output_type -> pilab.agent.v2.DeletePowerScheduleResponse
+	158, // 229: pilab.agent.v2.AgentService.WakeOnLAN:output_type -> pilab.agent.v2.WakeOnLANResponse
 	171, // [171:230] is the sub-list for method output_type
 	112, // [112:171] is the sub-list for method input_type
 	112, // [112:112] is the sub-list for extension type_name

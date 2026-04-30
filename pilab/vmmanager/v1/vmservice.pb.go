@@ -111,7 +111,7 @@ type VM struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Uuid              string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	State             VMState                `protobuf:"varint,3,opt,name=state,proto3,enum=pilab.cloud.vmmanager.v1.VMState" json:"state,omitempty"`
+	State             VMState                `protobuf:"varint,3,opt,name=state,proto3,enum=pilab.vmmanager.v1.VMState" json:"state,omitempty"`
 	MemoryMb          int32                  `protobuf:"varint,4,opt,name=memory_mb,json=memoryMb,proto3" json:"memory_mb,omitempty"`
 	Vcpus             int32                  `protobuf:"varint,5,opt,name=vcpus,proto3" json:"vcpus,omitempty"`
 	Disks             []*Disk                `protobuf:"bytes,6,rep,name=disks,proto3" json:"disks,omitempty"`
@@ -2111,33 +2111,33 @@ var File_pilab_vmmanager_v1_vmservice_proto protoreflect.FileDescriptor
 
 const file_pilab_vmmanager_v1_vmservice_proto_rawDesc = "" +
 	"\n" +
-	"\"pilab/vmmanager/v1/vmservice.proto\x12\x18pilab.cloud.vmmanager.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf4\x03\n" +
+	"\"pilab/vmmanager/v1/vmservice.proto\x12\x12pilab.vmmanager.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xdc\x03\n" +
 	"\x02VM\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x127\n" +
-	"\x05state\x18\x03 \x01(\x0e2!.pilab.cloud.vmmanager.v1.VMStateR\x05state\x12\x1b\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x121\n" +
+	"\x05state\x18\x03 \x01(\x0e2\x1b.pilab.vmmanager.v1.VMStateR\x05state\x12\x1b\n" +
 	"\tmemory_mb\x18\x04 \x01(\x05R\bmemoryMb\x12\x14\n" +
-	"\x05vcpus\x18\x05 \x01(\x05R\x05vcpus\x124\n" +
-	"\x05disks\x18\x06 \x03(\v2\x1e.pilab.cloud.vmmanager.v1.DiskR\x05disks\x12Y\n" +
-	"\x12network_interfaces\x18\a \x03(\v2*.pilab.cloud.vmmanager.v1.NetworkInterfaceR\x11networkInterfaces\x12S\n" +
-	"\x10hardware_devices\x18\b \x03(\v2(.pilab.cloud.vmmanager.v1.HardwareDeviceR\x0fhardwareDevices\x12?\n" +
+	"\x05vcpus\x18\x05 \x01(\x05R\x05vcpus\x12.\n" +
+	"\x05disks\x18\x06 \x03(\v2\x18.pilab.vmmanager.v1.DiskR\x05disks\x12S\n" +
+	"\x12network_interfaces\x18\a \x03(\v2$.pilab.vmmanager.v1.NetworkInterfaceR\x11networkInterfaces\x12M\n" +
+	"\x10hardware_devices\x18\b \x03(\v2\".pilab.vmmanager.v1.HardwareDeviceR\x0fhardwareDevices\x12?\n" +
 	"\rcreation_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\fcreationTime\x12\x17\n" +
 	"\aos_type\x18\n" +
 	" \x01(\tR\x06osType\x12\x1a\n" +
-	"\bfirmware\x18\v \x01(\tR\bfirmware\"\x9e\x02\n" +
+	"\bfirmware\x18\v \x01(\tR\bfirmware\"\x92\x02\n" +
 	"\x0fCreateVMRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
 	"\tmemory_mb\x18\x02 \x01(\x05R\bmemoryMb\x12\x14\n" +
 	"\x05vcpus\x18\x03 \x01(\x05R\x05vcpus\x12\x17\n" +
 	"\aos_type\x18\x04 \x01(\tR\x06osType\x12\x1a\n" +
-	"\bfirmware\x18\x05 \x01(\tR\bfirmware\x124\n" +
-	"\x05disks\x18\x06 \x03(\v2\x1e.pilab.cloud.vmmanager.v1.DiskR\x05disks\x12Y\n" +
-	"\x12network_interfaces\x18\a \x03(\v2*.pilab.cloud.vmmanager.v1.NetworkInterfaceR\x11networkInterfaces\"\"\n" +
+	"\bfirmware\x18\x05 \x01(\tR\bfirmware\x12.\n" +
+	"\x05disks\x18\x06 \x03(\v2\x18.pilab.vmmanager.v1.DiskR\x05disks\x12S\n" +
+	"\x12network_interfaces\x18\a \x03(\v2$.pilab.vmmanager.v1.NetworkInterfaceR\x11networkInterfaces\"\"\n" +
 	"\fGetVMRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"\x10\n" +
-	"\x0eListVMsRequest\"A\n" +
-	"\x0fListVMsResponse\x12.\n" +
-	"\x03vms\x18\x01 \x03(\v2\x1c.pilab.cloud.vmmanager.v1.VMR\x03vms\"$\n" +
+	"\x0eListVMsRequest\";\n" +
+	"\x0fListVMsResponse\x12(\n" +
+	"\x03vms\x18\x01 \x03(\v2\x16.pilab.vmmanager.v1.VMR\x03vms\"$\n" +
 	"\x0eStartVMRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"9\n" +
 	"\rStopVMRequest\x12\x12\n" +
@@ -2186,9 +2186,9 @@ const file_pilab_vmmanager_v1_vmservice_proto_rawDesc = "" +
 	"\x0eGetDiskRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"+\n" +
 	"\x10ListDisksRequest\x12\x17\n" +
-	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\"I\n" +
-	"\x11ListDisksResponse\x124\n" +
-	"\x05disks\x18\x01 \x03(\v2\x1e.pilab.cloud.vmmanager.v1.DiskR\x05disks\"'\n" +
+	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\"C\n" +
+	"\x11ListDisksResponse\x12.\n" +
+	"\x05disks\x18\x01 \x03(\v2\x18.pilab.vmmanager.v1.DiskR\x05disks\"'\n" +
 	"\x11RemoveDiskRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"G\n" +
 	"\x11ResizeDiskRequest\x12\x12\n" +
@@ -2218,9 +2218,9 @@ const file_pilab_vmmanager_v1_vmservice_proto_rawDesc = "" +
 	"\x1aGetNetworkInterfaceRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"7\n" +
 	"\x1cListNetworkInterfacesRequest\x12\x17\n" +
-	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\"z\n" +
-	"\x1dListNetworkInterfacesResponse\x12Y\n" +
-	"\x12network_interfaces\x18\x01 \x03(\v2*.pilab.cloud.vmmanager.v1.NetworkInterfaceR\x11networkInterfaces\"3\n" +
+	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\"t\n" +
+	"\x1dListNetworkInterfacesResponse\x12S\n" +
+	"\x12network_interfaces\x18\x01 \x03(\v2$.pilab.vmmanager.v1.NetworkInterfaceR\x11networkInterfaces\"3\n" +
 	"\x1dRemoveNetworkInterfaceRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"\x8d\x01\n" +
 	"\x1dUpdateNetworkInterfaceRequest\x12\x12\n" +
@@ -2228,24 +2228,24 @@ const file_pilab_vmmanager_v1_vmservice_proto_rawDesc = "" +
 	"\vmac_address\x18\x02 \x01(\tR\n" +
 	"macAddress\x12!\n" +
 	"\fnetwork_name\x18\x03 \x01(\tR\vnetworkName\x12\x14\n" +
-	"\x05model\x18\x04 \x01(\tR\x05model\"\x84\x02\n" +
+	"\x05model\x18\x04 \x01(\tR\x05model\"\xfe\x01\n" +
 	"\x0eHardwareDevice\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x17\n" +
 	"\avm_uuid\x18\x02 \x01(\tR\x06vmUuid\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x18\n" +
-	"\amanaged\x18\x04 \x01(\tR\amanaged\x12X\n" +
+	"\amanaged\x18\x04 \x01(\tR\amanaged\x12R\n" +
 	"\n" +
-	"attributes\x18\x05 \x03(\v28.pilab.cloud.vmmanager.v1.HardwareDevice.AttributesEntryR\n" +
+	"attributes\x18\x05 \x03(\v22.pilab.vmmanager.v1.HardwareDevice.AttributesEntryR\n" +
 	"attributes\x1a=\n" +
 	"\x0fAttributesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x84\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xfe\x01\n" +
 	"\x18AddHardwareDeviceRequest\x12\x17\n" +
 	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x18\n" +
-	"\amanaged\x18\x03 \x01(\tR\amanaged\x12b\n" +
+	"\amanaged\x18\x03 \x01(\tR\amanaged\x12\\\n" +
 	"\n" +
-	"attributes\x18\x04 \x03(\v2B.pilab.cloud.vmmanager.v1.AddHardwareDeviceRequest.AttributesEntryR\n" +
+	"attributes\x18\x04 \x03(\v2<.pilab.vmmanager.v1.AddHardwareDeviceRequest.AttributesEntryR\n" +
 	"attributes\x1a=\n" +
 	"\x0fAttributesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -2253,15 +2253,15 @@ const file_pilab_vmmanager_v1_vmservice_proto_rawDesc = "" +
 	"\x18GetHardwareDeviceRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"5\n" +
 	"\x1aListHardwareDevicesRequest\x12\x17\n" +
-	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\"r\n" +
-	"\x1bListHardwareDevicesResponse\x12S\n" +
-	"\x10hardware_devices\x18\x01 \x03(\v2(.pilab.cloud.vmmanager.v1.HardwareDeviceR\x0fhardwareDevices\"1\n" +
+	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\"l\n" +
+	"\x1bListHardwareDevicesResponse\x12M\n" +
+	"\x10hardware_devices\x18\x01 \x03(\v2\".pilab.vmmanager.v1.HardwareDeviceR\x0fhardwareDevices\"1\n" +
 	"\x1bRemoveHardwareDeviceRequest\x12\x12\n" +
-	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"\xd7\x01\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\"\xd1\x01\n" +
 	"\x1bUpdateHardwareDeviceRequest\x12\x12\n" +
-	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12e\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12_\n" +
 	"\n" +
-	"attributes\x18\x02 \x03(\v2E.pilab.cloud.vmmanager.v1.UpdateHardwareDeviceRequest.AttributesEntryR\n" +
+	"attributes\x18\x02 \x03(\v2?.pilab.vmmanager.v1.UpdateHardwareDeviceRequest.AttributesEntryR\n" +
 	"attributes\x1a=\n" +
 	"\x0fAttributesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -2275,37 +2275,37 @@ const file_pilab_vmmanager_v1_vmservice_proto_rawDesc = "" +
 	"\bSHUTDOWN\x10\x04\x12\v\n" +
 	"\aSHUTOFF\x10\x05\x12\v\n" +
 	"\aCRASHED\x10\x06\x12\x0f\n" +
-	"\vPMSUSPENDED\x10\a2\xa9\x14\n" +
-	"\tVMService\x12U\n" +
-	"\bCreateVM\x12).pilab.cloud.vmmanager.v1.CreateVMRequest\x1a\x1c.pilab.cloud.vmmanager.v1.VM\"\x00\x12O\n" +
-	"\x05GetVM\x12&.pilab.cloud.vmmanager.v1.GetVMRequest\x1a\x1c.pilab.cloud.vmmanager.v1.VM\"\x00\x12`\n" +
-	"\aListVMs\x12(.pilab.cloud.vmmanager.v1.ListVMsRequest\x1a).pilab.cloud.vmmanager.v1.ListVMsResponse\"\x00\x12M\n" +
-	"\aStartVM\x12(.pilab.cloud.vmmanager.v1.StartVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12K\n" +
-	"\x06StopVM\x12'.pilab.cloud.vmmanager.v1.StopVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12O\n" +
-	"\bRebootVM\x12).pilab.cloud.vmmanager.v1.RebootVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12Q\n" +
-	"\tSuspendVM\x12*.pilab.cloud.vmmanager.v1.SuspendVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12O\n" +
-	"\bResumeVM\x12).pilab.cloud.vmmanager.v1.ResumeVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12S\n" +
+	"\vPMSUSPENDED\x10\a2\xb1\x12\n" +
+	"\tVMService\x12I\n" +
+	"\bCreateVM\x12#.pilab.vmmanager.v1.CreateVMRequest\x1a\x16.pilab.vmmanager.v1.VM\"\x00\x12C\n" +
+	"\x05GetVM\x12 .pilab.vmmanager.v1.GetVMRequest\x1a\x16.pilab.vmmanager.v1.VM\"\x00\x12T\n" +
+	"\aListVMs\x12\".pilab.vmmanager.v1.ListVMsRequest\x1a#.pilab.vmmanager.v1.ListVMsResponse\"\x00\x12G\n" +
+	"\aStartVM\x12\".pilab.vmmanager.v1.StartVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12E\n" +
+	"\x06StopVM\x12!.pilab.vmmanager.v1.StopVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12I\n" +
+	"\bRebootVM\x12#.pilab.vmmanager.v1.RebootVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12K\n" +
+	"\tSuspendVM\x12$.pilab.vmmanager.v1.SuspendVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12I\n" +
+	"\bResumeVM\x12#.pilab.vmmanager.v1.ResumeVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12M\n" +
 	"\n" +
-	"ShutdownVM\x12+.pilab.cloud.vmmanager.v1.ShutdownVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12O\n" +
-	"\bDeleteVM\x12).pilab.cloud.vmmanager.v1.DeleteVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12U\n" +
-	"\bUpdateVM\x12).pilab.cloud.vmmanager.v1.UpdateVMRequest\x1a\x1c.pilab.cloud.vmmanager.v1.VM\"\x00\x12U\n" +
-	"\aAddDisk\x12(.pilab.cloud.vmmanager.v1.AddDiskRequest\x1a\x1e.pilab.cloud.vmmanager.v1.Disk\"\x00\x12U\n" +
-	"\aGetDisk\x12(.pilab.cloud.vmmanager.v1.GetDiskRequest\x1a\x1e.pilab.cloud.vmmanager.v1.Disk\"\x00\x12f\n" +
-	"\tListDisks\x12*.pilab.cloud.vmmanager.v1.ListDisksRequest\x1a+.pilab.cloud.vmmanager.v1.ListDisksResponse\"\x00\x12S\n" +
+	"ShutdownVM\x12%.pilab.vmmanager.v1.ShutdownVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12I\n" +
+	"\bDeleteVM\x12#.pilab.vmmanager.v1.DeleteVMRequest\x1a\x16.google.protobuf.Empty\"\x00\x12I\n" +
+	"\bUpdateVM\x12#.pilab.vmmanager.v1.UpdateVMRequest\x1a\x16.pilab.vmmanager.v1.VM\"\x00\x12I\n" +
+	"\aAddDisk\x12\".pilab.vmmanager.v1.AddDiskRequest\x1a\x18.pilab.vmmanager.v1.Disk\"\x00\x12I\n" +
+	"\aGetDisk\x12\".pilab.vmmanager.v1.GetDiskRequest\x1a\x18.pilab.vmmanager.v1.Disk\"\x00\x12Z\n" +
+	"\tListDisks\x12$.pilab.vmmanager.v1.ListDisksRequest\x1a%.pilab.vmmanager.v1.ListDisksResponse\"\x00\x12M\n" +
 	"\n" +
-	"RemoveDisk\x12+.pilab.cloud.vmmanager.v1.RemoveDiskRequest\x1a\x16.google.protobuf.Empty\"\x00\x12S\n" +
+	"RemoveDisk\x12%.pilab.vmmanager.v1.RemoveDiskRequest\x1a\x16.google.protobuf.Empty\"\x00\x12M\n" +
 	"\n" +
-	"ResizeDisk\x12+.pilab.cloud.vmmanager.v1.ResizeDiskRequest\x1a\x16.google.protobuf.Empty\"\x00\x12y\n" +
-	"\x13AddNetworkInterface\x124.pilab.cloud.vmmanager.v1.AddNetworkInterfaceRequest\x1a*.pilab.cloud.vmmanager.v1.NetworkInterface\"\x00\x12y\n" +
-	"\x13GetNetworkInterface\x124.pilab.cloud.vmmanager.v1.GetNetworkInterfaceRequest\x1a*.pilab.cloud.vmmanager.v1.NetworkInterface\"\x00\x12\x8a\x01\n" +
-	"\x15ListNetworkInterfaces\x126.pilab.cloud.vmmanager.v1.ListNetworkInterfacesRequest\x1a7.pilab.cloud.vmmanager.v1.ListNetworkInterfacesResponse\"\x00\x12k\n" +
-	"\x16RemoveNetworkInterface\x127.pilab.cloud.vmmanager.v1.RemoveNetworkInterfaceRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x7f\n" +
-	"\x16UpdateNetworkInterface\x127.pilab.cloud.vmmanager.v1.UpdateNetworkInterfaceRequest\x1a*.pilab.cloud.vmmanager.v1.NetworkInterface\"\x00\x12s\n" +
-	"\x11AddHardwareDevice\x122.pilab.cloud.vmmanager.v1.AddHardwareDeviceRequest\x1a(.pilab.cloud.vmmanager.v1.HardwareDevice\"\x00\x12s\n" +
-	"\x11GetHardwareDevice\x122.pilab.cloud.vmmanager.v1.GetHardwareDeviceRequest\x1a(.pilab.cloud.vmmanager.v1.HardwareDevice\"\x00\x12\x84\x01\n" +
-	"\x13ListHardwareDevices\x124.pilab.cloud.vmmanager.v1.ListHardwareDevicesRequest\x1a5.pilab.cloud.vmmanager.v1.ListHardwareDevicesResponse\"\x00\x12g\n" +
-	"\x14RemoveHardwareDevice\x125.pilab.cloud.vmmanager.v1.RemoveHardwareDeviceRequest\x1a\x16.google.protobuf.Empty\"\x00\x12y\n" +
-	"\x14UpdateHardwareDevice\x125.pilab.cloud.vmmanager.v1.UpdateHardwareDeviceRequest\x1a(.pilab.cloud.vmmanager.v1.HardwareDevice\"\x00B9Z7go.pilab.hu/cloud/virtpb/pilab/vmmanager/v1;vmmanagerv1b\x06proto3"
+	"ResizeDisk\x12%.pilab.vmmanager.v1.ResizeDiskRequest\x1a\x16.google.protobuf.Empty\"\x00\x12m\n" +
+	"\x13AddNetworkInterface\x12..pilab.vmmanager.v1.AddNetworkInterfaceRequest\x1a$.pilab.vmmanager.v1.NetworkInterface\"\x00\x12m\n" +
+	"\x13GetNetworkInterface\x12..pilab.vmmanager.v1.GetNetworkInterfaceRequest\x1a$.pilab.vmmanager.v1.NetworkInterface\"\x00\x12~\n" +
+	"\x15ListNetworkInterfaces\x120.pilab.vmmanager.v1.ListNetworkInterfacesRequest\x1a1.pilab.vmmanager.v1.ListNetworkInterfacesResponse\"\x00\x12e\n" +
+	"\x16RemoveNetworkInterface\x121.pilab.vmmanager.v1.RemoveNetworkInterfaceRequest\x1a\x16.google.protobuf.Empty\"\x00\x12s\n" +
+	"\x16UpdateNetworkInterface\x121.pilab.vmmanager.v1.UpdateNetworkInterfaceRequest\x1a$.pilab.vmmanager.v1.NetworkInterface\"\x00\x12g\n" +
+	"\x11AddHardwareDevice\x12,.pilab.vmmanager.v1.AddHardwareDeviceRequest\x1a\".pilab.vmmanager.v1.HardwareDevice\"\x00\x12g\n" +
+	"\x11GetHardwareDevice\x12,.pilab.vmmanager.v1.GetHardwareDeviceRequest\x1a\".pilab.vmmanager.v1.HardwareDevice\"\x00\x12x\n" +
+	"\x13ListHardwareDevices\x12..pilab.vmmanager.v1.ListHardwareDevicesRequest\x1a/.pilab.vmmanager.v1.ListHardwareDevicesResponse\"\x00\x12a\n" +
+	"\x14RemoveHardwareDevice\x12/.pilab.vmmanager.v1.RemoveHardwareDeviceRequest\x1a\x16.google.protobuf.Empty\"\x00\x12m\n" +
+	"\x14UpdateHardwareDevice\x12/.pilab.vmmanager.v1.UpdateHardwareDeviceRequest\x1a\".pilab.vmmanager.v1.HardwareDevice\"\x00B9Z7go.pilab.hu/cloud/virtpb/pilab/vmmanager/v1;vmmanagerv1b\x06proto3"
 
 var (
 	file_pilab_vmmanager_v1_vmservice_proto_rawDescOnce sync.Once
@@ -2322,114 +2322,114 @@ func file_pilab_vmmanager_v1_vmservice_proto_rawDescGZIP() []byte {
 var file_pilab_vmmanager_v1_vmservice_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_pilab_vmmanager_v1_vmservice_proto_msgTypes = make([]protoimpl.MessageInfo, 37)
 var file_pilab_vmmanager_v1_vmservice_proto_goTypes = []any{
-	(VMState)(0),                          // 0: pilab.cloud.vmmanager.v1.VMState
-	(*VM)(nil),                            // 1: pilab.cloud.vmmanager.v1.VM
-	(*CreateVMRequest)(nil),               // 2: pilab.cloud.vmmanager.v1.CreateVMRequest
-	(*GetVMRequest)(nil),                  // 3: pilab.cloud.vmmanager.v1.GetVMRequest
-	(*ListVMsRequest)(nil),                // 4: pilab.cloud.vmmanager.v1.ListVMsRequest
-	(*ListVMsResponse)(nil),               // 5: pilab.cloud.vmmanager.v1.ListVMsResponse
-	(*StartVMRequest)(nil),                // 6: pilab.cloud.vmmanager.v1.StartVMRequest
-	(*StopVMRequest)(nil),                 // 7: pilab.cloud.vmmanager.v1.StopVMRequest
-	(*RebootVMRequest)(nil),               // 8: pilab.cloud.vmmanager.v1.RebootVMRequest
-	(*SuspendVMRequest)(nil),              // 9: pilab.cloud.vmmanager.v1.SuspendVMRequest
-	(*ResumeVMRequest)(nil),               // 10: pilab.cloud.vmmanager.v1.ResumeVMRequest
-	(*ShutdownVMRequest)(nil),             // 11: pilab.cloud.vmmanager.v1.ShutdownVMRequest
-	(*DeleteVMRequest)(nil),               // 12: pilab.cloud.vmmanager.v1.DeleteVMRequest
-	(*UpdateVMRequest)(nil),               // 13: pilab.cloud.vmmanager.v1.UpdateVMRequest
-	(*Disk)(nil),                          // 14: pilab.cloud.vmmanager.v1.Disk
-	(*AddDiskRequest)(nil),                // 15: pilab.cloud.vmmanager.v1.AddDiskRequest
-	(*GetDiskRequest)(nil),                // 16: pilab.cloud.vmmanager.v1.GetDiskRequest
-	(*ListDisksRequest)(nil),              // 17: pilab.cloud.vmmanager.v1.ListDisksRequest
-	(*ListDisksResponse)(nil),             // 18: pilab.cloud.vmmanager.v1.ListDisksResponse
-	(*RemoveDiskRequest)(nil),             // 19: pilab.cloud.vmmanager.v1.RemoveDiskRequest
-	(*ResizeDiskRequest)(nil),             // 20: pilab.cloud.vmmanager.v1.ResizeDiskRequest
-	(*NetworkInterface)(nil),              // 21: pilab.cloud.vmmanager.v1.NetworkInterface
-	(*AddNetworkInterfaceRequest)(nil),    // 22: pilab.cloud.vmmanager.v1.AddNetworkInterfaceRequest
-	(*GetNetworkInterfaceRequest)(nil),    // 23: pilab.cloud.vmmanager.v1.GetNetworkInterfaceRequest
-	(*ListNetworkInterfacesRequest)(nil),  // 24: pilab.cloud.vmmanager.v1.ListNetworkInterfacesRequest
-	(*ListNetworkInterfacesResponse)(nil), // 25: pilab.cloud.vmmanager.v1.ListNetworkInterfacesResponse
-	(*RemoveNetworkInterfaceRequest)(nil), // 26: pilab.cloud.vmmanager.v1.RemoveNetworkInterfaceRequest
-	(*UpdateNetworkInterfaceRequest)(nil), // 27: pilab.cloud.vmmanager.v1.UpdateNetworkInterfaceRequest
-	(*HardwareDevice)(nil),                // 28: pilab.cloud.vmmanager.v1.HardwareDevice
-	(*AddHardwareDeviceRequest)(nil),      // 29: pilab.cloud.vmmanager.v1.AddHardwareDeviceRequest
-	(*GetHardwareDeviceRequest)(nil),      // 30: pilab.cloud.vmmanager.v1.GetHardwareDeviceRequest
-	(*ListHardwareDevicesRequest)(nil),    // 31: pilab.cloud.vmmanager.v1.ListHardwareDevicesRequest
-	(*ListHardwareDevicesResponse)(nil),   // 32: pilab.cloud.vmmanager.v1.ListHardwareDevicesResponse
-	(*RemoveHardwareDeviceRequest)(nil),   // 33: pilab.cloud.vmmanager.v1.RemoveHardwareDeviceRequest
-	(*UpdateHardwareDeviceRequest)(nil),   // 34: pilab.cloud.vmmanager.v1.UpdateHardwareDeviceRequest
-	nil,                                   // 35: pilab.cloud.vmmanager.v1.HardwareDevice.AttributesEntry
-	nil,                                   // 36: pilab.cloud.vmmanager.v1.AddHardwareDeviceRequest.AttributesEntry
-	nil,                                   // 37: pilab.cloud.vmmanager.v1.UpdateHardwareDeviceRequest.AttributesEntry
+	(VMState)(0),                          // 0: pilab.vmmanager.v1.VMState
+	(*VM)(nil),                            // 1: pilab.vmmanager.v1.VM
+	(*CreateVMRequest)(nil),               // 2: pilab.vmmanager.v1.CreateVMRequest
+	(*GetVMRequest)(nil),                  // 3: pilab.vmmanager.v1.GetVMRequest
+	(*ListVMsRequest)(nil),                // 4: pilab.vmmanager.v1.ListVMsRequest
+	(*ListVMsResponse)(nil),               // 5: pilab.vmmanager.v1.ListVMsResponse
+	(*StartVMRequest)(nil),                // 6: pilab.vmmanager.v1.StartVMRequest
+	(*StopVMRequest)(nil),                 // 7: pilab.vmmanager.v1.StopVMRequest
+	(*RebootVMRequest)(nil),               // 8: pilab.vmmanager.v1.RebootVMRequest
+	(*SuspendVMRequest)(nil),              // 9: pilab.vmmanager.v1.SuspendVMRequest
+	(*ResumeVMRequest)(nil),               // 10: pilab.vmmanager.v1.ResumeVMRequest
+	(*ShutdownVMRequest)(nil),             // 11: pilab.vmmanager.v1.ShutdownVMRequest
+	(*DeleteVMRequest)(nil),               // 12: pilab.vmmanager.v1.DeleteVMRequest
+	(*UpdateVMRequest)(nil),               // 13: pilab.vmmanager.v1.UpdateVMRequest
+	(*Disk)(nil),                          // 14: pilab.vmmanager.v1.Disk
+	(*AddDiskRequest)(nil),                // 15: pilab.vmmanager.v1.AddDiskRequest
+	(*GetDiskRequest)(nil),                // 16: pilab.vmmanager.v1.GetDiskRequest
+	(*ListDisksRequest)(nil),              // 17: pilab.vmmanager.v1.ListDisksRequest
+	(*ListDisksResponse)(nil),             // 18: pilab.vmmanager.v1.ListDisksResponse
+	(*RemoveDiskRequest)(nil),             // 19: pilab.vmmanager.v1.RemoveDiskRequest
+	(*ResizeDiskRequest)(nil),             // 20: pilab.vmmanager.v1.ResizeDiskRequest
+	(*NetworkInterface)(nil),              // 21: pilab.vmmanager.v1.NetworkInterface
+	(*AddNetworkInterfaceRequest)(nil),    // 22: pilab.vmmanager.v1.AddNetworkInterfaceRequest
+	(*GetNetworkInterfaceRequest)(nil),    // 23: pilab.vmmanager.v1.GetNetworkInterfaceRequest
+	(*ListNetworkInterfacesRequest)(nil),  // 24: pilab.vmmanager.v1.ListNetworkInterfacesRequest
+	(*ListNetworkInterfacesResponse)(nil), // 25: pilab.vmmanager.v1.ListNetworkInterfacesResponse
+	(*RemoveNetworkInterfaceRequest)(nil), // 26: pilab.vmmanager.v1.RemoveNetworkInterfaceRequest
+	(*UpdateNetworkInterfaceRequest)(nil), // 27: pilab.vmmanager.v1.UpdateNetworkInterfaceRequest
+	(*HardwareDevice)(nil),                // 28: pilab.vmmanager.v1.HardwareDevice
+	(*AddHardwareDeviceRequest)(nil),      // 29: pilab.vmmanager.v1.AddHardwareDeviceRequest
+	(*GetHardwareDeviceRequest)(nil),      // 30: pilab.vmmanager.v1.GetHardwareDeviceRequest
+	(*ListHardwareDevicesRequest)(nil),    // 31: pilab.vmmanager.v1.ListHardwareDevicesRequest
+	(*ListHardwareDevicesResponse)(nil),   // 32: pilab.vmmanager.v1.ListHardwareDevicesResponse
+	(*RemoveHardwareDeviceRequest)(nil),   // 33: pilab.vmmanager.v1.RemoveHardwareDeviceRequest
+	(*UpdateHardwareDeviceRequest)(nil),   // 34: pilab.vmmanager.v1.UpdateHardwareDeviceRequest
+	nil,                                   // 35: pilab.vmmanager.v1.HardwareDevice.AttributesEntry
+	nil,                                   // 36: pilab.vmmanager.v1.AddHardwareDeviceRequest.AttributesEntry
+	nil,                                   // 37: pilab.vmmanager.v1.UpdateHardwareDeviceRequest.AttributesEntry
 	(*timestamppb.Timestamp)(nil),         // 38: google.protobuf.Timestamp
 	(*emptypb.Empty)(nil),                 // 39: google.protobuf.Empty
 }
 var file_pilab_vmmanager_v1_vmservice_proto_depIdxs = []int32{
-	0,  // 0: pilab.cloud.vmmanager.v1.VM.state:type_name -> pilab.cloud.vmmanager.v1.VMState
-	14, // 1: pilab.cloud.vmmanager.v1.VM.disks:type_name -> pilab.cloud.vmmanager.v1.Disk
-	21, // 2: pilab.cloud.vmmanager.v1.VM.network_interfaces:type_name -> pilab.cloud.vmmanager.v1.NetworkInterface
-	28, // 3: pilab.cloud.vmmanager.v1.VM.hardware_devices:type_name -> pilab.cloud.vmmanager.v1.HardwareDevice
-	38, // 4: pilab.cloud.vmmanager.v1.VM.creation_time:type_name -> google.protobuf.Timestamp
-	14, // 5: pilab.cloud.vmmanager.v1.CreateVMRequest.disks:type_name -> pilab.cloud.vmmanager.v1.Disk
-	21, // 6: pilab.cloud.vmmanager.v1.CreateVMRequest.network_interfaces:type_name -> pilab.cloud.vmmanager.v1.NetworkInterface
-	1,  // 7: pilab.cloud.vmmanager.v1.ListVMsResponse.vms:type_name -> pilab.cloud.vmmanager.v1.VM
-	14, // 8: pilab.cloud.vmmanager.v1.ListDisksResponse.disks:type_name -> pilab.cloud.vmmanager.v1.Disk
-	21, // 9: pilab.cloud.vmmanager.v1.ListNetworkInterfacesResponse.network_interfaces:type_name -> pilab.cloud.vmmanager.v1.NetworkInterface
-	35, // 10: pilab.cloud.vmmanager.v1.HardwareDevice.attributes:type_name -> pilab.cloud.vmmanager.v1.HardwareDevice.AttributesEntry
-	36, // 11: pilab.cloud.vmmanager.v1.AddHardwareDeviceRequest.attributes:type_name -> pilab.cloud.vmmanager.v1.AddHardwareDeviceRequest.AttributesEntry
-	28, // 12: pilab.cloud.vmmanager.v1.ListHardwareDevicesResponse.hardware_devices:type_name -> pilab.cloud.vmmanager.v1.HardwareDevice
-	37, // 13: pilab.cloud.vmmanager.v1.UpdateHardwareDeviceRequest.attributes:type_name -> pilab.cloud.vmmanager.v1.UpdateHardwareDeviceRequest.AttributesEntry
-	2,  // 14: pilab.cloud.vmmanager.v1.VMService.CreateVM:input_type -> pilab.cloud.vmmanager.v1.CreateVMRequest
-	3,  // 15: pilab.cloud.vmmanager.v1.VMService.GetVM:input_type -> pilab.cloud.vmmanager.v1.GetVMRequest
-	4,  // 16: pilab.cloud.vmmanager.v1.VMService.ListVMs:input_type -> pilab.cloud.vmmanager.v1.ListVMsRequest
-	6,  // 17: pilab.cloud.vmmanager.v1.VMService.StartVM:input_type -> pilab.cloud.vmmanager.v1.StartVMRequest
-	7,  // 18: pilab.cloud.vmmanager.v1.VMService.StopVM:input_type -> pilab.cloud.vmmanager.v1.StopVMRequest
-	8,  // 19: pilab.cloud.vmmanager.v1.VMService.RebootVM:input_type -> pilab.cloud.vmmanager.v1.RebootVMRequest
-	9,  // 20: pilab.cloud.vmmanager.v1.VMService.SuspendVM:input_type -> pilab.cloud.vmmanager.v1.SuspendVMRequest
-	10, // 21: pilab.cloud.vmmanager.v1.VMService.ResumeVM:input_type -> pilab.cloud.vmmanager.v1.ResumeVMRequest
-	11, // 22: pilab.cloud.vmmanager.v1.VMService.ShutdownVM:input_type -> pilab.cloud.vmmanager.v1.ShutdownVMRequest
-	12, // 23: pilab.cloud.vmmanager.v1.VMService.DeleteVM:input_type -> pilab.cloud.vmmanager.v1.DeleteVMRequest
-	13, // 24: pilab.cloud.vmmanager.v1.VMService.UpdateVM:input_type -> pilab.cloud.vmmanager.v1.UpdateVMRequest
-	15, // 25: pilab.cloud.vmmanager.v1.VMService.AddDisk:input_type -> pilab.cloud.vmmanager.v1.AddDiskRequest
-	16, // 26: pilab.cloud.vmmanager.v1.VMService.GetDisk:input_type -> pilab.cloud.vmmanager.v1.GetDiskRequest
-	17, // 27: pilab.cloud.vmmanager.v1.VMService.ListDisks:input_type -> pilab.cloud.vmmanager.v1.ListDisksRequest
-	19, // 28: pilab.cloud.vmmanager.v1.VMService.RemoveDisk:input_type -> pilab.cloud.vmmanager.v1.RemoveDiskRequest
-	20, // 29: pilab.cloud.vmmanager.v1.VMService.ResizeDisk:input_type -> pilab.cloud.vmmanager.v1.ResizeDiskRequest
-	22, // 30: pilab.cloud.vmmanager.v1.VMService.AddNetworkInterface:input_type -> pilab.cloud.vmmanager.v1.AddNetworkInterfaceRequest
-	23, // 31: pilab.cloud.vmmanager.v1.VMService.GetNetworkInterface:input_type -> pilab.cloud.vmmanager.v1.GetNetworkInterfaceRequest
-	24, // 32: pilab.cloud.vmmanager.v1.VMService.ListNetworkInterfaces:input_type -> pilab.cloud.vmmanager.v1.ListNetworkInterfacesRequest
-	26, // 33: pilab.cloud.vmmanager.v1.VMService.RemoveNetworkInterface:input_type -> pilab.cloud.vmmanager.v1.RemoveNetworkInterfaceRequest
-	27, // 34: pilab.cloud.vmmanager.v1.VMService.UpdateNetworkInterface:input_type -> pilab.cloud.vmmanager.v1.UpdateNetworkInterfaceRequest
-	29, // 35: pilab.cloud.vmmanager.v1.VMService.AddHardwareDevice:input_type -> pilab.cloud.vmmanager.v1.AddHardwareDeviceRequest
-	30, // 36: pilab.cloud.vmmanager.v1.VMService.GetHardwareDevice:input_type -> pilab.cloud.vmmanager.v1.GetHardwareDeviceRequest
-	31, // 37: pilab.cloud.vmmanager.v1.VMService.ListHardwareDevices:input_type -> pilab.cloud.vmmanager.v1.ListHardwareDevicesRequest
-	33, // 38: pilab.cloud.vmmanager.v1.VMService.RemoveHardwareDevice:input_type -> pilab.cloud.vmmanager.v1.RemoveHardwareDeviceRequest
-	34, // 39: pilab.cloud.vmmanager.v1.VMService.UpdateHardwareDevice:input_type -> pilab.cloud.vmmanager.v1.UpdateHardwareDeviceRequest
-	1,  // 40: pilab.cloud.vmmanager.v1.VMService.CreateVM:output_type -> pilab.cloud.vmmanager.v1.VM
-	1,  // 41: pilab.cloud.vmmanager.v1.VMService.GetVM:output_type -> pilab.cloud.vmmanager.v1.VM
-	5,  // 42: pilab.cloud.vmmanager.v1.VMService.ListVMs:output_type -> pilab.cloud.vmmanager.v1.ListVMsResponse
-	39, // 43: pilab.cloud.vmmanager.v1.VMService.StartVM:output_type -> google.protobuf.Empty
-	39, // 44: pilab.cloud.vmmanager.v1.VMService.StopVM:output_type -> google.protobuf.Empty
-	39, // 45: pilab.cloud.vmmanager.v1.VMService.RebootVM:output_type -> google.protobuf.Empty
-	39, // 46: pilab.cloud.vmmanager.v1.VMService.SuspendVM:output_type -> google.protobuf.Empty
-	39, // 47: pilab.cloud.vmmanager.v1.VMService.ResumeVM:output_type -> google.protobuf.Empty
-	39, // 48: pilab.cloud.vmmanager.v1.VMService.ShutdownVM:output_type -> google.protobuf.Empty
-	39, // 49: pilab.cloud.vmmanager.v1.VMService.DeleteVM:output_type -> google.protobuf.Empty
-	1,  // 50: pilab.cloud.vmmanager.v1.VMService.UpdateVM:output_type -> pilab.cloud.vmmanager.v1.VM
-	14, // 51: pilab.cloud.vmmanager.v1.VMService.AddDisk:output_type -> pilab.cloud.vmmanager.v1.Disk
-	14, // 52: pilab.cloud.vmmanager.v1.VMService.GetDisk:output_type -> pilab.cloud.vmmanager.v1.Disk
-	18, // 53: pilab.cloud.vmmanager.v1.VMService.ListDisks:output_type -> pilab.cloud.vmmanager.v1.ListDisksResponse
-	39, // 54: pilab.cloud.vmmanager.v1.VMService.RemoveDisk:output_type -> google.protobuf.Empty
-	39, // 55: pilab.cloud.vmmanager.v1.VMService.ResizeDisk:output_type -> google.protobuf.Empty
-	21, // 56: pilab.cloud.vmmanager.v1.VMService.AddNetworkInterface:output_type -> pilab.cloud.vmmanager.v1.NetworkInterface
-	21, // 57: pilab.cloud.vmmanager.v1.VMService.GetNetworkInterface:output_type -> pilab.cloud.vmmanager.v1.NetworkInterface
-	25, // 58: pilab.cloud.vmmanager.v1.VMService.ListNetworkInterfaces:output_type -> pilab.cloud.vmmanager.v1.ListNetworkInterfacesResponse
-	39, // 59: pilab.cloud.vmmanager.v1.VMService.RemoveNetworkInterface:output_type -> google.protobuf.Empty
-	21, // 60: pilab.cloud.vmmanager.v1.VMService.UpdateNetworkInterface:output_type -> pilab.cloud.vmmanager.v1.NetworkInterface
-	28, // 61: pilab.cloud.vmmanager.v1.VMService.AddHardwareDevice:output_type -> pilab.cloud.vmmanager.v1.HardwareDevice
-	28, // 62: pilab.cloud.vmmanager.v1.VMService.GetHardwareDevice:output_type -> pilab.cloud.vmmanager.v1.HardwareDevice
-	32, // 63: pilab.cloud.vmmanager.v1.VMService.ListHardwareDevices:output_type -> pilab.cloud.vmmanager.v1.ListHardwareDevicesResponse
-	39, // 64: pilab.cloud.vmmanager.v1.VMService.RemoveHardwareDevice:output_type -> google.protobuf.Empty
-	28, // 65: pilab.cloud.vmmanager.v1.VMService.UpdateHardwareDevice:output_type -> pilab.cloud.vmmanager.v1.HardwareDevice
+	0,  // 0: pilab.vmmanager.v1.VM.state:type_name -> pilab.vmmanager.v1.VMState
+	14, // 1: pilab.vmmanager.v1.VM.disks:type_name -> pilab.vmmanager.v1.Disk
+	21, // 2: pilab.vmmanager.v1.VM.network_interfaces:type_name -> pilab.vmmanager.v1.NetworkInterface
+	28, // 3: pilab.vmmanager.v1.VM.hardware_devices:type_name -> pilab.vmmanager.v1.HardwareDevice
+	38, // 4: pilab.vmmanager.v1.VM.creation_time:type_name -> google.protobuf.Timestamp
+	14, // 5: pilab.vmmanager.v1.CreateVMRequest.disks:type_name -> pilab.vmmanager.v1.Disk
+	21, // 6: pilab.vmmanager.v1.CreateVMRequest.network_interfaces:type_name -> pilab.vmmanager.v1.NetworkInterface
+	1,  // 7: pilab.vmmanager.v1.ListVMsResponse.vms:type_name -> pilab.vmmanager.v1.VM
+	14, // 8: pilab.vmmanager.v1.ListDisksResponse.disks:type_name -> pilab.vmmanager.v1.Disk
+	21, // 9: pilab.vmmanager.v1.ListNetworkInterfacesResponse.network_interfaces:type_name -> pilab.vmmanager.v1.NetworkInterface
+	35, // 10: pilab.vmmanager.v1.HardwareDevice.attributes:type_name -> pilab.vmmanager.v1.HardwareDevice.AttributesEntry
+	36, // 11: pilab.vmmanager.v1.AddHardwareDeviceRequest.attributes:type_name -> pilab.vmmanager.v1.AddHardwareDeviceRequest.AttributesEntry
+	28, // 12: pilab.vmmanager.v1.ListHardwareDevicesResponse.hardware_devices:type_name -> pilab.vmmanager.v1.HardwareDevice
+	37, // 13: pilab.vmmanager.v1.UpdateHardwareDeviceRequest.attributes:type_name -> pilab.vmmanager.v1.UpdateHardwareDeviceRequest.AttributesEntry
+	2,  // 14: pilab.vmmanager.v1.VMService.CreateVM:input_type -> pilab.vmmanager.v1.CreateVMRequest
+	3,  // 15: pilab.vmmanager.v1.VMService.GetVM:input_type -> pilab.vmmanager.v1.GetVMRequest
+	4,  // 16: pilab.vmmanager.v1.VMService.ListVMs:input_type -> pilab.vmmanager.v1.ListVMsRequest
+	6,  // 17: pilab.vmmanager.v1.VMService.StartVM:input_type -> pilab.vmmanager.v1.StartVMRequest
+	7,  // 18: pilab.vmmanager.v1.VMService.StopVM:input_type -> pilab.vmmanager.v1.StopVMRequest
+	8,  // 19: pilab.vmmanager.v1.VMService.RebootVM:input_type -> pilab.vmmanager.v1.RebootVMRequest
+	9,  // 20: pilab.vmmanager.v1.VMService.SuspendVM:input_type -> pilab.vmmanager.v1.SuspendVMRequest
+	10, // 21: pilab.vmmanager.v1.VMService.ResumeVM:input_type -> pilab.vmmanager.v1.ResumeVMRequest
+	11, // 22: pilab.vmmanager.v1.VMService.ShutdownVM:input_type -> pilab.vmmanager.v1.ShutdownVMRequest
+	12, // 23: pilab.vmmanager.v1.VMService.DeleteVM:input_type -> pilab.vmmanager.v1.DeleteVMRequest
+	13, // 24: pilab.vmmanager.v1.VMService.UpdateVM:input_type -> pilab.vmmanager.v1.UpdateVMRequest
+	15, // 25: pilab.vmmanager.v1.VMService.AddDisk:input_type -> pilab.vmmanager.v1.AddDiskRequest
+	16, // 26: pilab.vmmanager.v1.VMService.GetDisk:input_type -> pilab.vmmanager.v1.GetDiskRequest
+	17, // 27: pilab.vmmanager.v1.VMService.ListDisks:input_type -> pilab.vmmanager.v1.ListDisksRequest
+	19, // 28: pilab.vmmanager.v1.VMService.RemoveDisk:input_type -> pilab.vmmanager.v1.RemoveDiskRequest
+	20, // 29: pilab.vmmanager.v1.VMService.ResizeDisk:input_type -> pilab.vmmanager.v1.ResizeDiskRequest
+	22, // 30: pilab.vmmanager.v1.VMService.AddNetworkInterface:input_type -> pilab.vmmanager.v1.AddNetworkInterfaceRequest
+	23, // 31: pilab.vmmanager.v1.VMService.GetNetworkInterface:input_type -> pilab.vmmanager.v1.GetNetworkInterfaceRequest
+	24, // 32: pilab.vmmanager.v1.VMService.ListNetworkInterfaces:input_type -> pilab.vmmanager.v1.ListNetworkInterfacesRequest
+	26, // 33: pilab.vmmanager.v1.VMService.RemoveNetworkInterface:input_type -> pilab.vmmanager.v1.RemoveNetworkInterfaceRequest
+	27, // 34: pilab.vmmanager.v1.VMService.UpdateNetworkInterface:input_type -> pilab.vmmanager.v1.UpdateNetworkInterfaceRequest
+	29, // 35: pilab.vmmanager.v1.VMService.AddHardwareDevice:input_type -> pilab.vmmanager.v1.AddHardwareDeviceRequest
+	30, // 36: pilab.vmmanager.v1.VMService.GetHardwareDevice:input_type -> pilab.vmmanager.v1.GetHardwareDeviceRequest
+	31, // 37: pilab.vmmanager.v1.VMService.ListHardwareDevices:input_type -> pilab.vmmanager.v1.ListHardwareDevicesRequest
+	33, // 38: pilab.vmmanager.v1.VMService.RemoveHardwareDevice:input_type -> pilab.vmmanager.v1.RemoveHardwareDeviceRequest
+	34, // 39: pilab.vmmanager.v1.VMService.UpdateHardwareDevice:input_type -> pilab.vmmanager.v1.UpdateHardwareDeviceRequest
+	1,  // 40: pilab.vmmanager.v1.VMService.CreateVM:output_type -> pilab.vmmanager.v1.VM
+	1,  // 41: pilab.vmmanager.v1.VMService.GetVM:output_type -> pilab.vmmanager.v1.VM
+	5,  // 42: pilab.vmmanager.v1.VMService.ListVMs:output_type -> pilab.vmmanager.v1.ListVMsResponse
+	39, // 43: pilab.vmmanager.v1.VMService.StartVM:output_type -> google.protobuf.Empty
+	39, // 44: pilab.vmmanager.v1.VMService.StopVM:output_type -> google.protobuf.Empty
+	39, // 45: pilab.vmmanager.v1.VMService.RebootVM:output_type -> google.protobuf.Empty
+	39, // 46: pilab.vmmanager.v1.VMService.SuspendVM:output_type -> google.protobuf.Empty
+	39, // 47: pilab.vmmanager.v1.VMService.ResumeVM:output_type -> google.protobuf.Empty
+	39, // 48: pilab.vmmanager.v1.VMService.ShutdownVM:output_type -> google.protobuf.Empty
+	39, // 49: pilab.vmmanager.v1.VMService.DeleteVM:output_type -> google.protobuf.Empty
+	1,  // 50: pilab.vmmanager.v1.VMService.UpdateVM:output_type -> pilab.vmmanager.v1.VM
+	14, // 51: pilab.vmmanager.v1.VMService.AddDisk:output_type -> pilab.vmmanager.v1.Disk
+	14, // 52: pilab.vmmanager.v1.VMService.GetDisk:output_type -> pilab.vmmanager.v1.Disk
+	18, // 53: pilab.vmmanager.v1.VMService.ListDisks:output_type -> pilab.vmmanager.v1.ListDisksResponse
+	39, // 54: pilab.vmmanager.v1.VMService.RemoveDisk:output_type -> google.protobuf.Empty
+	39, // 55: pilab.vmmanager.v1.VMService.ResizeDisk:output_type -> google.protobuf.Empty
+	21, // 56: pilab.vmmanager.v1.VMService.AddNetworkInterface:output_type -> pilab.vmmanager.v1.NetworkInterface
+	21, // 57: pilab.vmmanager.v1.VMService.GetNetworkInterface:output_type -> pilab.vmmanager.v1.NetworkInterface
+	25, // 58: pilab.vmmanager.v1.VMService.ListNetworkInterfaces:output_type -> pilab.vmmanager.v1.ListNetworkInterfacesResponse
+	39, // 59: pilab.vmmanager.v1.VMService.RemoveNetworkInterface:output_type -> google.protobuf.Empty
+	21, // 60: pilab.vmmanager.v1.VMService.UpdateNetworkInterface:output_type -> pilab.vmmanager.v1.NetworkInterface
+	28, // 61: pilab.vmmanager.v1.VMService.AddHardwareDevice:output_type -> pilab.vmmanager.v1.HardwareDevice
+	28, // 62: pilab.vmmanager.v1.VMService.GetHardwareDevice:output_type -> pilab.vmmanager.v1.HardwareDevice
+	32, // 63: pilab.vmmanager.v1.VMService.ListHardwareDevices:output_type -> pilab.vmmanager.v1.ListHardwareDevicesResponse
+	39, // 64: pilab.vmmanager.v1.VMService.RemoveHardwareDevice:output_type -> google.protobuf.Empty
+	28, // 65: pilab.vmmanager.v1.VMService.UpdateHardwareDevice:output_type -> pilab.vmmanager.v1.HardwareDevice
 	40, // [40:66] is the sub-list for method output_type
 	14, // [14:40] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name

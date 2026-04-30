@@ -42,7 +42,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// AgentServiceName is the fully-qualified name of the AgentService service.
-	AgentServiceName = "pilab.cloud.agent.v2.AgentService"
+	AgentServiceName = "pilab.agent.v2.AgentService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -55,164 +55,164 @@ const (
 const (
 	// AgentServiceRegisterHostProcedure is the fully-qualified name of the AgentService's RegisterHost
 	// RPC.
-	AgentServiceRegisterHostProcedure = "/pilab.cloud.agent.v2.AgentService/RegisterHost"
+	AgentServiceRegisterHostProcedure = "/pilab.agent.v2.AgentService/RegisterHost"
 	// AgentServiceHeartbeatProcedure is the fully-qualified name of the AgentService's Heartbeat RPC.
-	AgentServiceHeartbeatProcedure = "/pilab.cloud.agent.v2.AgentService/Heartbeat"
+	AgentServiceHeartbeatProcedure = "/pilab.agent.v2.AgentService/Heartbeat"
 	// AgentServiceGetHostStatusProcedure is the fully-qualified name of the AgentService's
 	// GetHostStatus RPC.
-	AgentServiceGetHostStatusProcedure = "/pilab.cloud.agent.v2.AgentService/GetHostStatus"
+	AgentServiceGetHostStatusProcedure = "/pilab.agent.v2.AgentService/GetHostStatus"
 	// AgentServiceCreateVMProcedure is the fully-qualified name of the AgentService's CreateVM RPC.
-	AgentServiceCreateVMProcedure = "/pilab.cloud.agent.v2.AgentService/CreateVM"
+	AgentServiceCreateVMProcedure = "/pilab.agent.v2.AgentService/CreateVM"
 	// AgentServiceGetVMDetailsProcedure is the fully-qualified name of the AgentService's GetVMDetails
 	// RPC.
-	AgentServiceGetVMDetailsProcedure = "/pilab.cloud.agent.v2.AgentService/GetVMDetails"
+	AgentServiceGetVMDetailsProcedure = "/pilab.agent.v2.AgentService/GetVMDetails"
 	// AgentServiceUpdateVMProcedure is the fully-qualified name of the AgentService's UpdateVM RPC.
-	AgentServiceUpdateVMProcedure = "/pilab.cloud.agent.v2.AgentService/UpdateVM"
+	AgentServiceUpdateVMProcedure = "/pilab.agent.v2.AgentService/UpdateVM"
 	// AgentServiceDeleteVMProcedure is the fully-qualified name of the AgentService's DeleteVM RPC.
-	AgentServiceDeleteVMProcedure = "/pilab.cloud.agent.v2.AgentService/DeleteVM"
+	AgentServiceDeleteVMProcedure = "/pilab.agent.v2.AgentService/DeleteVM"
 	// AgentServiceStartVMProcedure is the fully-qualified name of the AgentService's StartVM RPC.
-	AgentServiceStartVMProcedure = "/pilab.cloud.agent.v2.AgentService/StartVM"
+	AgentServiceStartVMProcedure = "/pilab.agent.v2.AgentService/StartVM"
 	// AgentServiceStopVMProcedure is the fully-qualified name of the AgentService's StopVM RPC.
-	AgentServiceStopVMProcedure = "/pilab.cloud.agent.v2.AgentService/StopVM"
+	AgentServiceStopVMProcedure = "/pilab.agent.v2.AgentService/StopVM"
 	// AgentServiceForceStopVMProcedure is the fully-qualified name of the AgentService's ForceStopVM
 	// RPC.
-	AgentServiceForceStopVMProcedure = "/pilab.cloud.agent.v2.AgentService/ForceStopVM"
+	AgentServiceForceStopVMProcedure = "/pilab.agent.v2.AgentService/ForceStopVM"
 	// AgentServiceRebootVMProcedure is the fully-qualified name of the AgentService's RebootVM RPC.
-	AgentServiceRebootVMProcedure = "/pilab.cloud.agent.v2.AgentService/RebootVM"
+	AgentServiceRebootVMProcedure = "/pilab.agent.v2.AgentService/RebootVM"
 	// AgentServicePauseVMProcedure is the fully-qualified name of the AgentService's PauseVM RPC.
-	AgentServicePauseVMProcedure = "/pilab.cloud.agent.v2.AgentService/PauseVM"
+	AgentServicePauseVMProcedure = "/pilab.agent.v2.AgentService/PauseVM"
 	// AgentServiceResumeVMProcedure is the fully-qualified name of the AgentService's ResumeVM RPC.
-	AgentServiceResumeVMProcedure = "/pilab.cloud.agent.v2.AgentService/ResumeVM"
+	AgentServiceResumeVMProcedure = "/pilab.agent.v2.AgentService/ResumeVM"
 	// AgentServiceInitiateMigrationProcedure is the fully-qualified name of the AgentService's
 	// InitiateMigration RPC.
-	AgentServiceInitiateMigrationProcedure = "/pilab.cloud.agent.v2.AgentService/InitiateMigration"
+	AgentServiceInitiateMigrationProcedure = "/pilab.agent.v2.AgentService/InitiateMigration"
 	// AgentServicePrepareForMigrationProcedure is the fully-qualified name of the AgentService's
 	// PrepareForMigration RPC.
-	AgentServicePrepareForMigrationProcedure = "/pilab.cloud.agent.v2.AgentService/PrepareForMigration"
+	AgentServicePrepareForMigrationProcedure = "/pilab.agent.v2.AgentService/PrepareForMigration"
 	// AgentServiceCreateSnapshotProcedure is the fully-qualified name of the AgentService's
 	// CreateSnapshot RPC.
-	AgentServiceCreateSnapshotProcedure = "/pilab.cloud.agent.v2.AgentService/CreateSnapshot"
+	AgentServiceCreateSnapshotProcedure = "/pilab.agent.v2.AgentService/CreateSnapshot"
 	// AgentServiceRevertToSnapshotProcedure is the fully-qualified name of the AgentService's
 	// RevertToSnapshot RPC.
-	AgentServiceRevertToSnapshotProcedure = "/pilab.cloud.agent.v2.AgentService/RevertToSnapshot"
+	AgentServiceRevertToSnapshotProcedure = "/pilab.agent.v2.AgentService/RevertToSnapshot"
 	// AgentServiceDeleteSnapshotProcedure is the fully-qualified name of the AgentService's
 	// DeleteSnapshot RPC.
-	AgentServiceDeleteSnapshotProcedure = "/pilab.cloud.agent.v2.AgentService/DeleteSnapshot"
+	AgentServiceDeleteSnapshotProcedure = "/pilab.agent.v2.AgentService/DeleteSnapshot"
 	// AgentServiceGetTaskStatusProcedure is the fully-qualified name of the AgentService's
 	// GetTaskStatus RPC.
-	AgentServiceGetTaskStatusProcedure = "/pilab.cloud.agent.v2.AgentService/GetTaskStatus"
+	AgentServiceGetTaskStatusProcedure = "/pilab.agent.v2.AgentService/GetTaskStatus"
 	// AgentServiceCancelTaskProcedure is the fully-qualified name of the AgentService's CancelTask RPC.
-	AgentServiceCancelTaskProcedure = "/pilab.cloud.agent.v2.AgentService/CancelTask"
+	AgentServiceCancelTaskProcedure = "/pilab.agent.v2.AgentService/CancelTask"
 	// AgentServiceConfigureNetworkProcedure is the fully-qualified name of the AgentService's
 	// ConfigureNetwork RPC.
-	AgentServiceConfigureNetworkProcedure = "/pilab.cloud.agent.v2.AgentService/ConfigureNetwork"
+	AgentServiceConfigureNetworkProcedure = "/pilab.agent.v2.AgentService/ConfigureNetwork"
 	// AgentServiceConfigureStorageProcedure is the fully-qualified name of the AgentService's
 	// ConfigureStorage RPC.
-	AgentServiceConfigureStorageProcedure = "/pilab.cloud.agent.v2.AgentService/ConfigureStorage"
+	AgentServiceConfigureStorageProcedure = "/pilab.agent.v2.AgentService/ConfigureStorage"
 	// AgentServiceConfigureTimeProcedure is the fully-qualified name of the AgentService's
 	// ConfigureTime RPC.
-	AgentServiceConfigureTimeProcedure = "/pilab.cloud.agent.v2.AgentService/ConfigureTime"
+	AgentServiceConfigureTimeProcedure = "/pilab.agent.v2.AgentService/ConfigureTime"
 	// AgentServiceSetMaintenanceModeProcedure is the fully-qualified name of the AgentService's
 	// SetMaintenanceMode RPC.
-	AgentServiceSetMaintenanceModeProcedure = "/pilab.cloud.agent.v2.AgentService/SetMaintenanceMode"
+	AgentServiceSetMaintenanceModeProcedure = "/pilab.agent.v2.AgentService/SetMaintenanceMode"
 	// AgentServiceUpdateHostProcedure is the fully-qualified name of the AgentService's UpdateHost RPC.
-	AgentServiceUpdateHostProcedure = "/pilab.cloud.agent.v2.AgentService/UpdateHost"
+	AgentServiceUpdateHostProcedure = "/pilab.agent.v2.AgentService/UpdateHost"
 	// AgentServiceGetContentLibraryItemsProcedure is the fully-qualified name of the AgentService's
 	// GetContentLibraryItems RPC.
-	AgentServiceGetContentLibraryItemsProcedure = "/pilab.cloud.agent.v2.AgentService/GetContentLibraryItems"
+	AgentServiceGetContentLibraryItemsProcedure = "/pilab.agent.v2.AgentService/GetContentLibraryItems"
 	// AgentServiceUploadContentLibraryItemProcedure is the fully-qualified name of the AgentService's
 	// UploadContentLibraryItem RPC.
-	AgentServiceUploadContentLibraryItemProcedure = "/pilab.cloud.agent.v2.AgentService/UploadContentLibraryItem"
+	AgentServiceUploadContentLibraryItemProcedure = "/pilab.agent.v2.AgentService/UploadContentLibraryItem"
 	// AgentServiceExportOVAProcedure is the fully-qualified name of the AgentService's ExportOVA RPC.
-	AgentServiceExportOVAProcedure = "/pilab.cloud.agent.v2.AgentService/ExportOVA"
+	AgentServiceExportOVAProcedure = "/pilab.agent.v2.AgentService/ExportOVA"
 	// AgentServiceImportOVAProcedure is the fully-qualified name of the AgentService's ImportOVA RPC.
-	AgentServiceImportOVAProcedure = "/pilab.cloud.agent.v2.AgentService/ImportOVA"
+	AgentServiceImportOVAProcedure = "/pilab.agent.v2.AgentService/ImportOVA"
 	// AgentServiceDeleteContentLibraryItemProcedure is the fully-qualified name of the AgentService's
 	// DeleteContentLibraryItem RPC.
-	AgentServiceDeleteContentLibraryItemProcedure = "/pilab.cloud.agent.v2.AgentService/DeleteContentLibraryItem"
+	AgentServiceDeleteContentLibraryItemProcedure = "/pilab.agent.v2.AgentService/DeleteContentLibraryItem"
 	// AgentServiceGetDatastoresProcedure is the fully-qualified name of the AgentService's
 	// GetDatastores RPC.
-	AgentServiceGetDatastoresProcedure = "/pilab.cloud.agent.v2.AgentService/GetDatastores"
+	AgentServiceGetDatastoresProcedure = "/pilab.agent.v2.AgentService/GetDatastores"
 	// AgentServiceGetDatastoreProcedure is the fully-qualified name of the AgentService's GetDatastore
 	// RPC.
-	AgentServiceGetDatastoreProcedure = "/pilab.cloud.agent.v2.AgentService/GetDatastore"
+	AgentServiceGetDatastoreProcedure = "/pilab.agent.v2.AgentService/GetDatastore"
 	// AgentServiceCreateDatastoreProcedure is the fully-qualified name of the AgentService's
 	// CreateDatastore RPC.
-	AgentServiceCreateDatastoreProcedure = "/pilab.cloud.agent.v2.AgentService/CreateDatastore"
+	AgentServiceCreateDatastoreProcedure = "/pilab.agent.v2.AgentService/CreateDatastore"
 	// AgentServiceDeleteDatastoreProcedure is the fully-qualified name of the AgentService's
 	// DeleteDatastore RPC.
-	AgentServiceDeleteDatastoreProcedure = "/pilab.cloud.agent.v2.AgentService/DeleteDatastore"
+	AgentServiceDeleteDatastoreProcedure = "/pilab.agent.v2.AgentService/DeleteDatastore"
 	// AgentServiceGetNetworksProcedure is the fully-qualified name of the AgentService's GetNetworks
 	// RPC.
-	AgentServiceGetNetworksProcedure = "/pilab.cloud.agent.v2.AgentService/GetNetworks"
+	AgentServiceGetNetworksProcedure = "/pilab.agent.v2.AgentService/GetNetworks"
 	// AgentServiceGetNetworkProcedure is the fully-qualified name of the AgentService's GetNetwork RPC.
-	AgentServiceGetNetworkProcedure = "/pilab.cloud.agent.v2.AgentService/GetNetwork"
+	AgentServiceGetNetworkProcedure = "/pilab.agent.v2.AgentService/GetNetwork"
 	// AgentServiceCreateNetworkProcedure is the fully-qualified name of the AgentService's
 	// CreateNetwork RPC.
-	AgentServiceCreateNetworkProcedure = "/pilab.cloud.agent.v2.AgentService/CreateNetwork"
+	AgentServiceCreateNetworkProcedure = "/pilab.agent.v2.AgentService/CreateNetwork"
 	// AgentServiceDeleteNetworkProcedure is the fully-qualified name of the AgentService's
 	// DeleteNetwork RPC.
-	AgentServiceDeleteNetworkProcedure = "/pilab.cloud.agent.v2.AgentService/DeleteNetwork"
+	AgentServiceDeleteNetworkProcedure = "/pilab.agent.v2.AgentService/DeleteNetwork"
 	// AgentServiceAttachIsoProcedure is the fully-qualified name of the AgentService's AttachIso RPC.
-	AgentServiceAttachIsoProcedure = "/pilab.cloud.agent.v2.AgentService/AttachIso"
+	AgentServiceAttachIsoProcedure = "/pilab.agent.v2.AgentService/AttachIso"
 	// AgentServiceDetachIsoProcedure is the fully-qualified name of the AgentService's DetachIso RPC.
-	AgentServiceDetachIsoProcedure = "/pilab.cloud.agent.v2.AgentService/DetachIso"
+	AgentServiceDetachIsoProcedure = "/pilab.agent.v2.AgentService/DetachIso"
 	// AgentServiceCloneVmFromTemplateProcedure is the fully-qualified name of the AgentService's
 	// CloneVmFromTemplate RPC.
-	AgentServiceCloneVmFromTemplateProcedure = "/pilab.cloud.agent.v2.AgentService/CloneVmFromTemplate"
+	AgentServiceCloneVmFromTemplateProcedure = "/pilab.agent.v2.AgentService/CloneVmFromTemplate"
 	// AgentServiceGetVMGuestIPsProcedure is the fully-qualified name of the AgentService's
 	// GetVMGuestIPs RPC.
-	AgentServiceGetVMGuestIPsProcedure = "/pilab.cloud.agent.v2.AgentService/GetVMGuestIPs"
+	AgentServiceGetVMGuestIPsProcedure = "/pilab.agent.v2.AgentService/GetVMGuestIPs"
 	// AgentServiceChangeVMUserPasswordProcedure is the fully-qualified name of the AgentService's
 	// ChangeVMUserPassword RPC.
-	AgentServiceChangeVMUserPasswordProcedure = "/pilab.cloud.agent.v2.AgentService/ChangeVMUserPassword"
+	AgentServiceChangeVMUserPasswordProcedure = "/pilab.agent.v2.AgentService/ChangeVMUserPassword"
 	// AgentServiceAttachCloudInitProcedure is the fully-qualified name of the AgentService's
 	// AttachCloudInit RPC.
-	AgentServiceAttachCloudInitProcedure = "/pilab.cloud.agent.v2.AgentService/AttachCloudInit"
+	AgentServiceAttachCloudInitProcedure = "/pilab.agent.v2.AgentService/AttachCloudInit"
 	// AgentServiceAttachNetworkInterfaceProcedure is the fully-qualified name of the AgentService's
 	// AttachNetworkInterface RPC.
-	AgentServiceAttachNetworkInterfaceProcedure = "/pilab.cloud.agent.v2.AgentService/AttachNetworkInterface"
+	AgentServiceAttachNetworkInterfaceProcedure = "/pilab.agent.v2.AgentService/AttachNetworkInterface"
 	// AgentServiceDetachNetworkInterfaceProcedure is the fully-qualified name of the AgentService's
 	// DetachNetworkInterface RPC.
-	AgentServiceDetachNetworkInterfaceProcedure = "/pilab.cloud.agent.v2.AgentService/DetachNetworkInterface"
+	AgentServiceDetachNetworkInterfaceProcedure = "/pilab.agent.v2.AgentService/DetachNetworkInterface"
 	// AgentServiceStreamProcedure is the fully-qualified name of the AgentService's Stream RPC.
-	AgentServiceStreamProcedure = "/pilab.cloud.agent.v2.AgentService/Stream"
+	AgentServiceStreamProcedure = "/pilab.agent.v2.AgentService/Stream"
 	// AgentServiceGetHardwareHealthProcedure is the fully-qualified name of the AgentService's
 	// GetHardwareHealth RPC.
-	AgentServiceGetHardwareHealthProcedure = "/pilab.cloud.agent.v2.AgentService/GetHardwareHealth"
+	AgentServiceGetHardwareHealthProcedure = "/pilab.agent.v2.AgentService/GetHardwareHealth"
 	// AgentServiceGetSensorDataProcedure is the fully-qualified name of the AgentService's
 	// GetSensorData RPC.
-	AgentServiceGetSensorDataProcedure = "/pilab.cloud.agent.v2.AgentService/GetSensorData"
+	AgentServiceGetSensorDataProcedure = "/pilab.agent.v2.AgentService/GetSensorData"
 	// AgentServiceDefineVMProcedure is the fully-qualified name of the AgentService's DefineVM RPC.
-	AgentServiceDefineVMProcedure = "/pilab.cloud.agent.v2.AgentService/DefineVM"
+	AgentServiceDefineVMProcedure = "/pilab.agent.v2.AgentService/DefineVM"
 	// AgentServiceGetVMDefinitionProcedure is the fully-qualified name of the AgentService's
 	// GetVMDefinition RPC.
-	AgentServiceGetVMDefinitionProcedure = "/pilab.cloud.agent.v2.AgentService/GetVMDefinition"
+	AgentServiceGetVMDefinitionProcedure = "/pilab.agent.v2.AgentService/GetVMDefinition"
 	// AgentServiceControlVMProcedure is the fully-qualified name of the AgentService's ControlVM RPC.
-	AgentServiceControlVMProcedure = "/pilab.cloud.agent.v2.AgentService/ControlVM"
+	AgentServiceControlVMProcedure = "/pilab.agent.v2.AgentService/ControlVM"
 	// AgentServiceGetVMStatusProcedure is the fully-qualified name of the AgentService's GetVMStatus
 	// RPC.
-	AgentServiceGetVMStatusProcedure = "/pilab.cloud.agent.v2.AgentService/GetVMStatus"
+	AgentServiceGetVMStatusProcedure = "/pilab.agent.v2.AgentService/GetVMStatus"
 	// AgentServiceGetVMGuestInfoProcedure is the fully-qualified name of the AgentService's
 	// GetVMGuestInfo RPC.
-	AgentServiceGetVMGuestInfoProcedure = "/pilab.cloud.agent.v2.AgentService/GetVMGuestInfo"
+	AgentServiceGetVMGuestInfoProcedure = "/pilab.agent.v2.AgentService/GetVMGuestInfo"
 	// AgentServiceCreatePowerScheduleProcedure is the fully-qualified name of the AgentService's
 	// CreatePowerSchedule RPC.
-	AgentServiceCreatePowerScheduleProcedure = "/pilab.cloud.agent.v2.AgentService/CreatePowerSchedule"
+	AgentServiceCreatePowerScheduleProcedure = "/pilab.agent.v2.AgentService/CreatePowerSchedule"
 	// AgentServiceListPowerSchedulesProcedure is the fully-qualified name of the AgentService's
 	// ListPowerSchedules RPC.
-	AgentServiceListPowerSchedulesProcedure = "/pilab.cloud.agent.v2.AgentService/ListPowerSchedules"
+	AgentServiceListPowerSchedulesProcedure = "/pilab.agent.v2.AgentService/ListPowerSchedules"
 	// AgentServiceUpdatePowerScheduleProcedure is the fully-qualified name of the AgentService's
 	// UpdatePowerSchedule RPC.
-	AgentServiceUpdatePowerScheduleProcedure = "/pilab.cloud.agent.v2.AgentService/UpdatePowerSchedule"
+	AgentServiceUpdatePowerScheduleProcedure = "/pilab.agent.v2.AgentService/UpdatePowerSchedule"
 	// AgentServiceDeletePowerScheduleProcedure is the fully-qualified name of the AgentService's
 	// DeletePowerSchedule RPC.
-	AgentServiceDeletePowerScheduleProcedure = "/pilab.cloud.agent.v2.AgentService/DeletePowerSchedule"
+	AgentServiceDeletePowerScheduleProcedure = "/pilab.agent.v2.AgentService/DeletePowerSchedule"
 	// AgentServiceWakeOnLANProcedure is the fully-qualified name of the AgentService's WakeOnLAN RPC.
-	AgentServiceWakeOnLANProcedure = "/pilab.cloud.agent.v2.AgentService/WakeOnLAN"
+	AgentServiceWakeOnLANProcedure = "/pilab.agent.v2.AgentService/WakeOnLAN"
 )
 
-// AgentServiceClient is a client for the pilab.cloud.agent.v2.AgentService service.
+// AgentServiceClient is a client for the pilab.agent.v2.AgentService service.
 type AgentServiceClient interface {
 	// Host Management
 	RegisterHost(context.Context, *connect.Request[v2.RegisterHostRequest]) (*connect.Response[v2.RegisterHostResponse], error)
@@ -306,7 +306,7 @@ type AgentServiceClient interface {
 	WakeOnLAN(context.Context, *connect.Request[v2.WakeOnLANRequest]) (*connect.Response[v2.WakeOnLANResponse], error)
 }
 
-// NewAgentServiceClient constructs a client for the pilab.cloud.agent.v2.AgentService service. By
+// NewAgentServiceClient constructs a client for the pilab.agent.v2.AgentService service. By
 // default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
 // and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -737,302 +737,302 @@ type agentServiceClient struct {
 	wakeOnLAN                *connect.Client[v2.WakeOnLANRequest, v2.WakeOnLANResponse]
 }
 
-// RegisterHost calls pilab.cloud.agent.v2.AgentService.RegisterHost.
+// RegisterHost calls pilab.agent.v2.AgentService.RegisterHost.
 func (c *agentServiceClient) RegisterHost(ctx context.Context, req *connect.Request[v2.RegisterHostRequest]) (*connect.Response[v2.RegisterHostResponse], error) {
 	return c.registerHost.CallUnary(ctx, req)
 }
 
-// Heartbeat calls pilab.cloud.agent.v2.AgentService.Heartbeat.
+// Heartbeat calls pilab.agent.v2.AgentService.Heartbeat.
 func (c *agentServiceClient) Heartbeat(ctx context.Context, req *connect.Request[v2.HeartbeatRequest]) (*connect.Response[v2.HeartbeatResponse], error) {
 	return c.heartbeat.CallUnary(ctx, req)
 }
 
-// GetHostStatus calls pilab.cloud.agent.v2.AgentService.GetHostStatus.
+// GetHostStatus calls pilab.agent.v2.AgentService.GetHostStatus.
 func (c *agentServiceClient) GetHostStatus(ctx context.Context, req *connect.Request[v2.GetHostStatusRequest]) (*connect.Response[v2.HostStatus], error) {
 	return c.getHostStatus.CallUnary(ctx, req)
 }
 
-// CreateVM calls pilab.cloud.agent.v2.AgentService.CreateVM.
+// CreateVM calls pilab.agent.v2.AgentService.CreateVM.
 func (c *agentServiceClient) CreateVM(ctx context.Context, req *connect.Request[v2.CreateVMRequest]) (*connect.Response[v2.CreateVMResponse], error) {
 	return c.createVM.CallUnary(ctx, req)
 }
 
-// GetVMDetails calls pilab.cloud.agent.v2.AgentService.GetVMDetails.
+// GetVMDetails calls pilab.agent.v2.AgentService.GetVMDetails.
 func (c *agentServiceClient) GetVMDetails(ctx context.Context, req *connect.Request[v2.GetVMDetailsRequest]) (*connect.Response[v2.GetVMDetailsResponse], error) {
 	return c.getVMDetails.CallUnary(ctx, req)
 }
 
-// UpdateVM calls pilab.cloud.agent.v2.AgentService.UpdateVM.
+// UpdateVM calls pilab.agent.v2.AgentService.UpdateVM.
 func (c *agentServiceClient) UpdateVM(ctx context.Context, req *connect.Request[v2.UpdateVMRequest]) (*connect.Response[v2.UpdateVMResponse], error) {
 	return c.updateVM.CallUnary(ctx, req)
 }
 
-// DeleteVM calls pilab.cloud.agent.v2.AgentService.DeleteVM.
+// DeleteVM calls pilab.agent.v2.AgentService.DeleteVM.
 func (c *agentServiceClient) DeleteVM(ctx context.Context, req *connect.Request[v2.DeleteVMRequest]) (*connect.Response[v2.DeleteVMResponse], error) {
 	return c.deleteVM.CallUnary(ctx, req)
 }
 
-// StartVM calls pilab.cloud.agent.v2.AgentService.StartVM.
+// StartVM calls pilab.agent.v2.AgentService.StartVM.
 func (c *agentServiceClient) StartVM(ctx context.Context, req *connect.Request[v2.StartVMRequest]) (*connect.Response[v2.StartVMResponse], error) {
 	return c.startVM.CallUnary(ctx, req)
 }
 
-// StopVM calls pilab.cloud.agent.v2.AgentService.StopVM.
+// StopVM calls pilab.agent.v2.AgentService.StopVM.
 func (c *agentServiceClient) StopVM(ctx context.Context, req *connect.Request[v2.StopVMRequest]) (*connect.Response[v2.StopVMResponse], error) {
 	return c.stopVM.CallUnary(ctx, req)
 }
 
-// ForceStopVM calls pilab.cloud.agent.v2.AgentService.ForceStopVM.
+// ForceStopVM calls pilab.agent.v2.AgentService.ForceStopVM.
 func (c *agentServiceClient) ForceStopVM(ctx context.Context, req *connect.Request[v2.ForceStopVMRequest]) (*connect.Response[v2.ForceStopVMResponse], error) {
 	return c.forceStopVM.CallUnary(ctx, req)
 }
 
-// RebootVM calls pilab.cloud.agent.v2.AgentService.RebootVM.
+// RebootVM calls pilab.agent.v2.AgentService.RebootVM.
 func (c *agentServiceClient) RebootVM(ctx context.Context, req *connect.Request[v2.RebootVMRequest]) (*connect.Response[v2.RebootVMResponse], error) {
 	return c.rebootVM.CallUnary(ctx, req)
 }
 
-// PauseVM calls pilab.cloud.agent.v2.AgentService.PauseVM.
+// PauseVM calls pilab.agent.v2.AgentService.PauseVM.
 func (c *agentServiceClient) PauseVM(ctx context.Context, req *connect.Request[v2.PauseVMRequest]) (*connect.Response[v2.PauseVMResponse], error) {
 	return c.pauseVM.CallUnary(ctx, req)
 }
 
-// ResumeVM calls pilab.cloud.agent.v2.AgentService.ResumeVM.
+// ResumeVM calls pilab.agent.v2.AgentService.ResumeVM.
 func (c *agentServiceClient) ResumeVM(ctx context.Context, req *connect.Request[v2.ResumeVMRequest]) (*connect.Response[v2.ResumeVMResponse], error) {
 	return c.resumeVM.CallUnary(ctx, req)
 }
 
-// InitiateMigration calls pilab.cloud.agent.v2.AgentService.InitiateMigration.
+// InitiateMigration calls pilab.agent.v2.AgentService.InitiateMigration.
 func (c *agentServiceClient) InitiateMigration(ctx context.Context, req *connect.Request[v2.InitiateMigrationRequest]) (*connect.Response[v2.InitiateMigrationResponse], error) {
 	return c.initiateMigration.CallUnary(ctx, req)
 }
 
-// PrepareForMigration calls pilab.cloud.agent.v2.AgentService.PrepareForMigration.
+// PrepareForMigration calls pilab.agent.v2.AgentService.PrepareForMigration.
 func (c *agentServiceClient) PrepareForMigration(ctx context.Context, req *connect.Request[v2.PrepareForMigrationRequest]) (*connect.Response[v2.PrepareForMigrationResponse], error) {
 	return c.prepareForMigration.CallUnary(ctx, req)
 }
 
-// CreateSnapshot calls pilab.cloud.agent.v2.AgentService.CreateSnapshot.
+// CreateSnapshot calls pilab.agent.v2.AgentService.CreateSnapshot.
 func (c *agentServiceClient) CreateSnapshot(ctx context.Context, req *connect.Request[v2.CreateSnapshotRequest]) (*connect.Response[v2.CreateSnapshotResponse], error) {
 	return c.createSnapshot.CallUnary(ctx, req)
 }
 
-// RevertToSnapshot calls pilab.cloud.agent.v2.AgentService.RevertToSnapshot.
+// RevertToSnapshot calls pilab.agent.v2.AgentService.RevertToSnapshot.
 func (c *agentServiceClient) RevertToSnapshot(ctx context.Context, req *connect.Request[v2.RevertToSnapshotRequest]) (*connect.Response[v2.RevertToSnapshotResponse], error) {
 	return c.revertToSnapshot.CallUnary(ctx, req)
 }
 
-// DeleteSnapshot calls pilab.cloud.agent.v2.AgentService.DeleteSnapshot.
+// DeleteSnapshot calls pilab.agent.v2.AgentService.DeleteSnapshot.
 func (c *agentServiceClient) DeleteSnapshot(ctx context.Context, req *connect.Request[v2.DeleteSnapshotRequest]) (*connect.Response[v2.DeleteSnapshotResponse], error) {
 	return c.deleteSnapshot.CallUnary(ctx, req)
 }
 
-// GetTaskStatus calls pilab.cloud.agent.v2.AgentService.GetTaskStatus.
+// GetTaskStatus calls pilab.agent.v2.AgentService.GetTaskStatus.
 func (c *agentServiceClient) GetTaskStatus(ctx context.Context, req *connect.Request[v2.GetTaskStatusRequest]) (*connect.Response[v2.Task], error) {
 	return c.getTaskStatus.CallUnary(ctx, req)
 }
 
-// CancelTask calls pilab.cloud.agent.v2.AgentService.CancelTask.
+// CancelTask calls pilab.agent.v2.AgentService.CancelTask.
 func (c *agentServiceClient) CancelTask(ctx context.Context, req *connect.Request[v2.CancelTaskRequest]) (*connect.Response[v2.CancelTaskResponse], error) {
 	return c.cancelTask.CallUnary(ctx, req)
 }
 
-// ConfigureNetwork calls pilab.cloud.agent.v2.AgentService.ConfigureNetwork.
+// ConfigureNetwork calls pilab.agent.v2.AgentService.ConfigureNetwork.
 func (c *agentServiceClient) ConfigureNetwork(ctx context.Context, req *connect.Request[v2.ConfigureNetworkRequest]) (*connect.Response[v2.ConfigureNetworkResponse], error) {
 	return c.configureNetwork.CallUnary(ctx, req)
 }
 
-// ConfigureStorage calls pilab.cloud.agent.v2.AgentService.ConfigureStorage.
+// ConfigureStorage calls pilab.agent.v2.AgentService.ConfigureStorage.
 func (c *agentServiceClient) ConfigureStorage(ctx context.Context, req *connect.Request[v2.ConfigureStorageRequest]) (*connect.Response[v2.ConfigureStorageResponse], error) {
 	return c.configureStorage.CallUnary(ctx, req)
 }
 
-// ConfigureTime calls pilab.cloud.agent.v2.AgentService.ConfigureTime.
+// ConfigureTime calls pilab.agent.v2.AgentService.ConfigureTime.
 func (c *agentServiceClient) ConfigureTime(ctx context.Context, req *connect.Request[v2.ConfigureTimeRequest]) (*connect.Response[v2.ConfigureTimeResponse], error) {
 	return c.configureTime.CallUnary(ctx, req)
 }
 
-// SetMaintenanceMode calls pilab.cloud.agent.v2.AgentService.SetMaintenanceMode.
+// SetMaintenanceMode calls pilab.agent.v2.AgentService.SetMaintenanceMode.
 func (c *agentServiceClient) SetMaintenanceMode(ctx context.Context, req *connect.Request[v2.SetMaintenanceModeRequest]) (*connect.Response[v2.SetMaintenanceModeResponse], error) {
 	return c.setMaintenanceMode.CallUnary(ctx, req)
 }
 
-// UpdateHost calls pilab.cloud.agent.v2.AgentService.UpdateHost.
+// UpdateHost calls pilab.agent.v2.AgentService.UpdateHost.
 func (c *agentServiceClient) UpdateHost(ctx context.Context, req *connect.Request[v2.UpdateHostRequest]) (*connect.Response[v2.UpdateHostResponse], error) {
 	return c.updateHost.CallUnary(ctx, req)
 }
 
-// GetContentLibraryItems calls pilab.cloud.agent.v2.AgentService.GetContentLibraryItems.
+// GetContentLibraryItems calls pilab.agent.v2.AgentService.GetContentLibraryItems.
 func (c *agentServiceClient) GetContentLibraryItems(ctx context.Context, req *connect.Request[v2.GetContentLibraryItemsRequest]) (*connect.Response[v2.GetContentLibraryItemsResponse], error) {
 	return c.getContentLibraryItems.CallUnary(ctx, req)
 }
 
-// UploadContentLibraryItem calls pilab.cloud.agent.v2.AgentService.UploadContentLibraryItem.
+// UploadContentLibraryItem calls pilab.agent.v2.AgentService.UploadContentLibraryItem.
 func (c *agentServiceClient) UploadContentLibraryItem(ctx context.Context) *connect.ClientStreamForClient[v2.UploadContentLibraryItemRequest, v2.UploadContentLibraryItemResponse] {
 	return c.uploadContentLibraryItem.CallClientStream(ctx)
 }
 
-// ExportOVA calls pilab.cloud.agent.v2.AgentService.ExportOVA.
+// ExportOVA calls pilab.agent.v2.AgentService.ExportOVA.
 func (c *agentServiceClient) ExportOVA(ctx context.Context, req *connect.Request[v2.ExportOVARequest]) (*connect.ServerStreamForClient[v2.ExportOVAResponse], error) {
 	return c.exportOVA.CallServerStream(ctx, req)
 }
 
-// ImportOVA calls pilab.cloud.agent.v2.AgentService.ImportOVA.
+// ImportOVA calls pilab.agent.v2.AgentService.ImportOVA.
 func (c *agentServiceClient) ImportOVA(ctx context.Context) *connect.ClientStreamForClient[v2.ImportOVARequest, v2.ImportOVAResponse] {
 	return c.importOVA.CallClientStream(ctx)
 }
 
-// DeleteContentLibraryItem calls pilab.cloud.agent.v2.AgentService.DeleteContentLibraryItem.
+// DeleteContentLibraryItem calls pilab.agent.v2.AgentService.DeleteContentLibraryItem.
 func (c *agentServiceClient) DeleteContentLibraryItem(ctx context.Context, req *connect.Request[v2.DeleteContentLibraryItemRequest]) (*connect.Response[v2.DeleteContentLibraryItemResponse], error) {
 	return c.deleteContentLibraryItem.CallUnary(ctx, req)
 }
 
-// GetDatastores calls pilab.cloud.agent.v2.AgentService.GetDatastores.
+// GetDatastores calls pilab.agent.v2.AgentService.GetDatastores.
 func (c *agentServiceClient) GetDatastores(ctx context.Context, req *connect.Request[v2.GetDatastoresRequest]) (*connect.Response[v2.GetDatastoresResponse], error) {
 	return c.getDatastores.CallUnary(ctx, req)
 }
 
-// GetDatastore calls pilab.cloud.agent.v2.AgentService.GetDatastore.
+// GetDatastore calls pilab.agent.v2.AgentService.GetDatastore.
 func (c *agentServiceClient) GetDatastore(ctx context.Context, req *connect.Request[v2.GetDatastoreRequest]) (*connect.Response[v2.GetDatastoreResponse], error) {
 	return c.getDatastore.CallUnary(ctx, req)
 }
 
-// CreateDatastore calls pilab.cloud.agent.v2.AgentService.CreateDatastore.
+// CreateDatastore calls pilab.agent.v2.AgentService.CreateDatastore.
 func (c *agentServiceClient) CreateDatastore(ctx context.Context, req *connect.Request[v2.CreateDatastoreRequest]) (*connect.Response[v2.CreateDatastoreResponse], error) {
 	return c.createDatastore.CallUnary(ctx, req)
 }
 
-// DeleteDatastore calls pilab.cloud.agent.v2.AgentService.DeleteDatastore.
+// DeleteDatastore calls pilab.agent.v2.AgentService.DeleteDatastore.
 func (c *agentServiceClient) DeleteDatastore(ctx context.Context, req *connect.Request[v2.DeleteDatastoreRequest]) (*connect.Response[v2.DeleteDatastoreResponse], error) {
 	return c.deleteDatastore.CallUnary(ctx, req)
 }
 
-// GetNetworks calls pilab.cloud.agent.v2.AgentService.GetNetworks.
+// GetNetworks calls pilab.agent.v2.AgentService.GetNetworks.
 func (c *agentServiceClient) GetNetworks(ctx context.Context, req *connect.Request[v2.GetNetworksRequest]) (*connect.Response[v2.GetNetworksResponse], error) {
 	return c.getNetworks.CallUnary(ctx, req)
 }
 
-// GetNetwork calls pilab.cloud.agent.v2.AgentService.GetNetwork.
+// GetNetwork calls pilab.agent.v2.AgentService.GetNetwork.
 func (c *agentServiceClient) GetNetwork(ctx context.Context, req *connect.Request[v2.GetNetworkRequest]) (*connect.Response[v2.GetNetworkResponse], error) {
 	return c.getNetwork.CallUnary(ctx, req)
 }
 
-// CreateNetwork calls pilab.cloud.agent.v2.AgentService.CreateNetwork.
+// CreateNetwork calls pilab.agent.v2.AgentService.CreateNetwork.
 func (c *agentServiceClient) CreateNetwork(ctx context.Context, req *connect.Request[v2.CreateNetworkRequest]) (*connect.Response[v2.CreateNetworkResponse], error) {
 	return c.createNetwork.CallUnary(ctx, req)
 }
 
-// DeleteNetwork calls pilab.cloud.agent.v2.AgentService.DeleteNetwork.
+// DeleteNetwork calls pilab.agent.v2.AgentService.DeleteNetwork.
 func (c *agentServiceClient) DeleteNetwork(ctx context.Context, req *connect.Request[v2.DeleteNetworkRequest]) (*connect.Response[v2.DeleteNetworkResponse], error) {
 	return c.deleteNetwork.CallUnary(ctx, req)
 }
 
-// AttachIso calls pilab.cloud.agent.v2.AgentService.AttachIso.
+// AttachIso calls pilab.agent.v2.AgentService.AttachIso.
 func (c *agentServiceClient) AttachIso(ctx context.Context, req *connect.Request[v2.AttachIsoRequest]) (*connect.Response[v2.AttachIsoResponse], error) {
 	return c.attachIso.CallUnary(ctx, req)
 }
 
-// DetachIso calls pilab.cloud.agent.v2.AgentService.DetachIso.
+// DetachIso calls pilab.agent.v2.AgentService.DetachIso.
 func (c *agentServiceClient) DetachIso(ctx context.Context, req *connect.Request[v2.DetachIsoRequest]) (*connect.Response[v2.DetachIsoResponse], error) {
 	return c.detachIso.CallUnary(ctx, req)
 }
 
-// CloneVmFromTemplate calls pilab.cloud.agent.v2.AgentService.CloneVmFromTemplate.
+// CloneVmFromTemplate calls pilab.agent.v2.AgentService.CloneVmFromTemplate.
 func (c *agentServiceClient) CloneVmFromTemplate(ctx context.Context, req *connect.Request[v2.CloneVmFromTemplateRequest]) (*connect.Response[v2.CloneVmFromTemplateResponse], error) {
 	return c.cloneVmFromTemplate.CallUnary(ctx, req)
 }
 
-// GetVMGuestIPs calls pilab.cloud.agent.v2.AgentService.GetVMGuestIPs.
+// GetVMGuestIPs calls pilab.agent.v2.AgentService.GetVMGuestIPs.
 func (c *agentServiceClient) GetVMGuestIPs(ctx context.Context, req *connect.Request[v2.GetVMGuestIPsRequest]) (*connect.Response[v2.GetVMGuestIPsResponse], error) {
 	return c.getVMGuestIPs.CallUnary(ctx, req)
 }
 
-// ChangeVMUserPassword calls pilab.cloud.agent.v2.AgentService.ChangeVMUserPassword.
+// ChangeVMUserPassword calls pilab.agent.v2.AgentService.ChangeVMUserPassword.
 func (c *agentServiceClient) ChangeVMUserPassword(ctx context.Context, req *connect.Request[v2.ChangeVMUserPasswordRequest]) (*connect.Response[v2.ChangeVMUserPasswordResponse], error) {
 	return c.changeVMUserPassword.CallUnary(ctx, req)
 }
 
-// AttachCloudInit calls pilab.cloud.agent.v2.AgentService.AttachCloudInit.
+// AttachCloudInit calls pilab.agent.v2.AgentService.AttachCloudInit.
 func (c *agentServiceClient) AttachCloudInit(ctx context.Context, req *connect.Request[v2.AttachCloudInitRequest]) (*connect.Response[v2.AttachCloudInitResponse], error) {
 	return c.attachCloudInit.CallUnary(ctx, req)
 }
 
-// AttachNetworkInterface calls pilab.cloud.agent.v2.AgentService.AttachNetworkInterface.
+// AttachNetworkInterface calls pilab.agent.v2.AgentService.AttachNetworkInterface.
 func (c *agentServiceClient) AttachNetworkInterface(ctx context.Context, req *connect.Request[v2.AttachNetworkInterfaceRequest]) (*connect.Response[v2.AttachNetworkInterfaceResponse], error) {
 	return c.attachNetworkInterface.CallUnary(ctx, req)
 }
 
-// DetachNetworkInterface calls pilab.cloud.agent.v2.AgentService.DetachNetworkInterface.
+// DetachNetworkInterface calls pilab.agent.v2.AgentService.DetachNetworkInterface.
 func (c *agentServiceClient) DetachNetworkInterface(ctx context.Context, req *connect.Request[v2.DetachNetworkInterfaceRequest]) (*connect.Response[v2.DetachNetworkInterfaceResponse], error) {
 	return c.detachNetworkInterface.CallUnary(ctx, req)
 }
 
-// Stream calls pilab.cloud.agent.v2.AgentService.Stream.
+// Stream calls pilab.agent.v2.AgentService.Stream.
 func (c *agentServiceClient) Stream(ctx context.Context) *connect.BidiStreamForClient[v2.StreamRequest, v2.StreamResponse] {
 	return c.stream.CallBidiStream(ctx)
 }
 
-// GetHardwareHealth calls pilab.cloud.agent.v2.AgentService.GetHardwareHealth.
+// GetHardwareHealth calls pilab.agent.v2.AgentService.GetHardwareHealth.
 func (c *agentServiceClient) GetHardwareHealth(ctx context.Context, req *connect.Request[v2.GetHardwareHealthRequest]) (*connect.Response[v2.GetHardwareHealthResponse], error) {
 	return c.getHardwareHealth.CallUnary(ctx, req)
 }
 
-// GetSensorData calls pilab.cloud.agent.v2.AgentService.GetSensorData.
+// GetSensorData calls pilab.agent.v2.AgentService.GetSensorData.
 func (c *agentServiceClient) GetSensorData(ctx context.Context, req *connect.Request[v2.GetSensorDataRequest]) (*connect.Response[v2.GetSensorDataResponse], error) {
 	return c.getSensorData.CallUnary(ctx, req)
 }
 
-// DefineVM calls pilab.cloud.agent.v2.AgentService.DefineVM.
+// DefineVM calls pilab.agent.v2.AgentService.DefineVM.
 func (c *agentServiceClient) DefineVM(ctx context.Context, req *connect.Request[v2.DefineVMRequest]) (*connect.Response[v2.DefineVMResponse], error) {
 	return c.defineVM.CallUnary(ctx, req)
 }
 
-// GetVMDefinition calls pilab.cloud.agent.v2.AgentService.GetVMDefinition.
+// GetVMDefinition calls pilab.agent.v2.AgentService.GetVMDefinition.
 func (c *agentServiceClient) GetVMDefinition(ctx context.Context, req *connect.Request[v2.GetVMDefinitionRequest]) (*connect.Response[v2.GetVMDefinitionResponse], error) {
 	return c.getVMDefinition.CallUnary(ctx, req)
 }
 
-// ControlVM calls pilab.cloud.agent.v2.AgentService.ControlVM.
+// ControlVM calls pilab.agent.v2.AgentService.ControlVM.
 func (c *agentServiceClient) ControlVM(ctx context.Context, req *connect.Request[v2.ControlVMRequest]) (*connect.Response[v2.ControlVMResponse], error) {
 	return c.controlVM.CallUnary(ctx, req)
 }
 
-// GetVMStatus calls pilab.cloud.agent.v2.AgentService.GetVMStatus.
+// GetVMStatus calls pilab.agent.v2.AgentService.GetVMStatus.
 func (c *agentServiceClient) GetVMStatus(ctx context.Context, req *connect.Request[v2.GetVMStatusRequest]) (*connect.Response[v2.GetVMStatusResponse], error) {
 	return c.getVMStatus.CallUnary(ctx, req)
 }
 
-// GetVMGuestInfo calls pilab.cloud.agent.v2.AgentService.GetVMGuestInfo.
+// GetVMGuestInfo calls pilab.agent.v2.AgentService.GetVMGuestInfo.
 func (c *agentServiceClient) GetVMGuestInfo(ctx context.Context, req *connect.Request[v2.GetVMGuestInfoRequest]) (*connect.Response[v2.GetVMGuestInfoResponse], error) {
 	return c.getVMGuestInfo.CallUnary(ctx, req)
 }
 
-// CreatePowerSchedule calls pilab.cloud.agent.v2.AgentService.CreatePowerSchedule.
+// CreatePowerSchedule calls pilab.agent.v2.AgentService.CreatePowerSchedule.
 func (c *agentServiceClient) CreatePowerSchedule(ctx context.Context, req *connect.Request[v2.CreatePowerScheduleRequest]) (*connect.Response[v2.CreatePowerScheduleResponse], error) {
 	return c.createPowerSchedule.CallUnary(ctx, req)
 }
 
-// ListPowerSchedules calls pilab.cloud.agent.v2.AgentService.ListPowerSchedules.
+// ListPowerSchedules calls pilab.agent.v2.AgentService.ListPowerSchedules.
 func (c *agentServiceClient) ListPowerSchedules(ctx context.Context, req *connect.Request[v2.ListPowerSchedulesRequest]) (*connect.Response[v2.ListPowerSchedulesResponse], error) {
 	return c.listPowerSchedules.CallUnary(ctx, req)
 }
 
-// UpdatePowerSchedule calls pilab.cloud.agent.v2.AgentService.UpdatePowerSchedule.
+// UpdatePowerSchedule calls pilab.agent.v2.AgentService.UpdatePowerSchedule.
 func (c *agentServiceClient) UpdatePowerSchedule(ctx context.Context, req *connect.Request[v2.UpdatePowerScheduleRequest]) (*connect.Response[v2.UpdatePowerScheduleResponse], error) {
 	return c.updatePowerSchedule.CallUnary(ctx, req)
 }
 
-// DeletePowerSchedule calls pilab.cloud.agent.v2.AgentService.DeletePowerSchedule.
+// DeletePowerSchedule calls pilab.agent.v2.AgentService.DeletePowerSchedule.
 func (c *agentServiceClient) DeletePowerSchedule(ctx context.Context, req *connect.Request[v2.DeletePowerScheduleRequest]) (*connect.Response[v2.DeletePowerScheduleResponse], error) {
 	return c.deletePowerSchedule.CallUnary(ctx, req)
 }
 
-// WakeOnLAN calls pilab.cloud.agent.v2.AgentService.WakeOnLAN.
+// WakeOnLAN calls pilab.agent.v2.AgentService.WakeOnLAN.
 func (c *agentServiceClient) WakeOnLAN(ctx context.Context, req *connect.Request[v2.WakeOnLANRequest]) (*connect.Response[v2.WakeOnLANResponse], error) {
 	return c.wakeOnLAN.CallUnary(ctx, req)
 }
 
-// AgentServiceHandler is an implementation of the pilab.cloud.agent.v2.AgentService service.
+// AgentServiceHandler is an implementation of the pilab.agent.v2.AgentService service.
 type AgentServiceHandler interface {
 	// Host Management
 	RegisterHost(context.Context, *connect.Request[v2.RegisterHostRequest]) (*connect.Response[v2.RegisterHostResponse], error)
@@ -1487,7 +1487,7 @@ func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(agentServiceMethods.ByName("WakeOnLAN")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.agent.v2.AgentService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.agent.v2.AgentService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AgentServiceRegisterHostProcedure:
 			agentServiceRegisterHostHandler.ServeHTTP(w, r)
@@ -1617,237 +1617,237 @@ func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOpti
 type UnimplementedAgentServiceHandler struct{}
 
 func (UnimplementedAgentServiceHandler) RegisterHost(context.Context, *connect.Request[v2.RegisterHostRequest]) (*connect.Response[v2.RegisterHostResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.RegisterHost is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.RegisterHost is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) Heartbeat(context.Context, *connect.Request[v2.HeartbeatRequest]) (*connect.Response[v2.HeartbeatResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.Heartbeat is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.Heartbeat is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetHostStatus(context.Context, *connect.Request[v2.GetHostStatusRequest]) (*connect.Response[v2.HostStatus], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetHostStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetHostStatus is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) CreateVM(context.Context, *connect.Request[v2.CreateVMRequest]) (*connect.Response[v2.CreateVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.CreateVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.CreateVM is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetVMDetails(context.Context, *connect.Request[v2.GetVMDetailsRequest]) (*connect.Response[v2.GetVMDetailsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetVMDetails is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetVMDetails is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) UpdateVM(context.Context, *connect.Request[v2.UpdateVMRequest]) (*connect.Response[v2.UpdateVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.UpdateVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.UpdateVM is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) DeleteVM(context.Context, *connect.Request[v2.DeleteVMRequest]) (*connect.Response[v2.DeleteVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.DeleteVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.DeleteVM is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) StartVM(context.Context, *connect.Request[v2.StartVMRequest]) (*connect.Response[v2.StartVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.StartVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.StartVM is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) StopVM(context.Context, *connect.Request[v2.StopVMRequest]) (*connect.Response[v2.StopVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.StopVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.StopVM is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) ForceStopVM(context.Context, *connect.Request[v2.ForceStopVMRequest]) (*connect.Response[v2.ForceStopVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.ForceStopVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ForceStopVM is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) RebootVM(context.Context, *connect.Request[v2.RebootVMRequest]) (*connect.Response[v2.RebootVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.RebootVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.RebootVM is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) PauseVM(context.Context, *connect.Request[v2.PauseVMRequest]) (*connect.Response[v2.PauseVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.PauseVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.PauseVM is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) ResumeVM(context.Context, *connect.Request[v2.ResumeVMRequest]) (*connect.Response[v2.ResumeVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.ResumeVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ResumeVM is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) InitiateMigration(context.Context, *connect.Request[v2.InitiateMigrationRequest]) (*connect.Response[v2.InitiateMigrationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.InitiateMigration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.InitiateMigration is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) PrepareForMigration(context.Context, *connect.Request[v2.PrepareForMigrationRequest]) (*connect.Response[v2.PrepareForMigrationResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.PrepareForMigration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.PrepareForMigration is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) CreateSnapshot(context.Context, *connect.Request[v2.CreateSnapshotRequest]) (*connect.Response[v2.CreateSnapshotResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.CreateSnapshot is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.CreateSnapshot is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) RevertToSnapshot(context.Context, *connect.Request[v2.RevertToSnapshotRequest]) (*connect.Response[v2.RevertToSnapshotResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.RevertToSnapshot is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.RevertToSnapshot is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) DeleteSnapshot(context.Context, *connect.Request[v2.DeleteSnapshotRequest]) (*connect.Response[v2.DeleteSnapshotResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.DeleteSnapshot is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.DeleteSnapshot is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetTaskStatus(context.Context, *connect.Request[v2.GetTaskStatusRequest]) (*connect.Response[v2.Task], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetTaskStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetTaskStatus is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) CancelTask(context.Context, *connect.Request[v2.CancelTaskRequest]) (*connect.Response[v2.CancelTaskResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.CancelTask is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.CancelTask is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) ConfigureNetwork(context.Context, *connect.Request[v2.ConfigureNetworkRequest]) (*connect.Response[v2.ConfigureNetworkResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.ConfigureNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ConfigureNetwork is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) ConfigureStorage(context.Context, *connect.Request[v2.ConfigureStorageRequest]) (*connect.Response[v2.ConfigureStorageResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.ConfigureStorage is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ConfigureStorage is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) ConfigureTime(context.Context, *connect.Request[v2.ConfigureTimeRequest]) (*connect.Response[v2.ConfigureTimeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.ConfigureTime is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ConfigureTime is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) SetMaintenanceMode(context.Context, *connect.Request[v2.SetMaintenanceModeRequest]) (*connect.Response[v2.SetMaintenanceModeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.SetMaintenanceMode is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.SetMaintenanceMode is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) UpdateHost(context.Context, *connect.Request[v2.UpdateHostRequest]) (*connect.Response[v2.UpdateHostResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.UpdateHost is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.UpdateHost is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetContentLibraryItems(context.Context, *connect.Request[v2.GetContentLibraryItemsRequest]) (*connect.Response[v2.GetContentLibraryItemsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetContentLibraryItems is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetContentLibraryItems is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) UploadContentLibraryItem(context.Context, *connect.ClientStream[v2.UploadContentLibraryItemRequest]) (*connect.Response[v2.UploadContentLibraryItemResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.UploadContentLibraryItem is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.UploadContentLibraryItem is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) ExportOVA(context.Context, *connect.Request[v2.ExportOVARequest], *connect.ServerStream[v2.ExportOVAResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.ExportOVA is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ExportOVA is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) ImportOVA(context.Context, *connect.ClientStream[v2.ImportOVARequest]) (*connect.Response[v2.ImportOVAResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.ImportOVA is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ImportOVA is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) DeleteContentLibraryItem(context.Context, *connect.Request[v2.DeleteContentLibraryItemRequest]) (*connect.Response[v2.DeleteContentLibraryItemResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.DeleteContentLibraryItem is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.DeleteContentLibraryItem is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetDatastores(context.Context, *connect.Request[v2.GetDatastoresRequest]) (*connect.Response[v2.GetDatastoresResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetDatastores is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetDatastores is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetDatastore(context.Context, *connect.Request[v2.GetDatastoreRequest]) (*connect.Response[v2.GetDatastoreResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetDatastore is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetDatastore is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) CreateDatastore(context.Context, *connect.Request[v2.CreateDatastoreRequest]) (*connect.Response[v2.CreateDatastoreResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.CreateDatastore is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.CreateDatastore is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) DeleteDatastore(context.Context, *connect.Request[v2.DeleteDatastoreRequest]) (*connect.Response[v2.DeleteDatastoreResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.DeleteDatastore is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.DeleteDatastore is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetNetworks(context.Context, *connect.Request[v2.GetNetworksRequest]) (*connect.Response[v2.GetNetworksResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetNetworks is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetNetworks is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetNetwork(context.Context, *connect.Request[v2.GetNetworkRequest]) (*connect.Response[v2.GetNetworkResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetNetwork is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) CreateNetwork(context.Context, *connect.Request[v2.CreateNetworkRequest]) (*connect.Response[v2.CreateNetworkResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.CreateNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.CreateNetwork is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) DeleteNetwork(context.Context, *connect.Request[v2.DeleteNetworkRequest]) (*connect.Response[v2.DeleteNetworkResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.DeleteNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.DeleteNetwork is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) AttachIso(context.Context, *connect.Request[v2.AttachIsoRequest]) (*connect.Response[v2.AttachIsoResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.AttachIso is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.AttachIso is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) DetachIso(context.Context, *connect.Request[v2.DetachIsoRequest]) (*connect.Response[v2.DetachIsoResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.DetachIso is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.DetachIso is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) CloneVmFromTemplate(context.Context, *connect.Request[v2.CloneVmFromTemplateRequest]) (*connect.Response[v2.CloneVmFromTemplateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.CloneVmFromTemplate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.CloneVmFromTemplate is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetVMGuestIPs(context.Context, *connect.Request[v2.GetVMGuestIPsRequest]) (*connect.Response[v2.GetVMGuestIPsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetVMGuestIPs is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetVMGuestIPs is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) ChangeVMUserPassword(context.Context, *connect.Request[v2.ChangeVMUserPasswordRequest]) (*connect.Response[v2.ChangeVMUserPasswordResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.ChangeVMUserPassword is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ChangeVMUserPassword is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) AttachCloudInit(context.Context, *connect.Request[v2.AttachCloudInitRequest]) (*connect.Response[v2.AttachCloudInitResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.AttachCloudInit is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.AttachCloudInit is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) AttachNetworkInterface(context.Context, *connect.Request[v2.AttachNetworkInterfaceRequest]) (*connect.Response[v2.AttachNetworkInterfaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.AttachNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.AttachNetworkInterface is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) DetachNetworkInterface(context.Context, *connect.Request[v2.DetachNetworkInterfaceRequest]) (*connect.Response[v2.DetachNetworkInterfaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.DetachNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.DetachNetworkInterface is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) Stream(context.Context, *connect.BidiStream[v2.StreamRequest, v2.StreamResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.Stream is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.Stream is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetHardwareHealth(context.Context, *connect.Request[v2.GetHardwareHealthRequest]) (*connect.Response[v2.GetHardwareHealthResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetHardwareHealth is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetHardwareHealth is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetSensorData(context.Context, *connect.Request[v2.GetSensorDataRequest]) (*connect.Response[v2.GetSensorDataResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetSensorData is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetSensorData is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) DefineVM(context.Context, *connect.Request[v2.DefineVMRequest]) (*connect.Response[v2.DefineVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.DefineVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.DefineVM is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetVMDefinition(context.Context, *connect.Request[v2.GetVMDefinitionRequest]) (*connect.Response[v2.GetVMDefinitionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetVMDefinition is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetVMDefinition is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) ControlVM(context.Context, *connect.Request[v2.ControlVMRequest]) (*connect.Response[v2.ControlVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.ControlVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ControlVM is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetVMStatus(context.Context, *connect.Request[v2.GetVMStatusRequest]) (*connect.Response[v2.GetVMStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetVMStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetVMStatus is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetVMGuestInfo(context.Context, *connect.Request[v2.GetVMGuestInfoRequest]) (*connect.Response[v2.GetVMGuestInfoResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.GetVMGuestInfo is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.GetVMGuestInfo is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) CreatePowerSchedule(context.Context, *connect.Request[v2.CreatePowerScheduleRequest]) (*connect.Response[v2.CreatePowerScheduleResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.CreatePowerSchedule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.CreatePowerSchedule is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) ListPowerSchedules(context.Context, *connect.Request[v2.ListPowerSchedulesRequest]) (*connect.Response[v2.ListPowerSchedulesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.ListPowerSchedules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ListPowerSchedules is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) UpdatePowerSchedule(context.Context, *connect.Request[v2.UpdatePowerScheduleRequest]) (*connect.Response[v2.UpdatePowerScheduleResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.UpdatePowerSchedule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.UpdatePowerSchedule is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) DeletePowerSchedule(context.Context, *connect.Request[v2.DeletePowerScheduleRequest]) (*connect.Response[v2.DeletePowerScheduleResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.DeletePowerSchedule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.DeletePowerSchedule is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) WakeOnLAN(context.Context, *connect.Request[v2.WakeOnLANRequest]) (*connect.Response[v2.WakeOnLANResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.AgentService.WakeOnLAN is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.WakeOnLAN is not implemented"))
 }

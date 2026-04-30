@@ -43,7 +43,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// DCUIServiceName is the fully-qualified name of the DCUIService service.
-	DCUIServiceName = "pilab.cloud.agent.v1.DCUIService"
+	DCUIServiceName = "pilab.agent.v1.DCUIService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -55,70 +55,70 @@ const (
 // period.
 const (
 	// DCUIServiceGetHostInfoProcedure is the fully-qualified name of the DCUIService's GetHostInfo RPC.
-	DCUIServiceGetHostInfoProcedure = "/pilab.cloud.agent.v1.DCUIService/GetHostInfo"
+	DCUIServiceGetHostInfoProcedure = "/pilab.agent.v1.DCUIService/GetHostInfo"
 	// DCUIServiceGetSystemResourcesProcedure is the fully-qualified name of the DCUIService's
 	// GetSystemResources RPC.
-	DCUIServiceGetSystemResourcesProcedure = "/pilab.cloud.agent.v1.DCUIService/GetSystemResources"
+	DCUIServiceGetSystemResourcesProcedure = "/pilab.agent.v1.DCUIService/GetSystemResources"
 	// DCUIServiceGetServiceStatusProcedure is the fully-qualified name of the DCUIService's
 	// GetServiceStatus RPC.
-	DCUIServiceGetServiceStatusProcedure = "/pilab.cloud.agent.v1.DCUIService/GetServiceStatus"
+	DCUIServiceGetServiceStatusProcedure = "/pilab.agent.v1.DCUIService/GetServiceStatus"
 	// DCUIServiceGetNetworkConfigProcedure is the fully-qualified name of the DCUIService's
 	// GetNetworkConfig RPC.
-	DCUIServiceGetNetworkConfigProcedure = "/pilab.cloud.agent.v1.DCUIService/GetNetworkConfig"
+	DCUIServiceGetNetworkConfigProcedure = "/pilab.agent.v1.DCUIService/GetNetworkConfig"
 	// DCUIServiceConfigureNetworkInterfaceProcedure is the fully-qualified name of the DCUIService's
 	// ConfigureNetworkInterface RPC.
-	DCUIServiceConfigureNetworkInterfaceProcedure = "/pilab.cloud.agent.v1.DCUIService/ConfigureNetworkInterface"
+	DCUIServiceConfigureNetworkInterfaceProcedure = "/pilab.agent.v1.DCUIService/ConfigureNetworkInterface"
 	// DCUIServiceTestNetworkProcedure is the fully-qualified name of the DCUIService's TestNetwork RPC.
-	DCUIServiceTestNetworkProcedure = "/pilab.cloud.agent.v1.DCUIService/TestNetwork"
+	DCUIServiceTestNetworkProcedure = "/pilab.agent.v1.DCUIService/TestNetwork"
 	// DCUIServiceGetStorageConfigProcedure is the fully-qualified name of the DCUIService's
 	// GetStorageConfig RPC.
-	DCUIServiceGetStorageConfigProcedure = "/pilab.cloud.agent.v1.DCUIService/GetStorageConfig"
+	DCUIServiceGetStorageConfigProcedure = "/pilab.agent.v1.DCUIService/GetStorageConfig"
 	// DCUIServiceMountNFSProcedure is the fully-qualified name of the DCUIService's MountNFS RPC.
-	DCUIServiceMountNFSProcedure = "/pilab.cloud.agent.v1.DCUIService/MountNFS"
+	DCUIServiceMountNFSProcedure = "/pilab.agent.v1.DCUIService/MountNFS"
 	// DCUIServiceUnmountNFSProcedure is the fully-qualified name of the DCUIService's UnmountNFS RPC.
-	DCUIServiceUnmountNFSProcedure = "/pilab.cloud.agent.v1.DCUIService/UnmountNFS"
+	DCUIServiceUnmountNFSProcedure = "/pilab.agent.v1.DCUIService/UnmountNFS"
 	// DCUIServiceSetMaintenanceModeProcedure is the fully-qualified name of the DCUIService's
 	// SetMaintenanceMode RPC.
-	DCUIServiceSetMaintenanceModeProcedure = "/pilab.cloud.agent.v1.DCUIService/SetMaintenanceMode"
+	DCUIServiceSetMaintenanceModeProcedure = "/pilab.agent.v1.DCUIService/SetMaintenanceMode"
 	// DCUIServiceGetMaintenanceModeProcedure is the fully-qualified name of the DCUIService's
 	// GetMaintenanceMode RPC.
-	DCUIServiceGetMaintenanceModeProcedure = "/pilab.cloud.agent.v1.DCUIService/GetMaintenanceMode"
+	DCUIServiceGetMaintenanceModeProcedure = "/pilab.agent.v1.DCUIService/GetMaintenanceMode"
 	// DCUIServiceRestartServiceProcedure is the fully-qualified name of the DCUIService's
 	// RestartService RPC.
-	DCUIServiceRestartServiceProcedure = "/pilab.cloud.agent.v1.DCUIService/RestartService"
+	DCUIServiceRestartServiceProcedure = "/pilab.agent.v1.DCUIService/RestartService"
 	// DCUIServiceGetFirewallRulesProcedure is the fully-qualified name of the DCUIService's
 	// GetFirewallRules RPC.
-	DCUIServiceGetFirewallRulesProcedure = "/pilab.cloud.agent.v1.DCUIService/GetFirewallRules"
+	DCUIServiceGetFirewallRulesProcedure = "/pilab.agent.v1.DCUIService/GetFirewallRules"
 	// DCUIServiceAddFirewallRuleProcedure is the fully-qualified name of the DCUIService's
 	// AddFirewallRule RPC.
-	DCUIServiceAddFirewallRuleProcedure = "/pilab.cloud.agent.v1.DCUIService/AddFirewallRule"
+	DCUIServiceAddFirewallRuleProcedure = "/pilab.agent.v1.DCUIService/AddFirewallRule"
 	// DCUIServiceRemoveFirewallRuleProcedure is the fully-qualified name of the DCUIService's
 	// RemoveFirewallRule RPC.
-	DCUIServiceRemoveFirewallRuleProcedure = "/pilab.cloud.agent.v1.DCUIService/RemoveFirewallRule"
+	DCUIServiceRemoveFirewallRuleProcedure = "/pilab.agent.v1.DCUIService/RemoveFirewallRule"
 	// DCUIServiceGetDNSConfigProcedure is the fully-qualified name of the DCUIService's GetDNSConfig
 	// RPC.
-	DCUIServiceGetDNSConfigProcedure = "/pilab.cloud.agent.v1.DCUIService/GetDNSConfig"
+	DCUIServiceGetDNSConfigProcedure = "/pilab.agent.v1.DCUIService/GetDNSConfig"
 	// DCUIServiceSetDNSConfigProcedure is the fully-qualified name of the DCUIService's SetDNSConfig
 	// RPC.
-	DCUIServiceSetDNSConfigProcedure = "/pilab.cloud.agent.v1.DCUIService/SetDNSConfig"
+	DCUIServiceSetDNSConfigProcedure = "/pilab.agent.v1.DCUIService/SetDNSConfig"
 	// DCUIServiceGetNTPConfigProcedure is the fully-qualified name of the DCUIService's GetNTPConfig
 	// RPC.
-	DCUIServiceGetNTPConfigProcedure = "/pilab.cloud.agent.v1.DCUIService/GetNTPConfig"
+	DCUIServiceGetNTPConfigProcedure = "/pilab.agent.v1.DCUIService/GetNTPConfig"
 	// DCUIServiceSetNTPConfigProcedure is the fully-qualified name of the DCUIService's SetNTPConfig
 	// RPC.
-	DCUIServiceSetNTPConfigProcedure = "/pilab.cloud.agent.v1.DCUIService/SetNTPConfig"
+	DCUIServiceSetNTPConfigProcedure = "/pilab.agent.v1.DCUIService/SetNTPConfig"
 	// DCUIServiceGetCloudStatusProcedure is the fully-qualified name of the DCUIService's
 	// GetCloudStatus RPC.
-	DCUIServiceGetCloudStatusProcedure = "/pilab.cloud.agent.v1.DCUIService/GetCloudStatus"
+	DCUIServiceGetCloudStatusProcedure = "/pilab.agent.v1.DCUIService/GetCloudStatus"
 	// DCUIServiceAdoptToCloudProcedure is the fully-qualified name of the DCUIService's AdoptToCloud
 	// RPC.
-	DCUIServiceAdoptToCloudProcedure = "/pilab.cloud.agent.v1.DCUIService/AdoptToCloud"
+	DCUIServiceAdoptToCloudProcedure = "/pilab.agent.v1.DCUIService/AdoptToCloud"
 	// DCUIServiceDisconnectFromCloudProcedure is the fully-qualified name of the DCUIService's
 	// DisconnectFromCloud RPC.
-	DCUIServiceDisconnectFromCloudProcedure = "/pilab.cloud.agent.v1.DCUIService/DisconnectFromCloud"
+	DCUIServiceDisconnectFromCloudProcedure = "/pilab.agent.v1.DCUIService/DisconnectFromCloud"
 )
 
-// DCUIServiceClient is a client for the pilab.cloud.agent.v1.DCUIService service.
+// DCUIServiceClient is a client for the pilab.agent.v1.DCUIService service.
 type DCUIServiceClient interface {
 	// Get comprehensive host information
 	GetHostInfo(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.HostInfo], error)
@@ -166,10 +166,10 @@ type DCUIServiceClient interface {
 	DisconnectFromCloud(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[emptypb.Empty], error)
 }
 
-// NewDCUIServiceClient constructs a client for the pilab.cloud.agent.v1.DCUIService service. By
-// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
-// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
+// NewDCUIServiceClient constructs a client for the pilab.agent.v1.DCUIService service. By default,
+// it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
+// sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
+// or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -338,117 +338,117 @@ type dCUIServiceClient struct {
 	disconnectFromCloud       *connect.Client[emptypb.Empty, emptypb.Empty]
 }
 
-// GetHostInfo calls pilab.cloud.agent.v1.DCUIService.GetHostInfo.
+// GetHostInfo calls pilab.agent.v1.DCUIService.GetHostInfo.
 func (c *dCUIServiceClient) GetHostInfo(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.HostInfo], error) {
 	return c.getHostInfo.CallUnary(ctx, req)
 }
 
-// GetSystemResources calls pilab.cloud.agent.v1.DCUIService.GetSystemResources.
+// GetSystemResources calls pilab.agent.v1.DCUIService.GetSystemResources.
 func (c *dCUIServiceClient) GetSystemResources(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.SystemResources], error) {
 	return c.getSystemResources.CallUnary(ctx, req)
 }
 
-// GetServiceStatus calls pilab.cloud.agent.v1.DCUIService.GetServiceStatus.
+// GetServiceStatus calls pilab.agent.v1.DCUIService.GetServiceStatus.
 func (c *dCUIServiceClient) GetServiceStatus(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.ServiceStatusList], error) {
 	return c.getServiceStatus.CallUnary(ctx, req)
 }
 
-// GetNetworkConfig calls pilab.cloud.agent.v1.DCUIService.GetNetworkConfig.
+// GetNetworkConfig calls pilab.agent.v1.DCUIService.GetNetworkConfig.
 func (c *dCUIServiceClient) GetNetworkConfig(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.NetworkConfig], error) {
 	return c.getNetworkConfig.CallUnary(ctx, req)
 }
 
-// ConfigureNetworkInterface calls pilab.cloud.agent.v1.DCUIService.ConfigureNetworkInterface.
+// ConfigureNetworkInterface calls pilab.agent.v1.DCUIService.ConfigureNetworkInterface.
 func (c *dCUIServiceClient) ConfigureNetworkInterface(ctx context.Context, req *connect.Request[v1.ConfigureNetworkInterfaceRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.configureNetworkInterface.CallUnary(ctx, req)
 }
 
-// TestNetwork calls pilab.cloud.agent.v1.DCUIService.TestNetwork.
+// TestNetwork calls pilab.agent.v1.DCUIService.TestNetwork.
 func (c *dCUIServiceClient) TestNetwork(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.NetworkTestResult], error) {
 	return c.testNetwork.CallUnary(ctx, req)
 }
 
-// GetStorageConfig calls pilab.cloud.agent.v1.DCUIService.GetStorageConfig.
+// GetStorageConfig calls pilab.agent.v1.DCUIService.GetStorageConfig.
 func (c *dCUIServiceClient) GetStorageConfig(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.StorageConfig], error) {
 	return c.getStorageConfig.CallUnary(ctx, req)
 }
 
-// MountNFS calls pilab.cloud.agent.v1.DCUIService.MountNFS.
+// MountNFS calls pilab.agent.v1.DCUIService.MountNFS.
 func (c *dCUIServiceClient) MountNFS(ctx context.Context, req *connect.Request[v1.MountNFSRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.mountNFS.CallUnary(ctx, req)
 }
 
-// UnmountNFS calls pilab.cloud.agent.v1.DCUIService.UnmountNFS.
+// UnmountNFS calls pilab.agent.v1.DCUIService.UnmountNFS.
 func (c *dCUIServiceClient) UnmountNFS(ctx context.Context, req *connect.Request[v1.UnmountNFSRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.unmountNFS.CallUnary(ctx, req)
 }
 
-// SetMaintenanceMode calls pilab.cloud.agent.v1.DCUIService.SetMaintenanceMode.
+// SetMaintenanceMode calls pilab.agent.v1.DCUIService.SetMaintenanceMode.
 func (c *dCUIServiceClient) SetMaintenanceMode(ctx context.Context, req *connect.Request[v1.SetMaintenanceModeRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.setMaintenanceMode.CallUnary(ctx, req)
 }
 
-// GetMaintenanceMode calls pilab.cloud.agent.v1.DCUIService.GetMaintenanceMode.
+// GetMaintenanceMode calls pilab.agent.v1.DCUIService.GetMaintenanceMode.
 func (c *dCUIServiceClient) GetMaintenanceMode(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.MaintenanceModeStatus], error) {
 	return c.getMaintenanceMode.CallUnary(ctx, req)
 }
 
-// RestartService calls pilab.cloud.agent.v1.DCUIService.RestartService.
+// RestartService calls pilab.agent.v1.DCUIService.RestartService.
 func (c *dCUIServiceClient) RestartService(ctx context.Context, req *connect.Request[v1.RestartServiceRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.restartService.CallUnary(ctx, req)
 }
 
-// GetFirewallRules calls pilab.cloud.agent.v1.DCUIService.GetFirewallRules.
+// GetFirewallRules calls pilab.agent.v1.DCUIService.GetFirewallRules.
 func (c *dCUIServiceClient) GetFirewallRules(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.FirewallRuleList], error) {
 	return c.getFirewallRules.CallUnary(ctx, req)
 }
 
-// AddFirewallRule calls pilab.cloud.agent.v1.DCUIService.AddFirewallRule.
+// AddFirewallRule calls pilab.agent.v1.DCUIService.AddFirewallRule.
 func (c *dCUIServiceClient) AddFirewallRule(ctx context.Context, req *connect.Request[v1.AddFirewallRuleRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.addFirewallRule.CallUnary(ctx, req)
 }
 
-// RemoveFirewallRule calls pilab.cloud.agent.v1.DCUIService.RemoveFirewallRule.
+// RemoveFirewallRule calls pilab.agent.v1.DCUIService.RemoveFirewallRule.
 func (c *dCUIServiceClient) RemoveFirewallRule(ctx context.Context, req *connect.Request[v1.RemoveFirewallRuleRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.removeFirewallRule.CallUnary(ctx, req)
 }
 
-// GetDNSConfig calls pilab.cloud.agent.v1.DCUIService.GetDNSConfig.
+// GetDNSConfig calls pilab.agent.v1.DCUIService.GetDNSConfig.
 func (c *dCUIServiceClient) GetDNSConfig(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.DNSConfig], error) {
 	return c.getDNSConfig.CallUnary(ctx, req)
 }
 
-// SetDNSConfig calls pilab.cloud.agent.v1.DCUIService.SetDNSConfig.
+// SetDNSConfig calls pilab.agent.v1.DCUIService.SetDNSConfig.
 func (c *dCUIServiceClient) SetDNSConfig(ctx context.Context, req *connect.Request[v1.SetDNSConfigRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.setDNSConfig.CallUnary(ctx, req)
 }
 
-// GetNTPConfig calls pilab.cloud.agent.v1.DCUIService.GetNTPConfig.
+// GetNTPConfig calls pilab.agent.v1.DCUIService.GetNTPConfig.
 func (c *dCUIServiceClient) GetNTPConfig(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.NTPConfig], error) {
 	return c.getNTPConfig.CallUnary(ctx, req)
 }
 
-// SetNTPConfig calls pilab.cloud.agent.v1.DCUIService.SetNTPConfig.
+// SetNTPConfig calls pilab.agent.v1.DCUIService.SetNTPConfig.
 func (c *dCUIServiceClient) SetNTPConfig(ctx context.Context, req *connect.Request[v1.SetNTPConfigRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.setNTPConfig.CallUnary(ctx, req)
 }
 
-// GetCloudStatus calls pilab.cloud.agent.v1.DCUIService.GetCloudStatus.
+// GetCloudStatus calls pilab.agent.v1.DCUIService.GetCloudStatus.
 func (c *dCUIServiceClient) GetCloudStatus(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.CloudStatus], error) {
 	return c.getCloudStatus.CallUnary(ctx, req)
 }
 
-// AdoptToCloud calls pilab.cloud.agent.v1.DCUIService.AdoptToCloud.
+// AdoptToCloud calls pilab.agent.v1.DCUIService.AdoptToCloud.
 func (c *dCUIServiceClient) AdoptToCloud(ctx context.Context, req *connect.Request[v1.AdoptToCloudRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.adoptToCloud.CallUnary(ctx, req)
 }
 
-// DisconnectFromCloud calls pilab.cloud.agent.v1.DCUIService.DisconnectFromCloud.
+// DisconnectFromCloud calls pilab.agent.v1.DCUIService.DisconnectFromCloud.
 func (c *dCUIServiceClient) DisconnectFromCloud(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[emptypb.Empty], error) {
 	return c.disconnectFromCloud.CallUnary(ctx, req)
 }
 
-// DCUIServiceHandler is an implementation of the pilab.cloud.agent.v1.DCUIService service.
+// DCUIServiceHandler is an implementation of the pilab.agent.v1.DCUIService service.
 type DCUIServiceHandler interface {
 	// Get comprehensive host information
 	GetHostInfo(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.HostInfo], error)
@@ -635,7 +635,7 @@ func NewDCUIServiceHandler(svc DCUIServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(dCUIServiceMethods.ByName("DisconnectFromCloud")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.agent.v1.DCUIService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.agent.v1.DCUIService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case DCUIServiceGetHostInfoProcedure:
 			dCUIServiceGetHostInfoHandler.ServeHTTP(w, r)
@@ -691,89 +691,89 @@ func NewDCUIServiceHandler(svc DCUIServiceHandler, opts ...connect.HandlerOption
 type UnimplementedDCUIServiceHandler struct{}
 
 func (UnimplementedDCUIServiceHandler) GetHostInfo(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.HostInfo], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.GetHostInfo is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.GetHostInfo is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) GetSystemResources(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.SystemResources], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.GetSystemResources is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.GetSystemResources is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) GetServiceStatus(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.ServiceStatusList], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.GetServiceStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.GetServiceStatus is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) GetNetworkConfig(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.NetworkConfig], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.GetNetworkConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.GetNetworkConfig is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) ConfigureNetworkInterface(context.Context, *connect.Request[v1.ConfigureNetworkInterfaceRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.ConfigureNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.ConfigureNetworkInterface is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) TestNetwork(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.NetworkTestResult], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.TestNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.TestNetwork is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) GetStorageConfig(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.StorageConfig], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.GetStorageConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.GetStorageConfig is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) MountNFS(context.Context, *connect.Request[v1.MountNFSRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.MountNFS is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.MountNFS is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) UnmountNFS(context.Context, *connect.Request[v1.UnmountNFSRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.UnmountNFS is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.UnmountNFS is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) SetMaintenanceMode(context.Context, *connect.Request[v1.SetMaintenanceModeRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.SetMaintenanceMode is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.SetMaintenanceMode is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) GetMaintenanceMode(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.MaintenanceModeStatus], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.GetMaintenanceMode is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.GetMaintenanceMode is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) RestartService(context.Context, *connect.Request[v1.RestartServiceRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.RestartService is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.RestartService is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) GetFirewallRules(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.FirewallRuleList], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.GetFirewallRules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.GetFirewallRules is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) AddFirewallRule(context.Context, *connect.Request[v1.AddFirewallRuleRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.AddFirewallRule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.AddFirewallRule is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) RemoveFirewallRule(context.Context, *connect.Request[v1.RemoveFirewallRuleRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.RemoveFirewallRule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.RemoveFirewallRule is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) GetDNSConfig(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.DNSConfig], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.GetDNSConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.GetDNSConfig is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) SetDNSConfig(context.Context, *connect.Request[v1.SetDNSConfigRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.SetDNSConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.SetDNSConfig is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) GetNTPConfig(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.NTPConfig], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.GetNTPConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.GetNTPConfig is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) SetNTPConfig(context.Context, *connect.Request[v1.SetNTPConfigRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.SetNTPConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.SetNTPConfig is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) GetCloudStatus(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.CloudStatus], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.GetCloudStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.GetCloudStatus is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) AdoptToCloud(context.Context, *connect.Request[v1.AdoptToCloudRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.AdoptToCloud is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.AdoptToCloud is not implemented"))
 }
 
 func (UnimplementedDCUIServiceHandler) DisconnectFromCloud(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.DCUIService.DisconnectFromCloud is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.DCUIService.DisconnectFromCloud is not implemented"))
 }

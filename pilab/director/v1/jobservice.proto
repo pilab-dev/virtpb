@@ -17,7 +17,7 @@
 
 syntax = "proto3";
 
-package pilab.cloud.director.v1;
+package pilab.director.v1;
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/director/v1;directorv1";
 

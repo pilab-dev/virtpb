@@ -40,21 +40,21 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	VirtualMachineService_Define_FullMethodName              = "/pilab.cloud.agent.v1.VirtualMachineService/Define"
-	VirtualMachineService_GetDefinition_FullMethodName       = "/pilab.cloud.agent.v1.VirtualMachineService/GetDefinition"
-	VirtualMachineService_Control_FullMethodName             = "/pilab.cloud.agent.v1.VirtualMachineService/Control"
-	VirtualMachineService_Status_FullMethodName              = "/pilab.cloud.agent.v1.VirtualMachineService/Status"
-	VirtualMachineService_GuestInfo_FullMethodName           = "/pilab.cloud.agent.v1.VirtualMachineService/GuestInfo"
-	VirtualMachineService_AttachISO_FullMethodName           = "/pilab.cloud.agent.v1.VirtualMachineService/AttachISO"
-	VirtualMachineService_DetachISO_FullMethodName           = "/pilab.cloud.agent.v1.VirtualMachineService/DetachISO"
-	VirtualMachineService_CreateVM_FullMethodName            = "/pilab.cloud.agent.v1.VirtualMachineService/CreateVM"
-	VirtualMachineService_StartVM_FullMethodName             = "/pilab.cloud.agent.v1.VirtualMachineService/StartVM"
-	VirtualMachineService_UpdateVM_FullMethodName            = "/pilab.cloud.agent.v1.VirtualMachineService/UpdateVM"
-	VirtualMachineService_WakeOnLAN_FullMethodName           = "/pilab.cloud.agent.v1.VirtualMachineService/WakeOnLAN"
-	VirtualMachineService_CreatePowerSchedule_FullMethodName = "/pilab.cloud.agent.v1.VirtualMachineService/CreatePowerSchedule"
-	VirtualMachineService_ListPowerSchedules_FullMethodName  = "/pilab.cloud.agent.v1.VirtualMachineService/ListPowerSchedules"
-	VirtualMachineService_UpdatePowerSchedule_FullMethodName = "/pilab.cloud.agent.v1.VirtualMachineService/UpdatePowerSchedule"
-	VirtualMachineService_DeletePowerSchedule_FullMethodName = "/pilab.cloud.agent.v1.VirtualMachineService/DeletePowerSchedule"
+	VirtualMachineService_Define_FullMethodName              = "/pilab.agent.v1.VirtualMachineService/Define"
+	VirtualMachineService_GetDefinition_FullMethodName       = "/pilab.agent.v1.VirtualMachineService/GetDefinition"
+	VirtualMachineService_Control_FullMethodName             = "/pilab.agent.v1.VirtualMachineService/Control"
+	VirtualMachineService_Status_FullMethodName              = "/pilab.agent.v1.VirtualMachineService/Status"
+	VirtualMachineService_GuestInfo_FullMethodName           = "/pilab.agent.v1.VirtualMachineService/GuestInfo"
+	VirtualMachineService_AttachISO_FullMethodName           = "/pilab.agent.v1.VirtualMachineService/AttachISO"
+	VirtualMachineService_DetachISO_FullMethodName           = "/pilab.agent.v1.VirtualMachineService/DetachISO"
+	VirtualMachineService_CreateVM_FullMethodName            = "/pilab.agent.v1.VirtualMachineService/CreateVM"
+	VirtualMachineService_StartVM_FullMethodName             = "/pilab.agent.v1.VirtualMachineService/StartVM"
+	VirtualMachineService_UpdateVM_FullMethodName            = "/pilab.agent.v1.VirtualMachineService/UpdateVM"
+	VirtualMachineService_WakeOnLAN_FullMethodName           = "/pilab.agent.v1.VirtualMachineService/WakeOnLAN"
+	VirtualMachineService_CreatePowerSchedule_FullMethodName = "/pilab.agent.v1.VirtualMachineService/CreatePowerSchedule"
+	VirtualMachineService_ListPowerSchedules_FullMethodName  = "/pilab.agent.v1.VirtualMachineService/ListPowerSchedules"
+	VirtualMachineService_UpdatePowerSchedule_FullMethodName = "/pilab.agent.v1.VirtualMachineService/UpdatePowerSchedule"
+	VirtualMachineService_DeletePowerSchedule_FullMethodName = "/pilab.agent.v1.VirtualMachineService/DeletePowerSchedule"
 )
 
 // VirtualMachineServiceClient is the client API for VirtualMachineService service.
@@ -621,7 +621,7 @@ func _VirtualMachineService_DeletePowerSchedule_Handler(srv interface{}, ctx con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var VirtualMachineService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.agent.v1.VirtualMachineService",
+	ServiceName: "pilab.agent.v1.VirtualMachineService",
 	HandlerType: (*VirtualMachineServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

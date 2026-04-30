@@ -46,20 +46,20 @@ const (
 type ControlCommand int32
 
 const (
-	ControlCommand_CONTROL_COMMAND_UNSPECIFIED ControlCommand = 0
-	ControlCommand_CONTROL_COMMAND_STOP        ControlCommand = 1
-	ControlCommand_CONTROL_COMMAND_KILL        ControlCommand = 2
-	ControlCommand_CONTROL_COMMAND_SUSPEND     ControlCommand = 3
-	ControlCommand_CONTROL_COMMAND_RESUME      ControlCommand = 4
-	ControlCommand_CONTROL_COMMAND_REBOOT      ControlCommand = 5
-	ControlCommand_CONTROL_COMMAND_SHUTDOWN    ControlCommand = 6
-	ControlCommand_CONTROL_COMMAND_RESET       ControlCommand = 7
+	ControlCommand_CONTROL_COMMAND_UNKNOWN  ControlCommand = 0
+	ControlCommand_CONTROL_COMMAND_STOP     ControlCommand = 1
+	ControlCommand_CONTROL_COMMAND_KILL     ControlCommand = 2
+	ControlCommand_CONTROL_COMMAND_SUSPEND  ControlCommand = 3
+	ControlCommand_CONTROL_COMMAND_RESUME   ControlCommand = 4
+	ControlCommand_CONTROL_COMMAND_REBOOT   ControlCommand = 5
+	ControlCommand_CONTROL_COMMAND_SHUTDOWN ControlCommand = 6
+	ControlCommand_CONTROL_COMMAND_RESET    ControlCommand = 7
 )
 
 // Enum value maps for ControlCommand.
 var (
 	ControlCommand_name = map[int32]string{
-		0: "CONTROL_COMMAND_UNSPECIFIED",
+		0: "CONTROL_COMMAND_UNKNOWN",
 		1: "CONTROL_COMMAND_STOP",
 		2: "CONTROL_COMMAND_KILL",
 		3: "CONTROL_COMMAND_SUSPEND",
@@ -69,14 +69,14 @@ var (
 		7: "CONTROL_COMMAND_RESET",
 	}
 	ControlCommand_value = map[string]int32{
-		"CONTROL_COMMAND_UNSPECIFIED": 0,
-		"CONTROL_COMMAND_STOP":        1,
-		"CONTROL_COMMAND_KILL":        2,
-		"CONTROL_COMMAND_SUSPEND":     3,
-		"CONTROL_COMMAND_RESUME":      4,
-		"CONTROL_COMMAND_REBOOT":      5,
-		"CONTROL_COMMAND_SHUTDOWN":    6,
-		"CONTROL_COMMAND_RESET":       7,
+		"CONTROL_COMMAND_UNKNOWN":  0,
+		"CONTROL_COMMAND_STOP":     1,
+		"CONTROL_COMMAND_KILL":     2,
+		"CONTROL_COMMAND_SUSPEND":  3,
+		"CONTROL_COMMAND_RESUME":   4,
+		"CONTROL_COMMAND_REBOOT":   5,
+		"CONTROL_COMMAND_SHUTDOWN": 6,
+		"CONTROL_COMMAND_RESET":    7,
 	}
 )
 
@@ -446,7 +446,7 @@ type VmControlRequest struct {
 	// The virtual machine's uuid.
 	Vm string `protobuf:"bytes,1,opt,name=vm,proto3" json:"vm,omitempty"`
 	// The command to execute on the virtual machine.
-	Command       ControlCommand `protobuf:"varint,2,opt,name=command,proto3,enum=pilab.cloud.agent.v1.ControlCommand" json:"command,omitempty"`
+	Command       ControlCommand `protobuf:"varint,2,opt,name=command,proto3,enum=pilab.agent.v1.ControlCommand" json:"command,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -492,7 +492,7 @@ func (x *VmControlRequest) GetCommand() ControlCommand {
 	if x != nil {
 		return x.Command
 	}
-	return ControlCommand_CONTROL_COMMAND_UNSPECIFIED
+	return ControlCommand_CONTROL_COMMAND_UNKNOWN
 }
 
 // VmControlResponse is the response of the VmControlRequest.
@@ -2204,8 +2204,8 @@ type PowerSchedule struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	VmUuid        string                 `protobuf:"bytes,2,opt,name=vm_uuid,json=vmUuid,proto3" json:"vm_uuid,omitempty"`
-	Action        PowerAction            `protobuf:"varint,3,opt,name=action,proto3,enum=pilab.cloud.agent.v1.PowerAction" json:"action,omitempty"`
-	Recurrence    RecurrenceType         `protobuf:"varint,4,opt,name=recurrence,proto3,enum=pilab.cloud.agent.v1.RecurrenceType" json:"recurrence,omitempty"`
+	Action        PowerAction            `protobuf:"varint,3,opt,name=action,proto3,enum=pilab.agent.v1.PowerAction" json:"action,omitempty"`
+	Recurrence    RecurrenceType         `protobuf:"varint,4,opt,name=recurrence,proto3,enum=pilab.agent.v1.RecurrenceType" json:"recurrence,omitempty"`
 	CronSpec      string                 `protobuf:"bytes,5,opt,name=cron_spec,json=cronSpec,proto3" json:"cron_spec,omitempty"`          // Cron expression for scheduling
 	DayOfWeek     int32                  `protobuf:"varint,6,opt,name=day_of_week,json=dayOfWeek,proto3" json:"day_of_week,omitempty"`    // 0-6 for weekly (Sunday=0), or day of month for monthly
 	DayOfMonth    int32                  `protobuf:"varint,7,opt,name=day_of_month,json=dayOfMonth,proto3" json:"day_of_month,omitempty"` // 1-31 for monthly recurrence
@@ -2327,8 +2327,8 @@ func (x *PowerSchedule) GetUpdatedAt() int64 {
 type CreatePowerScheduleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	VmUuid        string                 `protobuf:"bytes,1,opt,name=vm_uuid,json=vmUuid,proto3" json:"vm_uuid,omitempty"`
-	Action        PowerAction            `protobuf:"varint,2,opt,name=action,proto3,enum=pilab.cloud.agent.v1.PowerAction" json:"action,omitempty"`
-	Recurrence    RecurrenceType         `protobuf:"varint,3,opt,name=recurrence,proto3,enum=pilab.cloud.agent.v1.RecurrenceType" json:"recurrence,omitempty"`
+	Action        PowerAction            `protobuf:"varint,2,opt,name=action,proto3,enum=pilab.agent.v1.PowerAction" json:"action,omitempty"`
+	Recurrence    RecurrenceType         `protobuf:"varint,3,opt,name=recurrence,proto3,enum=pilab.agent.v1.RecurrenceType" json:"recurrence,omitempty"`
 	CronSpec      string                 `protobuf:"bytes,4,opt,name=cron_spec,json=cronSpec,proto3" json:"cron_spec,omitempty"`          // Optional: direct cron expression
 	DayOfWeek     int32                  `protobuf:"varint,5,opt,name=day_of_week,json=dayOfWeek,proto3" json:"day_of_week,omitempty"`    // For weekly recurrence
 	DayOfMonth    int32                  `protobuf:"varint,6,opt,name=day_of_month,json=dayOfMonth,proto3" json:"day_of_month,omitempty"` // For monthly recurrence
@@ -2591,8 +2591,8 @@ func (x *ListPowerSchedulesResponse) GetError() *ErrorResponse {
 type UpdatePowerScheduleRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ScheduleId    string                 `protobuf:"bytes,1,opt,name=schedule_id,json=scheduleId,proto3" json:"schedule_id,omitempty"`
-	Action        *PowerAction           `protobuf:"varint,2,opt,name=action,proto3,enum=pilab.cloud.agent.v1.PowerAction,oneof" json:"action,omitempty"`
-	Recurrence    *RecurrenceType        `protobuf:"varint,3,opt,name=recurrence,proto3,enum=pilab.cloud.agent.v1.RecurrenceType,oneof" json:"recurrence,omitempty"`
+	Action        *PowerAction           `protobuf:"varint,2,opt,name=action,proto3,enum=pilab.agent.v1.PowerAction,oneof" json:"action,omitempty"`
+	Recurrence    *RecurrenceType        `protobuf:"varint,3,opt,name=recurrence,proto3,enum=pilab.agent.v1.RecurrenceType,oneof" json:"recurrence,omitempty"`
 	CronSpec      *string                `protobuf:"bytes,4,opt,name=cron_spec,json=cronSpec,proto3,oneof" json:"cron_spec,omitempty"`
 	DayOfWeek     *int32                 `protobuf:"varint,5,opt,name=day_of_week,json=dayOfWeek,proto3,oneof" json:"day_of_week,omitempty"`
 	DayOfMonth    *int32                 `protobuf:"varint,6,opt,name=day_of_month,json=dayOfMonth,proto3,oneof" json:"day_of_month,omitempty"`
@@ -2840,15 +2840,15 @@ var File_pilab_agent_v1_vm_service_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_vm_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1fpilab/agent/v1/vm_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/agent/v1/stream.proto\x1a\x1apilab/agent/v1/error.proto\"t\n" +
+	"\x1fpilab/agent/v1/vm_service.proto\x12\x0epilab.agent.v1\x1a\x1apilab/agent/v1/error.proto\"t\n" +
 	"\x0fVmDefineRequest\x12#\n" +
 	"\rvm_definition\x18\x01 \x01(\tR\fvmDefinition\x12)\n" +
 	"\x0eboon_on_create\x18\x02 \x01(\bH\x00R\fboonOnCreate\x88\x01\x01B\x11\n" +
-	"\x0f_boon_on_create\"\xa9\x01\n" +
+	"\x0f_boon_on_create\"\xa3\x01\n" +
 	"\x10VmDefineResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12>\n" +
-	"\x05error\x18\x03 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12\x17\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x128\n" +
+	"\x05error\x18\x03 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12\x17\n" +
 	"\avm_uuid\x18\x04 \x01(\tR\x06vmUuidB\b\n" +
 	"\x06_error\"I\n" +
 	"\x16VmGetDefinitionRequest\x12\x0e\n" +
@@ -2856,14 +2856,14 @@ const file_pilab_agent_v1_vm_service_proto_rawDesc = "" +
 	"\vforce_fetch\x18\x02 \x01(\bR\n" +
 	"forceFetch\">\n" +
 	"\x17VmGetDefinitionResponse\x12#\n" +
-	"\rvm_definition\x18\x01 \x01(\tR\fvmDefinition\"b\n" +
+	"\rvm_definition\x18\x01 \x01(\tR\fvmDefinition\"\\\n" +
 	"\x10VmControlRequest\x12\x0e\n" +
-	"\x02vm\x18\x01 \x01(\tR\x02vm\x12>\n" +
-	"\acommand\x18\x02 \x01(\x0e2$.pilab.cloud.agent.v1.ControlCommandR\acommand\"\x91\x01\n" +
+	"\x02vm\x18\x01 \x01(\tR\x02vm\x128\n" +
+	"\acommand\x18\x02 \x01(\x0e2\x1e.pilab.agent.v1.ControlCommandR\acommand\"\x8b\x01\n" +
 	"\x11VmControlResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12>\n" +
-	"\x05error\x18\x03 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x128\n" +
+	"\x05error\x18\x03 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"?\n" +
 	"\x12VmAttachISORequest\x12\x0e\n" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12\x19\n" +
@@ -2919,28 +2919,28 @@ const file_pilab_agent_v1_vm_service_proto_rawDesc = "" +
 	"\x0fbond_interfaces\x18\x05 \x03(\tR\x0ebondInterfaces\x12\x1b\n" +
 	"\tbond_mode\x18\x06 \x01(\tR\bbondMode\x12!\n" +
 	"\flacp_enabled\x18\a \x01(\bR\vlacpEnabled\x12\x1e\n" +
-	"\vwake_on_lan\x18\b \x01(\bR\twakeOnLan\"\xef\x03\n" +
+	"\vwake_on_lan\x18\b \x01(\bR\twakeOnLan\"\xcb\x03\n" +
 	"\x0eVirtualMachine\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
 	"\tmemory_mb\x18\x03 \x01(\x05R\bmemoryMb\x12\x14\n" +
-	"\x05vcpus\x18\x04 \x01(\x05R\x05vcpus\x120\n" +
-	"\x05disks\x18\x05 \x03(\v2\x1a.pilab.cloud.agent.v1.DiskR\x05disks\x12:\n" +
-	"\bfirmware\x18\x06 \x01(\v2\x1e.pilab.cloud.agent.v1.FirmwareR\bfirmware\x12+\n" +
-	"\x03tpm\x18\a \x01(\v2\x19.pilab.cloud.agent.v1.TPMR\x03tpm\x12W\n" +
-	"\x12network_interfaces\x18\b \x03(\v2(.pilab.cloud.agent.v1.VMNetworkInterfaceR\x11networkInterfaces\x12L\n" +
-	"\x0fusb_controllers\x18\t \x03(\v2#.pilab.cloud.agent.v1.USBControllerR\x0eusbControllers\x12@\n" +
+	"\x05vcpus\x18\x04 \x01(\x05R\x05vcpus\x12*\n" +
+	"\x05disks\x18\x05 \x03(\v2\x14.pilab.agent.v1.DiskR\x05disks\x124\n" +
+	"\bfirmware\x18\x06 \x01(\v2\x18.pilab.agent.v1.FirmwareR\bfirmware\x12%\n" +
+	"\x03tpm\x18\a \x01(\v2\x13.pilab.agent.v1.TPMR\x03tpm\x12Q\n" +
+	"\x12network_interfaces\x18\b \x03(\v2\".pilab.agent.v1.VMNetworkInterfaceR\x11networkInterfaces\x12F\n" +
+	"\x0fusb_controllers\x18\t \x03(\v2\x1d.pilab.agent.v1.USBControllerR\x0eusbControllers\x12:\n" +
 	"\vusb_devices\x18\n" +
-	" \x03(\v2\x1f.pilab.cloud.agent.v1.USBDeviceR\n" +
-	"usbDevices\"\x92\x01\n" +
-	"\x0fCreateVMRequest\x12A\n" +
-	"\tvm_config\x18\x01 \x01(\v2$.pilab.cloud.agent.v1.VirtualMachineR\bvmConfig\x12)\n" +
+	" \x03(\v2\x19.pilab.agent.v1.USBDeviceR\n" +
+	"usbDevices\"\x8c\x01\n" +
+	"\x0fCreateVMRequest\x12;\n" +
+	"\tvm_config\x18\x01 \x01(\v2\x1e.pilab.agent.v1.VirtualMachineR\bvmConfig\x12)\n" +
 	"\x0eboot_on_create\x18\x02 \x01(\bH\x00R\fbootOnCreate\x88\x01\x01B\x11\n" +
-	"\x0f_boot_on_create\"\xa9\x01\n" +
+	"\x0f_boot_on_create\"\xa3\x01\n" +
 	"\x10CreateVMResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12>\n" +
-	"\x05error\x18\x03 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12\x17\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x128\n" +
+	"\x05error\x18\x03 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12\x17\n" +
 	"\avm_uuid\x18\x04 \x01(\tR\x06vmUuidB\b\n" +
 	"\x06_error\")\n" +
 	"\x0eStartVMRequest\x12\x17\n" +
@@ -2949,19 +2949,19 @@ const file_pilab_agent_v1_vm_service_proto_rawDesc = "" +
 	"\x10WakeOnLANRequest\x12\x17\n" +
 	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x12\x1f\n" +
 	"\vmac_address\x18\x02 \x01(\tR\n" +
-	"macAddress\"\x91\x01\n" +
+	"macAddress\"\x8b\x01\n" +
 	"\x11WakeOnLANResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12>\n" +
-	"\x05error\x18\x03 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
-	"\x06_error\"|\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x128\n" +
+	"\x05error\x18\x03 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\x06_error\"v\n" +
 	"\x0fUpdateVMRequest\x12\x17\n" +
-	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x12P\n" +
-	"\x11updated_vm_config\x18\x02 \x01(\v2$.pilab.cloud.agent.v1.VirtualMachineR\x0fupdatedVmConfig\"\x90\x01\n" +
+	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x12J\n" +
+	"\x11updated_vm_config\x18\x02 \x01(\v2\x1e.pilab.agent.v1.VirtualMachineR\x0fupdatedVmConfig\"\x8a\x01\n" +
 	"\x10UpdateVMResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12>\n" +
-	"\x05error\x18\x03 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x128\n" +
+	"\x05error\x18\x03 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"$\n" +
 	"\x12VmGuestInfoRequest\x12\x0e\n" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\"\xf1\x01\n" +
@@ -2979,23 +2979,23 @@ const file_pilab_agent_v1_vm_service_proto_rawDesc = "" +
 	"\x17VmGuestInterfaceAddress\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04type\x12\x18\n" +
 	"\aaddress\x18\x02 \x01(\tR\aaddress\x12\x16\n" +
-	"\x06prefix\x18\x03 \x01(\rR\x06prefix\"\x92\x01\n" +
+	"\x06prefix\x18\x03 \x01(\rR\x06prefix\"\x8c\x01\n" +
 	"\x17VmGuestNetworkInterface\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
-	"\x06hwaddr\x18\x02 \x01(\tR\x06hwaddr\x12K\n" +
-	"\taddresses\x18\x03 \x03(\v2-.pilab.cloud.agent.v1.VmGuestInterfaceAddressR\taddresses\"\xb1\x01\n" +
+	"\x06hwaddr\x18\x02 \x01(\tR\x06hwaddr\x12E\n" +
+	"\taddresses\x18\x03 \x03(\v2'.pilab.agent.v1.VmGuestInterfaceAddressR\taddresses\"\xa5\x01\n" +
 	"\x13VmGuestInfoResponse\x12\x1a\n" +
-	"\bhostname\x18\x01 \x01(\tR\bhostname\x12/\n" +
-	"\x02os\x18\x02 \x01(\v2\x1f.pilab.cloud.agent.v1.VmGuestOSR\x02os\x12M\n" +
+	"\bhostname\x18\x01 \x01(\tR\bhostname\x12)\n" +
+	"\x02os\x18\x02 \x01(\v2\x19.pilab.agent.v1.VmGuestOSR\x02os\x12G\n" +
 	"\n" +
-	"interfaces\x18\x03 \x03(\v2-.pilab.cloud.agent.v1.VmGuestNetworkInterfaceR\n" +
-	"interfaces\"\x84\x03\n" +
+	"interfaces\x18\x03 \x03(\v2'.pilab.agent.v1.VmGuestNetworkInterfaceR\n" +
+	"interfaces\"\xf8\x02\n" +
 	"\rPowerSchedule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
-	"\avm_uuid\x18\x02 \x01(\tR\x06vmUuid\x129\n" +
-	"\x06action\x18\x03 \x01(\x0e2!.pilab.cloud.agent.v1.PowerActionR\x06action\x12D\n" +
+	"\avm_uuid\x18\x02 \x01(\tR\x06vmUuid\x123\n" +
+	"\x06action\x18\x03 \x01(\x0e2\x1b.pilab.agent.v1.PowerActionR\x06action\x12>\n" +
 	"\n" +
-	"recurrence\x18\x04 \x01(\x0e2$.pilab.cloud.agent.v1.RecurrenceTypeR\n" +
+	"recurrence\x18\x04 \x01(\x0e2\x1e.pilab.agent.v1.RecurrenceTypeR\n" +
 	"recurrence\x12\x1b\n" +
 	"\tcron_spec\x18\x05 \x01(\tR\bcronSpec\x12\x1e\n" +
 	"\vday_of_week\x18\x06 \x01(\x05R\tdayOfWeek\x12 \n" +
@@ -3007,38 +3007,38 @@ const file_pilab_agent_v1_vm_service_proto_rawDesc = "" +
 	"created_at\x18\n" +
 	" \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\v \x01(\x03R\tupdatedAt\"\xc3\x02\n" +
+	"updated_at\x18\v \x01(\x03R\tupdatedAt\"\xb7\x02\n" +
 	"\x1aCreatePowerScheduleRequest\x12\x17\n" +
-	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x129\n" +
-	"\x06action\x18\x02 \x01(\x0e2!.pilab.cloud.agent.v1.PowerActionR\x06action\x12D\n" +
+	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x123\n" +
+	"\x06action\x18\x02 \x01(\x0e2\x1b.pilab.agent.v1.PowerActionR\x06action\x12>\n" +
 	"\n" +
-	"recurrence\x18\x03 \x01(\x0e2$.pilab.cloud.agent.v1.RecurrenceTypeR\n" +
+	"recurrence\x18\x03 \x01(\x0e2\x1e.pilab.agent.v1.RecurrenceTypeR\n" +
 	"recurrence\x12\x1b\n" +
 	"\tcron_spec\x18\x04 \x01(\tR\bcronSpec\x12\x1e\n" +
 	"\vday_of_week\x18\x05 \x01(\x05R\tdayOfWeek\x12 \n" +
 	"\fday_of_month\x18\x06 \x01(\x05R\n" +
 	"dayOfMonth\x12\x12\n" +
 	"\x04time\x18\a \x01(\tR\x04time\x12\x18\n" +
-	"\aenabled\x18\b \x01(\bR\aenabled\"\xa2\x01\n" +
+	"\aenabled\x18\b \x01(\bR\aenabled\"\x9c\x01\n" +
 	"\x1bCreatePowerScheduleResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x1f\n" +
 	"\vschedule_id\x18\x02 \x01(\tR\n" +
-	"scheduleId\x12>\n" +
-	"\x05error\x18\x03 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"scheduleId\x128\n" +
+	"\x05error\x18\x03 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"W\n" +
 	"\x19ListPowerSchedulesRequest\x12\x17\n" +
 	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\x12!\n" +
-	"\fenabled_only\x18\x02 \x01(\bR\venabledOnly\"\xa9\x01\n" +
-	"\x1aListPowerSchedulesResponse\x12A\n" +
-	"\tschedules\x18\x01 \x03(\v2#.pilab.cloud.agent.v1.PowerScheduleR\tschedules\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
-	"\x06_error\"\xcc\x03\n" +
+	"\fenabled_only\x18\x02 \x01(\bR\venabledOnly\"\x9d\x01\n" +
+	"\x1aListPowerSchedulesResponse\x12;\n" +
+	"\tschedules\x18\x01 \x03(\v2\x1d.pilab.agent.v1.PowerScheduleR\tschedules\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\x06_error\"\xc0\x03\n" +
 	"\x1aUpdatePowerScheduleRequest\x12\x1f\n" +
 	"\vschedule_id\x18\x01 \x01(\tR\n" +
-	"scheduleId\x12>\n" +
-	"\x06action\x18\x02 \x01(\x0e2!.pilab.cloud.agent.v1.PowerActionH\x00R\x06action\x88\x01\x01\x12I\n" +
+	"scheduleId\x128\n" +
+	"\x06action\x18\x02 \x01(\x0e2\x1b.pilab.agent.v1.PowerActionH\x00R\x06action\x88\x01\x01\x12C\n" +
 	"\n" +
-	"recurrence\x18\x03 \x01(\x0e2$.pilab.cloud.agent.v1.RecurrenceTypeH\x01R\n" +
+	"recurrence\x18\x03 \x01(\x0e2\x1e.pilab.agent.v1.RecurrenceTypeH\x01R\n" +
 	"recurrence\x88\x01\x01\x12 \n" +
 	"\tcron_spec\x18\x04 \x01(\tH\x02R\bcronSpec\x88\x01\x01\x12#\n" +
 	"\vday_of_week\x18\x05 \x01(\x05H\x03R\tdayOfWeek\x88\x01\x01\x12%\n" +
@@ -3054,20 +3054,20 @@ const file_pilab_agent_v1_vm_service_proto_rawDesc = "" +
 	"\r_day_of_monthB\a\n" +
 	"\x05_timeB\n" +
 	"\n" +
-	"\b_enabled\"\x81\x01\n" +
+	"\b_enabled\"{\n" +
 	"\x1bUpdatePowerScheduleResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"=\n" +
 	"\x1aDeletePowerScheduleRequest\x12\x1f\n" +
 	"\vschedule_id\x18\x01 \x01(\tR\n" +
-	"scheduleId\"\x81\x01\n" +
+	"scheduleId\"{\n" +
 	"\x1bDeletePowerScheduleResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
-	"\x06_error*\xf3\x01\n" +
-	"\x0eControlCommand\x12\x1f\n" +
-	"\x1bCONTROL_COMMAND_UNSPECIFIED\x10\x00\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\x06_error*\xef\x01\n" +
+	"\x0eControlCommand\x12\x1b\n" +
+	"\x17CONTROL_COMMAND_UNKNOWN\x10\x00\x12\x18\n" +
 	"\x14CONTROL_COMMAND_STOP\x10\x01\x12\x18\n" +
 	"\x14CONTROL_COMMAND_KILL\x10\x02\x12\x1b\n" +
 	"\x17CONTROL_COMMAND_SUSPEND\x10\x03\x12\x1a\n" +
@@ -3084,23 +3084,24 @@ const file_pilab_agent_v1_vm_service_proto_rawDesc = "" +
 	"\x1bRECURRENCE_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15RECURRENCE_TYPE_DAILY\x10\x01\x12\x1a\n" +
 	"\x16RECURRENCE_TYPE_WEEKLY\x10\x02\x12\x1b\n" +
-	"\x17RECURRENCE_TYPE_MONTHLY\x10\x032\x92\f\n" +
-	"\x15VirtualMachineService\x12W\n" +
-	"\x06Define\x12%.pilab.cloud.agent.v1.VmDefineRequest\x1a&.pilab.cloud.agent.v1.VmDefineResponse\x12l\n" +
-	"\rGetDefinition\x12,.pilab.cloud.agent.v1.VmGetDefinitionRequest\x1a-.pilab.cloud.agent.v1.VmGetDefinitionResponse\x12Z\n" +
-	"\aControl\x12&.pilab.cloud.agent.v1.VmControlRequest\x1a'.pilab.cloud.agent.v1.VmControlResponse\x12W\n" +
-	"\x06Status\x12%.pilab.cloud.agent.v1.VmStatusRequest\x1a&.pilab.cloud.agent.v1.VmStatusResponse\x12`\n" +
-	"\tGuestInfo\x12(.pilab.cloud.agent.v1.VmGuestInfoRequest\x1a).pilab.cloud.agent.v1.VmGuestInfoResponse\x12`\n" +
-	"\tAttachISO\x12(.pilab.cloud.agent.v1.VmAttachISORequest\x1a).pilab.cloud.agent.v1.VmAttachISOResponse\x12`\n" +
-	"\tDetachISO\x12(.pilab.cloud.agent.v1.VmDetachISORequest\x1a).pilab.cloud.agent.v1.VmDetachISOResponse\x12Y\n" +
-	"\bCreateVM\x12%.pilab.cloud.agent.v1.CreateVMRequest\x1a&.pilab.cloud.agent.v1.CreateVMResponse\x12V\n" +
-	"\aStartVM\x12$.pilab.cloud.agent.v1.StartVMRequest\x1a%.pilab.cloud.agent.v1.StartVMResponse\x12Y\n" +
-	"\bUpdateVM\x12%.pilab.cloud.agent.v1.UpdateVMRequest\x1a&.pilab.cloud.agent.v1.UpdateVMResponse\x12\\\n" +
-	"\tWakeOnLAN\x12&.pilab.cloud.agent.v1.WakeOnLANRequest\x1a'.pilab.cloud.agent.v1.WakeOnLANResponse\x12z\n" +
-	"\x13CreatePowerSchedule\x120.pilab.cloud.agent.v1.CreatePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.CreatePowerScheduleResponse\x12w\n" +
-	"\x12ListPowerSchedules\x12/.pilab.cloud.agent.v1.ListPowerSchedulesRequest\x1a0.pilab.cloud.agent.v1.ListPowerSchedulesResponse\x12z\n" +
-	"\x13UpdatePowerSchedule\x120.pilab.cloud.agent.v1.UpdatePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.UpdatePowerScheduleResponse\x12z\n" +
-	"\x13DeletePowerSchedule\x120.pilab.cloud.agent.v1.DeletePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.DeletePowerScheduleResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\x17RECURRENCE_TYPE_MONTHLY\x10\x032\xde\n" +
+	"\n" +
+	"\x15VirtualMachineService\x12K\n" +
+	"\x06Define\x12\x1f.pilab.agent.v1.VmDefineRequest\x1a .pilab.agent.v1.VmDefineResponse\x12`\n" +
+	"\rGetDefinition\x12&.pilab.agent.v1.VmGetDefinitionRequest\x1a'.pilab.agent.v1.VmGetDefinitionResponse\x12N\n" +
+	"\aControl\x12 .pilab.agent.v1.VmControlRequest\x1a!.pilab.agent.v1.VmControlResponse\x12K\n" +
+	"\x06Status\x12\x1f.pilab.agent.v1.VmStatusRequest\x1a .pilab.agent.v1.VmStatusResponse\x12T\n" +
+	"\tGuestInfo\x12\".pilab.agent.v1.VmGuestInfoRequest\x1a#.pilab.agent.v1.VmGuestInfoResponse\x12T\n" +
+	"\tAttachISO\x12\".pilab.agent.v1.VmAttachISORequest\x1a#.pilab.agent.v1.VmAttachISOResponse\x12T\n" +
+	"\tDetachISO\x12\".pilab.agent.v1.VmDetachISORequest\x1a#.pilab.agent.v1.VmDetachISOResponse\x12M\n" +
+	"\bCreateVM\x12\x1f.pilab.agent.v1.CreateVMRequest\x1a .pilab.agent.v1.CreateVMResponse\x12J\n" +
+	"\aStartVM\x12\x1e.pilab.agent.v1.StartVMRequest\x1a\x1f.pilab.agent.v1.StartVMResponse\x12M\n" +
+	"\bUpdateVM\x12\x1f.pilab.agent.v1.UpdateVMRequest\x1a .pilab.agent.v1.UpdateVMResponse\x12P\n" +
+	"\tWakeOnLAN\x12 .pilab.agent.v1.WakeOnLANRequest\x1a!.pilab.agent.v1.WakeOnLANResponse\x12n\n" +
+	"\x13CreatePowerSchedule\x12*.pilab.agent.v1.CreatePowerScheduleRequest\x1a+.pilab.agent.v1.CreatePowerScheduleResponse\x12k\n" +
+	"\x12ListPowerSchedules\x12).pilab.agent.v1.ListPowerSchedulesRequest\x1a*.pilab.agent.v1.ListPowerSchedulesResponse\x12n\n" +
+	"\x13UpdatePowerSchedule\x12*.pilab.agent.v1.UpdatePowerScheduleRequest\x1a+.pilab.agent.v1.UpdatePowerScheduleResponse\x12n\n" +
+	"\x13DeletePowerSchedule\x12*.pilab.agent.v1.DeletePowerScheduleRequest\x1a+.pilab.agent.v1.DeletePowerScheduleResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_vm_service_proto_rawDescOnce sync.Once
@@ -3117,111 +3118,111 @@ func file_pilab_agent_v1_vm_service_proto_rawDescGZIP() []byte {
 var file_pilab_agent_v1_vm_service_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_pilab_agent_v1_vm_service_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
 var file_pilab_agent_v1_vm_service_proto_goTypes = []any{
-	(ControlCommand)(0),                 // 0: pilab.cloud.agent.v1.ControlCommand
-	(PowerAction)(0),                    // 1: pilab.cloud.agent.v1.PowerAction
-	(RecurrenceType)(0),                 // 2: pilab.cloud.agent.v1.RecurrenceType
-	(*VmDefineRequest)(nil),             // 3: pilab.cloud.agent.v1.VmDefineRequest
-	(*VmDefineResponse)(nil),            // 4: pilab.cloud.agent.v1.VmDefineResponse
-	(*VmGetDefinitionRequest)(nil),      // 5: pilab.cloud.agent.v1.VmGetDefinitionRequest
-	(*VmGetDefinitionResponse)(nil),     // 6: pilab.cloud.agent.v1.VmGetDefinitionResponse
-	(*VmControlRequest)(nil),            // 7: pilab.cloud.agent.v1.VmControlRequest
-	(*VmControlResponse)(nil),           // 8: pilab.cloud.agent.v1.VmControlResponse
-	(*VmAttachISORequest)(nil),          // 9: pilab.cloud.agent.v1.VmAttachISORequest
-	(*VmAttachISOResponse)(nil),         // 10: pilab.cloud.agent.v1.VmAttachISOResponse
-	(*VmDetachISORequest)(nil),          // 11: pilab.cloud.agent.v1.VmDetachISORequest
-	(*VmDetachISOResponse)(nil),         // 12: pilab.cloud.agent.v1.VmDetachISOResponse
-	(*VmStatusRequest)(nil),             // 13: pilab.cloud.agent.v1.VmStatusRequest
-	(*VmStatusResponse)(nil),            // 14: pilab.cloud.agent.v1.VmStatusResponse
-	(*Disk)(nil),                        // 15: pilab.cloud.agent.v1.Disk
-	(*Firmware)(nil),                    // 16: pilab.cloud.agent.v1.Firmware
-	(*TPM)(nil),                         // 17: pilab.cloud.agent.v1.TPM
-	(*USBController)(nil),               // 18: pilab.cloud.agent.v1.USBController
-	(*USBDevice)(nil),                   // 19: pilab.cloud.agent.v1.USBDevice
-	(*VMNetworkInterface)(nil),          // 20: pilab.cloud.agent.v1.VMNetworkInterface
-	(*VirtualMachine)(nil),              // 21: pilab.cloud.agent.v1.VirtualMachine
-	(*CreateVMRequest)(nil),             // 22: pilab.cloud.agent.v1.CreateVMRequest
-	(*CreateVMResponse)(nil),            // 23: pilab.cloud.agent.v1.CreateVMResponse
-	(*StartVMRequest)(nil),              // 24: pilab.cloud.agent.v1.StartVMRequest
-	(*StartVMResponse)(nil),             // 25: pilab.cloud.agent.v1.StartVMResponse
-	(*WakeOnLANRequest)(nil),            // 26: pilab.cloud.agent.v1.WakeOnLANRequest
-	(*WakeOnLANResponse)(nil),           // 27: pilab.cloud.agent.v1.WakeOnLANResponse
-	(*UpdateVMRequest)(nil),             // 28: pilab.cloud.agent.v1.UpdateVMRequest
-	(*UpdateVMResponse)(nil),            // 29: pilab.cloud.agent.v1.UpdateVMResponse
-	(*VmGuestInfoRequest)(nil),          // 30: pilab.cloud.agent.v1.VmGuestInfoRequest
-	(*VmGuestOS)(nil),                   // 31: pilab.cloud.agent.v1.VmGuestOS
-	(*VmGuestInterfaceAddress)(nil),     // 32: pilab.cloud.agent.v1.VmGuestInterfaceAddress
-	(*VmGuestNetworkInterface)(nil),     // 33: pilab.cloud.agent.v1.VmGuestNetworkInterface
-	(*VmGuestInfoResponse)(nil),         // 34: pilab.cloud.agent.v1.VmGuestInfoResponse
-	(*PowerSchedule)(nil),               // 35: pilab.cloud.agent.v1.PowerSchedule
-	(*CreatePowerScheduleRequest)(nil),  // 36: pilab.cloud.agent.v1.CreatePowerScheduleRequest
-	(*CreatePowerScheduleResponse)(nil), // 37: pilab.cloud.agent.v1.CreatePowerScheduleResponse
-	(*ListPowerSchedulesRequest)(nil),   // 38: pilab.cloud.agent.v1.ListPowerSchedulesRequest
-	(*ListPowerSchedulesResponse)(nil),  // 39: pilab.cloud.agent.v1.ListPowerSchedulesResponse
-	(*UpdatePowerScheduleRequest)(nil),  // 40: pilab.cloud.agent.v1.UpdatePowerScheduleRequest
-	(*UpdatePowerScheduleResponse)(nil), // 41: pilab.cloud.agent.v1.UpdatePowerScheduleResponse
-	(*DeletePowerScheduleRequest)(nil),  // 42: pilab.cloud.agent.v1.DeletePowerScheduleRequest
-	(*DeletePowerScheduleResponse)(nil), // 43: pilab.cloud.agent.v1.DeletePowerScheduleResponse
-	(*ErrorResponse)(nil),               // 44: pilab.cloud.agent.v1.ErrorResponse
+	(ControlCommand)(0),                 // 0: pilab.agent.v1.ControlCommand
+	(PowerAction)(0),                    // 1: pilab.agent.v1.PowerAction
+	(RecurrenceType)(0),                 // 2: pilab.agent.v1.RecurrenceType
+	(*VmDefineRequest)(nil),             // 3: pilab.agent.v1.VmDefineRequest
+	(*VmDefineResponse)(nil),            // 4: pilab.agent.v1.VmDefineResponse
+	(*VmGetDefinitionRequest)(nil),      // 5: pilab.agent.v1.VmGetDefinitionRequest
+	(*VmGetDefinitionResponse)(nil),     // 6: pilab.agent.v1.VmGetDefinitionResponse
+	(*VmControlRequest)(nil),            // 7: pilab.agent.v1.VmControlRequest
+	(*VmControlResponse)(nil),           // 8: pilab.agent.v1.VmControlResponse
+	(*VmAttachISORequest)(nil),          // 9: pilab.agent.v1.VmAttachISORequest
+	(*VmAttachISOResponse)(nil),         // 10: pilab.agent.v1.VmAttachISOResponse
+	(*VmDetachISORequest)(nil),          // 11: pilab.agent.v1.VmDetachISORequest
+	(*VmDetachISOResponse)(nil),         // 12: pilab.agent.v1.VmDetachISOResponse
+	(*VmStatusRequest)(nil),             // 13: pilab.agent.v1.VmStatusRequest
+	(*VmStatusResponse)(nil),            // 14: pilab.agent.v1.VmStatusResponse
+	(*Disk)(nil),                        // 15: pilab.agent.v1.Disk
+	(*Firmware)(nil),                    // 16: pilab.agent.v1.Firmware
+	(*TPM)(nil),                         // 17: pilab.agent.v1.TPM
+	(*USBController)(nil),               // 18: pilab.agent.v1.USBController
+	(*USBDevice)(nil),                   // 19: pilab.agent.v1.USBDevice
+	(*VMNetworkInterface)(nil),          // 20: pilab.agent.v1.VMNetworkInterface
+	(*VirtualMachine)(nil),              // 21: pilab.agent.v1.VirtualMachine
+	(*CreateVMRequest)(nil),             // 22: pilab.agent.v1.CreateVMRequest
+	(*CreateVMResponse)(nil),            // 23: pilab.agent.v1.CreateVMResponse
+	(*StartVMRequest)(nil),              // 24: pilab.agent.v1.StartVMRequest
+	(*StartVMResponse)(nil),             // 25: pilab.agent.v1.StartVMResponse
+	(*WakeOnLANRequest)(nil),            // 26: pilab.agent.v1.WakeOnLANRequest
+	(*WakeOnLANResponse)(nil),           // 27: pilab.agent.v1.WakeOnLANResponse
+	(*UpdateVMRequest)(nil),             // 28: pilab.agent.v1.UpdateVMRequest
+	(*UpdateVMResponse)(nil),            // 29: pilab.agent.v1.UpdateVMResponse
+	(*VmGuestInfoRequest)(nil),          // 30: pilab.agent.v1.VmGuestInfoRequest
+	(*VmGuestOS)(nil),                   // 31: pilab.agent.v1.VmGuestOS
+	(*VmGuestInterfaceAddress)(nil),     // 32: pilab.agent.v1.VmGuestInterfaceAddress
+	(*VmGuestNetworkInterface)(nil),     // 33: pilab.agent.v1.VmGuestNetworkInterface
+	(*VmGuestInfoResponse)(nil),         // 34: pilab.agent.v1.VmGuestInfoResponse
+	(*PowerSchedule)(nil),               // 35: pilab.agent.v1.PowerSchedule
+	(*CreatePowerScheduleRequest)(nil),  // 36: pilab.agent.v1.CreatePowerScheduleRequest
+	(*CreatePowerScheduleResponse)(nil), // 37: pilab.agent.v1.CreatePowerScheduleResponse
+	(*ListPowerSchedulesRequest)(nil),   // 38: pilab.agent.v1.ListPowerSchedulesRequest
+	(*ListPowerSchedulesResponse)(nil),  // 39: pilab.agent.v1.ListPowerSchedulesResponse
+	(*UpdatePowerScheduleRequest)(nil),  // 40: pilab.agent.v1.UpdatePowerScheduleRequest
+	(*UpdatePowerScheduleResponse)(nil), // 41: pilab.agent.v1.UpdatePowerScheduleResponse
+	(*DeletePowerScheduleRequest)(nil),  // 42: pilab.agent.v1.DeletePowerScheduleRequest
+	(*DeletePowerScheduleResponse)(nil), // 43: pilab.agent.v1.DeletePowerScheduleResponse
+	(*ErrorResponse)(nil),               // 44: pilab.agent.v1.ErrorResponse
 }
 var file_pilab_agent_v1_vm_service_proto_depIdxs = []int32{
-	44, // 0: pilab.cloud.agent.v1.VmDefineResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	0,  // 1: pilab.cloud.agent.v1.VmControlRequest.command:type_name -> pilab.cloud.agent.v1.ControlCommand
-	44, // 2: pilab.cloud.agent.v1.VmControlResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	15, // 3: pilab.cloud.agent.v1.VirtualMachine.disks:type_name -> pilab.cloud.agent.v1.Disk
-	16, // 4: pilab.cloud.agent.v1.VirtualMachine.firmware:type_name -> pilab.cloud.agent.v1.Firmware
-	17, // 5: pilab.cloud.agent.v1.VirtualMachine.tpm:type_name -> pilab.cloud.agent.v1.TPM
-	20, // 6: pilab.cloud.agent.v1.VirtualMachine.network_interfaces:type_name -> pilab.cloud.agent.v1.VMNetworkInterface
-	18, // 7: pilab.cloud.agent.v1.VirtualMachine.usb_controllers:type_name -> pilab.cloud.agent.v1.USBController
-	19, // 8: pilab.cloud.agent.v1.VirtualMachine.usb_devices:type_name -> pilab.cloud.agent.v1.USBDevice
-	21, // 9: pilab.cloud.agent.v1.CreateVMRequest.vm_config:type_name -> pilab.cloud.agent.v1.VirtualMachine
-	44, // 10: pilab.cloud.agent.v1.CreateVMResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	44, // 11: pilab.cloud.agent.v1.WakeOnLANResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	21, // 12: pilab.cloud.agent.v1.UpdateVMRequest.updated_vm_config:type_name -> pilab.cloud.agent.v1.VirtualMachine
-	44, // 13: pilab.cloud.agent.v1.UpdateVMResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	32, // 14: pilab.cloud.agent.v1.VmGuestNetworkInterface.addresses:type_name -> pilab.cloud.agent.v1.VmGuestInterfaceAddress
-	31, // 15: pilab.cloud.agent.v1.VmGuestInfoResponse.os:type_name -> pilab.cloud.agent.v1.VmGuestOS
-	33, // 16: pilab.cloud.agent.v1.VmGuestInfoResponse.interfaces:type_name -> pilab.cloud.agent.v1.VmGuestNetworkInterface
-	1,  // 17: pilab.cloud.agent.v1.PowerSchedule.action:type_name -> pilab.cloud.agent.v1.PowerAction
-	2,  // 18: pilab.cloud.agent.v1.PowerSchedule.recurrence:type_name -> pilab.cloud.agent.v1.RecurrenceType
-	1,  // 19: pilab.cloud.agent.v1.CreatePowerScheduleRequest.action:type_name -> pilab.cloud.agent.v1.PowerAction
-	2,  // 20: pilab.cloud.agent.v1.CreatePowerScheduleRequest.recurrence:type_name -> pilab.cloud.agent.v1.RecurrenceType
-	44, // 21: pilab.cloud.agent.v1.CreatePowerScheduleResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	35, // 22: pilab.cloud.agent.v1.ListPowerSchedulesResponse.schedules:type_name -> pilab.cloud.agent.v1.PowerSchedule
-	44, // 23: pilab.cloud.agent.v1.ListPowerSchedulesResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	1,  // 24: pilab.cloud.agent.v1.UpdatePowerScheduleRequest.action:type_name -> pilab.cloud.agent.v1.PowerAction
-	2,  // 25: pilab.cloud.agent.v1.UpdatePowerScheduleRequest.recurrence:type_name -> pilab.cloud.agent.v1.RecurrenceType
-	44, // 26: pilab.cloud.agent.v1.UpdatePowerScheduleResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	44, // 27: pilab.cloud.agent.v1.DeletePowerScheduleResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	3,  // 28: pilab.cloud.agent.v1.VirtualMachineService.Define:input_type -> pilab.cloud.agent.v1.VmDefineRequest
-	5,  // 29: pilab.cloud.agent.v1.VirtualMachineService.GetDefinition:input_type -> pilab.cloud.agent.v1.VmGetDefinitionRequest
-	7,  // 30: pilab.cloud.agent.v1.VirtualMachineService.Control:input_type -> pilab.cloud.agent.v1.VmControlRequest
-	13, // 31: pilab.cloud.agent.v1.VirtualMachineService.Status:input_type -> pilab.cloud.agent.v1.VmStatusRequest
-	30, // 32: pilab.cloud.agent.v1.VirtualMachineService.GuestInfo:input_type -> pilab.cloud.agent.v1.VmGuestInfoRequest
-	9,  // 33: pilab.cloud.agent.v1.VirtualMachineService.AttachISO:input_type -> pilab.cloud.agent.v1.VmAttachISORequest
-	11, // 34: pilab.cloud.agent.v1.VirtualMachineService.DetachISO:input_type -> pilab.cloud.agent.v1.VmDetachISORequest
-	22, // 35: pilab.cloud.agent.v1.VirtualMachineService.CreateVM:input_type -> pilab.cloud.agent.v1.CreateVMRequest
-	24, // 36: pilab.cloud.agent.v1.VirtualMachineService.StartVM:input_type -> pilab.cloud.agent.v1.StartVMRequest
-	28, // 37: pilab.cloud.agent.v1.VirtualMachineService.UpdateVM:input_type -> pilab.cloud.agent.v1.UpdateVMRequest
-	26, // 38: pilab.cloud.agent.v1.VirtualMachineService.WakeOnLAN:input_type -> pilab.cloud.agent.v1.WakeOnLANRequest
-	36, // 39: pilab.cloud.agent.v1.VirtualMachineService.CreatePowerSchedule:input_type -> pilab.cloud.agent.v1.CreatePowerScheduleRequest
-	38, // 40: pilab.cloud.agent.v1.VirtualMachineService.ListPowerSchedules:input_type -> pilab.cloud.agent.v1.ListPowerSchedulesRequest
-	40, // 41: pilab.cloud.agent.v1.VirtualMachineService.UpdatePowerSchedule:input_type -> pilab.cloud.agent.v1.UpdatePowerScheduleRequest
-	42, // 42: pilab.cloud.agent.v1.VirtualMachineService.DeletePowerSchedule:input_type -> pilab.cloud.agent.v1.DeletePowerScheduleRequest
-	4,  // 43: pilab.cloud.agent.v1.VirtualMachineService.Define:output_type -> pilab.cloud.agent.v1.VmDefineResponse
-	6,  // 44: pilab.cloud.agent.v1.VirtualMachineService.GetDefinition:output_type -> pilab.cloud.agent.v1.VmGetDefinitionResponse
-	8,  // 45: pilab.cloud.agent.v1.VirtualMachineService.Control:output_type -> pilab.cloud.agent.v1.VmControlResponse
-	14, // 46: pilab.cloud.agent.v1.VirtualMachineService.Status:output_type -> pilab.cloud.agent.v1.VmStatusResponse
-	34, // 47: pilab.cloud.agent.v1.VirtualMachineService.GuestInfo:output_type -> pilab.cloud.agent.v1.VmGuestInfoResponse
-	10, // 48: pilab.cloud.agent.v1.VirtualMachineService.AttachISO:output_type -> pilab.cloud.agent.v1.VmAttachISOResponse
-	12, // 49: pilab.cloud.agent.v1.VirtualMachineService.DetachISO:output_type -> pilab.cloud.agent.v1.VmDetachISOResponse
-	23, // 50: pilab.cloud.agent.v1.VirtualMachineService.CreateVM:output_type -> pilab.cloud.agent.v1.CreateVMResponse
-	25, // 51: pilab.cloud.agent.v1.VirtualMachineService.StartVM:output_type -> pilab.cloud.agent.v1.StartVMResponse
-	29, // 52: pilab.cloud.agent.v1.VirtualMachineService.UpdateVM:output_type -> pilab.cloud.agent.v1.UpdateVMResponse
-	27, // 53: pilab.cloud.agent.v1.VirtualMachineService.WakeOnLAN:output_type -> pilab.cloud.agent.v1.WakeOnLANResponse
-	37, // 54: pilab.cloud.agent.v1.VirtualMachineService.CreatePowerSchedule:output_type -> pilab.cloud.agent.v1.CreatePowerScheduleResponse
-	39, // 55: pilab.cloud.agent.v1.VirtualMachineService.ListPowerSchedules:output_type -> pilab.cloud.agent.v1.ListPowerSchedulesResponse
-	41, // 56: pilab.cloud.agent.v1.VirtualMachineService.UpdatePowerSchedule:output_type -> pilab.cloud.agent.v1.UpdatePowerScheduleResponse
-	43, // 57: pilab.cloud.agent.v1.VirtualMachineService.DeletePowerSchedule:output_type -> pilab.cloud.agent.v1.DeletePowerScheduleResponse
+	44, // 0: pilab.agent.v1.VmDefineResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	0,  // 1: pilab.agent.v1.VmControlRequest.command:type_name -> pilab.agent.v1.ControlCommand
+	44, // 2: pilab.agent.v1.VmControlResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	15, // 3: pilab.agent.v1.VirtualMachine.disks:type_name -> pilab.agent.v1.Disk
+	16, // 4: pilab.agent.v1.VirtualMachine.firmware:type_name -> pilab.agent.v1.Firmware
+	17, // 5: pilab.agent.v1.VirtualMachine.tpm:type_name -> pilab.agent.v1.TPM
+	20, // 6: pilab.agent.v1.VirtualMachine.network_interfaces:type_name -> pilab.agent.v1.VMNetworkInterface
+	18, // 7: pilab.agent.v1.VirtualMachine.usb_controllers:type_name -> pilab.agent.v1.USBController
+	19, // 8: pilab.agent.v1.VirtualMachine.usb_devices:type_name -> pilab.agent.v1.USBDevice
+	21, // 9: pilab.agent.v1.CreateVMRequest.vm_config:type_name -> pilab.agent.v1.VirtualMachine
+	44, // 10: pilab.agent.v1.CreateVMResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	44, // 11: pilab.agent.v1.WakeOnLANResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	21, // 12: pilab.agent.v1.UpdateVMRequest.updated_vm_config:type_name -> pilab.agent.v1.VirtualMachine
+	44, // 13: pilab.agent.v1.UpdateVMResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	32, // 14: pilab.agent.v1.VmGuestNetworkInterface.addresses:type_name -> pilab.agent.v1.VmGuestInterfaceAddress
+	31, // 15: pilab.agent.v1.VmGuestInfoResponse.os:type_name -> pilab.agent.v1.VmGuestOS
+	33, // 16: pilab.agent.v1.VmGuestInfoResponse.interfaces:type_name -> pilab.agent.v1.VmGuestNetworkInterface
+	1,  // 17: pilab.agent.v1.PowerSchedule.action:type_name -> pilab.agent.v1.PowerAction
+	2,  // 18: pilab.agent.v1.PowerSchedule.recurrence:type_name -> pilab.agent.v1.RecurrenceType
+	1,  // 19: pilab.agent.v1.CreatePowerScheduleRequest.action:type_name -> pilab.agent.v1.PowerAction
+	2,  // 20: pilab.agent.v1.CreatePowerScheduleRequest.recurrence:type_name -> pilab.agent.v1.RecurrenceType
+	44, // 21: pilab.agent.v1.CreatePowerScheduleResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	35, // 22: pilab.agent.v1.ListPowerSchedulesResponse.schedules:type_name -> pilab.agent.v1.PowerSchedule
+	44, // 23: pilab.agent.v1.ListPowerSchedulesResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	1,  // 24: pilab.agent.v1.UpdatePowerScheduleRequest.action:type_name -> pilab.agent.v1.PowerAction
+	2,  // 25: pilab.agent.v1.UpdatePowerScheduleRequest.recurrence:type_name -> pilab.agent.v1.RecurrenceType
+	44, // 26: pilab.agent.v1.UpdatePowerScheduleResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	44, // 27: pilab.agent.v1.DeletePowerScheduleResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	3,  // 28: pilab.agent.v1.VirtualMachineService.Define:input_type -> pilab.agent.v1.VmDefineRequest
+	5,  // 29: pilab.agent.v1.VirtualMachineService.GetDefinition:input_type -> pilab.agent.v1.VmGetDefinitionRequest
+	7,  // 30: pilab.agent.v1.VirtualMachineService.Control:input_type -> pilab.agent.v1.VmControlRequest
+	13, // 31: pilab.agent.v1.VirtualMachineService.Status:input_type -> pilab.agent.v1.VmStatusRequest
+	30, // 32: pilab.agent.v1.VirtualMachineService.GuestInfo:input_type -> pilab.agent.v1.VmGuestInfoRequest
+	9,  // 33: pilab.agent.v1.VirtualMachineService.AttachISO:input_type -> pilab.agent.v1.VmAttachISORequest
+	11, // 34: pilab.agent.v1.VirtualMachineService.DetachISO:input_type -> pilab.agent.v1.VmDetachISORequest
+	22, // 35: pilab.agent.v1.VirtualMachineService.CreateVM:input_type -> pilab.agent.v1.CreateVMRequest
+	24, // 36: pilab.agent.v1.VirtualMachineService.StartVM:input_type -> pilab.agent.v1.StartVMRequest
+	28, // 37: pilab.agent.v1.VirtualMachineService.UpdateVM:input_type -> pilab.agent.v1.UpdateVMRequest
+	26, // 38: pilab.agent.v1.VirtualMachineService.WakeOnLAN:input_type -> pilab.agent.v1.WakeOnLANRequest
+	36, // 39: pilab.agent.v1.VirtualMachineService.CreatePowerSchedule:input_type -> pilab.agent.v1.CreatePowerScheduleRequest
+	38, // 40: pilab.agent.v1.VirtualMachineService.ListPowerSchedules:input_type -> pilab.agent.v1.ListPowerSchedulesRequest
+	40, // 41: pilab.agent.v1.VirtualMachineService.UpdatePowerSchedule:input_type -> pilab.agent.v1.UpdatePowerScheduleRequest
+	42, // 42: pilab.agent.v1.VirtualMachineService.DeletePowerSchedule:input_type -> pilab.agent.v1.DeletePowerScheduleRequest
+	4,  // 43: pilab.agent.v1.VirtualMachineService.Define:output_type -> pilab.agent.v1.VmDefineResponse
+	6,  // 44: pilab.agent.v1.VirtualMachineService.GetDefinition:output_type -> pilab.agent.v1.VmGetDefinitionResponse
+	8,  // 45: pilab.agent.v1.VirtualMachineService.Control:output_type -> pilab.agent.v1.VmControlResponse
+	14, // 46: pilab.agent.v1.VirtualMachineService.Status:output_type -> pilab.agent.v1.VmStatusResponse
+	34, // 47: pilab.agent.v1.VirtualMachineService.GuestInfo:output_type -> pilab.agent.v1.VmGuestInfoResponse
+	10, // 48: pilab.agent.v1.VirtualMachineService.AttachISO:output_type -> pilab.agent.v1.VmAttachISOResponse
+	12, // 49: pilab.agent.v1.VirtualMachineService.DetachISO:output_type -> pilab.agent.v1.VmDetachISOResponse
+	23, // 50: pilab.agent.v1.VirtualMachineService.CreateVM:output_type -> pilab.agent.v1.CreateVMResponse
+	25, // 51: pilab.agent.v1.VirtualMachineService.StartVM:output_type -> pilab.agent.v1.StartVMResponse
+	29, // 52: pilab.agent.v1.VirtualMachineService.UpdateVM:output_type -> pilab.agent.v1.UpdateVMResponse
+	27, // 53: pilab.agent.v1.VirtualMachineService.WakeOnLAN:output_type -> pilab.agent.v1.WakeOnLANResponse
+	37, // 54: pilab.agent.v1.VirtualMachineService.CreatePowerSchedule:output_type -> pilab.agent.v1.CreatePowerScheduleResponse
+	39, // 55: pilab.agent.v1.VirtualMachineService.ListPowerSchedules:output_type -> pilab.agent.v1.ListPowerSchedulesResponse
+	41, // 56: pilab.agent.v1.VirtualMachineService.UpdatePowerSchedule:output_type -> pilab.agent.v1.UpdatePowerScheduleResponse
+	43, // 57: pilab.agent.v1.VirtualMachineService.DeletePowerSchedule:output_type -> pilab.agent.v1.DeletePowerScheduleResponse
 	43, // [43:58] is the sub-list for method output_type
 	28, // [28:43] is the sub-list for method input_type
 	28, // [28:28] is the sub-list for extension type_name
@@ -3234,7 +3235,6 @@ func file_pilab_agent_v1_vm_service_proto_init() {
 	if File_pilab_agent_v1_vm_service_proto != nil {
 		return
 	}
-	file_pilab_agent_v1_stream_proto_init()
 	file_pilab_agent_v1_error_proto_init()
 	file_pilab_agent_v1_vm_service_proto_msgTypes[0].OneofWrappers = []any{}
 	file_pilab_agent_v1_vm_service_proto_msgTypes[1].OneofWrappers = []any{}

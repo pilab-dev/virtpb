@@ -40,20 +40,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AgentDirectorService_ReportHeartbeat_FullMethodName               = "/pilab.cloud.agent.v1.AgentDirectorService/ReportHeartbeat"
-	AgentDirectorService_ReportHypervisorStatus_FullMethodName        = "/pilab.cloud.agent.v1.AgentDirectorService/ReportHypervisorStatus"
-	AgentDirectorService_ReportVMStatus_FullMethodName                = "/pilab.cloud.agent.v1.AgentDirectorService/ReportVMStatus"
-	AgentDirectorService_ReportDiskStatus_FullMethodName              = "/pilab.cloud.agent.v1.AgentDirectorService/ReportDiskStatus"
-	AgentDirectorService_ReportNetworkInterfaceStatus_FullMethodName  = "/pilab.cloud.agent.v1.AgentDirectorService/ReportNetworkInterfaceStatus"
-	AgentDirectorService_ReportHardwareStatus_FullMethodName          = "/pilab.cloud.agent.v1.AgentDirectorService/ReportHardwareStatus"
-	AgentDirectorService_ReportVMMetrics_FullMethodName               = "/pilab.cloud.agent.v1.AgentDirectorService/ReportVMMetrics"
-	AgentDirectorService_ReportHypervisorResourceUsage_FullMethodName = "/pilab.cloud.agent.v1.AgentDirectorService/ReportHypervisorResourceUsage"
-	AgentDirectorService_ReportEvent_FullMethodName                   = "/pilab.cloud.agent.v1.AgentDirectorService/ReportEvent"
-	AgentDirectorService_StreamLogs_FullMethodName                    = "/pilab.cloud.agent.v1.AgentDirectorService/StreamLogs"
-	AgentDirectorService_ReportTaskProgress_FullMethodName            = "/pilab.cloud.agent.v1.AgentDirectorService/ReportTaskProgress"
-	AgentDirectorService_ReportWorkflowState_FullMethodName           = "/pilab.cloud.agent.v1.AgentDirectorService/ReportWorkflowState"
-	AgentDirectorService_ReportAgentUpdateStatus_FullMethodName       = "/pilab.cloud.agent.v1.AgentDirectorService/ReportAgentUpdateStatus"
-	AgentDirectorService_AcknowledgeAgentConfiguration_FullMethodName = "/pilab.cloud.agent.v1.AgentDirectorService/AcknowledgeAgentConfiguration"
+	AgentDirectorService_ReportHeartbeat_FullMethodName               = "/pilab.agent.v1.AgentDirectorService/ReportHeartbeat"
+	AgentDirectorService_ReportHypervisorStatus_FullMethodName        = "/pilab.agent.v1.AgentDirectorService/ReportHypervisorStatus"
+	AgentDirectorService_ReportVMStatus_FullMethodName                = "/pilab.agent.v1.AgentDirectorService/ReportVMStatus"
+	AgentDirectorService_ReportDiskStatus_FullMethodName              = "/pilab.agent.v1.AgentDirectorService/ReportDiskStatus"
+	AgentDirectorService_ReportNetworkInterfaceStatus_FullMethodName  = "/pilab.agent.v1.AgentDirectorService/ReportNetworkInterfaceStatus"
+	AgentDirectorService_ReportHardwareStatus_FullMethodName          = "/pilab.agent.v1.AgentDirectorService/ReportHardwareStatus"
+	AgentDirectorService_ReportVMMetrics_FullMethodName               = "/pilab.agent.v1.AgentDirectorService/ReportVMMetrics"
+	AgentDirectorService_ReportHypervisorResourceUsage_FullMethodName = "/pilab.agent.v1.AgentDirectorService/ReportHypervisorResourceUsage"
+	AgentDirectorService_ReportEvent_FullMethodName                   = "/pilab.agent.v1.AgentDirectorService/ReportEvent"
+	AgentDirectorService_StreamLogs_FullMethodName                    = "/pilab.agent.v1.AgentDirectorService/StreamLogs"
+	AgentDirectorService_ReportTaskProgress_FullMethodName            = "/pilab.agent.v1.AgentDirectorService/ReportTaskProgress"
+	AgentDirectorService_ReportWorkflowState_FullMethodName           = "/pilab.agent.v1.AgentDirectorService/ReportWorkflowState"
+	AgentDirectorService_ReportAgentUpdateStatus_FullMethodName       = "/pilab.agent.v1.AgentDirectorService/ReportAgentUpdateStatus"
+	AgentDirectorService_AcknowledgeAgentConfiguration_FullMethodName = "/pilab.agent.v1.AgentDirectorService/AcknowledgeAgentConfiguration"
 )
 
 // AgentDirectorServiceClient is the client API for AgentDirectorService service.
@@ -577,7 +577,7 @@ func _AgentDirectorService_AcknowledgeAgentConfiguration_Handler(srv interface{}
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AgentDirectorService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.agent.v1.AgentDirectorService",
+	ServiceName: "pilab.agent.v1.AgentDirectorService",
 	HandlerType: (*AgentDirectorServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

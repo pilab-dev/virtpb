@@ -39,40 +39,40 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ManagementService_CreateUser_FullMethodName              = "/pilab.cloud.frontend.v1.ManagementService/CreateUser"
-	ManagementService_GetUser_FullMethodName                 = "/pilab.cloud.frontend.v1.ManagementService/GetUser"
-	ManagementService_GetUserByUsername_FullMethodName       = "/pilab.cloud.frontend.v1.ManagementService/GetUserByUsername"
-	ManagementService_GetUserByEmail_FullMethodName          = "/pilab.cloud.frontend.v1.ManagementService/GetUserByEmail"
-	ManagementService_UpdateUser_FullMethodName              = "/pilab.cloud.frontend.v1.ManagementService/UpdateUser"
-	ManagementService_DeleteUser_FullMethodName              = "/pilab.cloud.frontend.v1.ManagementService/DeleteUser"
-	ManagementService_SearchUsers_FullMethodName             = "/pilab.cloud.frontend.v1.ManagementService/SearchUsers"
-	ManagementService_ChangeUserPassword_FullMethodName      = "/pilab.cloud.frontend.v1.ManagementService/ChangeUserPassword"
-	ManagementService_CreateRole_FullMethodName              = "/pilab.cloud.frontend.v1.ManagementService/CreateRole"
-	ManagementService_GetRole_FullMethodName                 = "/pilab.cloud.frontend.v1.ManagementService/GetRole"
-	ManagementService_GetRoleByName_FullMethodName           = "/pilab.cloud.frontend.v1.ManagementService/GetRoleByName"
-	ManagementService_UpdateRole_FullMethodName              = "/pilab.cloud.frontend.v1.ManagementService/UpdateRole"
-	ManagementService_DeleteRole_FullMethodName              = "/pilab.cloud.frontend.v1.ManagementService/DeleteRole"
-	ManagementService_SearchRoles_FullMethodName             = "/pilab.cloud.frontend.v1.ManagementService/SearchRoles"
-	ManagementService_AddRoleInheritance_FullMethodName      = "/pilab.cloud.frontend.v1.ManagementService/AddRoleInheritance"
-	ManagementService_RemoveRoleInheritance_FullMethodName   = "/pilab.cloud.frontend.v1.ManagementService/RemoveRoleInheritance"
-	ManagementService_GetParentRoles_FullMethodName          = "/pilab.cloud.frontend.v1.ManagementService/GetParentRoles"
-	ManagementService_GetChildRoles_FullMethodName           = "/pilab.cloud.frontend.v1.ManagementService/GetChildRoles"
-	ManagementService_GetAllParentRoles_FullMethodName       = "/pilab.cloud.frontend.v1.ManagementService/GetAllParentRoles"
-	ManagementService_GetAllChildRoles_FullMethodName        = "/pilab.cloud.frontend.v1.ManagementService/GetAllChildRoles"
-	ManagementService_CreateRoleGroup_FullMethodName         = "/pilab.cloud.frontend.v1.ManagementService/CreateRoleGroup"
-	ManagementService_GetRoleGroup_FullMethodName            = "/pilab.cloud.frontend.v1.ManagementService/GetRoleGroup"
-	ManagementService_GetRoleGroupByName_FullMethodName      = "/pilab.cloud.frontend.v1.ManagementService/GetRoleGroupByName"
-	ManagementService_UpdateRoleGroup_FullMethodName         = "/pilab.cloud.frontend.v1.ManagementService/UpdateRoleGroup"
-	ManagementService_DeleteRoleGroup_FullMethodName         = "/pilab.cloud.frontend.v1.ManagementService/DeleteRoleGroup"
-	ManagementService_SearchRoleGroups_FullMethodName        = "/pilab.cloud.frontend.v1.ManagementService/SearchRoleGroups"
-	ManagementService_AddUserToRoleGroup_FullMethodName      = "/pilab.cloud.frontend.v1.ManagementService/AddUserToRoleGroup"
-	ManagementService_RemoveUserFromRoleGroup_FullMethodName = "/pilab.cloud.frontend.v1.ManagementService/RemoveUserFromRoleGroup"
-	ManagementService_GetRoleGroupsForUser_FullMethodName    = "/pilab.cloud.frontend.v1.ManagementService/GetRoleGroupsForUser"
-	ManagementService_GetUsersInRoleGroup_FullMethodName     = "/pilab.cloud.frontend.v1.ManagementService/GetUsersInRoleGroup"
-	ManagementService_AssignRoleToUser_FullMethodName        = "/pilab.cloud.frontend.v1.ManagementService/AssignRoleToUser"
-	ManagementService_UnassignRoleFromUser_FullMethodName    = "/pilab.cloud.frontend.v1.ManagementService/UnassignRoleFromUser"
-	ManagementService_GetRolesForUser_FullMethodName         = "/pilab.cloud.frontend.v1.ManagementService/GetRolesForUser"
-	ManagementService_GetPermissionsForRole_FullMethodName   = "/pilab.cloud.frontend.v1.ManagementService/GetPermissionsForRole"
+	ManagementService_CreateUser_FullMethodName              = "/pilab.frontend.v1.ManagementService/CreateUser"
+	ManagementService_GetUser_FullMethodName                 = "/pilab.frontend.v1.ManagementService/GetUser"
+	ManagementService_GetUserByUsername_FullMethodName       = "/pilab.frontend.v1.ManagementService/GetUserByUsername"
+	ManagementService_GetUserByEmail_FullMethodName          = "/pilab.frontend.v1.ManagementService/GetUserByEmail"
+	ManagementService_UpdateUser_FullMethodName              = "/pilab.frontend.v1.ManagementService/UpdateUser"
+	ManagementService_DeleteUser_FullMethodName              = "/pilab.frontend.v1.ManagementService/DeleteUser"
+	ManagementService_SearchUsers_FullMethodName             = "/pilab.frontend.v1.ManagementService/SearchUsers"
+	ManagementService_ChangeUserPassword_FullMethodName      = "/pilab.frontend.v1.ManagementService/ChangeUserPassword"
+	ManagementService_CreateRole_FullMethodName              = "/pilab.frontend.v1.ManagementService/CreateRole"
+	ManagementService_GetRole_FullMethodName                 = "/pilab.frontend.v1.ManagementService/GetRole"
+	ManagementService_GetRoleByName_FullMethodName           = "/pilab.frontend.v1.ManagementService/GetRoleByName"
+	ManagementService_UpdateRole_FullMethodName              = "/pilab.frontend.v1.ManagementService/UpdateRole"
+	ManagementService_DeleteRole_FullMethodName              = "/pilab.frontend.v1.ManagementService/DeleteRole"
+	ManagementService_SearchRoles_FullMethodName             = "/pilab.frontend.v1.ManagementService/SearchRoles"
+	ManagementService_AddRoleInheritance_FullMethodName      = "/pilab.frontend.v1.ManagementService/AddRoleInheritance"
+	ManagementService_RemoveRoleInheritance_FullMethodName   = "/pilab.frontend.v1.ManagementService/RemoveRoleInheritance"
+	ManagementService_GetParentRoles_FullMethodName          = "/pilab.frontend.v1.ManagementService/GetParentRoles"
+	ManagementService_GetChildRoles_FullMethodName           = "/pilab.frontend.v1.ManagementService/GetChildRoles"
+	ManagementService_GetAllParentRoles_FullMethodName       = "/pilab.frontend.v1.ManagementService/GetAllParentRoles"
+	ManagementService_GetAllChildRoles_FullMethodName        = "/pilab.frontend.v1.ManagementService/GetAllChildRoles"
+	ManagementService_CreateRoleGroup_FullMethodName         = "/pilab.frontend.v1.ManagementService/CreateRoleGroup"
+	ManagementService_GetRoleGroup_FullMethodName            = "/pilab.frontend.v1.ManagementService/GetRoleGroup"
+	ManagementService_GetRoleGroupByName_FullMethodName      = "/pilab.frontend.v1.ManagementService/GetRoleGroupByName"
+	ManagementService_UpdateRoleGroup_FullMethodName         = "/pilab.frontend.v1.ManagementService/UpdateRoleGroup"
+	ManagementService_DeleteRoleGroup_FullMethodName         = "/pilab.frontend.v1.ManagementService/DeleteRoleGroup"
+	ManagementService_SearchRoleGroups_FullMethodName        = "/pilab.frontend.v1.ManagementService/SearchRoleGroups"
+	ManagementService_AddUserToRoleGroup_FullMethodName      = "/pilab.frontend.v1.ManagementService/AddUserToRoleGroup"
+	ManagementService_RemoveUserFromRoleGroup_FullMethodName = "/pilab.frontend.v1.ManagementService/RemoveUserFromRoleGroup"
+	ManagementService_GetRoleGroupsForUser_FullMethodName    = "/pilab.frontend.v1.ManagementService/GetRoleGroupsForUser"
+	ManagementService_GetUsersInRoleGroup_FullMethodName     = "/pilab.frontend.v1.ManagementService/GetUsersInRoleGroup"
+	ManagementService_AssignRoleToUser_FullMethodName        = "/pilab.frontend.v1.ManagementService/AssignRoleToUser"
+	ManagementService_UnassignRoleFromUser_FullMethodName    = "/pilab.frontend.v1.ManagementService/UnassignRoleFromUser"
+	ManagementService_GetRolesForUser_FullMethodName         = "/pilab.frontend.v1.ManagementService/GetRolesForUser"
+	ManagementService_GetPermissionsForRole_FullMethodName   = "/pilab.frontend.v1.ManagementService/GetPermissionsForRole"
 )
 
 // ManagementServiceClient is the client API for ManagementService service.
@@ -1268,7 +1268,7 @@ func _ManagementService_GetPermissionsForRole_Handler(srv interface{}, ctx conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ManagementService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.frontend.v1.ManagementService",
+	ServiceName: "pilab.frontend.v1.ManagementService",
 	HandlerType: (*ManagementServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

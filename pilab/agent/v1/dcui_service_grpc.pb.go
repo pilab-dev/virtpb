@@ -40,28 +40,28 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DCUIService_GetHostInfo_FullMethodName               = "/pilab.cloud.agent.v1.DCUIService/GetHostInfo"
-	DCUIService_GetSystemResources_FullMethodName        = "/pilab.cloud.agent.v1.DCUIService/GetSystemResources"
-	DCUIService_GetServiceStatus_FullMethodName          = "/pilab.cloud.agent.v1.DCUIService/GetServiceStatus"
-	DCUIService_GetNetworkConfig_FullMethodName          = "/pilab.cloud.agent.v1.DCUIService/GetNetworkConfig"
-	DCUIService_ConfigureNetworkInterface_FullMethodName = "/pilab.cloud.agent.v1.DCUIService/ConfigureNetworkInterface"
-	DCUIService_TestNetwork_FullMethodName               = "/pilab.cloud.agent.v1.DCUIService/TestNetwork"
-	DCUIService_GetStorageConfig_FullMethodName          = "/pilab.cloud.agent.v1.DCUIService/GetStorageConfig"
-	DCUIService_MountNFS_FullMethodName                  = "/pilab.cloud.agent.v1.DCUIService/MountNFS"
-	DCUIService_UnmountNFS_FullMethodName                = "/pilab.cloud.agent.v1.DCUIService/UnmountNFS"
-	DCUIService_SetMaintenanceMode_FullMethodName        = "/pilab.cloud.agent.v1.DCUIService/SetMaintenanceMode"
-	DCUIService_GetMaintenanceMode_FullMethodName        = "/pilab.cloud.agent.v1.DCUIService/GetMaintenanceMode"
-	DCUIService_RestartService_FullMethodName            = "/pilab.cloud.agent.v1.DCUIService/RestartService"
-	DCUIService_GetFirewallRules_FullMethodName          = "/pilab.cloud.agent.v1.DCUIService/GetFirewallRules"
-	DCUIService_AddFirewallRule_FullMethodName           = "/pilab.cloud.agent.v1.DCUIService/AddFirewallRule"
-	DCUIService_RemoveFirewallRule_FullMethodName        = "/pilab.cloud.agent.v1.DCUIService/RemoveFirewallRule"
-	DCUIService_GetDNSConfig_FullMethodName              = "/pilab.cloud.agent.v1.DCUIService/GetDNSConfig"
-	DCUIService_SetDNSConfig_FullMethodName              = "/pilab.cloud.agent.v1.DCUIService/SetDNSConfig"
-	DCUIService_GetNTPConfig_FullMethodName              = "/pilab.cloud.agent.v1.DCUIService/GetNTPConfig"
-	DCUIService_SetNTPConfig_FullMethodName              = "/pilab.cloud.agent.v1.DCUIService/SetNTPConfig"
-	DCUIService_GetCloudStatus_FullMethodName            = "/pilab.cloud.agent.v1.DCUIService/GetCloudStatus"
-	DCUIService_AdoptToCloud_FullMethodName              = "/pilab.cloud.agent.v1.DCUIService/AdoptToCloud"
-	DCUIService_DisconnectFromCloud_FullMethodName       = "/pilab.cloud.agent.v1.DCUIService/DisconnectFromCloud"
+	DCUIService_GetHostInfo_FullMethodName               = "/pilab.agent.v1.DCUIService/GetHostInfo"
+	DCUIService_GetSystemResources_FullMethodName        = "/pilab.agent.v1.DCUIService/GetSystemResources"
+	DCUIService_GetServiceStatus_FullMethodName          = "/pilab.agent.v1.DCUIService/GetServiceStatus"
+	DCUIService_GetNetworkConfig_FullMethodName          = "/pilab.agent.v1.DCUIService/GetNetworkConfig"
+	DCUIService_ConfigureNetworkInterface_FullMethodName = "/pilab.agent.v1.DCUIService/ConfigureNetworkInterface"
+	DCUIService_TestNetwork_FullMethodName               = "/pilab.agent.v1.DCUIService/TestNetwork"
+	DCUIService_GetStorageConfig_FullMethodName          = "/pilab.agent.v1.DCUIService/GetStorageConfig"
+	DCUIService_MountNFS_FullMethodName                  = "/pilab.agent.v1.DCUIService/MountNFS"
+	DCUIService_UnmountNFS_FullMethodName                = "/pilab.agent.v1.DCUIService/UnmountNFS"
+	DCUIService_SetMaintenanceMode_FullMethodName        = "/pilab.agent.v1.DCUIService/SetMaintenanceMode"
+	DCUIService_GetMaintenanceMode_FullMethodName        = "/pilab.agent.v1.DCUIService/GetMaintenanceMode"
+	DCUIService_RestartService_FullMethodName            = "/pilab.agent.v1.DCUIService/RestartService"
+	DCUIService_GetFirewallRules_FullMethodName          = "/pilab.agent.v1.DCUIService/GetFirewallRules"
+	DCUIService_AddFirewallRule_FullMethodName           = "/pilab.agent.v1.DCUIService/AddFirewallRule"
+	DCUIService_RemoveFirewallRule_FullMethodName        = "/pilab.agent.v1.DCUIService/RemoveFirewallRule"
+	DCUIService_GetDNSConfig_FullMethodName              = "/pilab.agent.v1.DCUIService/GetDNSConfig"
+	DCUIService_SetDNSConfig_FullMethodName              = "/pilab.agent.v1.DCUIService/SetDNSConfig"
+	DCUIService_GetNTPConfig_FullMethodName              = "/pilab.agent.v1.DCUIService/GetNTPConfig"
+	DCUIService_SetNTPConfig_FullMethodName              = "/pilab.agent.v1.DCUIService/SetNTPConfig"
+	DCUIService_GetCloudStatus_FullMethodName            = "/pilab.agent.v1.DCUIService/GetCloudStatus"
+	DCUIService_AdoptToCloud_FullMethodName              = "/pilab.agent.v1.DCUIService/AdoptToCloud"
+	DCUIService_DisconnectFromCloud_FullMethodName       = "/pilab.agent.v1.DCUIService/DisconnectFromCloud"
 )
 
 // DCUIServiceClient is the client API for DCUIService service.
@@ -893,7 +893,7 @@ func _DCUIService_DisconnectFromCloud_Handler(srv interface{}, ctx context.Conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DCUIService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.agent.v1.DCUIService",
+	ServiceName: "pilab.agent.v1.DCUIService",
 	HandlerType: (*DCUIServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

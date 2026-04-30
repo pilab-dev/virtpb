@@ -209,7 +209,7 @@ func (TaskStatus) EnumDescriptor() ([]byte, []int) {
 type SubscribeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	NodeId        string                 `protobuf:"bytes,1,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
-	TaskTypes     []TaskType             `protobuf:"varint,2,rep,packed,name=task_types,json=taskTypes,proto3,enum=pilab.cloud.director.v2.TaskType" json:"task_types,omitempty"` // Filter by task types
+	TaskTypes     []TaskType             `protobuf:"varint,2,rep,packed,name=task_types,json=taskTypes,proto3,enum=pilab.director.v2.TaskType" json:"task_types,omitempty"` // Filter by task types
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -262,7 +262,7 @@ func (x *SubscribeRequest) GetTaskTypes() []TaskType {
 type Task struct {
 	state  protoimpl.MessageState `protogen:"open.v1"`
 	Id     string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Type   TaskType               `protobuf:"varint,2,opt,name=type,proto3,enum=pilab.cloud.director.v2.TaskType" json:"type,omitempty"`
+	Type   TaskType               `protobuf:"varint,2,opt,name=type,proto3,enum=pilab.director.v2.TaskType" json:"type,omitempty"`
 	VmId   string                 `protobuf:"bytes,3,opt,name=vm_id,json=vmId,proto3" json:"vm_id,omitempty"`
 	VmName string                 `protobuf:"bytes,4,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
 	// Task-specific parameters
@@ -272,7 +272,7 @@ type Task struct {
 	CreatedAt *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	CreatedBy string                 `protobuf:"bytes,8,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
 	// Status
-	Status       TaskStatus             `protobuf:"varint,9,opt,name=status,proto3,enum=pilab.cloud.director.v2.TaskStatus" json:"status,omitempty"`
+	Status       TaskStatus             `protobuf:"varint,9,opt,name=status,proto3,enum=pilab.director.v2.TaskStatus" json:"status,omitempty"`
 	StartedAt    *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
 	CompletedAt  *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=completed_at,json=completedAt,proto3" json:"completed_at,omitempty"`
 	ErrorMessage string                 `protobuf:"bytes,12,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
@@ -447,7 +447,7 @@ func (x *Task) GetReason() string {
 // Create Task Messages
 type CreateTaskRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          TaskType               `protobuf:"varint,1,opt,name=type,proto3,enum=pilab.cloud.director.v2.TaskType" json:"type,omitempty"`
+	Type          TaskType               `protobuf:"varint,1,opt,name=type,proto3,enum=pilab.director.v2.TaskType" json:"type,omitempty"`
 	VmId          string                 `protobuf:"bytes,2,opt,name=vm_id,json=vmId,proto3" json:"vm_id,omitempty"`
 	VmName        string                 `protobuf:"bytes,3,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
 	Params        *structpb.Struct       `protobuf:"bytes,4,opt,name=params,proto3" json:"params,omitempty"`
@@ -601,7 +601,7 @@ func (x *CreateTaskResponse) GetSupersededTaskIds() []string {
 type GetTasksRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	NodeId        string                 `protobuf:"bytes,1,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
-	Statuses      []TaskStatus           `protobuf:"varint,2,rep,packed,name=statuses,proto3,enum=pilab.cloud.director.v2.TaskStatus" json:"statuses,omitempty"`
+	Statuses      []TaskStatus           `protobuf:"varint,2,rep,packed,name=statuses,proto3,enum=pilab.director.v2.TaskStatus" json:"statuses,omitempty"`
 	Limit         int32                  `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
 	AfterSequence string                 `protobuf:"bytes,4,opt,name=after_sequence,json=afterSequence,proto3" json:"after_sequence,omitempty"` // For pagination
 	unknownFields protoimpl.UnknownFields
@@ -812,7 +812,7 @@ type UpdateTaskStatusRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TaskId        string                 `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	NodeId        string                 `protobuf:"bytes,2,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
-	Status        TaskStatus             `protobuf:"varint,3,opt,name=status,proto3,enum=pilab.cloud.director.v2.TaskStatus" json:"status,omitempty"`
+	Status        TaskStatus             `protobuf:"varint,3,opt,name=status,proto3,enum=pilab.director.v2.TaskStatus" json:"status,omitempty"`
 	ErrorMessage  string                 `protobuf:"bytes,4,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
 	CompletedAt   *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=completed_at,json=completedAt,proto3" json:"completed_at,omitempty"`
 	Progress      *structpb.Struct       `protobuf:"bytes,6,opt,name=progress,proto3" json:"progress,omitempty"` // Optional progress details
@@ -985,7 +985,7 @@ type TaskStatusUpdate struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	TaskId        string                 `protobuf:"bytes,1,opt,name=task_id,json=taskId,proto3" json:"task_id,omitempty"`
 	NodeId        string                 `protobuf:"bytes,2,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
-	Status        TaskStatus             `protobuf:"varint,3,opt,name=status,proto3,enum=pilab.cloud.director.v2.TaskStatus" json:"status,omitempty"`
+	Status        TaskStatus             `protobuf:"varint,3,opt,name=status,proto3,enum=pilab.director.v2.TaskStatus" json:"status,omitempty"`
 	ErrorMessage  string                 `protobuf:"bytes,4,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
 	CompletedAt   *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=completed_at,json=completedAt,proto3" json:"completed_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -1529,14 +1529,14 @@ var File_pilab_director_v2_task_service_proto protoreflect.FileDescriptor
 
 const file_pilab_director_v2_task_service_proto_rawDesc = "" +
 	"\n" +
-	"$pilab/director/v2/task_service.proto\x12\x17pilab.cloud.director.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"m\n" +
+	"$pilab/director/v2/task_service.proto\x12\x11pilab.director.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"g\n" +
 	"\x10SubscribeRequest\x12\x17\n" +
-	"\anode_id\x18\x01 \x01(\tR\x06nodeId\x12@\n" +
+	"\anode_id\x18\x01 \x01(\tR\x06nodeId\x12:\n" +
 	"\n" +
-	"task_types\x18\x02 \x03(\x0e2!.pilab.cloud.director.v2.TaskTypeR\ttaskTypes\"\xd6\x05\n" +
+	"task_types\x18\x02 \x03(\x0e2\x1b.pilab.director.v2.TaskTypeR\ttaskTypes\"\xca\x05\n" +
 	"\x04Task\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x125\n" +
-	"\x04type\x18\x02 \x01(\x0e2!.pilab.cloud.director.v2.TaskTypeR\x04type\x12\x13\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12/\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x1b.pilab.director.v2.TaskTypeR\x04type\x12\x13\n" +
 	"\x05vm_id\x18\x03 \x01(\tR\x04vmId\x12\x17\n" +
 	"\avm_name\x18\x04 \x01(\tR\x06vmName\x12/\n" +
 	"\x06params\x18\x05 \x01(\v2\x17.google.protobuf.StructR\x06params\x12\x1a\n" +
@@ -1544,8 +1544,8 @@ const file_pilab_director_v2_task_service_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\b \x01(\tR\tcreatedBy\x12;\n" +
-	"\x06status\x18\t \x01(\x0e2#.pilab.cloud.director.v2.TaskStatusR\x06status\x129\n" +
+	"created_by\x18\b \x01(\tR\tcreatedBy\x125\n" +
+	"\x06status\x18\t \x01(\x0e2\x1d.pilab.director.v2.TaskStatusR\x06status\x129\n" +
 	"\n" +
 	"started_at\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x12=\n" +
@@ -1557,9 +1557,9 @@ const file_pilab_director_v2_task_service_proto_rawDesc = "" +
 	"\vassigned_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"assignedAt\x12\x1a\n" +
 	"\bpriority\x18\x11 \x01(\x05R\bpriority\x12\x16\n" +
-	"\x06reason\x18\x12 \x01(\tR\x06reason\"\xa2\x02\n" +
-	"\x11CreateTaskRequest\x125\n" +
-	"\x04type\x18\x01 \x01(\x0e2!.pilab.cloud.director.v2.TaskTypeR\x04type\x12\x13\n" +
+	"\x06reason\x18\x12 \x01(\tR\x06reason\"\x9c\x02\n" +
+	"\x11CreateTaskRequest\x12/\n" +
+	"\x04type\x18\x01 \x01(\x0e2\x1b.pilab.director.v2.TaskTypeR\x04type\x12\x13\n" +
 	"\x05vm_id\x18\x02 \x01(\tR\x04vmId\x12\x17\n" +
 	"\avm_name\x18\x03 \x01(\tR\x06vmName\x12/\n" +
 	"\x06params\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x06params\x12$\n" +
@@ -1567,58 +1567,58 @@ const file_pilab_director_v2_task_service_proto_rawDesc = "" +
 	"\n" +
 	"created_by\x18\x06 \x01(\tR\tcreatedBy\x12\x16\n" +
 	"\x06reason\x18\a \x01(\tR\x06reason\x12\x1a\n" +
-	"\bpriority\x18\b \x01(\x05R\bpriority\"w\n" +
-	"\x12CreateTaskResponse\x121\n" +
-	"\x04task\x18\x01 \x01(\v2\x1d.pilab.cloud.director.v2.TaskR\x04task\x12.\n" +
-	"\x13superseded_task_ids\x18\x02 \x03(\tR\x11supersededTaskIds\"\xa8\x01\n" +
+	"\bpriority\x18\b \x01(\x05R\bpriority\"q\n" +
+	"\x12CreateTaskResponse\x12+\n" +
+	"\x04task\x18\x01 \x01(\v2\x17.pilab.director.v2.TaskR\x04task\x12.\n" +
+	"\x13superseded_task_ids\x18\x02 \x03(\tR\x11supersededTaskIds\"\xa2\x01\n" +
 	"\x0fGetTasksRequest\x12\x17\n" +
-	"\anode_id\x18\x01 \x01(\tR\x06nodeId\x12?\n" +
-	"\bstatuses\x18\x02 \x03(\x0e2#.pilab.cloud.director.v2.TaskStatusR\bstatuses\x12\x14\n" +
+	"\anode_id\x18\x01 \x01(\tR\x06nodeId\x129\n" +
+	"\bstatuses\x18\x02 \x03(\x0e2\x1d.pilab.director.v2.TaskStatusR\bstatuses\x12\x14\n" +
 	"\x05limit\x18\x03 \x01(\x05R\x05limit\x12%\n" +
-	"\x0eafter_sequence\x18\x04 \x01(\tR\rafterSequence\"l\n" +
-	"\x10GetTasksResponse\x123\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x1d.pilab.cloud.director.v2.TaskR\x05tasks\x12#\n" +
+	"\x0eafter_sequence\x18\x04 \x01(\tR\rafterSequence\"f\n" +
+	"\x10GetTasksResponse\x12-\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x17.pilab.director.v2.TaskR\x05tasks\x12#\n" +
 	"\rnext_sequence\x18\x02 \x01(\tR\fnextSequence\")\n" +
 	"\x0eGetTaskRequest\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\tR\x06taskId\"D\n" +
-	"\x0fGetTaskResponse\x121\n" +
-	"\x04task\x18\x01 \x01(\v2\x1d.pilab.cloud.director.v2.TaskR\x04task\"\xa1\x02\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskId\">\n" +
+	"\x0fGetTaskResponse\x12+\n" +
+	"\x04task\x18\x01 \x01(\v2\x17.pilab.director.v2.TaskR\x04task\"\x9b\x02\n" +
 	"\x17UpdateTaskStatusRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x17\n" +
-	"\anode_id\x18\x02 \x01(\tR\x06nodeId\x12;\n" +
-	"\x06status\x18\x03 \x01(\x0e2#.pilab.cloud.director.v2.TaskStatusR\x06status\x12#\n" +
+	"\anode_id\x18\x02 \x01(\tR\x06nodeId\x125\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1d.pilab.director.v2.TaskStatusR\x06status\x12#\n" +
 	"\rerror_message\x18\x04 \x01(\tR\ferrorMessage\x12=\n" +
 	"\fcompleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\vcompletedAt\x123\n" +
-	"\bprogress\x18\x06 \x01(\v2\x17.google.protobuf.StructR\bprogress\"M\n" +
-	"\x18UpdateTaskStatusResponse\x121\n" +
-	"\x04task\x18\x01 \x01(\v2\x1d.pilab.cloud.director.v2.TaskR\x04task\"^\n" +
-	"\x17BatchUpdateTasksRequest\x12C\n" +
-	"\aupdates\x18\x01 \x03(\v2).pilab.cloud.director.v2.TaskStatusUpdateR\aupdates\"\xe5\x01\n" +
+	"\bprogress\x18\x06 \x01(\v2\x17.google.protobuf.StructR\bprogress\"G\n" +
+	"\x18UpdateTaskStatusResponse\x12+\n" +
+	"\x04task\x18\x01 \x01(\v2\x17.pilab.director.v2.TaskR\x04task\"X\n" +
+	"\x17BatchUpdateTasksRequest\x12=\n" +
+	"\aupdates\x18\x01 \x03(\v2#.pilab.director.v2.TaskStatusUpdateR\aupdates\"\xdf\x01\n" +
 	"\x10TaskStatusUpdate\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x17\n" +
-	"\anode_id\x18\x02 \x01(\tR\x06nodeId\x12;\n" +
-	"\x06status\x18\x03 \x01(\x0e2#.pilab.cloud.director.v2.TaskStatusR\x06status\x12#\n" +
+	"\anode_id\x18\x02 \x01(\tR\x06nodeId\x125\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1d.pilab.director.v2.TaskStatusR\x06status\x12#\n" +
 	"\rerror_message\x18\x04 \x01(\tR\ferrorMessage\x12=\n" +
-	"\fcompleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\vcompletedAt\"\x9d\x01\n" +
-	"\x18BatchUpdateTasksResponse\x12B\n" +
-	"\rupdated_tasks\x18\x01 \x03(\v2\x1d.pilab.cloud.director.v2.TaskR\fupdatedTasks\x12=\n" +
-	"\x06errors\x18\x02 \x03(\v2%.pilab.cloud.director.v2.FailedUpdateR\x06errors\"=\n" +
+	"\fcompleted_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\vcompletedAt\"\x91\x01\n" +
+	"\x18BatchUpdateTasksResponse\x12<\n" +
+	"\rupdated_tasks\x18\x01 \x03(\v2\x17.pilab.director.v2.TaskR\fupdatedTasks\x127\n" +
+	"\x06errors\x18\x02 \x03(\v2\x1f.pilab.director.v2.FailedUpdateR\x06errors\"=\n" +
 	"\fFailedUpdate\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x14\n" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"g\n" +
 	"\x11CancelTaskRequest\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12!\n" +
 	"\fcancelled_by\x18\x02 \x01(\tR\vcancelledBy\x12\x16\n" +
-	"\x06reason\x18\x03 \x01(\tR\x06reason\"e\n" +
-	"\x12CancelTaskResponse\x121\n" +
-	"\x04task\x18\x01 \x01(\v2\x1d.pilab.cloud.director.v2.TaskR\x04task\x12\x1c\n" +
+	"\x06reason\x18\x03 \x01(\tR\x06reason\"_\n" +
+	"\x12CancelTaskResponse\x12+\n" +
+	"\x04task\x18\x01 \x01(\v2\x17.pilab.director.v2.TaskR\x04task\x12\x1c\n" +
 	"\tcancelled\x18\x02 \x01(\bR\tcancelled\"k\n" +
 	"\x15GetTaskHistoryRequest\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x14\n" +
 	"\x05limit\x18\x02 \x01(\x05R\x05limit\x12'\n" +
-	"\x0fbefore_sequence\x18\x03 \x01(\tR\x0ebeforeSequence\"r\n" +
-	"\x16GetTaskHistoryResponse\x123\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x1d.pilab.cloud.director.v2.TaskR\x05tasks\x12#\n" +
+	"\x0fbefore_sequence\x18\x03 \x01(\tR\x0ebeforeSequence\"l\n" +
+	"\x16GetTaskHistoryResponse\x12-\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x17.pilab.director.v2.TaskR\x05tasks\x12#\n" +
 	"\rnext_sequence\x18\x02 \x01(\tR\fnextSequence\"\x8e\x03\n" +
 	"\n" +
 	"TaskParams\x12\x1b\n" +
@@ -1666,18 +1666,18 @@ const file_pilab_director_v2_task_service_proto_rawDesc = "" +
 	"\x15TASK_STATUS_COMPLETED\x10\x03\x12\x16\n" +
 	"\x12TASK_STATUS_FAILED\x10\x04\x12\x19\n" +
 	"\x15TASK_STATUS_CANCELLED\x10\x05\x12\x1a\n" +
-	"\x16TASK_STATUS_SUPERSEDED\x10\x062\xd8\x06\n" +
-	"\vTaskService\x12W\n" +
-	"\tSubscribe\x12).pilab.cloud.director.v2.SubscribeRequest\x1a\x1d.pilab.cloud.director.v2.Task0\x01\x12e\n" +
+	"\x16TASK_STATUS_SUPERSEDED\x10\x062\xf8\x05\n" +
+	"\vTaskService\x12K\n" +
+	"\tSubscribe\x12#.pilab.director.v2.SubscribeRequest\x1a\x17.pilab.director.v2.Task0\x01\x12Y\n" +
 	"\n" +
-	"CreateTask\x12*.pilab.cloud.director.v2.CreateTaskRequest\x1a+.pilab.cloud.director.v2.CreateTaskResponse\x12_\n" +
-	"\bGetTasks\x12(.pilab.cloud.director.v2.GetTasksRequest\x1a).pilab.cloud.director.v2.GetTasksResponse\x12\\\n" +
-	"\aGetTask\x12'.pilab.cloud.director.v2.GetTaskRequest\x1a(.pilab.cloud.director.v2.GetTaskResponse\x12w\n" +
-	"\x10UpdateTaskStatus\x120.pilab.cloud.director.v2.UpdateTaskStatusRequest\x1a1.pilab.cloud.director.v2.UpdateTaskStatusResponse\x12e\n" +
+	"CreateTask\x12$.pilab.director.v2.CreateTaskRequest\x1a%.pilab.director.v2.CreateTaskResponse\x12S\n" +
+	"\bGetTasks\x12\".pilab.director.v2.GetTasksRequest\x1a#.pilab.director.v2.GetTasksResponse\x12P\n" +
+	"\aGetTask\x12!.pilab.director.v2.GetTaskRequest\x1a\".pilab.director.v2.GetTaskResponse\x12k\n" +
+	"\x10UpdateTaskStatus\x12*.pilab.director.v2.UpdateTaskStatusRequest\x1a+.pilab.director.v2.UpdateTaskStatusResponse\x12Y\n" +
 	"\n" +
-	"CancelTask\x12*.pilab.cloud.director.v2.CancelTaskRequest\x1a+.pilab.cloud.director.v2.CancelTaskResponse\x12q\n" +
-	"\x0eGetTaskHistory\x12..pilab.cloud.director.v2.GetTaskHistoryRequest\x1a/.pilab.cloud.director.v2.GetTaskHistoryResponse\x12w\n" +
-	"\x10BatchUpdateTasks\x120.pilab.cloud.director.v2.BatchUpdateTasksRequest\x1a1.pilab.cloud.director.v2.BatchUpdateTasksResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/director/v2;directorv2b\x06proto3"
+	"CancelTask\x12$.pilab.director.v2.CancelTaskRequest\x1a%.pilab.director.v2.CancelTaskResponse\x12e\n" +
+	"\x0eGetTaskHistory\x12(.pilab.director.v2.GetTaskHistoryRequest\x1a).pilab.director.v2.GetTaskHistoryResponse\x12k\n" +
+	"\x10BatchUpdateTasks\x12*.pilab.director.v2.BatchUpdateTasksRequest\x1a+.pilab.director.v2.BatchUpdateTasksResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/director/v2;directorv2b\x06proto3"
 
 var (
 	file_pilab_director_v2_task_service_proto_rawDescOnce sync.Once
@@ -1694,72 +1694,72 @@ func file_pilab_director_v2_task_service_proto_rawDescGZIP() []byte {
 var file_pilab_director_v2_task_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_pilab_director_v2_task_service_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_pilab_director_v2_task_service_proto_goTypes = []any{
-	(TaskType)(0),                    // 0: pilab.cloud.director.v2.TaskType
-	(TaskStatus)(0),                  // 1: pilab.cloud.director.v2.TaskStatus
-	(*SubscribeRequest)(nil),         // 2: pilab.cloud.director.v2.SubscribeRequest
-	(*Task)(nil),                     // 3: pilab.cloud.director.v2.Task
-	(*CreateTaskRequest)(nil),        // 4: pilab.cloud.director.v2.CreateTaskRequest
-	(*CreateTaskResponse)(nil),       // 5: pilab.cloud.director.v2.CreateTaskResponse
-	(*GetTasksRequest)(nil),          // 6: pilab.cloud.director.v2.GetTasksRequest
-	(*GetTasksResponse)(nil),         // 7: pilab.cloud.director.v2.GetTasksResponse
-	(*GetTaskRequest)(nil),           // 8: pilab.cloud.director.v2.GetTaskRequest
-	(*GetTaskResponse)(nil),          // 9: pilab.cloud.director.v2.GetTaskResponse
-	(*UpdateTaskStatusRequest)(nil),  // 10: pilab.cloud.director.v2.UpdateTaskStatusRequest
-	(*UpdateTaskStatusResponse)(nil), // 11: pilab.cloud.director.v2.UpdateTaskStatusResponse
-	(*BatchUpdateTasksRequest)(nil),  // 12: pilab.cloud.director.v2.BatchUpdateTasksRequest
-	(*TaskStatusUpdate)(nil),         // 13: pilab.cloud.director.v2.TaskStatusUpdate
-	(*BatchUpdateTasksResponse)(nil), // 14: pilab.cloud.director.v2.BatchUpdateTasksResponse
-	(*FailedUpdate)(nil),             // 15: pilab.cloud.director.v2.FailedUpdate
-	(*CancelTaskRequest)(nil),        // 16: pilab.cloud.director.v2.CancelTaskRequest
-	(*CancelTaskResponse)(nil),       // 17: pilab.cloud.director.v2.CancelTaskResponse
-	(*GetTaskHistoryRequest)(nil),    // 18: pilab.cloud.director.v2.GetTaskHistoryRequest
-	(*GetTaskHistoryResponse)(nil),   // 19: pilab.cloud.director.v2.GetTaskHistoryResponse
-	(*TaskParams)(nil),               // 20: pilab.cloud.director.v2.TaskParams
+	(TaskType)(0),                    // 0: pilab.director.v2.TaskType
+	(TaskStatus)(0),                  // 1: pilab.director.v2.TaskStatus
+	(*SubscribeRequest)(nil),         // 2: pilab.director.v2.SubscribeRequest
+	(*Task)(nil),                     // 3: pilab.director.v2.Task
+	(*CreateTaskRequest)(nil),        // 4: pilab.director.v2.CreateTaskRequest
+	(*CreateTaskResponse)(nil),       // 5: pilab.director.v2.CreateTaskResponse
+	(*GetTasksRequest)(nil),          // 6: pilab.director.v2.GetTasksRequest
+	(*GetTasksResponse)(nil),         // 7: pilab.director.v2.GetTasksResponse
+	(*GetTaskRequest)(nil),           // 8: pilab.director.v2.GetTaskRequest
+	(*GetTaskResponse)(nil),          // 9: pilab.director.v2.GetTaskResponse
+	(*UpdateTaskStatusRequest)(nil),  // 10: pilab.director.v2.UpdateTaskStatusRequest
+	(*UpdateTaskStatusResponse)(nil), // 11: pilab.director.v2.UpdateTaskStatusResponse
+	(*BatchUpdateTasksRequest)(nil),  // 12: pilab.director.v2.BatchUpdateTasksRequest
+	(*TaskStatusUpdate)(nil),         // 13: pilab.director.v2.TaskStatusUpdate
+	(*BatchUpdateTasksResponse)(nil), // 14: pilab.director.v2.BatchUpdateTasksResponse
+	(*FailedUpdate)(nil),             // 15: pilab.director.v2.FailedUpdate
+	(*CancelTaskRequest)(nil),        // 16: pilab.director.v2.CancelTaskRequest
+	(*CancelTaskResponse)(nil),       // 17: pilab.director.v2.CancelTaskResponse
+	(*GetTaskHistoryRequest)(nil),    // 18: pilab.director.v2.GetTaskHistoryRequest
+	(*GetTaskHistoryResponse)(nil),   // 19: pilab.director.v2.GetTaskHistoryResponse
+	(*TaskParams)(nil),               // 20: pilab.director.v2.TaskParams
 	(*structpb.Struct)(nil),          // 21: google.protobuf.Struct
 	(*timestamppb.Timestamp)(nil),    // 22: google.protobuf.Timestamp
 }
 var file_pilab_director_v2_task_service_proto_depIdxs = []int32{
-	0,  // 0: pilab.cloud.director.v2.SubscribeRequest.task_types:type_name -> pilab.cloud.director.v2.TaskType
-	0,  // 1: pilab.cloud.director.v2.Task.type:type_name -> pilab.cloud.director.v2.TaskType
-	21, // 2: pilab.cloud.director.v2.Task.params:type_name -> google.protobuf.Struct
-	22, // 3: pilab.cloud.director.v2.Task.created_at:type_name -> google.protobuf.Timestamp
-	1,  // 4: pilab.cloud.director.v2.Task.status:type_name -> pilab.cloud.director.v2.TaskStatus
-	22, // 5: pilab.cloud.director.v2.Task.started_at:type_name -> google.protobuf.Timestamp
-	22, // 6: pilab.cloud.director.v2.Task.completed_at:type_name -> google.protobuf.Timestamp
-	22, // 7: pilab.cloud.director.v2.Task.assigned_at:type_name -> google.protobuf.Timestamp
-	0,  // 8: pilab.cloud.director.v2.CreateTaskRequest.type:type_name -> pilab.cloud.director.v2.TaskType
-	21, // 9: pilab.cloud.director.v2.CreateTaskRequest.params:type_name -> google.protobuf.Struct
-	3,  // 10: pilab.cloud.director.v2.CreateTaskResponse.task:type_name -> pilab.cloud.director.v2.Task
-	1,  // 11: pilab.cloud.director.v2.GetTasksRequest.statuses:type_name -> pilab.cloud.director.v2.TaskStatus
-	3,  // 12: pilab.cloud.director.v2.GetTasksResponse.tasks:type_name -> pilab.cloud.director.v2.Task
-	3,  // 13: pilab.cloud.director.v2.GetTaskResponse.task:type_name -> pilab.cloud.director.v2.Task
-	1,  // 14: pilab.cloud.director.v2.UpdateTaskStatusRequest.status:type_name -> pilab.cloud.director.v2.TaskStatus
-	22, // 15: pilab.cloud.director.v2.UpdateTaskStatusRequest.completed_at:type_name -> google.protobuf.Timestamp
-	21, // 16: pilab.cloud.director.v2.UpdateTaskStatusRequest.progress:type_name -> google.protobuf.Struct
-	3,  // 17: pilab.cloud.director.v2.UpdateTaskStatusResponse.task:type_name -> pilab.cloud.director.v2.Task
-	13, // 18: pilab.cloud.director.v2.BatchUpdateTasksRequest.updates:type_name -> pilab.cloud.director.v2.TaskStatusUpdate
-	1,  // 19: pilab.cloud.director.v2.TaskStatusUpdate.status:type_name -> pilab.cloud.director.v2.TaskStatus
-	22, // 20: pilab.cloud.director.v2.TaskStatusUpdate.completed_at:type_name -> google.protobuf.Timestamp
-	3,  // 21: pilab.cloud.director.v2.BatchUpdateTasksResponse.updated_tasks:type_name -> pilab.cloud.director.v2.Task
-	15, // 22: pilab.cloud.director.v2.BatchUpdateTasksResponse.errors:type_name -> pilab.cloud.director.v2.FailedUpdate
-	3,  // 23: pilab.cloud.director.v2.CancelTaskResponse.task:type_name -> pilab.cloud.director.v2.Task
-	3,  // 24: pilab.cloud.director.v2.GetTaskHistoryResponse.tasks:type_name -> pilab.cloud.director.v2.Task
-	2,  // 25: pilab.cloud.director.v2.TaskService.Subscribe:input_type -> pilab.cloud.director.v2.SubscribeRequest
-	4,  // 26: pilab.cloud.director.v2.TaskService.CreateTask:input_type -> pilab.cloud.director.v2.CreateTaskRequest
-	6,  // 27: pilab.cloud.director.v2.TaskService.GetTasks:input_type -> pilab.cloud.director.v2.GetTasksRequest
-	8,  // 28: pilab.cloud.director.v2.TaskService.GetTask:input_type -> pilab.cloud.director.v2.GetTaskRequest
-	10, // 29: pilab.cloud.director.v2.TaskService.UpdateTaskStatus:input_type -> pilab.cloud.director.v2.UpdateTaskStatusRequest
-	16, // 30: pilab.cloud.director.v2.TaskService.CancelTask:input_type -> pilab.cloud.director.v2.CancelTaskRequest
-	18, // 31: pilab.cloud.director.v2.TaskService.GetTaskHistory:input_type -> pilab.cloud.director.v2.GetTaskHistoryRequest
-	12, // 32: pilab.cloud.director.v2.TaskService.BatchUpdateTasks:input_type -> pilab.cloud.director.v2.BatchUpdateTasksRequest
-	3,  // 33: pilab.cloud.director.v2.TaskService.Subscribe:output_type -> pilab.cloud.director.v2.Task
-	5,  // 34: pilab.cloud.director.v2.TaskService.CreateTask:output_type -> pilab.cloud.director.v2.CreateTaskResponse
-	7,  // 35: pilab.cloud.director.v2.TaskService.GetTasks:output_type -> pilab.cloud.director.v2.GetTasksResponse
-	9,  // 36: pilab.cloud.director.v2.TaskService.GetTask:output_type -> pilab.cloud.director.v2.GetTaskResponse
-	11, // 37: pilab.cloud.director.v2.TaskService.UpdateTaskStatus:output_type -> pilab.cloud.director.v2.UpdateTaskStatusResponse
-	17, // 38: pilab.cloud.director.v2.TaskService.CancelTask:output_type -> pilab.cloud.director.v2.CancelTaskResponse
-	19, // 39: pilab.cloud.director.v2.TaskService.GetTaskHistory:output_type -> pilab.cloud.director.v2.GetTaskHistoryResponse
-	14, // 40: pilab.cloud.director.v2.TaskService.BatchUpdateTasks:output_type -> pilab.cloud.director.v2.BatchUpdateTasksResponse
+	0,  // 0: pilab.director.v2.SubscribeRequest.task_types:type_name -> pilab.director.v2.TaskType
+	0,  // 1: pilab.director.v2.Task.type:type_name -> pilab.director.v2.TaskType
+	21, // 2: pilab.director.v2.Task.params:type_name -> google.protobuf.Struct
+	22, // 3: pilab.director.v2.Task.created_at:type_name -> google.protobuf.Timestamp
+	1,  // 4: pilab.director.v2.Task.status:type_name -> pilab.director.v2.TaskStatus
+	22, // 5: pilab.director.v2.Task.started_at:type_name -> google.protobuf.Timestamp
+	22, // 6: pilab.director.v2.Task.completed_at:type_name -> google.protobuf.Timestamp
+	22, // 7: pilab.director.v2.Task.assigned_at:type_name -> google.protobuf.Timestamp
+	0,  // 8: pilab.director.v2.CreateTaskRequest.type:type_name -> pilab.director.v2.TaskType
+	21, // 9: pilab.director.v2.CreateTaskRequest.params:type_name -> google.protobuf.Struct
+	3,  // 10: pilab.director.v2.CreateTaskResponse.task:type_name -> pilab.director.v2.Task
+	1,  // 11: pilab.director.v2.GetTasksRequest.statuses:type_name -> pilab.director.v2.TaskStatus
+	3,  // 12: pilab.director.v2.GetTasksResponse.tasks:type_name -> pilab.director.v2.Task
+	3,  // 13: pilab.director.v2.GetTaskResponse.task:type_name -> pilab.director.v2.Task
+	1,  // 14: pilab.director.v2.UpdateTaskStatusRequest.status:type_name -> pilab.director.v2.TaskStatus
+	22, // 15: pilab.director.v2.UpdateTaskStatusRequest.completed_at:type_name -> google.protobuf.Timestamp
+	21, // 16: pilab.director.v2.UpdateTaskStatusRequest.progress:type_name -> google.protobuf.Struct
+	3,  // 17: pilab.director.v2.UpdateTaskStatusResponse.task:type_name -> pilab.director.v2.Task
+	13, // 18: pilab.director.v2.BatchUpdateTasksRequest.updates:type_name -> pilab.director.v2.TaskStatusUpdate
+	1,  // 19: pilab.director.v2.TaskStatusUpdate.status:type_name -> pilab.director.v2.TaskStatus
+	22, // 20: pilab.director.v2.TaskStatusUpdate.completed_at:type_name -> google.protobuf.Timestamp
+	3,  // 21: pilab.director.v2.BatchUpdateTasksResponse.updated_tasks:type_name -> pilab.director.v2.Task
+	15, // 22: pilab.director.v2.BatchUpdateTasksResponse.errors:type_name -> pilab.director.v2.FailedUpdate
+	3,  // 23: pilab.director.v2.CancelTaskResponse.task:type_name -> pilab.director.v2.Task
+	3,  // 24: pilab.director.v2.GetTaskHistoryResponse.tasks:type_name -> pilab.director.v2.Task
+	2,  // 25: pilab.director.v2.TaskService.Subscribe:input_type -> pilab.director.v2.SubscribeRequest
+	4,  // 26: pilab.director.v2.TaskService.CreateTask:input_type -> pilab.director.v2.CreateTaskRequest
+	6,  // 27: pilab.director.v2.TaskService.GetTasks:input_type -> pilab.director.v2.GetTasksRequest
+	8,  // 28: pilab.director.v2.TaskService.GetTask:input_type -> pilab.director.v2.GetTaskRequest
+	10, // 29: pilab.director.v2.TaskService.UpdateTaskStatus:input_type -> pilab.director.v2.UpdateTaskStatusRequest
+	16, // 30: pilab.director.v2.TaskService.CancelTask:input_type -> pilab.director.v2.CancelTaskRequest
+	18, // 31: pilab.director.v2.TaskService.GetTaskHistory:input_type -> pilab.director.v2.GetTaskHistoryRequest
+	12, // 32: pilab.director.v2.TaskService.BatchUpdateTasks:input_type -> pilab.director.v2.BatchUpdateTasksRequest
+	3,  // 33: pilab.director.v2.TaskService.Subscribe:output_type -> pilab.director.v2.Task
+	5,  // 34: pilab.director.v2.TaskService.CreateTask:output_type -> pilab.director.v2.CreateTaskResponse
+	7,  // 35: pilab.director.v2.TaskService.GetTasks:output_type -> pilab.director.v2.GetTasksResponse
+	9,  // 36: pilab.director.v2.TaskService.GetTask:output_type -> pilab.director.v2.GetTaskResponse
+	11, // 37: pilab.director.v2.TaskService.UpdateTaskStatus:output_type -> pilab.director.v2.UpdateTaskStatusResponse
+	17, // 38: pilab.director.v2.TaskService.CancelTask:output_type -> pilab.director.v2.CancelTaskResponse
+	19, // 39: pilab.director.v2.TaskService.GetTaskHistory:output_type -> pilab.director.v2.GetTaskHistoryResponse
+	14, // 40: pilab.director.v2.TaskService.BatchUpdateTasks:output_type -> pilab.director.v2.BatchUpdateTasksResponse
 	33, // [33:41] is the sub-list for method output_type
 	25, // [25:33] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name

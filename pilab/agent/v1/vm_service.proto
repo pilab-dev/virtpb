@@ -21,16 +21,15 @@
 
 syntax = "proto3";
 
-package pilab.cloud.agent.v1;
+package pilab.agent.v1;
 
-import "pilab/agent/v1/stream.proto";
 import "pilab/agent/v1/error.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
 
 // ControlCommand defines the commands that can be sent to control a virtual machine.
 enum ControlCommand {
-  CONTROL_COMMAND_UNSPECIFIED = 0;
+  CONTROL_COMMAND_UNKNOWN = 0;
   CONTROL_COMMAND_STOP = 1;
   CONTROL_COMMAND_KILL = 2;
   CONTROL_COMMAND_SUSPEND = 3;

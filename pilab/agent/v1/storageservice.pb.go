@@ -1621,7 +1621,7 @@ var File_pilab_agent_v1_storageservice_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_storageservice_proto_rawDesc = "" +
 	"\n" +
-	"#pilab/agent/v1/storageservice.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/agent/v1/stream.proto\x1a\"pilab/agent/v1/agent_service.proto\x1a\x1apilab/agent/v1/error.proto\"~\n" +
+	"#pilab/agent/v1/storageservice.proto\x12\x0epilab.agent.v1\x1a\x1apilab/agent/v1/error.proto\"~\n" +
 	"\x06Volume\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
 	"\tpool_name\x18\x02 \x01(\tR\bpoolName\x12\x17\n" +
@@ -1634,42 +1634,42 @@ const file_pilab_agent_v1_storageservice_proto_rawDesc = "" +
 	"\asize_gb\x18\x03 \x01(\x04R\x06sizeGb\x12\x16\n" +
 	"\x06format\x18\x04 \x01(\tR\x06format\x12(\n" +
 	"\rbacking_store\x18\x05 \x01(\tH\x00R\fbackingStore\x88\x01\x01B\x10\n" +
-	"\x0e_backing_store\"\xc0\x01\n" +
+	"\x0e_backing_store\"\xb4\x01\n" +
 	"\x14VolumeCreateResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x129\n" +
-	"\x06volume\x18\x03 \x01(\v2\x1c.pilab.cloud.agent.v1.VolumeH\x01R\x06volume\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x123\n" +
+	"\x06volume\x18\x03 \x01(\v2\x16.pilab.agent.v1.VolumeH\x01R\x06volume\x88\x01\x01B\b\n" +
 	"\x06_errorB\t\n" +
 	"\a_volume\"b\n" +
 	"\x13VolumeDeleteRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04pool\x18\x02 \x01(\tR\x04pool\x12\x19\n" +
 	"\x05force\x18\x03 \x01(\bH\x00R\x05force\x88\x01\x01B\b\n" +
-	"\x06_force\"z\n" +
+	"\x06_force\"t\n" +
 	"\x14VolumeDeleteResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"Q\n" +
 	"\x13VolumeResizeRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04pool\x18\x02 \x01(\tR\x04pool\x12\x12\n" +
-	"\x04size\x18\x03 \x01(\x04R\x04size\"z\n" +
+	"\x04size\x18\x03 \x01(\x04R\x04size\"t\n" +
 	"\x14VolumeResizeResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"C\n" +
 	"\x11VolumeListRequest\x12 \n" +
 	"\tpool_name\x18\x01 \x01(\tH\x00R\bpoolName\x88\x01\x01B\f\n" +
 	"\n" +
-	"_pool_name\"L\n" +
-	"\x12VolumeListResponse\x126\n" +
-	"\avolumes\x18\x01 \x03(\v2\x1c.pilab.cloud.agent.v1.VolumeR\avolumes\"C\n" +
+	"_pool_name\"F\n" +
+	"\x12VolumeListResponse\x120\n" +
+	"\avolumes\x18\x01 \x03(\v2\x16.pilab.agent.v1.VolumeR\avolumes\"C\n" +
 	"\x10VolumeGetRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
-	"\tpool_name\x18\x02 \x01(\tR\bpoolName\"\xa3\x01\n" +
-	"\x11VolumeGetResponse\x129\n" +
-	"\x06volume\x18\x01 \x01(\v2\x1c.pilab.cloud.agent.v1.VolumeH\x00R\x06volume\x88\x01\x01\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\t\n" +
+	"\tpool_name\x18\x02 \x01(\tR\bpoolName\"\x97\x01\n" +
+	"\x11VolumeGetResponse\x123\n" +
+	"\x06volume\x18\x01 \x01(\v2\x16.pilab.agent.v1.VolumeH\x00R\x06volume\x88\x01\x01\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\t\n" +
 	"\a_volumeB\b\n" +
 	"\x06_error\"\xb7\x01\n" +
 	"\x12VolumeCloneRequest\x12\x1f\n" +
@@ -1681,39 +1681,39 @@ const file_pilab_agent_v1_storageservice_proto_rawDesc = "" +
 	"\bnew_pool\x18\x04 \x01(\tR\anewPool\x12\x1d\n" +
 	"\ashallow\x18\x05 \x01(\bH\x00R\ashallow\x88\x01\x01B\n" +
 	"\n" +
-	"\b_shallow\"\xbf\x01\n" +
+	"\b_shallow\"\xb3\x01\n" +
 	"\x13VolumeCloneResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x129\n" +
-	"\x06volume\x18\x03 \x01(\v2\x1c.pilab.cloud.agent.v1.VolumeH\x01R\x06volume\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x123\n" +
+	"\x06volume\x18\x03 \x01(\v2\x16.pilab.agent.v1.VolumeH\x01R\x06volume\x88\x01\x01B\b\n" +
 	"\x06_errorB\t\n" +
 	"\a_volume\"\x80\x01\n" +
 	"\x1bVolumeSnapshotCreateRequest\x12\x1f\n" +
 	"\vvolume_name\x18\x01 \x01(\tR\n" +
 	"volumeName\x12\x1b\n" +
 	"\tpool_name\x18\x02 \x01(\tR\bpoolName\x12#\n" +
-	"\rsnapshot_name\x18\x03 \x01(\tR\fsnapshotName\"\x82\x01\n" +
+	"\rsnapshot_name\x18\x03 \x01(\tR\fsnapshotName\"|\n" +
 	"\x1cVolumeSnapshotCreateResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"\x80\x01\n" +
 	"\x1bVolumeSnapshotRevertRequest\x12\x1f\n" +
 	"\vvolume_name\x18\x01 \x01(\tR\n" +
 	"volumeName\x12\x1b\n" +
 	"\tpool_name\x18\x02 \x01(\tR\bpoolName\x12#\n" +
-	"\rsnapshot_name\x18\x03 \x01(\tR\fsnapshotName\"\x82\x01\n" +
+	"\rsnapshot_name\x18\x03 \x01(\tR\fsnapshotName\"|\n" +
 	"\x1cVolumeSnapshotRevertResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"\x80\x01\n" +
 	"\x1bVolumeSnapshotDeleteRequest\x12\x1f\n" +
 	"\vvolume_name\x18\x01 \x01(\tR\n" +
 	"volumeName\x12\x1b\n" +
 	"\tpool_name\x18\x02 \x01(\tR\bpoolName\x12#\n" +
-	"\rsnapshot_name\x18\x03 \x01(\tR\fsnapshotName\"\x82\x01\n" +
+	"\rsnapshot_name\x18\x03 \x01(\tR\fsnapshotName\"|\n" +
 	"\x1cVolumeSnapshotDeleteResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"\xc4\x01\n" +
 	"\vStoragePool\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
@@ -1725,44 +1725,45 @@ const file_pilab_agent_v1_storageservice_proto_rawDesc = "" +
 	"\x18StoragePoolCreateRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x12\n" +
-	"\x04path\x18\x03 \x01(\tR\x04path\"\xc4\x01\n" +
+	"\x04path\x18\x03 \x01(\tR\x04path\"\xb8\x01\n" +
 	"\x19StoragePoolCreateResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12:\n" +
-	"\x04pool\x18\x03 \x01(\v2!.pilab.cloud.agent.v1.StoragePoolH\x01R\x04pool\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x124\n" +
+	"\x04pool\x18\x03 \x01(\v2\x1b.pilab.agent.v1.StoragePoolH\x01R\x04pool\x88\x01\x01B\b\n" +
 	"\x06_errorB\a\n" +
 	"\x05_pool\".\n" +
 	"\x18StoragePoolDeleteRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\x7f\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"y\n" +
 	"\x19StoragePoolDeleteResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"\x18\n" +
-	"\x16StoragePoolListRequest\"R\n" +
-	"\x17StoragePoolListResponse\x127\n" +
-	"\x05pools\x18\x01 \x03(\v2!.pilab.cloud.agent.v1.StoragePoolR\x05pools\"+\n" +
+	"\x16StoragePoolListRequest\"L\n" +
+	"\x17StoragePoolListResponse\x121\n" +
+	"\x05pools\x18\x01 \x03(\v2\x1b.pilab.agent.v1.StoragePoolR\x05pools\"+\n" +
 	"\x15StoragePoolGetRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xa7\x01\n" +
-	"\x16StoragePoolGetResponse\x12:\n" +
-	"\x04pool\x18\x01 \x01(\v2!.pilab.cloud.agent.v1.StoragePoolH\x00R\x04pool\x88\x01\x01\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\a\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x9b\x01\n" +
+	"\x16StoragePoolGetResponse\x124\n" +
+	"\x04pool\x18\x01 \x01(\v2\x1b.pilab.agent.v1.StoragePoolH\x00R\x04pool\x88\x01\x01\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\a\n" +
 	"\x05_poolB\b\n" +
-	"\x06_error2\xae\v\n" +
-	"\x0eStorageService\x12e\n" +
-	"\fVolumeCreate\x12).pilab.cloud.agent.v1.VolumeCreateRequest\x1a*.pilab.cloud.agent.v1.VolumeCreateResponse\x12e\n" +
-	"\fVolumeDelete\x12).pilab.cloud.agent.v1.VolumeDeleteRequest\x1a*.pilab.cloud.agent.v1.VolumeDeleteResponse\x12e\n" +
-	"\fVolumeResize\x12).pilab.cloud.agent.v1.VolumeResizeRequest\x1a*.pilab.cloud.agent.v1.VolumeResizeResponse\x12_\n" +
+	"\x06_error2\x92\n" +
 	"\n" +
-	"VolumeList\x12'.pilab.cloud.agent.v1.VolumeListRequest\x1a(.pilab.cloud.agent.v1.VolumeListResponse\x12\\\n" +
-	"\tVolumeGet\x12&.pilab.cloud.agent.v1.VolumeGetRequest\x1a'.pilab.cloud.agent.v1.VolumeGetResponse\x12b\n" +
-	"\vVolumeClone\x12(.pilab.cloud.agent.v1.VolumeCloneRequest\x1a).pilab.cloud.agent.v1.VolumeCloneResponse\x12}\n" +
-	"\x14VolumeSnapshotCreate\x121.pilab.cloud.agent.v1.VolumeSnapshotCreateRequest\x1a2.pilab.cloud.agent.v1.VolumeSnapshotCreateResponse\x12}\n" +
-	"\x14VolumeSnapshotRevert\x121.pilab.cloud.agent.v1.VolumeSnapshotRevertRequest\x1a2.pilab.cloud.agent.v1.VolumeSnapshotRevertResponse\x12}\n" +
-	"\x14VolumeSnapshotDelete\x121.pilab.cloud.agent.v1.VolumeSnapshotDeleteRequest\x1a2.pilab.cloud.agent.v1.VolumeSnapshotDeleteResponse\x12t\n" +
-	"\x11StoragePoolCreate\x12..pilab.cloud.agent.v1.StoragePoolCreateRequest\x1a/.pilab.cloud.agent.v1.StoragePoolCreateResponse\x12t\n" +
-	"\x11StoragePoolDelete\x12..pilab.cloud.agent.v1.StoragePoolDeleteRequest\x1a/.pilab.cloud.agent.v1.StoragePoolDeleteResponse\x12n\n" +
-	"\x0fStoragePoolList\x12,.pilab.cloud.agent.v1.StoragePoolListRequest\x1a-.pilab.cloud.agent.v1.StoragePoolListResponse\x12k\n" +
-	"\x0eStoragePoolGet\x12+.pilab.cloud.agent.v1.StoragePoolGetRequest\x1a,.pilab.cloud.agent.v1.StoragePoolGetResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\x0eStorageService\x12Y\n" +
+	"\fVolumeCreate\x12#.pilab.agent.v1.VolumeCreateRequest\x1a$.pilab.agent.v1.VolumeCreateResponse\x12Y\n" +
+	"\fVolumeDelete\x12#.pilab.agent.v1.VolumeDeleteRequest\x1a$.pilab.agent.v1.VolumeDeleteResponse\x12Y\n" +
+	"\fVolumeResize\x12#.pilab.agent.v1.VolumeResizeRequest\x1a$.pilab.agent.v1.VolumeResizeResponse\x12S\n" +
+	"\n" +
+	"VolumeList\x12!.pilab.agent.v1.VolumeListRequest\x1a\".pilab.agent.v1.VolumeListResponse\x12P\n" +
+	"\tVolumeGet\x12 .pilab.agent.v1.VolumeGetRequest\x1a!.pilab.agent.v1.VolumeGetResponse\x12V\n" +
+	"\vVolumeClone\x12\".pilab.agent.v1.VolumeCloneRequest\x1a#.pilab.agent.v1.VolumeCloneResponse\x12q\n" +
+	"\x14VolumeSnapshotCreate\x12+.pilab.agent.v1.VolumeSnapshotCreateRequest\x1a,.pilab.agent.v1.VolumeSnapshotCreateResponse\x12q\n" +
+	"\x14VolumeSnapshotRevert\x12+.pilab.agent.v1.VolumeSnapshotRevertRequest\x1a,.pilab.agent.v1.VolumeSnapshotRevertResponse\x12q\n" +
+	"\x14VolumeSnapshotDelete\x12+.pilab.agent.v1.VolumeSnapshotDeleteRequest\x1a,.pilab.agent.v1.VolumeSnapshotDeleteResponse\x12h\n" +
+	"\x11StoragePoolCreate\x12(.pilab.agent.v1.StoragePoolCreateRequest\x1a).pilab.agent.v1.StoragePoolCreateResponse\x12h\n" +
+	"\x11StoragePoolDelete\x12(.pilab.agent.v1.StoragePoolDeleteRequest\x1a).pilab.agent.v1.StoragePoolDeleteResponse\x12b\n" +
+	"\x0fStoragePoolList\x12&.pilab.agent.v1.StoragePoolListRequest\x1a'.pilab.agent.v1.StoragePoolListResponse\x12_\n" +
+	"\x0eStoragePoolGet\x12%.pilab.agent.v1.StoragePoolGetRequest\x1a&.pilab.agent.v1.StoragePoolGetResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_storageservice_proto_rawDescOnce sync.Once
@@ -1778,81 +1779,81 @@ func file_pilab_agent_v1_storageservice_proto_rawDescGZIP() []byte {
 
 var file_pilab_agent_v1_storageservice_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_pilab_agent_v1_storageservice_proto_goTypes = []any{
-	(*Volume)(nil),                       // 0: pilab.cloud.agent.v1.Volume
-	(*VolumeCreateRequest)(nil),          // 1: pilab.cloud.agent.v1.VolumeCreateRequest
-	(*VolumeCreateResponse)(nil),         // 2: pilab.cloud.agent.v1.VolumeCreateResponse
-	(*VolumeDeleteRequest)(nil),          // 3: pilab.cloud.agent.v1.VolumeDeleteRequest
-	(*VolumeDeleteResponse)(nil),         // 4: pilab.cloud.agent.v1.VolumeDeleteResponse
-	(*VolumeResizeRequest)(nil),          // 5: pilab.cloud.agent.v1.VolumeResizeRequest
-	(*VolumeResizeResponse)(nil),         // 6: pilab.cloud.agent.v1.VolumeResizeResponse
-	(*VolumeListRequest)(nil),            // 7: pilab.cloud.agent.v1.VolumeListRequest
-	(*VolumeListResponse)(nil),           // 8: pilab.cloud.agent.v1.VolumeListResponse
-	(*VolumeGetRequest)(nil),             // 9: pilab.cloud.agent.v1.VolumeGetRequest
-	(*VolumeGetResponse)(nil),            // 10: pilab.cloud.agent.v1.VolumeGetResponse
-	(*VolumeCloneRequest)(nil),           // 11: pilab.cloud.agent.v1.VolumeCloneRequest
-	(*VolumeCloneResponse)(nil),          // 12: pilab.cloud.agent.v1.VolumeCloneResponse
-	(*VolumeSnapshotCreateRequest)(nil),  // 13: pilab.cloud.agent.v1.VolumeSnapshotCreateRequest
-	(*VolumeSnapshotCreateResponse)(nil), // 14: pilab.cloud.agent.v1.VolumeSnapshotCreateResponse
-	(*VolumeSnapshotRevertRequest)(nil),  // 15: pilab.cloud.agent.v1.VolumeSnapshotRevertRequest
-	(*VolumeSnapshotRevertResponse)(nil), // 16: pilab.cloud.agent.v1.VolumeSnapshotRevertResponse
-	(*VolumeSnapshotDeleteRequest)(nil),  // 17: pilab.cloud.agent.v1.VolumeSnapshotDeleteRequest
-	(*VolumeSnapshotDeleteResponse)(nil), // 18: pilab.cloud.agent.v1.VolumeSnapshotDeleteResponse
-	(*StoragePool)(nil),                  // 19: pilab.cloud.agent.v1.StoragePool
-	(*StoragePoolCreateRequest)(nil),     // 20: pilab.cloud.agent.v1.StoragePoolCreateRequest
-	(*StoragePoolCreateResponse)(nil),    // 21: pilab.cloud.agent.v1.StoragePoolCreateResponse
-	(*StoragePoolDeleteRequest)(nil),     // 22: pilab.cloud.agent.v1.StoragePoolDeleteRequest
-	(*StoragePoolDeleteResponse)(nil),    // 23: pilab.cloud.agent.v1.StoragePoolDeleteResponse
-	(*StoragePoolListRequest)(nil),       // 24: pilab.cloud.agent.v1.StoragePoolListRequest
-	(*StoragePoolListResponse)(nil),      // 25: pilab.cloud.agent.v1.StoragePoolListResponse
-	(*StoragePoolGetRequest)(nil),        // 26: pilab.cloud.agent.v1.StoragePoolGetRequest
-	(*StoragePoolGetResponse)(nil),       // 27: pilab.cloud.agent.v1.StoragePoolGetResponse
-	(*ErrorResponse)(nil),                // 28: pilab.cloud.agent.v1.ErrorResponse
+	(*Volume)(nil),                       // 0: pilab.agent.v1.Volume
+	(*VolumeCreateRequest)(nil),          // 1: pilab.agent.v1.VolumeCreateRequest
+	(*VolumeCreateResponse)(nil),         // 2: pilab.agent.v1.VolumeCreateResponse
+	(*VolumeDeleteRequest)(nil),          // 3: pilab.agent.v1.VolumeDeleteRequest
+	(*VolumeDeleteResponse)(nil),         // 4: pilab.agent.v1.VolumeDeleteResponse
+	(*VolumeResizeRequest)(nil),          // 5: pilab.agent.v1.VolumeResizeRequest
+	(*VolumeResizeResponse)(nil),         // 6: pilab.agent.v1.VolumeResizeResponse
+	(*VolumeListRequest)(nil),            // 7: pilab.agent.v1.VolumeListRequest
+	(*VolumeListResponse)(nil),           // 8: pilab.agent.v1.VolumeListResponse
+	(*VolumeGetRequest)(nil),             // 9: pilab.agent.v1.VolumeGetRequest
+	(*VolumeGetResponse)(nil),            // 10: pilab.agent.v1.VolumeGetResponse
+	(*VolumeCloneRequest)(nil),           // 11: pilab.agent.v1.VolumeCloneRequest
+	(*VolumeCloneResponse)(nil),          // 12: pilab.agent.v1.VolumeCloneResponse
+	(*VolumeSnapshotCreateRequest)(nil),  // 13: pilab.agent.v1.VolumeSnapshotCreateRequest
+	(*VolumeSnapshotCreateResponse)(nil), // 14: pilab.agent.v1.VolumeSnapshotCreateResponse
+	(*VolumeSnapshotRevertRequest)(nil),  // 15: pilab.agent.v1.VolumeSnapshotRevertRequest
+	(*VolumeSnapshotRevertResponse)(nil), // 16: pilab.agent.v1.VolumeSnapshotRevertResponse
+	(*VolumeSnapshotDeleteRequest)(nil),  // 17: pilab.agent.v1.VolumeSnapshotDeleteRequest
+	(*VolumeSnapshotDeleteResponse)(nil), // 18: pilab.agent.v1.VolumeSnapshotDeleteResponse
+	(*StoragePool)(nil),                  // 19: pilab.agent.v1.StoragePool
+	(*StoragePoolCreateRequest)(nil),     // 20: pilab.agent.v1.StoragePoolCreateRequest
+	(*StoragePoolCreateResponse)(nil),    // 21: pilab.agent.v1.StoragePoolCreateResponse
+	(*StoragePoolDeleteRequest)(nil),     // 22: pilab.agent.v1.StoragePoolDeleteRequest
+	(*StoragePoolDeleteResponse)(nil),    // 23: pilab.agent.v1.StoragePoolDeleteResponse
+	(*StoragePoolListRequest)(nil),       // 24: pilab.agent.v1.StoragePoolListRequest
+	(*StoragePoolListResponse)(nil),      // 25: pilab.agent.v1.StoragePoolListResponse
+	(*StoragePoolGetRequest)(nil),        // 26: pilab.agent.v1.StoragePoolGetRequest
+	(*StoragePoolGetResponse)(nil),       // 27: pilab.agent.v1.StoragePoolGetResponse
+	(*ErrorResponse)(nil),                // 28: pilab.agent.v1.ErrorResponse
 }
 var file_pilab_agent_v1_storageservice_proto_depIdxs = []int32{
-	28, // 0: pilab.cloud.agent.v1.VolumeCreateResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	0,  // 1: pilab.cloud.agent.v1.VolumeCreateResponse.volume:type_name -> pilab.cloud.agent.v1.Volume
-	28, // 2: pilab.cloud.agent.v1.VolumeDeleteResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	28, // 3: pilab.cloud.agent.v1.VolumeResizeResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	0,  // 4: pilab.cloud.agent.v1.VolumeListResponse.volumes:type_name -> pilab.cloud.agent.v1.Volume
-	0,  // 5: pilab.cloud.agent.v1.VolumeGetResponse.volume:type_name -> pilab.cloud.agent.v1.Volume
-	28, // 6: pilab.cloud.agent.v1.VolumeGetResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	28, // 7: pilab.cloud.agent.v1.VolumeCloneResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	0,  // 8: pilab.cloud.agent.v1.VolumeCloneResponse.volume:type_name -> pilab.cloud.agent.v1.Volume
-	28, // 9: pilab.cloud.agent.v1.VolumeSnapshotCreateResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	28, // 10: pilab.cloud.agent.v1.VolumeSnapshotRevertResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	28, // 11: pilab.cloud.agent.v1.VolumeSnapshotDeleteResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	28, // 12: pilab.cloud.agent.v1.StoragePoolCreateResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	19, // 13: pilab.cloud.agent.v1.StoragePoolCreateResponse.pool:type_name -> pilab.cloud.agent.v1.StoragePool
-	28, // 14: pilab.cloud.agent.v1.StoragePoolDeleteResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	19, // 15: pilab.cloud.agent.v1.StoragePoolListResponse.pools:type_name -> pilab.cloud.agent.v1.StoragePool
-	19, // 16: pilab.cloud.agent.v1.StoragePoolGetResponse.pool:type_name -> pilab.cloud.agent.v1.StoragePool
-	28, // 17: pilab.cloud.agent.v1.StoragePoolGetResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	1,  // 18: pilab.cloud.agent.v1.StorageService.VolumeCreate:input_type -> pilab.cloud.agent.v1.VolumeCreateRequest
-	3,  // 19: pilab.cloud.agent.v1.StorageService.VolumeDelete:input_type -> pilab.cloud.agent.v1.VolumeDeleteRequest
-	5,  // 20: pilab.cloud.agent.v1.StorageService.VolumeResize:input_type -> pilab.cloud.agent.v1.VolumeResizeRequest
-	7,  // 21: pilab.cloud.agent.v1.StorageService.VolumeList:input_type -> pilab.cloud.agent.v1.VolumeListRequest
-	9,  // 22: pilab.cloud.agent.v1.StorageService.VolumeGet:input_type -> pilab.cloud.agent.v1.VolumeGetRequest
-	11, // 23: pilab.cloud.agent.v1.StorageService.VolumeClone:input_type -> pilab.cloud.agent.v1.VolumeCloneRequest
-	13, // 24: pilab.cloud.agent.v1.StorageService.VolumeSnapshotCreate:input_type -> pilab.cloud.agent.v1.VolumeSnapshotCreateRequest
-	15, // 25: pilab.cloud.agent.v1.StorageService.VolumeSnapshotRevert:input_type -> pilab.cloud.agent.v1.VolumeSnapshotRevertRequest
-	17, // 26: pilab.cloud.agent.v1.StorageService.VolumeSnapshotDelete:input_type -> pilab.cloud.agent.v1.VolumeSnapshotDeleteRequest
-	20, // 27: pilab.cloud.agent.v1.StorageService.StoragePoolCreate:input_type -> pilab.cloud.agent.v1.StoragePoolCreateRequest
-	22, // 28: pilab.cloud.agent.v1.StorageService.StoragePoolDelete:input_type -> pilab.cloud.agent.v1.StoragePoolDeleteRequest
-	24, // 29: pilab.cloud.agent.v1.StorageService.StoragePoolList:input_type -> pilab.cloud.agent.v1.StoragePoolListRequest
-	26, // 30: pilab.cloud.agent.v1.StorageService.StoragePoolGet:input_type -> pilab.cloud.agent.v1.StoragePoolGetRequest
-	2,  // 31: pilab.cloud.agent.v1.StorageService.VolumeCreate:output_type -> pilab.cloud.agent.v1.VolumeCreateResponse
-	4,  // 32: pilab.cloud.agent.v1.StorageService.VolumeDelete:output_type -> pilab.cloud.agent.v1.VolumeDeleteResponse
-	6,  // 33: pilab.cloud.agent.v1.StorageService.VolumeResize:output_type -> pilab.cloud.agent.v1.VolumeResizeResponse
-	8,  // 34: pilab.cloud.agent.v1.StorageService.VolumeList:output_type -> pilab.cloud.agent.v1.VolumeListResponse
-	10, // 35: pilab.cloud.agent.v1.StorageService.VolumeGet:output_type -> pilab.cloud.agent.v1.VolumeGetResponse
-	12, // 36: pilab.cloud.agent.v1.StorageService.VolumeClone:output_type -> pilab.cloud.agent.v1.VolumeCloneResponse
-	14, // 37: pilab.cloud.agent.v1.StorageService.VolumeSnapshotCreate:output_type -> pilab.cloud.agent.v1.VolumeSnapshotCreateResponse
-	16, // 38: pilab.cloud.agent.v1.StorageService.VolumeSnapshotRevert:output_type -> pilab.cloud.agent.v1.VolumeSnapshotRevertResponse
-	18, // 39: pilab.cloud.agent.v1.StorageService.VolumeSnapshotDelete:output_type -> pilab.cloud.agent.v1.VolumeSnapshotDeleteResponse
-	21, // 40: pilab.cloud.agent.v1.StorageService.StoragePoolCreate:output_type -> pilab.cloud.agent.v1.StoragePoolCreateResponse
-	23, // 41: pilab.cloud.agent.v1.StorageService.StoragePoolDelete:output_type -> pilab.cloud.agent.v1.StoragePoolDeleteResponse
-	25, // 42: pilab.cloud.agent.v1.StorageService.StoragePoolList:output_type -> pilab.cloud.agent.v1.StoragePoolListResponse
-	27, // 43: pilab.cloud.agent.v1.StorageService.StoragePoolGet:output_type -> pilab.cloud.agent.v1.StoragePoolGetResponse
+	28, // 0: pilab.agent.v1.VolumeCreateResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	0,  // 1: pilab.agent.v1.VolumeCreateResponse.volume:type_name -> pilab.agent.v1.Volume
+	28, // 2: pilab.agent.v1.VolumeDeleteResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	28, // 3: pilab.agent.v1.VolumeResizeResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	0,  // 4: pilab.agent.v1.VolumeListResponse.volumes:type_name -> pilab.agent.v1.Volume
+	0,  // 5: pilab.agent.v1.VolumeGetResponse.volume:type_name -> pilab.agent.v1.Volume
+	28, // 6: pilab.agent.v1.VolumeGetResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	28, // 7: pilab.agent.v1.VolumeCloneResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	0,  // 8: pilab.agent.v1.VolumeCloneResponse.volume:type_name -> pilab.agent.v1.Volume
+	28, // 9: pilab.agent.v1.VolumeSnapshotCreateResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	28, // 10: pilab.agent.v1.VolumeSnapshotRevertResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	28, // 11: pilab.agent.v1.VolumeSnapshotDeleteResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	28, // 12: pilab.agent.v1.StoragePoolCreateResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	19, // 13: pilab.agent.v1.StoragePoolCreateResponse.pool:type_name -> pilab.agent.v1.StoragePool
+	28, // 14: pilab.agent.v1.StoragePoolDeleteResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	19, // 15: pilab.agent.v1.StoragePoolListResponse.pools:type_name -> pilab.agent.v1.StoragePool
+	19, // 16: pilab.agent.v1.StoragePoolGetResponse.pool:type_name -> pilab.agent.v1.StoragePool
+	28, // 17: pilab.agent.v1.StoragePoolGetResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	1,  // 18: pilab.agent.v1.StorageService.VolumeCreate:input_type -> pilab.agent.v1.VolumeCreateRequest
+	3,  // 19: pilab.agent.v1.StorageService.VolumeDelete:input_type -> pilab.agent.v1.VolumeDeleteRequest
+	5,  // 20: pilab.agent.v1.StorageService.VolumeResize:input_type -> pilab.agent.v1.VolumeResizeRequest
+	7,  // 21: pilab.agent.v1.StorageService.VolumeList:input_type -> pilab.agent.v1.VolumeListRequest
+	9,  // 22: pilab.agent.v1.StorageService.VolumeGet:input_type -> pilab.agent.v1.VolumeGetRequest
+	11, // 23: pilab.agent.v1.StorageService.VolumeClone:input_type -> pilab.agent.v1.VolumeCloneRequest
+	13, // 24: pilab.agent.v1.StorageService.VolumeSnapshotCreate:input_type -> pilab.agent.v1.VolumeSnapshotCreateRequest
+	15, // 25: pilab.agent.v1.StorageService.VolumeSnapshotRevert:input_type -> pilab.agent.v1.VolumeSnapshotRevertRequest
+	17, // 26: pilab.agent.v1.StorageService.VolumeSnapshotDelete:input_type -> pilab.agent.v1.VolumeSnapshotDeleteRequest
+	20, // 27: pilab.agent.v1.StorageService.StoragePoolCreate:input_type -> pilab.agent.v1.StoragePoolCreateRequest
+	22, // 28: pilab.agent.v1.StorageService.StoragePoolDelete:input_type -> pilab.agent.v1.StoragePoolDeleteRequest
+	24, // 29: pilab.agent.v1.StorageService.StoragePoolList:input_type -> pilab.agent.v1.StoragePoolListRequest
+	26, // 30: pilab.agent.v1.StorageService.StoragePoolGet:input_type -> pilab.agent.v1.StoragePoolGetRequest
+	2,  // 31: pilab.agent.v1.StorageService.VolumeCreate:output_type -> pilab.agent.v1.VolumeCreateResponse
+	4,  // 32: pilab.agent.v1.StorageService.VolumeDelete:output_type -> pilab.agent.v1.VolumeDeleteResponse
+	6,  // 33: pilab.agent.v1.StorageService.VolumeResize:output_type -> pilab.agent.v1.VolumeResizeResponse
+	8,  // 34: pilab.agent.v1.StorageService.VolumeList:output_type -> pilab.agent.v1.VolumeListResponse
+	10, // 35: pilab.agent.v1.StorageService.VolumeGet:output_type -> pilab.agent.v1.VolumeGetResponse
+	12, // 36: pilab.agent.v1.StorageService.VolumeClone:output_type -> pilab.agent.v1.VolumeCloneResponse
+	14, // 37: pilab.agent.v1.StorageService.VolumeSnapshotCreate:output_type -> pilab.agent.v1.VolumeSnapshotCreateResponse
+	16, // 38: pilab.agent.v1.StorageService.VolumeSnapshotRevert:output_type -> pilab.agent.v1.VolumeSnapshotRevertResponse
+	18, // 39: pilab.agent.v1.StorageService.VolumeSnapshotDelete:output_type -> pilab.agent.v1.VolumeSnapshotDeleteResponse
+	21, // 40: pilab.agent.v1.StorageService.StoragePoolCreate:output_type -> pilab.agent.v1.StoragePoolCreateResponse
+	23, // 41: pilab.agent.v1.StorageService.StoragePoolDelete:output_type -> pilab.agent.v1.StoragePoolDeleteResponse
+	25, // 42: pilab.agent.v1.StorageService.StoragePoolList:output_type -> pilab.agent.v1.StoragePoolListResponse
+	27, // 43: pilab.agent.v1.StorageService.StoragePoolGet:output_type -> pilab.agent.v1.StoragePoolGetResponse
 	31, // [31:44] is the sub-list for method output_type
 	18, // [18:31] is the sub-list for method input_type
 	18, // [18:18] is the sub-list for extension type_name
@@ -1865,8 +1866,6 @@ func file_pilab_agent_v1_storageservice_proto_init() {
 	if File_pilab_agent_v1_storageservice_proto != nil {
 		return
 	}
-	file_pilab_agent_v1_stream_proto_init()
-	file_pilab_agent_v1_agent_service_proto_init()
 	file_pilab_agent_v1_error_proto_init()
 	file_pilab_agent_v1_storageservice_proto_msgTypes[1].OneofWrappers = []any{}
 	file_pilab_agent_v1_storageservice_proto_msgTypes[2].OneofWrappers = []any{}

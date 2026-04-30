@@ -37,19 +37,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	StorageService_VolumeCreate_FullMethodName         = "/pilab.cloud.agent.v1.StorageService/VolumeCreate"
-	StorageService_VolumeDelete_FullMethodName         = "/pilab.cloud.agent.v1.StorageService/VolumeDelete"
-	StorageService_VolumeResize_FullMethodName         = "/pilab.cloud.agent.v1.StorageService/VolumeResize"
-	StorageService_VolumeList_FullMethodName           = "/pilab.cloud.agent.v1.StorageService/VolumeList"
-	StorageService_VolumeGet_FullMethodName            = "/pilab.cloud.agent.v1.StorageService/VolumeGet"
-	StorageService_VolumeClone_FullMethodName          = "/pilab.cloud.agent.v1.StorageService/VolumeClone"
-	StorageService_VolumeSnapshotCreate_FullMethodName = "/pilab.cloud.agent.v1.StorageService/VolumeSnapshotCreate"
-	StorageService_VolumeSnapshotRevert_FullMethodName = "/pilab.cloud.agent.v1.StorageService/VolumeSnapshotRevert"
-	StorageService_VolumeSnapshotDelete_FullMethodName = "/pilab.cloud.agent.v1.StorageService/VolumeSnapshotDelete"
-	StorageService_StoragePoolCreate_FullMethodName    = "/pilab.cloud.agent.v1.StorageService/StoragePoolCreate"
-	StorageService_StoragePoolDelete_FullMethodName    = "/pilab.cloud.agent.v1.StorageService/StoragePoolDelete"
-	StorageService_StoragePoolList_FullMethodName      = "/pilab.cloud.agent.v1.StorageService/StoragePoolList"
-	StorageService_StoragePoolGet_FullMethodName       = "/pilab.cloud.agent.v1.StorageService/StoragePoolGet"
+	StorageService_VolumeCreate_FullMethodName         = "/pilab.agent.v1.StorageService/VolumeCreate"
+	StorageService_VolumeDelete_FullMethodName         = "/pilab.agent.v1.StorageService/VolumeDelete"
+	StorageService_VolumeResize_FullMethodName         = "/pilab.agent.v1.StorageService/VolumeResize"
+	StorageService_VolumeList_FullMethodName           = "/pilab.agent.v1.StorageService/VolumeList"
+	StorageService_VolumeGet_FullMethodName            = "/pilab.agent.v1.StorageService/VolumeGet"
+	StorageService_VolumeClone_FullMethodName          = "/pilab.agent.v1.StorageService/VolumeClone"
+	StorageService_VolumeSnapshotCreate_FullMethodName = "/pilab.agent.v1.StorageService/VolumeSnapshotCreate"
+	StorageService_VolumeSnapshotRevert_FullMethodName = "/pilab.agent.v1.StorageService/VolumeSnapshotRevert"
+	StorageService_VolumeSnapshotDelete_FullMethodName = "/pilab.agent.v1.StorageService/VolumeSnapshotDelete"
+	StorageService_StoragePoolCreate_FullMethodName    = "/pilab.agent.v1.StorageService/StoragePoolCreate"
+	StorageService_StoragePoolDelete_FullMethodName    = "/pilab.agent.v1.StorageService/StoragePoolDelete"
+	StorageService_StoragePoolList_FullMethodName      = "/pilab.agent.v1.StorageService/StoragePoolList"
+	StorageService_StoragePoolGet_FullMethodName       = "/pilab.agent.v1.StorageService/StoragePoolGet"
 )
 
 // StorageServiceClient is the client API for StorageService service.
@@ -540,7 +540,7 @@ func _StorageService_StoragePoolGet_Handler(srv interface{}, ctx context.Context
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var StorageService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.agent.v1.StorageService",
+	ServiceName: "pilab.agent.v1.StorageService",
 	HandlerType: (*StorageServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

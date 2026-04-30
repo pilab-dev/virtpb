@@ -42,7 +42,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// ISCSIServiceName is the fully-qualified name of the ISCSIService service.
-	ISCSIServiceName = "pilab.cloud.agent.v2.ISCSIService"
+	ISCSIServiceName = "pilab.agent.v2.ISCSIService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -54,34 +54,34 @@ const (
 // period.
 const (
 	// ISCSIServiceDiscoverProcedure is the fully-qualified name of the ISCSIService's Discover RPC.
-	ISCSIServiceDiscoverProcedure = "/pilab.cloud.agent.v2.ISCSIService/Discover"
+	ISCSIServiceDiscoverProcedure = "/pilab.agent.v2.ISCSIService/Discover"
 	// ISCSIServiceLoginProcedure is the fully-qualified name of the ISCSIService's Login RPC.
-	ISCSIServiceLoginProcedure = "/pilab.cloud.agent.v2.ISCSIService/Login"
+	ISCSIServiceLoginProcedure = "/pilab.agent.v2.ISCSIService/Login"
 	// ISCSIServiceLogoutProcedure is the fully-qualified name of the ISCSIService's Logout RPC.
-	ISCSIServiceLogoutProcedure = "/pilab.cloud.agent.v2.ISCSIService/Logout"
+	ISCSIServiceLogoutProcedure = "/pilab.agent.v2.ISCSIService/Logout"
 	// ISCSIServiceDeleteNodeProcedure is the fully-qualified name of the ISCSIService's DeleteNode RPC.
-	ISCSIServiceDeleteNodeProcedure = "/pilab.cloud.agent.v2.ISCSIService/DeleteNode"
+	ISCSIServiceDeleteNodeProcedure = "/pilab.agent.v2.ISCSIService/DeleteNode"
 	// ISCSIServiceRescanProcedure is the fully-qualified name of the ISCSIService's Rescan RPC.
-	ISCSIServiceRescanProcedure = "/pilab.cloud.agent.v2.ISCSIService/Rescan"
+	ISCSIServiceRescanProcedure = "/pilab.agent.v2.ISCSIService/Rescan"
 	// ISCSIServiceSessionsProcedure is the fully-qualified name of the ISCSIService's Sessions RPC.
-	ISCSIServiceSessionsProcedure = "/pilab.cloud.agent.v2.ISCSIService/Sessions"
+	ISCSIServiceSessionsProcedure = "/pilab.agent.v2.ISCSIService/Sessions"
 	// ISCSIServiceNodesProcedure is the fully-qualified name of the ISCSIService's Nodes RPC.
-	ISCSIServiceNodesProcedure = "/pilab.cloud.agent.v2.ISCSIService/Nodes"
+	ISCSIServiceNodesProcedure = "/pilab.agent.v2.ISCSIService/Nodes"
 	// ISCSIServiceGetLunsProcedure is the fully-qualified name of the ISCSIService's GetLuns RPC.
-	ISCSIServiceGetLunsProcedure = "/pilab.cloud.agent.v2.ISCSIService/GetLuns"
+	ISCSIServiceGetLunsProcedure = "/pilab.agent.v2.ISCSIService/GetLuns"
 	// ISCSIServiceGetPathsProcedure is the fully-qualified name of the ISCSIService's GetPaths RPC.
-	ISCSIServiceGetPathsProcedure = "/pilab.cloud.agent.v2.ISCSIService/GetPaths"
+	ISCSIServiceGetPathsProcedure = "/pilab.agent.v2.ISCSIService/GetPaths"
 	// ISCSIServiceConfigureCHAPProcedure is the fully-qualified name of the ISCSIService's
 	// ConfigureCHAP RPC.
-	ISCSIServiceConfigureCHAPProcedure = "/pilab.cloud.agent.v2.ISCSIService/ConfigureCHAP"
+	ISCSIServiceConfigureCHAPProcedure = "/pilab.agent.v2.ISCSIService/ConfigureCHAP"
 	// ISCSIServiceConfigureCHAPInboundProcedure is the fully-qualified name of the ISCSIService's
 	// ConfigureCHAPInbound RPC.
-	ISCSIServiceConfigureCHAPInboundProcedure = "/pilab.cloud.agent.v2.ISCSIService/ConfigureCHAPInbound"
+	ISCSIServiceConfigureCHAPInboundProcedure = "/pilab.agent.v2.ISCSIService/ConfigureCHAPInbound"
 	// ISCSIServiceSetLoginProcedure is the fully-qualified name of the ISCSIService's SetLogin RPC.
-	ISCSIServiceSetLoginProcedure = "/pilab.cloud.agent.v2.ISCSIService/SetLogin"
+	ISCSIServiceSetLoginProcedure = "/pilab.agent.v2.ISCSIService/SetLogin"
 )
 
-// ISCSIServiceClient is a client for the pilab.cloud.agent.v2.ISCSIService service.
+// ISCSIServiceClient is a client for the pilab.agent.v2.ISCSIService service.
 type ISCSIServiceClient interface {
 	Discover(context.Context, *connect.Request[v2.ISCSIDiscoverRequest]) (*connect.Response[v2.ISCSIDiscoverResponse], error)
 	Login(context.Context, *connect.Request[v2.ISCSILoginRequest]) (*connect.Response[v2.ISCSILoginResponse], error)
@@ -97,7 +97,7 @@ type ISCSIServiceClient interface {
 	SetLogin(context.Context, *connect.Request[v2.ISCSISetLoginRequest]) (*connect.Response[v2.ISCSISetLoginResponse], error)
 }
 
-// NewISCSIServiceClient constructs a client for the pilab.cloud.agent.v2.ISCSIService service. By
+// NewISCSIServiceClient constructs a client for the pilab.agent.v2.ISCSIService service. By
 // default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
 // and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -199,67 +199,67 @@ type iSCSIServiceClient struct {
 	setLogin             *connect.Client[v2.ISCSISetLoginRequest, v2.ISCSISetLoginResponse]
 }
 
-// Discover calls pilab.cloud.agent.v2.ISCSIService.Discover.
+// Discover calls pilab.agent.v2.ISCSIService.Discover.
 func (c *iSCSIServiceClient) Discover(ctx context.Context, req *connect.Request[v2.ISCSIDiscoverRequest]) (*connect.Response[v2.ISCSIDiscoverResponse], error) {
 	return c.discover.CallUnary(ctx, req)
 }
 
-// Login calls pilab.cloud.agent.v2.ISCSIService.Login.
+// Login calls pilab.agent.v2.ISCSIService.Login.
 func (c *iSCSIServiceClient) Login(ctx context.Context, req *connect.Request[v2.ISCSILoginRequest]) (*connect.Response[v2.ISCSILoginResponse], error) {
 	return c.login.CallUnary(ctx, req)
 }
 
-// Logout calls pilab.cloud.agent.v2.ISCSIService.Logout.
+// Logout calls pilab.agent.v2.ISCSIService.Logout.
 func (c *iSCSIServiceClient) Logout(ctx context.Context, req *connect.Request[v2.ISCSILogoutRequest]) (*connect.Response[v2.ISCSILogoutResponse], error) {
 	return c.logout.CallUnary(ctx, req)
 }
 
-// DeleteNode calls pilab.cloud.agent.v2.ISCSIService.DeleteNode.
+// DeleteNode calls pilab.agent.v2.ISCSIService.DeleteNode.
 func (c *iSCSIServiceClient) DeleteNode(ctx context.Context, req *connect.Request[v2.ISCSIDeleteNodeRequest]) (*connect.Response[v2.ISCSIDeleteNodeResponse], error) {
 	return c.deleteNode.CallUnary(ctx, req)
 }
 
-// Rescan calls pilab.cloud.agent.v2.ISCSIService.Rescan.
+// Rescan calls pilab.agent.v2.ISCSIService.Rescan.
 func (c *iSCSIServiceClient) Rescan(ctx context.Context, req *connect.Request[v2.ISCSIRescanRequest]) (*connect.Response[v2.ISCSIRescanResponse], error) {
 	return c.rescan.CallUnary(ctx, req)
 }
 
-// Sessions calls pilab.cloud.agent.v2.ISCSIService.Sessions.
+// Sessions calls pilab.agent.v2.ISCSIService.Sessions.
 func (c *iSCSIServiceClient) Sessions(ctx context.Context, req *connect.Request[v2.ISCSISessionsRequest]) (*connect.Response[v2.ISCSISessionsResponse], error) {
 	return c.sessions.CallUnary(ctx, req)
 }
 
-// Nodes calls pilab.cloud.agent.v2.ISCSIService.Nodes.
+// Nodes calls pilab.agent.v2.ISCSIService.Nodes.
 func (c *iSCSIServiceClient) Nodes(ctx context.Context, req *connect.Request[v2.ISCSINodesRequest]) (*connect.Response[v2.ISCSINodesResponse], error) {
 	return c.nodes.CallUnary(ctx, req)
 }
 
-// GetLuns calls pilab.cloud.agent.v2.ISCSIService.GetLuns.
+// GetLuns calls pilab.agent.v2.ISCSIService.GetLuns.
 func (c *iSCSIServiceClient) GetLuns(ctx context.Context, req *connect.Request[v2.ISCSIGetLunsRequest]) (*connect.Response[v2.ISCSIGetLunsResponse], error) {
 	return c.getLuns.CallUnary(ctx, req)
 }
 
-// GetPaths calls pilab.cloud.agent.v2.ISCSIService.GetPaths.
+// GetPaths calls pilab.agent.v2.ISCSIService.GetPaths.
 func (c *iSCSIServiceClient) GetPaths(ctx context.Context, req *connect.Request[v2.ISCSIGetPathsRequest]) (*connect.Response[v2.ISCSIGetPathsResponse], error) {
 	return c.getPaths.CallUnary(ctx, req)
 }
 
-// ConfigureCHAP calls pilab.cloud.agent.v2.ISCSIService.ConfigureCHAP.
+// ConfigureCHAP calls pilab.agent.v2.ISCSIService.ConfigureCHAP.
 func (c *iSCSIServiceClient) ConfigureCHAP(ctx context.Context, req *connect.Request[v2.ISCSIConfigureCHAPRequest]) (*connect.Response[v2.ISCSIConfigureCHAPResponse], error) {
 	return c.configureCHAP.CallUnary(ctx, req)
 }
 
-// ConfigureCHAPInbound calls pilab.cloud.agent.v2.ISCSIService.ConfigureCHAPInbound.
+// ConfigureCHAPInbound calls pilab.agent.v2.ISCSIService.ConfigureCHAPInbound.
 func (c *iSCSIServiceClient) ConfigureCHAPInbound(ctx context.Context, req *connect.Request[v2.ISCSIConfigureCHAPInboundRequest]) (*connect.Response[v2.ISCSIConfigureCHAPInboundResponse], error) {
 	return c.configureCHAPInbound.CallUnary(ctx, req)
 }
 
-// SetLogin calls pilab.cloud.agent.v2.ISCSIService.SetLogin.
+// SetLogin calls pilab.agent.v2.ISCSIService.SetLogin.
 func (c *iSCSIServiceClient) SetLogin(ctx context.Context, req *connect.Request[v2.ISCSISetLoginRequest]) (*connect.Response[v2.ISCSISetLoginResponse], error) {
 	return c.setLogin.CallUnary(ctx, req)
 }
 
-// ISCSIServiceHandler is an implementation of the pilab.cloud.agent.v2.ISCSIService service.
+// ISCSIServiceHandler is an implementation of the pilab.agent.v2.ISCSIService service.
 type ISCSIServiceHandler interface {
 	Discover(context.Context, *connect.Request[v2.ISCSIDiscoverRequest]) (*connect.Response[v2.ISCSIDiscoverResponse], error)
 	Login(context.Context, *connect.Request[v2.ISCSILoginRequest]) (*connect.Response[v2.ISCSILoginResponse], error)
@@ -354,7 +354,7 @@ func NewISCSIServiceHandler(svc ISCSIServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(iSCSIServiceMethods.ByName("SetLogin")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.agent.v2.ISCSIService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.agent.v2.ISCSIService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ISCSIServiceDiscoverProcedure:
 			iSCSIServiceDiscoverHandler.ServeHTTP(w, r)
@@ -390,49 +390,49 @@ func NewISCSIServiceHandler(svc ISCSIServiceHandler, opts ...connect.HandlerOpti
 type UnimplementedISCSIServiceHandler struct{}
 
 func (UnimplementedISCSIServiceHandler) Discover(context.Context, *connect.Request[v2.ISCSIDiscoverRequest]) (*connect.Response[v2.ISCSIDiscoverResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.Discover is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.Discover is not implemented"))
 }
 
 func (UnimplementedISCSIServiceHandler) Login(context.Context, *connect.Request[v2.ISCSILoginRequest]) (*connect.Response[v2.ISCSILoginResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.Login is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.Login is not implemented"))
 }
 
 func (UnimplementedISCSIServiceHandler) Logout(context.Context, *connect.Request[v2.ISCSILogoutRequest]) (*connect.Response[v2.ISCSILogoutResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.Logout is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.Logout is not implemented"))
 }
 
 func (UnimplementedISCSIServiceHandler) DeleteNode(context.Context, *connect.Request[v2.ISCSIDeleteNodeRequest]) (*connect.Response[v2.ISCSIDeleteNodeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.DeleteNode is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.DeleteNode is not implemented"))
 }
 
 func (UnimplementedISCSIServiceHandler) Rescan(context.Context, *connect.Request[v2.ISCSIRescanRequest]) (*connect.Response[v2.ISCSIRescanResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.Rescan is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.Rescan is not implemented"))
 }
 
 func (UnimplementedISCSIServiceHandler) Sessions(context.Context, *connect.Request[v2.ISCSISessionsRequest]) (*connect.Response[v2.ISCSISessionsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.Sessions is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.Sessions is not implemented"))
 }
 
 func (UnimplementedISCSIServiceHandler) Nodes(context.Context, *connect.Request[v2.ISCSINodesRequest]) (*connect.Response[v2.ISCSINodesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.Nodes is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.Nodes is not implemented"))
 }
 
 func (UnimplementedISCSIServiceHandler) GetLuns(context.Context, *connect.Request[v2.ISCSIGetLunsRequest]) (*connect.Response[v2.ISCSIGetLunsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.GetLuns is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.GetLuns is not implemented"))
 }
 
 func (UnimplementedISCSIServiceHandler) GetPaths(context.Context, *connect.Request[v2.ISCSIGetPathsRequest]) (*connect.Response[v2.ISCSIGetPathsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.GetPaths is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.GetPaths is not implemented"))
 }
 
 func (UnimplementedISCSIServiceHandler) ConfigureCHAP(context.Context, *connect.Request[v2.ISCSIConfigureCHAPRequest]) (*connect.Response[v2.ISCSIConfigureCHAPResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.ConfigureCHAP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.ConfigureCHAP is not implemented"))
 }
 
 func (UnimplementedISCSIServiceHandler) ConfigureCHAPInbound(context.Context, *connect.Request[v2.ISCSIConfigureCHAPInboundRequest]) (*connect.Response[v2.ISCSIConfigureCHAPInboundResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.ConfigureCHAPInbound is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.ConfigureCHAPInbound is not implemented"))
 }
 
 func (UnimplementedISCSIServiceHandler) SetLogin(context.Context, *connect.Request[v2.ISCSISetLoginRequest]) (*connect.Response[v2.ISCSISetLoginResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v2.ISCSIService.SetLogin is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.ISCSIService.SetLogin is not implemented"))
 }

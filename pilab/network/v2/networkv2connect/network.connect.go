@@ -57,21 +57,21 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// NetworkServiceName is the fully-qualified name of the NetworkService service.
-	NetworkServiceName = "pilab.cloud.network.v2.NetworkService"
+	NetworkServiceName = "pilab.network.v2.NetworkService"
 	// QoSSecurityServiceName is the fully-qualified name of the QoSSecurityService service.
-	QoSSecurityServiceName = "pilab.cloud.network.v2.QoSSecurityService"
+	QoSSecurityServiceName = "pilab.network.v2.QoSSecurityService"
 	// PublicIPServiceName is the fully-qualified name of the PublicIPService service.
-	PublicIPServiceName = "pilab.cloud.network.v2.PublicIPService"
+	PublicIPServiceName = "pilab.network.v2.PublicIPService"
 	// DVSServiceName is the fully-qualified name of the DVSService service.
-	DVSServiceName = "pilab.cloud.network.v2.DVSService"
+	DVSServiceName = "pilab.network.v2.DVSService"
 	// IPAMServiceName is the fully-qualified name of the IPAMService service.
-	IPAMServiceName = "pilab.cloud.network.v2.IPAMService"
+	IPAMServiceName = "pilab.network.v2.IPAMService"
 	// StatisticsServiceName is the fully-qualified name of the StatisticsService service.
-	StatisticsServiceName = "pilab.cloud.network.v2.StatisticsService"
+	StatisticsServiceName = "pilab.network.v2.StatisticsService"
 	// FlowServiceName is the fully-qualified name of the FlowService service.
-	FlowServiceName = "pilab.cloud.network.v2.FlowService"
+	FlowServiceName = "pilab.network.v2.FlowService"
 	// ClusterBridgeServiceName is the fully-qualified name of the ClusterBridgeService service.
-	ClusterBridgeServiceName = "pilab.cloud.network.v2.ClusterBridgeService"
+	ClusterBridgeServiceName = "pilab.network.v2.ClusterBridgeService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -84,288 +84,288 @@ const (
 const (
 	// NetworkServiceCreateNetworkProcedure is the fully-qualified name of the NetworkService's
 	// CreateNetwork RPC.
-	NetworkServiceCreateNetworkProcedure = "/pilab.cloud.network.v2.NetworkService/CreateNetwork"
+	NetworkServiceCreateNetworkProcedure = "/pilab.network.v2.NetworkService/CreateNetwork"
 	// NetworkServiceGetNetworkProcedure is the fully-qualified name of the NetworkService's GetNetwork
 	// RPC.
-	NetworkServiceGetNetworkProcedure = "/pilab.cloud.network.v2.NetworkService/GetNetwork"
+	NetworkServiceGetNetworkProcedure = "/pilab.network.v2.NetworkService/GetNetwork"
 	// NetworkServiceListNetworksProcedure is the fully-qualified name of the NetworkService's
 	// ListNetworks RPC.
-	NetworkServiceListNetworksProcedure = "/pilab.cloud.network.v2.NetworkService/ListNetworks"
+	NetworkServiceListNetworksProcedure = "/pilab.network.v2.NetworkService/ListNetworks"
 	// NetworkServiceUpdateNetworkProcedure is the fully-qualified name of the NetworkService's
 	// UpdateNetwork RPC.
-	NetworkServiceUpdateNetworkProcedure = "/pilab.cloud.network.v2.NetworkService/UpdateNetwork"
+	NetworkServiceUpdateNetworkProcedure = "/pilab.network.v2.NetworkService/UpdateNetwork"
 	// NetworkServiceDeleteNetworkProcedure is the fully-qualified name of the NetworkService's
 	// DeleteNetwork RPC.
-	NetworkServiceDeleteNetworkProcedure = "/pilab.cloud.network.v2.NetworkService/DeleteNetwork"
+	NetworkServiceDeleteNetworkProcedure = "/pilab.network.v2.NetworkService/DeleteNetwork"
 	// NetworkServiceAttachHostsProcedure is the fully-qualified name of the NetworkService's
 	// AttachHosts RPC.
-	NetworkServiceAttachHostsProcedure = "/pilab.cloud.network.v2.NetworkService/AttachHosts"
+	NetworkServiceAttachHostsProcedure = "/pilab.network.v2.NetworkService/AttachHosts"
 	// NetworkServiceDetachHostsProcedure is the fully-qualified name of the NetworkService's
 	// DetachHosts RPC.
-	NetworkServiceDetachHostsProcedure = "/pilab.cloud.network.v2.NetworkService/DetachHosts"
+	NetworkServiceDetachHostsProcedure = "/pilab.network.v2.NetworkService/DetachHosts"
 	// NetworkServiceCreatePortProcedure is the fully-qualified name of the NetworkService's CreatePort
 	// RPC.
-	NetworkServiceCreatePortProcedure = "/pilab.cloud.network.v2.NetworkService/CreatePort"
+	NetworkServiceCreatePortProcedure = "/pilab.network.v2.NetworkService/CreatePort"
 	// NetworkServiceGetPortProcedure is the fully-qualified name of the NetworkService's GetPort RPC.
-	NetworkServiceGetPortProcedure = "/pilab.cloud.network.v2.NetworkService/GetPort"
+	NetworkServiceGetPortProcedure = "/pilab.network.v2.NetworkService/GetPort"
 	// NetworkServiceListPortsProcedure is the fully-qualified name of the NetworkService's ListPorts
 	// RPC.
-	NetworkServiceListPortsProcedure = "/pilab.cloud.network.v2.NetworkService/ListPorts"
+	NetworkServiceListPortsProcedure = "/pilab.network.v2.NetworkService/ListPorts"
 	// NetworkServiceUpdatePortProcedure is the fully-qualified name of the NetworkService's UpdatePort
 	// RPC.
-	NetworkServiceUpdatePortProcedure = "/pilab.cloud.network.v2.NetworkService/UpdatePort"
+	NetworkServiceUpdatePortProcedure = "/pilab.network.v2.NetworkService/UpdatePort"
 	// NetworkServiceDeletePortProcedure is the fully-qualified name of the NetworkService's DeletePort
 	// RPC.
-	NetworkServiceDeletePortProcedure = "/pilab.cloud.network.v2.NetworkService/DeletePort"
+	NetworkServiceDeletePortProcedure = "/pilab.network.v2.NetworkService/DeletePort"
 	// NetworkServiceAttachPortProcedure is the fully-qualified name of the NetworkService's AttachPort
 	// RPC.
-	NetworkServiceAttachPortProcedure = "/pilab.cloud.network.v2.NetworkService/AttachPort"
+	NetworkServiceAttachPortProcedure = "/pilab.network.v2.NetworkService/AttachPort"
 	// NetworkServiceDetachPortProcedure is the fully-qualified name of the NetworkService's DetachPort
 	// RPC.
-	NetworkServiceDetachPortProcedure = "/pilab.cloud.network.v2.NetworkService/DetachPort"
+	NetworkServiceDetachPortProcedure = "/pilab.network.v2.NetworkService/DetachPort"
 	// NetworkServiceCreateVLANRangeProcedure is the fully-qualified name of the NetworkService's
 	// CreateVLANRange RPC.
-	NetworkServiceCreateVLANRangeProcedure = "/pilab.cloud.network.v2.NetworkService/CreateVLANRange"
+	NetworkServiceCreateVLANRangeProcedure = "/pilab.network.v2.NetworkService/CreateVLANRange"
 	// NetworkServiceListVLANRangesProcedure is the fully-qualified name of the NetworkService's
 	// ListVLANRanges RPC.
-	NetworkServiceListVLANRangesProcedure = "/pilab.cloud.network.v2.NetworkService/ListVLANRanges"
+	NetworkServiceListVLANRangesProcedure = "/pilab.network.v2.NetworkService/ListVLANRanges"
 	// NetworkServiceAllocateVLANProcedure is the fully-qualified name of the NetworkService's
 	// AllocateVLAN RPC.
-	NetworkServiceAllocateVLANProcedure = "/pilab.cloud.network.v2.NetworkService/AllocateVLAN"
+	NetworkServiceAllocateVLANProcedure = "/pilab.network.v2.NetworkService/AllocateVLAN"
 	// NetworkServiceReleaseVLANProcedure is the fully-qualified name of the NetworkService's
 	// ReleaseVLAN RPC.
-	NetworkServiceReleaseVLANProcedure = "/pilab.cloud.network.v2.NetworkService/ReleaseVLAN"
+	NetworkServiceReleaseVLANProcedure = "/pilab.network.v2.NetworkService/ReleaseVLAN"
 	// NetworkServiceCreateVirtualCloudProcedure is the fully-qualified name of the NetworkService's
 	// CreateVirtualCloud RPC.
-	NetworkServiceCreateVirtualCloudProcedure = "/pilab.cloud.network.v2.NetworkService/CreateVirtualCloud"
+	NetworkServiceCreateVirtualCloudProcedure = "/pilab.network.v2.NetworkService/CreateVirtualCloud"
 	// NetworkServiceGetVirtualCloudProcedure is the fully-qualified name of the NetworkService's
 	// GetVirtualCloud RPC.
-	NetworkServiceGetVirtualCloudProcedure = "/pilab.cloud.network.v2.NetworkService/GetVirtualCloud"
+	NetworkServiceGetVirtualCloudProcedure = "/pilab.network.v2.NetworkService/GetVirtualCloud"
 	// NetworkServiceListVirtualCloudsProcedure is the fully-qualified name of the NetworkService's
 	// ListVirtualClouds RPC.
-	NetworkServiceListVirtualCloudsProcedure = "/pilab.cloud.network.v2.NetworkService/ListVirtualClouds"
+	NetworkServiceListVirtualCloudsProcedure = "/pilab.network.v2.NetworkService/ListVirtualClouds"
 	// NetworkServiceUpdateVirtualCloudProcedure is the fully-qualified name of the NetworkService's
 	// UpdateVirtualCloud RPC.
-	NetworkServiceUpdateVirtualCloudProcedure = "/pilab.cloud.network.v2.NetworkService/UpdateVirtualCloud"
+	NetworkServiceUpdateVirtualCloudProcedure = "/pilab.network.v2.NetworkService/UpdateVirtualCloud"
 	// NetworkServiceDeleteVirtualCloudProcedure is the fully-qualified name of the NetworkService's
 	// DeleteVirtualCloud RPC.
-	NetworkServiceDeleteVirtualCloudProcedure = "/pilab.cloud.network.v2.NetworkService/DeleteVirtualCloud"
+	NetworkServiceDeleteVirtualCloudProcedure = "/pilab.network.v2.NetworkService/DeleteVirtualCloud"
 	// NetworkServiceAddVNIEndpointProcedure is the fully-qualified name of the NetworkService's
 	// AddVNIEndpoint RPC.
-	NetworkServiceAddVNIEndpointProcedure = "/pilab.cloud.network.v2.NetworkService/AddVNIEndpoint"
+	NetworkServiceAddVNIEndpointProcedure = "/pilab.network.v2.NetworkService/AddVNIEndpoint"
 	// NetworkServiceRemoveVNIEndpointProcedure is the fully-qualified name of the NetworkService's
 	// RemoveVNIEndpoint RPC.
-	NetworkServiceRemoveVNIEndpointProcedure = "/pilab.cloud.network.v2.NetworkService/RemoveVNIEndpoint"
+	NetworkServiceRemoveVNIEndpointProcedure = "/pilab.network.v2.NetworkService/RemoveVNIEndpoint"
 	// NetworkServiceAllocateVNIProcedure is the fully-qualified name of the NetworkService's
 	// AllocateVNI RPC.
-	NetworkServiceAllocateVNIProcedure = "/pilab.cloud.network.v2.NetworkService/AllocateVNI"
+	NetworkServiceAllocateVNIProcedure = "/pilab.network.v2.NetworkService/AllocateVNI"
 	// NetworkServiceReleaseVNIProcedure is the fully-qualified name of the NetworkService's ReleaseVNI
 	// RPC.
-	NetworkServiceReleaseVNIProcedure = "/pilab.cloud.network.v2.NetworkService/ReleaseVNI"
+	NetworkServiceReleaseVNIProcedure = "/pilab.network.v2.NetworkService/ReleaseVNI"
 	// QoSSecurityServiceCreateQoSProfileProcedure is the fully-qualified name of the
 	// QoSSecurityService's CreateQoSProfile RPC.
-	QoSSecurityServiceCreateQoSProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/CreateQoSProfile"
+	QoSSecurityServiceCreateQoSProfileProcedure = "/pilab.network.v2.QoSSecurityService/CreateQoSProfile"
 	// QoSSecurityServiceGetQoSProfileProcedure is the fully-qualified name of the QoSSecurityService's
 	// GetQoSProfile RPC.
-	QoSSecurityServiceGetQoSProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/GetQoSProfile"
+	QoSSecurityServiceGetQoSProfileProcedure = "/pilab.network.v2.QoSSecurityService/GetQoSProfile"
 	// QoSSecurityServiceListQoSProfilesProcedure is the fully-qualified name of the
 	// QoSSecurityService's ListQoSProfiles RPC.
-	QoSSecurityServiceListQoSProfilesProcedure = "/pilab.cloud.network.v2.QoSSecurityService/ListQoSProfiles"
+	QoSSecurityServiceListQoSProfilesProcedure = "/pilab.network.v2.QoSSecurityService/ListQoSProfiles"
 	// QoSSecurityServiceUpdateQoSProfileProcedure is the fully-qualified name of the
 	// QoSSecurityService's UpdateQoSProfile RPC.
-	QoSSecurityServiceUpdateQoSProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/UpdateQoSProfile"
+	QoSSecurityServiceUpdateQoSProfileProcedure = "/pilab.network.v2.QoSSecurityService/UpdateQoSProfile"
 	// QoSSecurityServiceDeleteQoSProfileProcedure is the fully-qualified name of the
 	// QoSSecurityService's DeleteQoSProfile RPC.
-	QoSSecurityServiceDeleteQoSProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/DeleteQoSProfile"
+	QoSSecurityServiceDeleteQoSProfileProcedure = "/pilab.network.v2.QoSSecurityService/DeleteQoSProfile"
 	// QoSSecurityServiceApplyQoSProfileProcedure is the fully-qualified name of the
 	// QoSSecurityService's ApplyQoSProfile RPC.
-	QoSSecurityServiceApplyQoSProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/ApplyQoSProfile"
+	QoSSecurityServiceApplyQoSProfileProcedure = "/pilab.network.v2.QoSSecurityService/ApplyQoSProfile"
 	// QoSSecurityServiceRemoveQoSProfileProcedure is the fully-qualified name of the
 	// QoSSecurityService's RemoveQoSProfile RPC.
-	QoSSecurityServiceRemoveQoSProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/RemoveQoSProfile"
+	QoSSecurityServiceRemoveQoSProfileProcedure = "/pilab.network.v2.QoSSecurityService/RemoveQoSProfile"
 	// QoSSecurityServiceCreateSecurityProfileProcedure is the fully-qualified name of the
 	// QoSSecurityService's CreateSecurityProfile RPC.
-	QoSSecurityServiceCreateSecurityProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/CreateSecurityProfile"
+	QoSSecurityServiceCreateSecurityProfileProcedure = "/pilab.network.v2.QoSSecurityService/CreateSecurityProfile"
 	// QoSSecurityServiceGetSecurityProfileProcedure is the fully-qualified name of the
 	// QoSSecurityService's GetSecurityProfile RPC.
-	QoSSecurityServiceGetSecurityProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/GetSecurityProfile"
+	QoSSecurityServiceGetSecurityProfileProcedure = "/pilab.network.v2.QoSSecurityService/GetSecurityProfile"
 	// QoSSecurityServiceListSecurityProfilesProcedure is the fully-qualified name of the
 	// QoSSecurityService's ListSecurityProfiles RPC.
-	QoSSecurityServiceListSecurityProfilesProcedure = "/pilab.cloud.network.v2.QoSSecurityService/ListSecurityProfiles"
+	QoSSecurityServiceListSecurityProfilesProcedure = "/pilab.network.v2.QoSSecurityService/ListSecurityProfiles"
 	// QoSSecurityServiceUpdateSecurityProfileProcedure is the fully-qualified name of the
 	// QoSSecurityService's UpdateSecurityProfile RPC.
-	QoSSecurityServiceUpdateSecurityProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/UpdateSecurityProfile"
+	QoSSecurityServiceUpdateSecurityProfileProcedure = "/pilab.network.v2.QoSSecurityService/UpdateSecurityProfile"
 	// QoSSecurityServiceDeleteSecurityProfileProcedure is the fully-qualified name of the
 	// QoSSecurityService's DeleteSecurityProfile RPC.
-	QoSSecurityServiceDeleteSecurityProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/DeleteSecurityProfile"
+	QoSSecurityServiceDeleteSecurityProfileProcedure = "/pilab.network.v2.QoSSecurityService/DeleteSecurityProfile"
 	// QoSSecurityServiceApplySecurityProfileProcedure is the fully-qualified name of the
 	// QoSSecurityService's ApplySecurityProfile RPC.
-	QoSSecurityServiceApplySecurityProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/ApplySecurityProfile"
+	QoSSecurityServiceApplySecurityProfileProcedure = "/pilab.network.v2.QoSSecurityService/ApplySecurityProfile"
 	// QoSSecurityServiceRemoveSecurityProfileProcedure is the fully-qualified name of the
 	// QoSSecurityService's RemoveSecurityProfile RPC.
-	QoSSecurityServiceRemoveSecurityProfileProcedure = "/pilab.cloud.network.v2.QoSSecurityService/RemoveSecurityProfile"
+	QoSSecurityServiceRemoveSecurityProfileProcedure = "/pilab.network.v2.QoSSecurityService/RemoveSecurityProfile"
 	// QoSSecurityServiceAddACLRuleProcedure is the fully-qualified name of the QoSSecurityService's
 	// AddACLRule RPC.
-	QoSSecurityServiceAddACLRuleProcedure = "/pilab.cloud.network.v2.QoSSecurityService/AddACLRule"
+	QoSSecurityServiceAddACLRuleProcedure = "/pilab.network.v2.QoSSecurityService/AddACLRule"
 	// QoSSecurityServiceUpdateACLRuleProcedure is the fully-qualified name of the QoSSecurityService's
 	// UpdateACLRule RPC.
-	QoSSecurityServiceUpdateACLRuleProcedure = "/pilab.cloud.network.v2.QoSSecurityService/UpdateACLRule"
+	QoSSecurityServiceUpdateACLRuleProcedure = "/pilab.network.v2.QoSSecurityService/UpdateACLRule"
 	// QoSSecurityServiceRemoveACLRuleProcedure is the fully-qualified name of the QoSSecurityService's
 	// RemoveACLRule RPC.
-	QoSSecurityServiceRemoveACLRuleProcedure = "/pilab.cloud.network.v2.QoSSecurityService/RemoveACLRule"
+	QoSSecurityServiceRemoveACLRuleProcedure = "/pilab.network.v2.QoSSecurityService/RemoveACLRule"
 	// QoSSecurityServiceReorderACLRulesProcedure is the fully-qualified name of the
 	// QoSSecurityService's ReorderACLRules RPC.
-	QoSSecurityServiceReorderACLRulesProcedure = "/pilab.cloud.network.v2.QoSSecurityService/ReorderACLRules"
+	QoSSecurityServiceReorderACLRulesProcedure = "/pilab.network.v2.QoSSecurityService/ReorderACLRules"
 	// PublicIPServiceAllocatePublicIPProcedure is the fully-qualified name of the PublicIPService's
 	// AllocatePublicIP RPC.
-	PublicIPServiceAllocatePublicIPProcedure = "/pilab.cloud.network.v2.PublicIPService/AllocatePublicIP"
+	PublicIPServiceAllocatePublicIPProcedure = "/pilab.network.v2.PublicIPService/AllocatePublicIP"
 	// PublicIPServiceGetPublicIPProcedure is the fully-qualified name of the PublicIPService's
 	// GetPublicIP RPC.
-	PublicIPServiceGetPublicIPProcedure = "/pilab.cloud.network.v2.PublicIPService/GetPublicIP"
+	PublicIPServiceGetPublicIPProcedure = "/pilab.network.v2.PublicIPService/GetPublicIP"
 	// PublicIPServiceListPublicIPsProcedure is the fully-qualified name of the PublicIPService's
 	// ListPublicIPs RPC.
-	PublicIPServiceListPublicIPsProcedure = "/pilab.cloud.network.v2.PublicIPService/ListPublicIPs"
+	PublicIPServiceListPublicIPsProcedure = "/pilab.network.v2.PublicIPService/ListPublicIPs"
 	// PublicIPServiceReleasePublicIPProcedure is the fully-qualified name of the PublicIPService's
 	// ReleasePublicIP RPC.
-	PublicIPServiceReleasePublicIPProcedure = "/pilab.cloud.network.v2.PublicIPService/ReleasePublicIP"
+	PublicIPServiceReleasePublicIPProcedure = "/pilab.network.v2.PublicIPService/ReleasePublicIP"
 	// PublicIPServiceAssociatePublicIPProcedure is the fully-qualified name of the PublicIPService's
 	// AssociatePublicIP RPC.
-	PublicIPServiceAssociatePublicIPProcedure = "/pilab.cloud.network.v2.PublicIPService/AssociatePublicIP"
+	PublicIPServiceAssociatePublicIPProcedure = "/pilab.network.v2.PublicIPService/AssociatePublicIP"
 	// PublicIPServiceDisassociatePublicIPProcedure is the fully-qualified name of the PublicIPService's
 	// DisassociatePublicIP RPC.
-	PublicIPServiceDisassociatePublicIPProcedure = "/pilab.cloud.network.v2.PublicIPService/DisassociatePublicIP"
+	PublicIPServiceDisassociatePublicIPProcedure = "/pilab.network.v2.PublicIPService/DisassociatePublicIP"
 	// PublicIPServiceCreatePortForwardProcedure is the fully-qualified name of the PublicIPService's
 	// CreatePortForward RPC.
-	PublicIPServiceCreatePortForwardProcedure = "/pilab.cloud.network.v2.PublicIPService/CreatePortForward"
+	PublicIPServiceCreatePortForwardProcedure = "/pilab.network.v2.PublicIPService/CreatePortForward"
 	// PublicIPServiceUpdatePortForwardProcedure is the fully-qualified name of the PublicIPService's
 	// UpdatePortForward RPC.
-	PublicIPServiceUpdatePortForwardProcedure = "/pilab.cloud.network.v2.PublicIPService/UpdatePortForward"
+	PublicIPServiceUpdatePortForwardProcedure = "/pilab.network.v2.PublicIPService/UpdatePortForward"
 	// PublicIPServiceDeletePortForwardProcedure is the fully-qualified name of the PublicIPService's
 	// DeletePortForward RPC.
-	PublicIPServiceDeletePortForwardProcedure = "/pilab.cloud.network.v2.PublicIPService/DeletePortForward"
+	PublicIPServiceDeletePortForwardProcedure = "/pilab.network.v2.PublicIPService/DeletePortForward"
 	// PublicIPServiceListPortForwardsProcedure is the fully-qualified name of the PublicIPService's
 	// ListPortForwards RPC.
-	PublicIPServiceListPortForwardsProcedure = "/pilab.cloud.network.v2.PublicIPService/ListPortForwards"
+	PublicIPServiceListPortForwardsProcedure = "/pilab.network.v2.PublicIPService/ListPortForwards"
 	// PublicIPServiceCreateFirewallProfileProcedure is the fully-qualified name of the
 	// PublicIPService's CreateFirewallProfile RPC.
-	PublicIPServiceCreateFirewallProfileProcedure = "/pilab.cloud.network.v2.PublicIPService/CreateFirewallProfile"
+	PublicIPServiceCreateFirewallProfileProcedure = "/pilab.network.v2.PublicIPService/CreateFirewallProfile"
 	// PublicIPServiceGetFirewallProfileProcedure is the fully-qualified name of the PublicIPService's
 	// GetFirewallProfile RPC.
-	PublicIPServiceGetFirewallProfileProcedure = "/pilab.cloud.network.v2.PublicIPService/GetFirewallProfile"
+	PublicIPServiceGetFirewallProfileProcedure = "/pilab.network.v2.PublicIPService/GetFirewallProfile"
 	// PublicIPServiceUpdateFirewallProfileProcedure is the fully-qualified name of the
 	// PublicIPService's UpdateFirewallProfile RPC.
-	PublicIPServiceUpdateFirewallProfileProcedure = "/pilab.cloud.network.v2.PublicIPService/UpdateFirewallProfile"
+	PublicIPServiceUpdateFirewallProfileProcedure = "/pilab.network.v2.PublicIPService/UpdateFirewallProfile"
 	// PublicIPServiceDeleteFirewallProfileProcedure is the fully-qualified name of the
 	// PublicIPService's DeleteFirewallProfile RPC.
-	PublicIPServiceDeleteFirewallProfileProcedure = "/pilab.cloud.network.v2.PublicIPService/DeleteFirewallProfile"
+	PublicIPServiceDeleteFirewallProfileProcedure = "/pilab.network.v2.PublicIPService/DeleteFirewallProfile"
 	// PublicIPServiceAddFirewallRuleProcedure is the fully-qualified name of the PublicIPService's
 	// AddFirewallRule RPC.
-	PublicIPServiceAddFirewallRuleProcedure = "/pilab.cloud.network.v2.PublicIPService/AddFirewallRule"
+	PublicIPServiceAddFirewallRuleProcedure = "/pilab.network.v2.PublicIPService/AddFirewallRule"
 	// PublicIPServiceUpdateFirewallRuleProcedure is the fully-qualified name of the PublicIPService's
 	// UpdateFirewallRule RPC.
-	PublicIPServiceUpdateFirewallRuleProcedure = "/pilab.cloud.network.v2.PublicIPService/UpdateFirewallRule"
+	PublicIPServiceUpdateFirewallRuleProcedure = "/pilab.network.v2.PublicIPService/UpdateFirewallRule"
 	// PublicIPServiceRemoveFirewallRuleProcedure is the fully-qualified name of the PublicIPService's
 	// RemoveFirewallRule RPC.
-	PublicIPServiceRemoveFirewallRuleProcedure = "/pilab.cloud.network.v2.PublicIPService/RemoveFirewallRule"
+	PublicIPServiceRemoveFirewallRuleProcedure = "/pilab.network.v2.PublicIPService/RemoveFirewallRule"
 	// PublicIPServiceReorderFirewallRulesProcedure is the fully-qualified name of the PublicIPService's
 	// ReorderFirewallRules RPC.
-	PublicIPServiceReorderFirewallRulesProcedure = "/pilab.cloud.network.v2.PublicIPService/ReorderFirewallRules"
+	PublicIPServiceReorderFirewallRulesProcedure = "/pilab.network.v2.PublicIPService/ReorderFirewallRules"
 	// DVSServiceCreateDistributedSwitchProcedure is the fully-qualified name of the DVSService's
 	// CreateDistributedSwitch RPC.
-	DVSServiceCreateDistributedSwitchProcedure = "/pilab.cloud.network.v2.DVSService/CreateDistributedSwitch"
+	DVSServiceCreateDistributedSwitchProcedure = "/pilab.network.v2.DVSService/CreateDistributedSwitch"
 	// DVSServiceGetDistributedSwitchProcedure is the fully-qualified name of the DVSService's
 	// GetDistributedSwitch RPC.
-	DVSServiceGetDistributedSwitchProcedure = "/pilab.cloud.network.v2.DVSService/GetDistributedSwitch"
+	DVSServiceGetDistributedSwitchProcedure = "/pilab.network.v2.DVSService/GetDistributedSwitch"
 	// DVSServiceListDistributedSwitchesProcedure is the fully-qualified name of the DVSService's
 	// ListDistributedSwitches RPC.
-	DVSServiceListDistributedSwitchesProcedure = "/pilab.cloud.network.v2.DVSService/ListDistributedSwitches"
+	DVSServiceListDistributedSwitchesProcedure = "/pilab.network.v2.DVSService/ListDistributedSwitches"
 	// DVSServiceUpdateDistributedSwitchProcedure is the fully-qualified name of the DVSService's
 	// UpdateDistributedSwitch RPC.
-	DVSServiceUpdateDistributedSwitchProcedure = "/pilab.cloud.network.v2.DVSService/UpdateDistributedSwitch"
+	DVSServiceUpdateDistributedSwitchProcedure = "/pilab.network.v2.DVSService/UpdateDistributedSwitch"
 	// DVSServiceDeleteDistributedSwitchProcedure is the fully-qualified name of the DVSService's
 	// DeleteDistributedSwitch RPC.
-	DVSServiceDeleteDistributedSwitchProcedure = "/pilab.cloud.network.v2.DVSService/DeleteDistributedSwitch"
+	DVSServiceDeleteDistributedSwitchProcedure = "/pilab.network.v2.DVSService/DeleteDistributedSwitch"
 	// DVSServiceAddHostToDVSProcedure is the fully-qualified name of the DVSService's AddHostToDVS RPC.
-	DVSServiceAddHostToDVSProcedure = "/pilab.cloud.network.v2.DVSService/AddHostToDVS"
+	DVSServiceAddHostToDVSProcedure = "/pilab.network.v2.DVSService/AddHostToDVS"
 	// DVSServiceRemoveHostFromDVSProcedure is the fully-qualified name of the DVSService's
 	// RemoveHostFromDVS RPC.
-	DVSServiceRemoveHostFromDVSProcedure = "/pilab.cloud.network.v2.DVSService/RemoveHostFromDVS"
+	DVSServiceRemoveHostFromDVSProcedure = "/pilab.network.v2.DVSService/RemoveHostFromDVS"
 	// DVSServiceCreatePortGroupProcedure is the fully-qualified name of the DVSService's
 	// CreatePortGroup RPC.
-	DVSServiceCreatePortGroupProcedure = "/pilab.cloud.network.v2.DVSService/CreatePortGroup"
+	DVSServiceCreatePortGroupProcedure = "/pilab.network.v2.DVSService/CreatePortGroup"
 	// DVSServiceGetPortGroupProcedure is the fully-qualified name of the DVSService's GetPortGroup RPC.
-	DVSServiceGetPortGroupProcedure = "/pilab.cloud.network.v2.DVSService/GetPortGroup"
+	DVSServiceGetPortGroupProcedure = "/pilab.network.v2.DVSService/GetPortGroup"
 	// DVSServiceListPortGroupsProcedure is the fully-qualified name of the DVSService's ListPortGroups
 	// RPC.
-	DVSServiceListPortGroupsProcedure = "/pilab.cloud.network.v2.DVSService/ListPortGroups"
+	DVSServiceListPortGroupsProcedure = "/pilab.network.v2.DVSService/ListPortGroups"
 	// DVSServiceUpdatePortGroupProcedure is the fully-qualified name of the DVSService's
 	// UpdatePortGroup RPC.
-	DVSServiceUpdatePortGroupProcedure = "/pilab.cloud.network.v2.DVSService/UpdatePortGroup"
+	DVSServiceUpdatePortGroupProcedure = "/pilab.network.v2.DVSService/UpdatePortGroup"
 	// DVSServiceDeletePortGroupProcedure is the fully-qualified name of the DVSService's
 	// DeletePortGroup RPC.
-	DVSServiceDeletePortGroupProcedure = "/pilab.cloud.network.v2.DVSService/DeletePortGroup"
+	DVSServiceDeletePortGroupProcedure = "/pilab.network.v2.DVSService/DeletePortGroup"
 	// IPAMServiceCreateIPPoolProcedure is the fully-qualified name of the IPAMService's CreateIPPool
 	// RPC.
-	IPAMServiceCreateIPPoolProcedure = "/pilab.cloud.network.v2.IPAMService/CreateIPPool"
+	IPAMServiceCreateIPPoolProcedure = "/pilab.network.v2.IPAMService/CreateIPPool"
 	// IPAMServiceGetIPPoolProcedure is the fully-qualified name of the IPAMService's GetIPPool RPC.
-	IPAMServiceGetIPPoolProcedure = "/pilab.cloud.network.v2.IPAMService/GetIPPool"
+	IPAMServiceGetIPPoolProcedure = "/pilab.network.v2.IPAMService/GetIPPool"
 	// IPAMServiceListIPPoolsProcedure is the fully-qualified name of the IPAMService's ListIPPools RPC.
-	IPAMServiceListIPPoolsProcedure = "/pilab.cloud.network.v2.IPAMService/ListIPPools"
+	IPAMServiceListIPPoolsProcedure = "/pilab.network.v2.IPAMService/ListIPPools"
 	// IPAMServiceUpdateIPPoolProcedure is the fully-qualified name of the IPAMService's UpdateIPPool
 	// RPC.
-	IPAMServiceUpdateIPPoolProcedure = "/pilab.cloud.network.v2.IPAMService/UpdateIPPool"
+	IPAMServiceUpdateIPPoolProcedure = "/pilab.network.v2.IPAMService/UpdateIPPool"
 	// IPAMServiceDeleteIPPoolProcedure is the fully-qualified name of the IPAMService's DeleteIPPool
 	// RPC.
-	IPAMServiceDeleteIPPoolProcedure = "/pilab.cloud.network.v2.IPAMService/DeleteIPPool"
+	IPAMServiceDeleteIPPoolProcedure = "/pilab.network.v2.IPAMService/DeleteIPPool"
 	// IPAMServiceAllocateIPProcedure is the fully-qualified name of the IPAMService's AllocateIP RPC.
-	IPAMServiceAllocateIPProcedure = "/pilab.cloud.network.v2.IPAMService/AllocateIP"
+	IPAMServiceAllocateIPProcedure = "/pilab.network.v2.IPAMService/AllocateIP"
 	// IPAMServiceReleaseIPProcedure is the fully-qualified name of the IPAMService's ReleaseIP RPC.
-	IPAMServiceReleaseIPProcedure = "/pilab.cloud.network.v2.IPAMService/ReleaseIP"
+	IPAMServiceReleaseIPProcedure = "/pilab.network.v2.IPAMService/ReleaseIP"
 	// IPAMServiceListAllocationsProcedure is the fully-qualified name of the IPAMService's
 	// ListAllocations RPC.
-	IPAMServiceListAllocationsProcedure = "/pilab.cloud.network.v2.IPAMService/ListAllocations"
+	IPAMServiceListAllocationsProcedure = "/pilab.network.v2.IPAMService/ListAllocations"
 	// IPAMServiceReserveIPProcedure is the fully-qualified name of the IPAMService's ReserveIP RPC.
-	IPAMServiceReserveIPProcedure = "/pilab.cloud.network.v2.IPAMService/ReserveIP"
+	IPAMServiceReserveIPProcedure = "/pilab.network.v2.IPAMService/ReserveIP"
 	// StatisticsServiceGetNetworkStatsProcedure is the fully-qualified name of the StatisticsService's
 	// GetNetworkStats RPC.
-	StatisticsServiceGetNetworkStatsProcedure = "/pilab.cloud.network.v2.StatisticsService/GetNetworkStats"
+	StatisticsServiceGetNetworkStatsProcedure = "/pilab.network.v2.StatisticsService/GetNetworkStats"
 	// StatisticsServiceGetPortStatsProcedure is the fully-qualified name of the StatisticsService's
 	// GetPortStats RPC.
-	StatisticsServiceGetPortStatsProcedure = "/pilab.cloud.network.v2.StatisticsService/GetPortStats"
+	StatisticsServiceGetPortStatsProcedure = "/pilab.network.v2.StatisticsService/GetPortStats"
 	// StatisticsServiceGetQoSStatsProcedure is the fully-qualified name of the StatisticsService's
 	// GetQoSStats RPC.
-	StatisticsServiceGetQoSStatsProcedure = "/pilab.cloud.network.v2.StatisticsService/GetQoSStats"
+	StatisticsServiceGetQoSStatsProcedure = "/pilab.network.v2.StatisticsService/GetQoSStats"
 	// StatisticsServiceGetPublicIPUsageProcedure is the fully-qualified name of the StatisticsService's
 	// GetPublicIPUsage RPC.
-	StatisticsServiceGetPublicIPUsageProcedure = "/pilab.cloud.network.v2.StatisticsService/GetPublicIPUsage"
+	StatisticsServiceGetPublicIPUsageProcedure = "/pilab.network.v2.StatisticsService/GetPublicIPUsage"
 	// FlowServiceListFlowsProcedure is the fully-qualified name of the FlowService's ListFlows RPC.
-	FlowServiceListFlowsProcedure = "/pilab.cloud.network.v2.FlowService/ListFlows"
+	FlowServiceListFlowsProcedure = "/pilab.network.v2.FlowService/ListFlows"
 	// FlowServiceDebugFlowProcedure is the fully-qualified name of the FlowService's DebugFlow RPC.
-	FlowServiceDebugFlowProcedure = "/pilab.cloud.network.v2.FlowService/DebugFlow"
+	FlowServiceDebugFlowProcedure = "/pilab.network.v2.FlowService/DebugFlow"
 	// ClusterBridgeServiceCreateClusterBridgeProcedure is the fully-qualified name of the
 	// ClusterBridgeService's CreateClusterBridge RPC.
-	ClusterBridgeServiceCreateClusterBridgeProcedure = "/pilab.cloud.network.v2.ClusterBridgeService/CreateClusterBridge"
+	ClusterBridgeServiceCreateClusterBridgeProcedure = "/pilab.network.v2.ClusterBridgeService/CreateClusterBridge"
 	// ClusterBridgeServiceGetClusterBridgeProcedure is the fully-qualified name of the
 	// ClusterBridgeService's GetClusterBridge RPC.
-	ClusterBridgeServiceGetClusterBridgeProcedure = "/pilab.cloud.network.v2.ClusterBridgeService/GetClusterBridge"
+	ClusterBridgeServiceGetClusterBridgeProcedure = "/pilab.network.v2.ClusterBridgeService/GetClusterBridge"
 	// ClusterBridgeServiceListClusterBridgesProcedure is the fully-qualified name of the
 	// ClusterBridgeService's ListClusterBridges RPC.
-	ClusterBridgeServiceListClusterBridgesProcedure = "/pilab.cloud.network.v2.ClusterBridgeService/ListClusterBridges"
+	ClusterBridgeServiceListClusterBridgesProcedure = "/pilab.network.v2.ClusterBridgeService/ListClusterBridges"
 	// ClusterBridgeServiceUpdateClusterBridgeProcedure is the fully-qualified name of the
 	// ClusterBridgeService's UpdateClusterBridge RPC.
-	ClusterBridgeServiceUpdateClusterBridgeProcedure = "/pilab.cloud.network.v2.ClusterBridgeService/UpdateClusterBridge"
+	ClusterBridgeServiceUpdateClusterBridgeProcedure = "/pilab.network.v2.ClusterBridgeService/UpdateClusterBridge"
 	// ClusterBridgeServiceDeleteClusterBridgeProcedure is the fully-qualified name of the
 	// ClusterBridgeService's DeleteClusterBridge RPC.
-	ClusterBridgeServiceDeleteClusterBridgeProcedure = "/pilab.cloud.network.v2.ClusterBridgeService/DeleteClusterBridge"
+	ClusterBridgeServiceDeleteClusterBridgeProcedure = "/pilab.network.v2.ClusterBridgeService/DeleteClusterBridge"
 	// ClusterBridgeServiceAddUplinkProcedure is the fully-qualified name of the ClusterBridgeService's
 	// AddUplink RPC.
-	ClusterBridgeServiceAddUplinkProcedure = "/pilab.cloud.network.v2.ClusterBridgeService/AddUplink"
+	ClusterBridgeServiceAddUplinkProcedure = "/pilab.network.v2.ClusterBridgeService/AddUplink"
 	// ClusterBridgeServiceRemoveUplinkProcedure is the fully-qualified name of the
 	// ClusterBridgeService's RemoveUplink RPC.
-	ClusterBridgeServiceRemoveUplinkProcedure = "/pilab.cloud.network.v2.ClusterBridgeService/RemoveUplink"
+	ClusterBridgeServiceRemoveUplinkProcedure = "/pilab.network.v2.ClusterBridgeService/RemoveUplink"
 )
 
-// NetworkServiceClient is a client for the pilab.cloud.network.v2.NetworkService service.
+// NetworkServiceClient is a client for the pilab.network.v2.NetworkService service.
 type NetworkServiceClient interface {
 	CreateNetwork(context.Context, *connect.Request[v2.CreateNetworkRequest]) (*connect.Response[v2.VirtualNetwork], error)
 	GetNetwork(context.Context, *connect.Request[v2.GetNetworkRequest]) (*connect.Response[v2.VirtualNetwork], error)
@@ -396,10 +396,10 @@ type NetworkServiceClient interface {
 	ReleaseVNI(context.Context, *connect.Request[v2.ReleaseVNIRequest]) (*connect.Response[v2.Empty], error)
 }
 
-// NewNetworkServiceClient constructs a client for the pilab.cloud.network.v2.NetworkService
-// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
-// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
-// the connect.WithGRPC() or connect.WithGRPCWeb() options.
+// NewNetworkServiceClient constructs a client for the pilab.network.v2.NetworkService service. By
+// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
+// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -603,142 +603,142 @@ type networkServiceClient struct {
 	releaseVNI         *connect.Client[v2.ReleaseVNIRequest, v2.Empty]
 }
 
-// CreateNetwork calls pilab.cloud.network.v2.NetworkService.CreateNetwork.
+// CreateNetwork calls pilab.network.v2.NetworkService.CreateNetwork.
 func (c *networkServiceClient) CreateNetwork(ctx context.Context, req *connect.Request[v2.CreateNetworkRequest]) (*connect.Response[v2.VirtualNetwork], error) {
 	return c.createNetwork.CallUnary(ctx, req)
 }
 
-// GetNetwork calls pilab.cloud.network.v2.NetworkService.GetNetwork.
+// GetNetwork calls pilab.network.v2.NetworkService.GetNetwork.
 func (c *networkServiceClient) GetNetwork(ctx context.Context, req *connect.Request[v2.GetNetworkRequest]) (*connect.Response[v2.VirtualNetwork], error) {
 	return c.getNetwork.CallUnary(ctx, req)
 }
 
-// ListNetworks calls pilab.cloud.network.v2.NetworkService.ListNetworks.
+// ListNetworks calls pilab.network.v2.NetworkService.ListNetworks.
 func (c *networkServiceClient) ListNetworks(ctx context.Context, req *connect.Request[v2.ListNetworksRequest]) (*connect.Response[v2.ListNetworksResponse], error) {
 	return c.listNetworks.CallUnary(ctx, req)
 }
 
-// UpdateNetwork calls pilab.cloud.network.v2.NetworkService.UpdateNetwork.
+// UpdateNetwork calls pilab.network.v2.NetworkService.UpdateNetwork.
 func (c *networkServiceClient) UpdateNetwork(ctx context.Context, req *connect.Request[v2.UpdateNetworkRequest]) (*connect.Response[v2.VirtualNetwork], error) {
 	return c.updateNetwork.CallUnary(ctx, req)
 }
 
-// DeleteNetwork calls pilab.cloud.network.v2.NetworkService.DeleteNetwork.
+// DeleteNetwork calls pilab.network.v2.NetworkService.DeleteNetwork.
 func (c *networkServiceClient) DeleteNetwork(ctx context.Context, req *connect.Request[v2.DeleteNetworkRequest]) (*connect.Response[v2.Empty], error) {
 	return c.deleteNetwork.CallUnary(ctx, req)
 }
 
-// AttachHosts calls pilab.cloud.network.v2.NetworkService.AttachHosts.
+// AttachHosts calls pilab.network.v2.NetworkService.AttachHosts.
 func (c *networkServiceClient) AttachHosts(ctx context.Context, req *connect.Request[v2.AttachHostsRequest]) (*connect.Response[v2.Empty], error) {
 	return c.attachHosts.CallUnary(ctx, req)
 }
 
-// DetachHosts calls pilab.cloud.network.v2.NetworkService.DetachHosts.
+// DetachHosts calls pilab.network.v2.NetworkService.DetachHosts.
 func (c *networkServiceClient) DetachHosts(ctx context.Context, req *connect.Request[v2.DetachHostsRequest]) (*connect.Response[v2.Empty], error) {
 	return c.detachHosts.CallUnary(ctx, req)
 }
 
-// CreatePort calls pilab.cloud.network.v2.NetworkService.CreatePort.
+// CreatePort calls pilab.network.v2.NetworkService.CreatePort.
 func (c *networkServiceClient) CreatePort(ctx context.Context, req *connect.Request[v2.CreatePortRequest]) (*connect.Response[v2.VirtualPort], error) {
 	return c.createPort.CallUnary(ctx, req)
 }
 
-// GetPort calls pilab.cloud.network.v2.NetworkService.GetPort.
+// GetPort calls pilab.network.v2.NetworkService.GetPort.
 func (c *networkServiceClient) GetPort(ctx context.Context, req *connect.Request[v2.GetPortRequest]) (*connect.Response[v2.VirtualPort], error) {
 	return c.getPort.CallUnary(ctx, req)
 }
 
-// ListPorts calls pilab.cloud.network.v2.NetworkService.ListPorts.
+// ListPorts calls pilab.network.v2.NetworkService.ListPorts.
 func (c *networkServiceClient) ListPorts(ctx context.Context, req *connect.Request[v2.ListPortsRequest]) (*connect.Response[v2.ListPortsResponse], error) {
 	return c.listPorts.CallUnary(ctx, req)
 }
 
-// UpdatePort calls pilab.cloud.network.v2.NetworkService.UpdatePort.
+// UpdatePort calls pilab.network.v2.NetworkService.UpdatePort.
 func (c *networkServiceClient) UpdatePort(ctx context.Context, req *connect.Request[v2.UpdatePortRequest]) (*connect.Response[v2.VirtualPort], error) {
 	return c.updatePort.CallUnary(ctx, req)
 }
 
-// DeletePort calls pilab.cloud.network.v2.NetworkService.DeletePort.
+// DeletePort calls pilab.network.v2.NetworkService.DeletePort.
 func (c *networkServiceClient) DeletePort(ctx context.Context, req *connect.Request[v2.DeletePortRequest]) (*connect.Response[v2.Empty], error) {
 	return c.deletePort.CallUnary(ctx, req)
 }
 
-// AttachPort calls pilab.cloud.network.v2.NetworkService.AttachPort.
+// AttachPort calls pilab.network.v2.NetworkService.AttachPort.
 func (c *networkServiceClient) AttachPort(ctx context.Context, req *connect.Request[v2.AttachPortRequest]) (*connect.Response[v2.Empty], error) {
 	return c.attachPort.CallUnary(ctx, req)
 }
 
-// DetachPort calls pilab.cloud.network.v2.NetworkService.DetachPort.
+// DetachPort calls pilab.network.v2.NetworkService.DetachPort.
 func (c *networkServiceClient) DetachPort(ctx context.Context, req *connect.Request[v2.DetachPortRequest]) (*connect.Response[v2.Empty], error) {
 	return c.detachPort.CallUnary(ctx, req)
 }
 
-// CreateVLANRange calls pilab.cloud.network.v2.NetworkService.CreateVLANRange.
+// CreateVLANRange calls pilab.network.v2.NetworkService.CreateVLANRange.
 func (c *networkServiceClient) CreateVLANRange(ctx context.Context, req *connect.Request[v2.CreateVLANRangeRequest]) (*connect.Response[v2.VLANRange], error) {
 	return c.createVLANRange.CallUnary(ctx, req)
 }
 
-// ListVLANRanges calls pilab.cloud.network.v2.NetworkService.ListVLANRanges.
+// ListVLANRanges calls pilab.network.v2.NetworkService.ListVLANRanges.
 func (c *networkServiceClient) ListVLANRanges(ctx context.Context, req *connect.Request[v2.ListVLANRangesRequest]) (*connect.Response[v2.ListVLANRangesResponse], error) {
 	return c.listVLANRanges.CallUnary(ctx, req)
 }
 
-// AllocateVLAN calls pilab.cloud.network.v2.NetworkService.AllocateVLAN.
+// AllocateVLAN calls pilab.network.v2.NetworkService.AllocateVLAN.
 func (c *networkServiceClient) AllocateVLAN(ctx context.Context, req *connect.Request[v2.AllocateVLANRequest]) (*connect.Response[v2.VLANAllocation], error) {
 	return c.allocateVLAN.CallUnary(ctx, req)
 }
 
-// ReleaseVLAN calls pilab.cloud.network.v2.NetworkService.ReleaseVLAN.
+// ReleaseVLAN calls pilab.network.v2.NetworkService.ReleaseVLAN.
 func (c *networkServiceClient) ReleaseVLAN(ctx context.Context, req *connect.Request[v2.ReleaseVLANRequest]) (*connect.Response[v2.Empty], error) {
 	return c.releaseVLAN.CallUnary(ctx, req)
 }
 
-// CreateVirtualCloud calls pilab.cloud.network.v2.NetworkService.CreateVirtualCloud.
+// CreateVirtualCloud calls pilab.network.v2.NetworkService.CreateVirtualCloud.
 func (c *networkServiceClient) CreateVirtualCloud(ctx context.Context, req *connect.Request[v2.CreateVirtualCloudRequest]) (*connect.Response[v2.VirtualCloud], error) {
 	return c.createVirtualCloud.CallUnary(ctx, req)
 }
 
-// GetVirtualCloud calls pilab.cloud.network.v2.NetworkService.GetVirtualCloud.
+// GetVirtualCloud calls pilab.network.v2.NetworkService.GetVirtualCloud.
 func (c *networkServiceClient) GetVirtualCloud(ctx context.Context, req *connect.Request[v2.GetVirtualCloudRequest]) (*connect.Response[v2.VirtualCloud], error) {
 	return c.getVirtualCloud.CallUnary(ctx, req)
 }
 
-// ListVirtualClouds calls pilab.cloud.network.v2.NetworkService.ListVirtualClouds.
+// ListVirtualClouds calls pilab.network.v2.NetworkService.ListVirtualClouds.
 func (c *networkServiceClient) ListVirtualClouds(ctx context.Context, req *connect.Request[v2.ListVirtualCloudsRequest]) (*connect.Response[v2.ListVirtualCloudsResponse], error) {
 	return c.listVirtualClouds.CallUnary(ctx, req)
 }
 
-// UpdateVirtualCloud calls pilab.cloud.network.v2.NetworkService.UpdateVirtualCloud.
+// UpdateVirtualCloud calls pilab.network.v2.NetworkService.UpdateVirtualCloud.
 func (c *networkServiceClient) UpdateVirtualCloud(ctx context.Context, req *connect.Request[v2.UpdateVirtualCloudRequest]) (*connect.Response[v2.VirtualCloud], error) {
 	return c.updateVirtualCloud.CallUnary(ctx, req)
 }
 
-// DeleteVirtualCloud calls pilab.cloud.network.v2.NetworkService.DeleteVirtualCloud.
+// DeleteVirtualCloud calls pilab.network.v2.NetworkService.DeleteVirtualCloud.
 func (c *networkServiceClient) DeleteVirtualCloud(ctx context.Context, req *connect.Request[v2.DeleteVirtualCloudRequest]) (*connect.Response[v2.Empty], error) {
 	return c.deleteVirtualCloud.CallUnary(ctx, req)
 }
 
-// AddVNIEndpoint calls pilab.cloud.network.v2.NetworkService.AddVNIEndpoint.
+// AddVNIEndpoint calls pilab.network.v2.NetworkService.AddVNIEndpoint.
 func (c *networkServiceClient) AddVNIEndpoint(ctx context.Context, req *connect.Request[v2.AddVNIEndpointRequest]) (*connect.Response[v2.Empty], error) {
 	return c.addVNIEndpoint.CallUnary(ctx, req)
 }
 
-// RemoveVNIEndpoint calls pilab.cloud.network.v2.NetworkService.RemoveVNIEndpoint.
+// RemoveVNIEndpoint calls pilab.network.v2.NetworkService.RemoveVNIEndpoint.
 func (c *networkServiceClient) RemoveVNIEndpoint(ctx context.Context, req *connect.Request[v2.RemoveVNIEndpointRequest]) (*connect.Response[v2.Empty], error) {
 	return c.removeVNIEndpoint.CallUnary(ctx, req)
 }
 
-// AllocateVNI calls pilab.cloud.network.v2.NetworkService.AllocateVNI.
+// AllocateVNI calls pilab.network.v2.NetworkService.AllocateVNI.
 func (c *networkServiceClient) AllocateVNI(ctx context.Context, req *connect.Request[v2.AllocateVNIRequest]) (*connect.Response[v2.VNIAllocation], error) {
 	return c.allocateVNI.CallUnary(ctx, req)
 }
 
-// ReleaseVNI calls pilab.cloud.network.v2.NetworkService.ReleaseVNI.
+// ReleaseVNI calls pilab.network.v2.NetworkService.ReleaseVNI.
 func (c *networkServiceClient) ReleaseVNI(ctx context.Context, req *connect.Request[v2.ReleaseVNIRequest]) (*connect.Response[v2.Empty], error) {
 	return c.releaseVNI.CallUnary(ctx, req)
 }
 
-// NetworkServiceHandler is an implementation of the pilab.cloud.network.v2.NetworkService service.
+// NetworkServiceHandler is an implementation of the pilab.network.v2.NetworkService service.
 type NetworkServiceHandler interface {
 	CreateNetwork(context.Context, *connect.Request[v2.CreateNetworkRequest]) (*connect.Response[v2.VirtualNetwork], error)
 	GetNetwork(context.Context, *connect.Request[v2.GetNetworkRequest]) (*connect.Response[v2.VirtualNetwork], error)
@@ -938,7 +938,7 @@ func NewNetworkServiceHandler(svc NetworkServiceHandler, opts ...connect.Handler
 		connect.WithSchema(networkServiceMethods.ByName("ReleaseVNI")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.network.v2.NetworkService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.network.v2.NetworkService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case NetworkServiceCreateNetworkProcedure:
 			networkServiceCreateNetworkHandler.ServeHTTP(w, r)
@@ -1004,114 +1004,114 @@ func NewNetworkServiceHandler(svc NetworkServiceHandler, opts ...connect.Handler
 type UnimplementedNetworkServiceHandler struct{}
 
 func (UnimplementedNetworkServiceHandler) CreateNetwork(context.Context, *connect.Request[v2.CreateNetworkRequest]) (*connect.Response[v2.VirtualNetwork], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.CreateNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.CreateNetwork is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) GetNetwork(context.Context, *connect.Request[v2.GetNetworkRequest]) (*connect.Response[v2.VirtualNetwork], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.GetNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.GetNetwork is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) ListNetworks(context.Context, *connect.Request[v2.ListNetworksRequest]) (*connect.Response[v2.ListNetworksResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.ListNetworks is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.ListNetworks is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) UpdateNetwork(context.Context, *connect.Request[v2.UpdateNetworkRequest]) (*connect.Response[v2.VirtualNetwork], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.UpdateNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.UpdateNetwork is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) DeleteNetwork(context.Context, *connect.Request[v2.DeleteNetworkRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.DeleteNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.DeleteNetwork is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) AttachHosts(context.Context, *connect.Request[v2.AttachHostsRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.AttachHosts is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.AttachHosts is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) DetachHosts(context.Context, *connect.Request[v2.DetachHostsRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.DetachHosts is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.DetachHosts is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) CreatePort(context.Context, *connect.Request[v2.CreatePortRequest]) (*connect.Response[v2.VirtualPort], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.CreatePort is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.CreatePort is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) GetPort(context.Context, *connect.Request[v2.GetPortRequest]) (*connect.Response[v2.VirtualPort], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.GetPort is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.GetPort is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) ListPorts(context.Context, *connect.Request[v2.ListPortsRequest]) (*connect.Response[v2.ListPortsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.ListPorts is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.ListPorts is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) UpdatePort(context.Context, *connect.Request[v2.UpdatePortRequest]) (*connect.Response[v2.VirtualPort], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.UpdatePort is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.UpdatePort is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) DeletePort(context.Context, *connect.Request[v2.DeletePortRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.DeletePort is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.DeletePort is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) AttachPort(context.Context, *connect.Request[v2.AttachPortRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.AttachPort is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.AttachPort is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) DetachPort(context.Context, *connect.Request[v2.DetachPortRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.DetachPort is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.DetachPort is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) CreateVLANRange(context.Context, *connect.Request[v2.CreateVLANRangeRequest]) (*connect.Response[v2.VLANRange], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.CreateVLANRange is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.CreateVLANRange is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) ListVLANRanges(context.Context, *connect.Request[v2.ListVLANRangesRequest]) (*connect.Response[v2.ListVLANRangesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.ListVLANRanges is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.ListVLANRanges is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) AllocateVLAN(context.Context, *connect.Request[v2.AllocateVLANRequest]) (*connect.Response[v2.VLANAllocation], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.AllocateVLAN is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.AllocateVLAN is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) ReleaseVLAN(context.Context, *connect.Request[v2.ReleaseVLANRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.ReleaseVLAN is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.ReleaseVLAN is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) CreateVirtualCloud(context.Context, *connect.Request[v2.CreateVirtualCloudRequest]) (*connect.Response[v2.VirtualCloud], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.CreateVirtualCloud is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.CreateVirtualCloud is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) GetVirtualCloud(context.Context, *connect.Request[v2.GetVirtualCloudRequest]) (*connect.Response[v2.VirtualCloud], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.GetVirtualCloud is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.GetVirtualCloud is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) ListVirtualClouds(context.Context, *connect.Request[v2.ListVirtualCloudsRequest]) (*connect.Response[v2.ListVirtualCloudsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.ListVirtualClouds is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.ListVirtualClouds is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) UpdateVirtualCloud(context.Context, *connect.Request[v2.UpdateVirtualCloudRequest]) (*connect.Response[v2.VirtualCloud], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.UpdateVirtualCloud is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.UpdateVirtualCloud is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) DeleteVirtualCloud(context.Context, *connect.Request[v2.DeleteVirtualCloudRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.DeleteVirtualCloud is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.DeleteVirtualCloud is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) AddVNIEndpoint(context.Context, *connect.Request[v2.AddVNIEndpointRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.AddVNIEndpoint is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.AddVNIEndpoint is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) RemoveVNIEndpoint(context.Context, *connect.Request[v2.RemoveVNIEndpointRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.RemoveVNIEndpoint is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.RemoveVNIEndpoint is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) AllocateVNI(context.Context, *connect.Request[v2.AllocateVNIRequest]) (*connect.Response[v2.VNIAllocation], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.AllocateVNI is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.AllocateVNI is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) ReleaseVNI(context.Context, *connect.Request[v2.ReleaseVNIRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.NetworkService.ReleaseVNI is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.NetworkService.ReleaseVNI is not implemented"))
 }
 
-// QoSSecurityServiceClient is a client for the pilab.cloud.network.v2.QoSSecurityService service.
+// QoSSecurityServiceClient is a client for the pilab.network.v2.QoSSecurityService service.
 type QoSSecurityServiceClient interface {
 	CreateQoSProfile(context.Context, *connect.Request[v2.CreateQoSProfileRequest]) (*connect.Response[v2.QoSProfile], error)
 	GetQoSProfile(context.Context, *connect.Request[v2.GetQoSProfileRequest]) (*connect.Response[v2.QoSProfile], error)
@@ -1133,7 +1133,7 @@ type QoSSecurityServiceClient interface {
 	ReorderACLRules(context.Context, *connect.Request[v2.ReorderACLRulesRequest]) (*connect.Response[v2.Empty], error)
 }
 
-// NewQoSSecurityServiceClient constructs a client for the pilab.cloud.network.v2.QoSSecurityService
+// NewQoSSecurityServiceClient constructs a client for the pilab.network.v2.QoSSecurityService
 // service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
 // gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
 // the connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -1277,97 +1277,97 @@ type qoSSecurityServiceClient struct {
 	reorderACLRules       *connect.Client[v2.ReorderACLRulesRequest, v2.Empty]
 }
 
-// CreateQoSProfile calls pilab.cloud.network.v2.QoSSecurityService.CreateQoSProfile.
+// CreateQoSProfile calls pilab.network.v2.QoSSecurityService.CreateQoSProfile.
 func (c *qoSSecurityServiceClient) CreateQoSProfile(ctx context.Context, req *connect.Request[v2.CreateQoSProfileRequest]) (*connect.Response[v2.QoSProfile], error) {
 	return c.createQoSProfile.CallUnary(ctx, req)
 }
 
-// GetQoSProfile calls pilab.cloud.network.v2.QoSSecurityService.GetQoSProfile.
+// GetQoSProfile calls pilab.network.v2.QoSSecurityService.GetQoSProfile.
 func (c *qoSSecurityServiceClient) GetQoSProfile(ctx context.Context, req *connect.Request[v2.GetQoSProfileRequest]) (*connect.Response[v2.QoSProfile], error) {
 	return c.getQoSProfile.CallUnary(ctx, req)
 }
 
-// ListQoSProfiles calls pilab.cloud.network.v2.QoSSecurityService.ListQoSProfiles.
+// ListQoSProfiles calls pilab.network.v2.QoSSecurityService.ListQoSProfiles.
 func (c *qoSSecurityServiceClient) ListQoSProfiles(ctx context.Context, req *connect.Request[v2.ListQoSProfilesRequest]) (*connect.Response[v2.ListQoSProfilesResponse], error) {
 	return c.listQoSProfiles.CallUnary(ctx, req)
 }
 
-// UpdateQoSProfile calls pilab.cloud.network.v2.QoSSecurityService.UpdateQoSProfile.
+// UpdateQoSProfile calls pilab.network.v2.QoSSecurityService.UpdateQoSProfile.
 func (c *qoSSecurityServiceClient) UpdateQoSProfile(ctx context.Context, req *connect.Request[v2.UpdateQoSProfileRequest]) (*connect.Response[v2.QoSProfile], error) {
 	return c.updateQoSProfile.CallUnary(ctx, req)
 }
 
-// DeleteQoSProfile calls pilab.cloud.network.v2.QoSSecurityService.DeleteQoSProfile.
+// DeleteQoSProfile calls pilab.network.v2.QoSSecurityService.DeleteQoSProfile.
 func (c *qoSSecurityServiceClient) DeleteQoSProfile(ctx context.Context, req *connect.Request[v2.DeleteQoSProfileRequest]) (*connect.Response[v2.Empty], error) {
 	return c.deleteQoSProfile.CallUnary(ctx, req)
 }
 
-// ApplyQoSProfile calls pilab.cloud.network.v2.QoSSecurityService.ApplyQoSProfile.
+// ApplyQoSProfile calls pilab.network.v2.QoSSecurityService.ApplyQoSProfile.
 func (c *qoSSecurityServiceClient) ApplyQoSProfile(ctx context.Context, req *connect.Request[v2.ApplyQoSProfileRequest]) (*connect.Response[v2.Empty], error) {
 	return c.applyQoSProfile.CallUnary(ctx, req)
 }
 
-// RemoveQoSProfile calls pilab.cloud.network.v2.QoSSecurityService.RemoveQoSProfile.
+// RemoveQoSProfile calls pilab.network.v2.QoSSecurityService.RemoveQoSProfile.
 func (c *qoSSecurityServiceClient) RemoveQoSProfile(ctx context.Context, req *connect.Request[v2.RemoveQoSProfileRequest]) (*connect.Response[v2.Empty], error) {
 	return c.removeQoSProfile.CallUnary(ctx, req)
 }
 
-// CreateSecurityProfile calls pilab.cloud.network.v2.QoSSecurityService.CreateSecurityProfile.
+// CreateSecurityProfile calls pilab.network.v2.QoSSecurityService.CreateSecurityProfile.
 func (c *qoSSecurityServiceClient) CreateSecurityProfile(ctx context.Context, req *connect.Request[v2.CreateSecurityProfileRequest]) (*connect.Response[v2.SecurityProfile], error) {
 	return c.createSecurityProfile.CallUnary(ctx, req)
 }
 
-// GetSecurityProfile calls pilab.cloud.network.v2.QoSSecurityService.GetSecurityProfile.
+// GetSecurityProfile calls pilab.network.v2.QoSSecurityService.GetSecurityProfile.
 func (c *qoSSecurityServiceClient) GetSecurityProfile(ctx context.Context, req *connect.Request[v2.GetSecurityProfileRequest]) (*connect.Response[v2.SecurityProfile], error) {
 	return c.getSecurityProfile.CallUnary(ctx, req)
 }
 
-// ListSecurityProfiles calls pilab.cloud.network.v2.QoSSecurityService.ListSecurityProfiles.
+// ListSecurityProfiles calls pilab.network.v2.QoSSecurityService.ListSecurityProfiles.
 func (c *qoSSecurityServiceClient) ListSecurityProfiles(ctx context.Context, req *connect.Request[v2.ListSecurityProfilesRequest]) (*connect.Response[v2.ListSecurityProfilesResponse], error) {
 	return c.listSecurityProfiles.CallUnary(ctx, req)
 }
 
-// UpdateSecurityProfile calls pilab.cloud.network.v2.QoSSecurityService.UpdateSecurityProfile.
+// UpdateSecurityProfile calls pilab.network.v2.QoSSecurityService.UpdateSecurityProfile.
 func (c *qoSSecurityServiceClient) UpdateSecurityProfile(ctx context.Context, req *connect.Request[v2.UpdateSecurityProfileRequest]) (*connect.Response[v2.SecurityProfile], error) {
 	return c.updateSecurityProfile.CallUnary(ctx, req)
 }
 
-// DeleteSecurityProfile calls pilab.cloud.network.v2.QoSSecurityService.DeleteSecurityProfile.
+// DeleteSecurityProfile calls pilab.network.v2.QoSSecurityService.DeleteSecurityProfile.
 func (c *qoSSecurityServiceClient) DeleteSecurityProfile(ctx context.Context, req *connect.Request[v2.DeleteSecurityProfileRequest]) (*connect.Response[v2.Empty], error) {
 	return c.deleteSecurityProfile.CallUnary(ctx, req)
 }
 
-// ApplySecurityProfile calls pilab.cloud.network.v2.QoSSecurityService.ApplySecurityProfile.
+// ApplySecurityProfile calls pilab.network.v2.QoSSecurityService.ApplySecurityProfile.
 func (c *qoSSecurityServiceClient) ApplySecurityProfile(ctx context.Context, req *connect.Request[v2.ApplySecurityProfileRequest]) (*connect.Response[v2.Empty], error) {
 	return c.applySecurityProfile.CallUnary(ctx, req)
 }
 
-// RemoveSecurityProfile calls pilab.cloud.network.v2.QoSSecurityService.RemoveSecurityProfile.
+// RemoveSecurityProfile calls pilab.network.v2.QoSSecurityService.RemoveSecurityProfile.
 func (c *qoSSecurityServiceClient) RemoveSecurityProfile(ctx context.Context, req *connect.Request[v2.RemoveSecurityProfileRequest]) (*connect.Response[v2.Empty], error) {
 	return c.removeSecurityProfile.CallUnary(ctx, req)
 }
 
-// AddACLRule calls pilab.cloud.network.v2.QoSSecurityService.AddACLRule.
+// AddACLRule calls pilab.network.v2.QoSSecurityService.AddACLRule.
 func (c *qoSSecurityServiceClient) AddACLRule(ctx context.Context, req *connect.Request[v2.AddACLRuleRequest]) (*connect.Response[v2.ACLRule], error) {
 	return c.addACLRule.CallUnary(ctx, req)
 }
 
-// UpdateACLRule calls pilab.cloud.network.v2.QoSSecurityService.UpdateACLRule.
+// UpdateACLRule calls pilab.network.v2.QoSSecurityService.UpdateACLRule.
 func (c *qoSSecurityServiceClient) UpdateACLRule(ctx context.Context, req *connect.Request[v2.UpdateACLRuleRequest]) (*connect.Response[v2.ACLRule], error) {
 	return c.updateACLRule.CallUnary(ctx, req)
 }
 
-// RemoveACLRule calls pilab.cloud.network.v2.QoSSecurityService.RemoveACLRule.
+// RemoveACLRule calls pilab.network.v2.QoSSecurityService.RemoveACLRule.
 func (c *qoSSecurityServiceClient) RemoveACLRule(ctx context.Context, req *connect.Request[v2.RemoveACLRuleRequest]) (*connect.Response[v2.Empty], error) {
 	return c.removeACLRule.CallUnary(ctx, req)
 }
 
-// ReorderACLRules calls pilab.cloud.network.v2.QoSSecurityService.ReorderACLRules.
+// ReorderACLRules calls pilab.network.v2.QoSSecurityService.ReorderACLRules.
 func (c *qoSSecurityServiceClient) ReorderACLRules(ctx context.Context, req *connect.Request[v2.ReorderACLRulesRequest]) (*connect.Response[v2.Empty], error) {
 	return c.reorderACLRules.CallUnary(ctx, req)
 }
 
-// QoSSecurityServiceHandler is an implementation of the pilab.cloud.network.v2.QoSSecurityService
+// QoSSecurityServiceHandler is an implementation of the pilab.network.v2.QoSSecurityService
 // service.
 type QoSSecurityServiceHandler interface {
 	CreateQoSProfile(context.Context, *connect.Request[v2.CreateQoSProfileRequest]) (*connect.Response[v2.QoSProfile], error)
@@ -1505,7 +1505,7 @@ func NewQoSSecurityServiceHandler(svc QoSSecurityServiceHandler, opts ...connect
 		connect.WithSchema(qoSSecurityServiceMethods.ByName("ReorderACLRules")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.network.v2.QoSSecurityService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.network.v2.QoSSecurityService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case QoSSecurityServiceCreateQoSProfileProcedure:
 			qoSSecurityServiceCreateQoSProfileHandler.ServeHTTP(w, r)
@@ -1553,78 +1553,78 @@ func NewQoSSecurityServiceHandler(svc QoSSecurityServiceHandler, opts ...connect
 type UnimplementedQoSSecurityServiceHandler struct{}
 
 func (UnimplementedQoSSecurityServiceHandler) CreateQoSProfile(context.Context, *connect.Request[v2.CreateQoSProfileRequest]) (*connect.Response[v2.QoSProfile], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.CreateQoSProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.CreateQoSProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) GetQoSProfile(context.Context, *connect.Request[v2.GetQoSProfileRequest]) (*connect.Response[v2.QoSProfile], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.GetQoSProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.GetQoSProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) ListQoSProfiles(context.Context, *connect.Request[v2.ListQoSProfilesRequest]) (*connect.Response[v2.ListQoSProfilesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.ListQoSProfiles is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.ListQoSProfiles is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) UpdateQoSProfile(context.Context, *connect.Request[v2.UpdateQoSProfileRequest]) (*connect.Response[v2.QoSProfile], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.UpdateQoSProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.UpdateQoSProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) DeleteQoSProfile(context.Context, *connect.Request[v2.DeleteQoSProfileRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.DeleteQoSProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.DeleteQoSProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) ApplyQoSProfile(context.Context, *connect.Request[v2.ApplyQoSProfileRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.ApplyQoSProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.ApplyQoSProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) RemoveQoSProfile(context.Context, *connect.Request[v2.RemoveQoSProfileRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.RemoveQoSProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.RemoveQoSProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) CreateSecurityProfile(context.Context, *connect.Request[v2.CreateSecurityProfileRequest]) (*connect.Response[v2.SecurityProfile], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.CreateSecurityProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.CreateSecurityProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) GetSecurityProfile(context.Context, *connect.Request[v2.GetSecurityProfileRequest]) (*connect.Response[v2.SecurityProfile], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.GetSecurityProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.GetSecurityProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) ListSecurityProfiles(context.Context, *connect.Request[v2.ListSecurityProfilesRequest]) (*connect.Response[v2.ListSecurityProfilesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.ListSecurityProfiles is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.ListSecurityProfiles is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) UpdateSecurityProfile(context.Context, *connect.Request[v2.UpdateSecurityProfileRequest]) (*connect.Response[v2.SecurityProfile], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.UpdateSecurityProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.UpdateSecurityProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) DeleteSecurityProfile(context.Context, *connect.Request[v2.DeleteSecurityProfileRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.DeleteSecurityProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.DeleteSecurityProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) ApplySecurityProfile(context.Context, *connect.Request[v2.ApplySecurityProfileRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.ApplySecurityProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.ApplySecurityProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) RemoveSecurityProfile(context.Context, *connect.Request[v2.RemoveSecurityProfileRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.RemoveSecurityProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.RemoveSecurityProfile is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) AddACLRule(context.Context, *connect.Request[v2.AddACLRuleRequest]) (*connect.Response[v2.ACLRule], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.AddACLRule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.AddACLRule is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) UpdateACLRule(context.Context, *connect.Request[v2.UpdateACLRuleRequest]) (*connect.Response[v2.ACLRule], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.UpdateACLRule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.UpdateACLRule is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) RemoveACLRule(context.Context, *connect.Request[v2.RemoveACLRuleRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.RemoveACLRule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.RemoveACLRule is not implemented"))
 }
 
 func (UnimplementedQoSSecurityServiceHandler) ReorderACLRules(context.Context, *connect.Request[v2.ReorderACLRulesRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.QoSSecurityService.ReorderACLRules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.QoSSecurityService.ReorderACLRules is not implemented"))
 }
 
-// PublicIPServiceClient is a client for the pilab.cloud.network.v2.PublicIPService service.
+// PublicIPServiceClient is a client for the pilab.network.v2.PublicIPService service.
 type PublicIPServiceClient interface {
 	AllocatePublicIP(context.Context, *connect.Request[v2.AllocatePublicIPRequest]) (*connect.Response[v2.PublicIP], error)
 	GetPublicIP(context.Context, *connect.Request[v2.GetPublicIPRequest]) (*connect.Response[v2.PublicIP], error)
@@ -1646,10 +1646,10 @@ type PublicIPServiceClient interface {
 	ReorderFirewallRules(context.Context, *connect.Request[v2.ReorderFirewallRulesRequest]) (*connect.Response[v2.Empty], error)
 }
 
-// NewPublicIPServiceClient constructs a client for the pilab.cloud.network.v2.PublicIPService
-// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
-// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
-// the connect.WithGRPC() or connect.WithGRPCWeb() options.
+// NewPublicIPServiceClient constructs a client for the pilab.network.v2.PublicIPService service. By
+// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
+// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -1790,98 +1790,97 @@ type publicIPServiceClient struct {
 	reorderFirewallRules  *connect.Client[v2.ReorderFirewallRulesRequest, v2.Empty]
 }
 
-// AllocatePublicIP calls pilab.cloud.network.v2.PublicIPService.AllocatePublicIP.
+// AllocatePublicIP calls pilab.network.v2.PublicIPService.AllocatePublicIP.
 func (c *publicIPServiceClient) AllocatePublicIP(ctx context.Context, req *connect.Request[v2.AllocatePublicIPRequest]) (*connect.Response[v2.PublicIP], error) {
 	return c.allocatePublicIP.CallUnary(ctx, req)
 }
 
-// GetPublicIP calls pilab.cloud.network.v2.PublicIPService.GetPublicIP.
+// GetPublicIP calls pilab.network.v2.PublicIPService.GetPublicIP.
 func (c *publicIPServiceClient) GetPublicIP(ctx context.Context, req *connect.Request[v2.GetPublicIPRequest]) (*connect.Response[v2.PublicIP], error) {
 	return c.getPublicIP.CallUnary(ctx, req)
 }
 
-// ListPublicIPs calls pilab.cloud.network.v2.PublicIPService.ListPublicIPs.
+// ListPublicIPs calls pilab.network.v2.PublicIPService.ListPublicIPs.
 func (c *publicIPServiceClient) ListPublicIPs(ctx context.Context, req *connect.Request[v2.ListPublicIPsRequest]) (*connect.Response[v2.ListPublicIPsResponse], error) {
 	return c.listPublicIPs.CallUnary(ctx, req)
 }
 
-// ReleasePublicIP calls pilab.cloud.network.v2.PublicIPService.ReleasePublicIP.
+// ReleasePublicIP calls pilab.network.v2.PublicIPService.ReleasePublicIP.
 func (c *publicIPServiceClient) ReleasePublicIP(ctx context.Context, req *connect.Request[v2.ReleasePublicIPRequest]) (*connect.Response[v2.Empty], error) {
 	return c.releasePublicIP.CallUnary(ctx, req)
 }
 
-// AssociatePublicIP calls pilab.cloud.network.v2.PublicIPService.AssociatePublicIP.
+// AssociatePublicIP calls pilab.network.v2.PublicIPService.AssociatePublicIP.
 func (c *publicIPServiceClient) AssociatePublicIP(ctx context.Context, req *connect.Request[v2.AssociatePublicIPRequest]) (*connect.Response[v2.PublicIP], error) {
 	return c.associatePublicIP.CallUnary(ctx, req)
 }
 
-// DisassociatePublicIP calls pilab.cloud.network.v2.PublicIPService.DisassociatePublicIP.
+// DisassociatePublicIP calls pilab.network.v2.PublicIPService.DisassociatePublicIP.
 func (c *publicIPServiceClient) DisassociatePublicIP(ctx context.Context, req *connect.Request[v2.DisassociatePublicIPRequest]) (*connect.Response[v2.Empty], error) {
 	return c.disassociatePublicIP.CallUnary(ctx, req)
 }
 
-// CreatePortForward calls pilab.cloud.network.v2.PublicIPService.CreatePortForward.
+// CreatePortForward calls pilab.network.v2.PublicIPService.CreatePortForward.
 func (c *publicIPServiceClient) CreatePortForward(ctx context.Context, req *connect.Request[v2.CreatePortForwardRequest]) (*connect.Response[v2.PortForward], error) {
 	return c.createPortForward.CallUnary(ctx, req)
 }
 
-// UpdatePortForward calls pilab.cloud.network.v2.PublicIPService.UpdatePortForward.
+// UpdatePortForward calls pilab.network.v2.PublicIPService.UpdatePortForward.
 func (c *publicIPServiceClient) UpdatePortForward(ctx context.Context, req *connect.Request[v2.UpdatePortForwardRequest]) (*connect.Response[v2.PortForward], error) {
 	return c.updatePortForward.CallUnary(ctx, req)
 }
 
-// DeletePortForward calls pilab.cloud.network.v2.PublicIPService.DeletePortForward.
+// DeletePortForward calls pilab.network.v2.PublicIPService.DeletePortForward.
 func (c *publicIPServiceClient) DeletePortForward(ctx context.Context, req *connect.Request[v2.DeletePortForwardRequest]) (*connect.Response[v2.Empty], error) {
 	return c.deletePortForward.CallUnary(ctx, req)
 }
 
-// ListPortForwards calls pilab.cloud.network.v2.PublicIPService.ListPortForwards.
+// ListPortForwards calls pilab.network.v2.PublicIPService.ListPortForwards.
 func (c *publicIPServiceClient) ListPortForwards(ctx context.Context, req *connect.Request[v2.ListPortForwardsRequest]) (*connect.Response[v2.ListPortForwardsResponse], error) {
 	return c.listPortForwards.CallUnary(ctx, req)
 }
 
-// CreateFirewallProfile calls pilab.cloud.network.v2.PublicIPService.CreateFirewallProfile.
+// CreateFirewallProfile calls pilab.network.v2.PublicIPService.CreateFirewallProfile.
 func (c *publicIPServiceClient) CreateFirewallProfile(ctx context.Context, req *connect.Request[v2.CreateFirewallProfileRequest]) (*connect.Response[v2.FirewallProfile], error) {
 	return c.createFirewallProfile.CallUnary(ctx, req)
 }
 
-// GetFirewallProfile calls pilab.cloud.network.v2.PublicIPService.GetFirewallProfile.
+// GetFirewallProfile calls pilab.network.v2.PublicIPService.GetFirewallProfile.
 func (c *publicIPServiceClient) GetFirewallProfile(ctx context.Context, req *connect.Request[v2.GetFirewallProfileRequest]) (*connect.Response[v2.FirewallProfile], error) {
 	return c.getFirewallProfile.CallUnary(ctx, req)
 }
 
-// UpdateFirewallProfile calls pilab.cloud.network.v2.PublicIPService.UpdateFirewallProfile.
+// UpdateFirewallProfile calls pilab.network.v2.PublicIPService.UpdateFirewallProfile.
 func (c *publicIPServiceClient) UpdateFirewallProfile(ctx context.Context, req *connect.Request[v2.UpdateFirewallProfileRequest]) (*connect.Response[v2.FirewallProfile], error) {
 	return c.updateFirewallProfile.CallUnary(ctx, req)
 }
 
-// DeleteFirewallProfile calls pilab.cloud.network.v2.PublicIPService.DeleteFirewallProfile.
+// DeleteFirewallProfile calls pilab.network.v2.PublicIPService.DeleteFirewallProfile.
 func (c *publicIPServiceClient) DeleteFirewallProfile(ctx context.Context, req *connect.Request[v2.DeleteFirewallProfileRequest]) (*connect.Response[v2.Empty], error) {
 	return c.deleteFirewallProfile.CallUnary(ctx, req)
 }
 
-// AddFirewallRule calls pilab.cloud.network.v2.PublicIPService.AddFirewallRule.
+// AddFirewallRule calls pilab.network.v2.PublicIPService.AddFirewallRule.
 func (c *publicIPServiceClient) AddFirewallRule(ctx context.Context, req *connect.Request[v2.AddFirewallRuleRequest]) (*connect.Response[v2.FirewallRule], error) {
 	return c.addFirewallRule.CallUnary(ctx, req)
 }
 
-// UpdateFirewallRule calls pilab.cloud.network.v2.PublicIPService.UpdateFirewallRule.
+// UpdateFirewallRule calls pilab.network.v2.PublicIPService.UpdateFirewallRule.
 func (c *publicIPServiceClient) UpdateFirewallRule(ctx context.Context, req *connect.Request[v2.UpdateFirewallRuleRequest]) (*connect.Response[v2.FirewallRule], error) {
 	return c.updateFirewallRule.CallUnary(ctx, req)
 }
 
-// RemoveFirewallRule calls pilab.cloud.network.v2.PublicIPService.RemoveFirewallRule.
+// RemoveFirewallRule calls pilab.network.v2.PublicIPService.RemoveFirewallRule.
 func (c *publicIPServiceClient) RemoveFirewallRule(ctx context.Context, req *connect.Request[v2.RemoveFirewallRuleRequest]) (*connect.Response[v2.Empty], error) {
 	return c.removeFirewallRule.CallUnary(ctx, req)
 }
 
-// ReorderFirewallRules calls pilab.cloud.network.v2.PublicIPService.ReorderFirewallRules.
+// ReorderFirewallRules calls pilab.network.v2.PublicIPService.ReorderFirewallRules.
 func (c *publicIPServiceClient) ReorderFirewallRules(ctx context.Context, req *connect.Request[v2.ReorderFirewallRulesRequest]) (*connect.Response[v2.Empty], error) {
 	return c.reorderFirewallRules.CallUnary(ctx, req)
 }
 
-// PublicIPServiceHandler is an implementation of the pilab.cloud.network.v2.PublicIPService
-// service.
+// PublicIPServiceHandler is an implementation of the pilab.network.v2.PublicIPService service.
 type PublicIPServiceHandler interface {
 	AllocatePublicIP(context.Context, *connect.Request[v2.AllocatePublicIPRequest]) (*connect.Response[v2.PublicIP], error)
 	GetPublicIP(context.Context, *connect.Request[v2.GetPublicIPRequest]) (*connect.Response[v2.PublicIP], error)
@@ -2018,7 +2017,7 @@ func NewPublicIPServiceHandler(svc PublicIPServiceHandler, opts ...connect.Handl
 		connect.WithSchema(publicIPServiceMethods.ByName("ReorderFirewallRules")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.network.v2.PublicIPService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.network.v2.PublicIPService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case PublicIPServiceAllocatePublicIPProcedure:
 			publicIPServiceAllocatePublicIPHandler.ServeHTTP(w, r)
@@ -2066,78 +2065,78 @@ func NewPublicIPServiceHandler(svc PublicIPServiceHandler, opts ...connect.Handl
 type UnimplementedPublicIPServiceHandler struct{}
 
 func (UnimplementedPublicIPServiceHandler) AllocatePublicIP(context.Context, *connect.Request[v2.AllocatePublicIPRequest]) (*connect.Response[v2.PublicIP], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.AllocatePublicIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.AllocatePublicIP is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) GetPublicIP(context.Context, *connect.Request[v2.GetPublicIPRequest]) (*connect.Response[v2.PublicIP], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.GetPublicIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.GetPublicIP is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) ListPublicIPs(context.Context, *connect.Request[v2.ListPublicIPsRequest]) (*connect.Response[v2.ListPublicIPsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.ListPublicIPs is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.ListPublicIPs is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) ReleasePublicIP(context.Context, *connect.Request[v2.ReleasePublicIPRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.ReleasePublicIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.ReleasePublicIP is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) AssociatePublicIP(context.Context, *connect.Request[v2.AssociatePublicIPRequest]) (*connect.Response[v2.PublicIP], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.AssociatePublicIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.AssociatePublicIP is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) DisassociatePublicIP(context.Context, *connect.Request[v2.DisassociatePublicIPRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.DisassociatePublicIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.DisassociatePublicIP is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) CreatePortForward(context.Context, *connect.Request[v2.CreatePortForwardRequest]) (*connect.Response[v2.PortForward], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.CreatePortForward is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.CreatePortForward is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) UpdatePortForward(context.Context, *connect.Request[v2.UpdatePortForwardRequest]) (*connect.Response[v2.PortForward], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.UpdatePortForward is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.UpdatePortForward is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) DeletePortForward(context.Context, *connect.Request[v2.DeletePortForwardRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.DeletePortForward is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.DeletePortForward is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) ListPortForwards(context.Context, *connect.Request[v2.ListPortForwardsRequest]) (*connect.Response[v2.ListPortForwardsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.ListPortForwards is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.ListPortForwards is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) CreateFirewallProfile(context.Context, *connect.Request[v2.CreateFirewallProfileRequest]) (*connect.Response[v2.FirewallProfile], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.CreateFirewallProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.CreateFirewallProfile is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) GetFirewallProfile(context.Context, *connect.Request[v2.GetFirewallProfileRequest]) (*connect.Response[v2.FirewallProfile], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.GetFirewallProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.GetFirewallProfile is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) UpdateFirewallProfile(context.Context, *connect.Request[v2.UpdateFirewallProfileRequest]) (*connect.Response[v2.FirewallProfile], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.UpdateFirewallProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.UpdateFirewallProfile is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) DeleteFirewallProfile(context.Context, *connect.Request[v2.DeleteFirewallProfileRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.DeleteFirewallProfile is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.DeleteFirewallProfile is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) AddFirewallRule(context.Context, *connect.Request[v2.AddFirewallRuleRequest]) (*connect.Response[v2.FirewallRule], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.AddFirewallRule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.AddFirewallRule is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) UpdateFirewallRule(context.Context, *connect.Request[v2.UpdateFirewallRuleRequest]) (*connect.Response[v2.FirewallRule], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.UpdateFirewallRule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.UpdateFirewallRule is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) RemoveFirewallRule(context.Context, *connect.Request[v2.RemoveFirewallRuleRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.RemoveFirewallRule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.RemoveFirewallRule is not implemented"))
 }
 
 func (UnimplementedPublicIPServiceHandler) ReorderFirewallRules(context.Context, *connect.Request[v2.ReorderFirewallRulesRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.PublicIPService.ReorderFirewallRules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.PublicIPService.ReorderFirewallRules is not implemented"))
 }
 
-// DVSServiceClient is a client for the pilab.cloud.network.v2.DVSService service.
+// DVSServiceClient is a client for the pilab.network.v2.DVSService service.
 type DVSServiceClient interface {
 	CreateDistributedSwitch(context.Context, *connect.Request[v2.CreateDistributedSwitchRequest]) (*connect.Response[v2.DistributedSwitch], error)
 	GetDistributedSwitch(context.Context, *connect.Request[v2.GetDistributedSwitchRequest]) (*connect.Response[v2.DistributedSwitch], error)
@@ -2153,10 +2152,10 @@ type DVSServiceClient interface {
 	DeletePortGroup(context.Context, *connect.Request[v2.DeletePortGroupRequest]) (*connect.Response[v2.Empty], error)
 }
 
-// NewDVSServiceClient constructs a client for the pilab.cloud.network.v2.DVSService service. By
-// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
-// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
+// NewDVSServiceClient constructs a client for the pilab.network.v2.DVSService service. By default,
+// it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
+// sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
+// or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -2255,67 +2254,67 @@ type dVSServiceClient struct {
 	deletePortGroup         *connect.Client[v2.DeletePortGroupRequest, v2.Empty]
 }
 
-// CreateDistributedSwitch calls pilab.cloud.network.v2.DVSService.CreateDistributedSwitch.
+// CreateDistributedSwitch calls pilab.network.v2.DVSService.CreateDistributedSwitch.
 func (c *dVSServiceClient) CreateDistributedSwitch(ctx context.Context, req *connect.Request[v2.CreateDistributedSwitchRequest]) (*connect.Response[v2.DistributedSwitch], error) {
 	return c.createDistributedSwitch.CallUnary(ctx, req)
 }
 
-// GetDistributedSwitch calls pilab.cloud.network.v2.DVSService.GetDistributedSwitch.
+// GetDistributedSwitch calls pilab.network.v2.DVSService.GetDistributedSwitch.
 func (c *dVSServiceClient) GetDistributedSwitch(ctx context.Context, req *connect.Request[v2.GetDistributedSwitchRequest]) (*connect.Response[v2.DistributedSwitch], error) {
 	return c.getDistributedSwitch.CallUnary(ctx, req)
 }
 
-// ListDistributedSwitches calls pilab.cloud.network.v2.DVSService.ListDistributedSwitches.
+// ListDistributedSwitches calls pilab.network.v2.DVSService.ListDistributedSwitches.
 func (c *dVSServiceClient) ListDistributedSwitches(ctx context.Context, req *connect.Request[v2.ListDistributedSwitchesRequest]) (*connect.Response[v2.ListDistributedSwitchesResponse], error) {
 	return c.listDistributedSwitches.CallUnary(ctx, req)
 }
 
-// UpdateDistributedSwitch calls pilab.cloud.network.v2.DVSService.UpdateDistributedSwitch.
+// UpdateDistributedSwitch calls pilab.network.v2.DVSService.UpdateDistributedSwitch.
 func (c *dVSServiceClient) UpdateDistributedSwitch(ctx context.Context, req *connect.Request[v2.UpdateDistributedSwitchRequest]) (*connect.Response[v2.DistributedSwitch], error) {
 	return c.updateDistributedSwitch.CallUnary(ctx, req)
 }
 
-// DeleteDistributedSwitch calls pilab.cloud.network.v2.DVSService.DeleteDistributedSwitch.
+// DeleteDistributedSwitch calls pilab.network.v2.DVSService.DeleteDistributedSwitch.
 func (c *dVSServiceClient) DeleteDistributedSwitch(ctx context.Context, req *connect.Request[v2.DeleteDistributedSwitchRequest]) (*connect.Response[v2.Empty], error) {
 	return c.deleteDistributedSwitch.CallUnary(ctx, req)
 }
 
-// AddHostToDVS calls pilab.cloud.network.v2.DVSService.AddHostToDVS.
+// AddHostToDVS calls pilab.network.v2.DVSService.AddHostToDVS.
 func (c *dVSServiceClient) AddHostToDVS(ctx context.Context, req *connect.Request[v2.AddHostToDVSRequest]) (*connect.Response[v2.Empty], error) {
 	return c.addHostToDVS.CallUnary(ctx, req)
 }
 
-// RemoveHostFromDVS calls pilab.cloud.network.v2.DVSService.RemoveHostFromDVS.
+// RemoveHostFromDVS calls pilab.network.v2.DVSService.RemoveHostFromDVS.
 func (c *dVSServiceClient) RemoveHostFromDVS(ctx context.Context, req *connect.Request[v2.RemoveHostFromDVSRequest]) (*connect.Response[v2.Empty], error) {
 	return c.removeHostFromDVS.CallUnary(ctx, req)
 }
 
-// CreatePortGroup calls pilab.cloud.network.v2.DVSService.CreatePortGroup.
+// CreatePortGroup calls pilab.network.v2.DVSService.CreatePortGroup.
 func (c *dVSServiceClient) CreatePortGroup(ctx context.Context, req *connect.Request[v2.CreatePortGroupRequest]) (*connect.Response[v2.PortGroup], error) {
 	return c.createPortGroup.CallUnary(ctx, req)
 }
 
-// GetPortGroup calls pilab.cloud.network.v2.DVSService.GetPortGroup.
+// GetPortGroup calls pilab.network.v2.DVSService.GetPortGroup.
 func (c *dVSServiceClient) GetPortGroup(ctx context.Context, req *connect.Request[v2.GetPortGroupRequest]) (*connect.Response[v2.PortGroup], error) {
 	return c.getPortGroup.CallUnary(ctx, req)
 }
 
-// ListPortGroups calls pilab.cloud.network.v2.DVSService.ListPortGroups.
+// ListPortGroups calls pilab.network.v2.DVSService.ListPortGroups.
 func (c *dVSServiceClient) ListPortGroups(ctx context.Context, req *connect.Request[v2.ListPortGroupsRequest]) (*connect.Response[v2.ListPortGroupsResponse], error) {
 	return c.listPortGroups.CallUnary(ctx, req)
 }
 
-// UpdatePortGroup calls pilab.cloud.network.v2.DVSService.UpdatePortGroup.
+// UpdatePortGroup calls pilab.network.v2.DVSService.UpdatePortGroup.
 func (c *dVSServiceClient) UpdatePortGroup(ctx context.Context, req *connect.Request[v2.UpdatePortGroupRequest]) (*connect.Response[v2.PortGroup], error) {
 	return c.updatePortGroup.CallUnary(ctx, req)
 }
 
-// DeletePortGroup calls pilab.cloud.network.v2.DVSService.DeletePortGroup.
+// DeletePortGroup calls pilab.network.v2.DVSService.DeletePortGroup.
 func (c *dVSServiceClient) DeletePortGroup(ctx context.Context, req *connect.Request[v2.DeletePortGroupRequest]) (*connect.Response[v2.Empty], error) {
 	return c.deletePortGroup.CallUnary(ctx, req)
 }
 
-// DVSServiceHandler is an implementation of the pilab.cloud.network.v2.DVSService service.
+// DVSServiceHandler is an implementation of the pilab.network.v2.DVSService service.
 type DVSServiceHandler interface {
 	CreateDistributedSwitch(context.Context, *connect.Request[v2.CreateDistributedSwitchRequest]) (*connect.Response[v2.DistributedSwitch], error)
 	GetDistributedSwitch(context.Context, *connect.Request[v2.GetDistributedSwitchRequest]) (*connect.Response[v2.DistributedSwitch], error)
@@ -2410,7 +2409,7 @@ func NewDVSServiceHandler(svc DVSServiceHandler, opts ...connect.HandlerOption) 
 		connect.WithSchema(dVSServiceMethods.ByName("DeletePortGroup")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.network.v2.DVSService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.network.v2.DVSService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case DVSServiceCreateDistributedSwitchProcedure:
 			dVSServiceCreateDistributedSwitchHandler.ServeHTTP(w, r)
@@ -2446,54 +2445,54 @@ func NewDVSServiceHandler(svc DVSServiceHandler, opts ...connect.HandlerOption) 
 type UnimplementedDVSServiceHandler struct{}
 
 func (UnimplementedDVSServiceHandler) CreateDistributedSwitch(context.Context, *connect.Request[v2.CreateDistributedSwitchRequest]) (*connect.Response[v2.DistributedSwitch], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.CreateDistributedSwitch is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.CreateDistributedSwitch is not implemented"))
 }
 
 func (UnimplementedDVSServiceHandler) GetDistributedSwitch(context.Context, *connect.Request[v2.GetDistributedSwitchRequest]) (*connect.Response[v2.DistributedSwitch], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.GetDistributedSwitch is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.GetDistributedSwitch is not implemented"))
 }
 
 func (UnimplementedDVSServiceHandler) ListDistributedSwitches(context.Context, *connect.Request[v2.ListDistributedSwitchesRequest]) (*connect.Response[v2.ListDistributedSwitchesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.ListDistributedSwitches is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.ListDistributedSwitches is not implemented"))
 }
 
 func (UnimplementedDVSServiceHandler) UpdateDistributedSwitch(context.Context, *connect.Request[v2.UpdateDistributedSwitchRequest]) (*connect.Response[v2.DistributedSwitch], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.UpdateDistributedSwitch is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.UpdateDistributedSwitch is not implemented"))
 }
 
 func (UnimplementedDVSServiceHandler) DeleteDistributedSwitch(context.Context, *connect.Request[v2.DeleteDistributedSwitchRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.DeleteDistributedSwitch is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.DeleteDistributedSwitch is not implemented"))
 }
 
 func (UnimplementedDVSServiceHandler) AddHostToDVS(context.Context, *connect.Request[v2.AddHostToDVSRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.AddHostToDVS is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.AddHostToDVS is not implemented"))
 }
 
 func (UnimplementedDVSServiceHandler) RemoveHostFromDVS(context.Context, *connect.Request[v2.RemoveHostFromDVSRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.RemoveHostFromDVS is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.RemoveHostFromDVS is not implemented"))
 }
 
 func (UnimplementedDVSServiceHandler) CreatePortGroup(context.Context, *connect.Request[v2.CreatePortGroupRequest]) (*connect.Response[v2.PortGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.CreatePortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.CreatePortGroup is not implemented"))
 }
 
 func (UnimplementedDVSServiceHandler) GetPortGroup(context.Context, *connect.Request[v2.GetPortGroupRequest]) (*connect.Response[v2.PortGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.GetPortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.GetPortGroup is not implemented"))
 }
 
 func (UnimplementedDVSServiceHandler) ListPortGroups(context.Context, *connect.Request[v2.ListPortGroupsRequest]) (*connect.Response[v2.ListPortGroupsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.ListPortGroups is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.ListPortGroups is not implemented"))
 }
 
 func (UnimplementedDVSServiceHandler) UpdatePortGroup(context.Context, *connect.Request[v2.UpdatePortGroupRequest]) (*connect.Response[v2.PortGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.UpdatePortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.UpdatePortGroup is not implemented"))
 }
 
 func (UnimplementedDVSServiceHandler) DeletePortGroup(context.Context, *connect.Request[v2.DeletePortGroupRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.DVSService.DeletePortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.DVSService.DeletePortGroup is not implemented"))
 }
 
-// IPAMServiceClient is a client for the pilab.cloud.network.v2.IPAMService service.
+// IPAMServiceClient is a client for the pilab.network.v2.IPAMService service.
 type IPAMServiceClient interface {
 	CreateIPPool(context.Context, *connect.Request[v2.CreateIPPoolRequest]) (*connect.Response[v2.IPPool], error)
 	GetIPPool(context.Context, *connect.Request[v2.GetIPPoolRequest]) (*connect.Response[v2.IPPool], error)
@@ -2506,7 +2505,7 @@ type IPAMServiceClient interface {
 	ReserveIP(context.Context, *connect.Request[v2.ReserveIPRequest]) (*connect.Response[v2.IPReservation], error)
 }
 
-// NewIPAMServiceClient constructs a client for the pilab.cloud.network.v2.IPAMService service. By
+// NewIPAMServiceClient constructs a client for the pilab.network.v2.IPAMService service. By
 // default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
 // and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -2587,52 +2586,52 @@ type iPAMServiceClient struct {
 	reserveIP       *connect.Client[v2.ReserveIPRequest, v2.IPReservation]
 }
 
-// CreateIPPool calls pilab.cloud.network.v2.IPAMService.CreateIPPool.
+// CreateIPPool calls pilab.network.v2.IPAMService.CreateIPPool.
 func (c *iPAMServiceClient) CreateIPPool(ctx context.Context, req *connect.Request[v2.CreateIPPoolRequest]) (*connect.Response[v2.IPPool], error) {
 	return c.createIPPool.CallUnary(ctx, req)
 }
 
-// GetIPPool calls pilab.cloud.network.v2.IPAMService.GetIPPool.
+// GetIPPool calls pilab.network.v2.IPAMService.GetIPPool.
 func (c *iPAMServiceClient) GetIPPool(ctx context.Context, req *connect.Request[v2.GetIPPoolRequest]) (*connect.Response[v2.IPPool], error) {
 	return c.getIPPool.CallUnary(ctx, req)
 }
 
-// ListIPPools calls pilab.cloud.network.v2.IPAMService.ListIPPools.
+// ListIPPools calls pilab.network.v2.IPAMService.ListIPPools.
 func (c *iPAMServiceClient) ListIPPools(ctx context.Context, req *connect.Request[v2.ListIPPoolsRequest]) (*connect.Response[v2.ListIPPoolsResponse], error) {
 	return c.listIPPools.CallUnary(ctx, req)
 }
 
-// UpdateIPPool calls pilab.cloud.network.v2.IPAMService.UpdateIPPool.
+// UpdateIPPool calls pilab.network.v2.IPAMService.UpdateIPPool.
 func (c *iPAMServiceClient) UpdateIPPool(ctx context.Context, req *connect.Request[v2.UpdateIPPoolRequest]) (*connect.Response[v2.IPPool], error) {
 	return c.updateIPPool.CallUnary(ctx, req)
 }
 
-// DeleteIPPool calls pilab.cloud.network.v2.IPAMService.DeleteIPPool.
+// DeleteIPPool calls pilab.network.v2.IPAMService.DeleteIPPool.
 func (c *iPAMServiceClient) DeleteIPPool(ctx context.Context, req *connect.Request[v2.DeleteIPPoolRequest]) (*connect.Response[v2.Empty], error) {
 	return c.deleteIPPool.CallUnary(ctx, req)
 }
 
-// AllocateIP calls pilab.cloud.network.v2.IPAMService.AllocateIP.
+// AllocateIP calls pilab.network.v2.IPAMService.AllocateIP.
 func (c *iPAMServiceClient) AllocateIP(ctx context.Context, req *connect.Request[v2.AllocateIPRequest]) (*connect.Response[v2.IPAllocation], error) {
 	return c.allocateIP.CallUnary(ctx, req)
 }
 
-// ReleaseIP calls pilab.cloud.network.v2.IPAMService.ReleaseIP.
+// ReleaseIP calls pilab.network.v2.IPAMService.ReleaseIP.
 func (c *iPAMServiceClient) ReleaseIP(ctx context.Context, req *connect.Request[v2.ReleaseIPRequest]) (*connect.Response[v2.Empty], error) {
 	return c.releaseIP.CallUnary(ctx, req)
 }
 
-// ListAllocations calls pilab.cloud.network.v2.IPAMService.ListAllocations.
+// ListAllocations calls pilab.network.v2.IPAMService.ListAllocations.
 func (c *iPAMServiceClient) ListAllocations(ctx context.Context, req *connect.Request[v2.ListAllocationsRequest]) (*connect.Response[v2.ListAllocationsResponse], error) {
 	return c.listAllocations.CallUnary(ctx, req)
 }
 
-// ReserveIP calls pilab.cloud.network.v2.IPAMService.ReserveIP.
+// ReserveIP calls pilab.network.v2.IPAMService.ReserveIP.
 func (c *iPAMServiceClient) ReserveIP(ctx context.Context, req *connect.Request[v2.ReserveIPRequest]) (*connect.Response[v2.IPReservation], error) {
 	return c.reserveIP.CallUnary(ctx, req)
 }
 
-// IPAMServiceHandler is an implementation of the pilab.cloud.network.v2.IPAMService service.
+// IPAMServiceHandler is an implementation of the pilab.network.v2.IPAMService service.
 type IPAMServiceHandler interface {
 	CreateIPPool(context.Context, *connect.Request[v2.CreateIPPoolRequest]) (*connect.Response[v2.IPPool], error)
 	GetIPPool(context.Context, *connect.Request[v2.GetIPPoolRequest]) (*connect.Response[v2.IPPool], error)
@@ -2706,7 +2705,7 @@ func NewIPAMServiceHandler(svc IPAMServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(iPAMServiceMethods.ByName("ReserveIP")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.network.v2.IPAMService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.network.v2.IPAMService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case IPAMServiceCreateIPPoolProcedure:
 			iPAMServiceCreateIPPoolHandler.ServeHTTP(w, r)
@@ -2736,42 +2735,42 @@ func NewIPAMServiceHandler(svc IPAMServiceHandler, opts ...connect.HandlerOption
 type UnimplementedIPAMServiceHandler struct{}
 
 func (UnimplementedIPAMServiceHandler) CreateIPPool(context.Context, *connect.Request[v2.CreateIPPoolRequest]) (*connect.Response[v2.IPPool], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.IPAMService.CreateIPPool is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.IPAMService.CreateIPPool is not implemented"))
 }
 
 func (UnimplementedIPAMServiceHandler) GetIPPool(context.Context, *connect.Request[v2.GetIPPoolRequest]) (*connect.Response[v2.IPPool], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.IPAMService.GetIPPool is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.IPAMService.GetIPPool is not implemented"))
 }
 
 func (UnimplementedIPAMServiceHandler) ListIPPools(context.Context, *connect.Request[v2.ListIPPoolsRequest]) (*connect.Response[v2.ListIPPoolsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.IPAMService.ListIPPools is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.IPAMService.ListIPPools is not implemented"))
 }
 
 func (UnimplementedIPAMServiceHandler) UpdateIPPool(context.Context, *connect.Request[v2.UpdateIPPoolRequest]) (*connect.Response[v2.IPPool], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.IPAMService.UpdateIPPool is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.IPAMService.UpdateIPPool is not implemented"))
 }
 
 func (UnimplementedIPAMServiceHandler) DeleteIPPool(context.Context, *connect.Request[v2.DeleteIPPoolRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.IPAMService.DeleteIPPool is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.IPAMService.DeleteIPPool is not implemented"))
 }
 
 func (UnimplementedIPAMServiceHandler) AllocateIP(context.Context, *connect.Request[v2.AllocateIPRequest]) (*connect.Response[v2.IPAllocation], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.IPAMService.AllocateIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.IPAMService.AllocateIP is not implemented"))
 }
 
 func (UnimplementedIPAMServiceHandler) ReleaseIP(context.Context, *connect.Request[v2.ReleaseIPRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.IPAMService.ReleaseIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.IPAMService.ReleaseIP is not implemented"))
 }
 
 func (UnimplementedIPAMServiceHandler) ListAllocations(context.Context, *connect.Request[v2.ListAllocationsRequest]) (*connect.Response[v2.ListAllocationsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.IPAMService.ListAllocations is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.IPAMService.ListAllocations is not implemented"))
 }
 
 func (UnimplementedIPAMServiceHandler) ReserveIP(context.Context, *connect.Request[v2.ReserveIPRequest]) (*connect.Response[v2.IPReservation], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.IPAMService.ReserveIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.IPAMService.ReserveIP is not implemented"))
 }
 
-// StatisticsServiceClient is a client for the pilab.cloud.network.v2.StatisticsService service.
+// StatisticsServiceClient is a client for the pilab.network.v2.StatisticsService service.
 type StatisticsServiceClient interface {
 	GetNetworkStats(context.Context, *connect.Request[v2.GetNetworkStatsRequest]) (*connect.Response[v2.NetworkStats], error)
 	GetPortStats(context.Context, *connect.Request[v2.GetPortStatsRequest]) (*connect.Response[v2.PortStats], error)
@@ -2779,7 +2778,7 @@ type StatisticsServiceClient interface {
 	GetPublicIPUsage(context.Context, *connect.Request[v2.GetPublicIPUsageRequest]) (*connect.Response[v2.PublicIPUsage], error)
 }
 
-// NewStatisticsServiceClient constructs a client for the pilab.cloud.network.v2.StatisticsService
+// NewStatisticsServiceClient constructs a client for the pilab.network.v2.StatisticsService
 // service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
 // gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
 // the connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -2825,28 +2824,27 @@ type statisticsServiceClient struct {
 	getPublicIPUsage *connect.Client[v2.GetPublicIPUsageRequest, v2.PublicIPUsage]
 }
 
-// GetNetworkStats calls pilab.cloud.network.v2.StatisticsService.GetNetworkStats.
+// GetNetworkStats calls pilab.network.v2.StatisticsService.GetNetworkStats.
 func (c *statisticsServiceClient) GetNetworkStats(ctx context.Context, req *connect.Request[v2.GetNetworkStatsRequest]) (*connect.Response[v2.NetworkStats], error) {
 	return c.getNetworkStats.CallUnary(ctx, req)
 }
 
-// GetPortStats calls pilab.cloud.network.v2.StatisticsService.GetPortStats.
+// GetPortStats calls pilab.network.v2.StatisticsService.GetPortStats.
 func (c *statisticsServiceClient) GetPortStats(ctx context.Context, req *connect.Request[v2.GetPortStatsRequest]) (*connect.Response[v2.PortStats], error) {
 	return c.getPortStats.CallUnary(ctx, req)
 }
 
-// GetQoSStats calls pilab.cloud.network.v2.StatisticsService.GetQoSStats.
+// GetQoSStats calls pilab.network.v2.StatisticsService.GetQoSStats.
 func (c *statisticsServiceClient) GetQoSStats(ctx context.Context, req *connect.Request[v2.GetQoSStatsRequest]) (*connect.Response[v2.QoSStats], error) {
 	return c.getQoSStats.CallUnary(ctx, req)
 }
 
-// GetPublicIPUsage calls pilab.cloud.network.v2.StatisticsService.GetPublicIPUsage.
+// GetPublicIPUsage calls pilab.network.v2.StatisticsService.GetPublicIPUsage.
 func (c *statisticsServiceClient) GetPublicIPUsage(ctx context.Context, req *connect.Request[v2.GetPublicIPUsageRequest]) (*connect.Response[v2.PublicIPUsage], error) {
 	return c.getPublicIPUsage.CallUnary(ctx, req)
 }
 
-// StatisticsServiceHandler is an implementation of the pilab.cloud.network.v2.StatisticsService
-// service.
+// StatisticsServiceHandler is an implementation of the pilab.network.v2.StatisticsService service.
 type StatisticsServiceHandler interface {
 	GetNetworkStats(context.Context, *connect.Request[v2.GetNetworkStatsRequest]) (*connect.Response[v2.NetworkStats], error)
 	GetPortStats(context.Context, *connect.Request[v2.GetPortStatsRequest]) (*connect.Response[v2.PortStats], error)
@@ -2885,7 +2883,7 @@ func NewStatisticsServiceHandler(svc StatisticsServiceHandler, opts ...connect.H
 		connect.WithSchema(statisticsServiceMethods.ByName("GetPublicIPUsage")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.network.v2.StatisticsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.network.v2.StatisticsService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case StatisticsServiceGetNetworkStatsProcedure:
 			statisticsServiceGetNetworkStatsHandler.ServeHTTP(w, r)
@@ -2905,28 +2903,28 @@ func NewStatisticsServiceHandler(svc StatisticsServiceHandler, opts ...connect.H
 type UnimplementedStatisticsServiceHandler struct{}
 
 func (UnimplementedStatisticsServiceHandler) GetNetworkStats(context.Context, *connect.Request[v2.GetNetworkStatsRequest]) (*connect.Response[v2.NetworkStats], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.StatisticsService.GetNetworkStats is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.StatisticsService.GetNetworkStats is not implemented"))
 }
 
 func (UnimplementedStatisticsServiceHandler) GetPortStats(context.Context, *connect.Request[v2.GetPortStatsRequest]) (*connect.Response[v2.PortStats], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.StatisticsService.GetPortStats is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.StatisticsService.GetPortStats is not implemented"))
 }
 
 func (UnimplementedStatisticsServiceHandler) GetQoSStats(context.Context, *connect.Request[v2.GetQoSStatsRequest]) (*connect.Response[v2.QoSStats], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.StatisticsService.GetQoSStats is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.StatisticsService.GetQoSStats is not implemented"))
 }
 
 func (UnimplementedStatisticsServiceHandler) GetPublicIPUsage(context.Context, *connect.Request[v2.GetPublicIPUsageRequest]) (*connect.Response[v2.PublicIPUsage], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.StatisticsService.GetPublicIPUsage is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.StatisticsService.GetPublicIPUsage is not implemented"))
 }
 
-// FlowServiceClient is a client for the pilab.cloud.network.v2.FlowService service.
+// FlowServiceClient is a client for the pilab.network.v2.FlowService service.
 type FlowServiceClient interface {
 	ListFlows(context.Context, *connect.Request[v2.ListFlowsRequest]) (*connect.Response[v2.ListFlowsResponse], error)
 	DebugFlow(context.Context, *connect.Request[v2.DebugFlowRequest]) (*connect.Response[v2.DebugFlowResponse], error)
 }
 
-// NewFlowServiceClient constructs a client for the pilab.cloud.network.v2.FlowService service. By
+// NewFlowServiceClient constructs a client for the pilab.network.v2.FlowService service. By
 // default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
 // and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -2958,17 +2956,17 @@ type flowServiceClient struct {
 	debugFlow *connect.Client[v2.DebugFlowRequest, v2.DebugFlowResponse]
 }
 
-// ListFlows calls pilab.cloud.network.v2.FlowService.ListFlows.
+// ListFlows calls pilab.network.v2.FlowService.ListFlows.
 func (c *flowServiceClient) ListFlows(ctx context.Context, req *connect.Request[v2.ListFlowsRequest]) (*connect.Response[v2.ListFlowsResponse], error) {
 	return c.listFlows.CallUnary(ctx, req)
 }
 
-// DebugFlow calls pilab.cloud.network.v2.FlowService.DebugFlow.
+// DebugFlow calls pilab.network.v2.FlowService.DebugFlow.
 func (c *flowServiceClient) DebugFlow(ctx context.Context, req *connect.Request[v2.DebugFlowRequest]) (*connect.Response[v2.DebugFlowResponse], error) {
 	return c.debugFlow.CallUnary(ctx, req)
 }
 
-// FlowServiceHandler is an implementation of the pilab.cloud.network.v2.FlowService service.
+// FlowServiceHandler is an implementation of the pilab.network.v2.FlowService service.
 type FlowServiceHandler interface {
 	ListFlows(context.Context, *connect.Request[v2.ListFlowsRequest]) (*connect.Response[v2.ListFlowsResponse], error)
 	DebugFlow(context.Context, *connect.Request[v2.DebugFlowRequest]) (*connect.Response[v2.DebugFlowResponse], error)
@@ -2993,7 +2991,7 @@ func NewFlowServiceHandler(svc FlowServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(flowServiceMethods.ByName("DebugFlow")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.network.v2.FlowService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.network.v2.FlowService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case FlowServiceListFlowsProcedure:
 			flowServiceListFlowsHandler.ServeHTTP(w, r)
@@ -3009,15 +3007,14 @@ func NewFlowServiceHandler(svc FlowServiceHandler, opts ...connect.HandlerOption
 type UnimplementedFlowServiceHandler struct{}
 
 func (UnimplementedFlowServiceHandler) ListFlows(context.Context, *connect.Request[v2.ListFlowsRequest]) (*connect.Response[v2.ListFlowsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.FlowService.ListFlows is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.FlowService.ListFlows is not implemented"))
 }
 
 func (UnimplementedFlowServiceHandler) DebugFlow(context.Context, *connect.Request[v2.DebugFlowRequest]) (*connect.Response[v2.DebugFlowResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.FlowService.DebugFlow is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.FlowService.DebugFlow is not implemented"))
 }
 
-// ClusterBridgeServiceClient is a client for the pilab.cloud.network.v2.ClusterBridgeService
-// service.
+// ClusterBridgeServiceClient is a client for the pilab.network.v2.ClusterBridgeService service.
 type ClusterBridgeServiceClient interface {
 	CreateClusterBridge(context.Context, *connect.Request[v2.CreateClusterBridgeRequest]) (*connect.Response[v2.ClusterBridge], error)
 	GetClusterBridge(context.Context, *connect.Request[v2.GetClusterBridgeRequest]) (*connect.Response[v2.ClusterBridge], error)
@@ -3028,11 +3025,10 @@ type ClusterBridgeServiceClient interface {
 	RemoveUplink(context.Context, *connect.Request[v2.RemoveUplinkRequest]) (*connect.Response[v2.Empty], error)
 }
 
-// NewClusterBridgeServiceClient constructs a client for the
-// pilab.cloud.network.v2.ClusterBridgeService service. By default, it uses the Connect protocol
-// with the binary Protobuf Codec, asks for gzipped responses, and sends uncompressed requests. To
-// use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or connect.WithGRPCWeb()
-// options.
+// NewClusterBridgeServiceClient constructs a client for the pilab.network.v2.ClusterBridgeService
+// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
+// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
+// the connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -3096,43 +3092,43 @@ type clusterBridgeServiceClient struct {
 	removeUplink        *connect.Client[v2.RemoveUplinkRequest, v2.Empty]
 }
 
-// CreateClusterBridge calls pilab.cloud.network.v2.ClusterBridgeService.CreateClusterBridge.
+// CreateClusterBridge calls pilab.network.v2.ClusterBridgeService.CreateClusterBridge.
 func (c *clusterBridgeServiceClient) CreateClusterBridge(ctx context.Context, req *connect.Request[v2.CreateClusterBridgeRequest]) (*connect.Response[v2.ClusterBridge], error) {
 	return c.createClusterBridge.CallUnary(ctx, req)
 }
 
-// GetClusterBridge calls pilab.cloud.network.v2.ClusterBridgeService.GetClusterBridge.
+// GetClusterBridge calls pilab.network.v2.ClusterBridgeService.GetClusterBridge.
 func (c *clusterBridgeServiceClient) GetClusterBridge(ctx context.Context, req *connect.Request[v2.GetClusterBridgeRequest]) (*connect.Response[v2.ClusterBridge], error) {
 	return c.getClusterBridge.CallUnary(ctx, req)
 }
 
-// ListClusterBridges calls pilab.cloud.network.v2.ClusterBridgeService.ListClusterBridges.
+// ListClusterBridges calls pilab.network.v2.ClusterBridgeService.ListClusterBridges.
 func (c *clusterBridgeServiceClient) ListClusterBridges(ctx context.Context, req *connect.Request[v2.ListClusterBridgesRequest]) (*connect.Response[v2.ListClusterBridgesResponse], error) {
 	return c.listClusterBridges.CallUnary(ctx, req)
 }
 
-// UpdateClusterBridge calls pilab.cloud.network.v2.ClusterBridgeService.UpdateClusterBridge.
+// UpdateClusterBridge calls pilab.network.v2.ClusterBridgeService.UpdateClusterBridge.
 func (c *clusterBridgeServiceClient) UpdateClusterBridge(ctx context.Context, req *connect.Request[v2.UpdateClusterBridgeRequest]) (*connect.Response[v2.ClusterBridge], error) {
 	return c.updateClusterBridge.CallUnary(ctx, req)
 }
 
-// DeleteClusterBridge calls pilab.cloud.network.v2.ClusterBridgeService.DeleteClusterBridge.
+// DeleteClusterBridge calls pilab.network.v2.ClusterBridgeService.DeleteClusterBridge.
 func (c *clusterBridgeServiceClient) DeleteClusterBridge(ctx context.Context, req *connect.Request[v2.DeleteClusterBridgeRequest]) (*connect.Response[v2.Empty], error) {
 	return c.deleteClusterBridge.CallUnary(ctx, req)
 }
 
-// AddUplink calls pilab.cloud.network.v2.ClusterBridgeService.AddUplink.
+// AddUplink calls pilab.network.v2.ClusterBridgeService.AddUplink.
 func (c *clusterBridgeServiceClient) AddUplink(ctx context.Context, req *connect.Request[v2.AddUplinkRequest]) (*connect.Response[v2.Empty], error) {
 	return c.addUplink.CallUnary(ctx, req)
 }
 
-// RemoveUplink calls pilab.cloud.network.v2.ClusterBridgeService.RemoveUplink.
+// RemoveUplink calls pilab.network.v2.ClusterBridgeService.RemoveUplink.
 func (c *clusterBridgeServiceClient) RemoveUplink(ctx context.Context, req *connect.Request[v2.RemoveUplinkRequest]) (*connect.Response[v2.Empty], error) {
 	return c.removeUplink.CallUnary(ctx, req)
 }
 
-// ClusterBridgeServiceHandler is an implementation of the
-// pilab.cloud.network.v2.ClusterBridgeService service.
+// ClusterBridgeServiceHandler is an implementation of the pilab.network.v2.ClusterBridgeService
+// service.
 type ClusterBridgeServiceHandler interface {
 	CreateClusterBridge(context.Context, *connect.Request[v2.CreateClusterBridgeRequest]) (*connect.Response[v2.ClusterBridge], error)
 	GetClusterBridge(context.Context, *connect.Request[v2.GetClusterBridgeRequest]) (*connect.Response[v2.ClusterBridge], error)
@@ -3192,7 +3188,7 @@ func NewClusterBridgeServiceHandler(svc ClusterBridgeServiceHandler, opts ...con
 		connect.WithSchema(clusterBridgeServiceMethods.ByName("RemoveUplink")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.network.v2.ClusterBridgeService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.network.v2.ClusterBridgeService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterBridgeServiceCreateClusterBridgeProcedure:
 			clusterBridgeServiceCreateClusterBridgeHandler.ServeHTTP(w, r)
@@ -3218,29 +3214,29 @@ func NewClusterBridgeServiceHandler(svc ClusterBridgeServiceHandler, opts ...con
 type UnimplementedClusterBridgeServiceHandler struct{}
 
 func (UnimplementedClusterBridgeServiceHandler) CreateClusterBridge(context.Context, *connect.Request[v2.CreateClusterBridgeRequest]) (*connect.Response[v2.ClusterBridge], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.ClusterBridgeService.CreateClusterBridge is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.ClusterBridgeService.CreateClusterBridge is not implemented"))
 }
 
 func (UnimplementedClusterBridgeServiceHandler) GetClusterBridge(context.Context, *connect.Request[v2.GetClusterBridgeRequest]) (*connect.Response[v2.ClusterBridge], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.ClusterBridgeService.GetClusterBridge is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.ClusterBridgeService.GetClusterBridge is not implemented"))
 }
 
 func (UnimplementedClusterBridgeServiceHandler) ListClusterBridges(context.Context, *connect.Request[v2.ListClusterBridgesRequest]) (*connect.Response[v2.ListClusterBridgesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.ClusterBridgeService.ListClusterBridges is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.ClusterBridgeService.ListClusterBridges is not implemented"))
 }
 
 func (UnimplementedClusterBridgeServiceHandler) UpdateClusterBridge(context.Context, *connect.Request[v2.UpdateClusterBridgeRequest]) (*connect.Response[v2.ClusterBridge], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.ClusterBridgeService.UpdateClusterBridge is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.ClusterBridgeService.UpdateClusterBridge is not implemented"))
 }
 
 func (UnimplementedClusterBridgeServiceHandler) DeleteClusterBridge(context.Context, *connect.Request[v2.DeleteClusterBridgeRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.ClusterBridgeService.DeleteClusterBridge is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.ClusterBridgeService.DeleteClusterBridge is not implemented"))
 }
 
 func (UnimplementedClusterBridgeServiceHandler) AddUplink(context.Context, *connect.Request[v2.AddUplinkRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.ClusterBridgeService.AddUplink is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.ClusterBridgeService.AddUplink is not implemented"))
 }
 
 func (UnimplementedClusterBridgeServiceHandler) RemoveUplink(context.Context, *connect.Request[v2.RemoveUplinkRequest]) (*connect.Response[v2.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.network.v2.ClusterBridgeService.RemoveUplink is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.network.v2.ClusterBridgeService.RemoveUplink is not implemented"))
 }

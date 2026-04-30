@@ -43,7 +43,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// VMServiceName is the fully-qualified name of the VMService service.
-	VMServiceName = "pilab.cloud.vmmanager.v1.VMService"
+	VMServiceName = "pilab.vmmanager.v1.VMService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -55,70 +55,70 @@ const (
 // period.
 const (
 	// VMServiceCreateVMProcedure is the fully-qualified name of the VMService's CreateVM RPC.
-	VMServiceCreateVMProcedure = "/pilab.cloud.vmmanager.v1.VMService/CreateVM"
+	VMServiceCreateVMProcedure = "/pilab.vmmanager.v1.VMService/CreateVM"
 	// VMServiceGetVMProcedure is the fully-qualified name of the VMService's GetVM RPC.
-	VMServiceGetVMProcedure = "/pilab.cloud.vmmanager.v1.VMService/GetVM"
+	VMServiceGetVMProcedure = "/pilab.vmmanager.v1.VMService/GetVM"
 	// VMServiceListVMsProcedure is the fully-qualified name of the VMService's ListVMs RPC.
-	VMServiceListVMsProcedure = "/pilab.cloud.vmmanager.v1.VMService/ListVMs"
+	VMServiceListVMsProcedure = "/pilab.vmmanager.v1.VMService/ListVMs"
 	// VMServiceStartVMProcedure is the fully-qualified name of the VMService's StartVM RPC.
-	VMServiceStartVMProcedure = "/pilab.cloud.vmmanager.v1.VMService/StartVM"
+	VMServiceStartVMProcedure = "/pilab.vmmanager.v1.VMService/StartVM"
 	// VMServiceStopVMProcedure is the fully-qualified name of the VMService's StopVM RPC.
-	VMServiceStopVMProcedure = "/pilab.cloud.vmmanager.v1.VMService/StopVM"
+	VMServiceStopVMProcedure = "/pilab.vmmanager.v1.VMService/StopVM"
 	// VMServiceRebootVMProcedure is the fully-qualified name of the VMService's RebootVM RPC.
-	VMServiceRebootVMProcedure = "/pilab.cloud.vmmanager.v1.VMService/RebootVM"
+	VMServiceRebootVMProcedure = "/pilab.vmmanager.v1.VMService/RebootVM"
 	// VMServiceSuspendVMProcedure is the fully-qualified name of the VMService's SuspendVM RPC.
-	VMServiceSuspendVMProcedure = "/pilab.cloud.vmmanager.v1.VMService/SuspendVM"
+	VMServiceSuspendVMProcedure = "/pilab.vmmanager.v1.VMService/SuspendVM"
 	// VMServiceResumeVMProcedure is the fully-qualified name of the VMService's ResumeVM RPC.
-	VMServiceResumeVMProcedure = "/pilab.cloud.vmmanager.v1.VMService/ResumeVM"
+	VMServiceResumeVMProcedure = "/pilab.vmmanager.v1.VMService/ResumeVM"
 	// VMServiceShutdownVMProcedure is the fully-qualified name of the VMService's ShutdownVM RPC.
-	VMServiceShutdownVMProcedure = "/pilab.cloud.vmmanager.v1.VMService/ShutdownVM"
+	VMServiceShutdownVMProcedure = "/pilab.vmmanager.v1.VMService/ShutdownVM"
 	// VMServiceDeleteVMProcedure is the fully-qualified name of the VMService's DeleteVM RPC.
-	VMServiceDeleteVMProcedure = "/pilab.cloud.vmmanager.v1.VMService/DeleteVM"
+	VMServiceDeleteVMProcedure = "/pilab.vmmanager.v1.VMService/DeleteVM"
 	// VMServiceUpdateVMProcedure is the fully-qualified name of the VMService's UpdateVM RPC.
-	VMServiceUpdateVMProcedure = "/pilab.cloud.vmmanager.v1.VMService/UpdateVM"
+	VMServiceUpdateVMProcedure = "/pilab.vmmanager.v1.VMService/UpdateVM"
 	// VMServiceAddDiskProcedure is the fully-qualified name of the VMService's AddDisk RPC.
-	VMServiceAddDiskProcedure = "/pilab.cloud.vmmanager.v1.VMService/AddDisk"
+	VMServiceAddDiskProcedure = "/pilab.vmmanager.v1.VMService/AddDisk"
 	// VMServiceGetDiskProcedure is the fully-qualified name of the VMService's GetDisk RPC.
-	VMServiceGetDiskProcedure = "/pilab.cloud.vmmanager.v1.VMService/GetDisk"
+	VMServiceGetDiskProcedure = "/pilab.vmmanager.v1.VMService/GetDisk"
 	// VMServiceListDisksProcedure is the fully-qualified name of the VMService's ListDisks RPC.
-	VMServiceListDisksProcedure = "/pilab.cloud.vmmanager.v1.VMService/ListDisks"
+	VMServiceListDisksProcedure = "/pilab.vmmanager.v1.VMService/ListDisks"
 	// VMServiceRemoveDiskProcedure is the fully-qualified name of the VMService's RemoveDisk RPC.
-	VMServiceRemoveDiskProcedure = "/pilab.cloud.vmmanager.v1.VMService/RemoveDisk"
+	VMServiceRemoveDiskProcedure = "/pilab.vmmanager.v1.VMService/RemoveDisk"
 	// VMServiceResizeDiskProcedure is the fully-qualified name of the VMService's ResizeDisk RPC.
-	VMServiceResizeDiskProcedure = "/pilab.cloud.vmmanager.v1.VMService/ResizeDisk"
+	VMServiceResizeDiskProcedure = "/pilab.vmmanager.v1.VMService/ResizeDisk"
 	// VMServiceAddNetworkInterfaceProcedure is the fully-qualified name of the VMService's
 	// AddNetworkInterface RPC.
-	VMServiceAddNetworkInterfaceProcedure = "/pilab.cloud.vmmanager.v1.VMService/AddNetworkInterface"
+	VMServiceAddNetworkInterfaceProcedure = "/pilab.vmmanager.v1.VMService/AddNetworkInterface"
 	// VMServiceGetNetworkInterfaceProcedure is the fully-qualified name of the VMService's
 	// GetNetworkInterface RPC.
-	VMServiceGetNetworkInterfaceProcedure = "/pilab.cloud.vmmanager.v1.VMService/GetNetworkInterface"
+	VMServiceGetNetworkInterfaceProcedure = "/pilab.vmmanager.v1.VMService/GetNetworkInterface"
 	// VMServiceListNetworkInterfacesProcedure is the fully-qualified name of the VMService's
 	// ListNetworkInterfaces RPC.
-	VMServiceListNetworkInterfacesProcedure = "/pilab.cloud.vmmanager.v1.VMService/ListNetworkInterfaces"
+	VMServiceListNetworkInterfacesProcedure = "/pilab.vmmanager.v1.VMService/ListNetworkInterfaces"
 	// VMServiceRemoveNetworkInterfaceProcedure is the fully-qualified name of the VMService's
 	// RemoveNetworkInterface RPC.
-	VMServiceRemoveNetworkInterfaceProcedure = "/pilab.cloud.vmmanager.v1.VMService/RemoveNetworkInterface"
+	VMServiceRemoveNetworkInterfaceProcedure = "/pilab.vmmanager.v1.VMService/RemoveNetworkInterface"
 	// VMServiceUpdateNetworkInterfaceProcedure is the fully-qualified name of the VMService's
 	// UpdateNetworkInterface RPC.
-	VMServiceUpdateNetworkInterfaceProcedure = "/pilab.cloud.vmmanager.v1.VMService/UpdateNetworkInterface"
+	VMServiceUpdateNetworkInterfaceProcedure = "/pilab.vmmanager.v1.VMService/UpdateNetworkInterface"
 	// VMServiceAddHardwareDeviceProcedure is the fully-qualified name of the VMService's
 	// AddHardwareDevice RPC.
-	VMServiceAddHardwareDeviceProcedure = "/pilab.cloud.vmmanager.v1.VMService/AddHardwareDevice"
+	VMServiceAddHardwareDeviceProcedure = "/pilab.vmmanager.v1.VMService/AddHardwareDevice"
 	// VMServiceGetHardwareDeviceProcedure is the fully-qualified name of the VMService's
 	// GetHardwareDevice RPC.
-	VMServiceGetHardwareDeviceProcedure = "/pilab.cloud.vmmanager.v1.VMService/GetHardwareDevice"
+	VMServiceGetHardwareDeviceProcedure = "/pilab.vmmanager.v1.VMService/GetHardwareDevice"
 	// VMServiceListHardwareDevicesProcedure is the fully-qualified name of the VMService's
 	// ListHardwareDevices RPC.
-	VMServiceListHardwareDevicesProcedure = "/pilab.cloud.vmmanager.v1.VMService/ListHardwareDevices"
+	VMServiceListHardwareDevicesProcedure = "/pilab.vmmanager.v1.VMService/ListHardwareDevices"
 	// VMServiceRemoveHardwareDeviceProcedure is the fully-qualified name of the VMService's
 	// RemoveHardwareDevice RPC.
-	VMServiceRemoveHardwareDeviceProcedure = "/pilab.cloud.vmmanager.v1.VMService/RemoveHardwareDevice"
+	VMServiceRemoveHardwareDeviceProcedure = "/pilab.vmmanager.v1.VMService/RemoveHardwareDevice"
 	// VMServiceUpdateHardwareDeviceProcedure is the fully-qualified name of the VMService's
 	// UpdateHardwareDevice RPC.
-	VMServiceUpdateHardwareDeviceProcedure = "/pilab.cloud.vmmanager.v1.VMService/UpdateHardwareDevice"
+	VMServiceUpdateHardwareDeviceProcedure = "/pilab.vmmanager.v1.VMService/UpdateHardwareDevice"
 )
 
-// VMServiceClient is a client for the pilab.cloud.vmmanager.v1.VMService service.
+// VMServiceClient is a client for the pilab.vmmanager.v1.VMService service.
 type VMServiceClient interface {
 	// VM Lifecycle Management
 	CreateVM(context.Context, *connect.Request[v1.CreateVMRequest]) (*connect.Response[v1.VM], error)
@@ -152,10 +152,10 @@ type VMServiceClient interface {
 	UpdateHardwareDevice(context.Context, *connect.Request[v1.UpdateHardwareDeviceRequest]) (*connect.Response[v1.HardwareDevice], error)
 }
 
-// NewVMServiceClient constructs a client for the pilab.cloud.vmmanager.v1.VMService service. By
-// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
-// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
+// NewVMServiceClient constructs a client for the pilab.vmmanager.v1.VMService service. By default,
+// it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
+// sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
+// or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -352,137 +352,137 @@ type vMServiceClient struct {
 	updateHardwareDevice   *connect.Client[v1.UpdateHardwareDeviceRequest, v1.HardwareDevice]
 }
 
-// CreateVM calls pilab.cloud.vmmanager.v1.VMService.CreateVM.
+// CreateVM calls pilab.vmmanager.v1.VMService.CreateVM.
 func (c *vMServiceClient) CreateVM(ctx context.Context, req *connect.Request[v1.CreateVMRequest]) (*connect.Response[v1.VM], error) {
 	return c.createVM.CallUnary(ctx, req)
 }
 
-// GetVM calls pilab.cloud.vmmanager.v1.VMService.GetVM.
+// GetVM calls pilab.vmmanager.v1.VMService.GetVM.
 func (c *vMServiceClient) GetVM(ctx context.Context, req *connect.Request[v1.GetVMRequest]) (*connect.Response[v1.VM], error) {
 	return c.getVM.CallUnary(ctx, req)
 }
 
-// ListVMs calls pilab.cloud.vmmanager.v1.VMService.ListVMs.
+// ListVMs calls pilab.vmmanager.v1.VMService.ListVMs.
 func (c *vMServiceClient) ListVMs(ctx context.Context, req *connect.Request[v1.ListVMsRequest]) (*connect.Response[v1.ListVMsResponse], error) {
 	return c.listVMs.CallUnary(ctx, req)
 }
 
-// StartVM calls pilab.cloud.vmmanager.v1.VMService.StartVM.
+// StartVM calls pilab.vmmanager.v1.VMService.StartVM.
 func (c *vMServiceClient) StartVM(ctx context.Context, req *connect.Request[v1.StartVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.startVM.CallUnary(ctx, req)
 }
 
-// StopVM calls pilab.cloud.vmmanager.v1.VMService.StopVM.
+// StopVM calls pilab.vmmanager.v1.VMService.StopVM.
 func (c *vMServiceClient) StopVM(ctx context.Context, req *connect.Request[v1.StopVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.stopVM.CallUnary(ctx, req)
 }
 
-// RebootVM calls pilab.cloud.vmmanager.v1.VMService.RebootVM.
+// RebootVM calls pilab.vmmanager.v1.VMService.RebootVM.
 func (c *vMServiceClient) RebootVM(ctx context.Context, req *connect.Request[v1.RebootVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.rebootVM.CallUnary(ctx, req)
 }
 
-// SuspendVM calls pilab.cloud.vmmanager.v1.VMService.SuspendVM.
+// SuspendVM calls pilab.vmmanager.v1.VMService.SuspendVM.
 func (c *vMServiceClient) SuspendVM(ctx context.Context, req *connect.Request[v1.SuspendVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.suspendVM.CallUnary(ctx, req)
 }
 
-// ResumeVM calls pilab.cloud.vmmanager.v1.VMService.ResumeVM.
+// ResumeVM calls pilab.vmmanager.v1.VMService.ResumeVM.
 func (c *vMServiceClient) ResumeVM(ctx context.Context, req *connect.Request[v1.ResumeVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.resumeVM.CallUnary(ctx, req)
 }
 
-// ShutdownVM calls pilab.cloud.vmmanager.v1.VMService.ShutdownVM.
+// ShutdownVM calls pilab.vmmanager.v1.VMService.ShutdownVM.
 func (c *vMServiceClient) ShutdownVM(ctx context.Context, req *connect.Request[v1.ShutdownVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.shutdownVM.CallUnary(ctx, req)
 }
 
-// DeleteVM calls pilab.cloud.vmmanager.v1.VMService.DeleteVM.
+// DeleteVM calls pilab.vmmanager.v1.VMService.DeleteVM.
 func (c *vMServiceClient) DeleteVM(ctx context.Context, req *connect.Request[v1.DeleteVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteVM.CallUnary(ctx, req)
 }
 
-// UpdateVM calls pilab.cloud.vmmanager.v1.VMService.UpdateVM.
+// UpdateVM calls pilab.vmmanager.v1.VMService.UpdateVM.
 func (c *vMServiceClient) UpdateVM(ctx context.Context, req *connect.Request[v1.UpdateVMRequest]) (*connect.Response[v1.VM], error) {
 	return c.updateVM.CallUnary(ctx, req)
 }
 
-// AddDisk calls pilab.cloud.vmmanager.v1.VMService.AddDisk.
+// AddDisk calls pilab.vmmanager.v1.VMService.AddDisk.
 func (c *vMServiceClient) AddDisk(ctx context.Context, req *connect.Request[v1.AddDiskRequest]) (*connect.Response[v1.Disk], error) {
 	return c.addDisk.CallUnary(ctx, req)
 }
 
-// GetDisk calls pilab.cloud.vmmanager.v1.VMService.GetDisk.
+// GetDisk calls pilab.vmmanager.v1.VMService.GetDisk.
 func (c *vMServiceClient) GetDisk(ctx context.Context, req *connect.Request[v1.GetDiskRequest]) (*connect.Response[v1.Disk], error) {
 	return c.getDisk.CallUnary(ctx, req)
 }
 
-// ListDisks calls pilab.cloud.vmmanager.v1.VMService.ListDisks.
+// ListDisks calls pilab.vmmanager.v1.VMService.ListDisks.
 func (c *vMServiceClient) ListDisks(ctx context.Context, req *connect.Request[v1.ListDisksRequest]) (*connect.Response[v1.ListDisksResponse], error) {
 	return c.listDisks.CallUnary(ctx, req)
 }
 
-// RemoveDisk calls pilab.cloud.vmmanager.v1.VMService.RemoveDisk.
+// RemoveDisk calls pilab.vmmanager.v1.VMService.RemoveDisk.
 func (c *vMServiceClient) RemoveDisk(ctx context.Context, req *connect.Request[v1.RemoveDiskRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.removeDisk.CallUnary(ctx, req)
 }
 
-// ResizeDisk calls pilab.cloud.vmmanager.v1.VMService.ResizeDisk.
+// ResizeDisk calls pilab.vmmanager.v1.VMService.ResizeDisk.
 func (c *vMServiceClient) ResizeDisk(ctx context.Context, req *connect.Request[v1.ResizeDiskRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.resizeDisk.CallUnary(ctx, req)
 }
 
-// AddNetworkInterface calls pilab.cloud.vmmanager.v1.VMService.AddNetworkInterface.
+// AddNetworkInterface calls pilab.vmmanager.v1.VMService.AddNetworkInterface.
 func (c *vMServiceClient) AddNetworkInterface(ctx context.Context, req *connect.Request[v1.AddNetworkInterfaceRequest]) (*connect.Response[v1.NetworkInterface], error) {
 	return c.addNetworkInterface.CallUnary(ctx, req)
 }
 
-// GetNetworkInterface calls pilab.cloud.vmmanager.v1.VMService.GetNetworkInterface.
+// GetNetworkInterface calls pilab.vmmanager.v1.VMService.GetNetworkInterface.
 func (c *vMServiceClient) GetNetworkInterface(ctx context.Context, req *connect.Request[v1.GetNetworkInterfaceRequest]) (*connect.Response[v1.NetworkInterface], error) {
 	return c.getNetworkInterface.CallUnary(ctx, req)
 }
 
-// ListNetworkInterfaces calls pilab.cloud.vmmanager.v1.VMService.ListNetworkInterfaces.
+// ListNetworkInterfaces calls pilab.vmmanager.v1.VMService.ListNetworkInterfaces.
 func (c *vMServiceClient) ListNetworkInterfaces(ctx context.Context, req *connect.Request[v1.ListNetworkInterfacesRequest]) (*connect.Response[v1.ListNetworkInterfacesResponse], error) {
 	return c.listNetworkInterfaces.CallUnary(ctx, req)
 }
 
-// RemoveNetworkInterface calls pilab.cloud.vmmanager.v1.VMService.RemoveNetworkInterface.
+// RemoveNetworkInterface calls pilab.vmmanager.v1.VMService.RemoveNetworkInterface.
 func (c *vMServiceClient) RemoveNetworkInterface(ctx context.Context, req *connect.Request[v1.RemoveNetworkInterfaceRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.removeNetworkInterface.CallUnary(ctx, req)
 }
 
-// UpdateNetworkInterface calls pilab.cloud.vmmanager.v1.VMService.UpdateNetworkInterface.
+// UpdateNetworkInterface calls pilab.vmmanager.v1.VMService.UpdateNetworkInterface.
 func (c *vMServiceClient) UpdateNetworkInterface(ctx context.Context, req *connect.Request[v1.UpdateNetworkInterfaceRequest]) (*connect.Response[v1.NetworkInterface], error) {
 	return c.updateNetworkInterface.CallUnary(ctx, req)
 }
 
-// AddHardwareDevice calls pilab.cloud.vmmanager.v1.VMService.AddHardwareDevice.
+// AddHardwareDevice calls pilab.vmmanager.v1.VMService.AddHardwareDevice.
 func (c *vMServiceClient) AddHardwareDevice(ctx context.Context, req *connect.Request[v1.AddHardwareDeviceRequest]) (*connect.Response[v1.HardwareDevice], error) {
 	return c.addHardwareDevice.CallUnary(ctx, req)
 }
 
-// GetHardwareDevice calls pilab.cloud.vmmanager.v1.VMService.GetHardwareDevice.
+// GetHardwareDevice calls pilab.vmmanager.v1.VMService.GetHardwareDevice.
 func (c *vMServiceClient) GetHardwareDevice(ctx context.Context, req *connect.Request[v1.GetHardwareDeviceRequest]) (*connect.Response[v1.HardwareDevice], error) {
 	return c.getHardwareDevice.CallUnary(ctx, req)
 }
 
-// ListHardwareDevices calls pilab.cloud.vmmanager.v1.VMService.ListHardwareDevices.
+// ListHardwareDevices calls pilab.vmmanager.v1.VMService.ListHardwareDevices.
 func (c *vMServiceClient) ListHardwareDevices(ctx context.Context, req *connect.Request[v1.ListHardwareDevicesRequest]) (*connect.Response[v1.ListHardwareDevicesResponse], error) {
 	return c.listHardwareDevices.CallUnary(ctx, req)
 }
 
-// RemoveHardwareDevice calls pilab.cloud.vmmanager.v1.VMService.RemoveHardwareDevice.
+// RemoveHardwareDevice calls pilab.vmmanager.v1.VMService.RemoveHardwareDevice.
 func (c *vMServiceClient) RemoveHardwareDevice(ctx context.Context, req *connect.Request[v1.RemoveHardwareDeviceRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.removeHardwareDevice.CallUnary(ctx, req)
 }
 
-// UpdateHardwareDevice calls pilab.cloud.vmmanager.v1.VMService.UpdateHardwareDevice.
+// UpdateHardwareDevice calls pilab.vmmanager.v1.VMService.UpdateHardwareDevice.
 func (c *vMServiceClient) UpdateHardwareDevice(ctx context.Context, req *connect.Request[v1.UpdateHardwareDeviceRequest]) (*connect.Response[v1.HardwareDevice], error) {
 	return c.updateHardwareDevice.CallUnary(ctx, req)
 }
 
-// VMServiceHandler is an implementation of the pilab.cloud.vmmanager.v1.VMService service.
+// VMServiceHandler is an implementation of the pilab.vmmanager.v1.VMService service.
 type VMServiceHandler interface {
 	// VM Lifecycle Management
 	CreateVM(context.Context, *connect.Request[v1.CreateVMRequest]) (*connect.Response[v1.VM], error)
@@ -679,7 +679,7 @@ func NewVMServiceHandler(svc VMServiceHandler, opts ...connect.HandlerOption) (s
 		connect.WithSchema(vMServiceMethods.ByName("UpdateHardwareDevice")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.vmmanager.v1.VMService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.vmmanager.v1.VMService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case VMServiceCreateVMProcedure:
 			vMServiceCreateVMHandler.ServeHTTP(w, r)
@@ -743,105 +743,105 @@ func NewVMServiceHandler(svc VMServiceHandler, opts ...connect.HandlerOption) (s
 type UnimplementedVMServiceHandler struct{}
 
 func (UnimplementedVMServiceHandler) CreateVM(context.Context, *connect.Request[v1.CreateVMRequest]) (*connect.Response[v1.VM], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.CreateVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.CreateVM is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) GetVM(context.Context, *connect.Request[v1.GetVMRequest]) (*connect.Response[v1.VM], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.GetVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.GetVM is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) ListVMs(context.Context, *connect.Request[v1.ListVMsRequest]) (*connect.Response[v1.ListVMsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.ListVMs is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.ListVMs is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) StartVM(context.Context, *connect.Request[v1.StartVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.StartVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.StartVM is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) StopVM(context.Context, *connect.Request[v1.StopVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.StopVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.StopVM is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) RebootVM(context.Context, *connect.Request[v1.RebootVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.RebootVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.RebootVM is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) SuspendVM(context.Context, *connect.Request[v1.SuspendVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.SuspendVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.SuspendVM is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) ResumeVM(context.Context, *connect.Request[v1.ResumeVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.ResumeVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.ResumeVM is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) ShutdownVM(context.Context, *connect.Request[v1.ShutdownVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.ShutdownVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.ShutdownVM is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) DeleteVM(context.Context, *connect.Request[v1.DeleteVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.DeleteVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.DeleteVM is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) UpdateVM(context.Context, *connect.Request[v1.UpdateVMRequest]) (*connect.Response[v1.VM], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.UpdateVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.UpdateVM is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) AddDisk(context.Context, *connect.Request[v1.AddDiskRequest]) (*connect.Response[v1.Disk], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.AddDisk is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.AddDisk is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) GetDisk(context.Context, *connect.Request[v1.GetDiskRequest]) (*connect.Response[v1.Disk], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.GetDisk is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.GetDisk is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) ListDisks(context.Context, *connect.Request[v1.ListDisksRequest]) (*connect.Response[v1.ListDisksResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.ListDisks is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.ListDisks is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) RemoveDisk(context.Context, *connect.Request[v1.RemoveDiskRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.RemoveDisk is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.RemoveDisk is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) ResizeDisk(context.Context, *connect.Request[v1.ResizeDiskRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.ResizeDisk is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.ResizeDisk is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) AddNetworkInterface(context.Context, *connect.Request[v1.AddNetworkInterfaceRequest]) (*connect.Response[v1.NetworkInterface], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.AddNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.AddNetworkInterface is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) GetNetworkInterface(context.Context, *connect.Request[v1.GetNetworkInterfaceRequest]) (*connect.Response[v1.NetworkInterface], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.GetNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.GetNetworkInterface is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) ListNetworkInterfaces(context.Context, *connect.Request[v1.ListNetworkInterfacesRequest]) (*connect.Response[v1.ListNetworkInterfacesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.ListNetworkInterfaces is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.ListNetworkInterfaces is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) RemoveNetworkInterface(context.Context, *connect.Request[v1.RemoveNetworkInterfaceRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.RemoveNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.RemoveNetworkInterface is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) UpdateNetworkInterface(context.Context, *connect.Request[v1.UpdateNetworkInterfaceRequest]) (*connect.Response[v1.NetworkInterface], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.UpdateNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.UpdateNetworkInterface is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) AddHardwareDevice(context.Context, *connect.Request[v1.AddHardwareDeviceRequest]) (*connect.Response[v1.HardwareDevice], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.AddHardwareDevice is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.AddHardwareDevice is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) GetHardwareDevice(context.Context, *connect.Request[v1.GetHardwareDeviceRequest]) (*connect.Response[v1.HardwareDevice], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.GetHardwareDevice is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.GetHardwareDevice is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) ListHardwareDevices(context.Context, *connect.Request[v1.ListHardwareDevicesRequest]) (*connect.Response[v1.ListHardwareDevicesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.ListHardwareDevices is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.ListHardwareDevices is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) RemoveHardwareDevice(context.Context, *connect.Request[v1.RemoveHardwareDeviceRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.RemoveHardwareDevice is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.RemoveHardwareDevice is not implemented"))
 }
 
 func (UnimplementedVMServiceHandler) UpdateHardwareDevice(context.Context, *connect.Request[v1.UpdateHardwareDeviceRequest]) (*connect.Response[v1.HardwareDevice], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.vmmanager.v1.VMService.UpdateHardwareDevice is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.vmmanager.v1.VMService.UpdateHardwareDevice is not implemented"))
 }

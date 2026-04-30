@@ -559,7 +559,7 @@ type PortGroup struct {
 	Id                   string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	TenantId             string                 `protobuf:"bytes,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"` // FK to Tenant
 	Name                 string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Type                 PortGroupType          `protobuf:"varint,4,opt,name=type,proto3,enum=pilab.cloud.virtualization.v1.PortGroupType" json:"type,omitempty"`
+	Type                 PortGroupType          `protobuf:"varint,4,opt,name=type,proto3,enum=pilab.virtualization.v1.PortGroupType" json:"type,omitempty"`
 	VlanId               int32                  `protobuf:"varint,5,opt,name=vlan_id,json=vlanId,proto3" json:"vlan_id,omitempty"` // 0 for untagged, 1-4094 for tagged
 	SecurityPolicy       *SecurityPolicy        `protobuf:"bytes,6,opt,name=security_policy,json=securityPolicy,proto3" json:"security_policy,omitempty"`
 	TrafficShapingPolicy *TrafficShapingPolicy  `protobuf:"bytes,7,opt,name=traffic_shaping_policy,json=trafficShapingPolicy,proto3" json:"traffic_shaping_policy,omitempty"`
@@ -674,7 +674,7 @@ type CreatePortGroupRequest struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	TenantId             string                 `protobuf:"bytes,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
 	Name                 string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Type                 PortGroupType          `protobuf:"varint,3,opt,name=type,proto3,enum=pilab.cloud.virtualization.v1.PortGroupType" json:"type,omitempty"`
+	Type                 PortGroupType          `protobuf:"varint,3,opt,name=type,proto3,enum=pilab.virtualization.v1.PortGroupType" json:"type,omitempty"`
 	VlanId               int32                  `protobuf:"varint,4,opt,name=vlan_id,json=vlanId,proto3" json:"vlan_id,omitempty"`
 	SecurityPolicy       *SecurityPolicy        `protobuf:"bytes,5,opt,name=security_policy,json=securityPolicy,proto3" json:"security_policy,omitempty"`
 	TrafficShapingPolicy *TrafficShapingPolicy  `protobuf:"bytes,6,opt,name=traffic_shaping_policy,json=trafficShapingPolicy,proto3" json:"traffic_shaping_policy,omitempty"`
@@ -1247,9 +1247,9 @@ func (x *GetPortGroupSystemServicesRequest) GetPortGroupId() string {
 // --- Security Policy ---
 type SecurityPolicy struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
-	PromiscuousMode   SecurityPolicyAction   `protobuf:"varint,1,opt,name=promiscuous_mode,json=promiscuousMode,proto3,enum=pilab.cloud.virtualization.v1.SecurityPolicyAction" json:"promiscuous_mode,omitempty"`
-	MacAddressChanges SecurityPolicyAction   `protobuf:"varint,2,opt,name=mac_address_changes,json=macAddressChanges,proto3,enum=pilab.cloud.virtualization.v1.SecurityPolicyAction" json:"mac_address_changes,omitempty"`
-	ForgedTransmits   SecurityPolicyAction   `protobuf:"varint,3,opt,name=forged_transmits,json=forgedTransmits,proto3,enum=pilab.cloud.virtualization.v1.SecurityPolicyAction" json:"forged_transmits,omitempty"`
+	PromiscuousMode   SecurityPolicyAction   `protobuf:"varint,1,opt,name=promiscuous_mode,json=promiscuousMode,proto3,enum=pilab.virtualization.v1.SecurityPolicyAction" json:"promiscuous_mode,omitempty"`
+	MacAddressChanges SecurityPolicyAction   `protobuf:"varint,2,opt,name=mac_address_changes,json=macAddressChanges,proto3,enum=pilab.virtualization.v1.SecurityPolicyAction" json:"mac_address_changes,omitempty"`
+	ForgedTransmits   SecurityPolicyAction   `protobuf:"varint,3,opt,name=forged_transmits,json=forgedTransmits,proto3,enum=pilab.virtualization.v1.SecurityPolicyAction" json:"forged_transmits,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1369,7 +1369,7 @@ func (x *TrafficShapingPolicy) GetBurstSizeKb() int32 {
 // --- Teaming Policy ---
 type TeamingPolicy struct {
 	state                 protoimpl.MessageState `protogen:"open.v1"`
-	LoadBalancerAlgorithm LoadBalancerAlgorithm  `protobuf:"varint,1,opt,name=load_balancer_algorithm,json=loadBalancerAlgorithm,proto3,enum=pilab.cloud.virtualization.v1.LoadBalancerAlgorithm" json:"load_balancer_algorithm,omitempty"`
+	LoadBalancerAlgorithm LoadBalancerAlgorithm  `protobuf:"varint,1,opt,name=load_balancer_algorithm,json=loadBalancerAlgorithm,proto3,enum=pilab.virtualization.v1.LoadBalancerAlgorithm" json:"load_balancer_algorithm,omitempty"`
 	UplinkPorts           []string               `protobuf:"bytes,2,rep,name=uplink_ports,json=uplinkPorts,proto3" json:"uplink_ports,omitempty"`                        // Names of physical NICs/ports
 	ActiveUplinkPorts     []string               `protobuf:"bytes,3,rep,name=active_uplink_ports,json=activeUplinkPorts,proto3" json:"active_uplink_ports,omitempty"`    // Names of active physical NICs/ports in active-standby mode
 	StandbyUplinkPorts    []string               `protobuf:"bytes,4,rep,name=standby_uplink_ports,json=standbyUplinkPorts,proto3" json:"standby_uplink_ports,omitempty"` // Names of standby physical NICs/ports in active-standby mode
@@ -2271,7 +2271,7 @@ var File_pilab_virtualization_v1_virtualization_proto protoreflect.FileDescripto
 
 const file_pilab_virtualization_v1_virtualization_proto_rawDesc = "" +
 	"\n" +
-	",pilab/virtualization/v1/virtualization.proto\x12\x1dpilab.cloud.virtualization.v1\x1a\x1bgoogle/protobuf/empty.proto\"N\n" +
+	",pilab/virtualization/v1/virtualization.proto\x12\x17pilab.virtualization.v1\x1a\x1bgoogle/protobuf/empty.proto\"N\n" +
 	"\x06Tenant\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -2284,37 +2284,37 @@ const file_pilab_virtualization_v1_virtualization_proto_rawDesc = "" +
 	"\x12ListTenantsRequest\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"~\n" +
-	"\x13ListTenantsResponse\x12?\n" +
-	"\atenants\x18\x01 \x03(\v2%.pilab.cloud.virtualization.v1.TenantR\atenants\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"q\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"x\n" +
+	"\x13ListTenantsResponse\x129\n" +
+	"\atenants\x18\x01 \x03(\v2\x1f.pilab.virtualization.v1.TenantR\atenants\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"k\n" +
 	"\x13UpdateTenantRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12=\n" +
-	"\x06tenant\x18\x02 \x01(\v2%.pilab.cloud.virtualization.v1.TenantR\x06tenant\"2\n" +
+	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x127\n" +
+	"\x06tenant\x18\x02 \x01(\v2\x1f.pilab.virtualization.v1.TenantR\x06tenant\"2\n" +
 	"\x13DeleteTenantRequest\x12\x1b\n" +
-	"\ttenant_id\x18\x01 \x01(\tR\btenantId\"\xbc\x04\n" +
+	"\ttenant_id\x18\x01 \x01(\tR\btenantId\"\x9e\x04\n" +
 	"\tPortGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1b\n" +
 	"\ttenant_id\x18\x02 \x01(\tR\btenantId\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12@\n" +
-	"\x04type\x18\x04 \x01(\x0e2,.pilab.cloud.virtualization.v1.PortGroupTypeR\x04type\x12\x17\n" +
-	"\avlan_id\x18\x05 \x01(\x05R\x06vlanId\x12V\n" +
-	"\x0fsecurity_policy\x18\x06 \x01(\v2-.pilab.cloud.virtualization.v1.SecurityPolicyR\x0esecurityPolicy\x12i\n" +
-	"\x16traffic_shaping_policy\x18\a \x01(\v23.pilab.cloud.virtualization.v1.TrafficShapingPolicyR\x14trafficShapingPolicy\x12S\n" +
-	"\x0eteaming_policy\x18\b \x01(\v2,.pilab.cloud.virtualization.v1.TeamingPolicyR\rteamingPolicy\x12\\\n" +
-	"\x0fsystem_services\x18\t \x01(\v23.pilab.cloud.virtualization.v1.SystemServicesConfigR\x0esystemServices\x12\x1d\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12:\n" +
+	"\x04type\x18\x04 \x01(\x0e2&.pilab.virtualization.v1.PortGroupTypeR\x04type\x12\x17\n" +
+	"\avlan_id\x18\x05 \x01(\x05R\x06vlanId\x12P\n" +
+	"\x0fsecurity_policy\x18\x06 \x01(\v2'.pilab.virtualization.v1.SecurityPolicyR\x0esecurityPolicy\x12c\n" +
+	"\x16traffic_shaping_policy\x18\a \x01(\v2-.pilab.virtualization.v1.TrafficShapingPolicyR\x14trafficShapingPolicy\x12M\n" +
+	"\x0eteaming_policy\x18\b \x01(\v2&.pilab.virtualization.v1.TeamingPolicyR\rteamingPolicy\x12V\n" +
+	"\x0fsystem_services\x18\t \x01(\v2-.pilab.virtualization.v1.SystemServicesConfigR\x0esystemServices\x12\x1d\n" +
 	"\n" +
 	"network_id\x18\n" +
-	" \x01(\tR\tnetworkId\"\x9a\x04\n" +
+	" \x01(\tR\tnetworkId\"\xfc\x03\n" +
 	"\x16CreatePortGroupRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12@\n" +
-	"\x04type\x18\x03 \x01(\x0e2,.pilab.cloud.virtualization.v1.PortGroupTypeR\x04type\x12\x17\n" +
-	"\avlan_id\x18\x04 \x01(\x05R\x06vlanId\x12V\n" +
-	"\x0fsecurity_policy\x18\x05 \x01(\v2-.pilab.cloud.virtualization.v1.SecurityPolicyR\x0esecurityPolicy\x12i\n" +
-	"\x16traffic_shaping_policy\x18\x06 \x01(\v23.pilab.cloud.virtualization.v1.TrafficShapingPolicyR\x14trafficShapingPolicy\x12S\n" +
-	"\x0eteaming_policy\x18\a \x01(\v2,.pilab.cloud.virtualization.v1.TeamingPolicyR\rteamingPolicy\x12\\\n" +
-	"\x0fsystem_services\x18\b \x01(\v23.pilab.cloud.virtualization.v1.SystemServicesConfigR\x0esystemServices\"V\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12:\n" +
+	"\x04type\x18\x03 \x01(\x0e2&.pilab.virtualization.v1.PortGroupTypeR\x04type\x12\x17\n" +
+	"\avlan_id\x18\x04 \x01(\x05R\x06vlanId\x12P\n" +
+	"\x0fsecurity_policy\x18\x05 \x01(\v2'.pilab.virtualization.v1.SecurityPolicyR\x0esecurityPolicy\x12c\n" +
+	"\x16traffic_shaping_policy\x18\x06 \x01(\v2-.pilab.virtualization.v1.TrafficShapingPolicyR\x14trafficShapingPolicy\x12M\n" +
+	"\x0eteaming_policy\x18\a \x01(\v2&.pilab.virtualization.v1.TeamingPolicyR\rteamingPolicy\x12V\n" +
+	"\x0fsystem_services\x18\b \x01(\v2-.pilab.virtualization.v1.SystemServicesConfigR\x0esystemServices\"V\n" +
 	"\x13GetPortGroupRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\"\n" +
 	"\rport_group_id\x18\x02 \x01(\tR\vportGroupId\"p\n" +
@@ -2322,16 +2322,16 @@ const file_pilab_virtualization_v1_virtualization_proto_rawDesc = "" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tR\tpageToken\"\x8b\x01\n" +
-	"\x16ListPortGroupsResponse\x12I\n" +
-	"\vport_groups\x18\x01 \x03(\v2(.pilab.cloud.virtualization.v1.PortGroupR\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x85\x01\n" +
+	"\x16ListPortGroupsResponse\x12C\n" +
+	"\vport_groups\x18\x01 \x03(\v2\".pilab.virtualization.v1.PortGroupR\n" +
 	"portGroups\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa2\x01\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x9c\x01\n" +
 	"\x16UpdatePortGroupRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\"\n" +
-	"\rport_group_id\x18\x02 \x01(\tR\vportGroupId\x12G\n" +
+	"\rport_group_id\x18\x02 \x01(\tR\vportGroupId\x12A\n" +
 	"\n" +
-	"port_group\x18\x03 \x01(\v2(.pilab.cloud.virtualization.v1.PortGroupR\tportGroup\"Y\n" +
+	"port_group\x18\x03 \x01(\v2\".pilab.virtualization.v1.PortGroupR\tportGroup\"Y\n" +
 	"\x16DeletePortGroupRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\"\n" +
 	"\rport_group_id\x18\x02 \x01(\tR\vportGroupId\"\xb3\x02\n" +
@@ -2341,24 +2341,24 @@ const file_pilab_virtualization_v1_virtualization_proto_rawDesc = "" +
 	"\riscsi_enabled\x18\x03 \x01(\bR\fiscsiEnabled\x126\n" +
 	"\x17fault_tolerance_enabled\x18\x04 \x01(\bR\x15faultToleranceEnabled\x127\n" +
 	"\x18use_netns_for_management\x18\x05 \x01(\bR\x15useNetnsForManagement\x12-\n" +
-	"\x13use_netns_for_iscsi\x18\x06 \x01(\bR\x10useNetnsForIscsi\"\xc2\x01\n" +
+	"\x13use_netns_for_iscsi\x18\x06 \x01(\bR\x10useNetnsForIscsi\"\xbc\x01\n" +
 	"!SetPortGroupSystemServicesRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\"\n" +
-	"\rport_group_id\x18\x02 \x01(\tR\vportGroupId\x12\\\n" +
-	"\x0fsystem_services\x18\x03 \x01(\v23.pilab.cloud.virtualization.v1.SystemServicesConfigR\x0esystemServices\"d\n" +
+	"\rport_group_id\x18\x02 \x01(\tR\vportGroupId\x12V\n" +
+	"\x0fsystem_services\x18\x03 \x01(\v2-.pilab.virtualization.v1.SystemServicesConfigR\x0esystemServices\"d\n" +
 	"!GetPortGroupSystemServicesRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\"\n" +
-	"\rport_group_id\x18\x02 \x01(\tR\vportGroupId\"\xb5\x02\n" +
-	"\x0eSecurityPolicy\x12^\n" +
-	"\x10promiscuous_mode\x18\x01 \x01(\x0e23.pilab.cloud.virtualization.v1.SecurityPolicyActionR\x0fpromiscuousMode\x12c\n" +
-	"\x13mac_address_changes\x18\x02 \x01(\x0e23.pilab.cloud.virtualization.v1.SecurityPolicyActionR\x11macAddressChanges\x12^\n" +
-	"\x10forged_transmits\x18\x03 \x01(\x0e23.pilab.cloud.virtualization.v1.SecurityPolicyActionR\x0fforgedTransmits\"\xa0\x01\n" +
+	"\rport_group_id\x18\x02 \x01(\tR\vportGroupId\"\xa3\x02\n" +
+	"\x0eSecurityPolicy\x12X\n" +
+	"\x10promiscuous_mode\x18\x01 \x01(\x0e2-.pilab.virtualization.v1.SecurityPolicyActionR\x0fpromiscuousMode\x12]\n" +
+	"\x13mac_address_changes\x18\x02 \x01(\x0e2-.pilab.virtualization.v1.SecurityPolicyActionR\x11macAddressChanges\x12X\n" +
+	"\x10forged_transmits\x18\x03 \x01(\x0e2-.pilab.virtualization.v1.SecurityPolicyActionR\x0fforgedTransmits\"\xa0\x01\n" +
 	"\x14TrafficShapingPolicy\x124\n" +
 	"\x16average_bandwidth_kbps\x18\x01 \x01(\x05R\x14averageBandwidthKbps\x12.\n" +
 	"\x13peak_bandwidth_kbps\x18\x02 \x01(\x05R\x11peakBandwidthKbps\x12\"\n" +
-	"\rburst_size_kb\x18\x03 \x01(\x05R\vburstSizeKb\"\x82\x02\n" +
-	"\rTeamingPolicy\x12l\n" +
-	"\x17load_balancer_algorithm\x18\x01 \x01(\x0e24.pilab.cloud.virtualization.v1.LoadBalancerAlgorithmR\x15loadBalancerAlgorithm\x12!\n" +
+	"\rburst_size_kb\x18\x03 \x01(\x05R\vburstSizeKb\"\xfc\x01\n" +
+	"\rTeamingPolicy\x12f\n" +
+	"\x17load_balancer_algorithm\x18\x01 \x01(\x0e2..pilab.virtualization.v1.LoadBalancerAlgorithmR\x15loadBalancerAlgorithm\x12!\n" +
 	"\fuplink_ports\x18\x02 \x03(\tR\vuplinkPorts\x12.\n" +
 	"\x13active_uplink_ports\x18\x03 \x03(\tR\x11activeUplinkPorts\x120\n" +
 	"\x14standby_uplink_ports\x18\x04 \x03(\tR\x12standbyUplinkPorts\"l\n" +
@@ -2379,15 +2379,15 @@ const file_pilab_virtualization_v1_virtualization_proto_rawDesc = "" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tR\tpageToken\"\x82\x01\n" +
-	"\x14ListNetworksResponse\x12B\n" +
-	"\bnetworks\x18\x01 \x03(\v2&.pilab.cloud.virtualization.v1.NetworkR\bnetworks\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x94\x01\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"|\n" +
+	"\x14ListNetworksResponse\x12<\n" +
+	"\bnetworks\x18\x01 \x03(\v2 .pilab.virtualization.v1.NetworkR\bnetworks\x12&\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8e\x01\n" +
 	"\x14UpdateNetworkRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1d\n" +
 	"\n" +
-	"network_id\x18\x02 \x01(\tR\tnetworkId\x12@\n" +
-	"\anetwork\x18\x03 \x01(\v2&.pilab.cloud.virtualization.v1.NetworkR\anetwork\"R\n" +
+	"network_id\x18\x02 \x01(\tR\tnetworkId\x12:\n" +
+	"\anetwork\x18\x03 \x01(\v2 .pilab.virtualization.v1.NetworkR\anetwork\"R\n" +
 	"\x14DeleteNetworkRequest\x12\x1b\n" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12\x1d\n" +
 	"\n" +
@@ -2405,20 +2405,20 @@ const file_pilab_virtualization_v1_virtualization_proto_rawDesc = "" +
 	"\bhostname\x18\x02 \x01(\tR\bhostname\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\"2\n" +
 	"\x15GetAgentStatusRequest\x12\x19\n" +
-	"\bagent_id\x18\x01 \x01(\tR\aagentId\"\xff\x01\n" +
+	"\bagent_id\x18\x01 \x01(\tR\aagentId\"\xf9\x01\n" +
 	"\x13AgentStatusResponse\x12\x16\n" +
 	"\x06status\x18\x01 \x01(\tR\x06status\x12%\n" +
-	"\x0elast_heartbeat\x18\x02 \x01(\tR\rlastHeartbeat\x12h\n" +
-	"\fcapabilities\x18\x03 \x03(\v2D.pilab.cloud.virtualization.v1.AgentStatusResponse.CapabilitiesEntryR\fcapabilities\x1a?\n" +
+	"\x0elast_heartbeat\x18\x02 \x01(\tR\rlastHeartbeat\x12b\n" +
+	"\fcapabilities\x18\x03 \x03(\v2>.pilab.virtualization.v1.AgentStatusResponse.CapabilitiesEntryR\fcapabilities\x1a?\n" +
 	"\x11CapabilitiesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"O\n" +
 	"\x11ListAgentsRequest\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"z\n" +
-	"\x12ListAgentsResponse\x12<\n" +
-	"\x06agents\x18\x01 \x03(\v2$.pilab.cloud.virtualization.v1.AgentR\x06agents\x12&\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"t\n" +
+	"\x12ListAgentsResponse\x126\n" +
+	"\x06agents\x18\x01 \x03(\v2\x1e.pilab.virtualization.v1.AgentR\x06agents\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\a\n" +
 	"\x05Empty*d\n" +
 	"\rPortGroupType\x12\x1f\n" +
@@ -2434,31 +2434,31 @@ const file_pilab_virtualization_v1_virtualization_proto_rawDesc = "" +
 	"\x14SecurityPolicyAction\x12&\n" +
 	"\"SECURITY_POLICY_ACTION_UNSPECIFIED\x10\x00\x12 \n" +
 	"\x1cSECURITY_POLICY_ACTION_ALLOW\x10\x01\x12!\n" +
-	"\x1dSECURITY_POLICY_ACTION_REJECT\x10\x022\x88\x13\n" +
-	"\x15VirtualizationService\x12k\n" +
-	"\fCreateTenant\x122.pilab.cloud.virtualization.v1.CreateTenantRequest\x1a%.pilab.cloud.virtualization.v1.Tenant\"\x00\x12e\n" +
-	"\tGetTenant\x12/.pilab.cloud.virtualization.v1.GetTenantRequest\x1a%.pilab.cloud.virtualization.v1.Tenant\"\x00\x12v\n" +
-	"\vListTenants\x121.pilab.cloud.virtualization.v1.ListTenantsRequest\x1a2.pilab.cloud.virtualization.v1.ListTenantsResponse\"\x00\x12k\n" +
-	"\fUpdateTenant\x122.pilab.cloud.virtualization.v1.UpdateTenantRequest\x1a%.pilab.cloud.virtualization.v1.Tenant\"\x00\x12\\\n" +
-	"\fDeleteTenant\x122.pilab.cloud.virtualization.v1.DeleteTenantRequest\x1a\x16.google.protobuf.Empty\"\x00\x12t\n" +
-	"\x0fCreatePortGroup\x125.pilab.cloud.virtualization.v1.CreatePortGroupRequest\x1a(.pilab.cloud.virtualization.v1.PortGroup\"\x00\x12n\n" +
-	"\fGetPortGroup\x122.pilab.cloud.virtualization.v1.GetPortGroupRequest\x1a(.pilab.cloud.virtualization.v1.PortGroup\"\x00\x12\x7f\n" +
-	"\x0eListPortGroups\x124.pilab.cloud.virtualization.v1.ListPortGroupsRequest\x1a5.pilab.cloud.virtualization.v1.ListPortGroupsResponse\"\x00\x12t\n" +
-	"\x0fUpdatePortGroup\x125.pilab.cloud.virtualization.v1.UpdatePortGroupRequest\x1a(.pilab.cloud.virtualization.v1.PortGroup\"\x00\x12b\n" +
-	"\x0fDeletePortGroup\x125.pilab.cloud.virtualization.v1.DeletePortGroupRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x8a\x01\n" +
-	"\x1aSetPortGroupSystemServices\x12@.pilab.cloud.virtualization.v1.SetPortGroupSystemServicesRequest\x1a(.pilab.cloud.virtualization.v1.PortGroup\"\x00\x12\x95\x01\n" +
-	"\x1aGetPortGroupSystemServices\x12@.pilab.cloud.virtualization.v1.GetPortGroupSystemServicesRequest\x1a3.pilab.cloud.virtualization.v1.SystemServicesConfig\"\x00\x12n\n" +
-	"\rCreateNetwork\x123.pilab.cloud.virtualization.v1.CreateNetworkRequest\x1a&.pilab.cloud.virtualization.v1.Network\"\x00\x12h\n" +
+	"\x1dSECURITY_POLICY_ACTION_REJECT\x10\x022\xa9\x11\n" +
+	"\x15VirtualizationService\x12_\n" +
+	"\fCreateTenant\x12,.pilab.virtualization.v1.CreateTenantRequest\x1a\x1f.pilab.virtualization.v1.Tenant\"\x00\x12Y\n" +
+	"\tGetTenant\x12).pilab.virtualization.v1.GetTenantRequest\x1a\x1f.pilab.virtualization.v1.Tenant\"\x00\x12j\n" +
+	"\vListTenants\x12+.pilab.virtualization.v1.ListTenantsRequest\x1a,.pilab.virtualization.v1.ListTenantsResponse\"\x00\x12_\n" +
+	"\fUpdateTenant\x12,.pilab.virtualization.v1.UpdateTenantRequest\x1a\x1f.pilab.virtualization.v1.Tenant\"\x00\x12V\n" +
+	"\fDeleteTenant\x12,.pilab.virtualization.v1.DeleteTenantRequest\x1a\x16.google.protobuf.Empty\"\x00\x12h\n" +
+	"\x0fCreatePortGroup\x12/.pilab.virtualization.v1.CreatePortGroupRequest\x1a\".pilab.virtualization.v1.PortGroup\"\x00\x12b\n" +
+	"\fGetPortGroup\x12,.pilab.virtualization.v1.GetPortGroupRequest\x1a\".pilab.virtualization.v1.PortGroup\"\x00\x12s\n" +
+	"\x0eListPortGroups\x12..pilab.virtualization.v1.ListPortGroupsRequest\x1a/.pilab.virtualization.v1.ListPortGroupsResponse\"\x00\x12h\n" +
+	"\x0fUpdatePortGroup\x12/.pilab.virtualization.v1.UpdatePortGroupRequest\x1a\".pilab.virtualization.v1.PortGroup\"\x00\x12\\\n" +
+	"\x0fDeletePortGroup\x12/.pilab.virtualization.v1.DeletePortGroupRequest\x1a\x16.google.protobuf.Empty\"\x00\x12~\n" +
+	"\x1aSetPortGroupSystemServices\x12:.pilab.virtualization.v1.SetPortGroupSystemServicesRequest\x1a\".pilab.virtualization.v1.PortGroup\"\x00\x12\x89\x01\n" +
+	"\x1aGetPortGroupSystemServices\x12:.pilab.virtualization.v1.GetPortGroupSystemServicesRequest\x1a-.pilab.virtualization.v1.SystemServicesConfig\"\x00\x12b\n" +
+	"\rCreateNetwork\x12-.pilab.virtualization.v1.CreateNetworkRequest\x1a .pilab.virtualization.v1.Network\"\x00\x12\\\n" +
 	"\n" +
-	"GetNetwork\x120.pilab.cloud.virtualization.v1.GetNetworkRequest\x1a&.pilab.cloud.virtualization.v1.Network\"\x00\x12y\n" +
-	"\fListNetworks\x122.pilab.cloud.virtualization.v1.ListNetworksRequest\x1a3.pilab.cloud.virtualization.v1.ListNetworksResponse\"\x00\x12n\n" +
-	"\rUpdateNetwork\x123.pilab.cloud.virtualization.v1.UpdateNetworkRequest\x1a&.pilab.cloud.virtualization.v1.Network\"\x00\x12^\n" +
-	"\rDeleteNetwork\x123.pilab.cloud.virtualization.v1.DeleteNetworkRequest\x1a\x16.google.protobuf.Empty\"\x00\x12j\n" +
-	"\x13AttachVMToPortGroup\x129.pilab.cloud.virtualization.v1.AttachVMToPortGroupRequest\x1a\x16.google.protobuf.Empty\"\x00\x12n\n" +
-	"\x15DetachVMFromPortGroup\x12;.pilab.cloud.virtualization.v1.DetachVMFromPortGroupRequest\x1a\x16.google.protobuf.Empty\"\x00\x12|\n" +
-	"\x0eGetAgentStatus\x124.pilab.cloud.virtualization.v1.GetAgentStatusRequest\x1a2.pilab.cloud.virtualization.v1.AgentStatusResponse\"\x00\x12s\n" +
+	"GetNetwork\x12*.pilab.virtualization.v1.GetNetworkRequest\x1a .pilab.virtualization.v1.Network\"\x00\x12m\n" +
+	"\fListNetworks\x12,.pilab.virtualization.v1.ListNetworksRequest\x1a-.pilab.virtualization.v1.ListNetworksResponse\"\x00\x12b\n" +
+	"\rUpdateNetwork\x12-.pilab.virtualization.v1.UpdateNetworkRequest\x1a .pilab.virtualization.v1.Network\"\x00\x12X\n" +
+	"\rDeleteNetwork\x12-.pilab.virtualization.v1.DeleteNetworkRequest\x1a\x16.google.protobuf.Empty\"\x00\x12d\n" +
+	"\x13AttachVMToPortGroup\x123.pilab.virtualization.v1.AttachVMToPortGroupRequest\x1a\x16.google.protobuf.Empty\"\x00\x12h\n" +
+	"\x15DetachVMFromPortGroup\x125.pilab.virtualization.v1.DetachVMFromPortGroupRequest\x1a\x16.google.protobuf.Empty\"\x00\x12p\n" +
+	"\x0eGetAgentStatus\x12..pilab.virtualization.v1.GetAgentStatusRequest\x1a,.pilab.virtualization.v1.AgentStatusResponse\"\x00\x12g\n" +
 	"\n" +
-	"ListAgents\x120.pilab.cloud.virtualization.v1.ListAgentsRequest\x1a1.pilab.cloud.virtualization.v1.ListAgentsResponse\"\x00BCZAgo.pilab.hu/cloud/virtpb/pilab/virtualization/v1;virtualizationv1b\x06proto3"
+	"ListAgents\x12*.pilab.virtualization.v1.ListAgentsRequest\x1a+.pilab.virtualization.v1.ListAgentsResponse\"\x00BCZAgo.pilab.hu/cloud/virtpb/pilab/virtualization/v1;virtualizationv1b\x06proto3"
 
 var (
 	file_pilab_virtualization_v1_virtualization_proto_rawDescOnce sync.Once
@@ -2475,113 +2475,113 @@ func file_pilab_virtualization_v1_virtualization_proto_rawDescGZIP() []byte {
 var file_pilab_virtualization_v1_virtualization_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_pilab_virtualization_v1_virtualization_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_pilab_virtualization_v1_virtualization_proto_goTypes = []any{
-	(PortGroupType)(0),                        // 0: pilab.cloud.virtualization.v1.PortGroupType
-	(LoadBalancerAlgorithm)(0),                // 1: pilab.cloud.virtualization.v1.LoadBalancerAlgorithm
-	(SecurityPolicyAction)(0),                 // 2: pilab.cloud.virtualization.v1.SecurityPolicyAction
-	(*Tenant)(nil),                            // 3: pilab.cloud.virtualization.v1.Tenant
-	(*CreateTenantRequest)(nil),               // 4: pilab.cloud.virtualization.v1.CreateTenantRequest
-	(*GetTenantRequest)(nil),                  // 5: pilab.cloud.virtualization.v1.GetTenantRequest
-	(*ListTenantsRequest)(nil),                // 6: pilab.cloud.virtualization.v1.ListTenantsRequest
-	(*ListTenantsResponse)(nil),               // 7: pilab.cloud.virtualization.v1.ListTenantsResponse
-	(*UpdateTenantRequest)(nil),               // 8: pilab.cloud.virtualization.v1.UpdateTenantRequest
-	(*DeleteTenantRequest)(nil),               // 9: pilab.cloud.virtualization.v1.DeleteTenantRequest
-	(*PortGroup)(nil),                         // 10: pilab.cloud.virtualization.v1.PortGroup
-	(*CreatePortGroupRequest)(nil),            // 11: pilab.cloud.virtualization.v1.CreatePortGroupRequest
-	(*GetPortGroupRequest)(nil),               // 12: pilab.cloud.virtualization.v1.GetPortGroupRequest
-	(*ListPortGroupsRequest)(nil),             // 13: pilab.cloud.virtualization.v1.ListPortGroupsRequest
-	(*ListPortGroupsResponse)(nil),            // 14: pilab.cloud.virtualization.v1.ListPortGroupsResponse
-	(*UpdatePortGroupRequest)(nil),            // 15: pilab.cloud.virtualization.v1.UpdatePortGroupRequest
-	(*DeletePortGroupRequest)(nil),            // 16: pilab.cloud.virtualization.v1.DeletePortGroupRequest
-	(*SystemServicesConfig)(nil),              // 17: pilab.cloud.virtualization.v1.SystemServicesConfig
-	(*SetPortGroupSystemServicesRequest)(nil), // 18: pilab.cloud.virtualization.v1.SetPortGroupSystemServicesRequest
-	(*GetPortGroupSystemServicesRequest)(nil), // 19: pilab.cloud.virtualization.v1.GetPortGroupSystemServicesRequest
-	(*SecurityPolicy)(nil),                    // 20: pilab.cloud.virtualization.v1.SecurityPolicy
-	(*TrafficShapingPolicy)(nil),              // 21: pilab.cloud.virtualization.v1.TrafficShapingPolicy
-	(*TeamingPolicy)(nil),                     // 22: pilab.cloud.virtualization.v1.TeamingPolicy
-	(*Network)(nil),                           // 23: pilab.cloud.virtualization.v1.Network
-	(*CreateNetworkRequest)(nil),              // 24: pilab.cloud.virtualization.v1.CreateNetworkRequest
-	(*GetNetworkRequest)(nil),                 // 25: pilab.cloud.virtualization.v1.GetNetworkRequest
-	(*ListNetworksRequest)(nil),               // 26: pilab.cloud.virtualization.v1.ListNetworksRequest
-	(*ListNetworksResponse)(nil),              // 27: pilab.cloud.virtualization.v1.ListNetworksResponse
-	(*UpdateNetworkRequest)(nil),              // 28: pilab.cloud.virtualization.v1.UpdateNetworkRequest
-	(*DeleteNetworkRequest)(nil),              // 29: pilab.cloud.virtualization.v1.DeleteNetworkRequest
-	(*AttachVMToPortGroupRequest)(nil),        // 30: pilab.cloud.virtualization.v1.AttachVMToPortGroupRequest
-	(*DetachVMFromPortGroupRequest)(nil),      // 31: pilab.cloud.virtualization.v1.DetachVMFromPortGroupRequest
-	(*Agent)(nil),                             // 32: pilab.cloud.virtualization.v1.Agent
-	(*GetAgentStatusRequest)(nil),             // 33: pilab.cloud.virtualization.v1.GetAgentStatusRequest
-	(*AgentStatusResponse)(nil),               // 34: pilab.cloud.virtualization.v1.AgentStatusResponse
-	(*ListAgentsRequest)(nil),                 // 35: pilab.cloud.virtualization.v1.ListAgentsRequest
-	(*ListAgentsResponse)(nil),                // 36: pilab.cloud.virtualization.v1.ListAgentsResponse
-	(*Empty)(nil),                             // 37: pilab.cloud.virtualization.v1.Empty
-	nil,                                       // 38: pilab.cloud.virtualization.v1.AgentStatusResponse.CapabilitiesEntry
+	(PortGroupType)(0),                        // 0: pilab.virtualization.v1.PortGroupType
+	(LoadBalancerAlgorithm)(0),                // 1: pilab.virtualization.v1.LoadBalancerAlgorithm
+	(SecurityPolicyAction)(0),                 // 2: pilab.virtualization.v1.SecurityPolicyAction
+	(*Tenant)(nil),                            // 3: pilab.virtualization.v1.Tenant
+	(*CreateTenantRequest)(nil),               // 4: pilab.virtualization.v1.CreateTenantRequest
+	(*GetTenantRequest)(nil),                  // 5: pilab.virtualization.v1.GetTenantRequest
+	(*ListTenantsRequest)(nil),                // 6: pilab.virtualization.v1.ListTenantsRequest
+	(*ListTenantsResponse)(nil),               // 7: pilab.virtualization.v1.ListTenantsResponse
+	(*UpdateTenantRequest)(nil),               // 8: pilab.virtualization.v1.UpdateTenantRequest
+	(*DeleteTenantRequest)(nil),               // 9: pilab.virtualization.v1.DeleteTenantRequest
+	(*PortGroup)(nil),                         // 10: pilab.virtualization.v1.PortGroup
+	(*CreatePortGroupRequest)(nil),            // 11: pilab.virtualization.v1.CreatePortGroupRequest
+	(*GetPortGroupRequest)(nil),               // 12: pilab.virtualization.v1.GetPortGroupRequest
+	(*ListPortGroupsRequest)(nil),             // 13: pilab.virtualization.v1.ListPortGroupsRequest
+	(*ListPortGroupsResponse)(nil),            // 14: pilab.virtualization.v1.ListPortGroupsResponse
+	(*UpdatePortGroupRequest)(nil),            // 15: pilab.virtualization.v1.UpdatePortGroupRequest
+	(*DeletePortGroupRequest)(nil),            // 16: pilab.virtualization.v1.DeletePortGroupRequest
+	(*SystemServicesConfig)(nil),              // 17: pilab.virtualization.v1.SystemServicesConfig
+	(*SetPortGroupSystemServicesRequest)(nil), // 18: pilab.virtualization.v1.SetPortGroupSystemServicesRequest
+	(*GetPortGroupSystemServicesRequest)(nil), // 19: pilab.virtualization.v1.GetPortGroupSystemServicesRequest
+	(*SecurityPolicy)(nil),                    // 20: pilab.virtualization.v1.SecurityPolicy
+	(*TrafficShapingPolicy)(nil),              // 21: pilab.virtualization.v1.TrafficShapingPolicy
+	(*TeamingPolicy)(nil),                     // 22: pilab.virtualization.v1.TeamingPolicy
+	(*Network)(nil),                           // 23: pilab.virtualization.v1.Network
+	(*CreateNetworkRequest)(nil),              // 24: pilab.virtualization.v1.CreateNetworkRequest
+	(*GetNetworkRequest)(nil),                 // 25: pilab.virtualization.v1.GetNetworkRequest
+	(*ListNetworksRequest)(nil),               // 26: pilab.virtualization.v1.ListNetworksRequest
+	(*ListNetworksResponse)(nil),              // 27: pilab.virtualization.v1.ListNetworksResponse
+	(*UpdateNetworkRequest)(nil),              // 28: pilab.virtualization.v1.UpdateNetworkRequest
+	(*DeleteNetworkRequest)(nil),              // 29: pilab.virtualization.v1.DeleteNetworkRequest
+	(*AttachVMToPortGroupRequest)(nil),        // 30: pilab.virtualization.v1.AttachVMToPortGroupRequest
+	(*DetachVMFromPortGroupRequest)(nil),      // 31: pilab.virtualization.v1.DetachVMFromPortGroupRequest
+	(*Agent)(nil),                             // 32: pilab.virtualization.v1.Agent
+	(*GetAgentStatusRequest)(nil),             // 33: pilab.virtualization.v1.GetAgentStatusRequest
+	(*AgentStatusResponse)(nil),               // 34: pilab.virtualization.v1.AgentStatusResponse
+	(*ListAgentsRequest)(nil),                 // 35: pilab.virtualization.v1.ListAgentsRequest
+	(*ListAgentsResponse)(nil),                // 36: pilab.virtualization.v1.ListAgentsResponse
+	(*Empty)(nil),                             // 37: pilab.virtualization.v1.Empty
+	nil,                                       // 38: pilab.virtualization.v1.AgentStatusResponse.CapabilitiesEntry
 	(*emptypb.Empty)(nil),                     // 39: google.protobuf.Empty
 }
 var file_pilab_virtualization_v1_virtualization_proto_depIdxs = []int32{
-	3,  // 0: pilab.cloud.virtualization.v1.ListTenantsResponse.tenants:type_name -> pilab.cloud.virtualization.v1.Tenant
-	3,  // 1: pilab.cloud.virtualization.v1.UpdateTenantRequest.tenant:type_name -> pilab.cloud.virtualization.v1.Tenant
-	0,  // 2: pilab.cloud.virtualization.v1.PortGroup.type:type_name -> pilab.cloud.virtualization.v1.PortGroupType
-	20, // 3: pilab.cloud.virtualization.v1.PortGroup.security_policy:type_name -> pilab.cloud.virtualization.v1.SecurityPolicy
-	21, // 4: pilab.cloud.virtualization.v1.PortGroup.traffic_shaping_policy:type_name -> pilab.cloud.virtualization.v1.TrafficShapingPolicy
-	22, // 5: pilab.cloud.virtualization.v1.PortGroup.teaming_policy:type_name -> pilab.cloud.virtualization.v1.TeamingPolicy
-	17, // 6: pilab.cloud.virtualization.v1.PortGroup.system_services:type_name -> pilab.cloud.virtualization.v1.SystemServicesConfig
-	0,  // 7: pilab.cloud.virtualization.v1.CreatePortGroupRequest.type:type_name -> pilab.cloud.virtualization.v1.PortGroupType
-	20, // 8: pilab.cloud.virtualization.v1.CreatePortGroupRequest.security_policy:type_name -> pilab.cloud.virtualization.v1.SecurityPolicy
-	21, // 9: pilab.cloud.virtualization.v1.CreatePortGroupRequest.traffic_shaping_policy:type_name -> pilab.cloud.virtualization.v1.TrafficShapingPolicy
-	22, // 10: pilab.cloud.virtualization.v1.CreatePortGroupRequest.teaming_policy:type_name -> pilab.cloud.virtualization.v1.TeamingPolicy
-	17, // 11: pilab.cloud.virtualization.v1.CreatePortGroupRequest.system_services:type_name -> pilab.cloud.virtualization.v1.SystemServicesConfig
-	10, // 12: pilab.cloud.virtualization.v1.ListPortGroupsResponse.port_groups:type_name -> pilab.cloud.virtualization.v1.PortGroup
-	10, // 13: pilab.cloud.virtualization.v1.UpdatePortGroupRequest.port_group:type_name -> pilab.cloud.virtualization.v1.PortGroup
-	17, // 14: pilab.cloud.virtualization.v1.SetPortGroupSystemServicesRequest.system_services:type_name -> pilab.cloud.virtualization.v1.SystemServicesConfig
-	2,  // 15: pilab.cloud.virtualization.v1.SecurityPolicy.promiscuous_mode:type_name -> pilab.cloud.virtualization.v1.SecurityPolicyAction
-	2,  // 16: pilab.cloud.virtualization.v1.SecurityPolicy.mac_address_changes:type_name -> pilab.cloud.virtualization.v1.SecurityPolicyAction
-	2,  // 17: pilab.cloud.virtualization.v1.SecurityPolicy.forged_transmits:type_name -> pilab.cloud.virtualization.v1.SecurityPolicyAction
-	1,  // 18: pilab.cloud.virtualization.v1.TeamingPolicy.load_balancer_algorithm:type_name -> pilab.cloud.virtualization.v1.LoadBalancerAlgorithm
-	23, // 19: pilab.cloud.virtualization.v1.ListNetworksResponse.networks:type_name -> pilab.cloud.virtualization.v1.Network
-	23, // 20: pilab.cloud.virtualization.v1.UpdateNetworkRequest.network:type_name -> pilab.cloud.virtualization.v1.Network
-	38, // 21: pilab.cloud.virtualization.v1.AgentStatusResponse.capabilities:type_name -> pilab.cloud.virtualization.v1.AgentStatusResponse.CapabilitiesEntry
-	32, // 22: pilab.cloud.virtualization.v1.ListAgentsResponse.agents:type_name -> pilab.cloud.virtualization.v1.Agent
-	4,  // 23: pilab.cloud.virtualization.v1.VirtualizationService.CreateTenant:input_type -> pilab.cloud.virtualization.v1.CreateTenantRequest
-	5,  // 24: pilab.cloud.virtualization.v1.VirtualizationService.GetTenant:input_type -> pilab.cloud.virtualization.v1.GetTenantRequest
-	6,  // 25: pilab.cloud.virtualization.v1.VirtualizationService.ListTenants:input_type -> pilab.cloud.virtualization.v1.ListTenantsRequest
-	8,  // 26: pilab.cloud.virtualization.v1.VirtualizationService.UpdateTenant:input_type -> pilab.cloud.virtualization.v1.UpdateTenantRequest
-	9,  // 27: pilab.cloud.virtualization.v1.VirtualizationService.DeleteTenant:input_type -> pilab.cloud.virtualization.v1.DeleteTenantRequest
-	11, // 28: pilab.cloud.virtualization.v1.VirtualizationService.CreatePortGroup:input_type -> pilab.cloud.virtualization.v1.CreatePortGroupRequest
-	12, // 29: pilab.cloud.virtualization.v1.VirtualizationService.GetPortGroup:input_type -> pilab.cloud.virtualization.v1.GetPortGroupRequest
-	13, // 30: pilab.cloud.virtualization.v1.VirtualizationService.ListPortGroups:input_type -> pilab.cloud.virtualization.v1.ListPortGroupsRequest
-	15, // 31: pilab.cloud.virtualization.v1.VirtualizationService.UpdatePortGroup:input_type -> pilab.cloud.virtualization.v1.UpdatePortGroupRequest
-	16, // 32: pilab.cloud.virtualization.v1.VirtualizationService.DeletePortGroup:input_type -> pilab.cloud.virtualization.v1.DeletePortGroupRequest
-	18, // 33: pilab.cloud.virtualization.v1.VirtualizationService.SetPortGroupSystemServices:input_type -> pilab.cloud.virtualization.v1.SetPortGroupSystemServicesRequest
-	19, // 34: pilab.cloud.virtualization.v1.VirtualizationService.GetPortGroupSystemServices:input_type -> pilab.cloud.virtualization.v1.GetPortGroupSystemServicesRequest
-	24, // 35: pilab.cloud.virtualization.v1.VirtualizationService.CreateNetwork:input_type -> pilab.cloud.virtualization.v1.CreateNetworkRequest
-	25, // 36: pilab.cloud.virtualization.v1.VirtualizationService.GetNetwork:input_type -> pilab.cloud.virtualization.v1.GetNetworkRequest
-	26, // 37: pilab.cloud.virtualization.v1.VirtualizationService.ListNetworks:input_type -> pilab.cloud.virtualization.v1.ListNetworksRequest
-	28, // 38: pilab.cloud.virtualization.v1.VirtualizationService.UpdateNetwork:input_type -> pilab.cloud.virtualization.v1.UpdateNetworkRequest
-	29, // 39: pilab.cloud.virtualization.v1.VirtualizationService.DeleteNetwork:input_type -> pilab.cloud.virtualization.v1.DeleteNetworkRequest
-	30, // 40: pilab.cloud.virtualization.v1.VirtualizationService.AttachVMToPortGroup:input_type -> pilab.cloud.virtualization.v1.AttachVMToPortGroupRequest
-	31, // 41: pilab.cloud.virtualization.v1.VirtualizationService.DetachVMFromPortGroup:input_type -> pilab.cloud.virtualization.v1.DetachVMFromPortGroupRequest
-	33, // 42: pilab.cloud.virtualization.v1.VirtualizationService.GetAgentStatus:input_type -> pilab.cloud.virtualization.v1.GetAgentStatusRequest
-	35, // 43: pilab.cloud.virtualization.v1.VirtualizationService.ListAgents:input_type -> pilab.cloud.virtualization.v1.ListAgentsRequest
-	3,  // 44: pilab.cloud.virtualization.v1.VirtualizationService.CreateTenant:output_type -> pilab.cloud.virtualization.v1.Tenant
-	3,  // 45: pilab.cloud.virtualization.v1.VirtualizationService.GetTenant:output_type -> pilab.cloud.virtualization.v1.Tenant
-	7,  // 46: pilab.cloud.virtualization.v1.VirtualizationService.ListTenants:output_type -> pilab.cloud.virtualization.v1.ListTenantsResponse
-	3,  // 47: pilab.cloud.virtualization.v1.VirtualizationService.UpdateTenant:output_type -> pilab.cloud.virtualization.v1.Tenant
-	39, // 48: pilab.cloud.virtualization.v1.VirtualizationService.DeleteTenant:output_type -> google.protobuf.Empty
-	10, // 49: pilab.cloud.virtualization.v1.VirtualizationService.CreatePortGroup:output_type -> pilab.cloud.virtualization.v1.PortGroup
-	10, // 50: pilab.cloud.virtualization.v1.VirtualizationService.GetPortGroup:output_type -> pilab.cloud.virtualization.v1.PortGroup
-	14, // 51: pilab.cloud.virtualization.v1.VirtualizationService.ListPortGroups:output_type -> pilab.cloud.virtualization.v1.ListPortGroupsResponse
-	10, // 52: pilab.cloud.virtualization.v1.VirtualizationService.UpdatePortGroup:output_type -> pilab.cloud.virtualization.v1.PortGroup
-	39, // 53: pilab.cloud.virtualization.v1.VirtualizationService.DeletePortGroup:output_type -> google.protobuf.Empty
-	10, // 54: pilab.cloud.virtualization.v1.VirtualizationService.SetPortGroupSystemServices:output_type -> pilab.cloud.virtualization.v1.PortGroup
-	17, // 55: pilab.cloud.virtualization.v1.VirtualizationService.GetPortGroupSystemServices:output_type -> pilab.cloud.virtualization.v1.SystemServicesConfig
-	23, // 56: pilab.cloud.virtualization.v1.VirtualizationService.CreateNetwork:output_type -> pilab.cloud.virtualization.v1.Network
-	23, // 57: pilab.cloud.virtualization.v1.VirtualizationService.GetNetwork:output_type -> pilab.cloud.virtualization.v1.Network
-	27, // 58: pilab.cloud.virtualization.v1.VirtualizationService.ListNetworks:output_type -> pilab.cloud.virtualization.v1.ListNetworksResponse
-	23, // 59: pilab.cloud.virtualization.v1.VirtualizationService.UpdateNetwork:output_type -> pilab.cloud.virtualization.v1.Network
-	39, // 60: pilab.cloud.virtualization.v1.VirtualizationService.DeleteNetwork:output_type -> google.protobuf.Empty
-	39, // 61: pilab.cloud.virtualization.v1.VirtualizationService.AttachVMToPortGroup:output_type -> google.protobuf.Empty
-	39, // 62: pilab.cloud.virtualization.v1.VirtualizationService.DetachVMFromPortGroup:output_type -> google.protobuf.Empty
-	34, // 63: pilab.cloud.virtualization.v1.VirtualizationService.GetAgentStatus:output_type -> pilab.cloud.virtualization.v1.AgentStatusResponse
-	36, // 64: pilab.cloud.virtualization.v1.VirtualizationService.ListAgents:output_type -> pilab.cloud.virtualization.v1.ListAgentsResponse
+	3,  // 0: pilab.virtualization.v1.ListTenantsResponse.tenants:type_name -> pilab.virtualization.v1.Tenant
+	3,  // 1: pilab.virtualization.v1.UpdateTenantRequest.tenant:type_name -> pilab.virtualization.v1.Tenant
+	0,  // 2: pilab.virtualization.v1.PortGroup.type:type_name -> pilab.virtualization.v1.PortGroupType
+	20, // 3: pilab.virtualization.v1.PortGroup.security_policy:type_name -> pilab.virtualization.v1.SecurityPolicy
+	21, // 4: pilab.virtualization.v1.PortGroup.traffic_shaping_policy:type_name -> pilab.virtualization.v1.TrafficShapingPolicy
+	22, // 5: pilab.virtualization.v1.PortGroup.teaming_policy:type_name -> pilab.virtualization.v1.TeamingPolicy
+	17, // 6: pilab.virtualization.v1.PortGroup.system_services:type_name -> pilab.virtualization.v1.SystemServicesConfig
+	0,  // 7: pilab.virtualization.v1.CreatePortGroupRequest.type:type_name -> pilab.virtualization.v1.PortGroupType
+	20, // 8: pilab.virtualization.v1.CreatePortGroupRequest.security_policy:type_name -> pilab.virtualization.v1.SecurityPolicy
+	21, // 9: pilab.virtualization.v1.CreatePortGroupRequest.traffic_shaping_policy:type_name -> pilab.virtualization.v1.TrafficShapingPolicy
+	22, // 10: pilab.virtualization.v1.CreatePortGroupRequest.teaming_policy:type_name -> pilab.virtualization.v1.TeamingPolicy
+	17, // 11: pilab.virtualization.v1.CreatePortGroupRequest.system_services:type_name -> pilab.virtualization.v1.SystemServicesConfig
+	10, // 12: pilab.virtualization.v1.ListPortGroupsResponse.port_groups:type_name -> pilab.virtualization.v1.PortGroup
+	10, // 13: pilab.virtualization.v1.UpdatePortGroupRequest.port_group:type_name -> pilab.virtualization.v1.PortGroup
+	17, // 14: pilab.virtualization.v1.SetPortGroupSystemServicesRequest.system_services:type_name -> pilab.virtualization.v1.SystemServicesConfig
+	2,  // 15: pilab.virtualization.v1.SecurityPolicy.promiscuous_mode:type_name -> pilab.virtualization.v1.SecurityPolicyAction
+	2,  // 16: pilab.virtualization.v1.SecurityPolicy.mac_address_changes:type_name -> pilab.virtualization.v1.SecurityPolicyAction
+	2,  // 17: pilab.virtualization.v1.SecurityPolicy.forged_transmits:type_name -> pilab.virtualization.v1.SecurityPolicyAction
+	1,  // 18: pilab.virtualization.v1.TeamingPolicy.load_balancer_algorithm:type_name -> pilab.virtualization.v1.LoadBalancerAlgorithm
+	23, // 19: pilab.virtualization.v1.ListNetworksResponse.networks:type_name -> pilab.virtualization.v1.Network
+	23, // 20: pilab.virtualization.v1.UpdateNetworkRequest.network:type_name -> pilab.virtualization.v1.Network
+	38, // 21: pilab.virtualization.v1.AgentStatusResponse.capabilities:type_name -> pilab.virtualization.v1.AgentStatusResponse.CapabilitiesEntry
+	32, // 22: pilab.virtualization.v1.ListAgentsResponse.agents:type_name -> pilab.virtualization.v1.Agent
+	4,  // 23: pilab.virtualization.v1.VirtualizationService.CreateTenant:input_type -> pilab.virtualization.v1.CreateTenantRequest
+	5,  // 24: pilab.virtualization.v1.VirtualizationService.GetTenant:input_type -> pilab.virtualization.v1.GetTenantRequest
+	6,  // 25: pilab.virtualization.v1.VirtualizationService.ListTenants:input_type -> pilab.virtualization.v1.ListTenantsRequest
+	8,  // 26: pilab.virtualization.v1.VirtualizationService.UpdateTenant:input_type -> pilab.virtualization.v1.UpdateTenantRequest
+	9,  // 27: pilab.virtualization.v1.VirtualizationService.DeleteTenant:input_type -> pilab.virtualization.v1.DeleteTenantRequest
+	11, // 28: pilab.virtualization.v1.VirtualizationService.CreatePortGroup:input_type -> pilab.virtualization.v1.CreatePortGroupRequest
+	12, // 29: pilab.virtualization.v1.VirtualizationService.GetPortGroup:input_type -> pilab.virtualization.v1.GetPortGroupRequest
+	13, // 30: pilab.virtualization.v1.VirtualizationService.ListPortGroups:input_type -> pilab.virtualization.v1.ListPortGroupsRequest
+	15, // 31: pilab.virtualization.v1.VirtualizationService.UpdatePortGroup:input_type -> pilab.virtualization.v1.UpdatePortGroupRequest
+	16, // 32: pilab.virtualization.v1.VirtualizationService.DeletePortGroup:input_type -> pilab.virtualization.v1.DeletePortGroupRequest
+	18, // 33: pilab.virtualization.v1.VirtualizationService.SetPortGroupSystemServices:input_type -> pilab.virtualization.v1.SetPortGroupSystemServicesRequest
+	19, // 34: pilab.virtualization.v1.VirtualizationService.GetPortGroupSystemServices:input_type -> pilab.virtualization.v1.GetPortGroupSystemServicesRequest
+	24, // 35: pilab.virtualization.v1.VirtualizationService.CreateNetwork:input_type -> pilab.virtualization.v1.CreateNetworkRequest
+	25, // 36: pilab.virtualization.v1.VirtualizationService.GetNetwork:input_type -> pilab.virtualization.v1.GetNetworkRequest
+	26, // 37: pilab.virtualization.v1.VirtualizationService.ListNetworks:input_type -> pilab.virtualization.v1.ListNetworksRequest
+	28, // 38: pilab.virtualization.v1.VirtualizationService.UpdateNetwork:input_type -> pilab.virtualization.v1.UpdateNetworkRequest
+	29, // 39: pilab.virtualization.v1.VirtualizationService.DeleteNetwork:input_type -> pilab.virtualization.v1.DeleteNetworkRequest
+	30, // 40: pilab.virtualization.v1.VirtualizationService.AttachVMToPortGroup:input_type -> pilab.virtualization.v1.AttachVMToPortGroupRequest
+	31, // 41: pilab.virtualization.v1.VirtualizationService.DetachVMFromPortGroup:input_type -> pilab.virtualization.v1.DetachVMFromPortGroupRequest
+	33, // 42: pilab.virtualization.v1.VirtualizationService.GetAgentStatus:input_type -> pilab.virtualization.v1.GetAgentStatusRequest
+	35, // 43: pilab.virtualization.v1.VirtualizationService.ListAgents:input_type -> pilab.virtualization.v1.ListAgentsRequest
+	3,  // 44: pilab.virtualization.v1.VirtualizationService.CreateTenant:output_type -> pilab.virtualization.v1.Tenant
+	3,  // 45: pilab.virtualization.v1.VirtualizationService.GetTenant:output_type -> pilab.virtualization.v1.Tenant
+	7,  // 46: pilab.virtualization.v1.VirtualizationService.ListTenants:output_type -> pilab.virtualization.v1.ListTenantsResponse
+	3,  // 47: pilab.virtualization.v1.VirtualizationService.UpdateTenant:output_type -> pilab.virtualization.v1.Tenant
+	39, // 48: pilab.virtualization.v1.VirtualizationService.DeleteTenant:output_type -> google.protobuf.Empty
+	10, // 49: pilab.virtualization.v1.VirtualizationService.CreatePortGroup:output_type -> pilab.virtualization.v1.PortGroup
+	10, // 50: pilab.virtualization.v1.VirtualizationService.GetPortGroup:output_type -> pilab.virtualization.v1.PortGroup
+	14, // 51: pilab.virtualization.v1.VirtualizationService.ListPortGroups:output_type -> pilab.virtualization.v1.ListPortGroupsResponse
+	10, // 52: pilab.virtualization.v1.VirtualizationService.UpdatePortGroup:output_type -> pilab.virtualization.v1.PortGroup
+	39, // 53: pilab.virtualization.v1.VirtualizationService.DeletePortGroup:output_type -> google.protobuf.Empty
+	10, // 54: pilab.virtualization.v1.VirtualizationService.SetPortGroupSystemServices:output_type -> pilab.virtualization.v1.PortGroup
+	17, // 55: pilab.virtualization.v1.VirtualizationService.GetPortGroupSystemServices:output_type -> pilab.virtualization.v1.SystemServicesConfig
+	23, // 56: pilab.virtualization.v1.VirtualizationService.CreateNetwork:output_type -> pilab.virtualization.v1.Network
+	23, // 57: pilab.virtualization.v1.VirtualizationService.GetNetwork:output_type -> pilab.virtualization.v1.Network
+	27, // 58: pilab.virtualization.v1.VirtualizationService.ListNetworks:output_type -> pilab.virtualization.v1.ListNetworksResponse
+	23, // 59: pilab.virtualization.v1.VirtualizationService.UpdateNetwork:output_type -> pilab.virtualization.v1.Network
+	39, // 60: pilab.virtualization.v1.VirtualizationService.DeleteNetwork:output_type -> google.protobuf.Empty
+	39, // 61: pilab.virtualization.v1.VirtualizationService.AttachVMToPortGroup:output_type -> google.protobuf.Empty
+	39, // 62: pilab.virtualization.v1.VirtualizationService.DetachVMFromPortGroup:output_type -> google.protobuf.Empty
+	34, // 63: pilab.virtualization.v1.VirtualizationService.GetAgentStatus:output_type -> pilab.virtualization.v1.AgentStatusResponse
+	36, // 64: pilab.virtualization.v1.VirtualizationService.ListAgents:output_type -> pilab.virtualization.v1.ListAgentsResponse
 	44, // [44:65] is the sub-list for method output_type
 	23, // [23:44] is the sub-list for method input_type
 	23, // [23:23] is the sub-list for extension type_name

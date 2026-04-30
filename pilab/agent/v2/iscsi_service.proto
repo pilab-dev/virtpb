@@ -20,7 +20,7 @@
 
 syntax = "proto3";
 
-package pilab.cloud.agent.v2;
+package pilab.agent.v2;
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v2;agentv2";
 

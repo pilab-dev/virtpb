@@ -43,7 +43,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// AgentDirectorServiceName is the fully-qualified name of the AgentDirectorService service.
-	AgentDirectorServiceName = "pilab.cloud.agent.v1.AgentDirectorService"
+	AgentDirectorServiceName = "pilab.agent.v1.AgentDirectorService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -56,49 +56,49 @@ const (
 const (
 	// AgentDirectorServiceReportHeartbeatProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportHeartbeat RPC.
-	AgentDirectorServiceReportHeartbeatProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportHeartbeat"
+	AgentDirectorServiceReportHeartbeatProcedure = "/pilab.agent.v1.AgentDirectorService/ReportHeartbeat"
 	// AgentDirectorServiceReportHypervisorStatusProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportHypervisorStatus RPC.
-	AgentDirectorServiceReportHypervisorStatusProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportHypervisorStatus"
+	AgentDirectorServiceReportHypervisorStatusProcedure = "/pilab.agent.v1.AgentDirectorService/ReportHypervisorStatus"
 	// AgentDirectorServiceReportVMStatusProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportVMStatus RPC.
-	AgentDirectorServiceReportVMStatusProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportVMStatus"
+	AgentDirectorServiceReportVMStatusProcedure = "/pilab.agent.v1.AgentDirectorService/ReportVMStatus"
 	// AgentDirectorServiceReportDiskStatusProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportDiskStatus RPC.
-	AgentDirectorServiceReportDiskStatusProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportDiskStatus"
+	AgentDirectorServiceReportDiskStatusProcedure = "/pilab.agent.v1.AgentDirectorService/ReportDiskStatus"
 	// AgentDirectorServiceReportNetworkInterfaceStatusProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportNetworkInterfaceStatus RPC.
-	AgentDirectorServiceReportNetworkInterfaceStatusProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportNetworkInterfaceStatus"
+	AgentDirectorServiceReportNetworkInterfaceStatusProcedure = "/pilab.agent.v1.AgentDirectorService/ReportNetworkInterfaceStatus"
 	// AgentDirectorServiceReportHardwareStatusProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportHardwareStatus RPC.
-	AgentDirectorServiceReportHardwareStatusProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportHardwareStatus"
+	AgentDirectorServiceReportHardwareStatusProcedure = "/pilab.agent.v1.AgentDirectorService/ReportHardwareStatus"
 	// AgentDirectorServiceReportVMMetricsProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportVMMetrics RPC.
-	AgentDirectorServiceReportVMMetricsProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportVMMetrics"
+	AgentDirectorServiceReportVMMetricsProcedure = "/pilab.agent.v1.AgentDirectorService/ReportVMMetrics"
 	// AgentDirectorServiceReportHypervisorResourceUsageProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportHypervisorResourceUsage RPC.
-	AgentDirectorServiceReportHypervisorResourceUsageProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportHypervisorResourceUsage"
+	AgentDirectorServiceReportHypervisorResourceUsageProcedure = "/pilab.agent.v1.AgentDirectorService/ReportHypervisorResourceUsage"
 	// AgentDirectorServiceReportEventProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportEvent RPC.
-	AgentDirectorServiceReportEventProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportEvent"
+	AgentDirectorServiceReportEventProcedure = "/pilab.agent.v1.AgentDirectorService/ReportEvent"
 	// AgentDirectorServiceStreamLogsProcedure is the fully-qualified name of the AgentDirectorService's
 	// StreamLogs RPC.
-	AgentDirectorServiceStreamLogsProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/StreamLogs"
+	AgentDirectorServiceStreamLogsProcedure = "/pilab.agent.v1.AgentDirectorService/StreamLogs"
 	// AgentDirectorServiceReportTaskProgressProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportTaskProgress RPC.
-	AgentDirectorServiceReportTaskProgressProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportTaskProgress"
+	AgentDirectorServiceReportTaskProgressProcedure = "/pilab.agent.v1.AgentDirectorService/ReportTaskProgress"
 	// AgentDirectorServiceReportWorkflowStateProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportWorkflowState RPC.
-	AgentDirectorServiceReportWorkflowStateProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportWorkflowState"
+	AgentDirectorServiceReportWorkflowStateProcedure = "/pilab.agent.v1.AgentDirectorService/ReportWorkflowState"
 	// AgentDirectorServiceReportAgentUpdateStatusProcedure is the fully-qualified name of the
 	// AgentDirectorService's ReportAgentUpdateStatus RPC.
-	AgentDirectorServiceReportAgentUpdateStatusProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/ReportAgentUpdateStatus"
+	AgentDirectorServiceReportAgentUpdateStatusProcedure = "/pilab.agent.v1.AgentDirectorService/ReportAgentUpdateStatus"
 	// AgentDirectorServiceAcknowledgeAgentConfigurationProcedure is the fully-qualified name of the
 	// AgentDirectorService's AcknowledgeAgentConfiguration RPC.
-	AgentDirectorServiceAcknowledgeAgentConfigurationProcedure = "/pilab.cloud.agent.v1.AgentDirectorService/AcknowledgeAgentConfiguration"
+	AgentDirectorServiceAcknowledgeAgentConfigurationProcedure = "/pilab.agent.v1.AgentDirectorService/AcknowledgeAgentConfiguration"
 )
 
-// AgentDirectorServiceClient is a client for the pilab.cloud.agent.v1.AgentDirectorService service.
+// AgentDirectorServiceClient is a client for the pilab.agent.v1.AgentDirectorService service.
 type AgentDirectorServiceClient interface {
 	// --- Status and Health Reporting ---
 	ReportHeartbeat(context.Context, *connect.Request[v1.HeartbeatRequest]) (*connect.Response[v1.HeartbeatResponse], error)
@@ -121,10 +121,10 @@ type AgentDirectorServiceClient interface {
 	AcknowledgeAgentConfiguration(context.Context, *connect.Request[v1.AgentConfiguration]) (*connect.Response[emptypb.Empty], error)
 }
 
-// NewAgentDirectorServiceClient constructs a client for the
-// pilab.cloud.agent.v1.AgentDirectorService service. By default, it uses the Connect protocol with
-// the binary Protobuf Codec, asks for gzipped responses, and sends uncompressed requests. To use
-// the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or connect.WithGRPCWeb() options.
+// NewAgentDirectorServiceClient constructs a client for the pilab.agent.v1.AgentDirectorService
+// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
+// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
+// the connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -237,80 +237,80 @@ type agentDirectorServiceClient struct {
 	acknowledgeAgentConfiguration *connect.Client[v1.AgentConfiguration, emptypb.Empty]
 }
 
-// ReportHeartbeat calls pilab.cloud.agent.v1.AgentDirectorService.ReportHeartbeat.
+// ReportHeartbeat calls pilab.agent.v1.AgentDirectorService.ReportHeartbeat.
 func (c *agentDirectorServiceClient) ReportHeartbeat(ctx context.Context, req *connect.Request[v1.HeartbeatRequest]) (*connect.Response[v1.HeartbeatResponse], error) {
 	return c.reportHeartbeat.CallUnary(ctx, req)
 }
 
-// ReportHypervisorStatus calls pilab.cloud.agent.v1.AgentDirectorService.ReportHypervisorStatus.
+// ReportHypervisorStatus calls pilab.agent.v1.AgentDirectorService.ReportHypervisorStatus.
 func (c *agentDirectorServiceClient) ReportHypervisorStatus(ctx context.Context, req *connect.Request[v1.HypervisorStatus]) (*connect.Response[emptypb.Empty], error) {
 	return c.reportHypervisorStatus.CallUnary(ctx, req)
 }
 
-// ReportVMStatus calls pilab.cloud.agent.v1.AgentDirectorService.ReportVMStatus.
+// ReportVMStatus calls pilab.agent.v1.AgentDirectorService.ReportVMStatus.
 func (c *agentDirectorServiceClient) ReportVMStatus(ctx context.Context, req *connect.Request[v1.VMStatusUpdate]) (*connect.Response[emptypb.Empty], error) {
 	return c.reportVMStatus.CallUnary(ctx, req)
 }
 
-// ReportDiskStatus calls pilab.cloud.agent.v1.AgentDirectorService.ReportDiskStatus.
+// ReportDiskStatus calls pilab.agent.v1.AgentDirectorService.ReportDiskStatus.
 func (c *agentDirectorServiceClient) ReportDiskStatus(ctx context.Context, req *connect.Request[v1.DiskStatusUpdate]) (*connect.Response[emptypb.Empty], error) {
 	return c.reportDiskStatus.CallUnary(ctx, req)
 }
 
 // ReportNetworkInterfaceStatus calls
-// pilab.cloud.agent.v1.AgentDirectorService.ReportNetworkInterfaceStatus.
+// pilab.agent.v1.AgentDirectorService.ReportNetworkInterfaceStatus.
 func (c *agentDirectorServiceClient) ReportNetworkInterfaceStatus(ctx context.Context, req *connect.Request[v1.NetworkInterfaceStatusUpdate]) (*connect.Response[emptypb.Empty], error) {
 	return c.reportNetworkInterfaceStatus.CallUnary(ctx, req)
 }
 
-// ReportHardwareStatus calls pilab.cloud.agent.v1.AgentDirectorService.ReportHardwareStatus.
+// ReportHardwareStatus calls pilab.agent.v1.AgentDirectorService.ReportHardwareStatus.
 func (c *agentDirectorServiceClient) ReportHardwareStatus(ctx context.Context, req *connect.Request[v1.HardwareStatusUpdate]) (*connect.Response[emptypb.Empty], error) {
 	return c.reportHardwareStatus.CallUnary(ctx, req)
 }
 
-// ReportVMMetrics calls pilab.cloud.agent.v1.AgentDirectorService.ReportVMMetrics.
+// ReportVMMetrics calls pilab.agent.v1.AgentDirectorService.ReportVMMetrics.
 func (c *agentDirectorServiceClient) ReportVMMetrics(ctx context.Context, req *connect.Request[v1.VMMetrics]) (*connect.Response[emptypb.Empty], error) {
 	return c.reportVMMetrics.CallUnary(ctx, req)
 }
 
 // ReportHypervisorResourceUsage calls
-// pilab.cloud.agent.v1.AgentDirectorService.ReportHypervisorResourceUsage.
+// pilab.agent.v1.AgentDirectorService.ReportHypervisorResourceUsage.
 func (c *agentDirectorServiceClient) ReportHypervisorResourceUsage(ctx context.Context, req *connect.Request[v1.HypervisorResourceUsage]) (*connect.Response[emptypb.Empty], error) {
 	return c.reportHypervisorResourceUsage.CallUnary(ctx, req)
 }
 
-// ReportEvent calls pilab.cloud.agent.v1.AgentDirectorService.ReportEvent.
+// ReportEvent calls pilab.agent.v1.AgentDirectorService.ReportEvent.
 func (c *agentDirectorServiceClient) ReportEvent(ctx context.Context, req *connect.Request[v1.Event]) (*connect.Response[emptypb.Empty], error) {
 	return c.reportEvent.CallUnary(ctx, req)
 }
 
-// StreamLogs calls pilab.cloud.agent.v1.AgentDirectorService.StreamLogs.
+// StreamLogs calls pilab.agent.v1.AgentDirectorService.StreamLogs.
 func (c *agentDirectorServiceClient) StreamLogs(ctx context.Context) *connect.BidiStreamForClient[v1.LogRequest, v1.LogResponse] {
 	return c.streamLogs.CallBidiStream(ctx)
 }
 
-// ReportTaskProgress calls pilab.cloud.agent.v1.AgentDirectorService.ReportTaskProgress.
+// ReportTaskProgress calls pilab.agent.v1.AgentDirectorService.ReportTaskProgress.
 func (c *agentDirectorServiceClient) ReportTaskProgress(ctx context.Context, req *connect.Request[v1.TaskProgress]) (*connect.Response[emptypb.Empty], error) {
 	return c.reportTaskProgress.CallUnary(ctx, req)
 }
 
-// ReportWorkflowState calls pilab.cloud.agent.v1.AgentDirectorService.ReportWorkflowState.
+// ReportWorkflowState calls pilab.agent.v1.AgentDirectorService.ReportWorkflowState.
 func (c *agentDirectorServiceClient) ReportWorkflowState(ctx context.Context, req *connect.Request[v1.WorkflowState]) (*connect.Response[emptypb.Empty], error) {
 	return c.reportWorkflowState.CallUnary(ctx, req)
 }
 
-// ReportAgentUpdateStatus calls pilab.cloud.agent.v1.AgentDirectorService.ReportAgentUpdateStatus.
+// ReportAgentUpdateStatus calls pilab.agent.v1.AgentDirectorService.ReportAgentUpdateStatus.
 func (c *agentDirectorServiceClient) ReportAgentUpdateStatus(ctx context.Context, req *connect.Request[v1.AgentUpdateStatus]) (*connect.Response[emptypb.Empty], error) {
 	return c.reportAgentUpdateStatus.CallUnary(ctx, req)
 }
 
 // AcknowledgeAgentConfiguration calls
-// pilab.cloud.agent.v1.AgentDirectorService.AcknowledgeAgentConfiguration.
+// pilab.agent.v1.AgentDirectorService.AcknowledgeAgentConfiguration.
 func (c *agentDirectorServiceClient) AcknowledgeAgentConfiguration(ctx context.Context, req *connect.Request[v1.AgentConfiguration]) (*connect.Response[emptypb.Empty], error) {
 	return c.acknowledgeAgentConfiguration.CallUnary(ctx, req)
 }
 
-// AgentDirectorServiceHandler is an implementation of the pilab.cloud.agent.v1.AgentDirectorService
+// AgentDirectorServiceHandler is an implementation of the pilab.agent.v1.AgentDirectorService
 // service.
 type AgentDirectorServiceHandler interface {
 	// --- Status and Health Reporting ---
@@ -425,7 +425,7 @@ func NewAgentDirectorServiceHandler(svc AgentDirectorServiceHandler, opts ...con
 		connect.WithSchema(agentDirectorServiceMethods.ByName("AcknowledgeAgentConfiguration")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.agent.v1.AgentDirectorService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.agent.v1.AgentDirectorService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AgentDirectorServiceReportHeartbeatProcedure:
 			agentDirectorServiceReportHeartbeatHandler.ServeHTTP(w, r)
@@ -465,57 +465,57 @@ func NewAgentDirectorServiceHandler(svc AgentDirectorServiceHandler, opts ...con
 type UnimplementedAgentDirectorServiceHandler struct{}
 
 func (UnimplementedAgentDirectorServiceHandler) ReportHeartbeat(context.Context, *connect.Request[v1.HeartbeatRequest]) (*connect.Response[v1.HeartbeatResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportHeartbeat is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportHeartbeat is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) ReportHypervisorStatus(context.Context, *connect.Request[v1.HypervisorStatus]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportHypervisorStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportHypervisorStatus is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) ReportVMStatus(context.Context, *connect.Request[v1.VMStatusUpdate]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportVMStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportVMStatus is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) ReportDiskStatus(context.Context, *connect.Request[v1.DiskStatusUpdate]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportDiskStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportDiskStatus is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) ReportNetworkInterfaceStatus(context.Context, *connect.Request[v1.NetworkInterfaceStatusUpdate]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportNetworkInterfaceStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportNetworkInterfaceStatus is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) ReportHardwareStatus(context.Context, *connect.Request[v1.HardwareStatusUpdate]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportHardwareStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportHardwareStatus is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) ReportVMMetrics(context.Context, *connect.Request[v1.VMMetrics]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportVMMetrics is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportVMMetrics is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) ReportHypervisorResourceUsage(context.Context, *connect.Request[v1.HypervisorResourceUsage]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportHypervisorResourceUsage is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportHypervisorResourceUsage is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) ReportEvent(context.Context, *connect.Request[v1.Event]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportEvent is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportEvent is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) StreamLogs(context.Context, *connect.BidiStream[v1.LogRequest, v1.LogResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.StreamLogs is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.StreamLogs is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) ReportTaskProgress(context.Context, *connect.Request[v1.TaskProgress]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportTaskProgress is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportTaskProgress is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) ReportWorkflowState(context.Context, *connect.Request[v1.WorkflowState]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportWorkflowState is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportWorkflowState is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) ReportAgentUpdateStatus(context.Context, *connect.Request[v1.AgentUpdateStatus]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.ReportAgentUpdateStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.ReportAgentUpdateStatus is not implemented"))
 }
 
 func (UnimplementedAgentDirectorServiceHandler) AcknowledgeAgentConfiguration(context.Context, *connect.Request[v1.AgentConfiguration]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentDirectorService.AcknowledgeAgentConfiguration is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentDirectorService.AcknowledgeAgentConfiguration is not implemented"))
 }

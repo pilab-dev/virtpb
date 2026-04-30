@@ -17,7 +17,7 @@
 
 syntax = "proto3";
 
-package pilab.cloud;
+package pilab;
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab;cloudpb";
 

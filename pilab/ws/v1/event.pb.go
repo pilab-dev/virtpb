@@ -748,7 +748,7 @@ var File_pilab_ws_v1_event_proto protoreflect.FileDescriptor
 
 const file_pilab_ws_v1_event_proto_rawDesc = "" +
 	"\n" +
-	"\x17pilab/ws/v1/event.proto\x12\x11pilab.cloud.ws.v1\x1a\x16pilab/vm_metrics.proto\x1a\x16pilab/host_stats.proto\x1a\x16pilab/job_status.proto\"\x7f\n" +
+	"\x17pilab/ws/v1/event.proto\x12\vpilab.ws.v1\x1a\x16pilab/vm_metrics.proto\x1a\x16pilab/host_stats.proto\x1a\x16pilab/job_status.proto\"\x7f\n" +
 	"\n" +
 	"JobCreated\x12\x10\n" +
 	"\x03job\x18\x01 \x01(\tR\x03job\x12\x19\n" +
@@ -761,26 +761,26 @@ const file_pilab_ws_v1_event_proto_rawDesc = "" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"7\n" +
 	"\tJobFailed\x12\x10\n" +
 	"\x03job\x18\x01 \x01(\tR\x03job\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"5\n" +
-	"\aJobList\x12*\n" +
-	"\x04jobs\x18\x01 \x03(\v2\x16.pilab.cloud.JobStatusR\x04jobs\"b\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"/\n" +
+	"\aJobList\x12$\n" +
+	"\x04jobs\x18\x01 \x03(\v2\x10.pilab.JobStatusR\x04jobs\"b\n" +
 	"\aVmEvent\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x14\n" +
 	"\x05event\x18\x02 \x01(\tR\x05event\x12\x16\n" +
 	"\x06detail\x18\x03 \x01(\tR\x06detail\x12\x14\n" +
-	"\x05state\x18\x04 \x01(\tR\x05state\"\xca\x03\n" +
-	"\x05Event\x127\n" +
+	"\x05state\x18\x04 \x01(\tR\x05state\"\xa0\x03\n" +
+	"\x05Event\x121\n" +
 	"\n" +
-	"job_status\x18\x01 \x01(\v2\x16.pilab.cloud.JobStatusH\x00R\tjobStatus\x12@\n" +
-	"\vjob_created\x18\x02 \x01(\v2\x1d.pilab.cloud.ws.v1.JobCreatedH\x00R\n" +
-	"jobCreated\x12F\n" +
-	"\rjob_completed\x18\x03 \x01(\v2\x1f.pilab.cloud.ws.v1.JobCompletedH\x00R\fjobCompleted\x12=\n" +
+	"job_status\x18\x01 \x01(\v2\x10.pilab.JobStatusH\x00R\tjobStatus\x12:\n" +
+	"\vjob_created\x18\x02 \x01(\v2\x17.pilab.ws.v1.JobCreatedH\x00R\n" +
+	"jobCreated\x12@\n" +
+	"\rjob_completed\x18\x03 \x01(\v2\x19.pilab.ws.v1.JobCompletedH\x00R\fjobCompleted\x127\n" +
 	"\n" +
-	"job_failed\x18\x04 \x01(\v2\x1c.pilab.cloud.ws.v1.JobFailedH\x00R\tjobFailed\x127\n" +
-	"\bvm_event\x18\x05 \x01(\v2\x1a.pilab.cloud.ws.v1.VmEventH\x00R\avmEvent\x12B\n" +
-	"\x10host_stats_event\x18\x06 \x01(\v2\x16.pilab.cloud.HostStatsH\x00R\x0ehostStatsEvent\x127\n" +
+	"job_failed\x18\x04 \x01(\v2\x16.pilab.ws.v1.JobFailedH\x00R\tjobFailed\x121\n" +
+	"\bvm_event\x18\x05 \x01(\v2\x14.pilab.ws.v1.VmEventH\x00R\avmEvent\x12<\n" +
+	"\x10host_stats_event\x18\x06 \x01(\v2\x10.pilab.HostStatsH\x00R\x0ehostStatsEvent\x121\n" +
 	"\n" +
-	"vm_metrics\x18\a \x01(\v2\x16.pilab.cloud.VmMetricsH\x00R\tvmMetricsB\t\n" +
+	"vm_metrics\x18\a \x01(\v2\x10.pilab.VmMetricsH\x00R\tvmMetricsB\t\n" +
 	"\apayload\"\x7f\n" +
 	"\x10SubscribeMessage\x12\x12\n" +
 	"\x03job\x18\x01 \x01(\tH\x00R\x03job\x12\x15\n" +
@@ -790,10 +790,10 @@ const file_pilab_ws_v1_event_proto_rawDesc = "" +
 	"\f_unsubscribe\"+\n" +
 	"\x13AuthenticateMessage\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"\x10\n" +
-	"\x0eJobListRequest\"\xa8\x01\n" +
-	"\bRequests\x12C\n" +
-	"\tsubscribe\x18\x01 \x01(\v2#.pilab.cloud.ws.v1.SubscribeMessageH\x00R\tsubscribe\x12L\n" +
-	"\fauthenticate\x18\x02 \x01(\v2&.pilab.cloud.ws.v1.AuthenticateMessageH\x00R\fauthenticateB\t\n" +
+	"\x0eJobListRequest\"\x9c\x01\n" +
+	"\bRequests\x12=\n" +
+	"\tsubscribe\x18\x01 \x01(\v2\x1d.pilab.ws.v1.SubscribeMessageH\x00R\tsubscribe\x12F\n" +
+	"\fauthenticate\x18\x02 \x01(\v2 .pilab.ws.v1.AuthenticateMessageH\x00R\fauthenticateB\t\n" +
 	"\apayloadB+Z)go.pilab.hu/cloud/virtpb/pilab/ws/v1;wsv1b\x06proto3"
 
 var (
@@ -810,31 +810,31 @@ func file_pilab_ws_v1_event_proto_rawDescGZIP() []byte {
 
 var file_pilab_ws_v1_event_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_pilab_ws_v1_event_proto_goTypes = []any{
-	(*JobCreated)(nil),          // 0: pilab.cloud.ws.v1.JobCreated
-	(*JobCompleted)(nil),        // 1: pilab.cloud.ws.v1.JobCompleted
-	(*JobFailed)(nil),           // 2: pilab.cloud.ws.v1.JobFailed
-	(*JobList)(nil),             // 3: pilab.cloud.ws.v1.JobList
-	(*VmEvent)(nil),             // 4: pilab.cloud.ws.v1.VmEvent
-	(*Event)(nil),               // 5: pilab.cloud.ws.v1.Event
-	(*SubscribeMessage)(nil),    // 6: pilab.cloud.ws.v1.SubscribeMessage
-	(*AuthenticateMessage)(nil), // 7: pilab.cloud.ws.v1.AuthenticateMessage
-	(*JobListRequest)(nil),      // 8: pilab.cloud.ws.v1.JobListRequest
-	(*Requests)(nil),            // 9: pilab.cloud.ws.v1.Requests
-	(*pilab.JobStatus)(nil),     // 10: pilab.cloud.JobStatus
-	(*pilab.HostStats)(nil),     // 11: pilab.cloud.HostStats
-	(*pilab.VmMetrics)(nil),     // 12: pilab.cloud.VmMetrics
+	(*JobCreated)(nil),          // 0: pilab.ws.v1.JobCreated
+	(*JobCompleted)(nil),        // 1: pilab.ws.v1.JobCompleted
+	(*JobFailed)(nil),           // 2: pilab.ws.v1.JobFailed
+	(*JobList)(nil),             // 3: pilab.ws.v1.JobList
+	(*VmEvent)(nil),             // 4: pilab.ws.v1.VmEvent
+	(*Event)(nil),               // 5: pilab.ws.v1.Event
+	(*SubscribeMessage)(nil),    // 6: pilab.ws.v1.SubscribeMessage
+	(*AuthenticateMessage)(nil), // 7: pilab.ws.v1.AuthenticateMessage
+	(*JobListRequest)(nil),      // 8: pilab.ws.v1.JobListRequest
+	(*Requests)(nil),            // 9: pilab.ws.v1.Requests
+	(*pilab.JobStatus)(nil),     // 10: pilab.JobStatus
+	(*pilab.HostStats)(nil),     // 11: pilab.HostStats
+	(*pilab.VmMetrics)(nil),     // 12: pilab.VmMetrics
 }
 var file_pilab_ws_v1_event_proto_depIdxs = []int32{
-	10, // 0: pilab.cloud.ws.v1.JobList.jobs:type_name -> pilab.cloud.JobStatus
-	10, // 1: pilab.cloud.ws.v1.Event.job_status:type_name -> pilab.cloud.JobStatus
-	0,  // 2: pilab.cloud.ws.v1.Event.job_created:type_name -> pilab.cloud.ws.v1.JobCreated
-	1,  // 3: pilab.cloud.ws.v1.Event.job_completed:type_name -> pilab.cloud.ws.v1.JobCompleted
-	2,  // 4: pilab.cloud.ws.v1.Event.job_failed:type_name -> pilab.cloud.ws.v1.JobFailed
-	4,  // 5: pilab.cloud.ws.v1.Event.vm_event:type_name -> pilab.cloud.ws.v1.VmEvent
-	11, // 6: pilab.cloud.ws.v1.Event.host_stats_event:type_name -> pilab.cloud.HostStats
-	12, // 7: pilab.cloud.ws.v1.Event.vm_metrics:type_name -> pilab.cloud.VmMetrics
-	6,  // 8: pilab.cloud.ws.v1.Requests.subscribe:type_name -> pilab.cloud.ws.v1.SubscribeMessage
-	7,  // 9: pilab.cloud.ws.v1.Requests.authenticate:type_name -> pilab.cloud.ws.v1.AuthenticateMessage
+	10, // 0: pilab.ws.v1.JobList.jobs:type_name -> pilab.JobStatus
+	10, // 1: pilab.ws.v1.Event.job_status:type_name -> pilab.JobStatus
+	0,  // 2: pilab.ws.v1.Event.job_created:type_name -> pilab.ws.v1.JobCreated
+	1,  // 3: pilab.ws.v1.Event.job_completed:type_name -> pilab.ws.v1.JobCompleted
+	2,  // 4: pilab.ws.v1.Event.job_failed:type_name -> pilab.ws.v1.JobFailed
+	4,  // 5: pilab.ws.v1.Event.vm_event:type_name -> pilab.ws.v1.VmEvent
+	11, // 6: pilab.ws.v1.Event.host_stats_event:type_name -> pilab.HostStats
+	12, // 7: pilab.ws.v1.Event.vm_metrics:type_name -> pilab.VmMetrics
+	6,  // 8: pilab.ws.v1.Requests.subscribe:type_name -> pilab.ws.v1.SubscribeMessage
+	7,  // 9: pilab.ws.v1.Requests.authenticate:type_name -> pilab.ws.v1.AuthenticateMessage
 	10, // [10:10] is the sub-list for method output_type
 	10, // [10:10] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name

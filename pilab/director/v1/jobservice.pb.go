@@ -351,7 +351,7 @@ var File_pilab_director_v1_jobservice_proto protoreflect.FileDescriptor
 
 const file_pilab_director_v1_jobservice_proto_rawDesc = "" +
 	"\n" +
-	"\"pilab/director/v1/jobservice.proto\x12\x17pilab.cloud.director.v1\"\xec\x01\n" +
+	"\"pilab/director/v1/jobservice.proto\x12\x11pilab.director.v1\"\xec\x01\n" +
 	"\x03Job\x12\x15\n" +
 	"\x06job_id\x18\x01 \x01(\tR\x05jobId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x18\n" +
@@ -363,19 +363,19 @@ const file_pilab_director_v1_jobservice_proto_rawDesc = "" +
 	"\bjob_type\x18\a \x01(\tR\ajobType\x12\x13\n" +
 	"\x05vm_id\x18\b \x01(\tR\x04vmId\x12\x16\n" +
 	"\x06params\x18\t \x01(\fR\x06params\"\x12\n" +
-	"\x10SubscribeRequest\"C\n" +
-	"\x11SubscribeResponse\x12.\n" +
-	"\x03job\x18\x01 \x01(\v2\x1c.pilab.cloud.director.v1.JobR\x03job\"w\n" +
+	"\x10SubscribeRequest\"=\n" +
+	"\x11SubscribeResponse\x12(\n" +
+	"\x03job\x18\x01 \x01(\v2\x16.pilab.director.v1.JobR\x03job\"w\n" +
 	"\x10UpdateJobRequest\x12\x15\n" +
 	"\x06job_id\x18\x01 \x01(\tR\x05jobId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12\x1a\n" +
 	"\bprogress\x18\x04 \x01(\rR\bprogress\"\x13\n" +
-	"\x11UpdateJobResponse2\xd6\x01\n" +
+	"\x11UpdateJobResponse2\xbe\x01\n" +
 	"\n" +
-	"JobService\x12b\n" +
-	"\tUpdateJob\x12).pilab.cloud.director.v1.UpdateJobRequest\x1a*.pilab.cloud.director.v1.UpdateJobResponse\x12d\n" +
-	"\tSubscribe\x12).pilab.cloud.director.v1.SubscribeRequest\x1a*.pilab.cloud.director.v1.SubscribeResponse0\x01B7Z5go.pilab.hu/cloud/virtpb/pilab/director/v1;directorv1b\x06proto3"
+	"JobService\x12V\n" +
+	"\tUpdateJob\x12#.pilab.director.v1.UpdateJobRequest\x1a$.pilab.director.v1.UpdateJobResponse\x12X\n" +
+	"\tSubscribe\x12#.pilab.director.v1.SubscribeRequest\x1a$.pilab.director.v1.SubscribeResponse0\x01B7Z5go.pilab.hu/cloud/virtpb/pilab/director/v1;directorv1b\x06proto3"
 
 var (
 	file_pilab_director_v1_jobservice_proto_rawDescOnce sync.Once
@@ -391,18 +391,18 @@ func file_pilab_director_v1_jobservice_proto_rawDescGZIP() []byte {
 
 var file_pilab_director_v1_jobservice_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_pilab_director_v1_jobservice_proto_goTypes = []any{
-	(*Job)(nil),               // 0: pilab.cloud.director.v1.Job
-	(*SubscribeRequest)(nil),  // 1: pilab.cloud.director.v1.SubscribeRequest
-	(*SubscribeResponse)(nil), // 2: pilab.cloud.director.v1.SubscribeResponse
-	(*UpdateJobRequest)(nil),  // 3: pilab.cloud.director.v1.UpdateJobRequest
-	(*UpdateJobResponse)(nil), // 4: pilab.cloud.director.v1.UpdateJobResponse
+	(*Job)(nil),               // 0: pilab.director.v1.Job
+	(*SubscribeRequest)(nil),  // 1: pilab.director.v1.SubscribeRequest
+	(*SubscribeResponse)(nil), // 2: pilab.director.v1.SubscribeResponse
+	(*UpdateJobRequest)(nil),  // 3: pilab.director.v1.UpdateJobRequest
+	(*UpdateJobResponse)(nil), // 4: pilab.director.v1.UpdateJobResponse
 }
 var file_pilab_director_v1_jobservice_proto_depIdxs = []int32{
-	0, // 0: pilab.cloud.director.v1.SubscribeResponse.job:type_name -> pilab.cloud.director.v1.Job
-	3, // 1: pilab.cloud.director.v1.JobService.UpdateJob:input_type -> pilab.cloud.director.v1.UpdateJobRequest
-	1, // 2: pilab.cloud.director.v1.JobService.Subscribe:input_type -> pilab.cloud.director.v1.SubscribeRequest
-	4, // 3: pilab.cloud.director.v1.JobService.UpdateJob:output_type -> pilab.cloud.director.v1.UpdateJobResponse
-	2, // 4: pilab.cloud.director.v1.JobService.Subscribe:output_type -> pilab.cloud.director.v1.SubscribeResponse
+	0, // 0: pilab.director.v1.SubscribeResponse.job:type_name -> pilab.director.v1.Job
+	3, // 1: pilab.director.v1.JobService.UpdateJob:input_type -> pilab.director.v1.UpdateJobRequest
+	1, // 2: pilab.director.v1.JobService.Subscribe:input_type -> pilab.director.v1.SubscribeRequest
+	4, // 3: pilab.director.v1.JobService.UpdateJob:output_type -> pilab.director.v1.UpdateJobResponse
+	2, // 4: pilab.director.v1.JobService.Subscribe:output_type -> pilab.director.v1.SubscribeResponse
 	3, // [3:5] is the sub-list for method output_type
 	1, // [1:3] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

@@ -42,7 +42,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// ManagementServiceName is the fully-qualified name of the ManagementService service.
-	ManagementServiceName = "pilab.cloud.frontend.v1.ManagementService"
+	ManagementServiceName = "pilab.frontend.v1.ManagementService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -55,109 +55,109 @@ const (
 const (
 	// ManagementServiceCreateUserProcedure is the fully-qualified name of the ManagementService's
 	// CreateUser RPC.
-	ManagementServiceCreateUserProcedure = "/pilab.cloud.frontend.v1.ManagementService/CreateUser"
+	ManagementServiceCreateUserProcedure = "/pilab.frontend.v1.ManagementService/CreateUser"
 	// ManagementServiceGetUserProcedure is the fully-qualified name of the ManagementService's GetUser
 	// RPC.
-	ManagementServiceGetUserProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetUser"
+	ManagementServiceGetUserProcedure = "/pilab.frontend.v1.ManagementService/GetUser"
 	// ManagementServiceGetUserByUsernameProcedure is the fully-qualified name of the
 	// ManagementService's GetUserByUsername RPC.
-	ManagementServiceGetUserByUsernameProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetUserByUsername"
+	ManagementServiceGetUserByUsernameProcedure = "/pilab.frontend.v1.ManagementService/GetUserByUsername"
 	// ManagementServiceGetUserByEmailProcedure is the fully-qualified name of the ManagementService's
 	// GetUserByEmail RPC.
-	ManagementServiceGetUserByEmailProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetUserByEmail"
+	ManagementServiceGetUserByEmailProcedure = "/pilab.frontend.v1.ManagementService/GetUserByEmail"
 	// ManagementServiceUpdateUserProcedure is the fully-qualified name of the ManagementService's
 	// UpdateUser RPC.
-	ManagementServiceUpdateUserProcedure = "/pilab.cloud.frontend.v1.ManagementService/UpdateUser"
+	ManagementServiceUpdateUserProcedure = "/pilab.frontend.v1.ManagementService/UpdateUser"
 	// ManagementServiceDeleteUserProcedure is the fully-qualified name of the ManagementService's
 	// DeleteUser RPC.
-	ManagementServiceDeleteUserProcedure = "/pilab.cloud.frontend.v1.ManagementService/DeleteUser"
+	ManagementServiceDeleteUserProcedure = "/pilab.frontend.v1.ManagementService/DeleteUser"
 	// ManagementServiceSearchUsersProcedure is the fully-qualified name of the ManagementService's
 	// SearchUsers RPC.
-	ManagementServiceSearchUsersProcedure = "/pilab.cloud.frontend.v1.ManagementService/SearchUsers"
+	ManagementServiceSearchUsersProcedure = "/pilab.frontend.v1.ManagementService/SearchUsers"
 	// ManagementServiceChangeUserPasswordProcedure is the fully-qualified name of the
 	// ManagementService's ChangeUserPassword RPC.
-	ManagementServiceChangeUserPasswordProcedure = "/pilab.cloud.frontend.v1.ManagementService/ChangeUserPassword"
+	ManagementServiceChangeUserPasswordProcedure = "/pilab.frontend.v1.ManagementService/ChangeUserPassword"
 	// ManagementServiceCreateRoleProcedure is the fully-qualified name of the ManagementService's
 	// CreateRole RPC.
-	ManagementServiceCreateRoleProcedure = "/pilab.cloud.frontend.v1.ManagementService/CreateRole"
+	ManagementServiceCreateRoleProcedure = "/pilab.frontend.v1.ManagementService/CreateRole"
 	// ManagementServiceGetRoleProcedure is the fully-qualified name of the ManagementService's GetRole
 	// RPC.
-	ManagementServiceGetRoleProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetRole"
+	ManagementServiceGetRoleProcedure = "/pilab.frontend.v1.ManagementService/GetRole"
 	// ManagementServiceGetRoleByNameProcedure is the fully-qualified name of the ManagementService's
 	// GetRoleByName RPC.
-	ManagementServiceGetRoleByNameProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetRoleByName"
+	ManagementServiceGetRoleByNameProcedure = "/pilab.frontend.v1.ManagementService/GetRoleByName"
 	// ManagementServiceUpdateRoleProcedure is the fully-qualified name of the ManagementService's
 	// UpdateRole RPC.
-	ManagementServiceUpdateRoleProcedure = "/pilab.cloud.frontend.v1.ManagementService/UpdateRole"
+	ManagementServiceUpdateRoleProcedure = "/pilab.frontend.v1.ManagementService/UpdateRole"
 	// ManagementServiceDeleteRoleProcedure is the fully-qualified name of the ManagementService's
 	// DeleteRole RPC.
-	ManagementServiceDeleteRoleProcedure = "/pilab.cloud.frontend.v1.ManagementService/DeleteRole"
+	ManagementServiceDeleteRoleProcedure = "/pilab.frontend.v1.ManagementService/DeleteRole"
 	// ManagementServiceSearchRolesProcedure is the fully-qualified name of the ManagementService's
 	// SearchRoles RPC.
-	ManagementServiceSearchRolesProcedure = "/pilab.cloud.frontend.v1.ManagementService/SearchRoles"
+	ManagementServiceSearchRolesProcedure = "/pilab.frontend.v1.ManagementService/SearchRoles"
 	// ManagementServiceAddRoleInheritanceProcedure is the fully-qualified name of the
 	// ManagementService's AddRoleInheritance RPC.
-	ManagementServiceAddRoleInheritanceProcedure = "/pilab.cloud.frontend.v1.ManagementService/AddRoleInheritance"
+	ManagementServiceAddRoleInheritanceProcedure = "/pilab.frontend.v1.ManagementService/AddRoleInheritance"
 	// ManagementServiceRemoveRoleInheritanceProcedure is the fully-qualified name of the
 	// ManagementService's RemoveRoleInheritance RPC.
-	ManagementServiceRemoveRoleInheritanceProcedure = "/pilab.cloud.frontend.v1.ManagementService/RemoveRoleInheritance"
+	ManagementServiceRemoveRoleInheritanceProcedure = "/pilab.frontend.v1.ManagementService/RemoveRoleInheritance"
 	// ManagementServiceGetParentRolesProcedure is the fully-qualified name of the ManagementService's
 	// GetParentRoles RPC.
-	ManagementServiceGetParentRolesProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetParentRoles"
+	ManagementServiceGetParentRolesProcedure = "/pilab.frontend.v1.ManagementService/GetParentRoles"
 	// ManagementServiceGetChildRolesProcedure is the fully-qualified name of the ManagementService's
 	// GetChildRoles RPC.
-	ManagementServiceGetChildRolesProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetChildRoles"
+	ManagementServiceGetChildRolesProcedure = "/pilab.frontend.v1.ManagementService/GetChildRoles"
 	// ManagementServiceGetAllParentRolesProcedure is the fully-qualified name of the
 	// ManagementService's GetAllParentRoles RPC.
-	ManagementServiceGetAllParentRolesProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetAllParentRoles"
+	ManagementServiceGetAllParentRolesProcedure = "/pilab.frontend.v1.ManagementService/GetAllParentRoles"
 	// ManagementServiceGetAllChildRolesProcedure is the fully-qualified name of the ManagementService's
 	// GetAllChildRoles RPC.
-	ManagementServiceGetAllChildRolesProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetAllChildRoles"
+	ManagementServiceGetAllChildRolesProcedure = "/pilab.frontend.v1.ManagementService/GetAllChildRoles"
 	// ManagementServiceCreateRoleGroupProcedure is the fully-qualified name of the ManagementService's
 	// CreateRoleGroup RPC.
-	ManagementServiceCreateRoleGroupProcedure = "/pilab.cloud.frontend.v1.ManagementService/CreateRoleGroup"
+	ManagementServiceCreateRoleGroupProcedure = "/pilab.frontend.v1.ManagementService/CreateRoleGroup"
 	// ManagementServiceGetRoleGroupProcedure is the fully-qualified name of the ManagementService's
 	// GetRoleGroup RPC.
-	ManagementServiceGetRoleGroupProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetRoleGroup"
+	ManagementServiceGetRoleGroupProcedure = "/pilab.frontend.v1.ManagementService/GetRoleGroup"
 	// ManagementServiceGetRoleGroupByNameProcedure is the fully-qualified name of the
 	// ManagementService's GetRoleGroupByName RPC.
-	ManagementServiceGetRoleGroupByNameProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetRoleGroupByName"
+	ManagementServiceGetRoleGroupByNameProcedure = "/pilab.frontend.v1.ManagementService/GetRoleGroupByName"
 	// ManagementServiceUpdateRoleGroupProcedure is the fully-qualified name of the ManagementService's
 	// UpdateRoleGroup RPC.
-	ManagementServiceUpdateRoleGroupProcedure = "/pilab.cloud.frontend.v1.ManagementService/UpdateRoleGroup"
+	ManagementServiceUpdateRoleGroupProcedure = "/pilab.frontend.v1.ManagementService/UpdateRoleGroup"
 	// ManagementServiceDeleteRoleGroupProcedure is the fully-qualified name of the ManagementService's
 	// DeleteRoleGroup RPC.
-	ManagementServiceDeleteRoleGroupProcedure = "/pilab.cloud.frontend.v1.ManagementService/DeleteRoleGroup"
+	ManagementServiceDeleteRoleGroupProcedure = "/pilab.frontend.v1.ManagementService/DeleteRoleGroup"
 	// ManagementServiceSearchRoleGroupsProcedure is the fully-qualified name of the ManagementService's
 	// SearchRoleGroups RPC.
-	ManagementServiceSearchRoleGroupsProcedure = "/pilab.cloud.frontend.v1.ManagementService/SearchRoleGroups"
+	ManagementServiceSearchRoleGroupsProcedure = "/pilab.frontend.v1.ManagementService/SearchRoleGroups"
 	// ManagementServiceAddUserToRoleGroupProcedure is the fully-qualified name of the
 	// ManagementService's AddUserToRoleGroup RPC.
-	ManagementServiceAddUserToRoleGroupProcedure = "/pilab.cloud.frontend.v1.ManagementService/AddUserToRoleGroup"
+	ManagementServiceAddUserToRoleGroupProcedure = "/pilab.frontend.v1.ManagementService/AddUserToRoleGroup"
 	// ManagementServiceRemoveUserFromRoleGroupProcedure is the fully-qualified name of the
 	// ManagementService's RemoveUserFromRoleGroup RPC.
-	ManagementServiceRemoveUserFromRoleGroupProcedure = "/pilab.cloud.frontend.v1.ManagementService/RemoveUserFromRoleGroup"
+	ManagementServiceRemoveUserFromRoleGroupProcedure = "/pilab.frontend.v1.ManagementService/RemoveUserFromRoleGroup"
 	// ManagementServiceGetRoleGroupsForUserProcedure is the fully-qualified name of the
 	// ManagementService's GetRoleGroupsForUser RPC.
-	ManagementServiceGetRoleGroupsForUserProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetRoleGroupsForUser"
+	ManagementServiceGetRoleGroupsForUserProcedure = "/pilab.frontend.v1.ManagementService/GetRoleGroupsForUser"
 	// ManagementServiceGetUsersInRoleGroupProcedure is the fully-qualified name of the
 	// ManagementService's GetUsersInRoleGroup RPC.
-	ManagementServiceGetUsersInRoleGroupProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetUsersInRoleGroup"
+	ManagementServiceGetUsersInRoleGroupProcedure = "/pilab.frontend.v1.ManagementService/GetUsersInRoleGroup"
 	// ManagementServiceAssignRoleToUserProcedure is the fully-qualified name of the ManagementService's
 	// AssignRoleToUser RPC.
-	ManagementServiceAssignRoleToUserProcedure = "/pilab.cloud.frontend.v1.ManagementService/AssignRoleToUser"
+	ManagementServiceAssignRoleToUserProcedure = "/pilab.frontend.v1.ManagementService/AssignRoleToUser"
 	// ManagementServiceUnassignRoleFromUserProcedure is the fully-qualified name of the
 	// ManagementService's UnassignRoleFromUser RPC.
-	ManagementServiceUnassignRoleFromUserProcedure = "/pilab.cloud.frontend.v1.ManagementService/UnassignRoleFromUser"
+	ManagementServiceUnassignRoleFromUserProcedure = "/pilab.frontend.v1.ManagementService/UnassignRoleFromUser"
 	// ManagementServiceGetRolesForUserProcedure is the fully-qualified name of the ManagementService's
 	// GetRolesForUser RPC.
-	ManagementServiceGetRolesForUserProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetRolesForUser"
+	ManagementServiceGetRolesForUserProcedure = "/pilab.frontend.v1.ManagementService/GetRolesForUser"
 	// ManagementServiceGetPermissionsForRoleProcedure is the fully-qualified name of the
 	// ManagementService's GetPermissionsForRole RPC.
-	ManagementServiceGetPermissionsForRoleProcedure = "/pilab.cloud.frontend.v1.ManagementService/GetPermissionsForRole"
+	ManagementServiceGetPermissionsForRoleProcedure = "/pilab.frontend.v1.ManagementService/GetPermissionsForRole"
 )
 
-// ManagementServiceClient is a client for the pilab.cloud.frontend.v1.ManagementService service.
+// ManagementServiceClient is a client for the pilab.frontend.v1.ManagementService service.
 type ManagementServiceClient interface {
 	// User Management
 	CreateUser(context.Context, *connect.Request[v1.CreateUserRequest]) (*connect.Response[v1.User], error)
@@ -202,7 +202,7 @@ type ManagementServiceClient interface {
 	GetPermissionsForRole(context.Context, *connect.Request[v1.GetPermissionsForRoleRequest]) (*connect.Response[v1.GetPermissionsForRoleResponse], error)
 }
 
-// NewManagementServiceClient constructs a client for the pilab.cloud.frontend.v1.ManagementService
+// NewManagementServiceClient constructs a client for the pilab.frontend.v1.ManagementService
 // service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
 // gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
 // the connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -458,178 +458,177 @@ type managementServiceClient struct {
 	getPermissionsForRole   *connect.Client[v1.GetPermissionsForRoleRequest, v1.GetPermissionsForRoleResponse]
 }
 
-// CreateUser calls pilab.cloud.frontend.v1.ManagementService.CreateUser.
+// CreateUser calls pilab.frontend.v1.ManagementService.CreateUser.
 func (c *managementServiceClient) CreateUser(ctx context.Context, req *connect.Request[v1.CreateUserRequest]) (*connect.Response[v1.User], error) {
 	return c.createUser.CallUnary(ctx, req)
 }
 
-// GetUser calls pilab.cloud.frontend.v1.ManagementService.GetUser.
+// GetUser calls pilab.frontend.v1.ManagementService.GetUser.
 func (c *managementServiceClient) GetUser(ctx context.Context, req *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.User], error) {
 	return c.getUser.CallUnary(ctx, req)
 }
 
-// GetUserByUsername calls pilab.cloud.frontend.v1.ManagementService.GetUserByUsername.
+// GetUserByUsername calls pilab.frontend.v1.ManagementService.GetUserByUsername.
 func (c *managementServiceClient) GetUserByUsername(ctx context.Context, req *connect.Request[v1.GetUserByUsernameRequest]) (*connect.Response[v1.User], error) {
 	return c.getUserByUsername.CallUnary(ctx, req)
 }
 
-// GetUserByEmail calls pilab.cloud.frontend.v1.ManagementService.GetUserByEmail.
+// GetUserByEmail calls pilab.frontend.v1.ManagementService.GetUserByEmail.
 func (c *managementServiceClient) GetUserByEmail(ctx context.Context, req *connect.Request[v1.GetUserByEmailRequest]) (*connect.Response[v1.User], error) {
 	return c.getUserByEmail.CallUnary(ctx, req)
 }
 
-// UpdateUser calls pilab.cloud.frontend.v1.ManagementService.UpdateUser.
+// UpdateUser calls pilab.frontend.v1.ManagementService.UpdateUser.
 func (c *managementServiceClient) UpdateUser(ctx context.Context, req *connect.Request[v1.UpdateUserRequest]) (*connect.Response[v1.User], error) {
 	return c.updateUser.CallUnary(ctx, req)
 }
 
-// DeleteUser calls pilab.cloud.frontend.v1.ManagementService.DeleteUser.
+// DeleteUser calls pilab.frontend.v1.ManagementService.DeleteUser.
 func (c *managementServiceClient) DeleteUser(ctx context.Context, req *connect.Request[v1.DeleteUserRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteUser.CallUnary(ctx, req)
 }
 
-// SearchUsers calls pilab.cloud.frontend.v1.ManagementService.SearchUsers.
+// SearchUsers calls pilab.frontend.v1.ManagementService.SearchUsers.
 func (c *managementServiceClient) SearchUsers(ctx context.Context, req *connect.Request[v1.SearchUsersRequest]) (*connect.Response[v1.SearchUsersResponse], error) {
 	return c.searchUsers.CallUnary(ctx, req)
 }
 
-// ChangeUserPassword calls pilab.cloud.frontend.v1.ManagementService.ChangeUserPassword.
+// ChangeUserPassword calls pilab.frontend.v1.ManagementService.ChangeUserPassword.
 func (c *managementServiceClient) ChangeUserPassword(ctx context.Context, req *connect.Request[v1.ChangeUserPasswordRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.changeUserPassword.CallUnary(ctx, req)
 }
 
-// CreateRole calls pilab.cloud.frontend.v1.ManagementService.CreateRole.
+// CreateRole calls pilab.frontend.v1.ManagementService.CreateRole.
 func (c *managementServiceClient) CreateRole(ctx context.Context, req *connect.Request[v1.CreateRoleRequest]) (*connect.Response[v1.Role], error) {
 	return c.createRole.CallUnary(ctx, req)
 }
 
-// GetRole calls pilab.cloud.frontend.v1.ManagementService.GetRole.
+// GetRole calls pilab.frontend.v1.ManagementService.GetRole.
 func (c *managementServiceClient) GetRole(ctx context.Context, req *connect.Request[v1.GetRoleRequest]) (*connect.Response[v1.Role], error) {
 	return c.getRole.CallUnary(ctx, req)
 }
 
-// GetRoleByName calls pilab.cloud.frontend.v1.ManagementService.GetRoleByName.
+// GetRoleByName calls pilab.frontend.v1.ManagementService.GetRoleByName.
 func (c *managementServiceClient) GetRoleByName(ctx context.Context, req *connect.Request[v1.GetRoleByNameRequest]) (*connect.Response[v1.Role], error) {
 	return c.getRoleByName.CallUnary(ctx, req)
 }
 
-// UpdateRole calls pilab.cloud.frontend.v1.ManagementService.UpdateRole.
+// UpdateRole calls pilab.frontend.v1.ManagementService.UpdateRole.
 func (c *managementServiceClient) UpdateRole(ctx context.Context, req *connect.Request[v1.UpdateRoleRequest]) (*connect.Response[v1.Role], error) {
 	return c.updateRole.CallUnary(ctx, req)
 }
 
-// DeleteRole calls pilab.cloud.frontend.v1.ManagementService.DeleteRole.
+// DeleteRole calls pilab.frontend.v1.ManagementService.DeleteRole.
 func (c *managementServiceClient) DeleteRole(ctx context.Context, req *connect.Request[v1.DeleteRoleRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteRole.CallUnary(ctx, req)
 }
 
-// SearchRoles calls pilab.cloud.frontend.v1.ManagementService.SearchRoles.
+// SearchRoles calls pilab.frontend.v1.ManagementService.SearchRoles.
 func (c *managementServiceClient) SearchRoles(ctx context.Context, req *connect.Request[v1.SearchRolesRequest]) (*connect.Response[v1.SearchRolesResponse], error) {
 	return c.searchRoles.CallUnary(ctx, req)
 }
 
-// AddRoleInheritance calls pilab.cloud.frontend.v1.ManagementService.AddRoleInheritance.
+// AddRoleInheritance calls pilab.frontend.v1.ManagementService.AddRoleInheritance.
 func (c *managementServiceClient) AddRoleInheritance(ctx context.Context, req *connect.Request[v1.AddRoleInheritanceRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.addRoleInheritance.CallUnary(ctx, req)
 }
 
-// RemoveRoleInheritance calls pilab.cloud.frontend.v1.ManagementService.RemoveRoleInheritance.
+// RemoveRoleInheritance calls pilab.frontend.v1.ManagementService.RemoveRoleInheritance.
 func (c *managementServiceClient) RemoveRoleInheritance(ctx context.Context, req *connect.Request[v1.RemoveRoleInheritanceRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.removeRoleInheritance.CallUnary(ctx, req)
 }
 
-// GetParentRoles calls pilab.cloud.frontend.v1.ManagementService.GetParentRoles.
+// GetParentRoles calls pilab.frontend.v1.ManagementService.GetParentRoles.
 func (c *managementServiceClient) GetParentRoles(ctx context.Context, req *connect.Request[v1.GetParentRolesRequest]) (*connect.Response[v1.GetParentRolesResponse], error) {
 	return c.getParentRoles.CallUnary(ctx, req)
 }
 
-// GetChildRoles calls pilab.cloud.frontend.v1.ManagementService.GetChildRoles.
+// GetChildRoles calls pilab.frontend.v1.ManagementService.GetChildRoles.
 func (c *managementServiceClient) GetChildRoles(ctx context.Context, req *connect.Request[v1.GetChildRolesRequest]) (*connect.Response[v1.GetChildRolesResponse], error) {
 	return c.getChildRoles.CallUnary(ctx, req)
 }
 
-// GetAllParentRoles calls pilab.cloud.frontend.v1.ManagementService.GetAllParentRoles.
+// GetAllParentRoles calls pilab.frontend.v1.ManagementService.GetAllParentRoles.
 func (c *managementServiceClient) GetAllParentRoles(ctx context.Context, req *connect.Request[v1.GetAllParentRolesRequest]) (*connect.Response[v1.GetAllParentRolesResponse], error) {
 	return c.getAllParentRoles.CallUnary(ctx, req)
 }
 
-// GetAllChildRoles calls pilab.cloud.frontend.v1.ManagementService.GetAllChildRoles.
+// GetAllChildRoles calls pilab.frontend.v1.ManagementService.GetAllChildRoles.
 func (c *managementServiceClient) GetAllChildRoles(ctx context.Context, req *connect.Request[v1.GetAllChildRolesRequest]) (*connect.Response[v1.GetAllChildRolesResponse], error) {
 	return c.getAllChildRoles.CallUnary(ctx, req)
 }
 
-// CreateRoleGroup calls pilab.cloud.frontend.v1.ManagementService.CreateRoleGroup.
+// CreateRoleGroup calls pilab.frontend.v1.ManagementService.CreateRoleGroup.
 func (c *managementServiceClient) CreateRoleGroup(ctx context.Context, req *connect.Request[v1.CreateRoleGroupRequest]) (*connect.Response[v1.RoleGroup], error) {
 	return c.createRoleGroup.CallUnary(ctx, req)
 }
 
-// GetRoleGroup calls pilab.cloud.frontend.v1.ManagementService.GetRoleGroup.
+// GetRoleGroup calls pilab.frontend.v1.ManagementService.GetRoleGroup.
 func (c *managementServiceClient) GetRoleGroup(ctx context.Context, req *connect.Request[v1.GetRoleGroupRequest]) (*connect.Response[v1.RoleGroup], error) {
 	return c.getRoleGroup.CallUnary(ctx, req)
 }
 
-// GetRoleGroupByName calls pilab.cloud.frontend.v1.ManagementService.GetRoleGroupByName.
+// GetRoleGroupByName calls pilab.frontend.v1.ManagementService.GetRoleGroupByName.
 func (c *managementServiceClient) GetRoleGroupByName(ctx context.Context, req *connect.Request[v1.GetRoleGroupByNameRequest]) (*connect.Response[v1.RoleGroup], error) {
 	return c.getRoleGroupByName.CallUnary(ctx, req)
 }
 
-// UpdateRoleGroup calls pilab.cloud.frontend.v1.ManagementService.UpdateRoleGroup.
+// UpdateRoleGroup calls pilab.frontend.v1.ManagementService.UpdateRoleGroup.
 func (c *managementServiceClient) UpdateRoleGroup(ctx context.Context, req *connect.Request[v1.UpdateRoleGroupRequest]) (*connect.Response[v1.RoleGroup], error) {
 	return c.updateRoleGroup.CallUnary(ctx, req)
 }
 
-// DeleteRoleGroup calls pilab.cloud.frontend.v1.ManagementService.DeleteRoleGroup.
+// DeleteRoleGroup calls pilab.frontend.v1.ManagementService.DeleteRoleGroup.
 func (c *managementServiceClient) DeleteRoleGroup(ctx context.Context, req *connect.Request[v1.DeleteRoleGroupRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteRoleGroup.CallUnary(ctx, req)
 }
 
-// SearchRoleGroups calls pilab.cloud.frontend.v1.ManagementService.SearchRoleGroups.
+// SearchRoleGroups calls pilab.frontend.v1.ManagementService.SearchRoleGroups.
 func (c *managementServiceClient) SearchRoleGroups(ctx context.Context, req *connect.Request[v1.SearchRoleGroupsRequest]) (*connect.Response[v1.SearchRoleGroupsResponse], error) {
 	return c.searchRoleGroups.CallUnary(ctx, req)
 }
 
-// AddUserToRoleGroup calls pilab.cloud.frontend.v1.ManagementService.AddUserToRoleGroup.
+// AddUserToRoleGroup calls pilab.frontend.v1.ManagementService.AddUserToRoleGroup.
 func (c *managementServiceClient) AddUserToRoleGroup(ctx context.Context, req *connect.Request[v1.AddUserToRoleGroupRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.addUserToRoleGroup.CallUnary(ctx, req)
 }
 
-// RemoveUserFromRoleGroup calls pilab.cloud.frontend.v1.ManagementService.RemoveUserFromRoleGroup.
+// RemoveUserFromRoleGroup calls pilab.frontend.v1.ManagementService.RemoveUserFromRoleGroup.
 func (c *managementServiceClient) RemoveUserFromRoleGroup(ctx context.Context, req *connect.Request[v1.RemoveUserFromRoleGroupRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.removeUserFromRoleGroup.CallUnary(ctx, req)
 }
 
-// GetRoleGroupsForUser calls pilab.cloud.frontend.v1.ManagementService.GetRoleGroupsForUser.
+// GetRoleGroupsForUser calls pilab.frontend.v1.ManagementService.GetRoleGroupsForUser.
 func (c *managementServiceClient) GetRoleGroupsForUser(ctx context.Context, req *connect.Request[v1.GetRoleGroupsForUserRequest]) (*connect.Response[v1.GetRoleGroupsForUserResponse], error) {
 	return c.getRoleGroupsForUser.CallUnary(ctx, req)
 }
 
-// GetUsersInRoleGroup calls pilab.cloud.frontend.v1.ManagementService.GetUsersInRoleGroup.
+// GetUsersInRoleGroup calls pilab.frontend.v1.ManagementService.GetUsersInRoleGroup.
 func (c *managementServiceClient) GetUsersInRoleGroup(ctx context.Context, req *connect.Request[v1.GetUsersInRoleGroupRequest]) (*connect.Response[v1.GetUsersInRoleGroupResponse], error) {
 	return c.getUsersInRoleGroup.CallUnary(ctx, req)
 }
 
-// AssignRoleToUser calls pilab.cloud.frontend.v1.ManagementService.AssignRoleToUser.
+// AssignRoleToUser calls pilab.frontend.v1.ManagementService.AssignRoleToUser.
 func (c *managementServiceClient) AssignRoleToUser(ctx context.Context, req *connect.Request[v1.AssignRoleToUserRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.assignRoleToUser.CallUnary(ctx, req)
 }
 
-// UnassignRoleFromUser calls pilab.cloud.frontend.v1.ManagementService.UnassignRoleFromUser.
+// UnassignRoleFromUser calls pilab.frontend.v1.ManagementService.UnassignRoleFromUser.
 func (c *managementServiceClient) UnassignRoleFromUser(ctx context.Context, req *connect.Request[v1.UnassignRoleFromUserRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.unassignRoleFromUser.CallUnary(ctx, req)
 }
 
-// GetRolesForUser calls pilab.cloud.frontend.v1.ManagementService.GetRolesForUser.
+// GetRolesForUser calls pilab.frontend.v1.ManagementService.GetRolesForUser.
 func (c *managementServiceClient) GetRolesForUser(ctx context.Context, req *connect.Request[v1.GetRolesForUserRequest]) (*connect.Response[v1.GetRolesForUserResponse], error) {
 	return c.getRolesForUser.CallUnary(ctx, req)
 }
 
-// GetPermissionsForRole calls pilab.cloud.frontend.v1.ManagementService.GetPermissionsForRole.
+// GetPermissionsForRole calls pilab.frontend.v1.ManagementService.GetPermissionsForRole.
 func (c *managementServiceClient) GetPermissionsForRole(ctx context.Context, req *connect.Request[v1.GetPermissionsForRoleRequest]) (*connect.Response[v1.GetPermissionsForRoleResponse], error) {
 	return c.getPermissionsForRole.CallUnary(ctx, req)
 }
 
-// ManagementServiceHandler is an implementation of the pilab.cloud.frontend.v1.ManagementService
-// service.
+// ManagementServiceHandler is an implementation of the pilab.frontend.v1.ManagementService service.
 type ManagementServiceHandler interface {
 	// User Management
 	CreateUser(context.Context, *connect.Request[v1.CreateUserRequest]) (*connect.Response[v1.User], error)
@@ -885,7 +884,7 @@ func NewManagementServiceHandler(svc ManagementServiceHandler, opts ...connect.H
 		connect.WithSchema(managementServiceMethods.ByName("GetPermissionsForRole")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.frontend.v1.ManagementService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.frontend.v1.ManagementService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ManagementServiceCreateUserProcedure:
 			managementServiceCreateUserHandler.ServeHTTP(w, r)
@@ -965,137 +964,137 @@ func NewManagementServiceHandler(svc ManagementServiceHandler, opts ...connect.H
 type UnimplementedManagementServiceHandler struct{}
 
 func (UnimplementedManagementServiceHandler) CreateUser(context.Context, *connect.Request[v1.CreateUserRequest]) (*connect.Response[v1.User], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.CreateUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.CreateUser is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetUser(context.Context, *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.User], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetUser is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetUserByUsername(context.Context, *connect.Request[v1.GetUserByUsernameRequest]) (*connect.Response[v1.User], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetUserByUsername is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetUserByUsername is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetUserByEmail(context.Context, *connect.Request[v1.GetUserByEmailRequest]) (*connect.Response[v1.User], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetUserByEmail is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetUserByEmail is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) UpdateUser(context.Context, *connect.Request[v1.UpdateUserRequest]) (*connect.Response[v1.User], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.UpdateUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.UpdateUser is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) DeleteUser(context.Context, *connect.Request[v1.DeleteUserRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.DeleteUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.DeleteUser is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) SearchUsers(context.Context, *connect.Request[v1.SearchUsersRequest]) (*connect.Response[v1.SearchUsersResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.SearchUsers is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.SearchUsers is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) ChangeUserPassword(context.Context, *connect.Request[v1.ChangeUserPasswordRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.ChangeUserPassword is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.ChangeUserPassword is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) CreateRole(context.Context, *connect.Request[v1.CreateRoleRequest]) (*connect.Response[v1.Role], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.CreateRole is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.CreateRole is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetRole(context.Context, *connect.Request[v1.GetRoleRequest]) (*connect.Response[v1.Role], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetRole is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetRole is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetRoleByName(context.Context, *connect.Request[v1.GetRoleByNameRequest]) (*connect.Response[v1.Role], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetRoleByName is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetRoleByName is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) UpdateRole(context.Context, *connect.Request[v1.UpdateRoleRequest]) (*connect.Response[v1.Role], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.UpdateRole is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.UpdateRole is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) DeleteRole(context.Context, *connect.Request[v1.DeleteRoleRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.DeleteRole is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.DeleteRole is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) SearchRoles(context.Context, *connect.Request[v1.SearchRolesRequest]) (*connect.Response[v1.SearchRolesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.SearchRoles is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.SearchRoles is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) AddRoleInheritance(context.Context, *connect.Request[v1.AddRoleInheritanceRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.AddRoleInheritance is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.AddRoleInheritance is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) RemoveRoleInheritance(context.Context, *connect.Request[v1.RemoveRoleInheritanceRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.RemoveRoleInheritance is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.RemoveRoleInheritance is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetParentRoles(context.Context, *connect.Request[v1.GetParentRolesRequest]) (*connect.Response[v1.GetParentRolesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetParentRoles is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetParentRoles is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetChildRoles(context.Context, *connect.Request[v1.GetChildRolesRequest]) (*connect.Response[v1.GetChildRolesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetChildRoles is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetChildRoles is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetAllParentRoles(context.Context, *connect.Request[v1.GetAllParentRolesRequest]) (*connect.Response[v1.GetAllParentRolesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetAllParentRoles is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetAllParentRoles is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetAllChildRoles(context.Context, *connect.Request[v1.GetAllChildRolesRequest]) (*connect.Response[v1.GetAllChildRolesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetAllChildRoles is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetAllChildRoles is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) CreateRoleGroup(context.Context, *connect.Request[v1.CreateRoleGroupRequest]) (*connect.Response[v1.RoleGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.CreateRoleGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.CreateRoleGroup is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetRoleGroup(context.Context, *connect.Request[v1.GetRoleGroupRequest]) (*connect.Response[v1.RoleGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetRoleGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetRoleGroup is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetRoleGroupByName(context.Context, *connect.Request[v1.GetRoleGroupByNameRequest]) (*connect.Response[v1.RoleGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetRoleGroupByName is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetRoleGroupByName is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) UpdateRoleGroup(context.Context, *connect.Request[v1.UpdateRoleGroupRequest]) (*connect.Response[v1.RoleGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.UpdateRoleGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.UpdateRoleGroup is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) DeleteRoleGroup(context.Context, *connect.Request[v1.DeleteRoleGroupRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.DeleteRoleGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.DeleteRoleGroup is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) SearchRoleGroups(context.Context, *connect.Request[v1.SearchRoleGroupsRequest]) (*connect.Response[v1.SearchRoleGroupsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.SearchRoleGroups is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.SearchRoleGroups is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) AddUserToRoleGroup(context.Context, *connect.Request[v1.AddUserToRoleGroupRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.AddUserToRoleGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.AddUserToRoleGroup is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) RemoveUserFromRoleGroup(context.Context, *connect.Request[v1.RemoveUserFromRoleGroupRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.RemoveUserFromRoleGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.RemoveUserFromRoleGroup is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetRoleGroupsForUser(context.Context, *connect.Request[v1.GetRoleGroupsForUserRequest]) (*connect.Response[v1.GetRoleGroupsForUserResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetRoleGroupsForUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetRoleGroupsForUser is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetUsersInRoleGroup(context.Context, *connect.Request[v1.GetUsersInRoleGroupRequest]) (*connect.Response[v1.GetUsersInRoleGroupResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetUsersInRoleGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetUsersInRoleGroup is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) AssignRoleToUser(context.Context, *connect.Request[v1.AssignRoleToUserRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.AssignRoleToUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.AssignRoleToUser is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) UnassignRoleFromUser(context.Context, *connect.Request[v1.UnassignRoleFromUserRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.UnassignRoleFromUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.UnassignRoleFromUser is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetRolesForUser(context.Context, *connect.Request[v1.GetRolesForUserRequest]) (*connect.Response[v1.GetRolesForUserResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetRolesForUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetRolesForUser is not implemented"))
 }
 
 func (UnimplementedManagementServiceHandler) GetPermissionsForRole(context.Context, *connect.Request[v1.GetPermissionsForRoleRequest]) (*connect.Response[v1.GetPermissionsForRoleResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.ManagementService.GetPermissionsForRole is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.ManagementService.GetPermissionsForRole is not implemented"))
 }

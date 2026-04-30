@@ -353,21 +353,21 @@ var File_pilab_agent_v1_stream_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_stream_proto_rawDesc = "" +
 	"\n" +
-	"\x1bpilab/agent/v1/stream.proto\x12\x14pilab.cloud.agent.v1\"\xd7\x01\n" +
-	"\rStreamRequest\x12=\n" +
-	"\x04open\x18\x01 \x01(\v2'.pilab.cloud.agent.v1.OpenStreamMessageH\x00R\x04open\x12@\n" +
-	"\apayload\x18\x02 \x01(\v2$.pilab.cloud.agent.v1.PayloadMessageH\x00R\apayload\x12:\n" +
-	"\x05close\x18\x03 \x01(\v2\".pilab.cloud.agent.v1.CloseMessageH\x00R\x05closeB\t\n" +
+	"\x1bpilab/agent/v1/stream.proto\x12\x0epilab.agent.v1\"\xc5\x01\n" +
+	"\rStreamRequest\x127\n" +
+	"\x04open\x18\x01 \x01(\v2!.pilab.agent.v1.OpenStreamMessageH\x00R\x04open\x12:\n" +
+	"\apayload\x18\x02 \x01(\v2\x1e.pilab.agent.v1.PayloadMessageH\x00R\apayload\x124\n" +
+	"\x05close\x18\x03 \x01(\v2\x1c.pilab.agent.v1.CloseMessageH\x00R\x05closeB\t\n" +
 	"\amessage\"Z\n" +
 	"\x11OpenStreamMessage\x12\x1a\n" +
 	"\bresource\x18\x01 \x01(\tR\bresource\x12)\n" +
 	"\x10resource_variant\x18\x02 \x01(\tR\x0fresourceVariant\"$\n" +
 	"\x0ePayloadMessage\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\fR\x04data\"\x0e\n" +
-	"\fCloseMessage\"\x99\x01\n" +
-	"\x0eStreamResponse\x12@\n" +
-	"\apayload\x18\x01 \x01(\v2$.pilab.cloud.agent.v1.PayloadMessageH\x00R\apayload\x12:\n" +
-	"\x05close\x18\x02 \x01(\v2\".pilab.cloud.agent.v1.CloseMessageH\x00R\x05closeB\t\n" +
+	"\fCloseMessage\"\x8d\x01\n" +
+	"\x0eStreamResponse\x12:\n" +
+	"\apayload\x18\x01 \x01(\v2\x1e.pilab.agent.v1.PayloadMessageH\x00R\apayload\x124\n" +
+	"\x05close\x18\x02 \x01(\v2\x1c.pilab.agent.v1.CloseMessageH\x00R\x05closeB\t\n" +
 	"\amessageB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
@@ -384,18 +384,18 @@ func file_pilab_agent_v1_stream_proto_rawDescGZIP() []byte {
 
 var file_pilab_agent_v1_stream_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_pilab_agent_v1_stream_proto_goTypes = []any{
-	(*StreamRequest)(nil),     // 0: pilab.cloud.agent.v1.StreamRequest
-	(*OpenStreamMessage)(nil), // 1: pilab.cloud.agent.v1.OpenStreamMessage
-	(*PayloadMessage)(nil),    // 2: pilab.cloud.agent.v1.PayloadMessage
-	(*CloseMessage)(nil),      // 3: pilab.cloud.agent.v1.CloseMessage
-	(*StreamResponse)(nil),    // 4: pilab.cloud.agent.v1.StreamResponse
+	(*StreamRequest)(nil),     // 0: pilab.agent.v1.StreamRequest
+	(*OpenStreamMessage)(nil), // 1: pilab.agent.v1.OpenStreamMessage
+	(*PayloadMessage)(nil),    // 2: pilab.agent.v1.PayloadMessage
+	(*CloseMessage)(nil),      // 3: pilab.agent.v1.CloseMessage
+	(*StreamResponse)(nil),    // 4: pilab.agent.v1.StreamResponse
 }
 var file_pilab_agent_v1_stream_proto_depIdxs = []int32{
-	1, // 0: pilab.cloud.agent.v1.StreamRequest.open:type_name -> pilab.cloud.agent.v1.OpenStreamMessage
-	2, // 1: pilab.cloud.agent.v1.StreamRequest.payload:type_name -> pilab.cloud.agent.v1.PayloadMessage
-	3, // 2: pilab.cloud.agent.v1.StreamRequest.close:type_name -> pilab.cloud.agent.v1.CloseMessage
-	2, // 3: pilab.cloud.agent.v1.StreamResponse.payload:type_name -> pilab.cloud.agent.v1.PayloadMessage
-	3, // 4: pilab.cloud.agent.v1.StreamResponse.close:type_name -> pilab.cloud.agent.v1.CloseMessage
+	1, // 0: pilab.agent.v1.StreamRequest.open:type_name -> pilab.agent.v1.OpenStreamMessage
+	2, // 1: pilab.agent.v1.StreamRequest.payload:type_name -> pilab.agent.v1.PayloadMessage
+	3, // 2: pilab.agent.v1.StreamRequest.close:type_name -> pilab.agent.v1.CloseMessage
+	2, // 3: pilab.agent.v1.StreamResponse.payload:type_name -> pilab.agent.v1.PayloadMessage
+	3, // 4: pilab.agent.v1.StreamResponse.close:type_name -> pilab.agent.v1.CloseMessage
 	5, // [5:5] is the sub-list for method output_type
 	5, // [5:5] is the sub-list for method input_type
 	5, // [5:5] is the sub-list for extension type_name

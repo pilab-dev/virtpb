@@ -50,6 +50,279 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type ControlRequest_ControlCommand int32
+
+const (
+	ControlRequest_CONTROL_COMMAND_START    ControlRequest_ControlCommand = 0
+	ControlRequest_CONTROL_COMMAND_STOP     ControlRequest_ControlCommand = 1
+	ControlRequest_CONTROL_COMMAND_RESTART  ControlRequest_ControlCommand = 2
+	ControlRequest_CONTROL_COMMAND_PAUSE    ControlRequest_ControlCommand = 3
+	ControlRequest_CONTROL_COMMAND_RESUME   ControlRequest_ControlCommand = 4
+	ControlRequest_CONTROL_COMMAND_MIGRATE  ControlRequest_ControlCommand = 5
+	ControlRequest_CONTROL_COMMAND_KILL     ControlRequest_ControlCommand = 6
+	ControlRequest_CONTROL_COMMAND_SUSPEND  ControlRequest_ControlCommand = 7
+	ControlRequest_CONTROL_COMMAND_REBOOT   ControlRequest_ControlCommand = 8
+	ControlRequest_CONTROL_COMMAND_SHUTDOWN ControlRequest_ControlCommand = 9
+	ControlRequest_CONTROL_COMMAND_RESET    ControlRequest_ControlCommand = 10
+)
+
+// Enum value maps for ControlRequest_ControlCommand.
+var (
+	ControlRequest_ControlCommand_name = map[int32]string{
+		0:  "CONTROL_COMMAND_START",
+		1:  "CONTROL_COMMAND_STOP",
+		2:  "CONTROL_COMMAND_RESTART",
+		3:  "CONTROL_COMMAND_PAUSE",
+		4:  "CONTROL_COMMAND_RESUME",
+		5:  "CONTROL_COMMAND_MIGRATE",
+		6:  "CONTROL_COMMAND_KILL",
+		7:  "CONTROL_COMMAND_SUSPEND",
+		8:  "CONTROL_COMMAND_REBOOT",
+		9:  "CONTROL_COMMAND_SHUTDOWN",
+		10: "CONTROL_COMMAND_RESET",
+	}
+	ControlRequest_ControlCommand_value = map[string]int32{
+		"CONTROL_COMMAND_START":    0,
+		"CONTROL_COMMAND_STOP":     1,
+		"CONTROL_COMMAND_RESTART":  2,
+		"CONTROL_COMMAND_PAUSE":    3,
+		"CONTROL_COMMAND_RESUME":   4,
+		"CONTROL_COMMAND_MIGRATE":  5,
+		"CONTROL_COMMAND_KILL":     6,
+		"CONTROL_COMMAND_SUSPEND":  7,
+		"CONTROL_COMMAND_REBOOT":   8,
+		"CONTROL_COMMAND_SHUTDOWN": 9,
+		"CONTROL_COMMAND_RESET":    10,
+	}
+)
+
+func (x ControlRequest_ControlCommand) Enum() *ControlRequest_ControlCommand {
+	p := new(ControlRequest_ControlCommand)
+	*p = x
+	return p
+}
+
+func (x ControlRequest_ControlCommand) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ControlRequest_ControlCommand) Descriptor() protoreflect.EnumDescriptor {
+	return file_pilab_agent_v1_agent_service_proto_enumTypes[0].Descriptor()
+}
+
+func (ControlRequest_ControlCommand) Type() protoreflect.EnumType {
+	return &file_pilab_agent_v1_agent_service_proto_enumTypes[0]
+}
+
+func (x ControlRequest_ControlCommand) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ControlRequest_ControlCommand.Descriptor instead.
+func (ControlRequest_ControlCommand) EnumDescriptor() ([]byte, []int) {
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{2, 0}
+}
+
+type StatusRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Vm            string                 `protobuf:"bytes,1,opt,name=vm,proto3" json:"vm,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StatusRequest) Reset() {
+	*x = StatusRequest{}
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StatusRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StatusRequest) ProtoMessage() {}
+
+func (x *StatusRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StatusRequest.ProtoReflect.Descriptor instead.
+func (*StatusRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *StatusRequest) GetVm() string {
+	if x != nil {
+		return x.Vm
+	}
+	return ""
+}
+
+type StatusResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        string                 `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StatusResponse) Reset() {
+	*x = StatusResponse{}
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StatusResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StatusResponse) ProtoMessage() {}
+
+func (x *StatusResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StatusResponse.ProtoReflect.Descriptor instead.
+func (*StatusResponse) Descriptor() ([]byte, []int) {
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *StatusResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+type ControlRequest struct {
+	state         protoimpl.MessageState        `protogen:"open.v1"`
+	Command       ControlRequest_ControlCommand `protobuf:"varint,1,opt,name=command,proto3,enum=pilab.agent.v1.ControlRequest_ControlCommand" json:"command,omitempty"`
+	Vm            string                        `protobuf:"bytes,2,opt,name=vm,proto3" json:"vm,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ControlRequest) Reset() {
+	*x = ControlRequest{}
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ControlRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ControlRequest) ProtoMessage() {}
+
+func (x *ControlRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ControlRequest.ProtoReflect.Descriptor instead.
+func (*ControlRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ControlRequest) GetCommand() ControlRequest_ControlCommand {
+	if x != nil {
+		return x.Command
+	}
+	return ControlRequest_CONTROL_COMMAND_START
+}
+
+func (x *ControlRequest) GetVm() string {
+	if x != nil {
+		return x.Vm
+	}
+	return ""
+}
+
+type ControlResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Error         *ErrorResponse         `protobuf:"bytes,3,opt,name=error,proto3,oneof" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ControlResponse) Reset() {
+	*x = ControlResponse{}
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ControlResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ControlResponse) ProtoMessage() {}
+
+func (x *ControlResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ControlResponse.ProtoReflect.Descriptor instead.
+func (*ControlResponse) Descriptor() ([]byte, []int) {
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ControlResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+func (x *ControlResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *ControlResponse) GetError() *ErrorResponse {
+	if x != nil {
+		return x.Error
+	}
+	return nil
+}
+
 type VmAttachCloudInitRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Vm            string                 `protobuf:"bytes,1,opt,name=vm,proto3" json:"vm,omitempty"`
@@ -60,7 +333,7 @@ type VmAttachCloudInitRequest struct {
 
 func (x *VmAttachCloudInitRequest) Reset() {
 	*x = VmAttachCloudInitRequest{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[0]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -72,7 +345,7 @@ func (x *VmAttachCloudInitRequest) String() string {
 func (*VmAttachCloudInitRequest) ProtoMessage() {}
 
 func (x *VmAttachCloudInitRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[0]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -85,7 +358,7 @@ func (x *VmAttachCloudInitRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmAttachCloudInitRequest.ProtoReflect.Descriptor instead.
 func (*VmAttachCloudInitRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{0}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *VmAttachCloudInitRequest) GetVm() string {
@@ -110,7 +383,7 @@ type VmAttachCloudInitResponse struct {
 
 func (x *VmAttachCloudInitResponse) Reset() {
 	*x = VmAttachCloudInitResponse{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[1]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -122,7 +395,7 @@ func (x *VmAttachCloudInitResponse) String() string {
 func (*VmAttachCloudInitResponse) ProtoMessage() {}
 
 func (x *VmAttachCloudInitResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[1]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -135,7 +408,7 @@ func (x *VmAttachCloudInitResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmAttachCloudInitResponse.ProtoReflect.Descriptor instead.
 func (*VmAttachCloudInitResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{1}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{5}
 }
 
 // MigrationRequest is the request message for CloudHostService.VmMigrateRequest
@@ -155,7 +428,7 @@ type VmMigrateRequest struct {
 
 func (x *VmMigrateRequest) Reset() {
 	*x = VmMigrateRequest{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[2]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -167,7 +440,7 @@ func (x *VmMigrateRequest) String() string {
 func (*VmMigrateRequest) ProtoMessage() {}
 
 func (x *VmMigrateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[2]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -180,7 +453,7 @@ func (x *VmMigrateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmMigrateRequest.ProtoReflect.Descriptor instead.
 func (*VmMigrateRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{2}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *VmMigrateRequest) GetVm() string {
@@ -223,7 +496,7 @@ type VmMigrateResponse struct {
 
 func (x *VmMigrateResponse) Reset() {
 	*x = VmMigrateResponse{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[3]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -235,7 +508,7 @@ func (x *VmMigrateResponse) String() string {
 func (*VmMigrateResponse) ProtoMessage() {}
 
 func (x *VmMigrateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[3]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -248,7 +521,7 @@ func (x *VmMigrateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmMigrateResponse.ProtoReflect.Descriptor instead.
 func (*VmMigrateResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{3}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *VmMigrateResponse) GetSuccess() bool {
@@ -281,7 +554,7 @@ type VmIpListRequest struct {
 
 func (x *VmIpListRequest) Reset() {
 	*x = VmIpListRequest{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[4]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -293,7 +566,7 @@ func (x *VmIpListRequest) String() string {
 func (*VmIpListRequest) ProtoMessage() {}
 
 func (x *VmIpListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[4]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -306,7 +579,7 @@ func (x *VmIpListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmIpListRequest.ProtoReflect.Descriptor instead.
 func (*VmIpListRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{4}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *VmIpListRequest) GetVmUuid() string {
@@ -326,7 +599,7 @@ type InterfaceAddress struct {
 
 func (x *InterfaceAddress) Reset() {
 	*x = InterfaceAddress{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[5]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -338,7 +611,7 @@ func (x *InterfaceAddress) String() string {
 func (*InterfaceAddress) ProtoMessage() {}
 
 func (x *InterfaceAddress) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[5]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -351,7 +624,7 @@ func (x *InterfaceAddress) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InterfaceAddress.ProtoReflect.Descriptor instead.
 func (*InterfaceAddress) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{5}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *InterfaceAddress) GetMac() string {
@@ -377,7 +650,7 @@ type VmIpListResponse struct {
 
 func (x *VmIpListResponse) Reset() {
 	*x = VmIpListResponse{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[6]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -389,7 +662,7 @@ func (x *VmIpListResponse) String() string {
 func (*VmIpListResponse) ProtoMessage() {}
 
 func (x *VmIpListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[6]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -402,7 +675,7 @@ func (x *VmIpListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmIpListResponse.ProtoReflect.Descriptor instead.
 func (*VmIpListResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{6}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *VmIpListResponse) GetAddresses() []*InterfaceAddress {
@@ -423,7 +696,7 @@ type VmChangeUserPasswordRequest struct {
 
 func (x *VmChangeUserPasswordRequest) Reset() {
 	*x = VmChangeUserPasswordRequest{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[7]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -435,7 +708,7 @@ func (x *VmChangeUserPasswordRequest) String() string {
 func (*VmChangeUserPasswordRequest) ProtoMessage() {}
 
 func (x *VmChangeUserPasswordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[7]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -448,7 +721,7 @@ func (x *VmChangeUserPasswordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmChangeUserPasswordRequest.ProtoReflect.Descriptor instead.
 func (*VmChangeUserPasswordRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{7}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *VmChangeUserPasswordRequest) GetVm() string {
@@ -480,7 +753,7 @@ type VmChangeUserPasswordResponse struct {
 
 func (x *VmChangeUserPasswordResponse) Reset() {
 	*x = VmChangeUserPasswordResponse{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[8]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -492,7 +765,7 @@ func (x *VmChangeUserPasswordResponse) String() string {
 func (*VmChangeUserPasswordResponse) ProtoMessage() {}
 
 func (x *VmChangeUserPasswordResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[8]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -505,7 +778,7 @@ func (x *VmChangeUserPasswordResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmChangeUserPasswordResponse.ProtoReflect.Descriptor instead.
 func (*VmChangeUserPasswordResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{8}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{12}
 }
 
 type VmBackupSystemVolumeRequest struct {
@@ -517,7 +790,7 @@ type VmBackupSystemVolumeRequest struct {
 
 func (x *VmBackupSystemVolumeRequest) Reset() {
 	*x = VmBackupSystemVolumeRequest{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[9]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -529,7 +802,7 @@ func (x *VmBackupSystemVolumeRequest) String() string {
 func (*VmBackupSystemVolumeRequest) ProtoMessage() {}
 
 func (x *VmBackupSystemVolumeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[9]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -542,7 +815,7 @@ func (x *VmBackupSystemVolumeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmBackupSystemVolumeRequest.ProtoReflect.Descriptor instead.
 func (*VmBackupSystemVolumeRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{9}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *VmBackupSystemVolumeRequest) GetVm() string {
@@ -561,7 +834,7 @@ type VmBackupSystemVolumeResponse struct {
 
 func (x *VmBackupSystemVolumeResponse) Reset() {
 	*x = VmBackupSystemVolumeResponse{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[10]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -573,7 +846,7 @@ func (x *VmBackupSystemVolumeResponse) String() string {
 func (*VmBackupSystemVolumeResponse) ProtoMessage() {}
 
 func (x *VmBackupSystemVolumeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[10]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -586,7 +859,7 @@ func (x *VmBackupSystemVolumeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmBackupSystemVolumeResponse.ProtoReflect.Descriptor instead.
 func (*VmBackupSystemVolumeResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{10}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *VmBackupSystemVolumeResponse) GetVolumePath() string {
@@ -606,7 +879,7 @@ type VmRestoreSystemVolumeRequest struct {
 
 func (x *VmRestoreSystemVolumeRequest) Reset() {
 	*x = VmRestoreSystemVolumeRequest{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[11]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -618,7 +891,7 @@ func (x *VmRestoreSystemVolumeRequest) String() string {
 func (*VmRestoreSystemVolumeRequest) ProtoMessage() {}
 
 func (x *VmRestoreSystemVolumeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[11]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -631,7 +904,7 @@ func (x *VmRestoreSystemVolumeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmRestoreSystemVolumeRequest.ProtoReflect.Descriptor instead.
 func (*VmRestoreSystemVolumeRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{11}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *VmRestoreSystemVolumeRequest) GetVm() string {
@@ -656,7 +929,7 @@ type VmRestoreSystemVolumeResponse struct {
 
 func (x *VmRestoreSystemVolumeResponse) Reset() {
 	*x = VmRestoreSystemVolumeResponse{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[12]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -668,7 +941,7 @@ func (x *VmRestoreSystemVolumeResponse) String() string {
 func (*VmRestoreSystemVolumeResponse) ProtoMessage() {}
 
 func (x *VmRestoreSystemVolumeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[12]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -681,7 +954,7 @@ func (x *VmRestoreSystemVolumeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmRestoreSystemVolumeResponse.ProtoReflect.Descriptor instead.
 func (*VmRestoreSystemVolumeResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{12}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{16}
 }
 
 type UpdateConfigRequest struct {
@@ -693,7 +966,7 @@ type UpdateConfigRequest struct {
 
 func (x *UpdateConfigRequest) Reset() {
 	*x = UpdateConfigRequest{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[13]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -705,7 +978,7 @@ func (x *UpdateConfigRequest) String() string {
 func (*UpdateConfigRequest) ProtoMessage() {}
 
 func (x *UpdateConfigRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[13]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -718,7 +991,7 @@ func (x *UpdateConfigRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateConfigRequest.ProtoReflect.Descriptor instead.
 func (*UpdateConfigRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{13}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *UpdateConfigRequest) GetConfig() string {
@@ -739,7 +1012,7 @@ type UpdateConfigResponse struct {
 
 func (x *UpdateConfigResponse) Reset() {
 	*x = UpdateConfigResponse{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[14]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -751,7 +1024,7 @@ func (x *UpdateConfigResponse) String() string {
 func (*UpdateConfigResponse) ProtoMessage() {}
 
 func (x *UpdateConfigResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[14]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -764,7 +1037,7 @@ func (x *UpdateConfigResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateConfigResponse.ProtoReflect.Descriptor instead.
 func (*UpdateConfigResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{14}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *UpdateConfigResponse) GetSuccess() bool {
@@ -797,7 +1070,7 @@ type GetHardwareHealthRequest struct {
 
 func (x *GetHardwareHealthRequest) Reset() {
 	*x = GetHardwareHealthRequest{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[15]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -809,7 +1082,7 @@ func (x *GetHardwareHealthRequest) String() string {
 func (*GetHardwareHealthRequest) ProtoMessage() {}
 
 func (x *GetHardwareHealthRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[15]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -822,7 +1095,7 @@ func (x *GetHardwareHealthRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHardwareHealthRequest.ProtoReflect.Descriptor instead.
 func (*GetHardwareHealthRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{15}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{19}
 }
 
 type GetHardwareHealthResponse struct {
@@ -838,7 +1111,7 @@ type GetHardwareHealthResponse struct {
 
 func (x *GetHardwareHealthResponse) Reset() {
 	*x = GetHardwareHealthResponse{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[16]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -850,7 +1123,7 @@ func (x *GetHardwareHealthResponse) String() string {
 func (*GetHardwareHealthResponse) ProtoMessage() {}
 
 func (x *GetHardwareHealthResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[16]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -863,7 +1136,7 @@ func (x *GetHardwareHealthResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHardwareHealthResponse.ProtoReflect.Descriptor instead.
 func (*GetHardwareHealthResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{16}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetHardwareHealthResponse) GetOverallStatus() string {
@@ -910,7 +1183,7 @@ type GetSensorDataRequest struct {
 
 func (x *GetSensorDataRequest) Reset() {
 	*x = GetSensorDataRequest{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[17]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -922,7 +1195,7 @@ func (x *GetSensorDataRequest) String() string {
 func (*GetSensorDataRequest) ProtoMessage() {}
 
 func (x *GetSensorDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[17]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -935,7 +1208,7 @@ func (x *GetSensorDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSensorDataRequest.ProtoReflect.Descriptor instead.
 func (*GetSensorDataRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{17}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetSensorDataRequest) GetSensorName() string {
@@ -955,7 +1228,7 @@ type GetSensorDataResponse struct {
 
 func (x *GetSensorDataResponse) Reset() {
 	*x = GetSensorDataResponse{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[18]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -967,7 +1240,7 @@ func (x *GetSensorDataResponse) String() string {
 func (*GetSensorDataResponse) ProtoMessage() {}
 
 func (x *GetSensorDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[18]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -980,7 +1253,7 @@ func (x *GetSensorDataResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSensorDataResponse.ProtoReflect.Descriptor instead.
 func (*GetSensorDataResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{18}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetSensorDataResponse) GetSensors() []*SensorData {
@@ -1010,7 +1283,7 @@ type SensorData struct {
 
 func (x *SensorData) Reset() {
 	*x = SensorData{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[19]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1022,7 +1295,7 @@ func (x *SensorData) String() string {
 func (*SensorData) ProtoMessage() {}
 
 func (x *SensorData) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[19]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1035,7 +1308,7 @@ func (x *SensorData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SensorData.ProtoReflect.Descriptor instead.
 func (*SensorData) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{19}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *SensorData) GetName() string {
@@ -1086,7 +1359,7 @@ type VmAttachNetworkInterfaceRequest struct {
 
 func (x *VmAttachNetworkInterfaceRequest) Reset() {
 	*x = VmAttachNetworkInterfaceRequest{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[20]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1098,7 +1371,7 @@ func (x *VmAttachNetworkInterfaceRequest) String() string {
 func (*VmAttachNetworkInterfaceRequest) ProtoMessage() {}
 
 func (x *VmAttachNetworkInterfaceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[20]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1111,7 +1384,7 @@ func (x *VmAttachNetworkInterfaceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmAttachNetworkInterfaceRequest.ProtoReflect.Descriptor instead.
 func (*VmAttachNetworkInterfaceRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{20}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *VmAttachNetworkInterfaceRequest) GetVm() string {
@@ -1152,7 +1425,7 @@ type VmAttachNetworkInterfaceResponse struct {
 
 func (x *VmAttachNetworkInterfaceResponse) Reset() {
 	*x = VmAttachNetworkInterfaceResponse{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[21]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1164,7 +1437,7 @@ func (x *VmAttachNetworkInterfaceResponse) String() string {
 func (*VmAttachNetworkInterfaceResponse) ProtoMessage() {}
 
 func (x *VmAttachNetworkInterfaceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[21]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1177,7 +1450,7 @@ func (x *VmAttachNetworkInterfaceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmAttachNetworkInterfaceResponse.ProtoReflect.Descriptor instead.
 func (*VmAttachNetworkInterfaceResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{21}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *VmAttachNetworkInterfaceResponse) GetSuccess() bool {
@@ -1204,7 +1477,7 @@ type VmDetachNetworkInterfaceRequest struct {
 
 func (x *VmDetachNetworkInterfaceRequest) Reset() {
 	*x = VmDetachNetworkInterfaceRequest{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[22]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1216,7 +1489,7 @@ func (x *VmDetachNetworkInterfaceRequest) String() string {
 func (*VmDetachNetworkInterfaceRequest) ProtoMessage() {}
 
 func (x *VmDetachNetworkInterfaceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[22]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1229,7 +1502,7 @@ func (x *VmDetachNetworkInterfaceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmDetachNetworkInterfaceRequest.ProtoReflect.Descriptor instead.
 func (*VmDetachNetworkInterfaceRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{22}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *VmDetachNetworkInterfaceRequest) GetVm() string {
@@ -1256,7 +1529,7 @@ type VmDetachNetworkInterfaceResponse struct {
 
 func (x *VmDetachNetworkInterfaceResponse) Reset() {
 	*x = VmDetachNetworkInterfaceResponse{}
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[23]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1268,7 +1541,7 @@ func (x *VmDetachNetworkInterfaceResponse) String() string {
 func (*VmDetachNetworkInterfaceResponse) ProtoMessage() {}
 
 func (x *VmDetachNetworkInterfaceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[23]
+	mi := &file_pilab_agent_v1_agent_service_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1281,7 +1554,7 @@ func (x *VmDetachNetworkInterfaceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmDetachNetworkInterfaceResponse.ProtoReflect.Descriptor instead.
 func (*VmDetachNetworkInterfaceResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{23}
+	return file_pilab_agent_v1_agent_service_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *VmDetachNetworkInterfaceResponse) GetSuccess() bool {
@@ -1302,31 +1575,56 @@ var File_pilab_agent_v1_agent_service_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_agent_service_proto_rawDesc = "" +
 	"\n" +
-	"\"pilab/agent/v1/agent_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/agent/v1/stream.proto\x1a\x1apilab/agent/v1/error.proto\"P\n" +
+	"\"pilab/agent/v1/agent_service.proto\x12\x0epilab.agent.v1\x1a\x1bpilab/agent/v1/stream.proto\x1a\x1apilab/agent/v1/error.proto\"\x1f\n" +
+	"\rStatusRequest\x12\x0e\n" +
+	"\x02vm\x18\x01 \x01(\tR\x02vm\"(\n" +
+	"\x0eStatusResponse\x12\x16\n" +
+	"\x06status\x18\x01 \x01(\tR\x06status\"\xae\x03\n" +
+	"\x0eControlRequest\x12G\n" +
+	"\acommand\x18\x01 \x01(\x0e2-.pilab.agent.v1.ControlRequest.ControlCommandR\acommand\x12\x0e\n" +
+	"\x02vm\x18\x02 \x01(\tR\x02vm\"\xc2\x02\n" +
+	"\x0eControlCommand\x12\x19\n" +
+	"\x15CONTROL_COMMAND_START\x10\x00\x12\x18\n" +
+	"\x14CONTROL_COMMAND_STOP\x10\x01\x12\x1b\n" +
+	"\x17CONTROL_COMMAND_RESTART\x10\x02\x12\x19\n" +
+	"\x15CONTROL_COMMAND_PAUSE\x10\x03\x12\x1a\n" +
+	"\x16CONTROL_COMMAND_RESUME\x10\x04\x12\x1b\n" +
+	"\x17CONTROL_COMMAND_MIGRATE\x10\x05\x12\x18\n" +
+	"\x14CONTROL_COMMAND_KILL\x10\x06\x12\x1b\n" +
+	"\x17CONTROL_COMMAND_SUSPEND\x10\a\x12\x1a\n" +
+	"\x16CONTROL_COMMAND_REBOOT\x10\b\x12\x1c\n" +
+	"\x18CONTROL_COMMAND_SHUTDOWN\x10\t\x12\x19\n" +
+	"\x15CONTROL_COMMAND_RESET\x10\n" +
+	"\"\x89\x01\n" +
+	"\x0fControlResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x128\n" +
+	"\x05error\x18\x03 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\x06_error\"P\n" +
 	"\x18VmAttachCloudInitRequest\x12\x0e\n" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12$\n" +
 	"\x0ecloud_init_iso\x18\x02 \x01(\fR\fcloudInitIso\"\x1b\n" +
-	"\x19VmAttachCloudInitResponse\"\x99\x02\n" +
+	"\x19VmAttachCloudInitResponse\"\x93\x02\n" +
 	"\x10VmMigrateRequest\x12\x0e\n" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12 \n" +
 	"\vdestination\x18\x02 \x01(\tR\vdestination\x12\x12\n" +
-	"\x04live\x18\x03 \x01(\bR\x04live\x12v\n" +
-	"\x16live_migration_options\x18\x04 \x03(\v2@.pilab.cloud.agent.v1.VmMigrateRequest.LiveMigrationOptionsEntryR\x14liveMigrationOptions\x1aG\n" +
+	"\x04live\x18\x03 \x01(\bR\x04live\x12p\n" +
+	"\x16live_migration_options\x18\x04 \x03(\v2:.pilab.agent.v1.VmMigrateRequest.LiveMigrationOptionsEntryR\x14liveMigrationOptions\x1aG\n" +
 	"\x19LiveMigrationOptionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x91\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x8b\x01\n" +
 	"\x11VmMigrateResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12>\n" +
-	"\x05error\x18\x03 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x128\n" +
+	"\x05error\x18\x03 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"*\n" +
 	"\x0fVmIpListRequest\x12\x17\n" +
 	"\avm_uuid\x18\x01 \x01(\tR\x06vmUuid\"4\n" +
 	"\x10InterfaceAddress\x12\x10\n" +
 	"\x03mac\x18\x01 \x01(\tR\x03mac\x12\x0e\n" +
-	"\x02ip\x18\x02 \x03(\tR\x02ip\"X\n" +
-	"\x10VmIpListResponse\x12D\n" +
-	"\taddresses\x18\x01 \x03(\v2&.pilab.cloud.agent.v1.InterfaceAddressR\taddresses\"e\n" +
+	"\x02ip\x18\x02 \x03(\tR\x02ip\"R\n" +
+	"\x10VmIpListResponse\x12>\n" +
+	"\taddresses\x18\x01 \x03(\v2 .pilab.agent.v1.InterfaceAddressR\taddresses\"e\n" +
 	"\x1bVmChangeUserPasswordRequest\x12\x0e\n" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12\x1a\n" +
 	"\busername\x18\x02 \x01(\tR\busername\x12\x1a\n" +
@@ -1343,27 +1641,27 @@ const file_pilab_agent_v1_agent_service_proto_rawDesc = "" +
 	"backupPath\"\x1f\n" +
 	"\x1dVmRestoreSystemVolumeResponse\"-\n" +
 	"\x13UpdateConfigRequest\x12\x16\n" +
-	"\x06config\x18\x01 \x01(\tR\x06config\"\x94\x01\n" +
+	"\x06config\x18\x01 \x01(\tR\x06config\"\x8e\x01\n" +
 	"\x14UpdateConfigResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\x12>\n" +
-	"\x05error\x18\x03 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x128\n" +
+	"\x05error\x18\x03 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"\x1a\n" +
-	"\x18GetHardwareHealthRequest\"\x96\x02\n" +
+	"\x18GetHardwareHealthRequest\"\x8a\x02\n" +
 	"\x19GetHardwareHealthResponse\x12%\n" +
-	"\x0eoverall_status\x18\x01 \x01(\tR\roverallStatus\x12:\n" +
-	"\asensors\x18\x02 \x03(\v2 .pilab.cloud.agent.v1.SensorDataR\asensors\x12)\n" +
+	"\x0eoverall_status\x18\x01 \x01(\tR\roverallStatus\x124\n" +
+	"\asensors\x18\x02 \x03(\v2\x1a.pilab.agent.v1.SensorDataR\asensors\x12)\n" +
 	"\x10firmware_version\x18\x03 \x01(\tR\x0ffirmwareVersion\x12!\n" +
-	"\fpower_status\x18\x04 \x01(\tR\vpowerStatus\x12>\n" +
-	"\x05error\x18\x05 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\fpower_status\x18\x04 \x01(\tR\vpowerStatus\x128\n" +
+	"\x05error\x18\x05 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"L\n" +
 	"\x14GetSensorDataRequest\x12$\n" +
 	"\vsensor_name\x18\x01 \x01(\tH\x00R\n" +
 	"sensorName\x88\x01\x01B\x0e\n" +
-	"\f_sensor_name\"\x9d\x01\n" +
-	"\x15GetSensorDataResponse\x12:\n" +
-	"\asensors\x18\x01 \x03(\v2 .pilab.cloud.agent.v1.SensorDataR\asensors\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\f_sensor_name\"\x91\x01\n" +
+	"\x15GetSensorDataResponse\x124\n" +
+	"\asensors\x18\x01 \x03(\v2\x1a.pilab.agent.v1.SensorDataR\asensors\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"\x83\x01\n" +
 	"\n" +
 	"SensorData\x12\x12\n" +
@@ -1372,43 +1670,45 @@ const file_pilab_agent_v1_agent_service_proto_rawDesc = "" +
 	"\x04unit\x18\x03 \x01(\tR\x04unit\x12\x16\n" +
 	"\x06status\x18\x04 \x01(\tR\x06status\x12\x1f\n" +
 	"\vsensor_type\x18\x05 \x01(\tR\n" +
-	"sensorType\"\xa4\x02\n" +
+	"sensorType\"\x9e\x02\n" +
 	"\x1fVmAttachNetworkInterfaceRequest\x12\x0e\n" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12!\n" +
 	"\fnetwork_name\x18\x02 \x01(\tR\vnetworkName\x12$\n" +
 	"\vmac_address\x18\x03 \x01(\tH\x00R\n" +
-	"macAddress\x88\x01\x01\x12\\\n" +
-	"\aoptions\x18\x04 \x03(\v2B.pilab.cloud.agent.v1.VmAttachNetworkInterfaceRequest.OptionsEntryR\aoptions\x1a:\n" +
+	"macAddress\x88\x01\x01\x12V\n" +
+	"\aoptions\x18\x04 \x03(\v2<.pilab.agent.v1.VmAttachNetworkInterfaceRequest.OptionsEntryR\aoptions\x1a:\n" +
 	"\fOptionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x0e\n" +
-	"\f_mac_address\"\x86\x01\n" +
+	"\f_mac_address\"\x80\x01\n" +
 	" VmAttachNetworkInterfaceResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"R\n" +
 	"\x1fVmDetachNetworkInterfaceRequest\x12\x0e\n" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12\x1f\n" +
 	"\vmac_address\x18\x02 \x01(\tR\n" +
-	"macAddress\"\x86\x01\n" +
+	"macAddress\"\x80\x01\n" +
 	" VmDetachNetworkInterfaceResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
-	"\x06_error2\xf6\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\x06_error2\xf8\n" +
 	"\n" +
-	"\fAgentService\x12\\\n" +
-	"\tVmMigrate\x12&.pilab.cloud.agent.v1.VmMigrateRequest\x1a'.pilab.cloud.agent.v1.VmMigrateResponse\x12Y\n" +
-	"\bVmIpList\x12%.pilab.cloud.agent.v1.VmIpListRequest\x1a&.pilab.cloud.agent.v1.VmIpListResponse\x12}\n" +
-	"\x14VmChangeUserPassword\x121.pilab.cloud.agent.v1.VmChangeUserPasswordRequest\x1a2.pilab.cloud.agent.v1.VmChangeUserPasswordResponse\x12}\n" +
-	"\x14VmBackupSystemVolume\x121.pilab.cloud.agent.v1.VmBackupSystemVolumeRequest\x1a2.pilab.cloud.agent.v1.VmBackupSystemVolumeResponse\x12\x80\x01\n" +
-	"\x15VmRestoreSystemVolume\x122.pilab.cloud.agent.v1.VmRestoreSystemVolumeRequest\x1a3.pilab.cloud.agent.v1.VmRestoreSystemVolumeResponse\x12t\n" +
-	"\x11VmAttachCloudInit\x12..pilab.cloud.agent.v1.VmAttachCloudInitRequest\x1a/.pilab.cloud.agent.v1.VmAttachCloudInitResponse\x12\x89\x01\n" +
-	"\x18VmAttachNetworkInterface\x125.pilab.cloud.agent.v1.VmAttachNetworkInterfaceRequest\x1a6.pilab.cloud.agent.v1.VmAttachNetworkInterfaceResponse\x12\x89\x01\n" +
-	"\x18VmDetachNetworkInterface\x125.pilab.cloud.agent.v1.VmDetachNetworkInterfaceRequest\x1a6.pilab.cloud.agent.v1.VmDetachNetworkInterfaceResponse\x12W\n" +
-	"\x06Stream\x12#.pilab.cloud.agent.v1.StreamRequest\x1a$.pilab.cloud.agent.v1.StreamResponse(\x010\x01\x12e\n" +
-	"\fUpdateConfig\x12).pilab.cloud.agent.v1.UpdateConfigRequest\x1a*.pilab.cloud.agent.v1.UpdateConfigResponse\x12t\n" +
-	"\x11GetHardwareHealth\x12..pilab.cloud.agent.v1.GetHardwareHealthRequest\x1a/.pilab.cloud.agent.v1.GetHardwareHealthResponse\x12h\n" +
-	"\rGetSensorData\x12*.pilab.cloud.agent.v1.GetSensorDataRequest\x1a+.pilab.cloud.agent.v1.GetSensorDataResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\fAgentService\x12P\n" +
+	"\tVmMigrate\x12 .pilab.agent.v1.VmMigrateRequest\x1a!.pilab.agent.v1.VmMigrateResponse\x12M\n" +
+	"\bVmIpList\x12\x1f.pilab.agent.v1.VmIpListRequest\x1a .pilab.agent.v1.VmIpListResponse\x12q\n" +
+	"\x14VmChangeUserPassword\x12+.pilab.agent.v1.VmChangeUserPasswordRequest\x1a,.pilab.agent.v1.VmChangeUserPasswordResponse\x12q\n" +
+	"\x14VmBackupSystemVolume\x12+.pilab.agent.v1.VmBackupSystemVolumeRequest\x1a,.pilab.agent.v1.VmBackupSystemVolumeResponse\x12t\n" +
+	"\x15VmRestoreSystemVolume\x12,.pilab.agent.v1.VmRestoreSystemVolumeRequest\x1a-.pilab.agent.v1.VmRestoreSystemVolumeResponse\x12h\n" +
+	"\x11VmAttachCloudInit\x12(.pilab.agent.v1.VmAttachCloudInitRequest\x1a).pilab.agent.v1.VmAttachCloudInitResponse\x12}\n" +
+	"\x18VmAttachNetworkInterface\x12/.pilab.agent.v1.VmAttachNetworkInterfaceRequest\x1a0.pilab.agent.v1.VmAttachNetworkInterfaceResponse\x12}\n" +
+	"\x18VmDetachNetworkInterface\x12/.pilab.agent.v1.VmDetachNetworkInterfaceRequest\x1a0.pilab.agent.v1.VmDetachNetworkInterfaceResponse\x12K\n" +
+	"\x06Stream\x12\x1d.pilab.agent.v1.StreamRequest\x1a\x1e.pilab.agent.v1.StreamResponse(\x010\x01\x12Y\n" +
+	"\fUpdateConfig\x12#.pilab.agent.v1.UpdateConfigRequest\x1a$.pilab.agent.v1.UpdateConfigResponse\x12h\n" +
+	"\x11GetHardwareHealth\x12(.pilab.agent.v1.GetHardwareHealthRequest\x1a).pilab.agent.v1.GetHardwareHealthResponse\x12\\\n" +
+	"\rGetSensorData\x12$.pilab.agent.v1.GetSensorDataRequest\x1a%.pilab.agent.v1.GetSensorDataResponse\x12J\n" +
+	"\aControl\x12\x1e.pilab.agent.v1.ControlRequest\x1a\x1f.pilab.agent.v1.ControlResponse\x12G\n" +
+	"\x06Status\x12\x1d.pilab.agent.v1.StatusRequest\x1a\x1e.pilab.agent.v1.StatusResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_agent_service_proto_rawDescOnce sync.Once
@@ -1422,79 +1722,91 @@ func file_pilab_agent_v1_agent_service_proto_rawDescGZIP() []byte {
 	return file_pilab_agent_v1_agent_service_proto_rawDescData
 }
 
-var file_pilab_agent_v1_agent_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_pilab_agent_v1_agent_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_pilab_agent_v1_agent_service_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_pilab_agent_v1_agent_service_proto_goTypes = []any{
-	(*VmAttachCloudInitRequest)(nil),         // 0: pilab.cloud.agent.v1.VmAttachCloudInitRequest
-	(*VmAttachCloudInitResponse)(nil),        // 1: pilab.cloud.agent.v1.VmAttachCloudInitResponse
-	(*VmMigrateRequest)(nil),                 // 2: pilab.cloud.agent.v1.VmMigrateRequest
-	(*VmMigrateResponse)(nil),                // 3: pilab.cloud.agent.v1.VmMigrateResponse
-	(*VmIpListRequest)(nil),                  // 4: pilab.cloud.agent.v1.VmIpListRequest
-	(*InterfaceAddress)(nil),                 // 5: pilab.cloud.agent.v1.InterfaceAddress
-	(*VmIpListResponse)(nil),                 // 6: pilab.cloud.agent.v1.VmIpListResponse
-	(*VmChangeUserPasswordRequest)(nil),      // 7: pilab.cloud.agent.v1.VmChangeUserPasswordRequest
-	(*VmChangeUserPasswordResponse)(nil),     // 8: pilab.cloud.agent.v1.VmChangeUserPasswordResponse
-	(*VmBackupSystemVolumeRequest)(nil),      // 9: pilab.cloud.agent.v1.VmBackupSystemVolumeRequest
-	(*VmBackupSystemVolumeResponse)(nil),     // 10: pilab.cloud.agent.v1.VmBackupSystemVolumeResponse
-	(*VmRestoreSystemVolumeRequest)(nil),     // 11: pilab.cloud.agent.v1.VmRestoreSystemVolumeRequest
-	(*VmRestoreSystemVolumeResponse)(nil),    // 12: pilab.cloud.agent.v1.VmRestoreSystemVolumeResponse
-	(*UpdateConfigRequest)(nil),              // 13: pilab.cloud.agent.v1.UpdateConfigRequest
-	(*UpdateConfigResponse)(nil),             // 14: pilab.cloud.agent.v1.UpdateConfigResponse
-	(*GetHardwareHealthRequest)(nil),         // 15: pilab.cloud.agent.v1.GetHardwareHealthRequest
-	(*GetHardwareHealthResponse)(nil),        // 16: pilab.cloud.agent.v1.GetHardwareHealthResponse
-	(*GetSensorDataRequest)(nil),             // 17: pilab.cloud.agent.v1.GetSensorDataRequest
-	(*GetSensorDataResponse)(nil),            // 18: pilab.cloud.agent.v1.GetSensorDataResponse
-	(*SensorData)(nil),                       // 19: pilab.cloud.agent.v1.SensorData
-	(*VmAttachNetworkInterfaceRequest)(nil),  // 20: pilab.cloud.agent.v1.VmAttachNetworkInterfaceRequest
-	(*VmAttachNetworkInterfaceResponse)(nil), // 21: pilab.cloud.agent.v1.VmAttachNetworkInterfaceResponse
-	(*VmDetachNetworkInterfaceRequest)(nil),  // 22: pilab.cloud.agent.v1.VmDetachNetworkInterfaceRequest
-	(*VmDetachNetworkInterfaceResponse)(nil), // 23: pilab.cloud.agent.v1.VmDetachNetworkInterfaceResponse
-	nil,                                      // 24: pilab.cloud.agent.v1.VmMigrateRequest.LiveMigrationOptionsEntry
-	nil,                                      // 25: pilab.cloud.agent.v1.VmAttachNetworkInterfaceRequest.OptionsEntry
-	(*ErrorResponse)(nil),                    // 26: pilab.cloud.agent.v1.ErrorResponse
-	(*StreamRequest)(nil),                    // 27: pilab.cloud.agent.v1.StreamRequest
-	(*StreamResponse)(nil),                   // 28: pilab.cloud.agent.v1.StreamResponse
+	(ControlRequest_ControlCommand)(0),       // 0: pilab.agent.v1.ControlRequest.ControlCommand
+	(*StatusRequest)(nil),                    // 1: pilab.agent.v1.StatusRequest
+	(*StatusResponse)(nil),                   // 2: pilab.agent.v1.StatusResponse
+	(*ControlRequest)(nil),                   // 3: pilab.agent.v1.ControlRequest
+	(*ControlResponse)(nil),                  // 4: pilab.agent.v1.ControlResponse
+	(*VmAttachCloudInitRequest)(nil),         // 5: pilab.agent.v1.VmAttachCloudInitRequest
+	(*VmAttachCloudInitResponse)(nil),        // 6: pilab.agent.v1.VmAttachCloudInitResponse
+	(*VmMigrateRequest)(nil),                 // 7: pilab.agent.v1.VmMigrateRequest
+	(*VmMigrateResponse)(nil),                // 8: pilab.agent.v1.VmMigrateResponse
+	(*VmIpListRequest)(nil),                  // 9: pilab.agent.v1.VmIpListRequest
+	(*InterfaceAddress)(nil),                 // 10: pilab.agent.v1.InterfaceAddress
+	(*VmIpListResponse)(nil),                 // 11: pilab.agent.v1.VmIpListResponse
+	(*VmChangeUserPasswordRequest)(nil),      // 12: pilab.agent.v1.VmChangeUserPasswordRequest
+	(*VmChangeUserPasswordResponse)(nil),     // 13: pilab.agent.v1.VmChangeUserPasswordResponse
+	(*VmBackupSystemVolumeRequest)(nil),      // 14: pilab.agent.v1.VmBackupSystemVolumeRequest
+	(*VmBackupSystemVolumeResponse)(nil),     // 15: pilab.agent.v1.VmBackupSystemVolumeResponse
+	(*VmRestoreSystemVolumeRequest)(nil),     // 16: pilab.agent.v1.VmRestoreSystemVolumeRequest
+	(*VmRestoreSystemVolumeResponse)(nil),    // 17: pilab.agent.v1.VmRestoreSystemVolumeResponse
+	(*UpdateConfigRequest)(nil),              // 18: pilab.agent.v1.UpdateConfigRequest
+	(*UpdateConfigResponse)(nil),             // 19: pilab.agent.v1.UpdateConfigResponse
+	(*GetHardwareHealthRequest)(nil),         // 20: pilab.agent.v1.GetHardwareHealthRequest
+	(*GetHardwareHealthResponse)(nil),        // 21: pilab.agent.v1.GetHardwareHealthResponse
+	(*GetSensorDataRequest)(nil),             // 22: pilab.agent.v1.GetSensorDataRequest
+	(*GetSensorDataResponse)(nil),            // 23: pilab.agent.v1.GetSensorDataResponse
+	(*SensorData)(nil),                       // 24: pilab.agent.v1.SensorData
+	(*VmAttachNetworkInterfaceRequest)(nil),  // 25: pilab.agent.v1.VmAttachNetworkInterfaceRequest
+	(*VmAttachNetworkInterfaceResponse)(nil), // 26: pilab.agent.v1.VmAttachNetworkInterfaceResponse
+	(*VmDetachNetworkInterfaceRequest)(nil),  // 27: pilab.agent.v1.VmDetachNetworkInterfaceRequest
+	(*VmDetachNetworkInterfaceResponse)(nil), // 28: pilab.agent.v1.VmDetachNetworkInterfaceResponse
+	nil,                                      // 29: pilab.agent.v1.VmMigrateRequest.LiveMigrationOptionsEntry
+	nil,                                      // 30: pilab.agent.v1.VmAttachNetworkInterfaceRequest.OptionsEntry
+	(*ErrorResponse)(nil),                    // 31: pilab.agent.v1.ErrorResponse
+	(*StreamRequest)(nil),                    // 32: pilab.agent.v1.StreamRequest
+	(*StreamResponse)(nil),                   // 33: pilab.agent.v1.StreamResponse
 }
 var file_pilab_agent_v1_agent_service_proto_depIdxs = []int32{
-	24, // 0: pilab.cloud.agent.v1.VmMigrateRequest.live_migration_options:type_name -> pilab.cloud.agent.v1.VmMigrateRequest.LiveMigrationOptionsEntry
-	26, // 1: pilab.cloud.agent.v1.VmMigrateResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	5,  // 2: pilab.cloud.agent.v1.VmIpListResponse.addresses:type_name -> pilab.cloud.agent.v1.InterfaceAddress
-	26, // 3: pilab.cloud.agent.v1.UpdateConfigResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	19, // 4: pilab.cloud.agent.v1.GetHardwareHealthResponse.sensors:type_name -> pilab.cloud.agent.v1.SensorData
-	26, // 5: pilab.cloud.agent.v1.GetHardwareHealthResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	19, // 6: pilab.cloud.agent.v1.GetSensorDataResponse.sensors:type_name -> pilab.cloud.agent.v1.SensorData
-	26, // 7: pilab.cloud.agent.v1.GetSensorDataResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	25, // 8: pilab.cloud.agent.v1.VmAttachNetworkInterfaceRequest.options:type_name -> pilab.cloud.agent.v1.VmAttachNetworkInterfaceRequest.OptionsEntry
-	26, // 9: pilab.cloud.agent.v1.VmAttachNetworkInterfaceResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	26, // 10: pilab.cloud.agent.v1.VmDetachNetworkInterfaceResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	2,  // 11: pilab.cloud.agent.v1.AgentService.VmMigrate:input_type -> pilab.cloud.agent.v1.VmMigrateRequest
-	4,  // 12: pilab.cloud.agent.v1.AgentService.VmIpList:input_type -> pilab.cloud.agent.v1.VmIpListRequest
-	7,  // 13: pilab.cloud.agent.v1.AgentService.VmChangeUserPassword:input_type -> pilab.cloud.agent.v1.VmChangeUserPasswordRequest
-	9,  // 14: pilab.cloud.agent.v1.AgentService.VmBackupSystemVolume:input_type -> pilab.cloud.agent.v1.VmBackupSystemVolumeRequest
-	11, // 15: pilab.cloud.agent.v1.AgentService.VmRestoreSystemVolume:input_type -> pilab.cloud.agent.v1.VmRestoreSystemVolumeRequest
-	0,  // 16: pilab.cloud.agent.v1.AgentService.VmAttachCloudInit:input_type -> pilab.cloud.agent.v1.VmAttachCloudInitRequest
-	20, // 17: pilab.cloud.agent.v1.AgentService.VmAttachNetworkInterface:input_type -> pilab.cloud.agent.v1.VmAttachNetworkInterfaceRequest
-	22, // 18: pilab.cloud.agent.v1.AgentService.VmDetachNetworkInterface:input_type -> pilab.cloud.agent.v1.VmDetachNetworkInterfaceRequest
-	27, // 19: pilab.cloud.agent.v1.AgentService.Stream:input_type -> pilab.cloud.agent.v1.StreamRequest
-	13, // 20: pilab.cloud.agent.v1.AgentService.UpdateConfig:input_type -> pilab.cloud.agent.v1.UpdateConfigRequest
-	15, // 21: pilab.cloud.agent.v1.AgentService.GetHardwareHealth:input_type -> pilab.cloud.agent.v1.GetHardwareHealthRequest
-	17, // 22: pilab.cloud.agent.v1.AgentService.GetSensorData:input_type -> pilab.cloud.agent.v1.GetSensorDataRequest
-	3,  // 23: pilab.cloud.agent.v1.AgentService.VmMigrate:output_type -> pilab.cloud.agent.v1.VmMigrateResponse
-	6,  // 24: pilab.cloud.agent.v1.AgentService.VmIpList:output_type -> pilab.cloud.agent.v1.VmIpListResponse
-	8,  // 25: pilab.cloud.agent.v1.AgentService.VmChangeUserPassword:output_type -> pilab.cloud.agent.v1.VmChangeUserPasswordResponse
-	10, // 26: pilab.cloud.agent.v1.AgentService.VmBackupSystemVolume:output_type -> pilab.cloud.agent.v1.VmBackupSystemVolumeResponse
-	12, // 27: pilab.cloud.agent.v1.AgentService.VmRestoreSystemVolume:output_type -> pilab.cloud.agent.v1.VmRestoreSystemVolumeResponse
-	1,  // 28: pilab.cloud.agent.v1.AgentService.VmAttachCloudInit:output_type -> pilab.cloud.agent.v1.VmAttachCloudInitResponse
-	21, // 29: pilab.cloud.agent.v1.AgentService.VmAttachNetworkInterface:output_type -> pilab.cloud.agent.v1.VmAttachNetworkInterfaceResponse
-	23, // 30: pilab.cloud.agent.v1.AgentService.VmDetachNetworkInterface:output_type -> pilab.cloud.agent.v1.VmDetachNetworkInterfaceResponse
-	28, // 31: pilab.cloud.agent.v1.AgentService.Stream:output_type -> pilab.cloud.agent.v1.StreamResponse
-	14, // 32: pilab.cloud.agent.v1.AgentService.UpdateConfig:output_type -> pilab.cloud.agent.v1.UpdateConfigResponse
-	16, // 33: pilab.cloud.agent.v1.AgentService.GetHardwareHealth:output_type -> pilab.cloud.agent.v1.GetHardwareHealthResponse
-	18, // 34: pilab.cloud.agent.v1.AgentService.GetSensorData:output_type -> pilab.cloud.agent.v1.GetSensorDataResponse
-	23, // [23:35] is the sub-list for method output_type
-	11, // [11:23] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	0,  // 0: pilab.agent.v1.ControlRequest.command:type_name -> pilab.agent.v1.ControlRequest.ControlCommand
+	31, // 1: pilab.agent.v1.ControlResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	29, // 2: pilab.agent.v1.VmMigrateRequest.live_migration_options:type_name -> pilab.agent.v1.VmMigrateRequest.LiveMigrationOptionsEntry
+	31, // 3: pilab.agent.v1.VmMigrateResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	10, // 4: pilab.agent.v1.VmIpListResponse.addresses:type_name -> pilab.agent.v1.InterfaceAddress
+	31, // 5: pilab.agent.v1.UpdateConfigResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	24, // 6: pilab.agent.v1.GetHardwareHealthResponse.sensors:type_name -> pilab.agent.v1.SensorData
+	31, // 7: pilab.agent.v1.GetHardwareHealthResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	24, // 8: pilab.agent.v1.GetSensorDataResponse.sensors:type_name -> pilab.agent.v1.SensorData
+	31, // 9: pilab.agent.v1.GetSensorDataResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	30, // 10: pilab.agent.v1.VmAttachNetworkInterfaceRequest.options:type_name -> pilab.agent.v1.VmAttachNetworkInterfaceRequest.OptionsEntry
+	31, // 11: pilab.agent.v1.VmAttachNetworkInterfaceResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	31, // 12: pilab.agent.v1.VmDetachNetworkInterfaceResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	7,  // 13: pilab.agent.v1.AgentService.VmMigrate:input_type -> pilab.agent.v1.VmMigrateRequest
+	9,  // 14: pilab.agent.v1.AgentService.VmIpList:input_type -> pilab.agent.v1.VmIpListRequest
+	12, // 15: pilab.agent.v1.AgentService.VmChangeUserPassword:input_type -> pilab.agent.v1.VmChangeUserPasswordRequest
+	14, // 16: pilab.agent.v1.AgentService.VmBackupSystemVolume:input_type -> pilab.agent.v1.VmBackupSystemVolumeRequest
+	16, // 17: pilab.agent.v1.AgentService.VmRestoreSystemVolume:input_type -> pilab.agent.v1.VmRestoreSystemVolumeRequest
+	5,  // 18: pilab.agent.v1.AgentService.VmAttachCloudInit:input_type -> pilab.agent.v1.VmAttachCloudInitRequest
+	25, // 19: pilab.agent.v1.AgentService.VmAttachNetworkInterface:input_type -> pilab.agent.v1.VmAttachNetworkInterfaceRequest
+	27, // 20: pilab.agent.v1.AgentService.VmDetachNetworkInterface:input_type -> pilab.agent.v1.VmDetachNetworkInterfaceRequest
+	32, // 21: pilab.agent.v1.AgentService.Stream:input_type -> pilab.agent.v1.StreamRequest
+	18, // 22: pilab.agent.v1.AgentService.UpdateConfig:input_type -> pilab.agent.v1.UpdateConfigRequest
+	20, // 23: pilab.agent.v1.AgentService.GetHardwareHealth:input_type -> pilab.agent.v1.GetHardwareHealthRequest
+	22, // 24: pilab.agent.v1.AgentService.GetSensorData:input_type -> pilab.agent.v1.GetSensorDataRequest
+	3,  // 25: pilab.agent.v1.AgentService.Control:input_type -> pilab.agent.v1.ControlRequest
+	1,  // 26: pilab.agent.v1.AgentService.Status:input_type -> pilab.agent.v1.StatusRequest
+	8,  // 27: pilab.agent.v1.AgentService.VmMigrate:output_type -> pilab.agent.v1.VmMigrateResponse
+	11, // 28: pilab.agent.v1.AgentService.VmIpList:output_type -> pilab.agent.v1.VmIpListResponse
+	13, // 29: pilab.agent.v1.AgentService.VmChangeUserPassword:output_type -> pilab.agent.v1.VmChangeUserPasswordResponse
+	15, // 30: pilab.agent.v1.AgentService.VmBackupSystemVolume:output_type -> pilab.agent.v1.VmBackupSystemVolumeResponse
+	17, // 31: pilab.agent.v1.AgentService.VmRestoreSystemVolume:output_type -> pilab.agent.v1.VmRestoreSystemVolumeResponse
+	6,  // 32: pilab.agent.v1.AgentService.VmAttachCloudInit:output_type -> pilab.agent.v1.VmAttachCloudInitResponse
+	26, // 33: pilab.agent.v1.AgentService.VmAttachNetworkInterface:output_type -> pilab.agent.v1.VmAttachNetworkInterfaceResponse
+	28, // 34: pilab.agent.v1.AgentService.VmDetachNetworkInterface:output_type -> pilab.agent.v1.VmDetachNetworkInterfaceResponse
+	33, // 35: pilab.agent.v1.AgentService.Stream:output_type -> pilab.agent.v1.StreamResponse
+	19, // 36: pilab.agent.v1.AgentService.UpdateConfig:output_type -> pilab.agent.v1.UpdateConfigResponse
+	21, // 37: pilab.agent.v1.AgentService.GetHardwareHealth:output_type -> pilab.agent.v1.GetHardwareHealthResponse
+	23, // 38: pilab.agent.v1.AgentService.GetSensorData:output_type -> pilab.agent.v1.GetSensorDataResponse
+	4,  // 39: pilab.agent.v1.AgentService.Control:output_type -> pilab.agent.v1.ControlResponse
+	2,  // 40: pilab.agent.v1.AgentService.Status:output_type -> pilab.agent.v1.StatusResponse
+	27, // [27:41] is the sub-list for method output_type
+	13, // [13:27] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_pilab_agent_v1_agent_service_proto_init() }
@@ -1505,25 +1817,27 @@ func file_pilab_agent_v1_agent_service_proto_init() {
 	file_pilab_agent_v1_stream_proto_init()
 	file_pilab_agent_v1_error_proto_init()
 	file_pilab_agent_v1_agent_service_proto_msgTypes[3].OneofWrappers = []any{}
-	file_pilab_agent_v1_agent_service_proto_msgTypes[14].OneofWrappers = []any{}
-	file_pilab_agent_v1_agent_service_proto_msgTypes[16].OneofWrappers = []any{}
-	file_pilab_agent_v1_agent_service_proto_msgTypes[17].OneofWrappers = []any{}
+	file_pilab_agent_v1_agent_service_proto_msgTypes[7].OneofWrappers = []any{}
 	file_pilab_agent_v1_agent_service_proto_msgTypes[18].OneofWrappers = []any{}
 	file_pilab_agent_v1_agent_service_proto_msgTypes[20].OneofWrappers = []any{}
 	file_pilab_agent_v1_agent_service_proto_msgTypes[21].OneofWrappers = []any{}
-	file_pilab_agent_v1_agent_service_proto_msgTypes[23].OneofWrappers = []any{}
+	file_pilab_agent_v1_agent_service_proto_msgTypes[22].OneofWrappers = []any{}
+	file_pilab_agent_v1_agent_service_proto_msgTypes[24].OneofWrappers = []any{}
+	file_pilab_agent_v1_agent_service_proto_msgTypes[25].OneofWrappers = []any{}
+	file_pilab_agent_v1_agent_service_proto_msgTypes[27].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pilab_agent_v1_agent_service_proto_rawDesc), len(file_pilab_agent_v1_agent_service_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   26,
+			NumEnums:      1,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_pilab_agent_v1_agent_service_proto_goTypes,
 		DependencyIndexes: file_pilab_agent_v1_agent_service_proto_depIdxs,
+		EnumInfos:         file_pilab_agent_v1_agent_service_proto_enumTypes,
 		MessageInfos:      file_pilab_agent_v1_agent_service_proto_msgTypes,
 	}.Build()
 	File_pilab_agent_v1_agent_service_proto = out.File

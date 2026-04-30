@@ -21,7 +21,7 @@
 
 syntax = "proto3";
 
-package pilab.cloud.director.v1;
+package pilab.director.v1;
 
 import "pilab/vm_metrics.proto";
 import "pilab/job_status.proto";
@@ -42,9 +42,9 @@ message AgentEventsRequest {
         VmStateEvent vm_state_event = 1;
         HeartbeatEvent heartbeat = 2;
         VmDefinition vm_definition = 3;
-        pilab.cloud.HostStats host_stats = 4;
-        pilab.cloud.VmMetrics vm_metrics = 5;
-        pilab.cloud.JobStatus job_status = 6;
+        pilab.HostStats host_stats = 4;
+        pilab.VmMetrics vm_metrics = 5;
+        pilab.JobStatus job_status = 6;
         VmGuestInfo vm_guest_info = 7;
     }
 }

@@ -43,7 +43,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// SnapshotServiceName is the fully-qualified name of the SnapshotService service.
-	SnapshotServiceName = "pilab.cloud.agent.v1.SnapshotService"
+	SnapshotServiceName = "pilab.agent.v1.SnapshotService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -55,21 +55,21 @@ const (
 // period.
 const (
 	// SnapshotServiceCreateProcedure is the fully-qualified name of the SnapshotService's Create RPC.
-	SnapshotServiceCreateProcedure = "/pilab.cloud.agent.v1.SnapshotService/Create"
+	SnapshotServiceCreateProcedure = "/pilab.agent.v1.SnapshotService/Create"
 	// SnapshotServiceRestoreProcedure is the fully-qualified name of the SnapshotService's Restore RPC.
-	SnapshotServiceRestoreProcedure = "/pilab.cloud.agent.v1.SnapshotService/Restore"
+	SnapshotServiceRestoreProcedure = "/pilab.agent.v1.SnapshotService/Restore"
 	// SnapshotServiceDeleteProcedure is the fully-qualified name of the SnapshotService's Delete RPC.
-	SnapshotServiceDeleteProcedure = "/pilab.cloud.agent.v1.SnapshotService/Delete"
+	SnapshotServiceDeleteProcedure = "/pilab.agent.v1.SnapshotService/Delete"
 	// SnapshotServiceCloneProcedure is the fully-qualified name of the SnapshotService's Clone RPC.
-	SnapshotServiceCloneProcedure = "/pilab.cloud.agent.v1.SnapshotService/Clone"
+	SnapshotServiceCloneProcedure = "/pilab.agent.v1.SnapshotService/Clone"
 	// SnapshotServiceConsolidateProcedure is the fully-qualified name of the SnapshotService's
 	// Consolidate RPC.
-	SnapshotServiceConsolidateProcedure = "/pilab.cloud.agent.v1.SnapshotService/Consolidate"
+	SnapshotServiceConsolidateProcedure = "/pilab.agent.v1.SnapshotService/Consolidate"
 	// SnapshotServiceListProcedure is the fully-qualified name of the SnapshotService's List RPC.
-	SnapshotServiceListProcedure = "/pilab.cloud.agent.v1.SnapshotService/List"
+	SnapshotServiceListProcedure = "/pilab.agent.v1.SnapshotService/List"
 )
 
-// SnapshotServiceClient is a client for the pilab.cloud.agent.v1.SnapshotService service.
+// SnapshotServiceClient is a client for the pilab.agent.v1.SnapshotService service.
 type SnapshotServiceClient interface {
 	// Create creates a snapshot of a virtual machine.
 	Create(context.Context, *connect.Request[v1.SnapshotCreateRequest]) (*connect.ServerStreamForClient[v1.SnapshotCreateResponse], error)
@@ -85,10 +85,10 @@ type SnapshotServiceClient interface {
 	List(context.Context, *connect.Request[v1.SnapshotListRequest]) (*connect.Response[v1.SnapshotListResponse], error)
 }
 
-// NewSnapshotServiceClient constructs a client for the pilab.cloud.agent.v1.SnapshotService
-// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
-// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
-// the connect.WithGRPC() or connect.WithGRPCWeb() options.
+// NewSnapshotServiceClient constructs a client for the pilab.agent.v1.SnapshotService service. By
+// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
+// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -145,37 +145,37 @@ type snapshotServiceClient struct {
 	list        *connect.Client[v1.SnapshotListRequest, v1.SnapshotListResponse]
 }
 
-// Create calls pilab.cloud.agent.v1.SnapshotService.Create.
+// Create calls pilab.agent.v1.SnapshotService.Create.
 func (c *snapshotServiceClient) Create(ctx context.Context, req *connect.Request[v1.SnapshotCreateRequest]) (*connect.ServerStreamForClient[v1.SnapshotCreateResponse], error) {
 	return c.create.CallServerStream(ctx, req)
 }
 
-// Restore calls pilab.cloud.agent.v1.SnapshotService.Restore.
+// Restore calls pilab.agent.v1.SnapshotService.Restore.
 func (c *snapshotServiceClient) Restore(ctx context.Context, req *connect.Request[v1.SnapshotRestoreRequest]) (*connect.Response[v1.SnapshotRestoreResponse], error) {
 	return c.restore.CallUnary(ctx, req)
 }
 
-// Delete calls pilab.cloud.agent.v1.SnapshotService.Delete.
+// Delete calls pilab.agent.v1.SnapshotService.Delete.
 func (c *snapshotServiceClient) Delete(ctx context.Context, req *connect.Request[v1.SnapshotDeleteRequest]) (*connect.Response[v1.SnapshotDeleteResponse], error) {
 	return c.delete.CallUnary(ctx, req)
 }
 
-// Clone calls pilab.cloud.agent.v1.SnapshotService.Clone.
+// Clone calls pilab.agent.v1.SnapshotService.Clone.
 func (c *snapshotServiceClient) Clone(ctx context.Context, req *connect.Request[v1.SnapshotCloneRequest]) (*connect.Response[v1.SnapshotCloneResponse], error) {
 	return c.clone.CallUnary(ctx, req)
 }
 
-// Consolidate calls pilab.cloud.agent.v1.SnapshotService.Consolidate.
+// Consolidate calls pilab.agent.v1.SnapshotService.Consolidate.
 func (c *snapshotServiceClient) Consolidate(ctx context.Context, req *connect.Request[v1.SnapshotConsolidateRequest]) (*connect.Response[v1.SnapshotConsolidateResponse], error) {
 	return c.consolidate.CallUnary(ctx, req)
 }
 
-// List calls pilab.cloud.agent.v1.SnapshotService.List.
+// List calls pilab.agent.v1.SnapshotService.List.
 func (c *snapshotServiceClient) List(ctx context.Context, req *connect.Request[v1.SnapshotListRequest]) (*connect.Response[v1.SnapshotListResponse], error) {
 	return c.list.CallUnary(ctx, req)
 }
 
-// SnapshotServiceHandler is an implementation of the pilab.cloud.agent.v1.SnapshotService service.
+// SnapshotServiceHandler is an implementation of the pilab.agent.v1.SnapshotService service.
 type SnapshotServiceHandler interface {
 	// Create creates a snapshot of a virtual machine.
 	Create(context.Context, *connect.Request[v1.SnapshotCreateRequest], *connect.ServerStream[v1.SnapshotCreateResponse]) error
@@ -234,7 +234,7 @@ func NewSnapshotServiceHandler(svc SnapshotServiceHandler, opts ...connect.Handl
 		connect.WithSchema(snapshotServiceMethods.ByName("List")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.agent.v1.SnapshotService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.agent.v1.SnapshotService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case SnapshotServiceCreateProcedure:
 			snapshotServiceCreateHandler.ServeHTTP(w, r)
@@ -258,25 +258,25 @@ func NewSnapshotServiceHandler(svc SnapshotServiceHandler, opts ...connect.Handl
 type UnimplementedSnapshotServiceHandler struct{}
 
 func (UnimplementedSnapshotServiceHandler) Create(context.Context, *connect.Request[v1.SnapshotCreateRequest], *connect.ServerStream[v1.SnapshotCreateResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.SnapshotService.Create is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.SnapshotService.Create is not implemented"))
 }
 
 func (UnimplementedSnapshotServiceHandler) Restore(context.Context, *connect.Request[v1.SnapshotRestoreRequest]) (*connect.Response[v1.SnapshotRestoreResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.SnapshotService.Restore is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.SnapshotService.Restore is not implemented"))
 }
 
 func (UnimplementedSnapshotServiceHandler) Delete(context.Context, *connect.Request[v1.SnapshotDeleteRequest]) (*connect.Response[v1.SnapshotDeleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.SnapshotService.Delete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.SnapshotService.Delete is not implemented"))
 }
 
 func (UnimplementedSnapshotServiceHandler) Clone(context.Context, *connect.Request[v1.SnapshotCloneRequest]) (*connect.Response[v1.SnapshotCloneResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.SnapshotService.Clone is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.SnapshotService.Clone is not implemented"))
 }
 
 func (UnimplementedSnapshotServiceHandler) Consolidate(context.Context, *connect.Request[v1.SnapshotConsolidateRequest]) (*connect.Response[v1.SnapshotConsolidateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.SnapshotService.Consolidate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.SnapshotService.Consolidate is not implemented"))
 }
 
 func (UnimplementedSnapshotServiceHandler) List(context.Context, *connect.Request[v1.SnapshotListRequest]) (*connect.Response[v1.SnapshotListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.SnapshotService.List is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.SnapshotService.List is not implemented"))
 }

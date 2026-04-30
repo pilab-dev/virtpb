@@ -39,18 +39,18 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ISCSIService_Discover_FullMethodName             = "/pilab.cloud.agent.v2.ISCSIService/Discover"
-	ISCSIService_Login_FullMethodName                = "/pilab.cloud.agent.v2.ISCSIService/Login"
-	ISCSIService_Logout_FullMethodName               = "/pilab.cloud.agent.v2.ISCSIService/Logout"
-	ISCSIService_DeleteNode_FullMethodName           = "/pilab.cloud.agent.v2.ISCSIService/DeleteNode"
-	ISCSIService_Rescan_FullMethodName               = "/pilab.cloud.agent.v2.ISCSIService/Rescan"
-	ISCSIService_Sessions_FullMethodName             = "/pilab.cloud.agent.v2.ISCSIService/Sessions"
-	ISCSIService_Nodes_FullMethodName                = "/pilab.cloud.agent.v2.ISCSIService/Nodes"
-	ISCSIService_GetLuns_FullMethodName              = "/pilab.cloud.agent.v2.ISCSIService/GetLuns"
-	ISCSIService_GetPaths_FullMethodName             = "/pilab.cloud.agent.v2.ISCSIService/GetPaths"
-	ISCSIService_ConfigureCHAP_FullMethodName        = "/pilab.cloud.agent.v2.ISCSIService/ConfigureCHAP"
-	ISCSIService_ConfigureCHAPInbound_FullMethodName = "/pilab.cloud.agent.v2.ISCSIService/ConfigureCHAPInbound"
-	ISCSIService_SetLogin_FullMethodName             = "/pilab.cloud.agent.v2.ISCSIService/SetLogin"
+	ISCSIService_Discover_FullMethodName             = "/pilab.agent.v2.ISCSIService/Discover"
+	ISCSIService_Login_FullMethodName                = "/pilab.agent.v2.ISCSIService/Login"
+	ISCSIService_Logout_FullMethodName               = "/pilab.agent.v2.ISCSIService/Logout"
+	ISCSIService_DeleteNode_FullMethodName           = "/pilab.agent.v2.ISCSIService/DeleteNode"
+	ISCSIService_Rescan_FullMethodName               = "/pilab.agent.v2.ISCSIService/Rescan"
+	ISCSIService_Sessions_FullMethodName             = "/pilab.agent.v2.ISCSIService/Sessions"
+	ISCSIService_Nodes_FullMethodName                = "/pilab.agent.v2.ISCSIService/Nodes"
+	ISCSIService_GetLuns_FullMethodName              = "/pilab.agent.v2.ISCSIService/GetLuns"
+	ISCSIService_GetPaths_FullMethodName             = "/pilab.agent.v2.ISCSIService/GetPaths"
+	ISCSIService_ConfigureCHAP_FullMethodName        = "/pilab.agent.v2.ISCSIService/ConfigureCHAP"
+	ISCSIService_ConfigureCHAPInbound_FullMethodName = "/pilab.agent.v2.ISCSIService/ConfigureCHAPInbound"
+	ISCSIService_SetLogin_FullMethodName             = "/pilab.agent.v2.ISCSIService/SetLogin"
 )
 
 // ISCSIServiceClient is the client API for ISCSIService service.
@@ -502,7 +502,7 @@ func _ISCSIService_SetLogin_Handler(srv interface{}, ctx context.Context, dec fu
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ISCSIService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.agent.v2.ISCSIService",
+	ServiceName: "pilab.agent.v2.ISCSIService",
 	HandlerType: (*ISCSIServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

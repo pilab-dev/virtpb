@@ -9,11 +9,7 @@
 
 syntax = "proto3";
 
-package pilab.cloud.frontend.v1;
-
-import "pilab/vm_metrics.proto";
-import "pilab/job_status.proto";
-import "pilab/host_stats.proto";
+package pilab.frontend.v1;
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1";
 

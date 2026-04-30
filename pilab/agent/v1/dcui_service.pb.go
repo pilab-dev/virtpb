@@ -2455,7 +2455,7 @@ var File_pilab_agent_v1_dcui_service_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"\n" +
-	"!pilab/agent/v1/dcui_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x85\x04\n" +
+	"!pilab/agent/v1/dcui_service.proto\x12\x0epilab.agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x85\x04\n" +
 	"\bHostInfo\x12\x1a\n" +
 	"\bhostname\x18\x01 \x01(\tR\bhostname\x12\x1d\n" +
 	"\n" +
@@ -2475,12 +2475,12 @@ const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"build_date\x18\v \x01(\tR\tbuildDate\x12%\n" +
 	"\x0euptime_seconds\x18\f \x01(\x03R\ruptimeSeconds\x12)\n" +
 	"\x10maintenance_mode\x18\r \x01(\bR\x0fmaintenanceMode\x12,\n" +
-	"\x12console_access_url\x18\x0e \x01(\tR\x10consoleAccessUrl\"\x85\x02\n" +
-	"\x0fSystemResources\x124\n" +
-	"\x03cpu\x18\x01 \x01(\v2\".pilab.cloud.agent.v1.CPUResourcesR\x03cpu\x12=\n" +
-	"\x06memory\x18\x02 \x01(\v2%.pilab.cloud.agent.v1.MemoryResourcesR\x06memory\x129\n" +
-	"\x05disks\x18\x03 \x03(\v2#.pilab.cloud.agent.v1.DiskResourcesR\x05disks\x12B\n" +
-	"\bnetworks\x18\x04 \x03(\v2&.pilab.cloud.agent.v1.NetworkResourcesR\bnetworks\"\xb7\x01\n" +
+	"\x12console_access_url\x18\x0e \x01(\tR\x10consoleAccessUrl\"\xed\x01\n" +
+	"\x0fSystemResources\x12.\n" +
+	"\x03cpu\x18\x01 \x01(\v2\x1c.pilab.agent.v1.CPUResourcesR\x03cpu\x127\n" +
+	"\x06memory\x18\x02 \x01(\v2\x1f.pilab.agent.v1.MemoryResourcesR\x06memory\x123\n" +
+	"\x05disks\x18\x03 \x03(\v2\x1d.pilab.agent.v1.DiskResourcesR\x05disks\x12<\n" +
+	"\bnetworks\x18\x04 \x03(\v2 .pilab.agent.v1.NetworkResourcesR\bnetworks\"\xb7\x01\n" +
 	"\fCPUResources\x12\x14\n" +
 	"\x05cores\x18\x01 \x01(\x05R\x05cores\x12\x18\n" +
 	"\athreads\x18\x02 \x01(\x05R\athreads\x12#\n" +
@@ -2521,9 +2521,9 @@ const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"rx_packets\x18\x05 \x01(\x03R\trxPackets\x12\x1d\n" +
 	"\n" +
 	"tx_packets\x18\x06 \x01(\x03R\ttxPackets\x12\x17\n" +
-	"\alink_up\x18\a \x01(\bR\x06linkUp\"T\n" +
-	"\x11ServiceStatusList\x12?\n" +
-	"\bservices\x18\x01 \x03(\v2#.pilab.cloud.agent.v1.ServiceStatusR\bservices\"\xeb\x01\n" +
+	"\alink_up\x18\a \x01(\bR\x06linkUp\"N\n" +
+	"\x11ServiceStatusList\x129\n" +
+	"\bservices\x18\x01 \x03(\v2\x1d.pilab.agent.v1.ServiceStatusR\bservices\"\xeb\x01\n" +
 	"\rServiceStatus\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
 	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12\x16\n" +
@@ -2531,17 +2531,17 @@ const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"\ahealthy\x18\x04 \x01(\bR\ahealthy\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12=\n" +
 	"\flast_started\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\vlastStarted\x12\x10\n" +
-	"\x03pid\x18\a \x01(\x05R\x03pid\"\x86\x02\n" +
+	"\x03pid\x18\a \x01(\x05R\x03pid\"\xfa\x01\n" +
 	"\rNetworkConfig\x12\x1a\n" +
 	"\bhostname\x18\x01 \x01(\tR\bhostname\x12\x16\n" +
 	"\x06domain\x18\x02 \x01(\tR\x06domain\x12\x1f\n" +
 	"\vprimary_dns\x18\x03 \x01(\tR\n" +
 	"primaryDns\x12#\n" +
-	"\rsecondary_dns\x18\x04 \x01(\tR\fsecondaryDns\x12F\n" +
+	"\rsecondary_dns\x18\x04 \x01(\tR\fsecondaryDns\x12@\n" +
 	"\n" +
-	"interfaces\x18\x05 \x03(\v2&.pilab.cloud.agent.v1.NetworkInterfaceR\n" +
-	"interfaces\x123\n" +
-	"\x06routes\x18\x06 \x03(\v2\x1b.pilab.cloud.agent.v1.RouteR\x06routes\"\x87\x03\n" +
+	"interfaces\x18\x05 \x03(\v2 .pilab.agent.v1.NetworkInterfaceR\n" +
+	"interfaces\x12-\n" +
+	"\x06routes\x18\x06 \x03(\v2\x15.pilab.agent.v1.RouteR\x06routes\"\x81\x03\n" +
 	"\x10NetworkInterface\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
 	"\fdisplay_name\x18\x02 \x01(\tR\vdisplayName\x12\x1f\n" +
@@ -2554,9 +2554,9 @@ const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"\anetmask\x18\a \x01(\tR\anetmask\x12\x18\n" +
 	"\agateway\x18\b \x01(\tR\agateway\x12\x1f\n" +
 	"\vdns_servers\x18\t \x03(\tR\n" +
-	"dnsServers\x129\n" +
+	"dnsServers\x123\n" +
 	"\x05vlans\x18\n" +
-	" \x03(\v2#.pilab.cloud.agent.v1.VlanInterfaceR\x05vlans\x12\x1f\n" +
+	" \x03(\v2\x1d.pilab.agent.v1.VlanInterfaceR\x05vlans\x12\x1f\n" +
 	"\vbridge_name\x18\v \x01(\tR\n" +
 	"bridgeName\x12\x18\n" +
 	"\abridges\x18\f \x03(\tR\abridges\"u\n" +
@@ -2586,10 +2586,10 @@ const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"\x11gateway_reachable\x18\x02 \x01(\bR\x10gatewayReachable\x12-\n" +
 	"\x12internet_reachable\x18\x03 \x01(\bR\x11internetReachable\x122\n" +
 	"\x15ntp_servers_reachable\x18\x04 \x03(\tR\x13ntpServersReachable\x12\x1a\n" +
-	"\bwarnings\x18\x05 \x03(\tR\bwarnings\"\x8b\x02\n" +
-	"\rStorageConfig\x12C\n" +
+	"\bwarnings\x18\x05 \x03(\tR\bwarnings\"\x85\x02\n" +
+	"\rStorageConfig\x12=\n" +
 	"\n" +
-	"datastores\x18\x01 \x03(\v2#.pilab.cloud.agent.v1.DatastoreInfoR\n" +
+	"datastores\x18\x01 \x03(\v2\x1d.pilab.agent.v1.DatastoreInfoR\n" +
 	"datastores\x12\x1f\n" +
 	"\vlocal_disks\x18\x02 \x03(\tR\n" +
 	"localDisks\x12.\n" +
@@ -2612,15 +2612,15 @@ const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"used_bytes\x18\t \x01(\x03R\tusedBytes\x12'\n" +
 	"\x0favailable_bytes\x18\n" +
 	" \x01(\x03R\x0eavailableBytes\x12#\n" +
-	"\rusage_percent\x18\v \x01(\x05R\fusagePercent\"\x9c\x02\n" +
+	"\rusage_percent\x18\v \x01(\x05R\fusagePercent\"\x96\x02\n" +
 	"\x0fMountNFSRequest\x12\x16\n" +
 	"\x06server\x18\x01 \x01(\tR\x06server\x12\x1f\n" +
 	"\vexport_path\x18\x02 \x01(\tR\n" +
 	"exportPath\x12\x1f\n" +
 	"\vmount_point\x18\x03 \x01(\tR\n" +
 	"mountPoint\x12%\n" +
-	"\x0edatastore_name\x18\x04 \x01(\tR\rdatastoreName\x12L\n" +
-	"\aoptions\x18\x05 \x03(\v22.pilab.cloud.agent.v1.MountNFSRequest.OptionsEntryR\aoptions\x1a:\n" +
+	"\x0edatastore_name\x18\x04 \x01(\tR\rdatastoreName\x12F\n" +
+	"\aoptions\x18\x05 \x03(\v2,.pilab.agent.v1.MountNFSRequest.OptionsEntryR\aoptions\x1a:\n" +
 	"\fOptionsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"L\n" +
@@ -2639,9 +2639,9 @@ const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"\x14can_exit_maintenance\x18\x05 \x01(\bR\x12canExitMaintenance\"P\n" +
 	"\x15RestartServiceRequest\x12!\n" +
 	"\fservice_name\x18\x01 \x01(\tR\vserviceName\x12\x14\n" +
-	"\x05force\x18\x02 \x01(\bR\x05force\"L\n" +
-	"\x10FirewallRuleList\x128\n" +
-	"\x05rules\x18\x01 \x03(\v2\".pilab.cloud.agent.v1.FirewallRuleR\x05rules\"\xca\x01\n" +
+	"\x05force\x18\x02 \x01(\bR\x05force\"F\n" +
+	"\x10FirewallRuleList\x122\n" +
+	"\x05rules\x18\x01 \x03(\v2\x1c.pilab.agent.v1.FirewallRuleR\x05rules\"\xca\x01\n" +
 	"\fFirewallRule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1c\n" +
@@ -2665,9 +2665,9 @@ const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"\rsearch_domain\x18\x02 \x01(\tR\fsearchDomain\"\\\n" +
 	"\x13SetDNSConfigRequest\x12 \n" +
 	"\vnameservers\x18\x01 \x03(\tR\vnameservers\x12#\n" +
-	"\rsearch_domain\x18\x02 \x01(\tR\fsearchDomain\"\x97\x01\n" +
-	"\tNTPConfig\x129\n" +
-	"\aservers\x18\x01 \x03(\v2\x1f.pilab.cloud.agent.v1.NtpServerR\aservers\x12\x1f\n" +
+	"\rsearch_domain\x18\x02 \x01(\tR\fsearchDomain\"\x91\x01\n" +
+	"\tNTPConfig\x123\n" +
+	"\aservers\x18\x01 \x03(\v2\x19.pilab.agent.v1.NtpServerR\aservers\x12\x1f\n" +
 	"\vntp_enabled\x18\x02 \x01(\bR\n" +
 	"ntpEnabled\x12.\n" +
 	"\x13ntp_restrict_policy\x18\x03 \x01(\tR\x11ntpRestrictPolicy\"\x84\x01\n" +
@@ -2687,30 +2687,30 @@ const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"\x0elast_heartbeat\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\rlastHeartbeat\"g\n" +
 	"\x13AdoptToCloudRequest\x12)\n" +
 	"\x10director_address\x18\x01 \x01(\tR\x0fdirectorAddress\x12%\n" +
-	"\x0edirector_token\x18\x02 \x01(\tR\rdirectorToken2\xb3\x0e\n" +
-	"\vDCUIService\x12E\n" +
-	"\vGetHostInfo\x12\x16.google.protobuf.Empty\x1a\x1e.pilab.cloud.agent.v1.HostInfo\x12S\n" +
-	"\x12GetSystemResources\x12\x16.google.protobuf.Empty\x1a%.pilab.cloud.agent.v1.SystemResources\x12S\n" +
-	"\x10GetServiceStatus\x12\x16.google.protobuf.Empty\x1a'.pilab.cloud.agent.v1.ServiceStatusList\x12O\n" +
-	"\x10GetNetworkConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cloud.agent.v1.NetworkConfig\x12k\n" +
-	"\x19ConfigureNetworkInterface\x126.pilab.cloud.agent.v1.ConfigureNetworkInterfaceRequest\x1a\x16.google.protobuf.Empty\x12N\n" +
-	"\vTestNetwork\x12\x16.google.protobuf.Empty\x1a'.pilab.cloud.agent.v1.NetworkTestResult\x12O\n" +
-	"\x10GetStorageConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cloud.agent.v1.StorageConfig\x12I\n" +
-	"\bMountNFS\x12%.pilab.cloud.agent.v1.MountNFSRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
+	"\x0edirector_token\x18\x02 \x01(\tR\rdirectorToken2\xb5\r\n" +
+	"\vDCUIService\x12?\n" +
+	"\vGetHostInfo\x12\x16.google.protobuf.Empty\x1a\x18.pilab.agent.v1.HostInfo\x12M\n" +
+	"\x12GetSystemResources\x12\x16.google.protobuf.Empty\x1a\x1f.pilab.agent.v1.SystemResources\x12M\n" +
+	"\x10GetServiceStatus\x12\x16.google.protobuf.Empty\x1a!.pilab.agent.v1.ServiceStatusList\x12I\n" +
+	"\x10GetNetworkConfig\x12\x16.google.protobuf.Empty\x1a\x1d.pilab.agent.v1.NetworkConfig\x12e\n" +
+	"\x19ConfigureNetworkInterface\x120.pilab.agent.v1.ConfigureNetworkInterfaceRequest\x1a\x16.google.protobuf.Empty\x12H\n" +
+	"\vTestNetwork\x12\x16.google.protobuf.Empty\x1a!.pilab.agent.v1.NetworkTestResult\x12I\n" +
+	"\x10GetStorageConfig\x12\x16.google.protobuf.Empty\x1a\x1d.pilab.agent.v1.StorageConfig\x12C\n" +
+	"\bMountNFS\x12\x1f.pilab.agent.v1.MountNFSRequest\x1a\x16.google.protobuf.Empty\x12G\n" +
 	"\n" +
-	"UnmountNFS\x12'.pilab.cloud.agent.v1.UnmountNFSRequest\x1a\x16.google.protobuf.Empty\x12]\n" +
-	"\x12SetMaintenanceMode\x12/.pilab.cloud.agent.v1.SetMaintenanceModeRequest\x1a\x16.google.protobuf.Empty\x12Y\n" +
-	"\x12GetMaintenanceMode\x12\x16.google.protobuf.Empty\x1a+.pilab.cloud.agent.v1.MaintenanceModeStatus\x12U\n" +
-	"\x0eRestartService\x12+.pilab.cloud.agent.v1.RestartServiceRequest\x1a\x16.google.protobuf.Empty\x12R\n" +
-	"\x10GetFirewallRules\x12\x16.google.protobuf.Empty\x1a&.pilab.cloud.agent.v1.FirewallRuleList\x12W\n" +
-	"\x0fAddFirewallRule\x12,.pilab.cloud.agent.v1.AddFirewallRuleRequest\x1a\x16.google.protobuf.Empty\x12]\n" +
-	"\x12RemoveFirewallRule\x12/.pilab.cloud.agent.v1.RemoveFirewallRuleRequest\x1a\x16.google.protobuf.Empty\x12G\n" +
-	"\fGetDNSConfig\x12\x16.google.protobuf.Empty\x1a\x1f.pilab.cloud.agent.v1.DNSConfig\x12Q\n" +
-	"\fSetDNSConfig\x12).pilab.cloud.agent.v1.SetDNSConfigRequest\x1a\x16.google.protobuf.Empty\x12G\n" +
-	"\fGetNTPConfig\x12\x16.google.protobuf.Empty\x1a\x1f.pilab.cloud.agent.v1.NTPConfig\x12Q\n" +
-	"\fSetNTPConfig\x12).pilab.cloud.agent.v1.SetNTPConfigRequest\x1a\x16.google.protobuf.Empty\x12K\n" +
-	"\x0eGetCloudStatus\x12\x16.google.protobuf.Empty\x1a!.pilab.cloud.agent.v1.CloudStatus\x12Q\n" +
-	"\fAdoptToCloud\x12).pilab.cloud.agent.v1.AdoptToCloudRequest\x1a\x16.google.protobuf.Empty\x12E\n" +
+	"UnmountNFS\x12!.pilab.agent.v1.UnmountNFSRequest\x1a\x16.google.protobuf.Empty\x12W\n" +
+	"\x12SetMaintenanceMode\x12).pilab.agent.v1.SetMaintenanceModeRequest\x1a\x16.google.protobuf.Empty\x12S\n" +
+	"\x12GetMaintenanceMode\x12\x16.google.protobuf.Empty\x1a%.pilab.agent.v1.MaintenanceModeStatus\x12O\n" +
+	"\x0eRestartService\x12%.pilab.agent.v1.RestartServiceRequest\x1a\x16.google.protobuf.Empty\x12L\n" +
+	"\x10GetFirewallRules\x12\x16.google.protobuf.Empty\x1a .pilab.agent.v1.FirewallRuleList\x12Q\n" +
+	"\x0fAddFirewallRule\x12&.pilab.agent.v1.AddFirewallRuleRequest\x1a\x16.google.protobuf.Empty\x12W\n" +
+	"\x12RemoveFirewallRule\x12).pilab.agent.v1.RemoveFirewallRuleRequest\x1a\x16.google.protobuf.Empty\x12A\n" +
+	"\fGetDNSConfig\x12\x16.google.protobuf.Empty\x1a\x19.pilab.agent.v1.DNSConfig\x12K\n" +
+	"\fSetDNSConfig\x12#.pilab.agent.v1.SetDNSConfigRequest\x1a\x16.google.protobuf.Empty\x12A\n" +
+	"\fGetNTPConfig\x12\x16.google.protobuf.Empty\x1a\x19.pilab.agent.v1.NTPConfig\x12K\n" +
+	"\fSetNTPConfig\x12#.pilab.agent.v1.SetNTPConfigRequest\x1a\x16.google.protobuf.Empty\x12E\n" +
+	"\x0eGetCloudStatus\x12\x16.google.protobuf.Empty\x1a\x1b.pilab.agent.v1.CloudStatus\x12K\n" +
+	"\fAdoptToCloud\x12#.pilab.agent.v1.AdoptToCloudRequest\x1a\x16.google.protobuf.Empty\x12E\n" +
 	"\x13DisconnectFromCloud\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.EmptyB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
@@ -2727,101 +2727,101 @@ func file_pilab_agent_v1_dcui_service_proto_rawDescGZIP() []byte {
 
 var file_pilab_agent_v1_dcui_service_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
 var file_pilab_agent_v1_dcui_service_proto_goTypes = []any{
-	(*HostInfo)(nil),                         // 0: pilab.cloud.agent.v1.HostInfo
-	(*SystemResources)(nil),                  // 1: pilab.cloud.agent.v1.SystemResources
-	(*CPUResources)(nil),                     // 2: pilab.cloud.agent.v1.CPUResources
-	(*MemoryResources)(nil),                  // 3: pilab.cloud.agent.v1.MemoryResources
-	(*DiskResources)(nil),                    // 4: pilab.cloud.agent.v1.DiskResources
-	(*NetworkResources)(nil),                 // 5: pilab.cloud.agent.v1.NetworkResources
-	(*ServiceStatusList)(nil),                // 6: pilab.cloud.agent.v1.ServiceStatusList
-	(*ServiceStatus)(nil),                    // 7: pilab.cloud.agent.v1.ServiceStatus
-	(*NetworkConfig)(nil),                    // 8: pilab.cloud.agent.v1.NetworkConfig
-	(*NetworkInterface)(nil),                 // 9: pilab.cloud.agent.v1.NetworkInterface
-	(*VlanInterface)(nil),                    // 10: pilab.cloud.agent.v1.VlanInterface
-	(*Route)(nil),                            // 11: pilab.cloud.agent.v1.Route
-	(*ConfigureNetworkInterfaceRequest)(nil), // 12: pilab.cloud.agent.v1.ConfigureNetworkInterfaceRequest
-	(*NetworkTestResult)(nil),                // 13: pilab.cloud.agent.v1.NetworkTestResult
-	(*StorageConfig)(nil),                    // 14: pilab.cloud.agent.v1.StorageConfig
-	(*DatastoreInfo)(nil),                    // 15: pilab.cloud.agent.v1.DatastoreInfo
-	(*MountNFSRequest)(nil),                  // 16: pilab.cloud.agent.v1.MountNFSRequest
-	(*UnmountNFSRequest)(nil),                // 17: pilab.cloud.agent.v1.UnmountNFSRequest
-	(*SetMaintenanceModeRequest)(nil),        // 18: pilab.cloud.agent.v1.SetMaintenanceModeRequest
-	(*MaintenanceModeStatus)(nil),            // 19: pilab.cloud.agent.v1.MaintenanceModeStatus
-	(*RestartServiceRequest)(nil),            // 20: pilab.cloud.agent.v1.RestartServiceRequest
-	(*FirewallRuleList)(nil),                 // 21: pilab.cloud.agent.v1.FirewallRuleList
-	(*FirewallRule)(nil),                     // 22: pilab.cloud.agent.v1.FirewallRule
-	(*AddFirewallRuleRequest)(nil),           // 23: pilab.cloud.agent.v1.AddFirewallRuleRequest
-	(*RemoveFirewallRuleRequest)(nil),        // 24: pilab.cloud.agent.v1.RemoveFirewallRuleRequest
-	(*DNSConfig)(nil),                        // 25: pilab.cloud.agent.v1.DNSConfig
-	(*SetDNSConfigRequest)(nil),              // 26: pilab.cloud.agent.v1.SetDNSConfigRequest
-	(*NTPConfig)(nil),                        // 27: pilab.cloud.agent.v1.NTPConfig
-	(*NtpServer)(nil),                        // 28: pilab.cloud.agent.v1.NtpServer
-	(*SetNTPConfigRequest)(nil),              // 29: pilab.cloud.agent.v1.SetNTPConfigRequest
-	(*CloudStatus)(nil),                      // 30: pilab.cloud.agent.v1.CloudStatus
-	(*AdoptToCloudRequest)(nil),              // 31: pilab.cloud.agent.v1.AdoptToCloudRequest
-	nil,                                      // 32: pilab.cloud.agent.v1.MountNFSRequest.OptionsEntry
+	(*HostInfo)(nil),                         // 0: pilab.agent.v1.HostInfo
+	(*SystemResources)(nil),                  // 1: pilab.agent.v1.SystemResources
+	(*CPUResources)(nil),                     // 2: pilab.agent.v1.CPUResources
+	(*MemoryResources)(nil),                  // 3: pilab.agent.v1.MemoryResources
+	(*DiskResources)(nil),                    // 4: pilab.agent.v1.DiskResources
+	(*NetworkResources)(nil),                 // 5: pilab.agent.v1.NetworkResources
+	(*ServiceStatusList)(nil),                // 6: pilab.agent.v1.ServiceStatusList
+	(*ServiceStatus)(nil),                    // 7: pilab.agent.v1.ServiceStatus
+	(*NetworkConfig)(nil),                    // 8: pilab.agent.v1.NetworkConfig
+	(*NetworkInterface)(nil),                 // 9: pilab.agent.v1.NetworkInterface
+	(*VlanInterface)(nil),                    // 10: pilab.agent.v1.VlanInterface
+	(*Route)(nil),                            // 11: pilab.agent.v1.Route
+	(*ConfigureNetworkInterfaceRequest)(nil), // 12: pilab.agent.v1.ConfigureNetworkInterfaceRequest
+	(*NetworkTestResult)(nil),                // 13: pilab.agent.v1.NetworkTestResult
+	(*StorageConfig)(nil),                    // 14: pilab.agent.v1.StorageConfig
+	(*DatastoreInfo)(nil),                    // 15: pilab.agent.v1.DatastoreInfo
+	(*MountNFSRequest)(nil),                  // 16: pilab.agent.v1.MountNFSRequest
+	(*UnmountNFSRequest)(nil),                // 17: pilab.agent.v1.UnmountNFSRequest
+	(*SetMaintenanceModeRequest)(nil),        // 18: pilab.agent.v1.SetMaintenanceModeRequest
+	(*MaintenanceModeStatus)(nil),            // 19: pilab.agent.v1.MaintenanceModeStatus
+	(*RestartServiceRequest)(nil),            // 20: pilab.agent.v1.RestartServiceRequest
+	(*FirewallRuleList)(nil),                 // 21: pilab.agent.v1.FirewallRuleList
+	(*FirewallRule)(nil),                     // 22: pilab.agent.v1.FirewallRule
+	(*AddFirewallRuleRequest)(nil),           // 23: pilab.agent.v1.AddFirewallRuleRequest
+	(*RemoveFirewallRuleRequest)(nil),        // 24: pilab.agent.v1.RemoveFirewallRuleRequest
+	(*DNSConfig)(nil),                        // 25: pilab.agent.v1.DNSConfig
+	(*SetDNSConfigRequest)(nil),              // 26: pilab.agent.v1.SetDNSConfigRequest
+	(*NTPConfig)(nil),                        // 27: pilab.agent.v1.NTPConfig
+	(*NtpServer)(nil),                        // 28: pilab.agent.v1.NtpServer
+	(*SetNTPConfigRequest)(nil),              // 29: pilab.agent.v1.SetNTPConfigRequest
+	(*CloudStatus)(nil),                      // 30: pilab.agent.v1.CloudStatus
+	(*AdoptToCloudRequest)(nil),              // 31: pilab.agent.v1.AdoptToCloudRequest
+	nil,                                      // 32: pilab.agent.v1.MountNFSRequest.OptionsEntry
 	(*timestamppb.Timestamp)(nil),            // 33: google.protobuf.Timestamp
 	(*emptypb.Empty)(nil),                    // 34: google.protobuf.Empty
 }
 var file_pilab_agent_v1_dcui_service_proto_depIdxs = []int32{
-	2,  // 0: pilab.cloud.agent.v1.SystemResources.cpu:type_name -> pilab.cloud.agent.v1.CPUResources
-	3,  // 1: pilab.cloud.agent.v1.SystemResources.memory:type_name -> pilab.cloud.agent.v1.MemoryResources
-	4,  // 2: pilab.cloud.agent.v1.SystemResources.disks:type_name -> pilab.cloud.agent.v1.DiskResources
-	5,  // 3: pilab.cloud.agent.v1.SystemResources.networks:type_name -> pilab.cloud.agent.v1.NetworkResources
-	7,  // 4: pilab.cloud.agent.v1.ServiceStatusList.services:type_name -> pilab.cloud.agent.v1.ServiceStatus
-	33, // 5: pilab.cloud.agent.v1.ServiceStatus.last_started:type_name -> google.protobuf.Timestamp
-	9,  // 6: pilab.cloud.agent.v1.NetworkConfig.interfaces:type_name -> pilab.cloud.agent.v1.NetworkInterface
-	11, // 7: pilab.cloud.agent.v1.NetworkConfig.routes:type_name -> pilab.cloud.agent.v1.Route
-	10, // 8: pilab.cloud.agent.v1.NetworkInterface.vlans:type_name -> pilab.cloud.agent.v1.VlanInterface
-	15, // 9: pilab.cloud.agent.v1.StorageConfig.datastores:type_name -> pilab.cloud.agent.v1.DatastoreInfo
-	32, // 10: pilab.cloud.agent.v1.MountNFSRequest.options:type_name -> pilab.cloud.agent.v1.MountNFSRequest.OptionsEntry
-	22, // 11: pilab.cloud.agent.v1.FirewallRuleList.rules:type_name -> pilab.cloud.agent.v1.FirewallRule
-	28, // 12: pilab.cloud.agent.v1.NTPConfig.servers:type_name -> pilab.cloud.agent.v1.NtpServer
-	33, // 13: pilab.cloud.agent.v1.CloudStatus.last_heartbeat:type_name -> google.protobuf.Timestamp
-	34, // 14: pilab.cloud.agent.v1.DCUIService.GetHostInfo:input_type -> google.protobuf.Empty
-	34, // 15: pilab.cloud.agent.v1.DCUIService.GetSystemResources:input_type -> google.protobuf.Empty
-	34, // 16: pilab.cloud.agent.v1.DCUIService.GetServiceStatus:input_type -> google.protobuf.Empty
-	34, // 17: pilab.cloud.agent.v1.DCUIService.GetNetworkConfig:input_type -> google.protobuf.Empty
-	12, // 18: pilab.cloud.agent.v1.DCUIService.ConfigureNetworkInterface:input_type -> pilab.cloud.agent.v1.ConfigureNetworkInterfaceRequest
-	34, // 19: pilab.cloud.agent.v1.DCUIService.TestNetwork:input_type -> google.protobuf.Empty
-	34, // 20: pilab.cloud.agent.v1.DCUIService.GetStorageConfig:input_type -> google.protobuf.Empty
-	16, // 21: pilab.cloud.agent.v1.DCUIService.MountNFS:input_type -> pilab.cloud.agent.v1.MountNFSRequest
-	17, // 22: pilab.cloud.agent.v1.DCUIService.UnmountNFS:input_type -> pilab.cloud.agent.v1.UnmountNFSRequest
-	18, // 23: pilab.cloud.agent.v1.DCUIService.SetMaintenanceMode:input_type -> pilab.cloud.agent.v1.SetMaintenanceModeRequest
-	34, // 24: pilab.cloud.agent.v1.DCUIService.GetMaintenanceMode:input_type -> google.protobuf.Empty
-	20, // 25: pilab.cloud.agent.v1.DCUIService.RestartService:input_type -> pilab.cloud.agent.v1.RestartServiceRequest
-	34, // 26: pilab.cloud.agent.v1.DCUIService.GetFirewallRules:input_type -> google.protobuf.Empty
-	23, // 27: pilab.cloud.agent.v1.DCUIService.AddFirewallRule:input_type -> pilab.cloud.agent.v1.AddFirewallRuleRequest
-	24, // 28: pilab.cloud.agent.v1.DCUIService.RemoveFirewallRule:input_type -> pilab.cloud.agent.v1.RemoveFirewallRuleRequest
-	34, // 29: pilab.cloud.agent.v1.DCUIService.GetDNSConfig:input_type -> google.protobuf.Empty
-	26, // 30: pilab.cloud.agent.v1.DCUIService.SetDNSConfig:input_type -> pilab.cloud.agent.v1.SetDNSConfigRequest
-	34, // 31: pilab.cloud.agent.v1.DCUIService.GetNTPConfig:input_type -> google.protobuf.Empty
-	29, // 32: pilab.cloud.agent.v1.DCUIService.SetNTPConfig:input_type -> pilab.cloud.agent.v1.SetNTPConfigRequest
-	34, // 33: pilab.cloud.agent.v1.DCUIService.GetCloudStatus:input_type -> google.protobuf.Empty
-	31, // 34: pilab.cloud.agent.v1.DCUIService.AdoptToCloud:input_type -> pilab.cloud.agent.v1.AdoptToCloudRequest
-	34, // 35: pilab.cloud.agent.v1.DCUIService.DisconnectFromCloud:input_type -> google.protobuf.Empty
-	0,  // 36: pilab.cloud.agent.v1.DCUIService.GetHostInfo:output_type -> pilab.cloud.agent.v1.HostInfo
-	1,  // 37: pilab.cloud.agent.v1.DCUIService.GetSystemResources:output_type -> pilab.cloud.agent.v1.SystemResources
-	6,  // 38: pilab.cloud.agent.v1.DCUIService.GetServiceStatus:output_type -> pilab.cloud.agent.v1.ServiceStatusList
-	8,  // 39: pilab.cloud.agent.v1.DCUIService.GetNetworkConfig:output_type -> pilab.cloud.agent.v1.NetworkConfig
-	34, // 40: pilab.cloud.agent.v1.DCUIService.ConfigureNetworkInterface:output_type -> google.protobuf.Empty
-	13, // 41: pilab.cloud.agent.v1.DCUIService.TestNetwork:output_type -> pilab.cloud.agent.v1.NetworkTestResult
-	14, // 42: pilab.cloud.agent.v1.DCUIService.GetStorageConfig:output_type -> pilab.cloud.agent.v1.StorageConfig
-	34, // 43: pilab.cloud.agent.v1.DCUIService.MountNFS:output_type -> google.protobuf.Empty
-	34, // 44: pilab.cloud.agent.v1.DCUIService.UnmountNFS:output_type -> google.protobuf.Empty
-	34, // 45: pilab.cloud.agent.v1.DCUIService.SetMaintenanceMode:output_type -> google.protobuf.Empty
-	19, // 46: pilab.cloud.agent.v1.DCUIService.GetMaintenanceMode:output_type -> pilab.cloud.agent.v1.MaintenanceModeStatus
-	34, // 47: pilab.cloud.agent.v1.DCUIService.RestartService:output_type -> google.protobuf.Empty
-	21, // 48: pilab.cloud.agent.v1.DCUIService.GetFirewallRules:output_type -> pilab.cloud.agent.v1.FirewallRuleList
-	34, // 49: pilab.cloud.agent.v1.DCUIService.AddFirewallRule:output_type -> google.protobuf.Empty
-	34, // 50: pilab.cloud.agent.v1.DCUIService.RemoveFirewallRule:output_type -> google.protobuf.Empty
-	25, // 51: pilab.cloud.agent.v1.DCUIService.GetDNSConfig:output_type -> pilab.cloud.agent.v1.DNSConfig
-	34, // 52: pilab.cloud.agent.v1.DCUIService.SetDNSConfig:output_type -> google.protobuf.Empty
-	27, // 53: pilab.cloud.agent.v1.DCUIService.GetNTPConfig:output_type -> pilab.cloud.agent.v1.NTPConfig
-	34, // 54: pilab.cloud.agent.v1.DCUIService.SetNTPConfig:output_type -> google.protobuf.Empty
-	30, // 55: pilab.cloud.agent.v1.DCUIService.GetCloudStatus:output_type -> pilab.cloud.agent.v1.CloudStatus
-	34, // 56: pilab.cloud.agent.v1.DCUIService.AdoptToCloud:output_type -> google.protobuf.Empty
-	34, // 57: pilab.cloud.agent.v1.DCUIService.DisconnectFromCloud:output_type -> google.protobuf.Empty
+	2,  // 0: pilab.agent.v1.SystemResources.cpu:type_name -> pilab.agent.v1.CPUResources
+	3,  // 1: pilab.agent.v1.SystemResources.memory:type_name -> pilab.agent.v1.MemoryResources
+	4,  // 2: pilab.agent.v1.SystemResources.disks:type_name -> pilab.agent.v1.DiskResources
+	5,  // 3: pilab.agent.v1.SystemResources.networks:type_name -> pilab.agent.v1.NetworkResources
+	7,  // 4: pilab.agent.v1.ServiceStatusList.services:type_name -> pilab.agent.v1.ServiceStatus
+	33, // 5: pilab.agent.v1.ServiceStatus.last_started:type_name -> google.protobuf.Timestamp
+	9,  // 6: pilab.agent.v1.NetworkConfig.interfaces:type_name -> pilab.agent.v1.NetworkInterface
+	11, // 7: pilab.agent.v1.NetworkConfig.routes:type_name -> pilab.agent.v1.Route
+	10, // 8: pilab.agent.v1.NetworkInterface.vlans:type_name -> pilab.agent.v1.VlanInterface
+	15, // 9: pilab.agent.v1.StorageConfig.datastores:type_name -> pilab.agent.v1.DatastoreInfo
+	32, // 10: pilab.agent.v1.MountNFSRequest.options:type_name -> pilab.agent.v1.MountNFSRequest.OptionsEntry
+	22, // 11: pilab.agent.v1.FirewallRuleList.rules:type_name -> pilab.agent.v1.FirewallRule
+	28, // 12: pilab.agent.v1.NTPConfig.servers:type_name -> pilab.agent.v1.NtpServer
+	33, // 13: pilab.agent.v1.CloudStatus.last_heartbeat:type_name -> google.protobuf.Timestamp
+	34, // 14: pilab.agent.v1.DCUIService.GetHostInfo:input_type -> google.protobuf.Empty
+	34, // 15: pilab.agent.v1.DCUIService.GetSystemResources:input_type -> google.protobuf.Empty
+	34, // 16: pilab.agent.v1.DCUIService.GetServiceStatus:input_type -> google.protobuf.Empty
+	34, // 17: pilab.agent.v1.DCUIService.GetNetworkConfig:input_type -> google.protobuf.Empty
+	12, // 18: pilab.agent.v1.DCUIService.ConfigureNetworkInterface:input_type -> pilab.agent.v1.ConfigureNetworkInterfaceRequest
+	34, // 19: pilab.agent.v1.DCUIService.TestNetwork:input_type -> google.protobuf.Empty
+	34, // 20: pilab.agent.v1.DCUIService.GetStorageConfig:input_type -> google.protobuf.Empty
+	16, // 21: pilab.agent.v1.DCUIService.MountNFS:input_type -> pilab.agent.v1.MountNFSRequest
+	17, // 22: pilab.agent.v1.DCUIService.UnmountNFS:input_type -> pilab.agent.v1.UnmountNFSRequest
+	18, // 23: pilab.agent.v1.DCUIService.SetMaintenanceMode:input_type -> pilab.agent.v1.SetMaintenanceModeRequest
+	34, // 24: pilab.agent.v1.DCUIService.GetMaintenanceMode:input_type -> google.protobuf.Empty
+	20, // 25: pilab.agent.v1.DCUIService.RestartService:input_type -> pilab.agent.v1.RestartServiceRequest
+	34, // 26: pilab.agent.v1.DCUIService.GetFirewallRules:input_type -> google.protobuf.Empty
+	23, // 27: pilab.agent.v1.DCUIService.AddFirewallRule:input_type -> pilab.agent.v1.AddFirewallRuleRequest
+	24, // 28: pilab.agent.v1.DCUIService.RemoveFirewallRule:input_type -> pilab.agent.v1.RemoveFirewallRuleRequest
+	34, // 29: pilab.agent.v1.DCUIService.GetDNSConfig:input_type -> google.protobuf.Empty
+	26, // 30: pilab.agent.v1.DCUIService.SetDNSConfig:input_type -> pilab.agent.v1.SetDNSConfigRequest
+	34, // 31: pilab.agent.v1.DCUIService.GetNTPConfig:input_type -> google.protobuf.Empty
+	29, // 32: pilab.agent.v1.DCUIService.SetNTPConfig:input_type -> pilab.agent.v1.SetNTPConfigRequest
+	34, // 33: pilab.agent.v1.DCUIService.GetCloudStatus:input_type -> google.protobuf.Empty
+	31, // 34: pilab.agent.v1.DCUIService.AdoptToCloud:input_type -> pilab.agent.v1.AdoptToCloudRequest
+	34, // 35: pilab.agent.v1.DCUIService.DisconnectFromCloud:input_type -> google.protobuf.Empty
+	0,  // 36: pilab.agent.v1.DCUIService.GetHostInfo:output_type -> pilab.agent.v1.HostInfo
+	1,  // 37: pilab.agent.v1.DCUIService.GetSystemResources:output_type -> pilab.agent.v1.SystemResources
+	6,  // 38: pilab.agent.v1.DCUIService.GetServiceStatus:output_type -> pilab.agent.v1.ServiceStatusList
+	8,  // 39: pilab.agent.v1.DCUIService.GetNetworkConfig:output_type -> pilab.agent.v1.NetworkConfig
+	34, // 40: pilab.agent.v1.DCUIService.ConfigureNetworkInterface:output_type -> google.protobuf.Empty
+	13, // 41: pilab.agent.v1.DCUIService.TestNetwork:output_type -> pilab.agent.v1.NetworkTestResult
+	14, // 42: pilab.agent.v1.DCUIService.GetStorageConfig:output_type -> pilab.agent.v1.StorageConfig
+	34, // 43: pilab.agent.v1.DCUIService.MountNFS:output_type -> google.protobuf.Empty
+	34, // 44: pilab.agent.v1.DCUIService.UnmountNFS:output_type -> google.protobuf.Empty
+	34, // 45: pilab.agent.v1.DCUIService.SetMaintenanceMode:output_type -> google.protobuf.Empty
+	19, // 46: pilab.agent.v1.DCUIService.GetMaintenanceMode:output_type -> pilab.agent.v1.MaintenanceModeStatus
+	34, // 47: pilab.agent.v1.DCUIService.RestartService:output_type -> google.protobuf.Empty
+	21, // 48: pilab.agent.v1.DCUIService.GetFirewallRules:output_type -> pilab.agent.v1.FirewallRuleList
+	34, // 49: pilab.agent.v1.DCUIService.AddFirewallRule:output_type -> google.protobuf.Empty
+	34, // 50: pilab.agent.v1.DCUIService.RemoveFirewallRule:output_type -> google.protobuf.Empty
+	25, // 51: pilab.agent.v1.DCUIService.GetDNSConfig:output_type -> pilab.agent.v1.DNSConfig
+	34, // 52: pilab.agent.v1.DCUIService.SetDNSConfig:output_type -> google.protobuf.Empty
+	27, // 53: pilab.agent.v1.DCUIService.GetNTPConfig:output_type -> pilab.agent.v1.NTPConfig
+	34, // 54: pilab.agent.v1.DCUIService.SetNTPConfig:output_type -> google.protobuf.Empty
+	30, // 55: pilab.agent.v1.DCUIService.GetCloudStatus:output_type -> pilab.agent.v1.CloudStatus
+	34, // 56: pilab.agent.v1.DCUIService.AdoptToCloud:output_type -> google.protobuf.Empty
+	34, // 57: pilab.agent.v1.DCUIService.DisconnectFromCloud:output_type -> google.protobuf.Empty
 	36, // [36:58] is the sub-list for method output_type
 	14, // [14:36] is the sub-list for method input_type
 	14, // [14:14] is the sub-list for extension type_name

@@ -29,7 +29,7 @@
 
 syntax = "proto3";
 
-package pilab.cloud.agent.v1;
+package pilab.agent.v1;
 
 import "pilab/agent/v1/stream.proto";
 import "pilab/agent/v1/error.proto";
@@ -69,7 +69,49 @@ service AgentService {
   // Hardware monitoring
   rpc GetHardwareHealth(GetHardwareHealthRequest) returns (GetHardwareHealthResponse);
   rpc GetSensorData(GetSensorDataRequest) returns (GetSensorDataResponse);
+
+  // Control plane
+  rpc Control(ControlRequest) returns (ControlResponse);
+  // Status plane
+  rpc Status(StatusRequest) returns (StatusResponse);
 }
+
+
+
+message StatusRequest {
+  string vm = 1;
+}
+
+message StatusResponse {
+  string status = 1;
+}
+
+
+message ControlRequest {
+  enum ControlCommand {
+    CONTROL_COMMAND_START = 0;
+    CONTROL_COMMAND_STOP = 1;
+    CONTROL_COMMAND_RESTART = 2;
+    CONTROL_COMMAND_PAUSE = 3;
+    CONTROL_COMMAND_RESUME = 4;
+    CONTROL_COMMAND_MIGRATE = 5;
+    CONTROL_COMMAND_KILL = 6;
+    CONTROL_COMMAND_SUSPEND = 7;
+    CONTROL_COMMAND_REBOOT = 8;
+    CONTROL_COMMAND_SHUTDOWN = 9;
+    CONTROL_COMMAND_RESET = 10;
+  }
+
+  ControlCommand command = 1;
+  string vm = 2;
+}
+
+message ControlResponse {
+  bool success = 1;
+  string message = 2;
+  optional ErrorResponse error = 3;
+}
+
 
 // ----------------------------------------------------------------------------
 // Agent Service (Core VM Management)

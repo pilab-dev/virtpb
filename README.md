@@ -31,11 +31,10 @@ The generated code provides strongly-typed interfaces and structures for working
 
 ## 📦 Dependencies
 
-- 🐹 Go 1.23.0 or later
+- 🐹 Go 1.25.0 or later
 - 📜 Protocol Buffers
 - 🔌 gRPC
 - 🔗 Connect
-- 📊 OpenTelemetry
 
 ## 🔧 Development
 

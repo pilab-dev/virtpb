@@ -31,7 +31,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// TasksServiceName is the fully-qualified name of the TasksService service.
-	TasksServiceName = "pilab.cloud.frontend.v1.TasksService"
+	TasksServiceName = "pilab.frontend.v1.TasksService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -43,17 +43,17 @@ const (
 // period.
 const (
 	// TasksServiceListTasksProcedure is the fully-qualified name of the TasksService's ListTasks RPC.
-	TasksServiceListTasksProcedure = "/pilab.cloud.frontend.v1.TasksService/ListTasks"
+	TasksServiceListTasksProcedure = "/pilab.frontend.v1.TasksService/ListTasks"
 )
 
-// TasksServiceClient is a client for the pilab.cloud.frontend.v1.TasksService service.
+// TasksServiceClient is a client for the pilab.frontend.v1.TasksService service.
 type TasksServiceClient interface {
 	ListTasks(context.Context, *connect.Request[v1.ListTasksRequest]) (*connect.Response[v1.ListTasksResponse], error)
 }
 
-// NewTasksServiceClient constructs a client for the pilab.cloud.frontend.v1.TasksService service.
-// By default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped
-// responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// NewTasksServiceClient constructs a client for the pilab.frontend.v1.TasksService service. By
+// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
+// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
@@ -76,12 +76,12 @@ type tasksServiceClient struct {
 	listTasks *connect.Client[v1.ListTasksRequest, v1.ListTasksResponse]
 }
 
-// ListTasks calls pilab.cloud.frontend.v1.TasksService.ListTasks.
+// ListTasks calls pilab.frontend.v1.TasksService.ListTasks.
 func (c *tasksServiceClient) ListTasks(ctx context.Context, req *connect.Request[v1.ListTasksRequest]) (*connect.Response[v1.ListTasksResponse], error) {
 	return c.listTasks.CallUnary(ctx, req)
 }
 
-// TasksServiceHandler is an implementation of the pilab.cloud.frontend.v1.TasksService service.
+// TasksServiceHandler is an implementation of the pilab.frontend.v1.TasksService service.
 type TasksServiceHandler interface {
 	ListTasks(context.Context, *connect.Request[v1.ListTasksRequest]) (*connect.Response[v1.ListTasksResponse], error)
 }
@@ -99,7 +99,7 @@ func NewTasksServiceHandler(svc TasksServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(tasksServiceMethods.ByName("ListTasks")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.frontend.v1.TasksService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.frontend.v1.TasksService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case TasksServiceListTasksProcedure:
 			tasksServiceListTasksHandler.ServeHTTP(w, r)
@@ -113,5 +113,5 @@ func NewTasksServiceHandler(svc TasksServiceHandler, opts ...connect.HandlerOpti
 type UnimplementedTasksServiceHandler struct{}
 
 func (UnimplementedTasksServiceHandler) ListTasks(context.Context, *connect.Request[v1.ListTasksRequest]) (*connect.Response[v1.ListTasksResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.TasksService.ListTasks is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.TasksService.ListTasks is not implemented"))
 }

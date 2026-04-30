@@ -3645,31 +3645,31 @@ var File_pilab_agent_v1_networkservice_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_networkservice_proto_rawDesc = "" +
 	"\n" +
-	"#pilab/agent/v1/networkservice.proto\x12\x14pilab.cloud.agent.v1\x1a\"pilab/agent/v1/agent_service.proto\x1a\x1apilab/agent/v1/error.proto\"\x1f\n" +
+	"#pilab/agent/v1/networkservice.proto\x12\x0epilab.agent.v1\x1a\x1apilab/agent/v1/error.proto\"\x1f\n" +
 	"\tOvsBridge\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\",\n" +
 	"\x16OvsBridgeCreateRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xc6\x01\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xba\x01\n" +
 	"\x17OvsBridgeCreateResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12<\n" +
-	"\x06bridge\x18\x03 \x01(\v2\x1f.pilab.cloud.agent.v1.OvsBridgeH\x01R\x06bridge\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x126\n" +
+	"\x06bridge\x18\x03 \x01(\v2\x19.pilab.agent.v1.OvsBridgeH\x01R\x06bridge\x88\x01\x01B\b\n" +
 	"\x06_errorB\t\n" +
 	"\a_bridge\",\n" +
 	"\x16OvsBridgeDeleteRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"}\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"w\n" +
 	"\x17OvsBridgeDeleteResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"\x16\n" +
-	"\x14OvsBridgeListRequest\"R\n" +
-	"\x15OvsBridgeListResponse\x129\n" +
-	"\abridges\x18\x01 \x03(\v2\x1f.pilab.cloud.agent.v1.OvsBridgeR\abridges\")\n" +
+	"\x14OvsBridgeListRequest\"L\n" +
+	"\x15OvsBridgeListResponse\x123\n" +
+	"\abridges\x18\x01 \x03(\v2\x19.pilab.agent.v1.OvsBridgeR\abridges\")\n" +
 	"\x13OvsBridgeGetRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xa9\x01\n" +
-	"\x14OvsBridgeGetResponse\x12<\n" +
-	"\x06bridge\x18\x01 \x01(\v2\x1f.pilab.cloud.agent.v1.OvsBridgeH\x00R\x06bridge\x88\x01\x01\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\t\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x9d\x01\n" +
+	"\x14OvsBridgeGetResponse\x126\n" +
+	"\x06bridge\x18\x01 \x01(\v2\x19.pilab.agent.v1.OvsBridgeH\x00R\x06bridge\x88\x01\x01\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\t\n" +
 	"\a_bridgeB\b\n" +
 	"\x06_error\"\x9a\x01\n" +
 	"\aOvsPort\x12\x12\n" +
@@ -3685,39 +3685,39 @@ const file_pilab_agent_v1_networkservice_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12*\n" +
 	"\x0einterface_name\x18\x03 \x01(\tH\x00R\rinterfaceName\x88\x01\x01\x12\x1b\n" +
 	"\tvlan_tags\x18\x04 \x03(\tR\bvlanTagsB\x11\n" +
-	"\x0f_interface_name\"\xbc\x01\n" +
+	"\x0f_interface_name\"\xb0\x01\n" +
 	"\x15OvsPortCreateResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x126\n" +
-	"\x04port\x18\x03 \x01(\v2\x1d.pilab.cloud.agent.v1.OvsPortH\x01R\x04port\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x120\n" +
+	"\x04port\x18\x03 \x01(\v2\x17.pilab.agent.v1.OvsPortH\x01R\x04port\x88\x01\x01B\b\n" +
 	"\x06_errorB\a\n" +
 	"\x05_port\"*\n" +
 	"\x14OvsPortDeleteRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"{\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"u\n" +
 	"\x15OvsPortDeleteResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"J\n" +
 	"\x12OvsPortListRequest\x12$\n" +
 	"\vbridge_name\x18\x01 \x01(\tH\x00R\n" +
 	"bridgeName\x88\x01\x01B\x0e\n" +
-	"\f_bridge_name\"J\n" +
-	"\x13OvsPortListResponse\x123\n" +
-	"\x05ports\x18\x01 \x03(\v2\x1d.pilab.cloud.agent.v1.OvsPortR\x05ports\"'\n" +
+	"\f_bridge_name\"D\n" +
+	"\x13OvsPortListResponse\x12-\n" +
+	"\x05ports\x18\x01 \x03(\v2\x17.pilab.agent.v1.OvsPortR\x05ports\"'\n" +
 	"\x11OvsPortGetRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\x9f\x01\n" +
-	"\x12OvsPortGetResponse\x126\n" +
-	"\x04port\x18\x01 \x01(\v2\x1d.pilab.cloud.agent.v1.OvsPortH\x00R\x04port\x88\x01\x01\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\a\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x93\x01\n" +
+	"\x12OvsPortGetResponse\x120\n" +
+	"\x04port\x18\x01 \x01(\v2\x17.pilab.agent.v1.OvsPortH\x00R\x04port\x88\x01\x01\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\a\n" +
 	"\x05_portB\b\n" +
 	"\x06_error\"G\n" +
 	"\x14OvsPortUpdateRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
-	"\tvlan_tags\x18\x02 \x03(\tR\bvlanTags\"\xbc\x01\n" +
+	"\tvlan_tags\x18\x02 \x03(\tR\bvlanTags\"\xb0\x01\n" +
 	"\x15OvsPortUpdateResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x126\n" +
-	"\x04port\x18\x03 \x01(\v2\x1d.pilab.cloud.agent.v1.OvsPortH\x01R\x04port\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x120\n" +
+	"\x04port\x18\x03 \x01(\v2\x17.pilab.agent.v1.OvsPortH\x01R\x04port\x88\x01\x01B\b\n" +
 	"\x06_errorB\a\n" +
 	"\x05_port\"\x94\x02\n" +
 	"\n" +
@@ -3742,30 +3742,30 @@ const file_pilab_agent_v1_networkservice_proto_rawDesc = "" +
 	"\bpriority\x18\x06 \x01(\x05R\bpriority\x12 \n" +
 	"\tpeak_rate\x18\a \x01(\x04H\x00R\bpeakRate\x88\x01\x01B\f\n" +
 	"\n" +
-	"_peak_rate\"\xc2\x01\n" +
+	"_peak_rate\"\xb6\x01\n" +
 	"\x18OvsQosRuleCreateResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x129\n" +
-	"\x04rule\x18\x03 \x01(\v2 .pilab.cloud.agent.v1.OvsQosRuleH\x01R\x04rule\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x123\n" +
+	"\x04rule\x18\x03 \x01(\v2\x1a.pilab.agent.v1.OvsQosRuleH\x01R\x04rule\x88\x01\x01B\b\n" +
 	"\x06_errorB\a\n" +
 	"\x05_rule\")\n" +
 	"\x17OvsQosRuleDeleteRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"~\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"x\n" +
 	"\x18OvsQosRuleDeleteResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"G\n" +
 	"\x15OvsQosRuleListRequest\x12 \n" +
 	"\tport_name\x18\x01 \x01(\tH\x00R\bportName\x88\x01\x01B\f\n" +
 	"\n" +
-	"_port_name\"P\n" +
-	"\x16OvsQosRuleListResponse\x126\n" +
-	"\x05rules\x18\x01 \x03(\v2 .pilab.cloud.agent.v1.OvsQosRuleR\x05rules\"&\n" +
+	"_port_name\"J\n" +
+	"\x16OvsQosRuleListResponse\x120\n" +
+	"\x05rules\x18\x01 \x03(\v2\x1a.pilab.agent.v1.OvsQosRuleR\x05rules\"&\n" +
 	"\x14OvsQosRuleGetRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\xa5\x01\n" +
-	"\x15OvsQosRuleGetResponse\x129\n" +
-	"\x04rule\x18\x01 \x01(\v2 .pilab.cloud.agent.v1.OvsQosRuleH\x00R\x04rule\x88\x01\x01\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\a\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"\x99\x01\n" +
+	"\x15OvsQosRuleGetResponse\x123\n" +
+	"\x04rule\x18\x01 \x01(\v2\x1a.pilab.agent.v1.OvsQosRuleH\x00R\x04rule\x88\x01\x01\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\a\n" +
 	"\x05_ruleB\b\n" +
 	"\x06_error\"\x9e\x03\n" +
 	"\aNetwork\x12\x12\n" +
@@ -3814,48 +3814,48 @@ const file_pilab_agent_v1_networkservice_proto_rawDesc = "" +
 	"\n" +
 	"\b_netmaskB\r\n" +
 	"\v_dhcp_startB\v\n" +
-	"\t_dhcp_end\"\xc5\x01\n" +
+	"\t_dhcp_end\"\xb9\x01\n" +
 	"\x15NetworkCreateResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12<\n" +
-	"\anetwork\x18\x03 \x01(\v2\x1d.pilab.cloud.agent.v1.NetworkH\x01R\anetwork\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x126\n" +
+	"\anetwork\x18\x03 \x01(\v2\x17.pilab.agent.v1.NetworkH\x01R\anetwork\x88\x01\x01B\b\n" +
 	"\x06_errorB\n" +
 	"\n" +
 	"\b_network\"@\n" +
 	"\x14NetworkDeleteRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05force\x18\x02 \x01(\bR\x05force\"{\n" +
+	"\x05force\x18\x02 \x01(\bR\x05force\"u\n" +
 	"\x15NetworkDeleteResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"\x8c\x01\n" +
 	"\x12NetworkListRequest\x12$\n" +
 	"\vactive_only\x18\x01 \x01(\bH\x00R\n" +
 	"activeOnly\x88\x01\x01\x12,\n" +
 	"\x0fpersistent_only\x18\x02 \x01(\bH\x01R\x0epersistentOnly\x88\x01\x01B\x0e\n" +
 	"\f_active_onlyB\x12\n" +
-	"\x10_persistent_only\"P\n" +
-	"\x13NetworkListResponse\x129\n" +
-	"\bnetworks\x18\x01 \x03(\v2\x1d.pilab.cloud.agent.v1.NetworkR\bnetworks\"'\n" +
+	"\x10_persistent_only\"J\n" +
+	"\x13NetworkListResponse\x123\n" +
+	"\bnetworks\x18\x01 \x03(\v2\x17.pilab.agent.v1.NetworkR\bnetworks\"'\n" +
 	"\x11NetworkGetRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xa8\x01\n" +
-	"\x12NetworkGetResponse\x12<\n" +
-	"\anetwork\x18\x01 \x01(\v2\x1d.pilab.cloud.agent.v1.NetworkH\x00R\anetwork\x88\x01\x01\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x9c\x01\n" +
+	"\x12NetworkGetResponse\x126\n" +
+	"\anetwork\x18\x01 \x01(\v2\x17.pilab.agent.v1.NetworkH\x00R\anetwork\x88\x01\x01\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\n" +
 	"\n" +
 	"\b_networkB\b\n" +
 	"\x06_error\")\n" +
 	"\x13NetworkStartRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"z\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"t\n" +
 	"\x14NetworkStartResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"(\n" +
 	"\x12NetworkStopRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"y\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"s\n" +
 	"\x13NetworkStopResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"\xf4\x01\n" +
 	"\x14NetworkUpdateRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12&\n" +
@@ -3868,33 +3868,33 @@ const file_pilab_agent_v1_networkservice_proto_rawDesc = "" +
 	"\n" +
 	"_autostartB\r\n" +
 	"\v_dhcp_startB\v\n" +
-	"\t_dhcp_end\"\xc5\x01\n" +
+	"\t_dhcp_end\"\xb9\x01\n" +
 	"\x15NetworkUpdateResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12<\n" +
-	"\anetwork\x18\x03 \x01(\v2\x1d.pilab.cloud.agent.v1.NetworkH\x01R\anetwork\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x126\n" +
+	"\anetwork\x18\x03 \x01(\v2\x17.pilab.agent.v1.NetworkH\x01R\anetwork\x88\x01\x01B\b\n" +
 	"\x06_errorB\n" +
 	"\n" +
 	"\b_network\"K\n" +
 	"\x12OvsFlowPushRequest\x12\x1f\n" +
 	"\vbridge_name\x18\x01 \x01(\tR\n" +
 	"bridgeName\x12\x14\n" +
-	"\x05flows\x18\x02 \x03(\tR\x05flows\"\xa2\x01\n" +
+	"\x05flows\x18\x02 \x03(\tR\x05flows\"\x9c\x01\n" +
 	"\x13OvsFlowPushResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12'\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12'\n" +
 	"\x0fflows_installed\x18\x03 \x01(\x05R\x0eflowsInstalledB\b\n" +
 	"\x06_error\"K\n" +
 	"\x12OvsFlowSyncRequest\x12\x1f\n" +
 	"\vbridge_name\x18\x01 \x01(\tR\n" +
 	"bridgeName\x12\x14\n" +
-	"\x05flows\x18\x02 \x03(\tR\x05flows\"\x9a\x01\n" +
+	"\x05flows\x18\x02 \x03(\tR\x05flows\"\x94\x01\n" +
 	"\x13OvsFlowSyncResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12\x1f\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12\x1f\n" +
 	"\vflows_count\x18\x03 \x01(\x05R\n" +
 	"flowsCountB\b\n" +
-	"\x06_error\"\xd7\x05\n" +
+	"\x06_error\"\xd1\x05\n" +
 	"\x12SyncNetworkRequest\x12\x1d\n" +
 	"\n" +
 	"network_id\x18\x01 \x01(\tR\tnetworkId\x12\x12\n" +
@@ -3921,17 +3921,17 @@ const file_pilab_agent_v1_networkservice_proto_rawDesc = "" +
 	"\n" +
 	"cluster_id\x18\x11 \x01(\tR\tclusterId\x12.\n" +
 	"\x13security_profile_id\x18\x12 \x01(\tR\x11securityProfileId\x12$\n" +
-	"\x0eqos_profile_id\x18\x13 \x01(\tR\fqosProfileId\x12R\n" +
-	"\bmetadata\x18\x14 \x03(\v26.pilab.cloud.agent.v1.SyncNetworkRequest.MetadataEntryR\bmetadata\x1a;\n" +
+	"\x0eqos_profile_id\x18\x13 \x01(\tR\fqosProfileId\x12L\n" +
+	"\bmetadata\x18\x14 \x03(\v20.pilab.agent.v1.SyncNetworkRequest.MetadataEntryR\bmetadata\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x98\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x92\x01\n" +
 	"\x13SyncNetworkResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12\x1d\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12\x1d\n" +
 	"\n" +
 	"network_id\x18\x03 \x01(\tR\tnetworkIdB\b\n" +
-	"\x06_error\"\xb7\x04\n" +
+	"\x06_error\"\xb1\x04\n" +
 	"\x0fSyncPortRequest\x12\x17\n" +
 	"\aport_id\x18\x01 \x01(\tR\x06portId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -3950,35 +3950,35 @@ const file_pilab_agent_v1_networkservice_proto_rawDesc = "" +
 	" \x01(\tR\x04type\x12$\n" +
 	"\x0eadmin_state_up\x18\v \x01(\bR\fadminStateUp\x12.\n" +
 	"\x13security_profile_id\x18\f \x01(\tR\x11securityProfileId\x12$\n" +
-	"\x0eqos_profile_id\x18\r \x01(\tR\fqosProfileId\x12O\n" +
-	"\bmetadata\x18\x0e \x03(\v23.pilab.cloud.agent.v1.SyncPortRequest.MetadataEntryR\bmetadata\x1a;\n" +
+	"\x0eqos_profile_id\x18\r \x01(\tR\fqosProfileId\x12I\n" +
+	"\bmetadata\x18\x0e \x03(\v2-.pilab.agent.v1.SyncPortRequest.MetadataEntryR\bmetadata\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x8f\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x89\x01\n" +
 	"\x10SyncPortResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12\x17\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12\x17\n" +
 	"\aport_id\x18\x03 \x01(\tR\x06portIdB\b\n" +
 	"\x06_error\"K\n" +
 	"\x14DeleteNetworkRequest\x12\x1d\n" +
 	"\n" +
 	"network_id\x18\x01 \x01(\tR\tnetworkId\x12\x14\n" +
-	"\x05force\x18\x02 \x01(\bR\x05force\"{\n" +
+	"\x05force\x18\x02 \x01(\bR\x05force\"u\n" +
 	"\x15DeleteNetworkResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"B\n" +
 	"\x11DeletePortRequest\x12\x17\n" +
 	"\aport_id\x18\x01 \x01(\tR\x06portId\x12\x14\n" +
-	"\x05force\x18\x02 \x01(\bR\x05force\"x\n" +
+	"\x05force\x18\x02 \x01(\bR\x05force\"r\n" +
 	"\x12DeletePortResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
-	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x128\n" +
+	"\x05error\x18\x02 \x01(\v2\x1d.pilab.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
 	"\x06_error\"\x18\n" +
-	"\x16GetNetworkStateRequest\"\x92\x01\n" +
-	"\x17GetNetworkStateResponse\x12?\n" +
-	"\bnetworks\x18\x01 \x03(\v2#.pilab.cloud.agent.v1.SyncedNetworkR\bnetworks\x126\n" +
-	"\x05ports\x18\x02 \x03(\v2 .pilab.cloud.agent.v1.SyncedPortR\x05ports\"y\n" +
+	"\x16GetNetworkStateRequest\"\x86\x01\n" +
+	"\x17GetNetworkStateResponse\x129\n" +
+	"\bnetworks\x18\x01 \x03(\v2\x1d.pilab.agent.v1.SyncedNetworkR\bnetworks\x120\n" +
+	"\x05ports\x18\x02 \x03(\v2\x1a.pilab.agent.v1.SyncedPortR\x05ports\"y\n" +
 	"\rSyncedNetwork\x12\x1d\n" +
 	"\n" +
 	"network_id\x18\x01 \x01(\tR\tnetworkId\x12\x12\n" +
@@ -3992,38 +3992,38 @@ const file_pilab_agent_v1_networkservice_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
 	"network_id\x18\x03 \x01(\tR\tnetworkId\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status2\x91\x16\n" +
-	"\x0eNetworkService\x12n\n" +
-	"\x0fOvsBridgeCreate\x12,.pilab.cloud.agent.v1.OvsBridgeCreateRequest\x1a-.pilab.cloud.agent.v1.OvsBridgeCreateResponse\x12n\n" +
-	"\x0fOvsBridgeDelete\x12,.pilab.cloud.agent.v1.OvsBridgeDeleteRequest\x1a-.pilab.cloud.agent.v1.OvsBridgeDeleteResponse\x12h\n" +
-	"\rOvsBridgeList\x12*.pilab.cloud.agent.v1.OvsBridgeListRequest\x1a+.pilab.cloud.agent.v1.OvsBridgeListResponse\x12e\n" +
-	"\fOvsBridgeGet\x12).pilab.cloud.agent.v1.OvsBridgeGetRequest\x1a*.pilab.cloud.agent.v1.OvsBridgeGetResponse\x12h\n" +
-	"\rOvsPortCreate\x12*.pilab.cloud.agent.v1.OvsPortCreateRequest\x1a+.pilab.cloud.agent.v1.OvsPortCreateResponse\x12h\n" +
-	"\rOvsPortDelete\x12*.pilab.cloud.agent.v1.OvsPortDeleteRequest\x1a+.pilab.cloud.agent.v1.OvsPortDeleteResponse\x12b\n" +
-	"\vOvsPortList\x12(.pilab.cloud.agent.v1.OvsPortListRequest\x1a).pilab.cloud.agent.v1.OvsPortListResponse\x12_\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status2\xcd\x13\n" +
+	"\x0eNetworkService\x12b\n" +
+	"\x0fOvsBridgeCreate\x12&.pilab.agent.v1.OvsBridgeCreateRequest\x1a'.pilab.agent.v1.OvsBridgeCreateResponse\x12b\n" +
+	"\x0fOvsBridgeDelete\x12&.pilab.agent.v1.OvsBridgeDeleteRequest\x1a'.pilab.agent.v1.OvsBridgeDeleteResponse\x12\\\n" +
+	"\rOvsBridgeList\x12$.pilab.agent.v1.OvsBridgeListRequest\x1a%.pilab.agent.v1.OvsBridgeListResponse\x12Y\n" +
+	"\fOvsBridgeGet\x12#.pilab.agent.v1.OvsBridgeGetRequest\x1a$.pilab.agent.v1.OvsBridgeGetResponse\x12\\\n" +
+	"\rOvsPortCreate\x12$.pilab.agent.v1.OvsPortCreateRequest\x1a%.pilab.agent.v1.OvsPortCreateResponse\x12\\\n" +
+	"\rOvsPortDelete\x12$.pilab.agent.v1.OvsPortDeleteRequest\x1a%.pilab.agent.v1.OvsPortDeleteResponse\x12V\n" +
+	"\vOvsPortList\x12\".pilab.agent.v1.OvsPortListRequest\x1a#.pilab.agent.v1.OvsPortListResponse\x12S\n" +
 	"\n" +
-	"OvsPortGet\x12'.pilab.cloud.agent.v1.OvsPortGetRequest\x1a(.pilab.cloud.agent.v1.OvsPortGetResponse\x12h\n" +
-	"\rOvsPortUpdate\x12*.pilab.cloud.agent.v1.OvsPortUpdateRequest\x1a+.pilab.cloud.agent.v1.OvsPortUpdateResponse\x12q\n" +
-	"\x10OvsQosRuleCreate\x12-.pilab.cloud.agent.v1.OvsQosRuleCreateRequest\x1a..pilab.cloud.agent.v1.OvsQosRuleCreateResponse\x12q\n" +
-	"\x10OvsQosRuleDelete\x12-.pilab.cloud.agent.v1.OvsQosRuleDeleteRequest\x1a..pilab.cloud.agent.v1.OvsQosRuleDeleteResponse\x12k\n" +
-	"\x0eOvsQosRuleList\x12+.pilab.cloud.agent.v1.OvsQosRuleListRequest\x1a,.pilab.cloud.agent.v1.OvsQosRuleListResponse\x12h\n" +
-	"\rOvsQosRuleGet\x12*.pilab.cloud.agent.v1.OvsQosRuleGetRequest\x1a+.pilab.cloud.agent.v1.OvsQosRuleGetResponse\x12h\n" +
-	"\rNetworkCreate\x12*.pilab.cloud.agent.v1.NetworkCreateRequest\x1a+.pilab.cloud.agent.v1.NetworkCreateResponse\x12h\n" +
-	"\rNetworkDelete\x12*.pilab.cloud.agent.v1.NetworkDeleteRequest\x1a+.pilab.cloud.agent.v1.NetworkDeleteResponse\x12b\n" +
-	"\vNetworkList\x12(.pilab.cloud.agent.v1.NetworkListRequest\x1a).pilab.cloud.agent.v1.NetworkListResponse\x12_\n" +
+	"OvsPortGet\x12!.pilab.agent.v1.OvsPortGetRequest\x1a\".pilab.agent.v1.OvsPortGetResponse\x12\\\n" +
+	"\rOvsPortUpdate\x12$.pilab.agent.v1.OvsPortUpdateRequest\x1a%.pilab.agent.v1.OvsPortUpdateResponse\x12e\n" +
+	"\x10OvsQosRuleCreate\x12'.pilab.agent.v1.OvsQosRuleCreateRequest\x1a(.pilab.agent.v1.OvsQosRuleCreateResponse\x12e\n" +
+	"\x10OvsQosRuleDelete\x12'.pilab.agent.v1.OvsQosRuleDeleteRequest\x1a(.pilab.agent.v1.OvsQosRuleDeleteResponse\x12_\n" +
+	"\x0eOvsQosRuleList\x12%.pilab.agent.v1.OvsQosRuleListRequest\x1a&.pilab.agent.v1.OvsQosRuleListResponse\x12\\\n" +
+	"\rOvsQosRuleGet\x12$.pilab.agent.v1.OvsQosRuleGetRequest\x1a%.pilab.agent.v1.OvsQosRuleGetResponse\x12\\\n" +
+	"\rNetworkCreate\x12$.pilab.agent.v1.NetworkCreateRequest\x1a%.pilab.agent.v1.NetworkCreateResponse\x12\\\n" +
+	"\rNetworkDelete\x12$.pilab.agent.v1.NetworkDeleteRequest\x1a%.pilab.agent.v1.NetworkDeleteResponse\x12V\n" +
+	"\vNetworkList\x12\".pilab.agent.v1.NetworkListRequest\x1a#.pilab.agent.v1.NetworkListResponse\x12S\n" +
 	"\n" +
-	"NetworkGet\x12'.pilab.cloud.agent.v1.NetworkGetRequest\x1a(.pilab.cloud.agent.v1.NetworkGetResponse\x12e\n" +
-	"\fNetworkStart\x12).pilab.cloud.agent.v1.NetworkStartRequest\x1a*.pilab.cloud.agent.v1.NetworkStartResponse\x12b\n" +
-	"\vNetworkStop\x12(.pilab.cloud.agent.v1.NetworkStopRequest\x1a).pilab.cloud.agent.v1.NetworkStopResponse\x12h\n" +
-	"\rNetworkUpdate\x12*.pilab.cloud.agent.v1.NetworkUpdateRequest\x1a+.pilab.cloud.agent.v1.NetworkUpdateResponse\x12b\n" +
-	"\vOvsFlowPush\x12(.pilab.cloud.agent.v1.OvsFlowPushRequest\x1a).pilab.cloud.agent.v1.OvsFlowPushResponse\x12b\n" +
-	"\vOvsFlowSync\x12(.pilab.cloud.agent.v1.OvsFlowSyncRequest\x1a).pilab.cloud.agent.v1.OvsFlowSyncResponse\x12b\n" +
-	"\vSyncNetwork\x12(.pilab.cloud.agent.v1.SyncNetworkRequest\x1a).pilab.cloud.agent.v1.SyncNetworkResponse\x12Y\n" +
-	"\bSyncPort\x12%.pilab.cloud.agent.v1.SyncPortRequest\x1a&.pilab.cloud.agent.v1.SyncPortResponse\x12h\n" +
-	"\rDeleteNetwork\x12*.pilab.cloud.agent.v1.DeleteNetworkRequest\x1a+.pilab.cloud.agent.v1.DeleteNetworkResponse\x12_\n" +
+	"NetworkGet\x12!.pilab.agent.v1.NetworkGetRequest\x1a\".pilab.agent.v1.NetworkGetResponse\x12Y\n" +
+	"\fNetworkStart\x12#.pilab.agent.v1.NetworkStartRequest\x1a$.pilab.agent.v1.NetworkStartResponse\x12V\n" +
+	"\vNetworkStop\x12\".pilab.agent.v1.NetworkStopRequest\x1a#.pilab.agent.v1.NetworkStopResponse\x12\\\n" +
+	"\rNetworkUpdate\x12$.pilab.agent.v1.NetworkUpdateRequest\x1a%.pilab.agent.v1.NetworkUpdateResponse\x12V\n" +
+	"\vOvsFlowPush\x12\".pilab.agent.v1.OvsFlowPushRequest\x1a#.pilab.agent.v1.OvsFlowPushResponse\x12V\n" +
+	"\vOvsFlowSync\x12\".pilab.agent.v1.OvsFlowSyncRequest\x1a#.pilab.agent.v1.OvsFlowSyncResponse\x12V\n" +
+	"\vSyncNetwork\x12\".pilab.agent.v1.SyncNetworkRequest\x1a#.pilab.agent.v1.SyncNetworkResponse\x12M\n" +
+	"\bSyncPort\x12\x1f.pilab.agent.v1.SyncPortRequest\x1a .pilab.agent.v1.SyncPortResponse\x12\\\n" +
+	"\rDeleteNetwork\x12$.pilab.agent.v1.DeleteNetworkRequest\x1a%.pilab.agent.v1.DeleteNetworkResponse\x12S\n" +
 	"\n" +
-	"DeletePort\x12'.pilab.cloud.agent.v1.DeletePortRequest\x1a(.pilab.cloud.agent.v1.DeletePortResponse\x12n\n" +
-	"\x0fGetNetworkState\x12,.pilab.cloud.agent.v1.GetNetworkStateRequest\x1a-.pilab.cloud.agent.v1.GetNetworkStateResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"DeletePort\x12!.pilab.agent.v1.DeletePortRequest\x1a\".pilab.agent.v1.DeletePortResponse\x12b\n" +
+	"\x0fGetNetworkState\x12&.pilab.agent.v1.GetNetworkStateRequest\x1a'.pilab.agent.v1.GetNetworkStateResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_networkservice_proto_rawDescOnce sync.Once
@@ -4039,165 +4039,165 @@ func file_pilab_agent_v1_networkservice_proto_rawDescGZIP() []byte {
 
 var file_pilab_agent_v1_networkservice_proto_msgTypes = make([]protoimpl.MessageInfo, 62)
 var file_pilab_agent_v1_networkservice_proto_goTypes = []any{
-	(*OvsBridge)(nil),                // 0: pilab.cloud.agent.v1.OvsBridge
-	(*OvsBridgeCreateRequest)(nil),   // 1: pilab.cloud.agent.v1.OvsBridgeCreateRequest
-	(*OvsBridgeCreateResponse)(nil),  // 2: pilab.cloud.agent.v1.OvsBridgeCreateResponse
-	(*OvsBridgeDeleteRequest)(nil),   // 3: pilab.cloud.agent.v1.OvsBridgeDeleteRequest
-	(*OvsBridgeDeleteResponse)(nil),  // 4: pilab.cloud.agent.v1.OvsBridgeDeleteResponse
-	(*OvsBridgeListRequest)(nil),     // 5: pilab.cloud.agent.v1.OvsBridgeListRequest
-	(*OvsBridgeListResponse)(nil),    // 6: pilab.cloud.agent.v1.OvsBridgeListResponse
-	(*OvsBridgeGetRequest)(nil),      // 7: pilab.cloud.agent.v1.OvsBridgeGetRequest
-	(*OvsBridgeGetResponse)(nil),     // 8: pilab.cloud.agent.v1.OvsBridgeGetResponse
-	(*OvsPort)(nil),                  // 9: pilab.cloud.agent.v1.OvsPort
-	(*OvsPortCreateRequest)(nil),     // 10: pilab.cloud.agent.v1.OvsPortCreateRequest
-	(*OvsPortCreateResponse)(nil),    // 11: pilab.cloud.agent.v1.OvsPortCreateResponse
-	(*OvsPortDeleteRequest)(nil),     // 12: pilab.cloud.agent.v1.OvsPortDeleteRequest
-	(*OvsPortDeleteResponse)(nil),    // 13: pilab.cloud.agent.v1.OvsPortDeleteResponse
-	(*OvsPortListRequest)(nil),       // 14: pilab.cloud.agent.v1.OvsPortListRequest
-	(*OvsPortListResponse)(nil),      // 15: pilab.cloud.agent.v1.OvsPortListResponse
-	(*OvsPortGetRequest)(nil),        // 16: pilab.cloud.agent.v1.OvsPortGetRequest
-	(*OvsPortGetResponse)(nil),       // 17: pilab.cloud.agent.v1.OvsPortGetResponse
-	(*OvsPortUpdateRequest)(nil),     // 18: pilab.cloud.agent.v1.OvsPortUpdateRequest
-	(*OvsPortUpdateResponse)(nil),    // 19: pilab.cloud.agent.v1.OvsPortUpdateResponse
-	(*OvsQosRule)(nil),               // 20: pilab.cloud.agent.v1.OvsQosRule
-	(*OvsQosRuleCreateRequest)(nil),  // 21: pilab.cloud.agent.v1.OvsQosRuleCreateRequest
-	(*OvsQosRuleCreateResponse)(nil), // 22: pilab.cloud.agent.v1.OvsQosRuleCreateResponse
-	(*OvsQosRuleDeleteRequest)(nil),  // 23: pilab.cloud.agent.v1.OvsQosRuleDeleteRequest
-	(*OvsQosRuleDeleteResponse)(nil), // 24: pilab.cloud.agent.v1.OvsQosRuleDeleteResponse
-	(*OvsQosRuleListRequest)(nil),    // 25: pilab.cloud.agent.v1.OvsQosRuleListRequest
-	(*OvsQosRuleListResponse)(nil),   // 26: pilab.cloud.agent.v1.OvsQosRuleListResponse
-	(*OvsQosRuleGetRequest)(nil),     // 27: pilab.cloud.agent.v1.OvsQosRuleGetRequest
-	(*OvsQosRuleGetResponse)(nil),    // 28: pilab.cloud.agent.v1.OvsQosRuleGetResponse
-	(*Network)(nil),                  // 29: pilab.cloud.agent.v1.Network
-	(*NetworkCreateRequest)(nil),     // 30: pilab.cloud.agent.v1.NetworkCreateRequest
-	(*NetworkCreateResponse)(nil),    // 31: pilab.cloud.agent.v1.NetworkCreateResponse
-	(*NetworkDeleteRequest)(nil),     // 32: pilab.cloud.agent.v1.NetworkDeleteRequest
-	(*NetworkDeleteResponse)(nil),    // 33: pilab.cloud.agent.v1.NetworkDeleteResponse
-	(*NetworkListRequest)(nil),       // 34: pilab.cloud.agent.v1.NetworkListRequest
-	(*NetworkListResponse)(nil),      // 35: pilab.cloud.agent.v1.NetworkListResponse
-	(*NetworkGetRequest)(nil),        // 36: pilab.cloud.agent.v1.NetworkGetRequest
-	(*NetworkGetResponse)(nil),       // 37: pilab.cloud.agent.v1.NetworkGetResponse
-	(*NetworkStartRequest)(nil),      // 38: pilab.cloud.agent.v1.NetworkStartRequest
-	(*NetworkStartResponse)(nil),     // 39: pilab.cloud.agent.v1.NetworkStartResponse
-	(*NetworkStopRequest)(nil),       // 40: pilab.cloud.agent.v1.NetworkStopRequest
-	(*NetworkStopResponse)(nil),      // 41: pilab.cloud.agent.v1.NetworkStopResponse
-	(*NetworkUpdateRequest)(nil),     // 42: pilab.cloud.agent.v1.NetworkUpdateRequest
-	(*NetworkUpdateResponse)(nil),    // 43: pilab.cloud.agent.v1.NetworkUpdateResponse
-	(*OvsFlowPushRequest)(nil),       // 44: pilab.cloud.agent.v1.OvsFlowPushRequest
-	(*OvsFlowPushResponse)(nil),      // 45: pilab.cloud.agent.v1.OvsFlowPushResponse
-	(*OvsFlowSyncRequest)(nil),       // 46: pilab.cloud.agent.v1.OvsFlowSyncRequest
-	(*OvsFlowSyncResponse)(nil),      // 47: pilab.cloud.agent.v1.OvsFlowSyncResponse
-	(*SyncNetworkRequest)(nil),       // 48: pilab.cloud.agent.v1.SyncNetworkRequest
-	(*SyncNetworkResponse)(nil),      // 49: pilab.cloud.agent.v1.SyncNetworkResponse
-	(*SyncPortRequest)(nil),          // 50: pilab.cloud.agent.v1.SyncPortRequest
-	(*SyncPortResponse)(nil),         // 51: pilab.cloud.agent.v1.SyncPortResponse
-	(*DeleteNetworkRequest)(nil),     // 52: pilab.cloud.agent.v1.DeleteNetworkRequest
-	(*DeleteNetworkResponse)(nil),    // 53: pilab.cloud.agent.v1.DeleteNetworkResponse
-	(*DeletePortRequest)(nil),        // 54: pilab.cloud.agent.v1.DeletePortRequest
-	(*DeletePortResponse)(nil),       // 55: pilab.cloud.agent.v1.DeletePortResponse
-	(*GetNetworkStateRequest)(nil),   // 56: pilab.cloud.agent.v1.GetNetworkStateRequest
-	(*GetNetworkStateResponse)(nil),  // 57: pilab.cloud.agent.v1.GetNetworkStateResponse
-	(*SyncedNetwork)(nil),            // 58: pilab.cloud.agent.v1.SyncedNetwork
-	(*SyncedPort)(nil),               // 59: pilab.cloud.agent.v1.SyncedPort
-	nil,                              // 60: pilab.cloud.agent.v1.SyncNetworkRequest.MetadataEntry
-	nil,                              // 61: pilab.cloud.agent.v1.SyncPortRequest.MetadataEntry
-	(*ErrorResponse)(nil),            // 62: pilab.cloud.agent.v1.ErrorResponse
+	(*OvsBridge)(nil),                // 0: pilab.agent.v1.OvsBridge
+	(*OvsBridgeCreateRequest)(nil),   // 1: pilab.agent.v1.OvsBridgeCreateRequest
+	(*OvsBridgeCreateResponse)(nil),  // 2: pilab.agent.v1.OvsBridgeCreateResponse
+	(*OvsBridgeDeleteRequest)(nil),   // 3: pilab.agent.v1.OvsBridgeDeleteRequest
+	(*OvsBridgeDeleteResponse)(nil),  // 4: pilab.agent.v1.OvsBridgeDeleteResponse
+	(*OvsBridgeListRequest)(nil),     // 5: pilab.agent.v1.OvsBridgeListRequest
+	(*OvsBridgeListResponse)(nil),    // 6: pilab.agent.v1.OvsBridgeListResponse
+	(*OvsBridgeGetRequest)(nil),      // 7: pilab.agent.v1.OvsBridgeGetRequest
+	(*OvsBridgeGetResponse)(nil),     // 8: pilab.agent.v1.OvsBridgeGetResponse
+	(*OvsPort)(nil),                  // 9: pilab.agent.v1.OvsPort
+	(*OvsPortCreateRequest)(nil),     // 10: pilab.agent.v1.OvsPortCreateRequest
+	(*OvsPortCreateResponse)(nil),    // 11: pilab.agent.v1.OvsPortCreateResponse
+	(*OvsPortDeleteRequest)(nil),     // 12: pilab.agent.v1.OvsPortDeleteRequest
+	(*OvsPortDeleteResponse)(nil),    // 13: pilab.agent.v1.OvsPortDeleteResponse
+	(*OvsPortListRequest)(nil),       // 14: pilab.agent.v1.OvsPortListRequest
+	(*OvsPortListResponse)(nil),      // 15: pilab.agent.v1.OvsPortListResponse
+	(*OvsPortGetRequest)(nil),        // 16: pilab.agent.v1.OvsPortGetRequest
+	(*OvsPortGetResponse)(nil),       // 17: pilab.agent.v1.OvsPortGetResponse
+	(*OvsPortUpdateRequest)(nil),     // 18: pilab.agent.v1.OvsPortUpdateRequest
+	(*OvsPortUpdateResponse)(nil),    // 19: pilab.agent.v1.OvsPortUpdateResponse
+	(*OvsQosRule)(nil),               // 20: pilab.agent.v1.OvsQosRule
+	(*OvsQosRuleCreateRequest)(nil),  // 21: pilab.agent.v1.OvsQosRuleCreateRequest
+	(*OvsQosRuleCreateResponse)(nil), // 22: pilab.agent.v1.OvsQosRuleCreateResponse
+	(*OvsQosRuleDeleteRequest)(nil),  // 23: pilab.agent.v1.OvsQosRuleDeleteRequest
+	(*OvsQosRuleDeleteResponse)(nil), // 24: pilab.agent.v1.OvsQosRuleDeleteResponse
+	(*OvsQosRuleListRequest)(nil),    // 25: pilab.agent.v1.OvsQosRuleListRequest
+	(*OvsQosRuleListResponse)(nil),   // 26: pilab.agent.v1.OvsQosRuleListResponse
+	(*OvsQosRuleGetRequest)(nil),     // 27: pilab.agent.v1.OvsQosRuleGetRequest
+	(*OvsQosRuleGetResponse)(nil),    // 28: pilab.agent.v1.OvsQosRuleGetResponse
+	(*Network)(nil),                  // 29: pilab.agent.v1.Network
+	(*NetworkCreateRequest)(nil),     // 30: pilab.agent.v1.NetworkCreateRequest
+	(*NetworkCreateResponse)(nil),    // 31: pilab.agent.v1.NetworkCreateResponse
+	(*NetworkDeleteRequest)(nil),     // 32: pilab.agent.v1.NetworkDeleteRequest
+	(*NetworkDeleteResponse)(nil),    // 33: pilab.agent.v1.NetworkDeleteResponse
+	(*NetworkListRequest)(nil),       // 34: pilab.agent.v1.NetworkListRequest
+	(*NetworkListResponse)(nil),      // 35: pilab.agent.v1.NetworkListResponse
+	(*NetworkGetRequest)(nil),        // 36: pilab.agent.v1.NetworkGetRequest
+	(*NetworkGetResponse)(nil),       // 37: pilab.agent.v1.NetworkGetResponse
+	(*NetworkStartRequest)(nil),      // 38: pilab.agent.v1.NetworkStartRequest
+	(*NetworkStartResponse)(nil),     // 39: pilab.agent.v1.NetworkStartResponse
+	(*NetworkStopRequest)(nil),       // 40: pilab.agent.v1.NetworkStopRequest
+	(*NetworkStopResponse)(nil),      // 41: pilab.agent.v1.NetworkStopResponse
+	(*NetworkUpdateRequest)(nil),     // 42: pilab.agent.v1.NetworkUpdateRequest
+	(*NetworkUpdateResponse)(nil),    // 43: pilab.agent.v1.NetworkUpdateResponse
+	(*OvsFlowPushRequest)(nil),       // 44: pilab.agent.v1.OvsFlowPushRequest
+	(*OvsFlowPushResponse)(nil),      // 45: pilab.agent.v1.OvsFlowPushResponse
+	(*OvsFlowSyncRequest)(nil),       // 46: pilab.agent.v1.OvsFlowSyncRequest
+	(*OvsFlowSyncResponse)(nil),      // 47: pilab.agent.v1.OvsFlowSyncResponse
+	(*SyncNetworkRequest)(nil),       // 48: pilab.agent.v1.SyncNetworkRequest
+	(*SyncNetworkResponse)(nil),      // 49: pilab.agent.v1.SyncNetworkResponse
+	(*SyncPortRequest)(nil),          // 50: pilab.agent.v1.SyncPortRequest
+	(*SyncPortResponse)(nil),         // 51: pilab.agent.v1.SyncPortResponse
+	(*DeleteNetworkRequest)(nil),     // 52: pilab.agent.v1.DeleteNetworkRequest
+	(*DeleteNetworkResponse)(nil),    // 53: pilab.agent.v1.DeleteNetworkResponse
+	(*DeletePortRequest)(nil),        // 54: pilab.agent.v1.DeletePortRequest
+	(*DeletePortResponse)(nil),       // 55: pilab.agent.v1.DeletePortResponse
+	(*GetNetworkStateRequest)(nil),   // 56: pilab.agent.v1.GetNetworkStateRequest
+	(*GetNetworkStateResponse)(nil),  // 57: pilab.agent.v1.GetNetworkStateResponse
+	(*SyncedNetwork)(nil),            // 58: pilab.agent.v1.SyncedNetwork
+	(*SyncedPort)(nil),               // 59: pilab.agent.v1.SyncedPort
+	nil,                              // 60: pilab.agent.v1.SyncNetworkRequest.MetadataEntry
+	nil,                              // 61: pilab.agent.v1.SyncPortRequest.MetadataEntry
+	(*ErrorResponse)(nil),            // 62: pilab.agent.v1.ErrorResponse
 }
 var file_pilab_agent_v1_networkservice_proto_depIdxs = []int32{
-	62, // 0: pilab.cloud.agent.v1.OvsBridgeCreateResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	0,  // 1: pilab.cloud.agent.v1.OvsBridgeCreateResponse.bridge:type_name -> pilab.cloud.agent.v1.OvsBridge
-	62, // 2: pilab.cloud.agent.v1.OvsBridgeDeleteResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	0,  // 3: pilab.cloud.agent.v1.OvsBridgeListResponse.bridges:type_name -> pilab.cloud.agent.v1.OvsBridge
-	0,  // 4: pilab.cloud.agent.v1.OvsBridgeGetResponse.bridge:type_name -> pilab.cloud.agent.v1.OvsBridge
-	62, // 5: pilab.cloud.agent.v1.OvsBridgeGetResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	62, // 6: pilab.cloud.agent.v1.OvsPortCreateResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	9,  // 7: pilab.cloud.agent.v1.OvsPortCreateResponse.port:type_name -> pilab.cloud.agent.v1.OvsPort
-	62, // 8: pilab.cloud.agent.v1.OvsPortDeleteResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	9,  // 9: pilab.cloud.agent.v1.OvsPortListResponse.ports:type_name -> pilab.cloud.agent.v1.OvsPort
-	9,  // 10: pilab.cloud.agent.v1.OvsPortGetResponse.port:type_name -> pilab.cloud.agent.v1.OvsPort
-	62, // 11: pilab.cloud.agent.v1.OvsPortGetResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	62, // 12: pilab.cloud.agent.v1.OvsPortUpdateResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	9,  // 13: pilab.cloud.agent.v1.OvsPortUpdateResponse.port:type_name -> pilab.cloud.agent.v1.OvsPort
-	62, // 14: pilab.cloud.agent.v1.OvsQosRuleCreateResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	20, // 15: pilab.cloud.agent.v1.OvsQosRuleCreateResponse.rule:type_name -> pilab.cloud.agent.v1.OvsQosRule
-	62, // 16: pilab.cloud.agent.v1.OvsQosRuleDeleteResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	20, // 17: pilab.cloud.agent.v1.OvsQosRuleListResponse.rules:type_name -> pilab.cloud.agent.v1.OvsQosRule
-	20, // 18: pilab.cloud.agent.v1.OvsQosRuleGetResponse.rule:type_name -> pilab.cloud.agent.v1.OvsQosRule
-	62, // 19: pilab.cloud.agent.v1.OvsQosRuleGetResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	62, // 20: pilab.cloud.agent.v1.NetworkCreateResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	29, // 21: pilab.cloud.agent.v1.NetworkCreateResponse.network:type_name -> pilab.cloud.agent.v1.Network
-	62, // 22: pilab.cloud.agent.v1.NetworkDeleteResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	29, // 23: pilab.cloud.agent.v1.NetworkListResponse.networks:type_name -> pilab.cloud.agent.v1.Network
-	29, // 24: pilab.cloud.agent.v1.NetworkGetResponse.network:type_name -> pilab.cloud.agent.v1.Network
-	62, // 25: pilab.cloud.agent.v1.NetworkGetResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	62, // 26: pilab.cloud.agent.v1.NetworkStartResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	62, // 27: pilab.cloud.agent.v1.NetworkStopResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	62, // 28: pilab.cloud.agent.v1.NetworkUpdateResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	29, // 29: pilab.cloud.agent.v1.NetworkUpdateResponse.network:type_name -> pilab.cloud.agent.v1.Network
-	62, // 30: pilab.cloud.agent.v1.OvsFlowPushResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	62, // 31: pilab.cloud.agent.v1.OvsFlowSyncResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	60, // 32: pilab.cloud.agent.v1.SyncNetworkRequest.metadata:type_name -> pilab.cloud.agent.v1.SyncNetworkRequest.MetadataEntry
-	62, // 33: pilab.cloud.agent.v1.SyncNetworkResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	61, // 34: pilab.cloud.agent.v1.SyncPortRequest.metadata:type_name -> pilab.cloud.agent.v1.SyncPortRequest.MetadataEntry
-	62, // 35: pilab.cloud.agent.v1.SyncPortResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	62, // 36: pilab.cloud.agent.v1.DeleteNetworkResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	62, // 37: pilab.cloud.agent.v1.DeletePortResponse.error:type_name -> pilab.cloud.agent.v1.ErrorResponse
-	58, // 38: pilab.cloud.agent.v1.GetNetworkStateResponse.networks:type_name -> pilab.cloud.agent.v1.SyncedNetwork
-	59, // 39: pilab.cloud.agent.v1.GetNetworkStateResponse.ports:type_name -> pilab.cloud.agent.v1.SyncedPort
-	1,  // 40: pilab.cloud.agent.v1.NetworkService.OvsBridgeCreate:input_type -> pilab.cloud.agent.v1.OvsBridgeCreateRequest
-	3,  // 41: pilab.cloud.agent.v1.NetworkService.OvsBridgeDelete:input_type -> pilab.cloud.agent.v1.OvsBridgeDeleteRequest
-	5,  // 42: pilab.cloud.agent.v1.NetworkService.OvsBridgeList:input_type -> pilab.cloud.agent.v1.OvsBridgeListRequest
-	7,  // 43: pilab.cloud.agent.v1.NetworkService.OvsBridgeGet:input_type -> pilab.cloud.agent.v1.OvsBridgeGetRequest
-	10, // 44: pilab.cloud.agent.v1.NetworkService.OvsPortCreate:input_type -> pilab.cloud.agent.v1.OvsPortCreateRequest
-	12, // 45: pilab.cloud.agent.v1.NetworkService.OvsPortDelete:input_type -> pilab.cloud.agent.v1.OvsPortDeleteRequest
-	14, // 46: pilab.cloud.agent.v1.NetworkService.OvsPortList:input_type -> pilab.cloud.agent.v1.OvsPortListRequest
-	16, // 47: pilab.cloud.agent.v1.NetworkService.OvsPortGet:input_type -> pilab.cloud.agent.v1.OvsPortGetRequest
-	18, // 48: pilab.cloud.agent.v1.NetworkService.OvsPortUpdate:input_type -> pilab.cloud.agent.v1.OvsPortUpdateRequest
-	21, // 49: pilab.cloud.agent.v1.NetworkService.OvsQosRuleCreate:input_type -> pilab.cloud.agent.v1.OvsQosRuleCreateRequest
-	23, // 50: pilab.cloud.agent.v1.NetworkService.OvsQosRuleDelete:input_type -> pilab.cloud.agent.v1.OvsQosRuleDeleteRequest
-	25, // 51: pilab.cloud.agent.v1.NetworkService.OvsQosRuleList:input_type -> pilab.cloud.agent.v1.OvsQosRuleListRequest
-	27, // 52: pilab.cloud.agent.v1.NetworkService.OvsQosRuleGet:input_type -> pilab.cloud.agent.v1.OvsQosRuleGetRequest
-	30, // 53: pilab.cloud.agent.v1.NetworkService.NetworkCreate:input_type -> pilab.cloud.agent.v1.NetworkCreateRequest
-	32, // 54: pilab.cloud.agent.v1.NetworkService.NetworkDelete:input_type -> pilab.cloud.agent.v1.NetworkDeleteRequest
-	34, // 55: pilab.cloud.agent.v1.NetworkService.NetworkList:input_type -> pilab.cloud.agent.v1.NetworkListRequest
-	36, // 56: pilab.cloud.agent.v1.NetworkService.NetworkGet:input_type -> pilab.cloud.agent.v1.NetworkGetRequest
-	38, // 57: pilab.cloud.agent.v1.NetworkService.NetworkStart:input_type -> pilab.cloud.agent.v1.NetworkStartRequest
-	40, // 58: pilab.cloud.agent.v1.NetworkService.NetworkStop:input_type -> pilab.cloud.agent.v1.NetworkStopRequest
-	42, // 59: pilab.cloud.agent.v1.NetworkService.NetworkUpdate:input_type -> pilab.cloud.agent.v1.NetworkUpdateRequest
-	44, // 60: pilab.cloud.agent.v1.NetworkService.OvsFlowPush:input_type -> pilab.cloud.agent.v1.OvsFlowPushRequest
-	46, // 61: pilab.cloud.agent.v1.NetworkService.OvsFlowSync:input_type -> pilab.cloud.agent.v1.OvsFlowSyncRequest
-	48, // 62: pilab.cloud.agent.v1.NetworkService.SyncNetwork:input_type -> pilab.cloud.agent.v1.SyncNetworkRequest
-	50, // 63: pilab.cloud.agent.v1.NetworkService.SyncPort:input_type -> pilab.cloud.agent.v1.SyncPortRequest
-	52, // 64: pilab.cloud.agent.v1.NetworkService.DeleteNetwork:input_type -> pilab.cloud.agent.v1.DeleteNetworkRequest
-	54, // 65: pilab.cloud.agent.v1.NetworkService.DeletePort:input_type -> pilab.cloud.agent.v1.DeletePortRequest
-	56, // 66: pilab.cloud.agent.v1.NetworkService.GetNetworkState:input_type -> pilab.cloud.agent.v1.GetNetworkStateRequest
-	2,  // 67: pilab.cloud.agent.v1.NetworkService.OvsBridgeCreate:output_type -> pilab.cloud.agent.v1.OvsBridgeCreateResponse
-	4,  // 68: pilab.cloud.agent.v1.NetworkService.OvsBridgeDelete:output_type -> pilab.cloud.agent.v1.OvsBridgeDeleteResponse
-	6,  // 69: pilab.cloud.agent.v1.NetworkService.OvsBridgeList:output_type -> pilab.cloud.agent.v1.OvsBridgeListResponse
-	8,  // 70: pilab.cloud.agent.v1.NetworkService.OvsBridgeGet:output_type -> pilab.cloud.agent.v1.OvsBridgeGetResponse
-	11, // 71: pilab.cloud.agent.v1.NetworkService.OvsPortCreate:output_type -> pilab.cloud.agent.v1.OvsPortCreateResponse
-	13, // 72: pilab.cloud.agent.v1.NetworkService.OvsPortDelete:output_type -> pilab.cloud.agent.v1.OvsPortDeleteResponse
-	15, // 73: pilab.cloud.agent.v1.NetworkService.OvsPortList:output_type -> pilab.cloud.agent.v1.OvsPortListResponse
-	17, // 74: pilab.cloud.agent.v1.NetworkService.OvsPortGet:output_type -> pilab.cloud.agent.v1.OvsPortGetResponse
-	19, // 75: pilab.cloud.agent.v1.NetworkService.OvsPortUpdate:output_type -> pilab.cloud.agent.v1.OvsPortUpdateResponse
-	22, // 76: pilab.cloud.agent.v1.NetworkService.OvsQosRuleCreate:output_type -> pilab.cloud.agent.v1.OvsQosRuleCreateResponse
-	24, // 77: pilab.cloud.agent.v1.NetworkService.OvsQosRuleDelete:output_type -> pilab.cloud.agent.v1.OvsQosRuleDeleteResponse
-	26, // 78: pilab.cloud.agent.v1.NetworkService.OvsQosRuleList:output_type -> pilab.cloud.agent.v1.OvsQosRuleListResponse
-	28, // 79: pilab.cloud.agent.v1.NetworkService.OvsQosRuleGet:output_type -> pilab.cloud.agent.v1.OvsQosRuleGetResponse
-	31, // 80: pilab.cloud.agent.v1.NetworkService.NetworkCreate:output_type -> pilab.cloud.agent.v1.NetworkCreateResponse
-	33, // 81: pilab.cloud.agent.v1.NetworkService.NetworkDelete:output_type -> pilab.cloud.agent.v1.NetworkDeleteResponse
-	35, // 82: pilab.cloud.agent.v1.NetworkService.NetworkList:output_type -> pilab.cloud.agent.v1.NetworkListResponse
-	37, // 83: pilab.cloud.agent.v1.NetworkService.NetworkGet:output_type -> pilab.cloud.agent.v1.NetworkGetResponse
-	39, // 84: pilab.cloud.agent.v1.NetworkService.NetworkStart:output_type -> pilab.cloud.agent.v1.NetworkStartResponse
-	41, // 85: pilab.cloud.agent.v1.NetworkService.NetworkStop:output_type -> pilab.cloud.agent.v1.NetworkStopResponse
-	43, // 86: pilab.cloud.agent.v1.NetworkService.NetworkUpdate:output_type -> pilab.cloud.agent.v1.NetworkUpdateResponse
-	45, // 87: pilab.cloud.agent.v1.NetworkService.OvsFlowPush:output_type -> pilab.cloud.agent.v1.OvsFlowPushResponse
-	47, // 88: pilab.cloud.agent.v1.NetworkService.OvsFlowSync:output_type -> pilab.cloud.agent.v1.OvsFlowSyncResponse
-	49, // 89: pilab.cloud.agent.v1.NetworkService.SyncNetwork:output_type -> pilab.cloud.agent.v1.SyncNetworkResponse
-	51, // 90: pilab.cloud.agent.v1.NetworkService.SyncPort:output_type -> pilab.cloud.agent.v1.SyncPortResponse
-	53, // 91: pilab.cloud.agent.v1.NetworkService.DeleteNetwork:output_type -> pilab.cloud.agent.v1.DeleteNetworkResponse
-	55, // 92: pilab.cloud.agent.v1.NetworkService.DeletePort:output_type -> pilab.cloud.agent.v1.DeletePortResponse
-	57, // 93: pilab.cloud.agent.v1.NetworkService.GetNetworkState:output_type -> pilab.cloud.agent.v1.GetNetworkStateResponse
+	62, // 0: pilab.agent.v1.OvsBridgeCreateResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	0,  // 1: pilab.agent.v1.OvsBridgeCreateResponse.bridge:type_name -> pilab.agent.v1.OvsBridge
+	62, // 2: pilab.agent.v1.OvsBridgeDeleteResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	0,  // 3: pilab.agent.v1.OvsBridgeListResponse.bridges:type_name -> pilab.agent.v1.OvsBridge
+	0,  // 4: pilab.agent.v1.OvsBridgeGetResponse.bridge:type_name -> pilab.agent.v1.OvsBridge
+	62, // 5: pilab.agent.v1.OvsBridgeGetResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	62, // 6: pilab.agent.v1.OvsPortCreateResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	9,  // 7: pilab.agent.v1.OvsPortCreateResponse.port:type_name -> pilab.agent.v1.OvsPort
+	62, // 8: pilab.agent.v1.OvsPortDeleteResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	9,  // 9: pilab.agent.v1.OvsPortListResponse.ports:type_name -> pilab.agent.v1.OvsPort
+	9,  // 10: pilab.agent.v1.OvsPortGetResponse.port:type_name -> pilab.agent.v1.OvsPort
+	62, // 11: pilab.agent.v1.OvsPortGetResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	62, // 12: pilab.agent.v1.OvsPortUpdateResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	9,  // 13: pilab.agent.v1.OvsPortUpdateResponse.port:type_name -> pilab.agent.v1.OvsPort
+	62, // 14: pilab.agent.v1.OvsQosRuleCreateResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	20, // 15: pilab.agent.v1.OvsQosRuleCreateResponse.rule:type_name -> pilab.agent.v1.OvsQosRule
+	62, // 16: pilab.agent.v1.OvsQosRuleDeleteResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	20, // 17: pilab.agent.v1.OvsQosRuleListResponse.rules:type_name -> pilab.agent.v1.OvsQosRule
+	20, // 18: pilab.agent.v1.OvsQosRuleGetResponse.rule:type_name -> pilab.agent.v1.OvsQosRule
+	62, // 19: pilab.agent.v1.OvsQosRuleGetResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	62, // 20: pilab.agent.v1.NetworkCreateResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	29, // 21: pilab.agent.v1.NetworkCreateResponse.network:type_name -> pilab.agent.v1.Network
+	62, // 22: pilab.agent.v1.NetworkDeleteResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	29, // 23: pilab.agent.v1.NetworkListResponse.networks:type_name -> pilab.agent.v1.Network
+	29, // 24: pilab.agent.v1.NetworkGetResponse.network:type_name -> pilab.agent.v1.Network
+	62, // 25: pilab.agent.v1.NetworkGetResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	62, // 26: pilab.agent.v1.NetworkStartResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	62, // 27: pilab.agent.v1.NetworkStopResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	62, // 28: pilab.agent.v1.NetworkUpdateResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	29, // 29: pilab.agent.v1.NetworkUpdateResponse.network:type_name -> pilab.agent.v1.Network
+	62, // 30: pilab.agent.v1.OvsFlowPushResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	62, // 31: pilab.agent.v1.OvsFlowSyncResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	60, // 32: pilab.agent.v1.SyncNetworkRequest.metadata:type_name -> pilab.agent.v1.SyncNetworkRequest.MetadataEntry
+	62, // 33: pilab.agent.v1.SyncNetworkResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	61, // 34: pilab.agent.v1.SyncPortRequest.metadata:type_name -> pilab.agent.v1.SyncPortRequest.MetadataEntry
+	62, // 35: pilab.agent.v1.SyncPortResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	62, // 36: pilab.agent.v1.DeleteNetworkResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	62, // 37: pilab.agent.v1.DeletePortResponse.error:type_name -> pilab.agent.v1.ErrorResponse
+	58, // 38: pilab.agent.v1.GetNetworkStateResponse.networks:type_name -> pilab.agent.v1.SyncedNetwork
+	59, // 39: pilab.agent.v1.GetNetworkStateResponse.ports:type_name -> pilab.agent.v1.SyncedPort
+	1,  // 40: pilab.agent.v1.NetworkService.OvsBridgeCreate:input_type -> pilab.agent.v1.OvsBridgeCreateRequest
+	3,  // 41: pilab.agent.v1.NetworkService.OvsBridgeDelete:input_type -> pilab.agent.v1.OvsBridgeDeleteRequest
+	5,  // 42: pilab.agent.v1.NetworkService.OvsBridgeList:input_type -> pilab.agent.v1.OvsBridgeListRequest
+	7,  // 43: pilab.agent.v1.NetworkService.OvsBridgeGet:input_type -> pilab.agent.v1.OvsBridgeGetRequest
+	10, // 44: pilab.agent.v1.NetworkService.OvsPortCreate:input_type -> pilab.agent.v1.OvsPortCreateRequest
+	12, // 45: pilab.agent.v1.NetworkService.OvsPortDelete:input_type -> pilab.agent.v1.OvsPortDeleteRequest
+	14, // 46: pilab.agent.v1.NetworkService.OvsPortList:input_type -> pilab.agent.v1.OvsPortListRequest
+	16, // 47: pilab.agent.v1.NetworkService.OvsPortGet:input_type -> pilab.agent.v1.OvsPortGetRequest
+	18, // 48: pilab.agent.v1.NetworkService.OvsPortUpdate:input_type -> pilab.agent.v1.OvsPortUpdateRequest
+	21, // 49: pilab.agent.v1.NetworkService.OvsQosRuleCreate:input_type -> pilab.agent.v1.OvsQosRuleCreateRequest
+	23, // 50: pilab.agent.v1.NetworkService.OvsQosRuleDelete:input_type -> pilab.agent.v1.OvsQosRuleDeleteRequest
+	25, // 51: pilab.agent.v1.NetworkService.OvsQosRuleList:input_type -> pilab.agent.v1.OvsQosRuleListRequest
+	27, // 52: pilab.agent.v1.NetworkService.OvsQosRuleGet:input_type -> pilab.agent.v1.OvsQosRuleGetRequest
+	30, // 53: pilab.agent.v1.NetworkService.NetworkCreate:input_type -> pilab.agent.v1.NetworkCreateRequest
+	32, // 54: pilab.agent.v1.NetworkService.NetworkDelete:input_type -> pilab.agent.v1.NetworkDeleteRequest
+	34, // 55: pilab.agent.v1.NetworkService.NetworkList:input_type -> pilab.agent.v1.NetworkListRequest
+	36, // 56: pilab.agent.v1.NetworkService.NetworkGet:input_type -> pilab.agent.v1.NetworkGetRequest
+	38, // 57: pilab.agent.v1.NetworkService.NetworkStart:input_type -> pilab.agent.v1.NetworkStartRequest
+	40, // 58: pilab.agent.v1.NetworkService.NetworkStop:input_type -> pilab.agent.v1.NetworkStopRequest
+	42, // 59: pilab.agent.v1.NetworkService.NetworkUpdate:input_type -> pilab.agent.v1.NetworkUpdateRequest
+	44, // 60: pilab.agent.v1.NetworkService.OvsFlowPush:input_type -> pilab.agent.v1.OvsFlowPushRequest
+	46, // 61: pilab.agent.v1.NetworkService.OvsFlowSync:input_type -> pilab.agent.v1.OvsFlowSyncRequest
+	48, // 62: pilab.agent.v1.NetworkService.SyncNetwork:input_type -> pilab.agent.v1.SyncNetworkRequest
+	50, // 63: pilab.agent.v1.NetworkService.SyncPort:input_type -> pilab.agent.v1.SyncPortRequest
+	52, // 64: pilab.agent.v1.NetworkService.DeleteNetwork:input_type -> pilab.agent.v1.DeleteNetworkRequest
+	54, // 65: pilab.agent.v1.NetworkService.DeletePort:input_type -> pilab.agent.v1.DeletePortRequest
+	56, // 66: pilab.agent.v1.NetworkService.GetNetworkState:input_type -> pilab.agent.v1.GetNetworkStateRequest
+	2,  // 67: pilab.agent.v1.NetworkService.OvsBridgeCreate:output_type -> pilab.agent.v1.OvsBridgeCreateResponse
+	4,  // 68: pilab.agent.v1.NetworkService.OvsBridgeDelete:output_type -> pilab.agent.v1.OvsBridgeDeleteResponse
+	6,  // 69: pilab.agent.v1.NetworkService.OvsBridgeList:output_type -> pilab.agent.v1.OvsBridgeListResponse
+	8,  // 70: pilab.agent.v1.NetworkService.OvsBridgeGet:output_type -> pilab.agent.v1.OvsBridgeGetResponse
+	11, // 71: pilab.agent.v1.NetworkService.OvsPortCreate:output_type -> pilab.agent.v1.OvsPortCreateResponse
+	13, // 72: pilab.agent.v1.NetworkService.OvsPortDelete:output_type -> pilab.agent.v1.OvsPortDeleteResponse
+	15, // 73: pilab.agent.v1.NetworkService.OvsPortList:output_type -> pilab.agent.v1.OvsPortListResponse
+	17, // 74: pilab.agent.v1.NetworkService.OvsPortGet:output_type -> pilab.agent.v1.OvsPortGetResponse
+	19, // 75: pilab.agent.v1.NetworkService.OvsPortUpdate:output_type -> pilab.agent.v1.OvsPortUpdateResponse
+	22, // 76: pilab.agent.v1.NetworkService.OvsQosRuleCreate:output_type -> pilab.agent.v1.OvsQosRuleCreateResponse
+	24, // 77: pilab.agent.v1.NetworkService.OvsQosRuleDelete:output_type -> pilab.agent.v1.OvsQosRuleDeleteResponse
+	26, // 78: pilab.agent.v1.NetworkService.OvsQosRuleList:output_type -> pilab.agent.v1.OvsQosRuleListResponse
+	28, // 79: pilab.agent.v1.NetworkService.OvsQosRuleGet:output_type -> pilab.agent.v1.OvsQosRuleGetResponse
+	31, // 80: pilab.agent.v1.NetworkService.NetworkCreate:output_type -> pilab.agent.v1.NetworkCreateResponse
+	33, // 81: pilab.agent.v1.NetworkService.NetworkDelete:output_type -> pilab.agent.v1.NetworkDeleteResponse
+	35, // 82: pilab.agent.v1.NetworkService.NetworkList:output_type -> pilab.agent.v1.NetworkListResponse
+	37, // 83: pilab.agent.v1.NetworkService.NetworkGet:output_type -> pilab.agent.v1.NetworkGetResponse
+	39, // 84: pilab.agent.v1.NetworkService.NetworkStart:output_type -> pilab.agent.v1.NetworkStartResponse
+	41, // 85: pilab.agent.v1.NetworkService.NetworkStop:output_type -> pilab.agent.v1.NetworkStopResponse
+	43, // 86: pilab.agent.v1.NetworkService.NetworkUpdate:output_type -> pilab.agent.v1.NetworkUpdateResponse
+	45, // 87: pilab.agent.v1.NetworkService.OvsFlowPush:output_type -> pilab.agent.v1.OvsFlowPushResponse
+	47, // 88: pilab.agent.v1.NetworkService.OvsFlowSync:output_type -> pilab.agent.v1.OvsFlowSyncResponse
+	49, // 89: pilab.agent.v1.NetworkService.SyncNetwork:output_type -> pilab.agent.v1.SyncNetworkResponse
+	51, // 90: pilab.agent.v1.NetworkService.SyncPort:output_type -> pilab.agent.v1.SyncPortResponse
+	53, // 91: pilab.agent.v1.NetworkService.DeleteNetwork:output_type -> pilab.agent.v1.DeleteNetworkResponse
+	55, // 92: pilab.agent.v1.NetworkService.DeletePort:output_type -> pilab.agent.v1.DeletePortResponse
+	57, // 93: pilab.agent.v1.NetworkService.GetNetworkState:output_type -> pilab.agent.v1.GetNetworkStateResponse
 	67, // [67:94] is the sub-list for method output_type
 	40, // [40:67] is the sub-list for method input_type
 	40, // [40:40] is the sub-list for extension type_name
@@ -4210,7 +4210,6 @@ func file_pilab_agent_v1_networkservice_proto_init() {
 	if File_pilab_agent_v1_networkservice_proto != nil {
 		return
 	}
-	file_pilab_agent_v1_agent_service_proto_init()
 	file_pilab_agent_v1_error_proto_init()
 	file_pilab_agent_v1_networkservice_proto_msgTypes[2].OneofWrappers = []any{}
 	file_pilab_agent_v1_networkservice_proto_msgTypes[4].OneofWrappers = []any{}

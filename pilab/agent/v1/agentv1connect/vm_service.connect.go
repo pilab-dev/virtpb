@@ -43,7 +43,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// VirtualMachineServiceName is the fully-qualified name of the VirtualMachineService service.
-	VirtualMachineServiceName = "pilab.cloud.agent.v1.VirtualMachineService"
+	VirtualMachineServiceName = "pilab.agent.v1.VirtualMachineService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -56,53 +56,52 @@ const (
 const (
 	// VirtualMachineServiceDefineProcedure is the fully-qualified name of the VirtualMachineService's
 	// Define RPC.
-	VirtualMachineServiceDefineProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/Define"
+	VirtualMachineServiceDefineProcedure = "/pilab.agent.v1.VirtualMachineService/Define"
 	// VirtualMachineServiceGetDefinitionProcedure is the fully-qualified name of the
 	// VirtualMachineService's GetDefinition RPC.
-	VirtualMachineServiceGetDefinitionProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/GetDefinition"
+	VirtualMachineServiceGetDefinitionProcedure = "/pilab.agent.v1.VirtualMachineService/GetDefinition"
 	// VirtualMachineServiceControlProcedure is the fully-qualified name of the VirtualMachineService's
 	// Control RPC.
-	VirtualMachineServiceControlProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/Control"
+	VirtualMachineServiceControlProcedure = "/pilab.agent.v1.VirtualMachineService/Control"
 	// VirtualMachineServiceStatusProcedure is the fully-qualified name of the VirtualMachineService's
 	// Status RPC.
-	VirtualMachineServiceStatusProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/Status"
+	VirtualMachineServiceStatusProcedure = "/pilab.agent.v1.VirtualMachineService/Status"
 	// VirtualMachineServiceGuestInfoProcedure is the fully-qualified name of the
 	// VirtualMachineService's GuestInfo RPC.
-	VirtualMachineServiceGuestInfoProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/GuestInfo"
+	VirtualMachineServiceGuestInfoProcedure = "/pilab.agent.v1.VirtualMachineService/GuestInfo"
 	// VirtualMachineServiceAttachISOProcedure is the fully-qualified name of the
 	// VirtualMachineService's AttachISO RPC.
-	VirtualMachineServiceAttachISOProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/AttachISO"
+	VirtualMachineServiceAttachISOProcedure = "/pilab.agent.v1.VirtualMachineService/AttachISO"
 	// VirtualMachineServiceDetachISOProcedure is the fully-qualified name of the
 	// VirtualMachineService's DetachISO RPC.
-	VirtualMachineServiceDetachISOProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/DetachISO"
+	VirtualMachineServiceDetachISOProcedure = "/pilab.agent.v1.VirtualMachineService/DetachISO"
 	// VirtualMachineServiceCreateVMProcedure is the fully-qualified name of the VirtualMachineService's
 	// CreateVM RPC.
-	VirtualMachineServiceCreateVMProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/CreateVM"
+	VirtualMachineServiceCreateVMProcedure = "/pilab.agent.v1.VirtualMachineService/CreateVM"
 	// VirtualMachineServiceStartVMProcedure is the fully-qualified name of the VirtualMachineService's
 	// StartVM RPC.
-	VirtualMachineServiceStartVMProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/StartVM"
+	VirtualMachineServiceStartVMProcedure = "/pilab.agent.v1.VirtualMachineService/StartVM"
 	// VirtualMachineServiceUpdateVMProcedure is the fully-qualified name of the VirtualMachineService's
 	// UpdateVM RPC.
-	VirtualMachineServiceUpdateVMProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/UpdateVM"
+	VirtualMachineServiceUpdateVMProcedure = "/pilab.agent.v1.VirtualMachineService/UpdateVM"
 	// VirtualMachineServiceWakeOnLANProcedure is the fully-qualified name of the
 	// VirtualMachineService's WakeOnLAN RPC.
-	VirtualMachineServiceWakeOnLANProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/WakeOnLAN"
+	VirtualMachineServiceWakeOnLANProcedure = "/pilab.agent.v1.VirtualMachineService/WakeOnLAN"
 	// VirtualMachineServiceCreatePowerScheduleProcedure is the fully-qualified name of the
 	// VirtualMachineService's CreatePowerSchedule RPC.
-	VirtualMachineServiceCreatePowerScheduleProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/CreatePowerSchedule"
+	VirtualMachineServiceCreatePowerScheduleProcedure = "/pilab.agent.v1.VirtualMachineService/CreatePowerSchedule"
 	// VirtualMachineServiceListPowerSchedulesProcedure is the fully-qualified name of the
 	// VirtualMachineService's ListPowerSchedules RPC.
-	VirtualMachineServiceListPowerSchedulesProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/ListPowerSchedules"
+	VirtualMachineServiceListPowerSchedulesProcedure = "/pilab.agent.v1.VirtualMachineService/ListPowerSchedules"
 	// VirtualMachineServiceUpdatePowerScheduleProcedure is the fully-qualified name of the
 	// VirtualMachineService's UpdatePowerSchedule RPC.
-	VirtualMachineServiceUpdatePowerScheduleProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/UpdatePowerSchedule"
+	VirtualMachineServiceUpdatePowerScheduleProcedure = "/pilab.agent.v1.VirtualMachineService/UpdatePowerSchedule"
 	// VirtualMachineServiceDeletePowerScheduleProcedure is the fully-qualified name of the
 	// VirtualMachineService's DeletePowerSchedule RPC.
-	VirtualMachineServiceDeletePowerScheduleProcedure = "/pilab.cloud.agent.v1.VirtualMachineService/DeletePowerSchedule"
+	VirtualMachineServiceDeletePowerScheduleProcedure = "/pilab.agent.v1.VirtualMachineService/DeletePowerSchedule"
 )
 
-// VirtualMachineServiceClient is a client for the pilab.cloud.agent.v1.VirtualMachineService
-// service.
+// VirtualMachineServiceClient is a client for the pilab.agent.v1.VirtualMachineService service.
 type VirtualMachineServiceClient interface {
 	Define(context.Context, *connect.Request[v1.VmDefineRequest]) (*connect.Response[v1.VmDefineResponse], error)
 	// GetDefinition fetches the definition of a virtual machine.
@@ -129,10 +128,10 @@ type VirtualMachineServiceClient interface {
 	DeletePowerSchedule(context.Context, *connect.Request[v1.DeletePowerScheduleRequest]) (*connect.Response[v1.DeletePowerScheduleResponse], error)
 }
 
-// NewVirtualMachineServiceClient constructs a client for the
-// pilab.cloud.agent.v1.VirtualMachineService service. By default, it uses the Connect protocol with
-// the binary Protobuf Codec, asks for gzipped responses, and sends uncompressed requests. To use
-// the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or connect.WithGRPCWeb() options.
+// NewVirtualMachineServiceClient constructs a client for the pilab.agent.v1.VirtualMachineService
+// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
+// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
+// the connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -252,83 +251,83 @@ type virtualMachineServiceClient struct {
 	deletePowerSchedule *connect.Client[v1.DeletePowerScheduleRequest, v1.DeletePowerScheduleResponse]
 }
 
-// Define calls pilab.cloud.agent.v1.VirtualMachineService.Define.
+// Define calls pilab.agent.v1.VirtualMachineService.Define.
 func (c *virtualMachineServiceClient) Define(ctx context.Context, req *connect.Request[v1.VmDefineRequest]) (*connect.Response[v1.VmDefineResponse], error) {
 	return c.define.CallUnary(ctx, req)
 }
 
-// GetDefinition calls pilab.cloud.agent.v1.VirtualMachineService.GetDefinition.
+// GetDefinition calls pilab.agent.v1.VirtualMachineService.GetDefinition.
 func (c *virtualMachineServiceClient) GetDefinition(ctx context.Context, req *connect.Request[v1.VmGetDefinitionRequest]) (*connect.Response[v1.VmGetDefinitionResponse], error) {
 	return c.getDefinition.CallUnary(ctx, req)
 }
 
-// Control calls pilab.cloud.agent.v1.VirtualMachineService.Control.
+// Control calls pilab.agent.v1.VirtualMachineService.Control.
 func (c *virtualMachineServiceClient) Control(ctx context.Context, req *connect.Request[v1.VmControlRequest]) (*connect.Response[v1.VmControlResponse], error) {
 	return c.control.CallUnary(ctx, req)
 }
 
-// Status calls pilab.cloud.agent.v1.VirtualMachineService.Status.
+// Status calls pilab.agent.v1.VirtualMachineService.Status.
 func (c *virtualMachineServiceClient) Status(ctx context.Context, req *connect.Request[v1.VmStatusRequest]) (*connect.Response[v1.VmStatusResponse], error) {
 	return c.status.CallUnary(ctx, req)
 }
 
-// GuestInfo calls pilab.cloud.agent.v1.VirtualMachineService.GuestInfo.
+// GuestInfo calls pilab.agent.v1.VirtualMachineService.GuestInfo.
 func (c *virtualMachineServiceClient) GuestInfo(ctx context.Context, req *connect.Request[v1.VmGuestInfoRequest]) (*connect.Response[v1.VmGuestInfoResponse], error) {
 	return c.guestInfo.CallUnary(ctx, req)
 }
 
-// AttachISO calls pilab.cloud.agent.v1.VirtualMachineService.AttachISO.
+// AttachISO calls pilab.agent.v1.VirtualMachineService.AttachISO.
 func (c *virtualMachineServiceClient) AttachISO(ctx context.Context, req *connect.Request[v1.VmAttachISORequest]) (*connect.Response[v1.VmAttachISOResponse], error) {
 	return c.attachISO.CallUnary(ctx, req)
 }
 
-// DetachISO calls pilab.cloud.agent.v1.VirtualMachineService.DetachISO.
+// DetachISO calls pilab.agent.v1.VirtualMachineService.DetachISO.
 func (c *virtualMachineServiceClient) DetachISO(ctx context.Context, req *connect.Request[v1.VmDetachISORequest]) (*connect.Response[v1.VmDetachISOResponse], error) {
 	return c.detachISO.CallUnary(ctx, req)
 }
 
-// CreateVM calls pilab.cloud.agent.v1.VirtualMachineService.CreateVM.
+// CreateVM calls pilab.agent.v1.VirtualMachineService.CreateVM.
 func (c *virtualMachineServiceClient) CreateVM(ctx context.Context, req *connect.Request[v1.CreateVMRequest]) (*connect.Response[v1.CreateVMResponse], error) {
 	return c.createVM.CallUnary(ctx, req)
 }
 
-// StartVM calls pilab.cloud.agent.v1.VirtualMachineService.StartVM.
+// StartVM calls pilab.agent.v1.VirtualMachineService.StartVM.
 func (c *virtualMachineServiceClient) StartVM(ctx context.Context, req *connect.Request[v1.StartVMRequest]) (*connect.Response[v1.StartVMResponse], error) {
 	return c.startVM.CallUnary(ctx, req)
 }
 
-// UpdateVM calls pilab.cloud.agent.v1.VirtualMachineService.UpdateVM.
+// UpdateVM calls pilab.agent.v1.VirtualMachineService.UpdateVM.
 func (c *virtualMachineServiceClient) UpdateVM(ctx context.Context, req *connect.Request[v1.UpdateVMRequest]) (*connect.Response[v1.UpdateVMResponse], error) {
 	return c.updateVM.CallUnary(ctx, req)
 }
 
-// WakeOnLAN calls pilab.cloud.agent.v1.VirtualMachineService.WakeOnLAN.
+// WakeOnLAN calls pilab.agent.v1.VirtualMachineService.WakeOnLAN.
 func (c *virtualMachineServiceClient) WakeOnLAN(ctx context.Context, req *connect.Request[v1.WakeOnLANRequest]) (*connect.Response[v1.WakeOnLANResponse], error) {
 	return c.wakeOnLAN.CallUnary(ctx, req)
 }
 
-// CreatePowerSchedule calls pilab.cloud.agent.v1.VirtualMachineService.CreatePowerSchedule.
+// CreatePowerSchedule calls pilab.agent.v1.VirtualMachineService.CreatePowerSchedule.
 func (c *virtualMachineServiceClient) CreatePowerSchedule(ctx context.Context, req *connect.Request[v1.CreatePowerScheduleRequest]) (*connect.Response[v1.CreatePowerScheduleResponse], error) {
 	return c.createPowerSchedule.CallUnary(ctx, req)
 }
 
-// ListPowerSchedules calls pilab.cloud.agent.v1.VirtualMachineService.ListPowerSchedules.
+// ListPowerSchedules calls pilab.agent.v1.VirtualMachineService.ListPowerSchedules.
 func (c *virtualMachineServiceClient) ListPowerSchedules(ctx context.Context, req *connect.Request[v1.ListPowerSchedulesRequest]) (*connect.Response[v1.ListPowerSchedulesResponse], error) {
 	return c.listPowerSchedules.CallUnary(ctx, req)
 }
 
-// UpdatePowerSchedule calls pilab.cloud.agent.v1.VirtualMachineService.UpdatePowerSchedule.
+// UpdatePowerSchedule calls pilab.agent.v1.VirtualMachineService.UpdatePowerSchedule.
 func (c *virtualMachineServiceClient) UpdatePowerSchedule(ctx context.Context, req *connect.Request[v1.UpdatePowerScheduleRequest]) (*connect.Response[v1.UpdatePowerScheduleResponse], error) {
 	return c.updatePowerSchedule.CallUnary(ctx, req)
 }
 
-// DeletePowerSchedule calls pilab.cloud.agent.v1.VirtualMachineService.DeletePowerSchedule.
+// DeletePowerSchedule calls pilab.agent.v1.VirtualMachineService.DeletePowerSchedule.
 func (c *virtualMachineServiceClient) DeletePowerSchedule(ctx context.Context, req *connect.Request[v1.DeletePowerScheduleRequest]) (*connect.Response[v1.DeletePowerScheduleResponse], error) {
 	return c.deletePowerSchedule.CallUnary(ctx, req)
 }
 
-// VirtualMachineServiceHandler is an implementation of the
-// pilab.cloud.agent.v1.VirtualMachineService service.
+// VirtualMachineServiceHandler is an implementation of the pilab.agent.v1.VirtualMachineService
+// service.
 type VirtualMachineServiceHandler interface {
 	Define(context.Context, *connect.Request[v1.VmDefineRequest]) (*connect.Response[v1.VmDefineResponse], error)
 	// GetDefinition fetches the definition of a virtual machine.
@@ -452,7 +451,7 @@ func NewVirtualMachineServiceHandler(svc VirtualMachineServiceHandler, opts ...c
 		connect.WithSchema(virtualMachineServiceMethods.ByName("DeletePowerSchedule")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.agent.v1.VirtualMachineService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.agent.v1.VirtualMachineService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case VirtualMachineServiceDefineProcedure:
 			virtualMachineServiceDefineHandler.ServeHTTP(w, r)
@@ -494,61 +493,61 @@ func NewVirtualMachineServiceHandler(svc VirtualMachineServiceHandler, opts ...c
 type UnimplementedVirtualMachineServiceHandler struct{}
 
 func (UnimplementedVirtualMachineServiceHandler) Define(context.Context, *connect.Request[v1.VmDefineRequest]) (*connect.Response[v1.VmDefineResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.Define is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.Define is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) GetDefinition(context.Context, *connect.Request[v1.VmGetDefinitionRequest]) (*connect.Response[v1.VmGetDefinitionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.GetDefinition is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.GetDefinition is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) Control(context.Context, *connect.Request[v1.VmControlRequest]) (*connect.Response[v1.VmControlResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.Control is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.Control is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) Status(context.Context, *connect.Request[v1.VmStatusRequest]) (*connect.Response[v1.VmStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.Status is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.Status is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) GuestInfo(context.Context, *connect.Request[v1.VmGuestInfoRequest]) (*connect.Response[v1.VmGuestInfoResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.GuestInfo is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.GuestInfo is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) AttachISO(context.Context, *connect.Request[v1.VmAttachISORequest]) (*connect.Response[v1.VmAttachISOResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.AttachISO is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.AttachISO is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) DetachISO(context.Context, *connect.Request[v1.VmDetachISORequest]) (*connect.Response[v1.VmDetachISOResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.DetachISO is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.DetachISO is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) CreateVM(context.Context, *connect.Request[v1.CreateVMRequest]) (*connect.Response[v1.CreateVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.CreateVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.CreateVM is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) StartVM(context.Context, *connect.Request[v1.StartVMRequest]) (*connect.Response[v1.StartVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.StartVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.StartVM is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) UpdateVM(context.Context, *connect.Request[v1.UpdateVMRequest]) (*connect.Response[v1.UpdateVMResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.UpdateVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.UpdateVM is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) WakeOnLAN(context.Context, *connect.Request[v1.WakeOnLANRequest]) (*connect.Response[v1.WakeOnLANResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.WakeOnLAN is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.WakeOnLAN is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) CreatePowerSchedule(context.Context, *connect.Request[v1.CreatePowerScheduleRequest]) (*connect.Response[v1.CreatePowerScheduleResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.CreatePowerSchedule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.CreatePowerSchedule is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) ListPowerSchedules(context.Context, *connect.Request[v1.ListPowerSchedulesRequest]) (*connect.Response[v1.ListPowerSchedulesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.ListPowerSchedules is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.ListPowerSchedules is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) UpdatePowerSchedule(context.Context, *connect.Request[v1.UpdatePowerScheduleRequest]) (*connect.Response[v1.UpdatePowerScheduleResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.UpdatePowerSchedule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.UpdatePowerSchedule is not implemented"))
 }
 
 func (UnimplementedVirtualMachineServiceHandler) DeletePowerSchedule(context.Context, *connect.Request[v1.DeletePowerScheduleRequest]) (*connect.Response[v1.DeletePowerScheduleResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.VirtualMachineService.DeletePowerSchedule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.VirtualMachineService.DeletePowerSchedule is not implemented"))
 }

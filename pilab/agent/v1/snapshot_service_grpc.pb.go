@@ -40,12 +40,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SnapshotService_Create_FullMethodName      = "/pilab.cloud.agent.v1.SnapshotService/Create"
-	SnapshotService_Restore_FullMethodName     = "/pilab.cloud.agent.v1.SnapshotService/Restore"
-	SnapshotService_Delete_FullMethodName      = "/pilab.cloud.agent.v1.SnapshotService/Delete"
-	SnapshotService_Clone_FullMethodName       = "/pilab.cloud.agent.v1.SnapshotService/Clone"
-	SnapshotService_Consolidate_FullMethodName = "/pilab.cloud.agent.v1.SnapshotService/Consolidate"
-	SnapshotService_List_FullMethodName        = "/pilab.cloud.agent.v1.SnapshotService/List"
+	SnapshotService_Create_FullMethodName      = "/pilab.agent.v1.SnapshotService/Create"
+	SnapshotService_Restore_FullMethodName     = "/pilab.agent.v1.SnapshotService/Restore"
+	SnapshotService_Delete_FullMethodName      = "/pilab.agent.v1.SnapshotService/Delete"
+	SnapshotService_Clone_FullMethodName       = "/pilab.agent.v1.SnapshotService/Clone"
+	SnapshotService_Consolidate_FullMethodName = "/pilab.agent.v1.SnapshotService/Consolidate"
+	SnapshotService_List_FullMethodName        = "/pilab.agent.v1.SnapshotService/List"
 )
 
 // SnapshotServiceClient is the client API for SnapshotService service.
@@ -313,7 +313,7 @@ func _SnapshotService_List_Handler(srv interface{}, ctx context.Context, dec fun
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SnapshotService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.agent.v1.SnapshotService",
+	ServiceName: "pilab.agent.v1.SnapshotService",
 	HandlerType: (*SnapshotServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

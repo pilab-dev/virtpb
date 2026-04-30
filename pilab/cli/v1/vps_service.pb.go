@@ -1664,7 +1664,7 @@ type VM struct {
 	Id                       string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name                     string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	OrganizationId           string                 `protobuf:"bytes,3,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	State                    VMState                `protobuf:"varint,4,opt,name=state,proto3,enum=pilab.cloud.cli.v1.VMState" json:"state,omitempty"`
+	State                    VMState                `protobuf:"varint,4,opt,name=state,proto3,enum=pilab.cli.v1.VMState" json:"state,omitempty"`
 	MachineType              *MachineType           `protobuf:"bytes,5,opt,name=machine_type,json=machineType,proto3" json:"machine_type,omitempty"`
 	Image                    *Image                 `protobuf:"bytes,6,opt,name=image,proto3" json:"image,omitempty"`
 	Disks                    []*Disk                `protobuf:"bytes,7,rep,name=disks,proto3" json:"disks,omitempty"`
@@ -3513,7 +3513,7 @@ type Disk struct {
 	Zone           string                 `protobuf:"bytes,10,opt,name=zone,proto3" json:"zone,omitempty"`
 	Description    string                 `protobuf:"bytes,11,opt,name=description,proto3" json:"description,omitempty"`
 	Labels         map[string]string      `protobuf:"bytes,12,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	State          DiskState              `protobuf:"varint,13,opt,name=state,proto3,enum=pilab.cloud.cli.v1.DiskState" json:"state,omitempty"`
+	State          DiskState              `protobuf:"varint,13,opt,name=state,proto3,enum=pilab.cli.v1.DiskState" json:"state,omitempty"`
 	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt      *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -4321,7 +4321,7 @@ type Image struct {
 	Family         string                 `protobuf:"bytes,10,opt,name=family,proto3" json:"family,omitempty"`
 	Description    string                 `protobuf:"bytes,11,opt,name=description,proto3" json:"description,omitempty"`
 	Labels         map[string]string      `protobuf:"bytes,12,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	State          ImageState             `protobuf:"varint,13,opt,name=state,proto3,enum=pilab.cloud.cli.v1.ImageState" json:"state,omitempty"`
+	State          ImageState             `protobuf:"varint,13,opt,name=state,proto3,enum=pilab.cli.v1.ImageState" json:"state,omitempty"`
 	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt      *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -4914,7 +4914,7 @@ type Snapshot struct {
 	Labels          map[string]string      `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	SizeGb          int64                  `protobuf:"varint,8,opt,name=size_gb,json=sizeGb,proto3" json:"size_gb,omitempty"`
 	AutoDeleteAfter *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=auto_delete_after,json=autoDeleteAfter,proto3" json:"auto_delete_after,omitempty"`
-	State           SnapshotState          `protobuf:"varint,10,opt,name=state,proto3,enum=pilab.cloud.cli.v1.SnapshotState" json:"state,omitempty"`
+	State           SnapshotState          `protobuf:"varint,10,opt,name=state,proto3,enum=pilab.cli.v1.SnapshotState" json:"state,omitempty"`
 	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt       *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	MemorySnapshot  bool                   `protobuf:"varint,13,opt,name=memory_snapshot,json=memorySnapshot,proto3" json:"memory_snapshot,omitempty"`
@@ -5520,7 +5520,7 @@ type Network struct {
 	Zone           string                 `protobuf:"bytes,5,opt,name=zone,proto3" json:"zone,omitempty"`
 	Description    string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
 	Labels         map[string]string      `protobuf:"bytes,7,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	State          NetworkState           `protobuf:"varint,8,opt,name=state,proto3,enum=pilab.cloud.cli.v1.NetworkState" json:"state,omitempty"`
+	State          NetworkState           `protobuf:"varint,8,opt,name=state,proto3,enum=pilab.cli.v1.NetworkState" json:"state,omitempty"`
 	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt      *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -6427,7 +6427,7 @@ type VSwitch struct {
 	BridgeName    string                 `protobuf:"bytes,4,opt,name=bridge_name,json=bridgeName,proto3" json:"bridge_name,omitempty"`
 	Mtu           int32                  `protobuf:"varint,5,opt,name=mtu,proto3" json:"mtu,omitempty"`
 	Config        map[string]string      `protobuf:"bytes,6,rep,name=config,proto3" json:"config,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	State         VSwitchState           `protobuf:"varint,7,opt,name=state,proto3,enum=pilab.cloud.cli.v1.VSwitchState" json:"state,omitempty"`
+	State         VSwitchState           `protobuf:"varint,7,opt,name=state,proto3,enum=pilab.cli.v1.VSwitchState" json:"state,omitempty"`
 	PortGroups    []string               `protobuf:"bytes,8,rep,name=port_groups,json=portGroups,proto3" json:"port_groups,omitempty"`
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
@@ -6822,7 +6822,7 @@ type PortGroup struct {
 	MacChanges       bool                   `protobuf:"varint,7,opt,name=mac_changes,json=macChanges,proto3" json:"mac_changes,omitempty"`
 	ForgedTransmits  bool                   `protobuf:"varint,8,opt,name=forged_transmits,json=forgedTransmits,proto3" json:"forged_transmits,omitempty"`
 	AllowedMacs      []string               `protobuf:"bytes,9,rep,name=allowed_macs,json=allowedMacs,proto3" json:"allowed_macs,omitempty"`
-	State            PortGroupState         `protobuf:"varint,10,opt,name=state,proto3,enum=pilab.cloud.cli.v1.PortGroupState" json:"state,omitempty"`
+	State            PortGroupState         `protobuf:"varint,10,opt,name=state,proto3,enum=pilab.cli.v1.PortGroupState" json:"state,omitempty"`
 	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt        *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields    protoimpl.UnknownFields
@@ -7253,7 +7253,7 @@ type PublicIP struct {
 	Zone           string                 `protobuf:"bytes,6,opt,name=zone,proto3" json:"zone,omitempty"`
 	Description    string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
 	Labels         map[string]string      `protobuf:"bytes,8,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	State          PublicIPState          `protobuf:"varint,9,opt,name=state,proto3,enum=pilab.cloud.cli.v1.PublicIPState" json:"state,omitempty"`
+	State          PublicIPState          `protobuf:"varint,9,opt,name=state,proto3,enum=pilab.cli.v1.PublicIPState" json:"state,omitempty"`
 	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt      *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -7887,7 +7887,7 @@ type SecurityGroup struct {
 	Description    string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	Labels         map[string]string      `protobuf:"bytes,5,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Rules          []*SecurityRule        `protobuf:"bytes,6,rep,name=rules,proto3" json:"rules,omitempty"`
-	State          SecurityGroupState     `protobuf:"varint,7,opt,name=state,proto3,enum=pilab.cloud.cli.v1.SecurityGroupState" json:"state,omitempty"`
+	State          SecurityGroupState     `protobuf:"varint,7,opt,name=state,proto3,enum=pilab.cli.v1.SecurityGroupState" json:"state,omitempty"`
 	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -8659,7 +8659,7 @@ type Template struct {
 	Metadata                 map[string]string      `protobuf:"bytes,16,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Preemptible              bool                   `protobuf:"varint,17,opt,name=preemptible,proto3" json:"preemptible,omitempty"`
 	AutoRestartOnMaintenance bool                   `protobuf:"varint,18,opt,name=auto_restart_on_maintenance,json=autoRestartOnMaintenance,proto3" json:"auto_restart_on_maintenance,omitempty"`
-	State                    TemplateState          `protobuf:"varint,19,opt,name=state,proto3,enum=pilab.cloud.cli.v1.TemplateState" json:"state,omitempty"`
+	State                    TemplateState          `protobuf:"varint,19,opt,name=state,proto3,enum=pilab.cli.v1.TemplateState" json:"state,omitempty"`
 	CreatedAt                *timestamppb.Timestamp `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt                *timestamppb.Timestamp `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields            protoimpl.UnknownFields
@@ -9239,7 +9239,7 @@ type OSTemplate struct {
 	CloudInit     bool                   `protobuf:"varint,12,opt,name=cloud_init,json=cloudInit,proto3" json:"cloud_init,omitempty"`                                                   // Supports cloud-init
 	ImageUrls     []*ImageURL            `protobuf:"bytes,13,rep,name=image_urls,json=imageUrls,proto3" json:"image_urls,omitempty"`                                                    // Available image download URLs
 	Labels        map[string]string      `protobuf:"bytes,14,rep,name=labels,proto3" json:"labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // Labels for filtering
-	State         OSTemplateState        `protobuf:"varint,15,opt,name=state,proto3,enum=pilab.cloud.cli.v1.OSTemplateState" json:"state,omitempty"`                                    // Template state
+	State         OSTemplateState        `protobuf:"varint,15,opt,name=state,proto3,enum=pilab.cli.v1.OSTemplateState" json:"state,omitempty"`                                          // Template state
 	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -11319,11 +11319,11 @@ type Datastore struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	Id                string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Type              DatastoreType          `protobuf:"varint,3,opt,name=type,proto3,enum=pilab.cloud.cli.v1.DatastoreType" json:"type,omitempty"`
+	Type              DatastoreType          `protobuf:"varint,3,opt,name=type,proto3,enum=pilab.cli.v1.DatastoreType" json:"type,omitempty"`
 	TotalCapacity     int64                  `protobuf:"varint,4,opt,name=total_capacity,json=totalCapacity,proto3" json:"total_capacity,omitempty"`
 	AvailableCapacity int64                  `protobuf:"varint,5,opt,name=available_capacity,json=availableCapacity,proto3" json:"available_capacity,omitempty"`
 	MountPath         string                 `protobuf:"bytes,6,opt,name=mount_path,json=mountPath,proto3" json:"mount_path,omitempty"`
-	Status            DatastoreStatus        `protobuf:"varint,7,opt,name=status,proto3,enum=pilab.cloud.cli.v1.DatastoreStatus" json:"status,omitempty"`
+	Status            DatastoreStatus        `protobuf:"varint,7,opt,name=status,proto3,enum=pilab.cli.v1.DatastoreStatus" json:"status,omitempty"`
 	ConnectionInfo    map[string]string      `protobuf:"bytes,8,rep,name=connection_info,json=connectionInfo,proto3" json:"connection_info,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	SupportedFormats  []string               `protobuf:"bytes,9,rep,name=supported_formats,json=supportedFormats,proto3" json:"supported_formats,omitempty"`
 	IsLocal           bool                   `protobuf:"varint,10,opt,name=is_local,json=isLocal,proto3" json:"is_local,omitempty"`
@@ -11458,7 +11458,7 @@ func (x *Datastore) GetUpdatedAt() *timestamppb.Timestamp {
 type CreateDatastoreRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Name           string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Type           DatastoreType          `protobuf:"varint,2,opt,name=type,proto3,enum=pilab.cloud.cli.v1.DatastoreType" json:"type,omitempty"`
+	Type           DatastoreType          `protobuf:"varint,2,opt,name=type,proto3,enum=pilab.cli.v1.DatastoreType" json:"type,omitempty"`
 	ConnectionInfo map[string]string      `protobuf:"bytes,3,rep,name=connection_info,json=connectionInfo,proto3" json:"connection_info,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	OrganizationId string                 `protobuf:"bytes,4,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
@@ -11569,7 +11569,7 @@ func (x *GetDatastoreRequest) GetId() string {
 
 type ListDatastoresRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Type          DatastoreType          `protobuf:"varint,1,opt,name=type,proto3,enum=pilab.cloud.cli.v1.DatastoreType" json:"type,omitempty"`
+	Type          DatastoreType          `protobuf:"varint,1,opt,name=type,proto3,enum=pilab.cli.v1.DatastoreType" json:"type,omitempty"`
 	MountedOnly   bool                   `protobuf:"varint,2,opt,name=mounted_only,json=mountedOnly,proto3" json:"mounted_only,omitempty"`
 	PageSize      int32                  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	PageToken     string                 `protobuf:"bytes,4,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
@@ -12515,18 +12515,18 @@ var File_pilab_cli_v1_vps_service_proto protoreflect.FileDescriptor
 
 const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1epilab/cli/v1/vps_service.proto\x12\x12pilab.cloud.cli.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/duration.proto\"\x89\x01\n" +
+	"\x1epilab/cli/v1/vps_service.proto\x12\fpilab.cli.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/duration.proto\"\x89\x01\n" +
 	"\fLoginRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\"\n" +
 	"\forganization\x18\x03 \x01(\tR\forganization\x12\x1d\n" +
 	"\n" +
-	"api_server\x18\x04 \x01(\tR\tapiServer\"\xf9\x01\n" +
+	"api_server\x18\x04 \x01(\tR\tapiServer\"\xed\x01\n" +
 	"\rLoginResponse\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\x12#\n" +
-	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12,\n" +
-	"\x04user\x18\x03 \x01(\v2\x18.pilab.cloud.cli.v1.UserR\x04user\x12D\n" +
-	"\forganization\x18\x04 \x01(\v2 .pilab.cloud.cli.v1.OrganizationR\forganization\x129\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12&\n" +
+	"\x04user\x18\x03 \x01(\v2\x12.pilab.cli.v1.UserR\x04user\x12>\n" +
+	"\forganization\x18\x04 \x01(\v2\x1a.pilab.cli.v1.OrganizationR\forganization\x129\n" +
 	"\n" +
 	"expires_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"l\n" +
 	"\x19InitiateDeviceAuthRequest\x12\x1b\n" +
@@ -12546,7 +12546,7 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x15PollDeviceAuthRequest\x12\x1f\n" +
 	"\vdevice_code\x18\x01 \x01(\tR\n" +
 	"deviceCode\x12\x1b\n" +
-	"\tclient_id\x18\x02 \x01(\tR\bclientId\"\xe5\x02\n" +
+	"\tclient_id\x18\x02 \x01(\tR\bclientId\"\xd9\x02\n" +
 	"\x16PollDeviceAuthResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
 	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1d\n" +
@@ -12554,9 +12554,9 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"token_type\x18\x03 \x01(\tR\ttokenType\x12\x1d\n" +
 	"\n" +
 	"expires_in\x18\x04 \x01(\x05R\texpiresIn\x12\x16\n" +
-	"\x06scopes\x18\x05 \x03(\tR\x06scopes\x12,\n" +
-	"\x04user\x18\x06 \x01(\v2\x18.pilab.cloud.cli.v1.UserR\x04user\x12D\n" +
-	"\forganization\x18\a \x01(\v2 .pilab.cloud.cli.v1.OrganizationR\forganization\x129\n" +
+	"\x06scopes\x18\x05 \x03(\tR\x06scopes\x12&\n" +
+	"\x04user\x18\x06 \x01(\v2\x12.pilab.cli.v1.UserR\x04user\x12>\n" +
+	"\forganization\x18\a \x01(\v2\x1a.pilab.cli.v1.OrganizationR\forganization\x129\n" +
 	"\n" +
 	"expires_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"D\n" +
 	"\rLogoutRequest\x12!\n" +
@@ -12572,16 +12572,16 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xf6\x02\n" +
+	"updated_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xea\x02\n" +
 	"\fOrganization\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x19\n" +
 	"\bowner_id\x18\x04 \x01(\tR\aownerId\x12\x1d\n" +
 	"\n" +
-	"member_ids\x18\x05 \x03(\tR\tmemberIds\x127\n" +
-	"\x05quota\x18\x06 \x01(\v2!.pilab.cloud.cli.v1.ResourceQuotaR\x05quota\x127\n" +
-	"\x05usage\x18\a \x01(\v2!.pilab.cloud.cli.v1.ResourceUsageR\x05usage\x129\n" +
+	"member_ids\x18\x05 \x03(\tR\tmemberIds\x121\n" +
+	"\x05quota\x18\x06 \x01(\v2\x1b.pilab.cli.v1.ResourceQuotaR\x05quota\x121\n" +
+	"\x05usage\x18\a \x01(\v2\x1b.pilab.cli.v1.ResourceUsageR\x05usage\x129\n" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -12601,26 +12601,26 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"diskGbUsed\x12\x19\n" +
 	"\bvms_used\x18\x04 \x01(\x05R\avmsUsed\x12#\n" +
 	"\rnetworks_used\x18\x05 \x01(\x05R\fnetworksUsed\x12&\n" +
-	"\x0fpublic_ips_used\x18\x06 \x01(\x05R\rpublicIpsUsed\"\x8a\b\n" +
+	"\x0fpublic_ips_used\x18\x06 \x01(\x05R\rpublicIpsUsed\"\xd4\a\n" +
 	"\x02VM\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12'\n" +
-	"\x0forganization_id\x18\x03 \x01(\tR\x0eorganizationId\x121\n" +
-	"\x05state\x18\x04 \x01(\x0e2\x1b.pilab.cloud.cli.v1.VMStateR\x05state\x12B\n" +
-	"\fmachine_type\x18\x05 \x01(\v2\x1f.pilab.cloud.cli.v1.MachineTypeR\vmachineType\x12/\n" +
-	"\x05image\x18\x06 \x01(\v2\x19.pilab.cloud.cli.v1.ImageR\x05image\x12.\n" +
-	"\x05disks\x18\a \x03(\v2\x18.pilab.cloud.cli.v1.DiskR\x05disks\x12S\n" +
-	"\x12network_interfaces\x18\b \x03(\v2$.pilab.cloud.cli.v1.NetworkInterfaceR\x11networkInterfaces\x12J\n" +
-	"\x0fsecurity_groups\x18\t \x03(\v2!.pilab.cloud.cli.v1.SecurityGroupR\x0esecurityGroups\x12;\n" +
+	"\x0forganization_id\x18\x03 \x01(\tR\x0eorganizationId\x12+\n" +
+	"\x05state\x18\x04 \x01(\x0e2\x15.pilab.cli.v1.VMStateR\x05state\x12<\n" +
+	"\fmachine_type\x18\x05 \x01(\v2\x19.pilab.cli.v1.MachineTypeR\vmachineType\x12)\n" +
+	"\x05image\x18\x06 \x01(\v2\x13.pilab.cli.v1.ImageR\x05image\x12(\n" +
+	"\x05disks\x18\a \x03(\v2\x12.pilab.cli.v1.DiskR\x05disks\x12M\n" +
+	"\x12network_interfaces\x18\b \x03(\v2\x1e.pilab.cli.v1.NetworkInterfaceR\x11networkInterfaces\x12D\n" +
+	"\x0fsecurity_groups\x18\t \x03(\v2\x1b.pilab.cli.v1.SecurityGroupR\x0esecurityGroups\x125\n" +
 	"\n" +
 	"public_ips\x18\n" +
-	" \x03(\v2\x1c.pilab.cloud.cli.v1.PublicIPR\tpublicIps\x12:\n" +
-	"\x06labels\x18\v \x03(\v2\".pilab.cloud.cli.v1.VM.LabelsEntryR\x06labels\x12 \n" +
+	" \x03(\v2\x16.pilab.cli.v1.PublicIPR\tpublicIps\x124\n" +
+	"\x06labels\x18\v \x03(\v2\x1c.pilab.cli.v1.VM.LabelsEntryR\x06labels\x12 \n" +
 	"\vdescription\x18\f \x01(\tR\vdescription\x12 \n" +
 	"\vpreemptible\x18\r \x01(\bR\vpreemptible\x12=\n" +
 	"\x1bauto_restart_on_maintenance\x18\x0e \x01(\bR\x18autoRestartOnMaintenance\x12\x12\n" +
-	"\x04zone\x18\x0f \x01(\tR\x04zone\x12@\n" +
-	"\bmetadata\x18\x10 \x03(\v2$.pilab.cloud.cli.v1.VM.MetadataEntryR\bmetadata\x129\n" +
+	"\x04zone\x18\x0f \x01(\tR\x04zone\x12:\n" +
+	"\bmetadata\x18\x10 \x03(\v2\x1e.pilab.cli.v1.VM.MetadataEntryR\bmetadata\x129\n" +
 	"\n" +
 	"created_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -12636,7 +12636,7 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
 	"\tcpu_cores\x18\x03 \x01(\x05R\bcpuCores\x12\x15\n" +
 	"\x06ram_mb\x18\x04 \x01(\x05R\x05ramMb\x12\x1a\n" +
-	"\bcategory\x18\x05 \x01(\tR\bcategory\"\x90\a\n" +
+	"\bcategory\x18\x05 \x01(\tR\bcategory\"\x84\a\n" +
 	"\x0fCreateVMRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
 	"\fmachine_type\x18\x02 \x01(\tR\vmachineType\x12\x14\n" +
@@ -12650,16 +12650,16 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\n" +
 	"boot_order\x18\n" +
 	" \x01(\tR\tbootOrder\x12 \n" +
-	"\vdescription\x18\v \x01(\tR\vdescription\x12G\n" +
-	"\x06labels\x18\f \x03(\v2/.pilab.cloud.cli.v1.CreateVMRequest.LabelsEntryR\x06labels\x12 \n" +
+	"\vdescription\x18\v \x01(\tR\vdescription\x12A\n" +
+	"\x06labels\x18\f \x03(\v2).pilab.cli.v1.CreateVMRequest.LabelsEntryR\x06labels\x12 \n" +
 	"\vpreemptible\x18\r \x01(\bR\vpreemptible\x12=\n" +
 	"\x1bauto_restart_on_maintenance\x18\x0e \x01(\bR\x18autoRestartOnMaintenance\x12\x12\n" +
 	"\x04zone\x18\x0f \x01(\tR\x04zone\x12)\n" +
 	"\x10private_networks\x18\x10 \x03(\tR\x0fprivateNetworks\x12\x1b\n" +
 	"\tpublic_ip\x18\x11 \x01(\tR\bpublicIp\x12'\n" +
 	"\x0fsecurity_groups\x18\x12 \x03(\tR\x0esecurityGroups\x12'\n" +
-	"\x0fservice_account\x18\x13 \x01(\tR\x0eserviceAccount\x12M\n" +
-	"\bmetadata\x18\x14 \x03(\v21.pilab.cloud.cli.v1.CreateVMRequest.MetadataEntryR\bmetadata\x12\x12\n" +
+	"\x0fservice_account\x18\x13 \x01(\tR\x0eserviceAccount\x12G\n" +
+	"\bmetadata\x18\x14 \x03(\v2+.pilab.cli.v1.CreateVMRequest.MetadataEntryR\bmetadata\x12\x12\n" +
 	"\x04wait\x18\x15 \x01(\bR\x04wait\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -12668,12 +12668,12 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\"\n" +
 	"\fGetVMRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xe2\x03\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xd6\x03\n" +
 	"\x0eListVMsRequest\x12'\n" +
 	"\x0forganization_id\x18\x01 \x01(\tR\x0eorganizationId\x12+\n" +
-	"\x11all_organizations\x18\x02 \x01(\bR\x10allOrganizations\x12\\\n" +
-	"\x0elabel_selector\x18\x03 \x03(\v25.pilab.cloud.cli.v1.ListVMsRequest.LabelSelectorEntryR\rlabelSelector\x12\\\n" +
-	"\x0efield_selector\x18\x04 \x03(\v25.pilab.cloud.cli.v1.ListVMsRequest.FieldSelectorEntryR\rfieldSelector\x12\x1b\n" +
+	"\x11all_organizations\x18\x02 \x01(\bR\x10allOrganizations\x12V\n" +
+	"\x0elabel_selector\x18\x03 \x03(\v2/.pilab.cli.v1.ListVMsRequest.LabelSelectorEntryR\rlabelSelector\x12V\n" +
+	"\x0efield_selector\x18\x04 \x03(\v2/.pilab.cli.v1.ListVMsRequest.FieldSelectorEntryR\rfieldSelector\x12\x1b\n" +
 	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18\x06 \x01(\tR\tpageToken\x1a@\n" +
@@ -12682,17 +12682,17 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a@\n" +
 	"\x12FieldSelectorEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x84\x01\n" +
-	"\x0fListVMsResponse\x12(\n" +
-	"\x03vms\x18\x01 \x03(\v2\x16.pilab.cloud.cli.v1.VMR\x03vms\x12&\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"~\n" +
+	"\x0fListVMsResponse\x12\"\n" +
+	"\x03vms\x18\x01 \x03(\v2\x10.pilab.cli.v1.VMR\x03vms\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
-	"totalCount\"\xcb\x06\n" +
+	"totalCount\"\xbf\x06\n" +
 	"\x0fUpdateVMRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12!\n" +
 	"\fmachine_type\x18\x02 \x01(\tR\vmachineType\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12G\n" +
-	"\x06labels\x18\x04 \x03(\v2/.pilab.cloud.cli.v1.UpdateVMRequest.LabelsEntryR\x06labels\x12\x1d\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12A\n" +
+	"\x06labels\x18\x04 \x03(\v2).pilab.cli.v1.UpdateVMRequest.LabelsEntryR\x06labels\x12\x1d\n" +
 	"\n" +
 	"add_labels\x18\x05 \x03(\tR\taddLabels\x12#\n" +
 	"\rremove_labels\x18\x06 \x03(\tR\fremoveLabels\x12\x1d\n" +
@@ -12707,8 +12707,8 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x1bauto_restart_on_maintenance\x18\f \x01(\bR\x18autoRestartOnMaintenance\x12.\n" +
 	"\x13add_security_groups\x18\r \x03(\tR\x11addSecurityGroups\x124\n" +
 	"\x16remove_security_groups\x18\x0e \x03(\tR\x14removeSecurityGroups\x12'\n" +
-	"\x0fservice_account\x18\x0f \x01(\tR\x0eserviceAccount\x12M\n" +
-	"\bmetadata\x18\x10 \x03(\v21.pilab.cloud.cli.v1.UpdateVMRequest.MetadataEntryR\bmetadata\x12\x16\n" +
+	"\x0fservice_account\x18\x0f \x01(\tR\x0eserviceAccount\x12G\n" +
+	"\bmetadata\x18\x10 \x03(\v2+.pilab.cli.v1.UpdateVMRequest.MetadataEntryR\bmetadata\x12\x16\n" +
 	"\x06rename\x18\x11 \x01(\tR\x06rename\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -12760,9 +12760,9 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\rsnapshot_name\x18\x03 \x01(\tR\fsnapshotName\x12\x1d\n" +
 	"\n" +
 	"image_path\x18\x04 \x01(\tR\timagePath\x12\x14\n" +
-	"\x05start\x18\x05 \x01(\bR\x05start\"?\n" +
-	"\x15LinkedCloneVMResponse\x12&\n" +
-	"\x02vm\x18\x01 \x01(\v2\x16.pilab.cloud.cli.v1.VMR\x02vm\")\n" +
+	"\x05start\x18\x05 \x01(\bR\x05start\"9\n" +
+	"\x15LinkedCloneVMResponse\x12 \n" +
+	"\x02vm\x18\x01 \x01(\v2\x10.pilab.cli.v1.VMR\x02vm\")\n" +
 	"\x13GetVMConsoleRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"Z\n" +
 	"\x14GetVMConsoleResponse\x12\x1f\n" +
@@ -12777,10 +12777,10 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\n" +
 	"_cpu_coresB\f\n" +
 	"\n" +
-	"_memory_mb\"w\n" +
+	"_memory_mb\"q\n" +
 	"\x19UpdateVMResourcesResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\x12&\n" +
-	"\x02vm\x18\x02 \x01(\v2\x16.pilab.cloud.cli.v1.VMR\x02vm\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\x12 \n" +
+	"\x02vm\x18\x02 \x01(\v2\x10.pilab.cli.v1.VMR\x02vm\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\"0\n" +
 	"\x15GetVMResourcesRequest\x12\x17\n" +
 	"\avm_name\x18\x01 \x01(\tR\x06vmName\"\xb5\x02\n" +
@@ -12791,7 +12791,7 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\rmax_cpu_cores\x18\x04 \x01(\x05R\vmaxCpuCores\x12\"\n" +
 	"\rmax_memory_mb\x18\x05 \x01(\x05R\vmaxMemoryMb\x12-\n" +
 	"\x13cpu_hot_add_enabled\x18\x06 \x01(\bR\x10cpuHotAddEnabled\x123\n" +
-	"\x16memory_hot_add_enabled\x18\a \x01(\bR\x13memoryHotAddEnabled\"\xe7\x04\n" +
+	"\x16memory_hot_add_enabled\x18\a \x01(\bR\x13memoryHotAddEnabled\"\xdb\x04\n" +
 	"\x04Disk\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12'\n" +
@@ -12804,16 +12804,16 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\fsource_image\x18\t \x01(\tR\vsourceImage\x12\x12\n" +
 	"\x04zone\x18\n" +
 	" \x01(\tR\x04zone\x12 \n" +
-	"\vdescription\x18\v \x01(\tR\vdescription\x12<\n" +
-	"\x06labels\x18\f \x03(\v2$.pilab.cloud.cli.v1.Disk.LabelsEntryR\x06labels\x123\n" +
-	"\x05state\x18\r \x01(\x0e2\x1d.pilab.cloud.cli.v1.DiskStateR\x05state\x129\n" +
+	"\vdescription\x18\v \x01(\tR\vdescription\x126\n" +
+	"\x06labels\x18\f \x03(\v2\x1e.pilab.cli.v1.Disk.LabelsEntryR\x06labels\x12-\n" +
+	"\x05state\x18\r \x01(\x0e2\x17.pilab.cli.v1.DiskStateR\x05state\x129\n" +
 	"\n" +
 	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
 	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9c\x03\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x96\x03\n" +
 	"\x11CreateDiskRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\asize_gb\x18\x02 \x01(\x03R\x06sizeGb\x12\x1b\n" +
@@ -12822,8 +12822,8 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x0fsource_snapshot\x18\x05 \x01(\tR\x0esourceSnapshot\x12!\n" +
 	"\fsource_image\x18\x06 \x01(\tR\vsourceImage\x12\x12\n" +
 	"\x04zone\x18\a \x01(\tR\x04zone\x12 \n" +
-	"\vdescription\x18\b \x01(\tR\vdescription\x12I\n" +
-	"\x06labels\x18\t \x03(\v21.pilab.cloud.cli.v1.CreateDiskRequest.LabelsEntryR\x06labels\x12\x12\n" +
+	"\vdescription\x18\b \x01(\tR\vdescription\x12C\n" +
+	"\x06labels\x18\t \x03(\v2+.pilab.cli.v1.CreateDiskRequest.LabelsEntryR\x06labels\x12\x12\n" +
 	"\x04wait\x18\n" +
 	" \x01(\bR\x04wait\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
@@ -12840,16 +12840,16 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x04zone\x18\x04 \x01(\tR\x04zone\x12\x1b\n" +
 	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x06 \x01(\tR\tpageToken\"\x8c\x01\n" +
-	"\x11ListDisksResponse\x12.\n" +
-	"\x05disks\x18\x01 \x03(\v2\x18.pilab.cloud.cli.v1.DiskR\x05disks\x12&\n" +
+	"page_token\x18\x06 \x01(\tR\tpageToken\"\x86\x01\n" +
+	"\x11ListDisksResponse\x12(\n" +
+	"\x05disks\x18\x01 \x03(\v2\x12.pilab.cli.v1.DiskR\x05disks\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
-	"totalCount\"\xab\x02\n" +
+	"totalCount\"\xa5\x02\n" +
 	"\x11UpdateDiskRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12I\n" +
-	"\x06labels\x18\x03 \x03(\v21.pilab.cloud.cli.v1.UpdateDiskRequest.LabelsEntryR\x06labels\x12\x1d\n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12C\n" +
+	"\x06labels\x18\x03 \x03(\v2+.pilab.cli.v1.UpdateDiskRequest.LabelsEntryR\x06labels\x12\x1d\n" +
 	"\n" +
 	"add_labels\x18\x04 \x03(\tR\taddLabels\x12#\n" +
 	"\rremove_labels\x18\x05 \x03(\tR\fremoveLabels\x12\x16\n" +
@@ -12876,7 +12876,7 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x11DetachDiskRequest\x12\x1b\n" +
 	"\tdisk_name\x18\x01 \x01(\tR\bdiskName\x12\x17\n" +
 	"\avm_name\x18\x02 \x01(\tR\x06vmName\x12\x12\n" +
-	"\x04wait\x18\x03 \x01(\bR\x04wait\"\xe5\x04\n" +
+	"\x04wait\x18\x03 \x01(\bR\x04wait\"\xd9\x04\n" +
 	"\x05Image\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12'\n" +
@@ -12892,9 +12892,9 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"visibility\x12\x16\n" +
 	"\x06family\x18\n" +
 	" \x01(\tR\x06family\x12 \n" +
-	"\vdescription\x18\v \x01(\tR\vdescription\x12=\n" +
-	"\x06labels\x18\f \x03(\v2%.pilab.cloud.cli.v1.Image.LabelsEntryR\x06labels\x124\n" +
-	"\x05state\x18\r \x01(\x0e2\x1e.pilab.cloud.cli.v1.ImageStateR\x05state\x129\n" +
+	"\vdescription\x18\v \x01(\tR\vdescription\x127\n" +
+	"\x06labels\x18\f \x03(\v2\x1f.pilab.cli.v1.Image.LabelsEntryR\x06labels\x12.\n" +
+	"\x05state\x18\r \x01(\x0e2\x18.pilab.cli.v1.ImageStateR\x05state\x129\n" +
 	"\n" +
 	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -12914,19 +12914,19 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x06family\x18\x05 \x01(\tR\x06family\x12\x1b\n" +
 	"\tpage_size\x18\x06 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\a \x01(\tR\tpageToken\"\x90\x01\n" +
-	"\x12ListImagesResponse\x121\n" +
-	"\x06images\x18\x01 \x03(\v2\x19.pilab.cloud.cli.v1.ImageR\x06images\x12&\n" +
+	"page_token\x18\a \x01(\tR\tpageToken\"\x8a\x01\n" +
+	"\x12ListImagesResponse\x12+\n" +
+	"\x06images\x18\x01 \x03(\v2\x13.pilab.cli.v1.ImageR\x06images\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
-	"totalCount\"\x87\x03\n" +
+	"totalCount\"\x81\x03\n" +
 	"\x12CreateImageRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
 	"\tsource_vm\x18\x02 \x01(\tR\bsourceVm\x12\x1f\n" +
 	"\vsource_disk\x18\x03 \x01(\tR\n" +
 	"sourceDisk\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\x12J\n" +
-	"\x06labels\x18\x05 \x03(\v22.pilab.cloud.cli.v1.CreateImageRequest.LabelsEntryR\x06labels\x12\x1e\n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12D\n" +
+	"\x06labels\x18\x05 \x03(\v2,.pilab.cli.v1.CreateImageRequest.LabelsEntryR\x06labels\x12\x1e\n" +
 	"\n" +
 	"visibility\x18\x06 \x01(\tR\n" +
 	"visibility\x12\x16\n" +
@@ -12935,14 +12935,14 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x04wait\x18\t \x01(\bR\x04wait\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xbc\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb6\x02\n" +
 	"\x12UploadImageRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
 	"image_data\x18\x02 \x01(\fR\timageData\x12\x16\n" +
 	"\x06format\x18\x03 \x01(\tR\x06format\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\x12J\n" +
-	"\x06labels\x18\x05 \x03(\v22.pilab.cloud.cli.v1.UploadImageRequest.LabelsEntryR\x06labels\x12\x1e\n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12D\n" +
+	"\x06labels\x18\x05 \x03(\v2,.pilab.cli.v1.UploadImageRequest.LabelsEntryR\x06labels\x12\x1e\n" +
 	"\n" +
 	"visibility\x18\x06 \x01(\tR\n" +
 	"visibility\x12\x12\n" +
@@ -12951,19 +12951,19 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"(\n" +
 	"\x12DeleteImageRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xdd\x04\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xd1\x04\n" +
 	"\bSnapshot\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12'\n" +
 	"\x0forganization_id\x18\x03 \x01(\tR\x0eorganizationId\x12\x13\n" +
 	"\x05vm_id\x18\x04 \x01(\tR\x04vmId\x12\x17\n" +
 	"\adisk_id\x18\x05 \x01(\tR\x06diskId\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\x12@\n" +
-	"\x06labels\x18\a \x03(\v2(.pilab.cloud.cli.v1.Snapshot.LabelsEntryR\x06labels\x12\x17\n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12:\n" +
+	"\x06labels\x18\a \x03(\v2\".pilab.cli.v1.Snapshot.LabelsEntryR\x06labels\x12\x17\n" +
 	"\asize_gb\x18\b \x01(\x03R\x06sizeGb\x12F\n" +
-	"\x11auto_delete_after\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x0fautoDeleteAfter\x127\n" +
+	"\x11auto_delete_after\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\x0fautoDeleteAfter\x121\n" +
 	"\x05state\x18\n" +
-	" \x01(\x0e2!.pilab.cloud.cli.v1.SnapshotStateR\x05state\x129\n" +
+	" \x01(\x0e2\x1b.pilab.cli.v1.SnapshotStateR\x05state\x129\n" +
 	"\n" +
 	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -12973,30 +12973,30 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"(\n" +
 	"\x12GetSnapshotRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xcb\x02\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xc5\x02\n" +
 	"\x14ListSnapshotsRequest\x12\x17\n" +
 	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12\x1b\n" +
 	"\tdisk_name\x18\x02 \x01(\tR\bdiskName\x128\n" +
 	"\n" +
-	"older_than\x18\x03 \x01(\v2\x19.google.protobuf.DurationR\tolderThan\x12L\n" +
-	"\x06labels\x18\x04 \x03(\v24.pilab.cloud.cli.v1.ListSnapshotsRequest.LabelsEntryR\x06labels\x12\x1b\n" +
+	"older_than\x18\x03 \x01(\v2\x19.google.protobuf.DurationR\tolderThan\x12F\n" +
+	"\x06labels\x18\x04 \x03(\v2..pilab.cli.v1.ListSnapshotsRequest.LabelsEntryR\x06labels\x12\x1b\n" +
 	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
 	"page_token\x18\x06 \x01(\tR\tpageToken\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x9c\x01\n" +
-	"\x15ListSnapshotsResponse\x12:\n" +
-	"\tsnapshots\x18\x01 \x03(\v2\x1c.pilab.cloud.cli.v1.SnapshotR\tsnapshots\x12&\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\x96\x01\n" +
+	"\x15ListSnapshotsResponse\x124\n" +
+	"\tsnapshots\x18\x01 \x03(\v2\x16.pilab.cli.v1.SnapshotR\tsnapshots\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
-	"totalCount\"\x8f\x03\n" +
+	"totalCount\"\x89\x03\n" +
 	"\x15CreateSnapshotRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x17\n" +
 	"\avm_name\x18\x02 \x01(\tR\x06vmName\x12\x1b\n" +
 	"\tdisk_name\x18\x03 \x01(\tR\bdiskName\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\x12M\n" +
-	"\x06labels\x18\x05 \x03(\v25.pilab.cloud.cli.v1.CreateSnapshotRequest.LabelsEntryR\x06labels\x12E\n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12G\n" +
+	"\x06labels\x18\x05 \x03(\v2/.pilab.cli.v1.CreateSnapshotRequest.LabelsEntryR\x06labels\x12E\n" +
 	"\x11auto_delete_after\x18\x06 \x01(\v2\x19.google.protobuf.DurationR\x0fautoDeleteAfter\x12\x12\n" +
 	"\x04wait\x18\a \x01(\bR\x04wait\x12%\n" +
 	"\x0einclude_memory\x18\b \x01(\bR\rincludeMemory\x1a9\n" +
@@ -13014,7 +13014,7 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"Z\n" +
 	"\x1aSnapshotConsolidateRequest\x12\x17\n" +
 	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12#\n" +
-	"\rsnapshot_name\x18\x02 \x01(\tR\fsnapshotName\"\xd5\x03\n" +
+	"\rsnapshot_name\x18\x02 \x01(\tR\fsnapshotName\"\xc9\x03\n" +
 	"\aNetwork\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12'\n" +
@@ -13022,9 +13022,9 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\n" +
 	"cidr_block\x18\x04 \x01(\tR\tcidrBlock\x12\x12\n" +
 	"\x04zone\x18\x05 \x01(\tR\x04zone\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\x12?\n" +
-	"\x06labels\x18\a \x03(\v2'.pilab.cloud.cli.v1.Network.LabelsEntryR\x06labels\x126\n" +
-	"\x05state\x18\b \x01(\x0e2 .pilab.cloud.cli.v1.NetworkStateR\x05state\x129\n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x129\n" +
+	"\x06labels\x18\a \x03(\v2!.pilab.cli.v1.Network.LabelsEntryR\x06labels\x120\n" +
+	"\x05state\x18\b \x01(\x0e2\x1a.pilab.cli.v1.NetworkStateR\x05state\x129\n" +
 	"\n" +
 	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -13046,14 +13046,14 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x0einterface_type\x18\a \x01(\tR\rinterfaceType\x12\x16\n" +
 	"\x06target\x18\b \x01(\tR\x06target\x129\n" +
 	"\n" +
-	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x9c\x02\n" +
+	"created_at\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x96\x02\n" +
 	"\x14CreateNetworkRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
 	"cidr_block\x18\x02 \x01(\tR\tcidrBlock\x12\x12\n" +
 	"\x04zone\x18\x03 \x01(\tR\x04zone\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\x12L\n" +
-	"\x06labels\x18\x05 \x03(\v24.pilab.cloud.cli.v1.CreateNetworkRequest.LabelsEntryR\x06labels\x12\x12\n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12F\n" +
+	"\x06labels\x18\x05 \x03(\v2..pilab.cli.v1.CreateNetworkRequest.LabelsEntryR\x06labels\x12\x12\n" +
 	"\x04wait\x18\x06 \x01(\bR\x04wait\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -13065,16 +13065,16 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x04zone\x18\x02 \x01(\tR\x04zone\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x04 \x01(\tR\tpageToken\"\x98\x01\n" +
-	"\x14ListNetworksResponse\x127\n" +
-	"\bnetworks\x18\x01 \x03(\v2\x1b.pilab.cloud.cli.v1.NetworkR\bnetworks\x12&\n" +
+	"page_token\x18\x04 \x01(\tR\tpageToken\"\x92\x01\n" +
+	"\x14ListNetworksResponse\x121\n" +
+	"\bnetworks\x18\x01 \x03(\v2\x15.pilab.cli.v1.NetworkR\bnetworks\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
-	"totalCount\"\xb1\x02\n" +
+	"totalCount\"\xab\x02\n" +
 	"\x14UpdateNetworkRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12L\n" +
-	"\x06labels\x18\x03 \x03(\v24.pilab.cloud.cli.v1.UpdateNetworkRequest.LabelsEntryR\x06labels\x12\x1d\n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12F\n" +
+	"\x06labels\x18\x03 \x03(\v2..pilab.cli.v1.UpdateNetworkRequest.LabelsEntryR\x06labels\x12\x1d\n" +
 	"\n" +
 	"add_labels\x18\x04 \x03(\tR\taddLabels\x12#\n" +
 	"\rremove_labels\x18\x05 \x03(\tR\fremoveLabels\x12\x16\n" +
@@ -13090,9 +13090,9 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tR\tpageToken\"\xbd\x01\n" +
-	"\x1dListNetworkInterfacesResponse\x12S\n" +
-	"\x12network_interfaces\x18\x01 \x03(\v2$.pilab.cloud.cli.v1.NetworkInterfaceR\x11networkInterfaces\x12&\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\xb7\x01\n" +
+	"\x1dListNetworkInterfacesResponse\x12M\n" +
+	"\x12network_interfaces\x18\x01 \x03(\v2\x1e.pilab.cli.v1.NetworkInterfaceR\x11networkInterfaces\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\"\xac\x01\n" +
@@ -13107,16 +13107,16 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x1dRemoveNetworkInterfaceRequest\x12\x17\n" +
 	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12!\n" +
 	"\finterface_id\x18\x02 \x01(\tR\vinterfaceId\x12\x12\n" +
-	"\x04wait\x18\x03 \x01(\bR\x04wait\"\xbf\x03\n" +
+	"\x04wait\x18\x03 \x01(\bR\x04wait\"\xb3\x03\n" +
 	"\aVSwitch\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x03 \x01(\tR\x04type\x12\x1f\n" +
 	"\vbridge_name\x18\x04 \x01(\tR\n" +
 	"bridgeName\x12\x10\n" +
-	"\x03mtu\x18\x05 \x01(\x05R\x03mtu\x12?\n" +
-	"\x06config\x18\x06 \x03(\v2'.pilab.cloud.cli.v1.VSwitch.ConfigEntryR\x06config\x126\n" +
-	"\x05state\x18\a \x01(\x0e2 .pilab.cloud.cli.v1.VSwitchStateR\x05state\x12\x1f\n" +
+	"\x03mtu\x18\x05 \x01(\x05R\x03mtu\x129\n" +
+	"\x06config\x18\x06 \x03(\v2!.pilab.cli.v1.VSwitch.ConfigEntryR\x06config\x120\n" +
+	"\x05state\x18\a \x01(\x0e2\x1a.pilab.cli.v1.VSwitchStateR\x05state\x12\x1f\n" +
 	"\vport_groups\x18\b \x03(\tR\n" +
 	"portGroups\x129\n" +
 	"\n" +
@@ -13126,12 +13126,12 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1a9\n" +
 	"\vConfigEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd9\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xd3\x01\n" +
 	"\x14CreateVSwitchRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x10\n" +
-	"\x03mtu\x18\x03 \x01(\x05R\x03mtu\x12L\n" +
-	"\x06config\x18\x04 \x03(\v24.pilab.cloud.cli.v1.CreateVSwitchRequest.ConfigEntryR\x06config\x1a9\n" +
+	"\x03mtu\x18\x03 \x01(\x05R\x03mtu\x12F\n" +
+	"\x06config\x18\x04 \x03(\v2..pilab.cli.v1.CreateVSwitchRequest.ConfigEntryR\x06config\x1a9\n" +
 	"\vConfigEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"'\n" +
@@ -13140,15 +13140,15 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x14ListVSwitchesRequest\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\x9b\x01\n" +
-	"\x15ListVSwitchesResponse\x129\n" +
-	"\tvswitches\x18\x01 \x03(\v2\x1b.pilab.cloud.cli.v1.VSwitchR\tvswitches\x12&\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\x95\x01\n" +
+	"\x15ListVSwitchesResponse\x123\n" +
+	"\tvswitches\x18\x01 \x03(\v2\x15.pilab.cli.v1.VSwitchR\tvswitches\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\"@\n" +
 	"\x14DeleteVSwitchRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x14\n" +
-	"\x05force\x18\x02 \x01(\bR\x05force\"\xc9\x03\n" +
+	"\x05force\x18\x02 \x01(\bR\x05force\"\xc3\x03\n" +
 	"\tPortGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12!\n" +
@@ -13159,9 +13159,9 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\vmac_changes\x18\a \x01(\bR\n" +
 	"macChanges\x12)\n" +
 	"\x10forged_transmits\x18\b \x01(\bR\x0fforgedTransmits\x12!\n" +
-	"\fallowed_macs\x18\t \x03(\tR\vallowedMacs\x128\n" +
+	"\fallowed_macs\x18\t \x03(\tR\vallowedMacs\x122\n" +
 	"\x05state\x18\n" +
-	" \x01(\x0e2\".pilab.cloud.cli.v1.PortGroupStateR\x05state\x129\n" +
+	" \x01(\x0e2\x1c.pilab.cli.v1.PortGroupStateR\x05state\x129\n" +
 	"\n" +
 	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -13181,15 +13181,15 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\fvswitch_name\x18\x01 \x01(\tR\vvswitchName\x12\x1b\n" +
 	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x03 \x01(\tR\tpageToken\"\xa1\x01\n" +
-	"\x16ListPortGroupsResponse\x12>\n" +
-	"\vport_groups\x18\x01 \x03(\v2\x1d.pilab.cloud.cli.v1.PortGroupR\n" +
+	"page_token\x18\x03 \x01(\tR\tpageToken\"\x9b\x01\n" +
+	"\x16ListPortGroupsResponse\x128\n" +
+	"\vport_groups\x18\x01 \x03(\v2\x17.pilab.cli.v1.PortGroupR\n" +
 	"portGroups\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\",\n" +
 	"\x16DeletePortGroupRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xed\x03\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xe1\x03\n" +
 	"\bPublicIP\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12'\n" +
@@ -13198,9 +13198,9 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"ip_address\x18\x04 \x01(\tR\tipAddress\x12\x13\n" +
 	"\x05vm_id\x18\x05 \x01(\tR\x04vmId\x12\x12\n" +
 	"\x04zone\x18\x06 \x01(\tR\x04zone\x12 \n" +
-	"\vdescription\x18\a \x01(\tR\vdescription\x12@\n" +
-	"\x06labels\x18\b \x03(\v2(.pilab.cloud.cli.v1.PublicIP.LabelsEntryR\x06labels\x127\n" +
-	"\x05state\x18\t \x01(\x0e2!.pilab.cloud.cli.v1.PublicIPStateR\x05state\x129\n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12:\n" +
+	"\x06labels\x18\b \x03(\v2\".pilab.cli.v1.PublicIP.LabelsEntryR\x06labels\x121\n" +
+	"\x05state\x18\t \x01(\x0e2\x1b.pilab.cli.v1.PublicIPStateR\x05state\x129\n" +
 	"\n" +
 	"created_at\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
@@ -13208,12 +13208,12 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"updated_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xff\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xf9\x01\n" +
 	"\x15CreatePublicIPRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04zone\x18\x02 \x01(\tR\x04zone\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12M\n" +
-	"\x06labels\x18\x04 \x03(\v25.pilab.cloud.cli.v1.CreatePublicIPRequest.LabelsEntryR\x06labels\x12\x12\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12G\n" +
+	"\x06labels\x18\x04 \x03(\v2/.pilab.cli.v1.CreatePublicIPRequest.LabelsEntryR\x06labels\x12\x12\n" +
 	"\x04wait\x18\x05 \x01(\bR\x04wait\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -13230,19 +13230,19 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x04zone\x18\x03 \x01(\tR\x04zone\x12\x1b\n" +
 	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x05 \x01(\tR\tpageToken\"\x9d\x01\n" +
-	"\x15ListPublicIPsResponse\x12;\n" +
+	"page_token\x18\x05 \x01(\tR\tpageToken\"\x97\x01\n" +
+	"\x15ListPublicIPsResponse\x125\n" +
 	"\n" +
-	"public_ips\x18\x01 \x03(\v2\x1c.pilab.cloud.cli.v1.PublicIPR\tpublicIps\x12&\n" +
+	"public_ips\x18\x01 \x03(\v2\x16.pilab.cli.v1.PublicIPR\tpublicIps\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
-	"totalCount\"\xbf\x02\n" +
+	"totalCount\"\xb9\x02\n" +
 	"\x15UpdatePublicIPRequest\x12\x1e\n" +
 	"\n" +
 	"identifier\x18\x01 \x01(\tR\n" +
 	"identifier\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12M\n" +
-	"\x06labels\x18\x03 \x03(\v25.pilab.cloud.cli.v1.UpdatePublicIPRequest.LabelsEntryR\x06labels\x12\x1d\n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12G\n" +
+	"\x06labels\x18\x03 \x03(\v2/.pilab.cli.v1.UpdatePublicIPRequest.LabelsEntryR\x06labels\x12\x1d\n" +
 	"\n" +
 	"add_labels\x18\x04 \x03(\tR\taddLabels\x12#\n" +
 	"\rremove_labels\x18\x05 \x03(\tR\fremoveLabels\x12\x16\n" +
@@ -13266,15 +13266,15 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"identifier\x18\x01 \x01(\tR\n" +
 	"identifier\x12\x17\n" +
 	"\avm_name\x18\x02 \x01(\tR\x06vmName\x12\x12\n" +
-	"\x04wait\x18\x03 \x01(\bR\x04wait\"\xec\x03\n" +
+	"\x04wait\x18\x03 \x01(\bR\x04wait\"\xda\x03\n" +
 	"\rSecurityGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12'\n" +
 	"\x0forganization_id\x18\x03 \x01(\tR\x0eorganizationId\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\x12E\n" +
-	"\x06labels\x18\x05 \x03(\v2-.pilab.cloud.cli.v1.SecurityGroup.LabelsEntryR\x06labels\x126\n" +
-	"\x05rules\x18\x06 \x03(\v2 .pilab.cloud.cli.v1.SecurityRuleR\x05rules\x12<\n" +
-	"\x05state\x18\a \x01(\x0e2&.pilab.cloud.cli.v1.SecurityGroupStateR\x05state\x129\n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12?\n" +
+	"\x06labels\x18\x05 \x03(\v2'.pilab.cli.v1.SecurityGroup.LabelsEntryR\x06labels\x120\n" +
+	"\x05rules\x18\x06 \x03(\v2\x1a.pilab.cli.v1.SecurityRuleR\x05rules\x126\n" +
+	"\x05state\x18\a \x01(\x0e2 .pilab.cli.v1.SecurityGroupStateR\x05state\x129\n" +
 	"\n" +
 	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -13297,11 +13297,11 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	" \x01(\tR\vdescription\x12\x1a\n" +
 	"\bpriority\x18\v \x01(\x05R\bpriority\x129\n" +
 	"\n" +
-	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xf5\x01\n" +
+	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xef\x01\n" +
 	"\x1aCreateSecurityGroupRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12R\n" +
-	"\x06labels\x18\x03 \x03(\v2:.pilab.cloud.cli.v1.CreateSecurityGroupRequest.LabelsEntryR\x06labels\x12\x12\n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12L\n" +
+	"\x06labels\x18\x03 \x03(\v24.pilab.cli.v1.CreateSecurityGroupRequest.LabelsEntryR\x06labels\x12\x12\n" +
 	"\x04wait\x18\x04 \x01(\bR\x04wait\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -13311,16 +13311,16 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x19ListSecurityGroupsRequest\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\xb1\x01\n" +
-	"\x1aListSecurityGroupsResponse\x12J\n" +
-	"\x0fsecurity_groups\x18\x01 \x03(\v2!.pilab.cloud.cli.v1.SecurityGroupR\x0esecurityGroups\x12&\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\xab\x01\n" +
+	"\x1aListSecurityGroupsResponse\x12D\n" +
+	"\x0fsecurity_groups\x18\x01 \x03(\v2\x1b.pilab.cli.v1.SecurityGroupR\x0esecurityGroups\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
-	"totalCount\"\xbd\x02\n" +
+	"totalCount\"\xb7\x02\n" +
 	"\x1aUpdateSecurityGroupRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12R\n" +
-	"\x06labels\x18\x03 \x03(\v2:.pilab.cloud.cli.v1.UpdateSecurityGroupRequest.LabelsEntryR\x06labels\x12\x1d\n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12L\n" +
+	"\x06labels\x18\x03 \x03(\v24.pilab.cli.v1.UpdateSecurityGroupRequest.LabelsEntryR\x06labels\x12\x1d\n" +
 	"\n" +
 	"add_labels\x18\x04 \x03(\tR\taddLabels\x12#\n" +
 	"\rremove_labels\x18\x05 \x03(\tR\fremoveLabels\x12\x16\n" +
@@ -13347,15 +13347,15 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x19RemoveSecurityRuleRequest\x12\x1d\n" +
 	"\n" +
 	"group_name\x18\x01 \x01(\tR\tgroupName\x12\x17\n" +
-	"\arule_id\x18\x02 \x01(\tR\x06ruleId\"\x95\b\n" +
+	"\arule_id\x18\x02 \x01(\tR\x06ruleId\"\xf7\a\n" +
 	"\bTemplate\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12'\n" +
 	"\x0forganization_id\x18\x03 \x01(\tR\x0eorganizationId\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\x12@\n" +
-	"\x06labels\x18\x05 \x03(\v2(.pilab.cloud.cli.v1.Template.LabelsEntryR\x06labels\x12B\n" +
-	"\fmachine_type\x18\x06 \x01(\v2\x1f.pilab.cloud.cli.v1.MachineTypeR\vmachineType\x12/\n" +
-	"\x05image\x18\a \x01(\v2\x19.pilab.cloud.cli.v1.ImageR\x05image\x12)\n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\x12:\n" +
+	"\x06labels\x18\x05 \x03(\v2\".pilab.cli.v1.Template.LabelsEntryR\x06labels\x12<\n" +
+	"\fmachine_type\x18\x06 \x01(\v2\x19.pilab.cli.v1.MachineTypeR\vmachineType\x12)\n" +
+	"\x05image\x18\a \x01(\v2\x13.pilab.cli.v1.ImageR\x05image\x12)\n" +
 	"\x11root_disk_size_gb\x18\b \x01(\x05R\x0erootDiskSizeGb\x12$\n" +
 	"\x0eroot_disk_type\x18\t \x01(\tR\frootDiskType\x12\x18\n" +
 	"\anetwork\x18\n" +
@@ -13365,11 +13365,11 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\bssh_keys\x18\r \x03(\tR\asshKeys\x12\x1a\n" +
 	"\buserdata\x18\x0e \x01(\tR\buserdata\x12\x1d\n" +
 	"\n" +
-	"boot_order\x18\x0f \x01(\tR\tbootOrder\x12F\n" +
-	"\bmetadata\x18\x10 \x03(\v2*.pilab.cloud.cli.v1.Template.MetadataEntryR\bmetadata\x12 \n" +
+	"boot_order\x18\x0f \x01(\tR\tbootOrder\x12@\n" +
+	"\bmetadata\x18\x10 \x03(\v2$.pilab.cli.v1.Template.MetadataEntryR\bmetadata\x12 \n" +
 	"\vpreemptible\x18\x11 \x01(\bR\vpreemptible\x12=\n" +
-	"\x1bauto_restart_on_maintenance\x18\x12 \x01(\bR\x18autoRestartOnMaintenance\x127\n" +
-	"\x05state\x18\x13 \x01(\x0e2!.pilab.cloud.cli.v1.TemplateStateR\x05state\x129\n" +
+	"\x1bauto_restart_on_maintenance\x18\x12 \x01(\bR\x18autoRestartOnMaintenance\x121\n" +
+	"\x05state\x18\x13 \x01(\x0e2\x1b.pilab.cli.v1.TemplateStateR\x05state\x129\n" +
 	"\n" +
 	"created_at\x18\x14 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -13379,12 +13379,12 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xc9\x06\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xbd\x06\n" +
 	"\x15CreateTemplateRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
 	"\tsource_vm\x18\x02 \x01(\tR\bsourceVm\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12M\n" +
-	"\x06labels\x18\x04 \x03(\v25.pilab.cloud.cli.v1.CreateTemplateRequest.LabelsEntryR\x06labels\x12!\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12G\n" +
+	"\x06labels\x18\x04 \x03(\v2/.pilab.cli.v1.CreateTemplateRequest.LabelsEntryR\x06labels\x12!\n" +
 	"\fmachine_type\x18\x05 \x01(\tR\vmachineType\x12\x14\n" +
 	"\x05image\x18\x06 \x01(\tR\x05image\x12)\n" +
 	"\x11root_disk_size_gb\x18\a \x01(\x05R\x0erootDiskSizeGb\x12$\n" +
@@ -13396,8 +13396,8 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\bssh_keys\x18\f \x03(\tR\asshKeys\x12\x1a\n" +
 	"\buserdata\x18\r \x01(\tR\buserdata\x12\x1d\n" +
 	"\n" +
-	"boot_order\x18\x0e \x01(\tR\tbootOrder\x12S\n" +
-	"\bmetadata\x18\x0f \x03(\v27.pilab.cloud.cli.v1.CreateTemplateRequest.MetadataEntryR\bmetadata\x12 \n" +
+	"boot_order\x18\x0e \x01(\tR\tbootOrder\x12M\n" +
+	"\bmetadata\x18\x0f \x03(\v21.pilab.cli.v1.CreateTemplateRequest.MetadataEntryR\bmetadata\x12 \n" +
 	"\vpreemptible\x18\x10 \x01(\bR\vpreemptible\x12=\n" +
 	"\x1bauto_restart_on_maintenance\x18\x11 \x01(\bR\x18autoRestartOnMaintenance\x12\x12\n" +
 	"\x04wait\x18\x12 \x01(\bR\x04wait\x1a9\n" +
@@ -13412,14 +13412,14 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x14ListTemplatesRequest\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\x9c\x01\n" +
-	"\x15ListTemplatesResponse\x12:\n" +
-	"\ttemplates\x18\x01 \x03(\v2\x1c.pilab.cloud.cli.v1.TemplateR\ttemplates\x12&\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\x96\x01\n" +
+	"\x15ListTemplatesResponse\x124\n" +
+	"\ttemplates\x18\x01 \x03(\v2\x16.pilab.cli.v1.TemplateR\ttemplates\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\"+\n" +
 	"\x15DeleteTemplateRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xaf\x05\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x9d\x05\n" +
 	"\n" +
 	"OSTemplate\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x13\n" +
@@ -13435,11 +13435,11 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	" \x01(\x05R\bmemoryMb\x12\x17\n" +
 	"\adisk_gb\x18\v \x01(\x05R\x06diskGb\x12\x1d\n" +
 	"\n" +
-	"cloud_init\x18\f \x01(\bR\tcloudInit\x12;\n" +
+	"cloud_init\x18\f \x01(\bR\tcloudInit\x125\n" +
 	"\n" +
-	"image_urls\x18\r \x03(\v2\x1c.pilab.cloud.cli.v1.ImageURLR\timageUrls\x12B\n" +
-	"\x06labels\x18\x0e \x03(\v2*.pilab.cloud.cli.v1.OSTemplate.LabelsEntryR\x06labels\x129\n" +
-	"\x05state\x18\x0f \x01(\x0e2#.pilab.cloud.cli.v1.OSTemplateStateR\x05state\x129\n" +
+	"image_urls\x18\r \x03(\v2\x16.pilab.cli.v1.ImageURLR\timageUrls\x12<\n" +
+	"\x06labels\x18\x0e \x03(\v2$.pilab.cli.v1.OSTemplate.LabelsEntryR\x06labels\x123\n" +
+	"\x05state\x18\x0f \x01(\x0e2\x1d.pilab.cli.v1.OSTemplateStateR\x05state\x129\n" +
 	"\n" +
 	"created_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
@@ -13462,9 +13462,9 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x0fcloud_init_only\x18\x04 \x01(\bR\rcloudInitOnly\x12\x1b\n" +
 	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x06 \x01(\tR\tpageToken\"\xa0\x01\n" +
-	"\x17ListOSTemplatesResponse\x12<\n" +
-	"\ttemplates\x18\x01 \x03(\v2\x1e.pilab.cloud.cli.v1.OSTemplateR\ttemplates\x12&\n" +
+	"page_token\x18\x06 \x01(\tR\tpageToken\"\x9a\x01\n" +
+	"\x17ListOSTemplatesResponse\x126\n" +
+	"\ttemplates\x18\x01 \x03(\v2\x18.pilab.cli.v1.OSTemplateR\ttemplates\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\"+\n" +
@@ -13474,7 +13474,7 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x05force\x18\x01 \x01(\bR\x05force\"y\n" +
 	"\x17SyncOSTemplatesResponse\x12%\n" +
 	"\x0eimported_count\x18\x01 \x01(\x05R\rimportedCount\x127\n" +
-	"\tsynced_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\bsyncedAt\"\x8a\a\n" +
+	"\tsynced_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\bsyncedAt\"\xfe\x06\n" +
 	"\x1dCreateVMFromOSTemplateRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x13\n" +
 	"\x05os_id\x18\x02 \x01(\tR\x04osId\x12\x1b\n" +
@@ -13487,16 +13487,16 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\n" +
 	"boot_order\x18\t \x01(\tR\tbootOrder\x12 \n" +
 	"\vdescription\x18\n" +
-	" \x01(\tR\vdescription\x12U\n" +
-	"\x06labels\x18\v \x03(\v2=.pilab.cloud.cli.v1.CreateVMFromOSTemplateRequest.LabelsEntryR\x06labels\x12 \n" +
+	" \x01(\tR\vdescription\x12O\n" +
+	"\x06labels\x18\v \x03(\v27.pilab.cli.v1.CreateVMFromOSTemplateRequest.LabelsEntryR\x06labels\x12 \n" +
 	"\vpreemptible\x18\f \x01(\bR\vpreemptible\x12=\n" +
 	"\x1bauto_restart_on_maintenance\x18\r \x01(\bR\x18autoRestartOnMaintenance\x12\x12\n" +
 	"\x04zone\x18\x0e \x01(\tR\x04zone\x12)\n" +
 	"\x10private_networks\x18\x0f \x03(\tR\x0fprivateNetworks\x12\x1b\n" +
 	"\tpublic_ip\x18\x10 \x01(\tR\bpublicIp\x12'\n" +
 	"\x0fsecurity_groups\x18\x11 \x03(\tR\x0esecurityGroups\x12!\n" +
-	"\fmachine_type\x18\x12 \x01(\tR\vmachineType\x12[\n" +
-	"\bmetadata\x18\x13 \x03(\v2?.pilab.cloud.cli.v1.CreateVMFromOSTemplateRequest.MetadataEntryR\bmetadata\x12\x12\n" +
+	"\fmachine_type\x18\x12 \x01(\tR\vmachineType\x12U\n" +
+	"\bmetadata\x18\x13 \x03(\v29.pilab.cli.v1.CreateVMFromOSTemplateRequest.MetadataEntryR\bmetadata\x12\x12\n" +
 	"\x04wait\x18\x14 \x01(\bR\x04wait\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
@@ -13510,9 +13510,9 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"metricType\x121\n" +
 	"\x06period\x18\x03 \x01(\v2\x19.google.protobuf.DurationR\x06period\x125\n" +
 	"\binterval\x18\x04 \x01(\v2\x19.google.protobuf.DurationR\binterval\x12#\n" +
-	"\routput_format\x18\x05 \x01(\tR\foutputFormat\"\x90\x01\n" +
-	"\x12GetMetricsResponse\x12@\n" +
-	"\vdata_points\x18\x01 \x03(\v2\x1f.pilab.cloud.cli.v1.MetricPointR\n" +
+	"\routput_format\x18\x05 \x01(\tR\foutputFormat\"\x8a\x01\n" +
+	"\x12GetMetricsResponse\x12:\n" +
+	"\vdata_points\x18\x01 \x03(\v2\x19.pilab.cli.v1.MetricPointR\n" +
 	"dataPoints\x12\x1f\n" +
 	"\vmetric_type\x18\x02 \x01(\tR\n" +
 	"metricType\x12\x17\n" +
@@ -13530,14 +13530,14 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x05limit\x18\x06 \x01(\x05R\x05limit\x12\x1b\n" +
 	"\tpage_size\x18\a \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\b \x01(\tR\tpageToken\"\x9f\x01\n" +
-	"\x13GetActivityResponse\x12?\n" +
+	"page_token\x18\b \x01(\tR\tpageToken\"\x99\x01\n" +
+	"\x13GetActivityResponse\x129\n" +
 	"\n" +
-	"activities\x18\x01 \x03(\v2\x1f.pilab.cloud.cli.v1.ActivityLogR\n" +
+	"activities\x18\x01 \x03(\v2\x19.pilab.cli.v1.ActivityLogR\n" +
 	"activities\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
-	"totalCount\"\xb3\x03\n" +
+	"totalCount\"\xad\x03\n" +
 	"\vActivityLog\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x1b\n" +
@@ -13546,8 +13546,8 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\rresource_type\x18\x05 \x01(\tR\fresourceType\x12#\n" +
 	"\rresource_name\x18\x06 \x01(\tR\fresourceName\x12\x1f\n" +
 	"\vresource_id\x18\a \x01(\tR\n" +
-	"resourceId\x12F\n" +
-	"\adetails\x18\b \x03(\v2,.pilab.cloud.cli.v1.ActivityLog.DetailsEntryR\adetails\x12\x1d\n" +
+	"resourceId\x12@\n" +
+	"\adetails\x18\b \x03(\v2&.pilab.cli.v1.ActivityLog.DetailsEntryR\adetails\x12\x1d\n" +
 	"\n" +
 	"ip_address\x18\t \x01(\tR\tipAddress\x128\n" +
 	"\ttimestamp\x18\n" +
@@ -13573,9 +13573,9 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x18ListOrganizationsRequest\x12\x1b\n" +
 	"\tpage_size\x18\x01 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\tR\tpageToken\"\xac\x01\n" +
-	"\x19ListOrganizationsResponse\x12F\n" +
-	"\rorganizations\x18\x01 \x03(\v2 .pilab.cloud.cli.v1.OrganizationR\rorganizations\x12&\n" +
+	"page_token\x18\x02 \x01(\tR\tpageToken\"\xa6\x01\n" +
+	"\x19ListOrganizationsResponse\x12@\n" +
+	"\rorganizations\x18\x01 \x03(\v2\x1a.pilab.cli.v1.OrganizationR\rorganizations\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\"\x8a\x02\n" +
@@ -13608,9 +13608,9 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\forganization\x18\x02 \x01(\tR\forganization\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x04 \x01(\tR\tpageToken\"\x8c\x01\n" +
-	"\x11ListUsersResponse\x12.\n" +
-	"\x05users\x18\x01 \x03(\v2\x18.pilab.cloud.cli.v1.UserR\x05users\x12&\n" +
+	"page_token\x18\x04 \x01(\tR\tpageToken\"\x86\x01\n" +
+	"\x11ListUsersResponse\x12(\n" +
+	"\x05users\x18\x01 \x03(\v2\x12.pilab.cli.v1.UserR\x05users\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
 	"totalCount\"\xad\x02\n" +
@@ -13633,17 +13633,17 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\n" +
 	"build_date\x18\x03 \x01(\tR\tbuildDate\x12\x1d\n" +
 	"\n" +
-	"git_commit\x18\x04 \x01(\tR\tgitCommit\"\x9e\x05\n" +
+	"git_commit\x18\x04 \x01(\tR\tgitCommit\"\x8c\x05\n" +
 	"\tDatastore\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x125\n" +
-	"\x04type\x18\x03 \x01(\x0e2!.pilab.cloud.cli.v1.DatastoreTypeR\x04type\x12%\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12/\n" +
+	"\x04type\x18\x03 \x01(\x0e2\x1b.pilab.cli.v1.DatastoreTypeR\x04type\x12%\n" +
 	"\x0etotal_capacity\x18\x04 \x01(\x03R\rtotalCapacity\x12-\n" +
 	"\x12available_capacity\x18\x05 \x01(\x03R\x11availableCapacity\x12\x1d\n" +
 	"\n" +
-	"mount_path\x18\x06 \x01(\tR\tmountPath\x12;\n" +
-	"\x06status\x18\a \x01(\x0e2#.pilab.cloud.cli.v1.DatastoreStatusR\x06status\x12Z\n" +
-	"\x0fconnection_info\x18\b \x03(\v21.pilab.cloud.cli.v1.Datastore.ConnectionInfoEntryR\x0econnectionInfo\x12+\n" +
+	"mount_path\x18\x06 \x01(\tR\tmountPath\x125\n" +
+	"\x06status\x18\a \x01(\x0e2\x1d.pilab.cli.v1.DatastoreStatusR\x06status\x12T\n" +
+	"\x0fconnection_info\x18\b \x03(\v2+.pilab.cli.v1.Datastore.ConnectionInfoEntryR\x0econnectionInfo\x12+\n" +
 	"\x11supported_formats\x18\t \x03(\tR\x10supportedFormats\x12\x19\n" +
 	"\bis_local\x18\n" +
 	" \x01(\bR\aisLocal\x12'\n" +
@@ -13654,26 +13654,26 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1aA\n" +
 	"\x13ConnectionInfoEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xb8\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"\xac\x02\n" +
 	"\x16CreateDatastoreRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x125\n" +
-	"\x04type\x18\x02 \x01(\x0e2!.pilab.cloud.cli.v1.DatastoreTypeR\x04type\x12g\n" +
-	"\x0fconnection_info\x18\x03 \x03(\v2>.pilab.cloud.cli.v1.CreateDatastoreRequest.ConnectionInfoEntryR\x0econnectionInfo\x12'\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12/\n" +
+	"\x04type\x18\x02 \x01(\x0e2\x1b.pilab.cli.v1.DatastoreTypeR\x04type\x12a\n" +
+	"\x0fconnection_info\x18\x03 \x03(\v28.pilab.cli.v1.CreateDatastoreRequest.ConnectionInfoEntryR\x0econnectionInfo\x12'\n" +
 	"\x0forganization_id\x18\x04 \x01(\tR\x0eorganizationId\x1aA\n" +
 	"\x13ConnectionInfoEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"%\n" +
 	"\x13GetDatastoreRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\xad\x01\n" +
-	"\x15ListDatastoresRequest\x125\n" +
-	"\x04type\x18\x01 \x01(\x0e2!.pilab.cloud.cli.v1.DatastoreTypeR\x04type\x12!\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"\xa7\x01\n" +
+	"\x15ListDatastoresRequest\x12/\n" +
+	"\x04type\x18\x01 \x01(\x0e2\x1b.pilab.cli.v1.DatastoreTypeR\x04type\x12!\n" +
 	"\fmounted_only\x18\x02 \x01(\bR\vmountedOnly\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\x05R\bpageSize\x12\x1d\n" +
 	"\n" +
-	"page_token\x18\x04 \x01(\tR\tpageToken\"\xa0\x01\n" +
-	"\x16ListDatastoresResponse\x12=\n" +
+	"page_token\x18\x04 \x01(\tR\tpageToken\"\x9a\x01\n" +
+	"\x16ListDatastoresResponse\x127\n" +
 	"\n" +
-	"datastores\x18\x01 \x03(\v2\x1d.pilab.cloud.cli.v1.DatastoreR\n" +
+	"datastores\x18\x01 \x03(\v2\x17.pilab.cli.v1.DatastoreR\n" +
 	"datastores\x12&\n" +
 	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\x12\x1f\n" +
 	"\vtotal_count\x18\x03 \x01(\x05R\n" +
@@ -13720,17 +13720,17 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\vbridge_name\x18\t \x01(\tR\n" +
 	"bridgeName\x12\x14\n" +
 	"\x05vlans\x18\n" +
-	" \x03(\tR\x05vlans\"\xcd\x01\n" +
-	"\x15NetworkConfigResponse\x12H\n" +
+	" \x03(\tR\x05vlans\"\xc7\x01\n" +
+	"\x15NetworkConfigResponse\x12B\n" +
 	"\n" +
-	"interfaces\x18\x01 \x03(\v2(.pilab.cloud.cli.v1.NetworkInterfaceInfoR\n" +
+	"interfaces\x18\x01 \x03(\v2\".pilab.cli.v1.NetworkInterfaceInfoR\n" +
 	"interfaces\x12+\n" +
 	"\x11primary_interface\x18\x02 \x01(\tR\x10primaryInterface\x12!\n" +
 	"\fdhcp_enabled\x18\x03 \x01(\bR\vdhcpEnabled\x12\x1a\n" +
-	"\bhostname\x18\x04 \x01(\tR\bhostname\"\xec\x01\n" +
-	"\x15StorageConfigResponse\x12=\n" +
+	"\bhostname\x18\x04 \x01(\tR\bhostname\"\xe6\x01\n" +
+	"\x15StorageConfigResponse\x127\n" +
 	"\n" +
-	"datastores\x18\x01 \x03(\v2\x1d.pilab.cloud.cli.v1.DatastoreR\n" +
+	"datastores\x18\x01 \x03(\v2\x17.pilab.cli.v1.DatastoreR\n" +
 	"datastores\x12#\n" +
 	"\rtotal_storage\x18\x02 \x01(\x03R\ftotalStorage\x12!\n" +
 	"\fused_storage\x18\x03 \x01(\x03R\vusedStorage\x12+\n" +
@@ -13741,13 +13741,13 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x18\n" +
 	"\ahealthy\x18\x03 \x01(\bR\ahealthy\x12\x18\n" +
-	"\amessage\x18\x04 \x01(\tR\amessage\"\xfb\x02\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\"\xf5\x02\n" +
 	"\x12HostHealthResponse\x12'\n" +
 	"\x0foverall_healthy\x18\x01 \x01(\bR\x0eoverallHealthy\x12*\n" +
 	"\x11cpu_usage_percent\x18\x02 \x01(\x05R\x0fcpuUsagePercent\x120\n" +
 	"\x14memory_usage_percent\x18\x03 \x01(\x05R\x12memoryUsagePercent\x12,\n" +
-	"\x12disk_usage_percent\x18\x04 \x01(\x05R\x10diskUsagePercent\x12=\n" +
-	"\bservices\x18\x05 \x03(\v2!.pilab.cloud.cli.v1.ServiceStatusR\bservices\x12\x1a\n" +
+	"\x12disk_usage_percent\x18\x04 \x01(\x05R\x10diskUsagePercent\x127\n" +
+	"\bservices\x18\x05 \x03(\v2\x1b.pilab.cli.v1.ServiceStatusR\bservices\x12\x1a\n" +
 	"\bwarnings\x18\x06 \x03(\tR\bwarnings\x12\x16\n" +
 	"\x06errors\x18\a \x03(\tR\x06errors\x12=\n" +
 	"\flast_updated\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\vlastUpdated\"\xe4\x01\n" +
@@ -13842,127 +13842,127 @@ const file_pilab_cli_v1_vps_service_proto_rawDesc = "" +
 	"\x1cDATASTORE_STATUS_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18DATASTORE_STATUS_MOUNTED\x10\x01\x12\x1e\n" +
 	"\x1aDATASTORE_STATUS_UNMOUNTED\x10\x02\x12\x1a\n" +
-	"\x16DATASTORE_STATUS_ERROR\x10\x032\xa2H\n" +
+	"\x16DATASTORE_STATUS_ERROR\x10\x032\xa0@\n" +
 	"\n" +
-	"VPSService\x12L\n" +
-	"\x05Login\x12 .pilab.cloud.cli.v1.LoginRequest\x1a!.pilab.cloud.cli.v1.LoginResponse\x12s\n" +
-	"\x12InitiateDeviceAuth\x12-.pilab.cloud.cli.v1.InitiateDeviceAuthRequest\x1a..pilab.cloud.cli.v1.InitiateDeviceAuthResponse\x12g\n" +
-	"\x0ePollDeviceAuth\x12).pilab.cloud.cli.v1.PollDeviceAuthRequest\x1a*.pilab.cloud.cli.v1.PollDeviceAuthResponse\x12C\n" +
-	"\x06Logout\x12!.pilab.cloud.cli.v1.LogoutRequest\x1a\x16.google.protobuf.Empty\x12B\n" +
-	"\x0eGetCurrentUser\x12\x16.google.protobuf.Empty\x1a\x18.pilab.cloud.cli.v1.User\x12G\n" +
-	"\bCreateVM\x12#.pilab.cloud.cli.v1.CreateVMRequest\x1a\x16.pilab.cloud.cli.v1.VM\x12A\n" +
-	"\x05GetVM\x12 .pilab.cloud.cli.v1.GetVMRequest\x1a\x16.pilab.cloud.cli.v1.VM\x12R\n" +
-	"\aListVMs\x12\".pilab.cloud.cli.v1.ListVMsRequest\x1a#.pilab.cloud.cli.v1.ListVMsResponse\x12G\n" +
-	"\bUpdateVM\x12#.pilab.cloud.cli.v1.UpdateVMRequest\x1a\x16.pilab.cloud.cli.v1.VM\x12G\n" +
-	"\bDeleteVM\x12#.pilab.cloud.cli.v1.DeleteVMRequest\x1a\x16.google.protobuf.Empty\x12E\n" +
-	"\aStartVM\x12\".pilab.cloud.cli.v1.StartVMRequest\x1a\x16.google.protobuf.Empty\x12C\n" +
-	"\x06StopVM\x12!.pilab.cloud.cli.v1.StopVMRequest\x1a\x16.google.protobuf.Empty\x12I\n" +
-	"\tRestartVM\x12$.pilab.cloud.cli.v1.RestartVMRequest\x1a\x16.google.protobuf.Empty\x12E\n" +
-	"\aPauseVM\x12\".pilab.cloud.cli.v1.PauseVMRequest\x1a\x16.google.protobuf.Empty\x12I\n" +
-	"\tUnpauseVM\x12$.pilab.cloud.cli.v1.UnpauseVMRequest\x1a\x16.google.protobuf.Empty\x12I\n" +
-	"\tMigrateVM\x12$.pilab.cloud.cli.v1.MigrateVMRequest\x1a\x16.google.protobuf.Empty\x12I\n" +
-	"\tRebuildVM\x12$.pilab.cloud.cli.v1.RebuildVMRequest\x1a\x16.pilab.cloud.cli.v1.VM\x12E\n" +
-	"\aCloneVM\x12\".pilab.cloud.cli.v1.CloneVMRequest\x1a\x16.pilab.cloud.cli.v1.VM\x12Q\n" +
-	"\rLinkedCloneVM\x12(.pilab.cloud.cli.v1.LinkedCloneVMRequest\x1a\x16.pilab.cloud.cli.v1.VM\x12a\n" +
-	"\fGetVMConsole\x12'.pilab.cloud.cli.v1.GetVMConsoleRequest\x1a(.pilab.cloud.cli.v1.GetVMConsoleResponse\x12p\n" +
-	"\x11UpdateVMResources\x12,.pilab.cloud.cli.v1.UpdateVMResourcesRequest\x1a-.pilab.cloud.cli.v1.UpdateVMResourcesResponse\x12g\n" +
-	"\x0eGetVMResources\x12).pilab.cloud.cli.v1.GetVMResourcesRequest\x1a*.pilab.cloud.cli.v1.GetVMResourcesResponse\x12M\n" +
+	"VPSService\x12@\n" +
+	"\x05Login\x12\x1a.pilab.cli.v1.LoginRequest\x1a\x1b.pilab.cli.v1.LoginResponse\x12g\n" +
+	"\x12InitiateDeviceAuth\x12'.pilab.cli.v1.InitiateDeviceAuthRequest\x1a(.pilab.cli.v1.InitiateDeviceAuthResponse\x12[\n" +
+	"\x0ePollDeviceAuth\x12#.pilab.cli.v1.PollDeviceAuthRequest\x1a$.pilab.cli.v1.PollDeviceAuthResponse\x12=\n" +
+	"\x06Logout\x12\x1b.pilab.cli.v1.LogoutRequest\x1a\x16.google.protobuf.Empty\x12<\n" +
+	"\x0eGetCurrentUser\x12\x16.google.protobuf.Empty\x1a\x12.pilab.cli.v1.User\x12;\n" +
+	"\bCreateVM\x12\x1d.pilab.cli.v1.CreateVMRequest\x1a\x10.pilab.cli.v1.VM\x125\n" +
+	"\x05GetVM\x12\x1a.pilab.cli.v1.GetVMRequest\x1a\x10.pilab.cli.v1.VM\x12F\n" +
+	"\aListVMs\x12\x1c.pilab.cli.v1.ListVMsRequest\x1a\x1d.pilab.cli.v1.ListVMsResponse\x12;\n" +
+	"\bUpdateVM\x12\x1d.pilab.cli.v1.UpdateVMRequest\x1a\x10.pilab.cli.v1.VM\x12A\n" +
+	"\bDeleteVM\x12\x1d.pilab.cli.v1.DeleteVMRequest\x1a\x16.google.protobuf.Empty\x12?\n" +
+	"\aStartVM\x12\x1c.pilab.cli.v1.StartVMRequest\x1a\x16.google.protobuf.Empty\x12=\n" +
+	"\x06StopVM\x12\x1b.pilab.cli.v1.StopVMRequest\x1a\x16.google.protobuf.Empty\x12C\n" +
+	"\tRestartVM\x12\x1e.pilab.cli.v1.RestartVMRequest\x1a\x16.google.protobuf.Empty\x12?\n" +
+	"\aPauseVM\x12\x1c.pilab.cli.v1.PauseVMRequest\x1a\x16.google.protobuf.Empty\x12C\n" +
+	"\tUnpauseVM\x12\x1e.pilab.cli.v1.UnpauseVMRequest\x1a\x16.google.protobuf.Empty\x12C\n" +
+	"\tMigrateVM\x12\x1e.pilab.cli.v1.MigrateVMRequest\x1a\x16.google.protobuf.Empty\x12=\n" +
+	"\tRebuildVM\x12\x1e.pilab.cli.v1.RebuildVMRequest\x1a\x10.pilab.cli.v1.VM\x129\n" +
+	"\aCloneVM\x12\x1c.pilab.cli.v1.CloneVMRequest\x1a\x10.pilab.cli.v1.VM\x12E\n" +
+	"\rLinkedCloneVM\x12\".pilab.cli.v1.LinkedCloneVMRequest\x1a\x10.pilab.cli.v1.VM\x12U\n" +
+	"\fGetVMConsole\x12!.pilab.cli.v1.GetVMConsoleRequest\x1a\".pilab.cli.v1.GetVMConsoleResponse\x12d\n" +
+	"\x11UpdateVMResources\x12&.pilab.cli.v1.UpdateVMResourcesRequest\x1a'.pilab.cli.v1.UpdateVMResourcesResponse\x12[\n" +
+	"\x0eGetVMResources\x12#.pilab.cli.v1.GetVMResourcesRequest\x1a$.pilab.cli.v1.GetVMResourcesResponse\x12A\n" +
 	"\n" +
-	"CreateDisk\x12%.pilab.cloud.cli.v1.CreateDiskRequest\x1a\x18.pilab.cloud.cli.v1.Disk\x12G\n" +
-	"\aGetDisk\x12\".pilab.cloud.cli.v1.GetDiskRequest\x1a\x18.pilab.cloud.cli.v1.Disk\x12X\n" +
-	"\tListDisks\x12$.pilab.cloud.cli.v1.ListDisksRequest\x1a%.pilab.cloud.cli.v1.ListDisksResponse\x12M\n" +
+	"CreateDisk\x12\x1f.pilab.cli.v1.CreateDiskRequest\x1a\x12.pilab.cli.v1.Disk\x12;\n" +
+	"\aGetDisk\x12\x1c.pilab.cli.v1.GetDiskRequest\x1a\x12.pilab.cli.v1.Disk\x12L\n" +
+	"\tListDisks\x12\x1e.pilab.cli.v1.ListDisksRequest\x1a\x1f.pilab.cli.v1.ListDisksResponse\x12A\n" +
 	"\n" +
-	"UpdateDisk\x12%.pilab.cloud.cli.v1.UpdateDiskRequest\x1a\x18.pilab.cloud.cli.v1.Disk\x12K\n" +
+	"UpdateDisk\x12\x1f.pilab.cli.v1.UpdateDiskRequest\x1a\x12.pilab.cli.v1.Disk\x12E\n" +
 	"\n" +
-	"DeleteDisk\x12%.pilab.cloud.cli.v1.DeleteDiskRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
+	"DeleteDisk\x12\x1f.pilab.cli.v1.DeleteDiskRequest\x1a\x16.google.protobuf.Empty\x12A\n" +
 	"\n" +
-	"ExtendDisk\x12%.pilab.cloud.cli.v1.ExtendDiskRequest\x1a\x18.pilab.cloud.cli.v1.Disk\x12K\n" +
+	"ExtendDisk\x12\x1f.pilab.cli.v1.ExtendDiskRequest\x1a\x12.pilab.cli.v1.Disk\x12E\n" +
 	"\n" +
-	"AttachDisk\x12%.pilab.cloud.cli.v1.AttachDiskRequest\x1a\x16.google.protobuf.Empty\x12K\n" +
+	"AttachDisk\x12\x1f.pilab.cli.v1.AttachDiskRequest\x1a\x16.google.protobuf.Empty\x12E\n" +
 	"\n" +
-	"DetachDisk\x12%.pilab.cloud.cli.v1.DetachDiskRequest\x1a\x16.google.protobuf.Empty\x12J\n" +
-	"\bGetImage\x12#.pilab.cloud.cli.v1.GetImageRequest\x1a\x19.pilab.cloud.cli.v1.Image\x12[\n" +
+	"DetachDisk\x12\x1f.pilab.cli.v1.DetachDiskRequest\x1a\x16.google.protobuf.Empty\x12>\n" +
+	"\bGetImage\x12\x1d.pilab.cli.v1.GetImageRequest\x1a\x13.pilab.cli.v1.Image\x12O\n" +
 	"\n" +
-	"ListImages\x12%.pilab.cloud.cli.v1.ListImagesRequest\x1a&.pilab.cloud.cli.v1.ListImagesResponse\x12P\n" +
-	"\vCreateImage\x12&.pilab.cloud.cli.v1.CreateImageRequest\x1a\x19.pilab.cloud.cli.v1.Image\x12P\n" +
-	"\vUploadImage\x12&.pilab.cloud.cli.v1.UploadImageRequest\x1a\x19.pilab.cloud.cli.v1.Image\x12M\n" +
-	"\vDeleteImage\x12&.pilab.cloud.cli.v1.DeleteImageRequest\x1a\x16.google.protobuf.Empty\x12S\n" +
-	"\vGetSnapshot\x12&.pilab.cloud.cli.v1.GetSnapshotRequest\x1a\x1c.pilab.cloud.cli.v1.Snapshot\x12d\n" +
-	"\rListSnapshots\x12(.pilab.cloud.cli.v1.ListSnapshotsRequest\x1a).pilab.cloud.cli.v1.ListSnapshotsResponse\x12Y\n" +
-	"\x0eCreateSnapshot\x12).pilab.cloud.cli.v1.CreateSnapshotRequest\x1a\x1c.pilab.cloud.cli.v1.Snapshot\x12U\n" +
-	"\x0fRestoreSnapshot\x12*.pilab.cloud.cli.v1.RestoreSnapshotRequest\x1a\x16.google.protobuf.Empty\x12S\n" +
-	"\x0eDeleteSnapshot\x12).pilab.cloud.cli.v1.DeleteSnapshotRequest\x1a\x16.google.protobuf.Empty\x12]\n" +
-	"\x13ConsolidateSnapshot\x12..pilab.cloud.cli.v1.SnapshotConsolidateRequest\x1a\x16.google.protobuf.Empty\x12V\n" +
-	"\rCreateNetwork\x12(.pilab.cloud.cli.v1.CreateNetworkRequest\x1a\x1b.pilab.cloud.cli.v1.Network\x12P\n" +
+	"ListImages\x12\x1f.pilab.cli.v1.ListImagesRequest\x1a .pilab.cli.v1.ListImagesResponse\x12D\n" +
+	"\vCreateImage\x12 .pilab.cli.v1.CreateImageRequest\x1a\x13.pilab.cli.v1.Image\x12D\n" +
+	"\vUploadImage\x12 .pilab.cli.v1.UploadImageRequest\x1a\x13.pilab.cli.v1.Image\x12G\n" +
+	"\vDeleteImage\x12 .pilab.cli.v1.DeleteImageRequest\x1a\x16.google.protobuf.Empty\x12G\n" +
+	"\vGetSnapshot\x12 .pilab.cli.v1.GetSnapshotRequest\x1a\x16.pilab.cli.v1.Snapshot\x12X\n" +
+	"\rListSnapshots\x12\".pilab.cli.v1.ListSnapshotsRequest\x1a#.pilab.cli.v1.ListSnapshotsResponse\x12M\n" +
+	"\x0eCreateSnapshot\x12#.pilab.cli.v1.CreateSnapshotRequest\x1a\x16.pilab.cli.v1.Snapshot\x12O\n" +
+	"\x0fRestoreSnapshot\x12$.pilab.cli.v1.RestoreSnapshotRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
+	"\x0eDeleteSnapshot\x12#.pilab.cli.v1.DeleteSnapshotRequest\x1a\x16.google.protobuf.Empty\x12W\n" +
+	"\x13ConsolidateSnapshot\x12(.pilab.cli.v1.SnapshotConsolidateRequest\x1a\x16.google.protobuf.Empty\x12J\n" +
+	"\rCreateNetwork\x12\".pilab.cli.v1.CreateNetworkRequest\x1a\x15.pilab.cli.v1.Network\x12D\n" +
 	"\n" +
-	"GetNetwork\x12%.pilab.cloud.cli.v1.GetNetworkRequest\x1a\x1b.pilab.cloud.cli.v1.Network\x12a\n" +
-	"\fListNetworks\x12'.pilab.cloud.cli.v1.ListNetworksRequest\x1a(.pilab.cloud.cli.v1.ListNetworksResponse\x12V\n" +
-	"\rUpdateNetwork\x12(.pilab.cloud.cli.v1.UpdateNetworkRequest\x1a\x1b.pilab.cloud.cli.v1.Network\x12Q\n" +
-	"\rDeleteNetwork\x12(.pilab.cloud.cli.v1.DeleteNetworkRequest\x1a\x16.google.protobuf.Empty\x12k\n" +
-	"\x13GetNetworkInterface\x12..pilab.cloud.cli.v1.GetNetworkInterfaceRequest\x1a$.pilab.cloud.cli.v1.NetworkInterface\x12|\n" +
-	"\x15ListNetworkInterfaces\x120.pilab.cloud.cli.v1.ListNetworkInterfacesRequest\x1a1.pilab.cloud.cli.v1.ListNetworkInterfacesResponse\x12k\n" +
-	"\x13AddNetworkInterface\x12..pilab.cloud.cli.v1.AddNetworkInterfaceRequest\x1a$.pilab.cloud.cli.v1.NetworkInterface\x12c\n" +
-	"\x16RemoveNetworkInterface\x121.pilab.cloud.cli.v1.RemoveNetworkInterfaceRequest\x1a\x16.google.protobuf.Empty\x12V\n" +
-	"\rCreateVSwitch\x12(.pilab.cloud.cli.v1.CreateVSwitchRequest\x1a\x1b.pilab.cloud.cli.v1.VSwitch\x12P\n" +
+	"GetNetwork\x12\x1f.pilab.cli.v1.GetNetworkRequest\x1a\x15.pilab.cli.v1.Network\x12U\n" +
+	"\fListNetworks\x12!.pilab.cli.v1.ListNetworksRequest\x1a\".pilab.cli.v1.ListNetworksResponse\x12J\n" +
+	"\rUpdateNetwork\x12\".pilab.cli.v1.UpdateNetworkRequest\x1a\x15.pilab.cli.v1.Network\x12K\n" +
+	"\rDeleteNetwork\x12\".pilab.cli.v1.DeleteNetworkRequest\x1a\x16.google.protobuf.Empty\x12_\n" +
+	"\x13GetNetworkInterface\x12(.pilab.cli.v1.GetNetworkInterfaceRequest\x1a\x1e.pilab.cli.v1.NetworkInterface\x12p\n" +
+	"\x15ListNetworkInterfaces\x12*.pilab.cli.v1.ListNetworkInterfacesRequest\x1a+.pilab.cli.v1.ListNetworkInterfacesResponse\x12_\n" +
+	"\x13AddNetworkInterface\x12(.pilab.cli.v1.AddNetworkInterfaceRequest\x1a\x1e.pilab.cli.v1.NetworkInterface\x12]\n" +
+	"\x16RemoveNetworkInterface\x12+.pilab.cli.v1.RemoveNetworkInterfaceRequest\x1a\x16.google.protobuf.Empty\x12J\n" +
+	"\rCreateVSwitch\x12\".pilab.cli.v1.CreateVSwitchRequest\x1a\x15.pilab.cli.v1.VSwitch\x12D\n" +
 	"\n" +
-	"GetVSwitch\x12%.pilab.cloud.cli.v1.GetVSwitchRequest\x1a\x1b.pilab.cloud.cli.v1.VSwitch\x12d\n" +
-	"\rListVSwitches\x12(.pilab.cloud.cli.v1.ListVSwitchesRequest\x1a).pilab.cloud.cli.v1.ListVSwitchesResponse\x12Q\n" +
-	"\rDeleteVSwitch\x12(.pilab.cloud.cli.v1.DeleteVSwitchRequest\x1a\x16.google.protobuf.Empty\x12\\\n" +
-	"\x0fCreatePortGroup\x12*.pilab.cloud.cli.v1.CreatePortGroupRequest\x1a\x1d.pilab.cloud.cli.v1.PortGroup\x12V\n" +
-	"\fGetPortGroup\x12'.pilab.cloud.cli.v1.GetPortGroupRequest\x1a\x1d.pilab.cloud.cli.v1.PortGroup\x12g\n" +
-	"\x0eListPortGroups\x12).pilab.cloud.cli.v1.ListPortGroupsRequest\x1a*.pilab.cloud.cli.v1.ListPortGroupsResponse\x12U\n" +
-	"\x0fDeletePortGroup\x12*.pilab.cloud.cli.v1.DeletePortGroupRequest\x1a\x16.google.protobuf.Empty\x12Y\n" +
-	"\x0eCreatePublicIP\x12).pilab.cloud.cli.v1.CreatePublicIPRequest\x1a\x1c.pilab.cloud.cli.v1.PublicIP\x12S\n" +
-	"\vGetPublicIP\x12&.pilab.cloud.cli.v1.GetPublicIPRequest\x1a\x1c.pilab.cloud.cli.v1.PublicIP\x12d\n" +
-	"\rListPublicIPs\x12(.pilab.cloud.cli.v1.ListPublicIPsRequest\x1a).pilab.cloud.cli.v1.ListPublicIPsResponse\x12Y\n" +
-	"\x0eUpdatePublicIP\x12).pilab.cloud.cli.v1.UpdatePublicIPRequest\x1a\x1c.pilab.cloud.cli.v1.PublicIP\x12S\n" +
-	"\x0eDeletePublicIP\x12).pilab.cloud.cli.v1.DeletePublicIPRequest\x1a\x16.google.protobuf.Empty\x12S\n" +
-	"\x0eAssignPublicIP\x12).pilab.cloud.cli.v1.AssignPublicIPRequest\x1a\x16.google.protobuf.Empty\x12W\n" +
-	"\x10UnassignPublicIP\x12+.pilab.cloud.cli.v1.UnassignPublicIPRequest\x1a\x16.google.protobuf.Empty\x12h\n" +
-	"\x13CreateSecurityGroup\x12..pilab.cloud.cli.v1.CreateSecurityGroupRequest\x1a!.pilab.cloud.cli.v1.SecurityGroup\x12b\n" +
-	"\x10GetSecurityGroup\x12+.pilab.cloud.cli.v1.GetSecurityGroupRequest\x1a!.pilab.cloud.cli.v1.SecurityGroup\x12s\n" +
-	"\x12ListSecurityGroups\x12-.pilab.cloud.cli.v1.ListSecurityGroupsRequest\x1a..pilab.cloud.cli.v1.ListSecurityGroupsResponse\x12h\n" +
-	"\x13UpdateSecurityGroup\x12..pilab.cloud.cli.v1.UpdateSecurityGroupRequest\x1a!.pilab.cloud.cli.v1.SecurityGroup\x12]\n" +
-	"\x13DeleteSecurityGroup\x12..pilab.cloud.cli.v1.DeleteSecurityGroupRequest\x1a\x16.google.protobuf.Empty\x12_\n" +
-	"\x0fAddSecurityRule\x12*.pilab.cloud.cli.v1.AddSecurityRuleRequest\x1a .pilab.cloud.cli.v1.SecurityRule\x12[\n" +
-	"\x12RemoveSecurityRule\x12-.pilab.cloud.cli.v1.RemoveSecurityRuleRequest\x1a\x16.google.protobuf.Empty\x12Y\n" +
-	"\x0eCreateTemplate\x12).pilab.cloud.cli.v1.CreateTemplateRequest\x1a\x1c.pilab.cloud.cli.v1.Template\x12S\n" +
-	"\vGetTemplate\x12&.pilab.cloud.cli.v1.GetTemplateRequest\x1a\x1c.pilab.cloud.cli.v1.Template\x12d\n" +
-	"\rListTemplates\x12(.pilab.cloud.cli.v1.ListTemplatesRequest\x1a).pilab.cloud.cli.v1.ListTemplatesResponse\x12S\n" +
-	"\x0eDeleteTemplate\x12).pilab.cloud.cli.v1.DeleteTemplateRequest\x1a\x16.google.protobuf.Empty\x12j\n" +
-	"\x0fListOSTemplates\x12*.pilab.cloud.cli.v1.ListOSTemplatesRequest\x1a+.pilab.cloud.cli.v1.ListOSTemplatesResponse\x12Y\n" +
-	"\rGetOSTemplate\x12(.pilab.cloud.cli.v1.GetOSTemplateRequest\x1a\x1e.pilab.cloud.cli.v1.OSTemplate\x12j\n" +
-	"\x0fSyncOSTemplates\x12*.pilab.cloud.cli.v1.SyncOSTemplatesRequest\x1a+.pilab.cloud.cli.v1.SyncOSTemplatesResponse\x12c\n" +
-	"\x16CreateVMFromOSTemplate\x121.pilab.cloud.cli.v1.CreateVMFromOSTemplateRequest\x1a\x16.pilab.cloud.cli.v1.VM\x12[\n" +
+	"GetVSwitch\x12\x1f.pilab.cli.v1.GetVSwitchRequest\x1a\x15.pilab.cli.v1.VSwitch\x12X\n" +
+	"\rListVSwitches\x12\".pilab.cli.v1.ListVSwitchesRequest\x1a#.pilab.cli.v1.ListVSwitchesResponse\x12K\n" +
+	"\rDeleteVSwitch\x12\".pilab.cli.v1.DeleteVSwitchRequest\x1a\x16.google.protobuf.Empty\x12P\n" +
+	"\x0fCreatePortGroup\x12$.pilab.cli.v1.CreatePortGroupRequest\x1a\x17.pilab.cli.v1.PortGroup\x12J\n" +
+	"\fGetPortGroup\x12!.pilab.cli.v1.GetPortGroupRequest\x1a\x17.pilab.cli.v1.PortGroup\x12[\n" +
+	"\x0eListPortGroups\x12#.pilab.cli.v1.ListPortGroupsRequest\x1a$.pilab.cli.v1.ListPortGroupsResponse\x12O\n" +
+	"\x0fDeletePortGroup\x12$.pilab.cli.v1.DeletePortGroupRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
+	"\x0eCreatePublicIP\x12#.pilab.cli.v1.CreatePublicIPRequest\x1a\x16.pilab.cli.v1.PublicIP\x12G\n" +
+	"\vGetPublicIP\x12 .pilab.cli.v1.GetPublicIPRequest\x1a\x16.pilab.cli.v1.PublicIP\x12X\n" +
+	"\rListPublicIPs\x12\".pilab.cli.v1.ListPublicIPsRequest\x1a#.pilab.cli.v1.ListPublicIPsResponse\x12M\n" +
+	"\x0eUpdatePublicIP\x12#.pilab.cli.v1.UpdatePublicIPRequest\x1a\x16.pilab.cli.v1.PublicIP\x12M\n" +
+	"\x0eDeletePublicIP\x12#.pilab.cli.v1.DeletePublicIPRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
+	"\x0eAssignPublicIP\x12#.pilab.cli.v1.AssignPublicIPRequest\x1a\x16.google.protobuf.Empty\x12Q\n" +
+	"\x10UnassignPublicIP\x12%.pilab.cli.v1.UnassignPublicIPRequest\x1a\x16.google.protobuf.Empty\x12\\\n" +
+	"\x13CreateSecurityGroup\x12(.pilab.cli.v1.CreateSecurityGroupRequest\x1a\x1b.pilab.cli.v1.SecurityGroup\x12V\n" +
+	"\x10GetSecurityGroup\x12%.pilab.cli.v1.GetSecurityGroupRequest\x1a\x1b.pilab.cli.v1.SecurityGroup\x12g\n" +
+	"\x12ListSecurityGroups\x12'.pilab.cli.v1.ListSecurityGroupsRequest\x1a(.pilab.cli.v1.ListSecurityGroupsResponse\x12\\\n" +
+	"\x13UpdateSecurityGroup\x12(.pilab.cli.v1.UpdateSecurityGroupRequest\x1a\x1b.pilab.cli.v1.SecurityGroup\x12W\n" +
+	"\x13DeleteSecurityGroup\x12(.pilab.cli.v1.DeleteSecurityGroupRequest\x1a\x16.google.protobuf.Empty\x12S\n" +
+	"\x0fAddSecurityRule\x12$.pilab.cli.v1.AddSecurityRuleRequest\x1a\x1a.pilab.cli.v1.SecurityRule\x12U\n" +
+	"\x12RemoveSecurityRule\x12'.pilab.cli.v1.RemoveSecurityRuleRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
+	"\x0eCreateTemplate\x12#.pilab.cli.v1.CreateTemplateRequest\x1a\x16.pilab.cli.v1.Template\x12G\n" +
+	"\vGetTemplate\x12 .pilab.cli.v1.GetTemplateRequest\x1a\x16.pilab.cli.v1.Template\x12X\n" +
+	"\rListTemplates\x12\".pilab.cli.v1.ListTemplatesRequest\x1a#.pilab.cli.v1.ListTemplatesResponse\x12M\n" +
+	"\x0eDeleteTemplate\x12#.pilab.cli.v1.DeleteTemplateRequest\x1a\x16.google.protobuf.Empty\x12^\n" +
+	"\x0fListOSTemplates\x12$.pilab.cli.v1.ListOSTemplatesRequest\x1a%.pilab.cli.v1.ListOSTemplatesResponse\x12M\n" +
+	"\rGetOSTemplate\x12\".pilab.cli.v1.GetOSTemplateRequest\x1a\x18.pilab.cli.v1.OSTemplate\x12^\n" +
+	"\x0fSyncOSTemplates\x12$.pilab.cli.v1.SyncOSTemplatesRequest\x1a%.pilab.cli.v1.SyncOSTemplatesResponse\x12W\n" +
+	"\x16CreateVMFromOSTemplate\x12+.pilab.cli.v1.CreateVMFromOSTemplateRequest\x1a\x10.pilab.cli.v1.VM\x12O\n" +
 	"\n" +
-	"GetMetrics\x12%.pilab.cloud.cli.v1.GetMetricsRequest\x1a&.pilab.cloud.cli.v1.GetMetricsResponse\x12^\n" +
-	"\vGetActivity\x12&.pilab.cloud.cli.v1.GetActivityRequest\x1a'.pilab.cloud.cli.v1.GetActivityResponse\x12e\n" +
-	"\x12CreateOrganization\x12-.pilab.cloud.cli.v1.CreateOrganizationRequest\x1a .pilab.cloud.cli.v1.Organization\x12_\n" +
-	"\x0fGetOrganization\x12*.pilab.cloud.cli.v1.GetOrganizationRequest\x1a .pilab.cloud.cli.v1.Organization\x12p\n" +
-	"\x11ListOrganizations\x12,.pilab.cloud.cli.v1.ListOrganizationsRequest\x1a-.pilab.cloud.cli.v1.ListOrganizationsResponse\x12e\n" +
-	"\x12UpdateOrganization\x12-.pilab.cloud.cli.v1.UpdateOrganizationRequest\x1a .pilab.cloud.cli.v1.Organization\x12[\n" +
-	"\x12DeleteOrganization\x12-.pilab.cloud.cli.v1.DeleteOrganizationRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
+	"GetMetrics\x12\x1f.pilab.cli.v1.GetMetricsRequest\x1a .pilab.cli.v1.GetMetricsResponse\x12R\n" +
+	"\vGetActivity\x12 .pilab.cli.v1.GetActivityRequest\x1a!.pilab.cli.v1.GetActivityResponse\x12Y\n" +
+	"\x12CreateOrganization\x12'.pilab.cli.v1.CreateOrganizationRequest\x1a\x1a.pilab.cli.v1.Organization\x12S\n" +
+	"\x0fGetOrganization\x12$.pilab.cli.v1.GetOrganizationRequest\x1a\x1a.pilab.cli.v1.Organization\x12d\n" +
+	"\x11ListOrganizations\x12&.pilab.cli.v1.ListOrganizationsRequest\x1a'.pilab.cli.v1.ListOrganizationsResponse\x12Y\n" +
+	"\x12UpdateOrganization\x12'.pilab.cli.v1.UpdateOrganizationRequest\x1a\x1a.pilab.cli.v1.Organization\x12U\n" +
+	"\x12DeleteOrganization\x12'.pilab.cli.v1.DeleteOrganizationRequest\x1a\x16.google.protobuf.Empty\x12A\n" +
 	"\n" +
-	"CreateUser\x12%.pilab.cloud.cli.v1.CreateUserRequest\x1a\x18.pilab.cloud.cli.v1.User\x12G\n" +
-	"\aGetUser\x12\".pilab.cloud.cli.v1.GetUserRequest\x1a\x18.pilab.cloud.cli.v1.User\x12X\n" +
-	"\tListUsers\x12$.pilab.cloud.cli.v1.ListUsersRequest\x1a%.pilab.cloud.cli.v1.ListUsersResponse\x12M\n" +
+	"CreateUser\x12\x1f.pilab.cli.v1.CreateUserRequest\x1a\x12.pilab.cli.v1.User\x12;\n" +
+	"\aGetUser\x12\x1c.pilab.cli.v1.GetUserRequest\x1a\x12.pilab.cli.v1.User\x12L\n" +
+	"\tListUsers\x12\x1e.pilab.cli.v1.ListUsersRequest\x1a\x1f.pilab.cli.v1.ListUsersResponse\x12A\n" +
 	"\n" +
-	"UpdateUser\x12%.pilab.cloud.cli.v1.UpdateUserRequest\x1a\x18.pilab.cloud.cli.v1.User\x12K\n" +
+	"UpdateUser\x12\x1f.pilab.cli.v1.UpdateUserRequest\x1a\x12.pilab.cli.v1.User\x12E\n" +
 	"\n" +
-	"DeleteUser\x12%.pilab.cloud.cli.v1.DeleteUserRequest\x1a\x16.google.protobuf.Empty\x12I\n" +
+	"DeleteUser\x12\x1f.pilab.cli.v1.DeleteUserRequest\x1a\x16.google.protobuf.Empty\x12C\n" +
 	"\n" +
-	"GetVersion\x12\x16.google.protobuf.Empty\x1a#.pilab.cloud.cli.v1.VersionResponse\x12\\\n" +
-	"\x0fCreateDatastore\x12*.pilab.cloud.cli.v1.CreateDatastoreRequest\x1a\x1d.pilab.cloud.cli.v1.Datastore\x12V\n" +
-	"\fGetDatastore\x12'.pilab.cloud.cli.v1.GetDatastoreRequest\x1a\x1d.pilab.cloud.cli.v1.Datastore\x12g\n" +
-	"\x0eListDatastores\x12).pilab.cloud.cli.v1.ListDatastoresRequest\x1a*.pilab.cloud.cli.v1.ListDatastoresResponse\x12U\n" +
-	"\x0fDeleteDatastore\x12*.pilab.cloud.cli.v1.DeleteDatastoreRequest\x1a\x16.google.protobuf.Empty\x12S\n" +
-	"\x0eMountDatastore\x12).pilab.cloud.cli.v1.MountDatastoreRequest\x1a\x16.google.protobuf.Empty\x12W\n" +
-	"\x10UnmountDatastore\x12+.pilab.cloud.cli.v1.UnmountDatastoreRequest\x1a\x16.google.protobuf.Empty\x12C\n" +
-	"\vGetHostInfo\x12\x16.google.protobuf.Empty\x1a\x1c.pilab.cloud.cli.v1.HostInfo\x12U\n" +
-	"\x10GetNetworkConfig\x12\x16.google.protobuf.Empty\x1a).pilab.cloud.cli.v1.NetworkConfigResponse\x12U\n" +
-	"\x10GetStorageConfig\x12\x16.google.protobuf.Empty\x1a).pilab.cloud.cli.v1.StorageConfigResponse\x12O\n" +
-	"\rGetHostHealth\x12\x16.google.protobuf.Empty\x1a&.pilab.cloud.cli.v1.HostHealthResponse\x12W\n" +
-	"\x10ConfigureNetwork\x12+.pilab.cloud.cli.v1.ConfigureNetworkRequest\x1a\x16.google.protobuf.EmptyB-Z+go.pilab.hu/cloud/virtpb/pilab/cli/v1;cliv1b\x06proto3"
+	"GetVersion\x12\x16.google.protobuf.Empty\x1a\x1d.pilab.cli.v1.VersionResponse\x12P\n" +
+	"\x0fCreateDatastore\x12$.pilab.cli.v1.CreateDatastoreRequest\x1a\x17.pilab.cli.v1.Datastore\x12J\n" +
+	"\fGetDatastore\x12!.pilab.cli.v1.GetDatastoreRequest\x1a\x17.pilab.cli.v1.Datastore\x12[\n" +
+	"\x0eListDatastores\x12#.pilab.cli.v1.ListDatastoresRequest\x1a$.pilab.cli.v1.ListDatastoresResponse\x12O\n" +
+	"\x0fDeleteDatastore\x12$.pilab.cli.v1.DeleteDatastoreRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
+	"\x0eMountDatastore\x12#.pilab.cli.v1.MountDatastoreRequest\x1a\x16.google.protobuf.Empty\x12Q\n" +
+	"\x10UnmountDatastore\x12%.pilab.cli.v1.UnmountDatastoreRequest\x1a\x16.google.protobuf.Empty\x12=\n" +
+	"\vGetHostInfo\x12\x16.google.protobuf.Empty\x1a\x16.pilab.cli.v1.HostInfo\x12O\n" +
+	"\x10GetNetworkConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cli.v1.NetworkConfigResponse\x12O\n" +
+	"\x10GetStorageConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cli.v1.StorageConfigResponse\x12I\n" +
+	"\rGetHostHealth\x12\x16.google.protobuf.Empty\x1a .pilab.cli.v1.HostHealthResponse\x12Q\n" +
+	"\x10ConfigureNetwork\x12%.pilab.cli.v1.ConfigureNetworkRequest\x1a\x16.google.protobuf.EmptyB-Z+go.pilab.hu/cloud/virtpb/pilab/cli/v1;cliv1b\x06proto3"
 
 var (
 	file_pilab_cli_v1_vps_service_proto_rawDescOnce sync.Once
@@ -13979,555 +13979,555 @@ func file_pilab_cli_v1_vps_service_proto_rawDescGZIP() []byte {
 var file_pilab_cli_v1_vps_service_proto_enumTypes = make([]protoimpl.EnumInfo, 13)
 var file_pilab_cli_v1_vps_service_proto_msgTypes = make([]protoimpl.MessageInfo, 190)
 var file_pilab_cli_v1_vps_service_proto_goTypes = []any{
-	(VMState)(0),                          // 0: pilab.cloud.cli.v1.VMState
-	(DiskState)(0),                        // 1: pilab.cloud.cli.v1.DiskState
-	(ImageState)(0),                       // 2: pilab.cloud.cli.v1.ImageState
-	(SnapshotState)(0),                    // 3: pilab.cloud.cli.v1.SnapshotState
-	(NetworkState)(0),                     // 4: pilab.cloud.cli.v1.NetworkState
-	(VSwitchState)(0),                     // 5: pilab.cloud.cli.v1.VSwitchState
-	(PortGroupState)(0),                   // 6: pilab.cloud.cli.v1.PortGroupState
-	(PublicIPState)(0),                    // 7: pilab.cloud.cli.v1.PublicIPState
-	(SecurityGroupState)(0),               // 8: pilab.cloud.cli.v1.SecurityGroupState
-	(TemplateState)(0),                    // 9: pilab.cloud.cli.v1.TemplateState
-	(OSTemplateState)(0),                  // 10: pilab.cloud.cli.v1.OSTemplateState
-	(DatastoreType)(0),                    // 11: pilab.cloud.cli.v1.DatastoreType
-	(DatastoreStatus)(0),                  // 12: pilab.cloud.cli.v1.DatastoreStatus
-	(*LoginRequest)(nil),                  // 13: pilab.cloud.cli.v1.LoginRequest
-	(*LoginResponse)(nil),                 // 14: pilab.cloud.cli.v1.LoginResponse
-	(*InitiateDeviceAuthRequest)(nil),     // 15: pilab.cloud.cli.v1.InitiateDeviceAuthRequest
-	(*InitiateDeviceAuthResponse)(nil),    // 16: pilab.cloud.cli.v1.InitiateDeviceAuthResponse
-	(*PollDeviceAuthRequest)(nil),         // 17: pilab.cloud.cli.v1.PollDeviceAuthRequest
-	(*PollDeviceAuthResponse)(nil),        // 18: pilab.cloud.cli.v1.PollDeviceAuthResponse
-	(*LogoutRequest)(nil),                 // 19: pilab.cloud.cli.v1.LogoutRequest
-	(*User)(nil),                          // 20: pilab.cloud.cli.v1.User
-	(*Organization)(nil),                  // 21: pilab.cloud.cli.v1.Organization
-	(*ResourceQuota)(nil),                 // 22: pilab.cloud.cli.v1.ResourceQuota
-	(*ResourceUsage)(nil),                 // 23: pilab.cloud.cli.v1.ResourceUsage
-	(*VM)(nil),                            // 24: pilab.cloud.cli.v1.VM
-	(*MachineType)(nil),                   // 25: pilab.cloud.cli.v1.MachineType
-	(*CreateVMRequest)(nil),               // 26: pilab.cloud.cli.v1.CreateVMRequest
-	(*GetVMRequest)(nil),                  // 27: pilab.cloud.cli.v1.GetVMRequest
-	(*ListVMsRequest)(nil),                // 28: pilab.cloud.cli.v1.ListVMsRequest
-	(*ListVMsResponse)(nil),               // 29: pilab.cloud.cli.v1.ListVMsResponse
-	(*UpdateVMRequest)(nil),               // 30: pilab.cloud.cli.v1.UpdateVMRequest
-	(*DeleteVMRequest)(nil),               // 31: pilab.cloud.cli.v1.DeleteVMRequest
-	(*StartVMRequest)(nil),                // 32: pilab.cloud.cli.v1.StartVMRequest
-	(*StopVMRequest)(nil),                 // 33: pilab.cloud.cli.v1.StopVMRequest
-	(*RestartVMRequest)(nil),              // 34: pilab.cloud.cli.v1.RestartVMRequest
-	(*PauseVMRequest)(nil),                // 35: pilab.cloud.cli.v1.PauseVMRequest
-	(*UnpauseVMRequest)(nil),              // 36: pilab.cloud.cli.v1.UnpauseVMRequest
-	(*MigrateVMRequest)(nil),              // 37: pilab.cloud.cli.v1.MigrateVMRequest
-	(*RebuildVMRequest)(nil),              // 38: pilab.cloud.cli.v1.RebuildVMRequest
-	(*CloneVMRequest)(nil),                // 39: pilab.cloud.cli.v1.CloneVMRequest
-	(*LinkedCloneVMRequest)(nil),          // 40: pilab.cloud.cli.v1.LinkedCloneVMRequest
-	(*LinkedCloneVMResponse)(nil),         // 41: pilab.cloud.cli.v1.LinkedCloneVMResponse
-	(*GetVMConsoleRequest)(nil),           // 42: pilab.cloud.cli.v1.GetVMConsoleRequest
-	(*GetVMConsoleResponse)(nil),          // 43: pilab.cloud.cli.v1.GetVMConsoleResponse
-	(*UpdateVMResourcesRequest)(nil),      // 44: pilab.cloud.cli.v1.UpdateVMResourcesRequest
-	(*UpdateVMResourcesResponse)(nil),     // 45: pilab.cloud.cli.v1.UpdateVMResourcesResponse
-	(*GetVMResourcesRequest)(nil),         // 46: pilab.cloud.cli.v1.GetVMResourcesRequest
-	(*GetVMResourcesResponse)(nil),        // 47: pilab.cloud.cli.v1.GetVMResourcesResponse
-	(*Disk)(nil),                          // 48: pilab.cloud.cli.v1.Disk
-	(*CreateDiskRequest)(nil),             // 49: pilab.cloud.cli.v1.CreateDiskRequest
-	(*GetDiskRequest)(nil),                // 50: pilab.cloud.cli.v1.GetDiskRequest
-	(*ListDisksRequest)(nil),              // 51: pilab.cloud.cli.v1.ListDisksRequest
-	(*ListDisksResponse)(nil),             // 52: pilab.cloud.cli.v1.ListDisksResponse
-	(*UpdateDiskRequest)(nil),             // 53: pilab.cloud.cli.v1.UpdateDiskRequest
-	(*DeleteDiskRequest)(nil),             // 54: pilab.cloud.cli.v1.DeleteDiskRequest
-	(*ExtendDiskRequest)(nil),             // 55: pilab.cloud.cli.v1.ExtendDiskRequest
-	(*AttachDiskRequest)(nil),             // 56: pilab.cloud.cli.v1.AttachDiskRequest
-	(*DetachDiskRequest)(nil),             // 57: pilab.cloud.cli.v1.DetachDiskRequest
-	(*Image)(nil),                         // 58: pilab.cloud.cli.v1.Image
-	(*GetImageRequest)(nil),               // 59: pilab.cloud.cli.v1.GetImageRequest
-	(*ListImagesRequest)(nil),             // 60: pilab.cloud.cli.v1.ListImagesRequest
-	(*ListImagesResponse)(nil),            // 61: pilab.cloud.cli.v1.ListImagesResponse
-	(*CreateImageRequest)(nil),            // 62: pilab.cloud.cli.v1.CreateImageRequest
-	(*UploadImageRequest)(nil),            // 63: pilab.cloud.cli.v1.UploadImageRequest
-	(*DeleteImageRequest)(nil),            // 64: pilab.cloud.cli.v1.DeleteImageRequest
-	(*Snapshot)(nil),                      // 65: pilab.cloud.cli.v1.Snapshot
-	(*GetSnapshotRequest)(nil),            // 66: pilab.cloud.cli.v1.GetSnapshotRequest
-	(*ListSnapshotsRequest)(nil),          // 67: pilab.cloud.cli.v1.ListSnapshotsRequest
-	(*ListSnapshotsResponse)(nil),         // 68: pilab.cloud.cli.v1.ListSnapshotsResponse
-	(*CreateSnapshotRequest)(nil),         // 69: pilab.cloud.cli.v1.CreateSnapshotRequest
-	(*RestoreSnapshotRequest)(nil),        // 70: pilab.cloud.cli.v1.RestoreSnapshotRequest
-	(*DeleteSnapshotRequest)(nil),         // 71: pilab.cloud.cli.v1.DeleteSnapshotRequest
-	(*SnapshotConsolidateRequest)(nil),    // 72: pilab.cloud.cli.v1.SnapshotConsolidateRequest
-	(*Network)(nil),                       // 73: pilab.cloud.cli.v1.Network
-	(*NetworkInterface)(nil),              // 74: pilab.cloud.cli.v1.NetworkInterface
-	(*CreateNetworkRequest)(nil),          // 75: pilab.cloud.cli.v1.CreateNetworkRequest
-	(*GetNetworkRequest)(nil),             // 76: pilab.cloud.cli.v1.GetNetworkRequest
-	(*ListNetworksRequest)(nil),           // 77: pilab.cloud.cli.v1.ListNetworksRequest
-	(*ListNetworksResponse)(nil),          // 78: pilab.cloud.cli.v1.ListNetworksResponse
-	(*UpdateNetworkRequest)(nil),          // 79: pilab.cloud.cli.v1.UpdateNetworkRequest
-	(*DeleteNetworkRequest)(nil),          // 80: pilab.cloud.cli.v1.DeleteNetworkRequest
-	(*GetNetworkInterfaceRequest)(nil),    // 81: pilab.cloud.cli.v1.GetNetworkInterfaceRequest
-	(*ListNetworkInterfacesRequest)(nil),  // 82: pilab.cloud.cli.v1.ListNetworkInterfacesRequest
-	(*ListNetworkInterfacesResponse)(nil), // 83: pilab.cloud.cli.v1.ListNetworkInterfacesResponse
-	(*AddNetworkInterfaceRequest)(nil),    // 84: pilab.cloud.cli.v1.AddNetworkInterfaceRequest
-	(*RemoveNetworkInterfaceRequest)(nil), // 85: pilab.cloud.cli.v1.RemoveNetworkInterfaceRequest
-	(*VSwitch)(nil),                       // 86: pilab.cloud.cli.v1.VSwitch
-	(*CreateVSwitchRequest)(nil),          // 87: pilab.cloud.cli.v1.CreateVSwitchRequest
-	(*GetVSwitchRequest)(nil),             // 88: pilab.cloud.cli.v1.GetVSwitchRequest
-	(*ListVSwitchesRequest)(nil),          // 89: pilab.cloud.cli.v1.ListVSwitchesRequest
-	(*ListVSwitchesResponse)(nil),         // 90: pilab.cloud.cli.v1.ListVSwitchesResponse
-	(*DeleteVSwitchRequest)(nil),          // 91: pilab.cloud.cli.v1.DeleteVSwitchRequest
-	(*PortGroup)(nil),                     // 92: pilab.cloud.cli.v1.PortGroup
-	(*CreatePortGroupRequest)(nil),        // 93: pilab.cloud.cli.v1.CreatePortGroupRequest
-	(*GetPortGroupRequest)(nil),           // 94: pilab.cloud.cli.v1.GetPortGroupRequest
-	(*ListPortGroupsRequest)(nil),         // 95: pilab.cloud.cli.v1.ListPortGroupsRequest
-	(*ListPortGroupsResponse)(nil),        // 96: pilab.cloud.cli.v1.ListPortGroupsResponse
-	(*DeletePortGroupRequest)(nil),        // 97: pilab.cloud.cli.v1.DeletePortGroupRequest
-	(*PublicIP)(nil),                      // 98: pilab.cloud.cli.v1.PublicIP
-	(*CreatePublicIPRequest)(nil),         // 99: pilab.cloud.cli.v1.CreatePublicIPRequest
-	(*GetPublicIPRequest)(nil),            // 100: pilab.cloud.cli.v1.GetPublicIPRequest
-	(*ListPublicIPsRequest)(nil),          // 101: pilab.cloud.cli.v1.ListPublicIPsRequest
-	(*ListPublicIPsResponse)(nil),         // 102: pilab.cloud.cli.v1.ListPublicIPsResponse
-	(*UpdatePublicIPRequest)(nil),         // 103: pilab.cloud.cli.v1.UpdatePublicIPRequest
-	(*DeletePublicIPRequest)(nil),         // 104: pilab.cloud.cli.v1.DeletePublicIPRequest
-	(*AssignPublicIPRequest)(nil),         // 105: pilab.cloud.cli.v1.AssignPublicIPRequest
-	(*UnassignPublicIPRequest)(nil),       // 106: pilab.cloud.cli.v1.UnassignPublicIPRequest
-	(*SecurityGroup)(nil),                 // 107: pilab.cloud.cli.v1.SecurityGroup
-	(*SecurityRule)(nil),                  // 108: pilab.cloud.cli.v1.SecurityRule
-	(*CreateSecurityGroupRequest)(nil),    // 109: pilab.cloud.cli.v1.CreateSecurityGroupRequest
-	(*GetSecurityGroupRequest)(nil),       // 110: pilab.cloud.cli.v1.GetSecurityGroupRequest
-	(*ListSecurityGroupsRequest)(nil),     // 111: pilab.cloud.cli.v1.ListSecurityGroupsRequest
-	(*ListSecurityGroupsResponse)(nil),    // 112: pilab.cloud.cli.v1.ListSecurityGroupsResponse
-	(*UpdateSecurityGroupRequest)(nil),    // 113: pilab.cloud.cli.v1.UpdateSecurityGroupRequest
-	(*DeleteSecurityGroupRequest)(nil),    // 114: pilab.cloud.cli.v1.DeleteSecurityGroupRequest
-	(*AddSecurityRuleRequest)(nil),        // 115: pilab.cloud.cli.v1.AddSecurityRuleRequest
-	(*RemoveSecurityRuleRequest)(nil),     // 116: pilab.cloud.cli.v1.RemoveSecurityRuleRequest
-	(*Template)(nil),                      // 117: pilab.cloud.cli.v1.Template
-	(*CreateTemplateRequest)(nil),         // 118: pilab.cloud.cli.v1.CreateTemplateRequest
-	(*GetTemplateRequest)(nil),            // 119: pilab.cloud.cli.v1.GetTemplateRequest
-	(*ListTemplatesRequest)(nil),          // 120: pilab.cloud.cli.v1.ListTemplatesRequest
-	(*ListTemplatesResponse)(nil),         // 121: pilab.cloud.cli.v1.ListTemplatesResponse
-	(*DeleteTemplateRequest)(nil),         // 122: pilab.cloud.cli.v1.DeleteTemplateRequest
-	(*OSTemplate)(nil),                    // 123: pilab.cloud.cli.v1.OSTemplate
-	(*ImageURL)(nil),                      // 124: pilab.cloud.cli.v1.ImageURL
-	(*ListOSTemplatesRequest)(nil),        // 125: pilab.cloud.cli.v1.ListOSTemplatesRequest
-	(*ListOSTemplatesResponse)(nil),       // 126: pilab.cloud.cli.v1.ListOSTemplatesResponse
-	(*GetOSTemplateRequest)(nil),          // 127: pilab.cloud.cli.v1.GetOSTemplateRequest
-	(*SyncOSTemplatesRequest)(nil),        // 128: pilab.cloud.cli.v1.SyncOSTemplatesRequest
-	(*SyncOSTemplatesResponse)(nil),       // 129: pilab.cloud.cli.v1.SyncOSTemplatesResponse
-	(*CreateVMFromOSTemplateRequest)(nil), // 130: pilab.cloud.cli.v1.CreateVMFromOSTemplateRequest
-	(*GetMetricsRequest)(nil),             // 131: pilab.cloud.cli.v1.GetMetricsRequest
-	(*GetMetricsResponse)(nil),            // 132: pilab.cloud.cli.v1.GetMetricsResponse
-	(*MetricPoint)(nil),                   // 133: pilab.cloud.cli.v1.MetricPoint
-	(*GetActivityRequest)(nil),            // 134: pilab.cloud.cli.v1.GetActivityRequest
-	(*GetActivityResponse)(nil),           // 135: pilab.cloud.cli.v1.GetActivityResponse
-	(*ActivityLog)(nil),                   // 136: pilab.cloud.cli.v1.ActivityLog
-	(*CreateOrganizationRequest)(nil),     // 137: pilab.cloud.cli.v1.CreateOrganizationRequest
-	(*GetOrganizationRequest)(nil),        // 138: pilab.cloud.cli.v1.GetOrganizationRequest
-	(*ListOrganizationsRequest)(nil),      // 139: pilab.cloud.cli.v1.ListOrganizationsRequest
-	(*ListOrganizationsResponse)(nil),     // 140: pilab.cloud.cli.v1.ListOrganizationsResponse
-	(*UpdateOrganizationRequest)(nil),     // 141: pilab.cloud.cli.v1.UpdateOrganizationRequest
-	(*DeleteOrganizationRequest)(nil),     // 142: pilab.cloud.cli.v1.DeleteOrganizationRequest
-	(*CreateUserRequest)(nil),             // 143: pilab.cloud.cli.v1.CreateUserRequest
-	(*GetUserRequest)(nil),                // 144: pilab.cloud.cli.v1.GetUserRequest
-	(*ListUsersRequest)(nil),              // 145: pilab.cloud.cli.v1.ListUsersRequest
-	(*ListUsersResponse)(nil),             // 146: pilab.cloud.cli.v1.ListUsersResponse
-	(*UpdateUserRequest)(nil),             // 147: pilab.cloud.cli.v1.UpdateUserRequest
-	(*DeleteUserRequest)(nil),             // 148: pilab.cloud.cli.v1.DeleteUserRequest
-	(*VersionResponse)(nil),               // 149: pilab.cloud.cli.v1.VersionResponse
-	(*Datastore)(nil),                     // 150: pilab.cloud.cli.v1.Datastore
-	(*CreateDatastoreRequest)(nil),        // 151: pilab.cloud.cli.v1.CreateDatastoreRequest
-	(*GetDatastoreRequest)(nil),           // 152: pilab.cloud.cli.v1.GetDatastoreRequest
-	(*ListDatastoresRequest)(nil),         // 153: pilab.cloud.cli.v1.ListDatastoresRequest
-	(*ListDatastoresResponse)(nil),        // 154: pilab.cloud.cli.v1.ListDatastoresResponse
-	(*DeleteDatastoreRequest)(nil),        // 155: pilab.cloud.cli.v1.DeleteDatastoreRequest
-	(*MountDatastoreRequest)(nil),         // 156: pilab.cloud.cli.v1.MountDatastoreRequest
-	(*UnmountDatastoreRequest)(nil),       // 157: pilab.cloud.cli.v1.UnmountDatastoreRequest
-	(*HostInfo)(nil),                      // 158: pilab.cloud.cli.v1.HostInfo
-	(*NetworkInterfaceInfo)(nil),          // 159: pilab.cloud.cli.v1.NetworkInterfaceInfo
-	(*NetworkConfigResponse)(nil),         // 160: pilab.cloud.cli.v1.NetworkConfigResponse
-	(*StorageConfigResponse)(nil),         // 161: pilab.cloud.cli.v1.StorageConfigResponse
-	(*ServiceStatus)(nil),                 // 162: pilab.cloud.cli.v1.ServiceStatus
-	(*HostHealthResponse)(nil),            // 163: pilab.cloud.cli.v1.HostHealthResponse
-	(*ConfigureNetworkRequest)(nil),       // 164: pilab.cloud.cli.v1.ConfigureNetworkRequest
-	nil,                                   // 165: pilab.cloud.cli.v1.VM.LabelsEntry
-	nil,                                   // 166: pilab.cloud.cli.v1.VM.MetadataEntry
-	nil,                                   // 167: pilab.cloud.cli.v1.CreateVMRequest.LabelsEntry
-	nil,                                   // 168: pilab.cloud.cli.v1.CreateVMRequest.MetadataEntry
-	nil,                                   // 169: pilab.cloud.cli.v1.ListVMsRequest.LabelSelectorEntry
-	nil,                                   // 170: pilab.cloud.cli.v1.ListVMsRequest.FieldSelectorEntry
-	nil,                                   // 171: pilab.cloud.cli.v1.UpdateVMRequest.LabelsEntry
-	nil,                                   // 172: pilab.cloud.cli.v1.UpdateVMRequest.MetadataEntry
-	nil,                                   // 173: pilab.cloud.cli.v1.Disk.LabelsEntry
-	nil,                                   // 174: pilab.cloud.cli.v1.CreateDiskRequest.LabelsEntry
-	nil,                                   // 175: pilab.cloud.cli.v1.UpdateDiskRequest.LabelsEntry
-	nil,                                   // 176: pilab.cloud.cli.v1.Image.LabelsEntry
-	nil,                                   // 177: pilab.cloud.cli.v1.CreateImageRequest.LabelsEntry
-	nil,                                   // 178: pilab.cloud.cli.v1.UploadImageRequest.LabelsEntry
-	nil,                                   // 179: pilab.cloud.cli.v1.Snapshot.LabelsEntry
-	nil,                                   // 180: pilab.cloud.cli.v1.ListSnapshotsRequest.LabelsEntry
-	nil,                                   // 181: pilab.cloud.cli.v1.CreateSnapshotRequest.LabelsEntry
-	nil,                                   // 182: pilab.cloud.cli.v1.Network.LabelsEntry
-	nil,                                   // 183: pilab.cloud.cli.v1.CreateNetworkRequest.LabelsEntry
-	nil,                                   // 184: pilab.cloud.cli.v1.UpdateNetworkRequest.LabelsEntry
-	nil,                                   // 185: pilab.cloud.cli.v1.VSwitch.ConfigEntry
-	nil,                                   // 186: pilab.cloud.cli.v1.CreateVSwitchRequest.ConfigEntry
-	nil,                                   // 187: pilab.cloud.cli.v1.PublicIP.LabelsEntry
-	nil,                                   // 188: pilab.cloud.cli.v1.CreatePublicIPRequest.LabelsEntry
-	nil,                                   // 189: pilab.cloud.cli.v1.UpdatePublicIPRequest.LabelsEntry
-	nil,                                   // 190: pilab.cloud.cli.v1.SecurityGroup.LabelsEntry
-	nil,                                   // 191: pilab.cloud.cli.v1.CreateSecurityGroupRequest.LabelsEntry
-	nil,                                   // 192: pilab.cloud.cli.v1.UpdateSecurityGroupRequest.LabelsEntry
-	nil,                                   // 193: pilab.cloud.cli.v1.Template.LabelsEntry
-	nil,                                   // 194: pilab.cloud.cli.v1.Template.MetadataEntry
-	nil,                                   // 195: pilab.cloud.cli.v1.CreateTemplateRequest.LabelsEntry
-	nil,                                   // 196: pilab.cloud.cli.v1.CreateTemplateRequest.MetadataEntry
-	nil,                                   // 197: pilab.cloud.cli.v1.OSTemplate.LabelsEntry
-	nil,                                   // 198: pilab.cloud.cli.v1.CreateVMFromOSTemplateRequest.LabelsEntry
-	nil,                                   // 199: pilab.cloud.cli.v1.CreateVMFromOSTemplateRequest.MetadataEntry
-	nil,                                   // 200: pilab.cloud.cli.v1.ActivityLog.DetailsEntry
-	nil,                                   // 201: pilab.cloud.cli.v1.Datastore.ConnectionInfoEntry
-	nil,                                   // 202: pilab.cloud.cli.v1.CreateDatastoreRequest.ConnectionInfoEntry
+	(VMState)(0),                          // 0: pilab.cli.v1.VMState
+	(DiskState)(0),                        // 1: pilab.cli.v1.DiskState
+	(ImageState)(0),                       // 2: pilab.cli.v1.ImageState
+	(SnapshotState)(0),                    // 3: pilab.cli.v1.SnapshotState
+	(NetworkState)(0),                     // 4: pilab.cli.v1.NetworkState
+	(VSwitchState)(0),                     // 5: pilab.cli.v1.VSwitchState
+	(PortGroupState)(0),                   // 6: pilab.cli.v1.PortGroupState
+	(PublicIPState)(0),                    // 7: pilab.cli.v1.PublicIPState
+	(SecurityGroupState)(0),               // 8: pilab.cli.v1.SecurityGroupState
+	(TemplateState)(0),                    // 9: pilab.cli.v1.TemplateState
+	(OSTemplateState)(0),                  // 10: pilab.cli.v1.OSTemplateState
+	(DatastoreType)(0),                    // 11: pilab.cli.v1.DatastoreType
+	(DatastoreStatus)(0),                  // 12: pilab.cli.v1.DatastoreStatus
+	(*LoginRequest)(nil),                  // 13: pilab.cli.v1.LoginRequest
+	(*LoginResponse)(nil),                 // 14: pilab.cli.v1.LoginResponse
+	(*InitiateDeviceAuthRequest)(nil),     // 15: pilab.cli.v1.InitiateDeviceAuthRequest
+	(*InitiateDeviceAuthResponse)(nil),    // 16: pilab.cli.v1.InitiateDeviceAuthResponse
+	(*PollDeviceAuthRequest)(nil),         // 17: pilab.cli.v1.PollDeviceAuthRequest
+	(*PollDeviceAuthResponse)(nil),        // 18: pilab.cli.v1.PollDeviceAuthResponse
+	(*LogoutRequest)(nil),                 // 19: pilab.cli.v1.LogoutRequest
+	(*User)(nil),                          // 20: pilab.cli.v1.User
+	(*Organization)(nil),                  // 21: pilab.cli.v1.Organization
+	(*ResourceQuota)(nil),                 // 22: pilab.cli.v1.ResourceQuota
+	(*ResourceUsage)(nil),                 // 23: pilab.cli.v1.ResourceUsage
+	(*VM)(nil),                            // 24: pilab.cli.v1.VM
+	(*MachineType)(nil),                   // 25: pilab.cli.v1.MachineType
+	(*CreateVMRequest)(nil),               // 26: pilab.cli.v1.CreateVMRequest
+	(*GetVMRequest)(nil),                  // 27: pilab.cli.v1.GetVMRequest
+	(*ListVMsRequest)(nil),                // 28: pilab.cli.v1.ListVMsRequest
+	(*ListVMsResponse)(nil),               // 29: pilab.cli.v1.ListVMsResponse
+	(*UpdateVMRequest)(nil),               // 30: pilab.cli.v1.UpdateVMRequest
+	(*DeleteVMRequest)(nil),               // 31: pilab.cli.v1.DeleteVMRequest
+	(*StartVMRequest)(nil),                // 32: pilab.cli.v1.StartVMRequest
+	(*StopVMRequest)(nil),                 // 33: pilab.cli.v1.StopVMRequest
+	(*RestartVMRequest)(nil),              // 34: pilab.cli.v1.RestartVMRequest
+	(*PauseVMRequest)(nil),                // 35: pilab.cli.v1.PauseVMRequest
+	(*UnpauseVMRequest)(nil),              // 36: pilab.cli.v1.UnpauseVMRequest
+	(*MigrateVMRequest)(nil),              // 37: pilab.cli.v1.MigrateVMRequest
+	(*RebuildVMRequest)(nil),              // 38: pilab.cli.v1.RebuildVMRequest
+	(*CloneVMRequest)(nil),                // 39: pilab.cli.v1.CloneVMRequest
+	(*LinkedCloneVMRequest)(nil),          // 40: pilab.cli.v1.LinkedCloneVMRequest
+	(*LinkedCloneVMResponse)(nil),         // 41: pilab.cli.v1.LinkedCloneVMResponse
+	(*GetVMConsoleRequest)(nil),           // 42: pilab.cli.v1.GetVMConsoleRequest
+	(*GetVMConsoleResponse)(nil),          // 43: pilab.cli.v1.GetVMConsoleResponse
+	(*UpdateVMResourcesRequest)(nil),      // 44: pilab.cli.v1.UpdateVMResourcesRequest
+	(*UpdateVMResourcesResponse)(nil),     // 45: pilab.cli.v1.UpdateVMResourcesResponse
+	(*GetVMResourcesRequest)(nil),         // 46: pilab.cli.v1.GetVMResourcesRequest
+	(*GetVMResourcesResponse)(nil),        // 47: pilab.cli.v1.GetVMResourcesResponse
+	(*Disk)(nil),                          // 48: pilab.cli.v1.Disk
+	(*CreateDiskRequest)(nil),             // 49: pilab.cli.v1.CreateDiskRequest
+	(*GetDiskRequest)(nil),                // 50: pilab.cli.v1.GetDiskRequest
+	(*ListDisksRequest)(nil),              // 51: pilab.cli.v1.ListDisksRequest
+	(*ListDisksResponse)(nil),             // 52: pilab.cli.v1.ListDisksResponse
+	(*UpdateDiskRequest)(nil),             // 53: pilab.cli.v1.UpdateDiskRequest
+	(*DeleteDiskRequest)(nil),             // 54: pilab.cli.v1.DeleteDiskRequest
+	(*ExtendDiskRequest)(nil),             // 55: pilab.cli.v1.ExtendDiskRequest
+	(*AttachDiskRequest)(nil),             // 56: pilab.cli.v1.AttachDiskRequest
+	(*DetachDiskRequest)(nil),             // 57: pilab.cli.v1.DetachDiskRequest
+	(*Image)(nil),                         // 58: pilab.cli.v1.Image
+	(*GetImageRequest)(nil),               // 59: pilab.cli.v1.GetImageRequest
+	(*ListImagesRequest)(nil),             // 60: pilab.cli.v1.ListImagesRequest
+	(*ListImagesResponse)(nil),            // 61: pilab.cli.v1.ListImagesResponse
+	(*CreateImageRequest)(nil),            // 62: pilab.cli.v1.CreateImageRequest
+	(*UploadImageRequest)(nil),            // 63: pilab.cli.v1.UploadImageRequest
+	(*DeleteImageRequest)(nil),            // 64: pilab.cli.v1.DeleteImageRequest
+	(*Snapshot)(nil),                      // 65: pilab.cli.v1.Snapshot
+	(*GetSnapshotRequest)(nil),            // 66: pilab.cli.v1.GetSnapshotRequest
+	(*ListSnapshotsRequest)(nil),          // 67: pilab.cli.v1.ListSnapshotsRequest
+	(*ListSnapshotsResponse)(nil),         // 68: pilab.cli.v1.ListSnapshotsResponse
+	(*CreateSnapshotRequest)(nil),         // 69: pilab.cli.v1.CreateSnapshotRequest
+	(*RestoreSnapshotRequest)(nil),        // 70: pilab.cli.v1.RestoreSnapshotRequest
+	(*DeleteSnapshotRequest)(nil),         // 71: pilab.cli.v1.DeleteSnapshotRequest
+	(*SnapshotConsolidateRequest)(nil),    // 72: pilab.cli.v1.SnapshotConsolidateRequest
+	(*Network)(nil),                       // 73: pilab.cli.v1.Network
+	(*NetworkInterface)(nil),              // 74: pilab.cli.v1.NetworkInterface
+	(*CreateNetworkRequest)(nil),          // 75: pilab.cli.v1.CreateNetworkRequest
+	(*GetNetworkRequest)(nil),             // 76: pilab.cli.v1.GetNetworkRequest
+	(*ListNetworksRequest)(nil),           // 77: pilab.cli.v1.ListNetworksRequest
+	(*ListNetworksResponse)(nil),          // 78: pilab.cli.v1.ListNetworksResponse
+	(*UpdateNetworkRequest)(nil),          // 79: pilab.cli.v1.UpdateNetworkRequest
+	(*DeleteNetworkRequest)(nil),          // 80: pilab.cli.v1.DeleteNetworkRequest
+	(*GetNetworkInterfaceRequest)(nil),    // 81: pilab.cli.v1.GetNetworkInterfaceRequest
+	(*ListNetworkInterfacesRequest)(nil),  // 82: pilab.cli.v1.ListNetworkInterfacesRequest
+	(*ListNetworkInterfacesResponse)(nil), // 83: pilab.cli.v1.ListNetworkInterfacesResponse
+	(*AddNetworkInterfaceRequest)(nil),    // 84: pilab.cli.v1.AddNetworkInterfaceRequest
+	(*RemoveNetworkInterfaceRequest)(nil), // 85: pilab.cli.v1.RemoveNetworkInterfaceRequest
+	(*VSwitch)(nil),                       // 86: pilab.cli.v1.VSwitch
+	(*CreateVSwitchRequest)(nil),          // 87: pilab.cli.v1.CreateVSwitchRequest
+	(*GetVSwitchRequest)(nil),             // 88: pilab.cli.v1.GetVSwitchRequest
+	(*ListVSwitchesRequest)(nil),          // 89: pilab.cli.v1.ListVSwitchesRequest
+	(*ListVSwitchesResponse)(nil),         // 90: pilab.cli.v1.ListVSwitchesResponse
+	(*DeleteVSwitchRequest)(nil),          // 91: pilab.cli.v1.DeleteVSwitchRequest
+	(*PortGroup)(nil),                     // 92: pilab.cli.v1.PortGroup
+	(*CreatePortGroupRequest)(nil),        // 93: pilab.cli.v1.CreatePortGroupRequest
+	(*GetPortGroupRequest)(nil),           // 94: pilab.cli.v1.GetPortGroupRequest
+	(*ListPortGroupsRequest)(nil),         // 95: pilab.cli.v1.ListPortGroupsRequest
+	(*ListPortGroupsResponse)(nil),        // 96: pilab.cli.v1.ListPortGroupsResponse
+	(*DeletePortGroupRequest)(nil),        // 97: pilab.cli.v1.DeletePortGroupRequest
+	(*PublicIP)(nil),                      // 98: pilab.cli.v1.PublicIP
+	(*CreatePublicIPRequest)(nil),         // 99: pilab.cli.v1.CreatePublicIPRequest
+	(*GetPublicIPRequest)(nil),            // 100: pilab.cli.v1.GetPublicIPRequest
+	(*ListPublicIPsRequest)(nil),          // 101: pilab.cli.v1.ListPublicIPsRequest
+	(*ListPublicIPsResponse)(nil),         // 102: pilab.cli.v1.ListPublicIPsResponse
+	(*UpdatePublicIPRequest)(nil),         // 103: pilab.cli.v1.UpdatePublicIPRequest
+	(*DeletePublicIPRequest)(nil),         // 104: pilab.cli.v1.DeletePublicIPRequest
+	(*AssignPublicIPRequest)(nil),         // 105: pilab.cli.v1.AssignPublicIPRequest
+	(*UnassignPublicIPRequest)(nil),       // 106: pilab.cli.v1.UnassignPublicIPRequest
+	(*SecurityGroup)(nil),                 // 107: pilab.cli.v1.SecurityGroup
+	(*SecurityRule)(nil),                  // 108: pilab.cli.v1.SecurityRule
+	(*CreateSecurityGroupRequest)(nil),    // 109: pilab.cli.v1.CreateSecurityGroupRequest
+	(*GetSecurityGroupRequest)(nil),       // 110: pilab.cli.v1.GetSecurityGroupRequest
+	(*ListSecurityGroupsRequest)(nil),     // 111: pilab.cli.v1.ListSecurityGroupsRequest
+	(*ListSecurityGroupsResponse)(nil),    // 112: pilab.cli.v1.ListSecurityGroupsResponse
+	(*UpdateSecurityGroupRequest)(nil),    // 113: pilab.cli.v1.UpdateSecurityGroupRequest
+	(*DeleteSecurityGroupRequest)(nil),    // 114: pilab.cli.v1.DeleteSecurityGroupRequest
+	(*AddSecurityRuleRequest)(nil),        // 115: pilab.cli.v1.AddSecurityRuleRequest
+	(*RemoveSecurityRuleRequest)(nil),     // 116: pilab.cli.v1.RemoveSecurityRuleRequest
+	(*Template)(nil),                      // 117: pilab.cli.v1.Template
+	(*CreateTemplateRequest)(nil),         // 118: pilab.cli.v1.CreateTemplateRequest
+	(*GetTemplateRequest)(nil),            // 119: pilab.cli.v1.GetTemplateRequest
+	(*ListTemplatesRequest)(nil),          // 120: pilab.cli.v1.ListTemplatesRequest
+	(*ListTemplatesResponse)(nil),         // 121: pilab.cli.v1.ListTemplatesResponse
+	(*DeleteTemplateRequest)(nil),         // 122: pilab.cli.v1.DeleteTemplateRequest
+	(*OSTemplate)(nil),                    // 123: pilab.cli.v1.OSTemplate
+	(*ImageURL)(nil),                      // 124: pilab.cli.v1.ImageURL
+	(*ListOSTemplatesRequest)(nil),        // 125: pilab.cli.v1.ListOSTemplatesRequest
+	(*ListOSTemplatesResponse)(nil),       // 126: pilab.cli.v1.ListOSTemplatesResponse
+	(*GetOSTemplateRequest)(nil),          // 127: pilab.cli.v1.GetOSTemplateRequest
+	(*SyncOSTemplatesRequest)(nil),        // 128: pilab.cli.v1.SyncOSTemplatesRequest
+	(*SyncOSTemplatesResponse)(nil),       // 129: pilab.cli.v1.SyncOSTemplatesResponse
+	(*CreateVMFromOSTemplateRequest)(nil), // 130: pilab.cli.v1.CreateVMFromOSTemplateRequest
+	(*GetMetricsRequest)(nil),             // 131: pilab.cli.v1.GetMetricsRequest
+	(*GetMetricsResponse)(nil),            // 132: pilab.cli.v1.GetMetricsResponse
+	(*MetricPoint)(nil),                   // 133: pilab.cli.v1.MetricPoint
+	(*GetActivityRequest)(nil),            // 134: pilab.cli.v1.GetActivityRequest
+	(*GetActivityResponse)(nil),           // 135: pilab.cli.v1.GetActivityResponse
+	(*ActivityLog)(nil),                   // 136: pilab.cli.v1.ActivityLog
+	(*CreateOrganizationRequest)(nil),     // 137: pilab.cli.v1.CreateOrganizationRequest
+	(*GetOrganizationRequest)(nil),        // 138: pilab.cli.v1.GetOrganizationRequest
+	(*ListOrganizationsRequest)(nil),      // 139: pilab.cli.v1.ListOrganizationsRequest
+	(*ListOrganizationsResponse)(nil),     // 140: pilab.cli.v1.ListOrganizationsResponse
+	(*UpdateOrganizationRequest)(nil),     // 141: pilab.cli.v1.UpdateOrganizationRequest
+	(*DeleteOrganizationRequest)(nil),     // 142: pilab.cli.v1.DeleteOrganizationRequest
+	(*CreateUserRequest)(nil),             // 143: pilab.cli.v1.CreateUserRequest
+	(*GetUserRequest)(nil),                // 144: pilab.cli.v1.GetUserRequest
+	(*ListUsersRequest)(nil),              // 145: pilab.cli.v1.ListUsersRequest
+	(*ListUsersResponse)(nil),             // 146: pilab.cli.v1.ListUsersResponse
+	(*UpdateUserRequest)(nil),             // 147: pilab.cli.v1.UpdateUserRequest
+	(*DeleteUserRequest)(nil),             // 148: pilab.cli.v1.DeleteUserRequest
+	(*VersionResponse)(nil),               // 149: pilab.cli.v1.VersionResponse
+	(*Datastore)(nil),                     // 150: pilab.cli.v1.Datastore
+	(*CreateDatastoreRequest)(nil),        // 151: pilab.cli.v1.CreateDatastoreRequest
+	(*GetDatastoreRequest)(nil),           // 152: pilab.cli.v1.GetDatastoreRequest
+	(*ListDatastoresRequest)(nil),         // 153: pilab.cli.v1.ListDatastoresRequest
+	(*ListDatastoresResponse)(nil),        // 154: pilab.cli.v1.ListDatastoresResponse
+	(*DeleteDatastoreRequest)(nil),        // 155: pilab.cli.v1.DeleteDatastoreRequest
+	(*MountDatastoreRequest)(nil),         // 156: pilab.cli.v1.MountDatastoreRequest
+	(*UnmountDatastoreRequest)(nil),       // 157: pilab.cli.v1.UnmountDatastoreRequest
+	(*HostInfo)(nil),                      // 158: pilab.cli.v1.HostInfo
+	(*NetworkInterfaceInfo)(nil),          // 159: pilab.cli.v1.NetworkInterfaceInfo
+	(*NetworkConfigResponse)(nil),         // 160: pilab.cli.v1.NetworkConfigResponse
+	(*StorageConfigResponse)(nil),         // 161: pilab.cli.v1.StorageConfigResponse
+	(*ServiceStatus)(nil),                 // 162: pilab.cli.v1.ServiceStatus
+	(*HostHealthResponse)(nil),            // 163: pilab.cli.v1.HostHealthResponse
+	(*ConfigureNetworkRequest)(nil),       // 164: pilab.cli.v1.ConfigureNetworkRequest
+	nil,                                   // 165: pilab.cli.v1.VM.LabelsEntry
+	nil,                                   // 166: pilab.cli.v1.VM.MetadataEntry
+	nil,                                   // 167: pilab.cli.v1.CreateVMRequest.LabelsEntry
+	nil,                                   // 168: pilab.cli.v1.CreateVMRequest.MetadataEntry
+	nil,                                   // 169: pilab.cli.v1.ListVMsRequest.LabelSelectorEntry
+	nil,                                   // 170: pilab.cli.v1.ListVMsRequest.FieldSelectorEntry
+	nil,                                   // 171: pilab.cli.v1.UpdateVMRequest.LabelsEntry
+	nil,                                   // 172: pilab.cli.v1.UpdateVMRequest.MetadataEntry
+	nil,                                   // 173: pilab.cli.v1.Disk.LabelsEntry
+	nil,                                   // 174: pilab.cli.v1.CreateDiskRequest.LabelsEntry
+	nil,                                   // 175: pilab.cli.v1.UpdateDiskRequest.LabelsEntry
+	nil,                                   // 176: pilab.cli.v1.Image.LabelsEntry
+	nil,                                   // 177: pilab.cli.v1.CreateImageRequest.LabelsEntry
+	nil,                                   // 178: pilab.cli.v1.UploadImageRequest.LabelsEntry
+	nil,                                   // 179: pilab.cli.v1.Snapshot.LabelsEntry
+	nil,                                   // 180: pilab.cli.v1.ListSnapshotsRequest.LabelsEntry
+	nil,                                   // 181: pilab.cli.v1.CreateSnapshotRequest.LabelsEntry
+	nil,                                   // 182: pilab.cli.v1.Network.LabelsEntry
+	nil,                                   // 183: pilab.cli.v1.CreateNetworkRequest.LabelsEntry
+	nil,                                   // 184: pilab.cli.v1.UpdateNetworkRequest.LabelsEntry
+	nil,                                   // 185: pilab.cli.v1.VSwitch.ConfigEntry
+	nil,                                   // 186: pilab.cli.v1.CreateVSwitchRequest.ConfigEntry
+	nil,                                   // 187: pilab.cli.v1.PublicIP.LabelsEntry
+	nil,                                   // 188: pilab.cli.v1.CreatePublicIPRequest.LabelsEntry
+	nil,                                   // 189: pilab.cli.v1.UpdatePublicIPRequest.LabelsEntry
+	nil,                                   // 190: pilab.cli.v1.SecurityGroup.LabelsEntry
+	nil,                                   // 191: pilab.cli.v1.CreateSecurityGroupRequest.LabelsEntry
+	nil,                                   // 192: pilab.cli.v1.UpdateSecurityGroupRequest.LabelsEntry
+	nil,                                   // 193: pilab.cli.v1.Template.LabelsEntry
+	nil,                                   // 194: pilab.cli.v1.Template.MetadataEntry
+	nil,                                   // 195: pilab.cli.v1.CreateTemplateRequest.LabelsEntry
+	nil,                                   // 196: pilab.cli.v1.CreateTemplateRequest.MetadataEntry
+	nil,                                   // 197: pilab.cli.v1.OSTemplate.LabelsEntry
+	nil,                                   // 198: pilab.cli.v1.CreateVMFromOSTemplateRequest.LabelsEntry
+	nil,                                   // 199: pilab.cli.v1.CreateVMFromOSTemplateRequest.MetadataEntry
+	nil,                                   // 200: pilab.cli.v1.ActivityLog.DetailsEntry
+	nil,                                   // 201: pilab.cli.v1.Datastore.ConnectionInfoEntry
+	nil,                                   // 202: pilab.cli.v1.CreateDatastoreRequest.ConnectionInfoEntry
 	(*timestamppb.Timestamp)(nil),         // 203: google.protobuf.Timestamp
 	(*durationpb.Duration)(nil),           // 204: google.protobuf.Duration
 	(*emptypb.Empty)(nil),                 // 205: google.protobuf.Empty
 }
 var file_pilab_cli_v1_vps_service_proto_depIdxs = []int32{
-	20,  // 0: pilab.cloud.cli.v1.LoginResponse.user:type_name -> pilab.cloud.cli.v1.User
-	21,  // 1: pilab.cloud.cli.v1.LoginResponse.organization:type_name -> pilab.cloud.cli.v1.Organization
-	203, // 2: pilab.cloud.cli.v1.LoginResponse.expires_at:type_name -> google.protobuf.Timestamp
-	20,  // 3: pilab.cloud.cli.v1.PollDeviceAuthResponse.user:type_name -> pilab.cloud.cli.v1.User
-	21,  // 4: pilab.cloud.cli.v1.PollDeviceAuthResponse.organization:type_name -> pilab.cloud.cli.v1.Organization
-	203, // 5: pilab.cloud.cli.v1.PollDeviceAuthResponse.expires_at:type_name -> google.protobuf.Timestamp
-	203, // 6: pilab.cloud.cli.v1.User.created_at:type_name -> google.protobuf.Timestamp
-	203, // 7: pilab.cloud.cli.v1.User.updated_at:type_name -> google.protobuf.Timestamp
-	22,  // 8: pilab.cloud.cli.v1.Organization.quota:type_name -> pilab.cloud.cli.v1.ResourceQuota
-	23,  // 9: pilab.cloud.cli.v1.Organization.usage:type_name -> pilab.cloud.cli.v1.ResourceUsage
-	203, // 10: pilab.cloud.cli.v1.Organization.created_at:type_name -> google.protobuf.Timestamp
-	203, // 11: pilab.cloud.cli.v1.Organization.updated_at:type_name -> google.protobuf.Timestamp
-	0,   // 12: pilab.cloud.cli.v1.VM.state:type_name -> pilab.cloud.cli.v1.VMState
-	25,  // 13: pilab.cloud.cli.v1.VM.machine_type:type_name -> pilab.cloud.cli.v1.MachineType
-	58,  // 14: pilab.cloud.cli.v1.VM.image:type_name -> pilab.cloud.cli.v1.Image
-	48,  // 15: pilab.cloud.cli.v1.VM.disks:type_name -> pilab.cloud.cli.v1.Disk
-	74,  // 16: pilab.cloud.cli.v1.VM.network_interfaces:type_name -> pilab.cloud.cli.v1.NetworkInterface
-	107, // 17: pilab.cloud.cli.v1.VM.security_groups:type_name -> pilab.cloud.cli.v1.SecurityGroup
-	98,  // 18: pilab.cloud.cli.v1.VM.public_ips:type_name -> pilab.cloud.cli.v1.PublicIP
-	165, // 19: pilab.cloud.cli.v1.VM.labels:type_name -> pilab.cloud.cli.v1.VM.LabelsEntry
-	166, // 20: pilab.cloud.cli.v1.VM.metadata:type_name -> pilab.cloud.cli.v1.VM.MetadataEntry
-	203, // 21: pilab.cloud.cli.v1.VM.created_at:type_name -> google.protobuf.Timestamp
-	203, // 22: pilab.cloud.cli.v1.VM.updated_at:type_name -> google.protobuf.Timestamp
-	167, // 23: pilab.cloud.cli.v1.CreateVMRequest.labels:type_name -> pilab.cloud.cli.v1.CreateVMRequest.LabelsEntry
-	168, // 24: pilab.cloud.cli.v1.CreateVMRequest.metadata:type_name -> pilab.cloud.cli.v1.CreateVMRequest.MetadataEntry
-	169, // 25: pilab.cloud.cli.v1.ListVMsRequest.label_selector:type_name -> pilab.cloud.cli.v1.ListVMsRequest.LabelSelectorEntry
-	170, // 26: pilab.cloud.cli.v1.ListVMsRequest.field_selector:type_name -> pilab.cloud.cli.v1.ListVMsRequest.FieldSelectorEntry
-	24,  // 27: pilab.cloud.cli.v1.ListVMsResponse.vms:type_name -> pilab.cloud.cli.v1.VM
-	171, // 28: pilab.cloud.cli.v1.UpdateVMRequest.labels:type_name -> pilab.cloud.cli.v1.UpdateVMRequest.LabelsEntry
-	172, // 29: pilab.cloud.cli.v1.UpdateVMRequest.metadata:type_name -> pilab.cloud.cli.v1.UpdateVMRequest.MetadataEntry
-	24,  // 30: pilab.cloud.cli.v1.LinkedCloneVMResponse.vm:type_name -> pilab.cloud.cli.v1.VM
-	24,  // 31: pilab.cloud.cli.v1.UpdateVMResourcesResponse.vm:type_name -> pilab.cloud.cli.v1.VM
-	173, // 32: pilab.cloud.cli.v1.Disk.labels:type_name -> pilab.cloud.cli.v1.Disk.LabelsEntry
-	1,   // 33: pilab.cloud.cli.v1.Disk.state:type_name -> pilab.cloud.cli.v1.DiskState
-	203, // 34: pilab.cloud.cli.v1.Disk.created_at:type_name -> google.protobuf.Timestamp
-	203, // 35: pilab.cloud.cli.v1.Disk.updated_at:type_name -> google.protobuf.Timestamp
-	174, // 36: pilab.cloud.cli.v1.CreateDiskRequest.labels:type_name -> pilab.cloud.cli.v1.CreateDiskRequest.LabelsEntry
-	48,  // 37: pilab.cloud.cli.v1.ListDisksResponse.disks:type_name -> pilab.cloud.cli.v1.Disk
-	175, // 38: pilab.cloud.cli.v1.UpdateDiskRequest.labels:type_name -> pilab.cloud.cli.v1.UpdateDiskRequest.LabelsEntry
-	176, // 39: pilab.cloud.cli.v1.Image.labels:type_name -> pilab.cloud.cli.v1.Image.LabelsEntry
-	2,   // 40: pilab.cloud.cli.v1.Image.state:type_name -> pilab.cloud.cli.v1.ImageState
-	203, // 41: pilab.cloud.cli.v1.Image.created_at:type_name -> google.protobuf.Timestamp
-	203, // 42: pilab.cloud.cli.v1.Image.updated_at:type_name -> google.protobuf.Timestamp
-	58,  // 43: pilab.cloud.cli.v1.ListImagesResponse.images:type_name -> pilab.cloud.cli.v1.Image
-	177, // 44: pilab.cloud.cli.v1.CreateImageRequest.labels:type_name -> pilab.cloud.cli.v1.CreateImageRequest.LabelsEntry
-	178, // 45: pilab.cloud.cli.v1.UploadImageRequest.labels:type_name -> pilab.cloud.cli.v1.UploadImageRequest.LabelsEntry
-	179, // 46: pilab.cloud.cli.v1.Snapshot.labels:type_name -> pilab.cloud.cli.v1.Snapshot.LabelsEntry
-	203, // 47: pilab.cloud.cli.v1.Snapshot.auto_delete_after:type_name -> google.protobuf.Timestamp
-	3,   // 48: pilab.cloud.cli.v1.Snapshot.state:type_name -> pilab.cloud.cli.v1.SnapshotState
-	203, // 49: pilab.cloud.cli.v1.Snapshot.created_at:type_name -> google.protobuf.Timestamp
-	203, // 50: pilab.cloud.cli.v1.Snapshot.updated_at:type_name -> google.protobuf.Timestamp
-	204, // 51: pilab.cloud.cli.v1.ListSnapshotsRequest.older_than:type_name -> google.protobuf.Duration
-	180, // 52: pilab.cloud.cli.v1.ListSnapshotsRequest.labels:type_name -> pilab.cloud.cli.v1.ListSnapshotsRequest.LabelsEntry
-	65,  // 53: pilab.cloud.cli.v1.ListSnapshotsResponse.snapshots:type_name -> pilab.cloud.cli.v1.Snapshot
-	181, // 54: pilab.cloud.cli.v1.CreateSnapshotRequest.labels:type_name -> pilab.cloud.cli.v1.CreateSnapshotRequest.LabelsEntry
-	204, // 55: pilab.cloud.cli.v1.CreateSnapshotRequest.auto_delete_after:type_name -> google.protobuf.Duration
-	182, // 56: pilab.cloud.cli.v1.Network.labels:type_name -> pilab.cloud.cli.v1.Network.LabelsEntry
-	4,   // 57: pilab.cloud.cli.v1.Network.state:type_name -> pilab.cloud.cli.v1.NetworkState
-	203, // 58: pilab.cloud.cli.v1.Network.created_at:type_name -> google.protobuf.Timestamp
-	203, // 59: pilab.cloud.cli.v1.Network.updated_at:type_name -> google.protobuf.Timestamp
-	203, // 60: pilab.cloud.cli.v1.NetworkInterface.created_at:type_name -> google.protobuf.Timestamp
-	183, // 61: pilab.cloud.cli.v1.CreateNetworkRequest.labels:type_name -> pilab.cloud.cli.v1.CreateNetworkRequest.LabelsEntry
-	73,  // 62: pilab.cloud.cli.v1.ListNetworksResponse.networks:type_name -> pilab.cloud.cli.v1.Network
-	184, // 63: pilab.cloud.cli.v1.UpdateNetworkRequest.labels:type_name -> pilab.cloud.cli.v1.UpdateNetworkRequest.LabelsEntry
-	74,  // 64: pilab.cloud.cli.v1.ListNetworkInterfacesResponse.network_interfaces:type_name -> pilab.cloud.cli.v1.NetworkInterface
-	185, // 65: pilab.cloud.cli.v1.VSwitch.config:type_name -> pilab.cloud.cli.v1.VSwitch.ConfigEntry
-	5,   // 66: pilab.cloud.cli.v1.VSwitch.state:type_name -> pilab.cloud.cli.v1.VSwitchState
-	203, // 67: pilab.cloud.cli.v1.VSwitch.created_at:type_name -> google.protobuf.Timestamp
-	203, // 68: pilab.cloud.cli.v1.VSwitch.updated_at:type_name -> google.protobuf.Timestamp
-	186, // 69: pilab.cloud.cli.v1.CreateVSwitchRequest.config:type_name -> pilab.cloud.cli.v1.CreateVSwitchRequest.ConfigEntry
-	86,  // 70: pilab.cloud.cli.v1.ListVSwitchesResponse.vswitches:type_name -> pilab.cloud.cli.v1.VSwitch
-	6,   // 71: pilab.cloud.cli.v1.PortGroup.state:type_name -> pilab.cloud.cli.v1.PortGroupState
-	203, // 72: pilab.cloud.cli.v1.PortGroup.created_at:type_name -> google.protobuf.Timestamp
-	203, // 73: pilab.cloud.cli.v1.PortGroup.updated_at:type_name -> google.protobuf.Timestamp
-	92,  // 74: pilab.cloud.cli.v1.ListPortGroupsResponse.port_groups:type_name -> pilab.cloud.cli.v1.PortGroup
-	187, // 75: pilab.cloud.cli.v1.PublicIP.labels:type_name -> pilab.cloud.cli.v1.PublicIP.LabelsEntry
-	7,   // 76: pilab.cloud.cli.v1.PublicIP.state:type_name -> pilab.cloud.cli.v1.PublicIPState
-	203, // 77: pilab.cloud.cli.v1.PublicIP.created_at:type_name -> google.protobuf.Timestamp
-	203, // 78: pilab.cloud.cli.v1.PublicIP.updated_at:type_name -> google.protobuf.Timestamp
-	188, // 79: pilab.cloud.cli.v1.CreatePublicIPRequest.labels:type_name -> pilab.cloud.cli.v1.CreatePublicIPRequest.LabelsEntry
-	98,  // 80: pilab.cloud.cli.v1.ListPublicIPsResponse.public_ips:type_name -> pilab.cloud.cli.v1.PublicIP
-	189, // 81: pilab.cloud.cli.v1.UpdatePublicIPRequest.labels:type_name -> pilab.cloud.cli.v1.UpdatePublicIPRequest.LabelsEntry
-	190, // 82: pilab.cloud.cli.v1.SecurityGroup.labels:type_name -> pilab.cloud.cli.v1.SecurityGroup.LabelsEntry
-	108, // 83: pilab.cloud.cli.v1.SecurityGroup.rules:type_name -> pilab.cloud.cli.v1.SecurityRule
-	8,   // 84: pilab.cloud.cli.v1.SecurityGroup.state:type_name -> pilab.cloud.cli.v1.SecurityGroupState
-	203, // 85: pilab.cloud.cli.v1.SecurityGroup.created_at:type_name -> google.protobuf.Timestamp
-	203, // 86: pilab.cloud.cli.v1.SecurityGroup.updated_at:type_name -> google.protobuf.Timestamp
-	203, // 87: pilab.cloud.cli.v1.SecurityRule.created_at:type_name -> google.protobuf.Timestamp
-	191, // 88: pilab.cloud.cli.v1.CreateSecurityGroupRequest.labels:type_name -> pilab.cloud.cli.v1.CreateSecurityGroupRequest.LabelsEntry
-	107, // 89: pilab.cloud.cli.v1.ListSecurityGroupsResponse.security_groups:type_name -> pilab.cloud.cli.v1.SecurityGroup
-	192, // 90: pilab.cloud.cli.v1.UpdateSecurityGroupRequest.labels:type_name -> pilab.cloud.cli.v1.UpdateSecurityGroupRequest.LabelsEntry
-	193, // 91: pilab.cloud.cli.v1.Template.labels:type_name -> pilab.cloud.cli.v1.Template.LabelsEntry
-	25,  // 92: pilab.cloud.cli.v1.Template.machine_type:type_name -> pilab.cloud.cli.v1.MachineType
-	58,  // 93: pilab.cloud.cli.v1.Template.image:type_name -> pilab.cloud.cli.v1.Image
-	194, // 94: pilab.cloud.cli.v1.Template.metadata:type_name -> pilab.cloud.cli.v1.Template.MetadataEntry
-	9,   // 95: pilab.cloud.cli.v1.Template.state:type_name -> pilab.cloud.cli.v1.TemplateState
-	203, // 96: pilab.cloud.cli.v1.Template.created_at:type_name -> google.protobuf.Timestamp
-	203, // 97: pilab.cloud.cli.v1.Template.updated_at:type_name -> google.protobuf.Timestamp
-	195, // 98: pilab.cloud.cli.v1.CreateTemplateRequest.labels:type_name -> pilab.cloud.cli.v1.CreateTemplateRequest.LabelsEntry
-	196, // 99: pilab.cloud.cli.v1.CreateTemplateRequest.metadata:type_name -> pilab.cloud.cli.v1.CreateTemplateRequest.MetadataEntry
-	117, // 100: pilab.cloud.cli.v1.ListTemplatesResponse.templates:type_name -> pilab.cloud.cli.v1.Template
-	124, // 101: pilab.cloud.cli.v1.OSTemplate.image_urls:type_name -> pilab.cloud.cli.v1.ImageURL
-	197, // 102: pilab.cloud.cli.v1.OSTemplate.labels:type_name -> pilab.cloud.cli.v1.OSTemplate.LabelsEntry
-	10,  // 103: pilab.cloud.cli.v1.OSTemplate.state:type_name -> pilab.cloud.cli.v1.OSTemplateState
-	203, // 104: pilab.cloud.cli.v1.OSTemplate.created_at:type_name -> google.protobuf.Timestamp
-	203, // 105: pilab.cloud.cli.v1.OSTemplate.updated_at:type_name -> google.protobuf.Timestamp
-	123, // 106: pilab.cloud.cli.v1.ListOSTemplatesResponse.templates:type_name -> pilab.cloud.cli.v1.OSTemplate
-	203, // 107: pilab.cloud.cli.v1.SyncOSTemplatesResponse.synced_at:type_name -> google.protobuf.Timestamp
-	198, // 108: pilab.cloud.cli.v1.CreateVMFromOSTemplateRequest.labels:type_name -> pilab.cloud.cli.v1.CreateVMFromOSTemplateRequest.LabelsEntry
-	199, // 109: pilab.cloud.cli.v1.CreateVMFromOSTemplateRequest.metadata:type_name -> pilab.cloud.cli.v1.CreateVMFromOSTemplateRequest.MetadataEntry
-	204, // 110: pilab.cloud.cli.v1.GetMetricsRequest.period:type_name -> google.protobuf.Duration
-	204, // 111: pilab.cloud.cli.v1.GetMetricsRequest.interval:type_name -> google.protobuf.Duration
-	133, // 112: pilab.cloud.cli.v1.GetMetricsResponse.data_points:type_name -> pilab.cloud.cli.v1.MetricPoint
-	203, // 113: pilab.cloud.cli.v1.MetricPoint.timestamp:type_name -> google.protobuf.Timestamp
-	204, // 114: pilab.cloud.cli.v1.GetActivityRequest.since:type_name -> google.protobuf.Duration
-	136, // 115: pilab.cloud.cli.v1.GetActivityResponse.activities:type_name -> pilab.cloud.cli.v1.ActivityLog
-	200, // 116: pilab.cloud.cli.v1.ActivityLog.details:type_name -> pilab.cloud.cli.v1.ActivityLog.DetailsEntry
-	203, // 117: pilab.cloud.cli.v1.ActivityLog.timestamp:type_name -> google.protobuf.Timestamp
-	21,  // 118: pilab.cloud.cli.v1.ListOrganizationsResponse.organizations:type_name -> pilab.cloud.cli.v1.Organization
-	20,  // 119: pilab.cloud.cli.v1.ListUsersResponse.users:type_name -> pilab.cloud.cli.v1.User
-	11,  // 120: pilab.cloud.cli.v1.Datastore.type:type_name -> pilab.cloud.cli.v1.DatastoreType
-	12,  // 121: pilab.cloud.cli.v1.Datastore.status:type_name -> pilab.cloud.cli.v1.DatastoreStatus
-	201, // 122: pilab.cloud.cli.v1.Datastore.connection_info:type_name -> pilab.cloud.cli.v1.Datastore.ConnectionInfoEntry
-	203, // 123: pilab.cloud.cli.v1.Datastore.created_at:type_name -> google.protobuf.Timestamp
-	203, // 124: pilab.cloud.cli.v1.Datastore.updated_at:type_name -> google.protobuf.Timestamp
-	11,  // 125: pilab.cloud.cli.v1.CreateDatastoreRequest.type:type_name -> pilab.cloud.cli.v1.DatastoreType
-	202, // 126: pilab.cloud.cli.v1.CreateDatastoreRequest.connection_info:type_name -> pilab.cloud.cli.v1.CreateDatastoreRequest.ConnectionInfoEntry
-	11,  // 127: pilab.cloud.cli.v1.ListDatastoresRequest.type:type_name -> pilab.cloud.cli.v1.DatastoreType
-	150, // 128: pilab.cloud.cli.v1.ListDatastoresResponse.datastores:type_name -> pilab.cloud.cli.v1.Datastore
-	159, // 129: pilab.cloud.cli.v1.NetworkConfigResponse.interfaces:type_name -> pilab.cloud.cli.v1.NetworkInterfaceInfo
-	150, // 130: pilab.cloud.cli.v1.StorageConfigResponse.datastores:type_name -> pilab.cloud.cli.v1.Datastore
-	162, // 131: pilab.cloud.cli.v1.HostHealthResponse.services:type_name -> pilab.cloud.cli.v1.ServiceStatus
-	203, // 132: pilab.cloud.cli.v1.HostHealthResponse.last_updated:type_name -> google.protobuf.Timestamp
-	13,  // 133: pilab.cloud.cli.v1.VPSService.Login:input_type -> pilab.cloud.cli.v1.LoginRequest
-	15,  // 134: pilab.cloud.cli.v1.VPSService.InitiateDeviceAuth:input_type -> pilab.cloud.cli.v1.InitiateDeviceAuthRequest
-	17,  // 135: pilab.cloud.cli.v1.VPSService.PollDeviceAuth:input_type -> pilab.cloud.cli.v1.PollDeviceAuthRequest
-	19,  // 136: pilab.cloud.cli.v1.VPSService.Logout:input_type -> pilab.cloud.cli.v1.LogoutRequest
-	205, // 137: pilab.cloud.cli.v1.VPSService.GetCurrentUser:input_type -> google.protobuf.Empty
-	26,  // 138: pilab.cloud.cli.v1.VPSService.CreateVM:input_type -> pilab.cloud.cli.v1.CreateVMRequest
-	27,  // 139: pilab.cloud.cli.v1.VPSService.GetVM:input_type -> pilab.cloud.cli.v1.GetVMRequest
-	28,  // 140: pilab.cloud.cli.v1.VPSService.ListVMs:input_type -> pilab.cloud.cli.v1.ListVMsRequest
-	30,  // 141: pilab.cloud.cli.v1.VPSService.UpdateVM:input_type -> pilab.cloud.cli.v1.UpdateVMRequest
-	31,  // 142: pilab.cloud.cli.v1.VPSService.DeleteVM:input_type -> pilab.cloud.cli.v1.DeleteVMRequest
-	32,  // 143: pilab.cloud.cli.v1.VPSService.StartVM:input_type -> pilab.cloud.cli.v1.StartVMRequest
-	33,  // 144: pilab.cloud.cli.v1.VPSService.StopVM:input_type -> pilab.cloud.cli.v1.StopVMRequest
-	34,  // 145: pilab.cloud.cli.v1.VPSService.RestartVM:input_type -> pilab.cloud.cli.v1.RestartVMRequest
-	35,  // 146: pilab.cloud.cli.v1.VPSService.PauseVM:input_type -> pilab.cloud.cli.v1.PauseVMRequest
-	36,  // 147: pilab.cloud.cli.v1.VPSService.UnpauseVM:input_type -> pilab.cloud.cli.v1.UnpauseVMRequest
-	37,  // 148: pilab.cloud.cli.v1.VPSService.MigrateVM:input_type -> pilab.cloud.cli.v1.MigrateVMRequest
-	38,  // 149: pilab.cloud.cli.v1.VPSService.RebuildVM:input_type -> pilab.cloud.cli.v1.RebuildVMRequest
-	39,  // 150: pilab.cloud.cli.v1.VPSService.CloneVM:input_type -> pilab.cloud.cli.v1.CloneVMRequest
-	40,  // 151: pilab.cloud.cli.v1.VPSService.LinkedCloneVM:input_type -> pilab.cloud.cli.v1.LinkedCloneVMRequest
-	42,  // 152: pilab.cloud.cli.v1.VPSService.GetVMConsole:input_type -> pilab.cloud.cli.v1.GetVMConsoleRequest
-	44,  // 153: pilab.cloud.cli.v1.VPSService.UpdateVMResources:input_type -> pilab.cloud.cli.v1.UpdateVMResourcesRequest
-	46,  // 154: pilab.cloud.cli.v1.VPSService.GetVMResources:input_type -> pilab.cloud.cli.v1.GetVMResourcesRequest
-	49,  // 155: pilab.cloud.cli.v1.VPSService.CreateDisk:input_type -> pilab.cloud.cli.v1.CreateDiskRequest
-	50,  // 156: pilab.cloud.cli.v1.VPSService.GetDisk:input_type -> pilab.cloud.cli.v1.GetDiskRequest
-	51,  // 157: pilab.cloud.cli.v1.VPSService.ListDisks:input_type -> pilab.cloud.cli.v1.ListDisksRequest
-	53,  // 158: pilab.cloud.cli.v1.VPSService.UpdateDisk:input_type -> pilab.cloud.cli.v1.UpdateDiskRequest
-	54,  // 159: pilab.cloud.cli.v1.VPSService.DeleteDisk:input_type -> pilab.cloud.cli.v1.DeleteDiskRequest
-	55,  // 160: pilab.cloud.cli.v1.VPSService.ExtendDisk:input_type -> pilab.cloud.cli.v1.ExtendDiskRequest
-	56,  // 161: pilab.cloud.cli.v1.VPSService.AttachDisk:input_type -> pilab.cloud.cli.v1.AttachDiskRequest
-	57,  // 162: pilab.cloud.cli.v1.VPSService.DetachDisk:input_type -> pilab.cloud.cli.v1.DetachDiskRequest
-	59,  // 163: pilab.cloud.cli.v1.VPSService.GetImage:input_type -> pilab.cloud.cli.v1.GetImageRequest
-	60,  // 164: pilab.cloud.cli.v1.VPSService.ListImages:input_type -> pilab.cloud.cli.v1.ListImagesRequest
-	62,  // 165: pilab.cloud.cli.v1.VPSService.CreateImage:input_type -> pilab.cloud.cli.v1.CreateImageRequest
-	63,  // 166: pilab.cloud.cli.v1.VPSService.UploadImage:input_type -> pilab.cloud.cli.v1.UploadImageRequest
-	64,  // 167: pilab.cloud.cli.v1.VPSService.DeleteImage:input_type -> pilab.cloud.cli.v1.DeleteImageRequest
-	66,  // 168: pilab.cloud.cli.v1.VPSService.GetSnapshot:input_type -> pilab.cloud.cli.v1.GetSnapshotRequest
-	67,  // 169: pilab.cloud.cli.v1.VPSService.ListSnapshots:input_type -> pilab.cloud.cli.v1.ListSnapshotsRequest
-	69,  // 170: pilab.cloud.cli.v1.VPSService.CreateSnapshot:input_type -> pilab.cloud.cli.v1.CreateSnapshotRequest
-	70,  // 171: pilab.cloud.cli.v1.VPSService.RestoreSnapshot:input_type -> pilab.cloud.cli.v1.RestoreSnapshotRequest
-	71,  // 172: pilab.cloud.cli.v1.VPSService.DeleteSnapshot:input_type -> pilab.cloud.cli.v1.DeleteSnapshotRequest
-	72,  // 173: pilab.cloud.cli.v1.VPSService.ConsolidateSnapshot:input_type -> pilab.cloud.cli.v1.SnapshotConsolidateRequest
-	75,  // 174: pilab.cloud.cli.v1.VPSService.CreateNetwork:input_type -> pilab.cloud.cli.v1.CreateNetworkRequest
-	76,  // 175: pilab.cloud.cli.v1.VPSService.GetNetwork:input_type -> pilab.cloud.cli.v1.GetNetworkRequest
-	77,  // 176: pilab.cloud.cli.v1.VPSService.ListNetworks:input_type -> pilab.cloud.cli.v1.ListNetworksRequest
-	79,  // 177: pilab.cloud.cli.v1.VPSService.UpdateNetwork:input_type -> pilab.cloud.cli.v1.UpdateNetworkRequest
-	80,  // 178: pilab.cloud.cli.v1.VPSService.DeleteNetwork:input_type -> pilab.cloud.cli.v1.DeleteNetworkRequest
-	81,  // 179: pilab.cloud.cli.v1.VPSService.GetNetworkInterface:input_type -> pilab.cloud.cli.v1.GetNetworkInterfaceRequest
-	82,  // 180: pilab.cloud.cli.v1.VPSService.ListNetworkInterfaces:input_type -> pilab.cloud.cli.v1.ListNetworkInterfacesRequest
-	84,  // 181: pilab.cloud.cli.v1.VPSService.AddNetworkInterface:input_type -> pilab.cloud.cli.v1.AddNetworkInterfaceRequest
-	85,  // 182: pilab.cloud.cli.v1.VPSService.RemoveNetworkInterface:input_type -> pilab.cloud.cli.v1.RemoveNetworkInterfaceRequest
-	87,  // 183: pilab.cloud.cli.v1.VPSService.CreateVSwitch:input_type -> pilab.cloud.cli.v1.CreateVSwitchRequest
-	88,  // 184: pilab.cloud.cli.v1.VPSService.GetVSwitch:input_type -> pilab.cloud.cli.v1.GetVSwitchRequest
-	89,  // 185: pilab.cloud.cli.v1.VPSService.ListVSwitches:input_type -> pilab.cloud.cli.v1.ListVSwitchesRequest
-	91,  // 186: pilab.cloud.cli.v1.VPSService.DeleteVSwitch:input_type -> pilab.cloud.cli.v1.DeleteVSwitchRequest
-	93,  // 187: pilab.cloud.cli.v1.VPSService.CreatePortGroup:input_type -> pilab.cloud.cli.v1.CreatePortGroupRequest
-	94,  // 188: pilab.cloud.cli.v1.VPSService.GetPortGroup:input_type -> pilab.cloud.cli.v1.GetPortGroupRequest
-	95,  // 189: pilab.cloud.cli.v1.VPSService.ListPortGroups:input_type -> pilab.cloud.cli.v1.ListPortGroupsRequest
-	97,  // 190: pilab.cloud.cli.v1.VPSService.DeletePortGroup:input_type -> pilab.cloud.cli.v1.DeletePortGroupRequest
-	99,  // 191: pilab.cloud.cli.v1.VPSService.CreatePublicIP:input_type -> pilab.cloud.cli.v1.CreatePublicIPRequest
-	100, // 192: pilab.cloud.cli.v1.VPSService.GetPublicIP:input_type -> pilab.cloud.cli.v1.GetPublicIPRequest
-	101, // 193: pilab.cloud.cli.v1.VPSService.ListPublicIPs:input_type -> pilab.cloud.cli.v1.ListPublicIPsRequest
-	103, // 194: pilab.cloud.cli.v1.VPSService.UpdatePublicIP:input_type -> pilab.cloud.cli.v1.UpdatePublicIPRequest
-	104, // 195: pilab.cloud.cli.v1.VPSService.DeletePublicIP:input_type -> pilab.cloud.cli.v1.DeletePublicIPRequest
-	105, // 196: pilab.cloud.cli.v1.VPSService.AssignPublicIP:input_type -> pilab.cloud.cli.v1.AssignPublicIPRequest
-	106, // 197: pilab.cloud.cli.v1.VPSService.UnassignPublicIP:input_type -> pilab.cloud.cli.v1.UnassignPublicIPRequest
-	109, // 198: pilab.cloud.cli.v1.VPSService.CreateSecurityGroup:input_type -> pilab.cloud.cli.v1.CreateSecurityGroupRequest
-	110, // 199: pilab.cloud.cli.v1.VPSService.GetSecurityGroup:input_type -> pilab.cloud.cli.v1.GetSecurityGroupRequest
-	111, // 200: pilab.cloud.cli.v1.VPSService.ListSecurityGroups:input_type -> pilab.cloud.cli.v1.ListSecurityGroupsRequest
-	113, // 201: pilab.cloud.cli.v1.VPSService.UpdateSecurityGroup:input_type -> pilab.cloud.cli.v1.UpdateSecurityGroupRequest
-	114, // 202: pilab.cloud.cli.v1.VPSService.DeleteSecurityGroup:input_type -> pilab.cloud.cli.v1.DeleteSecurityGroupRequest
-	115, // 203: pilab.cloud.cli.v1.VPSService.AddSecurityRule:input_type -> pilab.cloud.cli.v1.AddSecurityRuleRequest
-	116, // 204: pilab.cloud.cli.v1.VPSService.RemoveSecurityRule:input_type -> pilab.cloud.cli.v1.RemoveSecurityRuleRequest
-	118, // 205: pilab.cloud.cli.v1.VPSService.CreateTemplate:input_type -> pilab.cloud.cli.v1.CreateTemplateRequest
-	119, // 206: pilab.cloud.cli.v1.VPSService.GetTemplate:input_type -> pilab.cloud.cli.v1.GetTemplateRequest
-	120, // 207: pilab.cloud.cli.v1.VPSService.ListTemplates:input_type -> pilab.cloud.cli.v1.ListTemplatesRequest
-	122, // 208: pilab.cloud.cli.v1.VPSService.DeleteTemplate:input_type -> pilab.cloud.cli.v1.DeleteTemplateRequest
-	125, // 209: pilab.cloud.cli.v1.VPSService.ListOSTemplates:input_type -> pilab.cloud.cli.v1.ListOSTemplatesRequest
-	127, // 210: pilab.cloud.cli.v1.VPSService.GetOSTemplate:input_type -> pilab.cloud.cli.v1.GetOSTemplateRequest
-	128, // 211: pilab.cloud.cli.v1.VPSService.SyncOSTemplates:input_type -> pilab.cloud.cli.v1.SyncOSTemplatesRequest
-	130, // 212: pilab.cloud.cli.v1.VPSService.CreateVMFromOSTemplate:input_type -> pilab.cloud.cli.v1.CreateVMFromOSTemplateRequest
-	131, // 213: pilab.cloud.cli.v1.VPSService.GetMetrics:input_type -> pilab.cloud.cli.v1.GetMetricsRequest
-	134, // 214: pilab.cloud.cli.v1.VPSService.GetActivity:input_type -> pilab.cloud.cli.v1.GetActivityRequest
-	137, // 215: pilab.cloud.cli.v1.VPSService.CreateOrganization:input_type -> pilab.cloud.cli.v1.CreateOrganizationRequest
-	138, // 216: pilab.cloud.cli.v1.VPSService.GetOrganization:input_type -> pilab.cloud.cli.v1.GetOrganizationRequest
-	139, // 217: pilab.cloud.cli.v1.VPSService.ListOrganizations:input_type -> pilab.cloud.cli.v1.ListOrganizationsRequest
-	141, // 218: pilab.cloud.cli.v1.VPSService.UpdateOrganization:input_type -> pilab.cloud.cli.v1.UpdateOrganizationRequest
-	142, // 219: pilab.cloud.cli.v1.VPSService.DeleteOrganization:input_type -> pilab.cloud.cli.v1.DeleteOrganizationRequest
-	143, // 220: pilab.cloud.cli.v1.VPSService.CreateUser:input_type -> pilab.cloud.cli.v1.CreateUserRequest
-	144, // 221: pilab.cloud.cli.v1.VPSService.GetUser:input_type -> pilab.cloud.cli.v1.GetUserRequest
-	145, // 222: pilab.cloud.cli.v1.VPSService.ListUsers:input_type -> pilab.cloud.cli.v1.ListUsersRequest
-	147, // 223: pilab.cloud.cli.v1.VPSService.UpdateUser:input_type -> pilab.cloud.cli.v1.UpdateUserRequest
-	148, // 224: pilab.cloud.cli.v1.VPSService.DeleteUser:input_type -> pilab.cloud.cli.v1.DeleteUserRequest
-	205, // 225: pilab.cloud.cli.v1.VPSService.GetVersion:input_type -> google.protobuf.Empty
-	151, // 226: pilab.cloud.cli.v1.VPSService.CreateDatastore:input_type -> pilab.cloud.cli.v1.CreateDatastoreRequest
-	152, // 227: pilab.cloud.cli.v1.VPSService.GetDatastore:input_type -> pilab.cloud.cli.v1.GetDatastoreRequest
-	153, // 228: pilab.cloud.cli.v1.VPSService.ListDatastores:input_type -> pilab.cloud.cli.v1.ListDatastoresRequest
-	155, // 229: pilab.cloud.cli.v1.VPSService.DeleteDatastore:input_type -> pilab.cloud.cli.v1.DeleteDatastoreRequest
-	156, // 230: pilab.cloud.cli.v1.VPSService.MountDatastore:input_type -> pilab.cloud.cli.v1.MountDatastoreRequest
-	157, // 231: pilab.cloud.cli.v1.VPSService.UnmountDatastore:input_type -> pilab.cloud.cli.v1.UnmountDatastoreRequest
-	205, // 232: pilab.cloud.cli.v1.VPSService.GetHostInfo:input_type -> google.protobuf.Empty
-	205, // 233: pilab.cloud.cli.v1.VPSService.GetNetworkConfig:input_type -> google.protobuf.Empty
-	205, // 234: pilab.cloud.cli.v1.VPSService.GetStorageConfig:input_type -> google.protobuf.Empty
-	205, // 235: pilab.cloud.cli.v1.VPSService.GetHostHealth:input_type -> google.protobuf.Empty
-	164, // 236: pilab.cloud.cli.v1.VPSService.ConfigureNetwork:input_type -> pilab.cloud.cli.v1.ConfigureNetworkRequest
-	14,  // 237: pilab.cloud.cli.v1.VPSService.Login:output_type -> pilab.cloud.cli.v1.LoginResponse
-	16,  // 238: pilab.cloud.cli.v1.VPSService.InitiateDeviceAuth:output_type -> pilab.cloud.cli.v1.InitiateDeviceAuthResponse
-	18,  // 239: pilab.cloud.cli.v1.VPSService.PollDeviceAuth:output_type -> pilab.cloud.cli.v1.PollDeviceAuthResponse
-	205, // 240: pilab.cloud.cli.v1.VPSService.Logout:output_type -> google.protobuf.Empty
-	20,  // 241: pilab.cloud.cli.v1.VPSService.GetCurrentUser:output_type -> pilab.cloud.cli.v1.User
-	24,  // 242: pilab.cloud.cli.v1.VPSService.CreateVM:output_type -> pilab.cloud.cli.v1.VM
-	24,  // 243: pilab.cloud.cli.v1.VPSService.GetVM:output_type -> pilab.cloud.cli.v1.VM
-	29,  // 244: pilab.cloud.cli.v1.VPSService.ListVMs:output_type -> pilab.cloud.cli.v1.ListVMsResponse
-	24,  // 245: pilab.cloud.cli.v1.VPSService.UpdateVM:output_type -> pilab.cloud.cli.v1.VM
-	205, // 246: pilab.cloud.cli.v1.VPSService.DeleteVM:output_type -> google.protobuf.Empty
-	205, // 247: pilab.cloud.cli.v1.VPSService.StartVM:output_type -> google.protobuf.Empty
-	205, // 248: pilab.cloud.cli.v1.VPSService.StopVM:output_type -> google.protobuf.Empty
-	205, // 249: pilab.cloud.cli.v1.VPSService.RestartVM:output_type -> google.protobuf.Empty
-	205, // 250: pilab.cloud.cli.v1.VPSService.PauseVM:output_type -> google.protobuf.Empty
-	205, // 251: pilab.cloud.cli.v1.VPSService.UnpauseVM:output_type -> google.protobuf.Empty
-	205, // 252: pilab.cloud.cli.v1.VPSService.MigrateVM:output_type -> google.protobuf.Empty
-	24,  // 253: pilab.cloud.cli.v1.VPSService.RebuildVM:output_type -> pilab.cloud.cli.v1.VM
-	24,  // 254: pilab.cloud.cli.v1.VPSService.CloneVM:output_type -> pilab.cloud.cli.v1.VM
-	24,  // 255: pilab.cloud.cli.v1.VPSService.LinkedCloneVM:output_type -> pilab.cloud.cli.v1.VM
-	43,  // 256: pilab.cloud.cli.v1.VPSService.GetVMConsole:output_type -> pilab.cloud.cli.v1.GetVMConsoleResponse
-	45,  // 257: pilab.cloud.cli.v1.VPSService.UpdateVMResources:output_type -> pilab.cloud.cli.v1.UpdateVMResourcesResponse
-	47,  // 258: pilab.cloud.cli.v1.VPSService.GetVMResources:output_type -> pilab.cloud.cli.v1.GetVMResourcesResponse
-	48,  // 259: pilab.cloud.cli.v1.VPSService.CreateDisk:output_type -> pilab.cloud.cli.v1.Disk
-	48,  // 260: pilab.cloud.cli.v1.VPSService.GetDisk:output_type -> pilab.cloud.cli.v1.Disk
-	52,  // 261: pilab.cloud.cli.v1.VPSService.ListDisks:output_type -> pilab.cloud.cli.v1.ListDisksResponse
-	48,  // 262: pilab.cloud.cli.v1.VPSService.UpdateDisk:output_type -> pilab.cloud.cli.v1.Disk
-	205, // 263: pilab.cloud.cli.v1.VPSService.DeleteDisk:output_type -> google.protobuf.Empty
-	48,  // 264: pilab.cloud.cli.v1.VPSService.ExtendDisk:output_type -> pilab.cloud.cli.v1.Disk
-	205, // 265: pilab.cloud.cli.v1.VPSService.AttachDisk:output_type -> google.protobuf.Empty
-	205, // 266: pilab.cloud.cli.v1.VPSService.DetachDisk:output_type -> google.protobuf.Empty
-	58,  // 267: pilab.cloud.cli.v1.VPSService.GetImage:output_type -> pilab.cloud.cli.v1.Image
-	61,  // 268: pilab.cloud.cli.v1.VPSService.ListImages:output_type -> pilab.cloud.cli.v1.ListImagesResponse
-	58,  // 269: pilab.cloud.cli.v1.VPSService.CreateImage:output_type -> pilab.cloud.cli.v1.Image
-	58,  // 270: pilab.cloud.cli.v1.VPSService.UploadImage:output_type -> pilab.cloud.cli.v1.Image
-	205, // 271: pilab.cloud.cli.v1.VPSService.DeleteImage:output_type -> google.protobuf.Empty
-	65,  // 272: pilab.cloud.cli.v1.VPSService.GetSnapshot:output_type -> pilab.cloud.cli.v1.Snapshot
-	68,  // 273: pilab.cloud.cli.v1.VPSService.ListSnapshots:output_type -> pilab.cloud.cli.v1.ListSnapshotsResponse
-	65,  // 274: pilab.cloud.cli.v1.VPSService.CreateSnapshot:output_type -> pilab.cloud.cli.v1.Snapshot
-	205, // 275: pilab.cloud.cli.v1.VPSService.RestoreSnapshot:output_type -> google.protobuf.Empty
-	205, // 276: pilab.cloud.cli.v1.VPSService.DeleteSnapshot:output_type -> google.protobuf.Empty
-	205, // 277: pilab.cloud.cli.v1.VPSService.ConsolidateSnapshot:output_type -> google.protobuf.Empty
-	73,  // 278: pilab.cloud.cli.v1.VPSService.CreateNetwork:output_type -> pilab.cloud.cli.v1.Network
-	73,  // 279: pilab.cloud.cli.v1.VPSService.GetNetwork:output_type -> pilab.cloud.cli.v1.Network
-	78,  // 280: pilab.cloud.cli.v1.VPSService.ListNetworks:output_type -> pilab.cloud.cli.v1.ListNetworksResponse
-	73,  // 281: pilab.cloud.cli.v1.VPSService.UpdateNetwork:output_type -> pilab.cloud.cli.v1.Network
-	205, // 282: pilab.cloud.cli.v1.VPSService.DeleteNetwork:output_type -> google.protobuf.Empty
-	74,  // 283: pilab.cloud.cli.v1.VPSService.GetNetworkInterface:output_type -> pilab.cloud.cli.v1.NetworkInterface
-	83,  // 284: pilab.cloud.cli.v1.VPSService.ListNetworkInterfaces:output_type -> pilab.cloud.cli.v1.ListNetworkInterfacesResponse
-	74,  // 285: pilab.cloud.cli.v1.VPSService.AddNetworkInterface:output_type -> pilab.cloud.cli.v1.NetworkInterface
-	205, // 286: pilab.cloud.cli.v1.VPSService.RemoveNetworkInterface:output_type -> google.protobuf.Empty
-	86,  // 287: pilab.cloud.cli.v1.VPSService.CreateVSwitch:output_type -> pilab.cloud.cli.v1.VSwitch
-	86,  // 288: pilab.cloud.cli.v1.VPSService.GetVSwitch:output_type -> pilab.cloud.cli.v1.VSwitch
-	90,  // 289: pilab.cloud.cli.v1.VPSService.ListVSwitches:output_type -> pilab.cloud.cli.v1.ListVSwitchesResponse
-	205, // 290: pilab.cloud.cli.v1.VPSService.DeleteVSwitch:output_type -> google.protobuf.Empty
-	92,  // 291: pilab.cloud.cli.v1.VPSService.CreatePortGroup:output_type -> pilab.cloud.cli.v1.PortGroup
-	92,  // 292: pilab.cloud.cli.v1.VPSService.GetPortGroup:output_type -> pilab.cloud.cli.v1.PortGroup
-	96,  // 293: pilab.cloud.cli.v1.VPSService.ListPortGroups:output_type -> pilab.cloud.cli.v1.ListPortGroupsResponse
-	205, // 294: pilab.cloud.cli.v1.VPSService.DeletePortGroup:output_type -> google.protobuf.Empty
-	98,  // 295: pilab.cloud.cli.v1.VPSService.CreatePublicIP:output_type -> pilab.cloud.cli.v1.PublicIP
-	98,  // 296: pilab.cloud.cli.v1.VPSService.GetPublicIP:output_type -> pilab.cloud.cli.v1.PublicIP
-	102, // 297: pilab.cloud.cli.v1.VPSService.ListPublicIPs:output_type -> pilab.cloud.cli.v1.ListPublicIPsResponse
-	98,  // 298: pilab.cloud.cli.v1.VPSService.UpdatePublicIP:output_type -> pilab.cloud.cli.v1.PublicIP
-	205, // 299: pilab.cloud.cli.v1.VPSService.DeletePublicIP:output_type -> google.protobuf.Empty
-	205, // 300: pilab.cloud.cli.v1.VPSService.AssignPublicIP:output_type -> google.protobuf.Empty
-	205, // 301: pilab.cloud.cli.v1.VPSService.UnassignPublicIP:output_type -> google.protobuf.Empty
-	107, // 302: pilab.cloud.cli.v1.VPSService.CreateSecurityGroup:output_type -> pilab.cloud.cli.v1.SecurityGroup
-	107, // 303: pilab.cloud.cli.v1.VPSService.GetSecurityGroup:output_type -> pilab.cloud.cli.v1.SecurityGroup
-	112, // 304: pilab.cloud.cli.v1.VPSService.ListSecurityGroups:output_type -> pilab.cloud.cli.v1.ListSecurityGroupsResponse
-	107, // 305: pilab.cloud.cli.v1.VPSService.UpdateSecurityGroup:output_type -> pilab.cloud.cli.v1.SecurityGroup
-	205, // 306: pilab.cloud.cli.v1.VPSService.DeleteSecurityGroup:output_type -> google.protobuf.Empty
-	108, // 307: pilab.cloud.cli.v1.VPSService.AddSecurityRule:output_type -> pilab.cloud.cli.v1.SecurityRule
-	205, // 308: pilab.cloud.cli.v1.VPSService.RemoveSecurityRule:output_type -> google.protobuf.Empty
-	117, // 309: pilab.cloud.cli.v1.VPSService.CreateTemplate:output_type -> pilab.cloud.cli.v1.Template
-	117, // 310: pilab.cloud.cli.v1.VPSService.GetTemplate:output_type -> pilab.cloud.cli.v1.Template
-	121, // 311: pilab.cloud.cli.v1.VPSService.ListTemplates:output_type -> pilab.cloud.cli.v1.ListTemplatesResponse
-	205, // 312: pilab.cloud.cli.v1.VPSService.DeleteTemplate:output_type -> google.protobuf.Empty
-	126, // 313: pilab.cloud.cli.v1.VPSService.ListOSTemplates:output_type -> pilab.cloud.cli.v1.ListOSTemplatesResponse
-	123, // 314: pilab.cloud.cli.v1.VPSService.GetOSTemplate:output_type -> pilab.cloud.cli.v1.OSTemplate
-	129, // 315: pilab.cloud.cli.v1.VPSService.SyncOSTemplates:output_type -> pilab.cloud.cli.v1.SyncOSTemplatesResponse
-	24,  // 316: pilab.cloud.cli.v1.VPSService.CreateVMFromOSTemplate:output_type -> pilab.cloud.cli.v1.VM
-	132, // 317: pilab.cloud.cli.v1.VPSService.GetMetrics:output_type -> pilab.cloud.cli.v1.GetMetricsResponse
-	135, // 318: pilab.cloud.cli.v1.VPSService.GetActivity:output_type -> pilab.cloud.cli.v1.GetActivityResponse
-	21,  // 319: pilab.cloud.cli.v1.VPSService.CreateOrganization:output_type -> pilab.cloud.cli.v1.Organization
-	21,  // 320: pilab.cloud.cli.v1.VPSService.GetOrganization:output_type -> pilab.cloud.cli.v1.Organization
-	140, // 321: pilab.cloud.cli.v1.VPSService.ListOrganizations:output_type -> pilab.cloud.cli.v1.ListOrganizationsResponse
-	21,  // 322: pilab.cloud.cli.v1.VPSService.UpdateOrganization:output_type -> pilab.cloud.cli.v1.Organization
-	205, // 323: pilab.cloud.cli.v1.VPSService.DeleteOrganization:output_type -> google.protobuf.Empty
-	20,  // 324: pilab.cloud.cli.v1.VPSService.CreateUser:output_type -> pilab.cloud.cli.v1.User
-	20,  // 325: pilab.cloud.cli.v1.VPSService.GetUser:output_type -> pilab.cloud.cli.v1.User
-	146, // 326: pilab.cloud.cli.v1.VPSService.ListUsers:output_type -> pilab.cloud.cli.v1.ListUsersResponse
-	20,  // 327: pilab.cloud.cli.v1.VPSService.UpdateUser:output_type -> pilab.cloud.cli.v1.User
-	205, // 328: pilab.cloud.cli.v1.VPSService.DeleteUser:output_type -> google.protobuf.Empty
-	149, // 329: pilab.cloud.cli.v1.VPSService.GetVersion:output_type -> pilab.cloud.cli.v1.VersionResponse
-	150, // 330: pilab.cloud.cli.v1.VPSService.CreateDatastore:output_type -> pilab.cloud.cli.v1.Datastore
-	150, // 331: pilab.cloud.cli.v1.VPSService.GetDatastore:output_type -> pilab.cloud.cli.v1.Datastore
-	154, // 332: pilab.cloud.cli.v1.VPSService.ListDatastores:output_type -> pilab.cloud.cli.v1.ListDatastoresResponse
-	205, // 333: pilab.cloud.cli.v1.VPSService.DeleteDatastore:output_type -> google.protobuf.Empty
-	205, // 334: pilab.cloud.cli.v1.VPSService.MountDatastore:output_type -> google.protobuf.Empty
-	205, // 335: pilab.cloud.cli.v1.VPSService.UnmountDatastore:output_type -> google.protobuf.Empty
-	158, // 336: pilab.cloud.cli.v1.VPSService.GetHostInfo:output_type -> pilab.cloud.cli.v1.HostInfo
-	160, // 337: pilab.cloud.cli.v1.VPSService.GetNetworkConfig:output_type -> pilab.cloud.cli.v1.NetworkConfigResponse
-	161, // 338: pilab.cloud.cli.v1.VPSService.GetStorageConfig:output_type -> pilab.cloud.cli.v1.StorageConfigResponse
-	163, // 339: pilab.cloud.cli.v1.VPSService.GetHostHealth:output_type -> pilab.cloud.cli.v1.HostHealthResponse
-	205, // 340: pilab.cloud.cli.v1.VPSService.ConfigureNetwork:output_type -> google.protobuf.Empty
+	20,  // 0: pilab.cli.v1.LoginResponse.user:type_name -> pilab.cli.v1.User
+	21,  // 1: pilab.cli.v1.LoginResponse.organization:type_name -> pilab.cli.v1.Organization
+	203, // 2: pilab.cli.v1.LoginResponse.expires_at:type_name -> google.protobuf.Timestamp
+	20,  // 3: pilab.cli.v1.PollDeviceAuthResponse.user:type_name -> pilab.cli.v1.User
+	21,  // 4: pilab.cli.v1.PollDeviceAuthResponse.organization:type_name -> pilab.cli.v1.Organization
+	203, // 5: pilab.cli.v1.PollDeviceAuthResponse.expires_at:type_name -> google.protobuf.Timestamp
+	203, // 6: pilab.cli.v1.User.created_at:type_name -> google.protobuf.Timestamp
+	203, // 7: pilab.cli.v1.User.updated_at:type_name -> google.protobuf.Timestamp
+	22,  // 8: pilab.cli.v1.Organization.quota:type_name -> pilab.cli.v1.ResourceQuota
+	23,  // 9: pilab.cli.v1.Organization.usage:type_name -> pilab.cli.v1.ResourceUsage
+	203, // 10: pilab.cli.v1.Organization.created_at:type_name -> google.protobuf.Timestamp
+	203, // 11: pilab.cli.v1.Organization.updated_at:type_name -> google.protobuf.Timestamp
+	0,   // 12: pilab.cli.v1.VM.state:type_name -> pilab.cli.v1.VMState
+	25,  // 13: pilab.cli.v1.VM.machine_type:type_name -> pilab.cli.v1.MachineType
+	58,  // 14: pilab.cli.v1.VM.image:type_name -> pilab.cli.v1.Image
+	48,  // 15: pilab.cli.v1.VM.disks:type_name -> pilab.cli.v1.Disk
+	74,  // 16: pilab.cli.v1.VM.network_interfaces:type_name -> pilab.cli.v1.NetworkInterface
+	107, // 17: pilab.cli.v1.VM.security_groups:type_name -> pilab.cli.v1.SecurityGroup
+	98,  // 18: pilab.cli.v1.VM.public_ips:type_name -> pilab.cli.v1.PublicIP
+	165, // 19: pilab.cli.v1.VM.labels:type_name -> pilab.cli.v1.VM.LabelsEntry
+	166, // 20: pilab.cli.v1.VM.metadata:type_name -> pilab.cli.v1.VM.MetadataEntry
+	203, // 21: pilab.cli.v1.VM.created_at:type_name -> google.protobuf.Timestamp
+	203, // 22: pilab.cli.v1.VM.updated_at:type_name -> google.protobuf.Timestamp
+	167, // 23: pilab.cli.v1.CreateVMRequest.labels:type_name -> pilab.cli.v1.CreateVMRequest.LabelsEntry
+	168, // 24: pilab.cli.v1.CreateVMRequest.metadata:type_name -> pilab.cli.v1.CreateVMRequest.MetadataEntry
+	169, // 25: pilab.cli.v1.ListVMsRequest.label_selector:type_name -> pilab.cli.v1.ListVMsRequest.LabelSelectorEntry
+	170, // 26: pilab.cli.v1.ListVMsRequest.field_selector:type_name -> pilab.cli.v1.ListVMsRequest.FieldSelectorEntry
+	24,  // 27: pilab.cli.v1.ListVMsResponse.vms:type_name -> pilab.cli.v1.VM
+	171, // 28: pilab.cli.v1.UpdateVMRequest.labels:type_name -> pilab.cli.v1.UpdateVMRequest.LabelsEntry
+	172, // 29: pilab.cli.v1.UpdateVMRequest.metadata:type_name -> pilab.cli.v1.UpdateVMRequest.MetadataEntry
+	24,  // 30: pilab.cli.v1.LinkedCloneVMResponse.vm:type_name -> pilab.cli.v1.VM
+	24,  // 31: pilab.cli.v1.UpdateVMResourcesResponse.vm:type_name -> pilab.cli.v1.VM
+	173, // 32: pilab.cli.v1.Disk.labels:type_name -> pilab.cli.v1.Disk.LabelsEntry
+	1,   // 33: pilab.cli.v1.Disk.state:type_name -> pilab.cli.v1.DiskState
+	203, // 34: pilab.cli.v1.Disk.created_at:type_name -> google.protobuf.Timestamp
+	203, // 35: pilab.cli.v1.Disk.updated_at:type_name -> google.protobuf.Timestamp
+	174, // 36: pilab.cli.v1.CreateDiskRequest.labels:type_name -> pilab.cli.v1.CreateDiskRequest.LabelsEntry
+	48,  // 37: pilab.cli.v1.ListDisksResponse.disks:type_name -> pilab.cli.v1.Disk
+	175, // 38: pilab.cli.v1.UpdateDiskRequest.labels:type_name -> pilab.cli.v1.UpdateDiskRequest.LabelsEntry
+	176, // 39: pilab.cli.v1.Image.labels:type_name -> pilab.cli.v1.Image.LabelsEntry
+	2,   // 40: pilab.cli.v1.Image.state:type_name -> pilab.cli.v1.ImageState
+	203, // 41: pilab.cli.v1.Image.created_at:type_name -> google.protobuf.Timestamp
+	203, // 42: pilab.cli.v1.Image.updated_at:type_name -> google.protobuf.Timestamp
+	58,  // 43: pilab.cli.v1.ListImagesResponse.images:type_name -> pilab.cli.v1.Image
+	177, // 44: pilab.cli.v1.CreateImageRequest.labels:type_name -> pilab.cli.v1.CreateImageRequest.LabelsEntry
+	178, // 45: pilab.cli.v1.UploadImageRequest.labels:type_name -> pilab.cli.v1.UploadImageRequest.LabelsEntry
+	179, // 46: pilab.cli.v1.Snapshot.labels:type_name -> pilab.cli.v1.Snapshot.LabelsEntry
+	203, // 47: pilab.cli.v1.Snapshot.auto_delete_after:type_name -> google.protobuf.Timestamp
+	3,   // 48: pilab.cli.v1.Snapshot.state:type_name -> pilab.cli.v1.SnapshotState
+	203, // 49: pilab.cli.v1.Snapshot.created_at:type_name -> google.protobuf.Timestamp
+	203, // 50: pilab.cli.v1.Snapshot.updated_at:type_name -> google.protobuf.Timestamp
+	204, // 51: pilab.cli.v1.ListSnapshotsRequest.older_than:type_name -> google.protobuf.Duration
+	180, // 52: pilab.cli.v1.ListSnapshotsRequest.labels:type_name -> pilab.cli.v1.ListSnapshotsRequest.LabelsEntry
+	65,  // 53: pilab.cli.v1.ListSnapshotsResponse.snapshots:type_name -> pilab.cli.v1.Snapshot
+	181, // 54: pilab.cli.v1.CreateSnapshotRequest.labels:type_name -> pilab.cli.v1.CreateSnapshotRequest.LabelsEntry
+	204, // 55: pilab.cli.v1.CreateSnapshotRequest.auto_delete_after:type_name -> google.protobuf.Duration
+	182, // 56: pilab.cli.v1.Network.labels:type_name -> pilab.cli.v1.Network.LabelsEntry
+	4,   // 57: pilab.cli.v1.Network.state:type_name -> pilab.cli.v1.NetworkState
+	203, // 58: pilab.cli.v1.Network.created_at:type_name -> google.protobuf.Timestamp
+	203, // 59: pilab.cli.v1.Network.updated_at:type_name -> google.protobuf.Timestamp
+	203, // 60: pilab.cli.v1.NetworkInterface.created_at:type_name -> google.protobuf.Timestamp
+	183, // 61: pilab.cli.v1.CreateNetworkRequest.labels:type_name -> pilab.cli.v1.CreateNetworkRequest.LabelsEntry
+	73,  // 62: pilab.cli.v1.ListNetworksResponse.networks:type_name -> pilab.cli.v1.Network
+	184, // 63: pilab.cli.v1.UpdateNetworkRequest.labels:type_name -> pilab.cli.v1.UpdateNetworkRequest.LabelsEntry
+	74,  // 64: pilab.cli.v1.ListNetworkInterfacesResponse.network_interfaces:type_name -> pilab.cli.v1.NetworkInterface
+	185, // 65: pilab.cli.v1.VSwitch.config:type_name -> pilab.cli.v1.VSwitch.ConfigEntry
+	5,   // 66: pilab.cli.v1.VSwitch.state:type_name -> pilab.cli.v1.VSwitchState
+	203, // 67: pilab.cli.v1.VSwitch.created_at:type_name -> google.protobuf.Timestamp
+	203, // 68: pilab.cli.v1.VSwitch.updated_at:type_name -> google.protobuf.Timestamp
+	186, // 69: pilab.cli.v1.CreateVSwitchRequest.config:type_name -> pilab.cli.v1.CreateVSwitchRequest.ConfigEntry
+	86,  // 70: pilab.cli.v1.ListVSwitchesResponse.vswitches:type_name -> pilab.cli.v1.VSwitch
+	6,   // 71: pilab.cli.v1.PortGroup.state:type_name -> pilab.cli.v1.PortGroupState
+	203, // 72: pilab.cli.v1.PortGroup.created_at:type_name -> google.protobuf.Timestamp
+	203, // 73: pilab.cli.v1.PortGroup.updated_at:type_name -> google.protobuf.Timestamp
+	92,  // 74: pilab.cli.v1.ListPortGroupsResponse.port_groups:type_name -> pilab.cli.v1.PortGroup
+	187, // 75: pilab.cli.v1.PublicIP.labels:type_name -> pilab.cli.v1.PublicIP.LabelsEntry
+	7,   // 76: pilab.cli.v1.PublicIP.state:type_name -> pilab.cli.v1.PublicIPState
+	203, // 77: pilab.cli.v1.PublicIP.created_at:type_name -> google.protobuf.Timestamp
+	203, // 78: pilab.cli.v1.PublicIP.updated_at:type_name -> google.protobuf.Timestamp
+	188, // 79: pilab.cli.v1.CreatePublicIPRequest.labels:type_name -> pilab.cli.v1.CreatePublicIPRequest.LabelsEntry
+	98,  // 80: pilab.cli.v1.ListPublicIPsResponse.public_ips:type_name -> pilab.cli.v1.PublicIP
+	189, // 81: pilab.cli.v1.UpdatePublicIPRequest.labels:type_name -> pilab.cli.v1.UpdatePublicIPRequest.LabelsEntry
+	190, // 82: pilab.cli.v1.SecurityGroup.labels:type_name -> pilab.cli.v1.SecurityGroup.LabelsEntry
+	108, // 83: pilab.cli.v1.SecurityGroup.rules:type_name -> pilab.cli.v1.SecurityRule
+	8,   // 84: pilab.cli.v1.SecurityGroup.state:type_name -> pilab.cli.v1.SecurityGroupState
+	203, // 85: pilab.cli.v1.SecurityGroup.created_at:type_name -> google.protobuf.Timestamp
+	203, // 86: pilab.cli.v1.SecurityGroup.updated_at:type_name -> google.protobuf.Timestamp
+	203, // 87: pilab.cli.v1.SecurityRule.created_at:type_name -> google.protobuf.Timestamp
+	191, // 88: pilab.cli.v1.CreateSecurityGroupRequest.labels:type_name -> pilab.cli.v1.CreateSecurityGroupRequest.LabelsEntry
+	107, // 89: pilab.cli.v1.ListSecurityGroupsResponse.security_groups:type_name -> pilab.cli.v1.SecurityGroup
+	192, // 90: pilab.cli.v1.UpdateSecurityGroupRequest.labels:type_name -> pilab.cli.v1.UpdateSecurityGroupRequest.LabelsEntry
+	193, // 91: pilab.cli.v1.Template.labels:type_name -> pilab.cli.v1.Template.LabelsEntry
+	25,  // 92: pilab.cli.v1.Template.machine_type:type_name -> pilab.cli.v1.MachineType
+	58,  // 93: pilab.cli.v1.Template.image:type_name -> pilab.cli.v1.Image
+	194, // 94: pilab.cli.v1.Template.metadata:type_name -> pilab.cli.v1.Template.MetadataEntry
+	9,   // 95: pilab.cli.v1.Template.state:type_name -> pilab.cli.v1.TemplateState
+	203, // 96: pilab.cli.v1.Template.created_at:type_name -> google.protobuf.Timestamp
+	203, // 97: pilab.cli.v1.Template.updated_at:type_name -> google.protobuf.Timestamp
+	195, // 98: pilab.cli.v1.CreateTemplateRequest.labels:type_name -> pilab.cli.v1.CreateTemplateRequest.LabelsEntry
+	196, // 99: pilab.cli.v1.CreateTemplateRequest.metadata:type_name -> pilab.cli.v1.CreateTemplateRequest.MetadataEntry
+	117, // 100: pilab.cli.v1.ListTemplatesResponse.templates:type_name -> pilab.cli.v1.Template
+	124, // 101: pilab.cli.v1.OSTemplate.image_urls:type_name -> pilab.cli.v1.ImageURL
+	197, // 102: pilab.cli.v1.OSTemplate.labels:type_name -> pilab.cli.v1.OSTemplate.LabelsEntry
+	10,  // 103: pilab.cli.v1.OSTemplate.state:type_name -> pilab.cli.v1.OSTemplateState
+	203, // 104: pilab.cli.v1.OSTemplate.created_at:type_name -> google.protobuf.Timestamp
+	203, // 105: pilab.cli.v1.OSTemplate.updated_at:type_name -> google.protobuf.Timestamp
+	123, // 106: pilab.cli.v1.ListOSTemplatesResponse.templates:type_name -> pilab.cli.v1.OSTemplate
+	203, // 107: pilab.cli.v1.SyncOSTemplatesResponse.synced_at:type_name -> google.protobuf.Timestamp
+	198, // 108: pilab.cli.v1.CreateVMFromOSTemplateRequest.labels:type_name -> pilab.cli.v1.CreateVMFromOSTemplateRequest.LabelsEntry
+	199, // 109: pilab.cli.v1.CreateVMFromOSTemplateRequest.metadata:type_name -> pilab.cli.v1.CreateVMFromOSTemplateRequest.MetadataEntry
+	204, // 110: pilab.cli.v1.GetMetricsRequest.period:type_name -> google.protobuf.Duration
+	204, // 111: pilab.cli.v1.GetMetricsRequest.interval:type_name -> google.protobuf.Duration
+	133, // 112: pilab.cli.v1.GetMetricsResponse.data_points:type_name -> pilab.cli.v1.MetricPoint
+	203, // 113: pilab.cli.v1.MetricPoint.timestamp:type_name -> google.protobuf.Timestamp
+	204, // 114: pilab.cli.v1.GetActivityRequest.since:type_name -> google.protobuf.Duration
+	136, // 115: pilab.cli.v1.GetActivityResponse.activities:type_name -> pilab.cli.v1.ActivityLog
+	200, // 116: pilab.cli.v1.ActivityLog.details:type_name -> pilab.cli.v1.ActivityLog.DetailsEntry
+	203, // 117: pilab.cli.v1.ActivityLog.timestamp:type_name -> google.protobuf.Timestamp
+	21,  // 118: pilab.cli.v1.ListOrganizationsResponse.organizations:type_name -> pilab.cli.v1.Organization
+	20,  // 119: pilab.cli.v1.ListUsersResponse.users:type_name -> pilab.cli.v1.User
+	11,  // 120: pilab.cli.v1.Datastore.type:type_name -> pilab.cli.v1.DatastoreType
+	12,  // 121: pilab.cli.v1.Datastore.status:type_name -> pilab.cli.v1.DatastoreStatus
+	201, // 122: pilab.cli.v1.Datastore.connection_info:type_name -> pilab.cli.v1.Datastore.ConnectionInfoEntry
+	203, // 123: pilab.cli.v1.Datastore.created_at:type_name -> google.protobuf.Timestamp
+	203, // 124: pilab.cli.v1.Datastore.updated_at:type_name -> google.protobuf.Timestamp
+	11,  // 125: pilab.cli.v1.CreateDatastoreRequest.type:type_name -> pilab.cli.v1.DatastoreType
+	202, // 126: pilab.cli.v1.CreateDatastoreRequest.connection_info:type_name -> pilab.cli.v1.CreateDatastoreRequest.ConnectionInfoEntry
+	11,  // 127: pilab.cli.v1.ListDatastoresRequest.type:type_name -> pilab.cli.v1.DatastoreType
+	150, // 128: pilab.cli.v1.ListDatastoresResponse.datastores:type_name -> pilab.cli.v1.Datastore
+	159, // 129: pilab.cli.v1.NetworkConfigResponse.interfaces:type_name -> pilab.cli.v1.NetworkInterfaceInfo
+	150, // 130: pilab.cli.v1.StorageConfigResponse.datastores:type_name -> pilab.cli.v1.Datastore
+	162, // 131: pilab.cli.v1.HostHealthResponse.services:type_name -> pilab.cli.v1.ServiceStatus
+	203, // 132: pilab.cli.v1.HostHealthResponse.last_updated:type_name -> google.protobuf.Timestamp
+	13,  // 133: pilab.cli.v1.VPSService.Login:input_type -> pilab.cli.v1.LoginRequest
+	15,  // 134: pilab.cli.v1.VPSService.InitiateDeviceAuth:input_type -> pilab.cli.v1.InitiateDeviceAuthRequest
+	17,  // 135: pilab.cli.v1.VPSService.PollDeviceAuth:input_type -> pilab.cli.v1.PollDeviceAuthRequest
+	19,  // 136: pilab.cli.v1.VPSService.Logout:input_type -> pilab.cli.v1.LogoutRequest
+	205, // 137: pilab.cli.v1.VPSService.GetCurrentUser:input_type -> google.protobuf.Empty
+	26,  // 138: pilab.cli.v1.VPSService.CreateVM:input_type -> pilab.cli.v1.CreateVMRequest
+	27,  // 139: pilab.cli.v1.VPSService.GetVM:input_type -> pilab.cli.v1.GetVMRequest
+	28,  // 140: pilab.cli.v1.VPSService.ListVMs:input_type -> pilab.cli.v1.ListVMsRequest
+	30,  // 141: pilab.cli.v1.VPSService.UpdateVM:input_type -> pilab.cli.v1.UpdateVMRequest
+	31,  // 142: pilab.cli.v1.VPSService.DeleteVM:input_type -> pilab.cli.v1.DeleteVMRequest
+	32,  // 143: pilab.cli.v1.VPSService.StartVM:input_type -> pilab.cli.v1.StartVMRequest
+	33,  // 144: pilab.cli.v1.VPSService.StopVM:input_type -> pilab.cli.v1.StopVMRequest
+	34,  // 145: pilab.cli.v1.VPSService.RestartVM:input_type -> pilab.cli.v1.RestartVMRequest
+	35,  // 146: pilab.cli.v1.VPSService.PauseVM:input_type -> pilab.cli.v1.PauseVMRequest
+	36,  // 147: pilab.cli.v1.VPSService.UnpauseVM:input_type -> pilab.cli.v1.UnpauseVMRequest
+	37,  // 148: pilab.cli.v1.VPSService.MigrateVM:input_type -> pilab.cli.v1.MigrateVMRequest
+	38,  // 149: pilab.cli.v1.VPSService.RebuildVM:input_type -> pilab.cli.v1.RebuildVMRequest
+	39,  // 150: pilab.cli.v1.VPSService.CloneVM:input_type -> pilab.cli.v1.CloneVMRequest
+	40,  // 151: pilab.cli.v1.VPSService.LinkedCloneVM:input_type -> pilab.cli.v1.LinkedCloneVMRequest
+	42,  // 152: pilab.cli.v1.VPSService.GetVMConsole:input_type -> pilab.cli.v1.GetVMConsoleRequest
+	44,  // 153: pilab.cli.v1.VPSService.UpdateVMResources:input_type -> pilab.cli.v1.UpdateVMResourcesRequest
+	46,  // 154: pilab.cli.v1.VPSService.GetVMResources:input_type -> pilab.cli.v1.GetVMResourcesRequest
+	49,  // 155: pilab.cli.v1.VPSService.CreateDisk:input_type -> pilab.cli.v1.CreateDiskRequest
+	50,  // 156: pilab.cli.v1.VPSService.GetDisk:input_type -> pilab.cli.v1.GetDiskRequest
+	51,  // 157: pilab.cli.v1.VPSService.ListDisks:input_type -> pilab.cli.v1.ListDisksRequest
+	53,  // 158: pilab.cli.v1.VPSService.UpdateDisk:input_type -> pilab.cli.v1.UpdateDiskRequest
+	54,  // 159: pilab.cli.v1.VPSService.DeleteDisk:input_type -> pilab.cli.v1.DeleteDiskRequest
+	55,  // 160: pilab.cli.v1.VPSService.ExtendDisk:input_type -> pilab.cli.v1.ExtendDiskRequest
+	56,  // 161: pilab.cli.v1.VPSService.AttachDisk:input_type -> pilab.cli.v1.AttachDiskRequest
+	57,  // 162: pilab.cli.v1.VPSService.DetachDisk:input_type -> pilab.cli.v1.DetachDiskRequest
+	59,  // 163: pilab.cli.v1.VPSService.GetImage:input_type -> pilab.cli.v1.GetImageRequest
+	60,  // 164: pilab.cli.v1.VPSService.ListImages:input_type -> pilab.cli.v1.ListImagesRequest
+	62,  // 165: pilab.cli.v1.VPSService.CreateImage:input_type -> pilab.cli.v1.CreateImageRequest
+	63,  // 166: pilab.cli.v1.VPSService.UploadImage:input_type -> pilab.cli.v1.UploadImageRequest
+	64,  // 167: pilab.cli.v1.VPSService.DeleteImage:input_type -> pilab.cli.v1.DeleteImageRequest
+	66,  // 168: pilab.cli.v1.VPSService.GetSnapshot:input_type -> pilab.cli.v1.GetSnapshotRequest
+	67,  // 169: pilab.cli.v1.VPSService.ListSnapshots:input_type -> pilab.cli.v1.ListSnapshotsRequest
+	69,  // 170: pilab.cli.v1.VPSService.CreateSnapshot:input_type -> pilab.cli.v1.CreateSnapshotRequest
+	70,  // 171: pilab.cli.v1.VPSService.RestoreSnapshot:input_type -> pilab.cli.v1.RestoreSnapshotRequest
+	71,  // 172: pilab.cli.v1.VPSService.DeleteSnapshot:input_type -> pilab.cli.v1.DeleteSnapshotRequest
+	72,  // 173: pilab.cli.v1.VPSService.ConsolidateSnapshot:input_type -> pilab.cli.v1.SnapshotConsolidateRequest
+	75,  // 174: pilab.cli.v1.VPSService.CreateNetwork:input_type -> pilab.cli.v1.CreateNetworkRequest
+	76,  // 175: pilab.cli.v1.VPSService.GetNetwork:input_type -> pilab.cli.v1.GetNetworkRequest
+	77,  // 176: pilab.cli.v1.VPSService.ListNetworks:input_type -> pilab.cli.v1.ListNetworksRequest
+	79,  // 177: pilab.cli.v1.VPSService.UpdateNetwork:input_type -> pilab.cli.v1.UpdateNetworkRequest
+	80,  // 178: pilab.cli.v1.VPSService.DeleteNetwork:input_type -> pilab.cli.v1.DeleteNetworkRequest
+	81,  // 179: pilab.cli.v1.VPSService.GetNetworkInterface:input_type -> pilab.cli.v1.GetNetworkInterfaceRequest
+	82,  // 180: pilab.cli.v1.VPSService.ListNetworkInterfaces:input_type -> pilab.cli.v1.ListNetworkInterfacesRequest
+	84,  // 181: pilab.cli.v1.VPSService.AddNetworkInterface:input_type -> pilab.cli.v1.AddNetworkInterfaceRequest
+	85,  // 182: pilab.cli.v1.VPSService.RemoveNetworkInterface:input_type -> pilab.cli.v1.RemoveNetworkInterfaceRequest
+	87,  // 183: pilab.cli.v1.VPSService.CreateVSwitch:input_type -> pilab.cli.v1.CreateVSwitchRequest
+	88,  // 184: pilab.cli.v1.VPSService.GetVSwitch:input_type -> pilab.cli.v1.GetVSwitchRequest
+	89,  // 185: pilab.cli.v1.VPSService.ListVSwitches:input_type -> pilab.cli.v1.ListVSwitchesRequest
+	91,  // 186: pilab.cli.v1.VPSService.DeleteVSwitch:input_type -> pilab.cli.v1.DeleteVSwitchRequest
+	93,  // 187: pilab.cli.v1.VPSService.CreatePortGroup:input_type -> pilab.cli.v1.CreatePortGroupRequest
+	94,  // 188: pilab.cli.v1.VPSService.GetPortGroup:input_type -> pilab.cli.v1.GetPortGroupRequest
+	95,  // 189: pilab.cli.v1.VPSService.ListPortGroups:input_type -> pilab.cli.v1.ListPortGroupsRequest
+	97,  // 190: pilab.cli.v1.VPSService.DeletePortGroup:input_type -> pilab.cli.v1.DeletePortGroupRequest
+	99,  // 191: pilab.cli.v1.VPSService.CreatePublicIP:input_type -> pilab.cli.v1.CreatePublicIPRequest
+	100, // 192: pilab.cli.v1.VPSService.GetPublicIP:input_type -> pilab.cli.v1.GetPublicIPRequest
+	101, // 193: pilab.cli.v1.VPSService.ListPublicIPs:input_type -> pilab.cli.v1.ListPublicIPsRequest
+	103, // 194: pilab.cli.v1.VPSService.UpdatePublicIP:input_type -> pilab.cli.v1.UpdatePublicIPRequest
+	104, // 195: pilab.cli.v1.VPSService.DeletePublicIP:input_type -> pilab.cli.v1.DeletePublicIPRequest
+	105, // 196: pilab.cli.v1.VPSService.AssignPublicIP:input_type -> pilab.cli.v1.AssignPublicIPRequest
+	106, // 197: pilab.cli.v1.VPSService.UnassignPublicIP:input_type -> pilab.cli.v1.UnassignPublicIPRequest
+	109, // 198: pilab.cli.v1.VPSService.CreateSecurityGroup:input_type -> pilab.cli.v1.CreateSecurityGroupRequest
+	110, // 199: pilab.cli.v1.VPSService.GetSecurityGroup:input_type -> pilab.cli.v1.GetSecurityGroupRequest
+	111, // 200: pilab.cli.v1.VPSService.ListSecurityGroups:input_type -> pilab.cli.v1.ListSecurityGroupsRequest
+	113, // 201: pilab.cli.v1.VPSService.UpdateSecurityGroup:input_type -> pilab.cli.v1.UpdateSecurityGroupRequest
+	114, // 202: pilab.cli.v1.VPSService.DeleteSecurityGroup:input_type -> pilab.cli.v1.DeleteSecurityGroupRequest
+	115, // 203: pilab.cli.v1.VPSService.AddSecurityRule:input_type -> pilab.cli.v1.AddSecurityRuleRequest
+	116, // 204: pilab.cli.v1.VPSService.RemoveSecurityRule:input_type -> pilab.cli.v1.RemoveSecurityRuleRequest
+	118, // 205: pilab.cli.v1.VPSService.CreateTemplate:input_type -> pilab.cli.v1.CreateTemplateRequest
+	119, // 206: pilab.cli.v1.VPSService.GetTemplate:input_type -> pilab.cli.v1.GetTemplateRequest
+	120, // 207: pilab.cli.v1.VPSService.ListTemplates:input_type -> pilab.cli.v1.ListTemplatesRequest
+	122, // 208: pilab.cli.v1.VPSService.DeleteTemplate:input_type -> pilab.cli.v1.DeleteTemplateRequest
+	125, // 209: pilab.cli.v1.VPSService.ListOSTemplates:input_type -> pilab.cli.v1.ListOSTemplatesRequest
+	127, // 210: pilab.cli.v1.VPSService.GetOSTemplate:input_type -> pilab.cli.v1.GetOSTemplateRequest
+	128, // 211: pilab.cli.v1.VPSService.SyncOSTemplates:input_type -> pilab.cli.v1.SyncOSTemplatesRequest
+	130, // 212: pilab.cli.v1.VPSService.CreateVMFromOSTemplate:input_type -> pilab.cli.v1.CreateVMFromOSTemplateRequest
+	131, // 213: pilab.cli.v1.VPSService.GetMetrics:input_type -> pilab.cli.v1.GetMetricsRequest
+	134, // 214: pilab.cli.v1.VPSService.GetActivity:input_type -> pilab.cli.v1.GetActivityRequest
+	137, // 215: pilab.cli.v1.VPSService.CreateOrganization:input_type -> pilab.cli.v1.CreateOrganizationRequest
+	138, // 216: pilab.cli.v1.VPSService.GetOrganization:input_type -> pilab.cli.v1.GetOrganizationRequest
+	139, // 217: pilab.cli.v1.VPSService.ListOrganizations:input_type -> pilab.cli.v1.ListOrganizationsRequest
+	141, // 218: pilab.cli.v1.VPSService.UpdateOrganization:input_type -> pilab.cli.v1.UpdateOrganizationRequest
+	142, // 219: pilab.cli.v1.VPSService.DeleteOrganization:input_type -> pilab.cli.v1.DeleteOrganizationRequest
+	143, // 220: pilab.cli.v1.VPSService.CreateUser:input_type -> pilab.cli.v1.CreateUserRequest
+	144, // 221: pilab.cli.v1.VPSService.GetUser:input_type -> pilab.cli.v1.GetUserRequest
+	145, // 222: pilab.cli.v1.VPSService.ListUsers:input_type -> pilab.cli.v1.ListUsersRequest
+	147, // 223: pilab.cli.v1.VPSService.UpdateUser:input_type -> pilab.cli.v1.UpdateUserRequest
+	148, // 224: pilab.cli.v1.VPSService.DeleteUser:input_type -> pilab.cli.v1.DeleteUserRequest
+	205, // 225: pilab.cli.v1.VPSService.GetVersion:input_type -> google.protobuf.Empty
+	151, // 226: pilab.cli.v1.VPSService.CreateDatastore:input_type -> pilab.cli.v1.CreateDatastoreRequest
+	152, // 227: pilab.cli.v1.VPSService.GetDatastore:input_type -> pilab.cli.v1.GetDatastoreRequest
+	153, // 228: pilab.cli.v1.VPSService.ListDatastores:input_type -> pilab.cli.v1.ListDatastoresRequest
+	155, // 229: pilab.cli.v1.VPSService.DeleteDatastore:input_type -> pilab.cli.v1.DeleteDatastoreRequest
+	156, // 230: pilab.cli.v1.VPSService.MountDatastore:input_type -> pilab.cli.v1.MountDatastoreRequest
+	157, // 231: pilab.cli.v1.VPSService.UnmountDatastore:input_type -> pilab.cli.v1.UnmountDatastoreRequest
+	205, // 232: pilab.cli.v1.VPSService.GetHostInfo:input_type -> google.protobuf.Empty
+	205, // 233: pilab.cli.v1.VPSService.GetNetworkConfig:input_type -> google.protobuf.Empty
+	205, // 234: pilab.cli.v1.VPSService.GetStorageConfig:input_type -> google.protobuf.Empty
+	205, // 235: pilab.cli.v1.VPSService.GetHostHealth:input_type -> google.protobuf.Empty
+	164, // 236: pilab.cli.v1.VPSService.ConfigureNetwork:input_type -> pilab.cli.v1.ConfigureNetworkRequest
+	14,  // 237: pilab.cli.v1.VPSService.Login:output_type -> pilab.cli.v1.LoginResponse
+	16,  // 238: pilab.cli.v1.VPSService.InitiateDeviceAuth:output_type -> pilab.cli.v1.InitiateDeviceAuthResponse
+	18,  // 239: pilab.cli.v1.VPSService.PollDeviceAuth:output_type -> pilab.cli.v1.PollDeviceAuthResponse
+	205, // 240: pilab.cli.v1.VPSService.Logout:output_type -> google.protobuf.Empty
+	20,  // 241: pilab.cli.v1.VPSService.GetCurrentUser:output_type -> pilab.cli.v1.User
+	24,  // 242: pilab.cli.v1.VPSService.CreateVM:output_type -> pilab.cli.v1.VM
+	24,  // 243: pilab.cli.v1.VPSService.GetVM:output_type -> pilab.cli.v1.VM
+	29,  // 244: pilab.cli.v1.VPSService.ListVMs:output_type -> pilab.cli.v1.ListVMsResponse
+	24,  // 245: pilab.cli.v1.VPSService.UpdateVM:output_type -> pilab.cli.v1.VM
+	205, // 246: pilab.cli.v1.VPSService.DeleteVM:output_type -> google.protobuf.Empty
+	205, // 247: pilab.cli.v1.VPSService.StartVM:output_type -> google.protobuf.Empty
+	205, // 248: pilab.cli.v1.VPSService.StopVM:output_type -> google.protobuf.Empty
+	205, // 249: pilab.cli.v1.VPSService.RestartVM:output_type -> google.protobuf.Empty
+	205, // 250: pilab.cli.v1.VPSService.PauseVM:output_type -> google.protobuf.Empty
+	205, // 251: pilab.cli.v1.VPSService.UnpauseVM:output_type -> google.protobuf.Empty
+	205, // 252: pilab.cli.v1.VPSService.MigrateVM:output_type -> google.protobuf.Empty
+	24,  // 253: pilab.cli.v1.VPSService.RebuildVM:output_type -> pilab.cli.v1.VM
+	24,  // 254: pilab.cli.v1.VPSService.CloneVM:output_type -> pilab.cli.v1.VM
+	24,  // 255: pilab.cli.v1.VPSService.LinkedCloneVM:output_type -> pilab.cli.v1.VM
+	43,  // 256: pilab.cli.v1.VPSService.GetVMConsole:output_type -> pilab.cli.v1.GetVMConsoleResponse
+	45,  // 257: pilab.cli.v1.VPSService.UpdateVMResources:output_type -> pilab.cli.v1.UpdateVMResourcesResponse
+	47,  // 258: pilab.cli.v1.VPSService.GetVMResources:output_type -> pilab.cli.v1.GetVMResourcesResponse
+	48,  // 259: pilab.cli.v1.VPSService.CreateDisk:output_type -> pilab.cli.v1.Disk
+	48,  // 260: pilab.cli.v1.VPSService.GetDisk:output_type -> pilab.cli.v1.Disk
+	52,  // 261: pilab.cli.v1.VPSService.ListDisks:output_type -> pilab.cli.v1.ListDisksResponse
+	48,  // 262: pilab.cli.v1.VPSService.UpdateDisk:output_type -> pilab.cli.v1.Disk
+	205, // 263: pilab.cli.v1.VPSService.DeleteDisk:output_type -> google.protobuf.Empty
+	48,  // 264: pilab.cli.v1.VPSService.ExtendDisk:output_type -> pilab.cli.v1.Disk
+	205, // 265: pilab.cli.v1.VPSService.AttachDisk:output_type -> google.protobuf.Empty
+	205, // 266: pilab.cli.v1.VPSService.DetachDisk:output_type -> google.protobuf.Empty
+	58,  // 267: pilab.cli.v1.VPSService.GetImage:output_type -> pilab.cli.v1.Image
+	61,  // 268: pilab.cli.v1.VPSService.ListImages:output_type -> pilab.cli.v1.ListImagesResponse
+	58,  // 269: pilab.cli.v1.VPSService.CreateImage:output_type -> pilab.cli.v1.Image
+	58,  // 270: pilab.cli.v1.VPSService.UploadImage:output_type -> pilab.cli.v1.Image
+	205, // 271: pilab.cli.v1.VPSService.DeleteImage:output_type -> google.protobuf.Empty
+	65,  // 272: pilab.cli.v1.VPSService.GetSnapshot:output_type -> pilab.cli.v1.Snapshot
+	68,  // 273: pilab.cli.v1.VPSService.ListSnapshots:output_type -> pilab.cli.v1.ListSnapshotsResponse
+	65,  // 274: pilab.cli.v1.VPSService.CreateSnapshot:output_type -> pilab.cli.v1.Snapshot
+	205, // 275: pilab.cli.v1.VPSService.RestoreSnapshot:output_type -> google.protobuf.Empty
+	205, // 276: pilab.cli.v1.VPSService.DeleteSnapshot:output_type -> google.protobuf.Empty
+	205, // 277: pilab.cli.v1.VPSService.ConsolidateSnapshot:output_type -> google.protobuf.Empty
+	73,  // 278: pilab.cli.v1.VPSService.CreateNetwork:output_type -> pilab.cli.v1.Network
+	73,  // 279: pilab.cli.v1.VPSService.GetNetwork:output_type -> pilab.cli.v1.Network
+	78,  // 280: pilab.cli.v1.VPSService.ListNetworks:output_type -> pilab.cli.v1.ListNetworksResponse
+	73,  // 281: pilab.cli.v1.VPSService.UpdateNetwork:output_type -> pilab.cli.v1.Network
+	205, // 282: pilab.cli.v1.VPSService.DeleteNetwork:output_type -> google.protobuf.Empty
+	74,  // 283: pilab.cli.v1.VPSService.GetNetworkInterface:output_type -> pilab.cli.v1.NetworkInterface
+	83,  // 284: pilab.cli.v1.VPSService.ListNetworkInterfaces:output_type -> pilab.cli.v1.ListNetworkInterfacesResponse
+	74,  // 285: pilab.cli.v1.VPSService.AddNetworkInterface:output_type -> pilab.cli.v1.NetworkInterface
+	205, // 286: pilab.cli.v1.VPSService.RemoveNetworkInterface:output_type -> google.protobuf.Empty
+	86,  // 287: pilab.cli.v1.VPSService.CreateVSwitch:output_type -> pilab.cli.v1.VSwitch
+	86,  // 288: pilab.cli.v1.VPSService.GetVSwitch:output_type -> pilab.cli.v1.VSwitch
+	90,  // 289: pilab.cli.v1.VPSService.ListVSwitches:output_type -> pilab.cli.v1.ListVSwitchesResponse
+	205, // 290: pilab.cli.v1.VPSService.DeleteVSwitch:output_type -> google.protobuf.Empty
+	92,  // 291: pilab.cli.v1.VPSService.CreatePortGroup:output_type -> pilab.cli.v1.PortGroup
+	92,  // 292: pilab.cli.v1.VPSService.GetPortGroup:output_type -> pilab.cli.v1.PortGroup
+	96,  // 293: pilab.cli.v1.VPSService.ListPortGroups:output_type -> pilab.cli.v1.ListPortGroupsResponse
+	205, // 294: pilab.cli.v1.VPSService.DeletePortGroup:output_type -> google.protobuf.Empty
+	98,  // 295: pilab.cli.v1.VPSService.CreatePublicIP:output_type -> pilab.cli.v1.PublicIP
+	98,  // 296: pilab.cli.v1.VPSService.GetPublicIP:output_type -> pilab.cli.v1.PublicIP
+	102, // 297: pilab.cli.v1.VPSService.ListPublicIPs:output_type -> pilab.cli.v1.ListPublicIPsResponse
+	98,  // 298: pilab.cli.v1.VPSService.UpdatePublicIP:output_type -> pilab.cli.v1.PublicIP
+	205, // 299: pilab.cli.v1.VPSService.DeletePublicIP:output_type -> google.protobuf.Empty
+	205, // 300: pilab.cli.v1.VPSService.AssignPublicIP:output_type -> google.protobuf.Empty
+	205, // 301: pilab.cli.v1.VPSService.UnassignPublicIP:output_type -> google.protobuf.Empty
+	107, // 302: pilab.cli.v1.VPSService.CreateSecurityGroup:output_type -> pilab.cli.v1.SecurityGroup
+	107, // 303: pilab.cli.v1.VPSService.GetSecurityGroup:output_type -> pilab.cli.v1.SecurityGroup
+	112, // 304: pilab.cli.v1.VPSService.ListSecurityGroups:output_type -> pilab.cli.v1.ListSecurityGroupsResponse
+	107, // 305: pilab.cli.v1.VPSService.UpdateSecurityGroup:output_type -> pilab.cli.v1.SecurityGroup
+	205, // 306: pilab.cli.v1.VPSService.DeleteSecurityGroup:output_type -> google.protobuf.Empty
+	108, // 307: pilab.cli.v1.VPSService.AddSecurityRule:output_type -> pilab.cli.v1.SecurityRule
+	205, // 308: pilab.cli.v1.VPSService.RemoveSecurityRule:output_type -> google.protobuf.Empty
+	117, // 309: pilab.cli.v1.VPSService.CreateTemplate:output_type -> pilab.cli.v1.Template
+	117, // 310: pilab.cli.v1.VPSService.GetTemplate:output_type -> pilab.cli.v1.Template
+	121, // 311: pilab.cli.v1.VPSService.ListTemplates:output_type -> pilab.cli.v1.ListTemplatesResponse
+	205, // 312: pilab.cli.v1.VPSService.DeleteTemplate:output_type -> google.protobuf.Empty
+	126, // 313: pilab.cli.v1.VPSService.ListOSTemplates:output_type -> pilab.cli.v1.ListOSTemplatesResponse
+	123, // 314: pilab.cli.v1.VPSService.GetOSTemplate:output_type -> pilab.cli.v1.OSTemplate
+	129, // 315: pilab.cli.v1.VPSService.SyncOSTemplates:output_type -> pilab.cli.v1.SyncOSTemplatesResponse
+	24,  // 316: pilab.cli.v1.VPSService.CreateVMFromOSTemplate:output_type -> pilab.cli.v1.VM
+	132, // 317: pilab.cli.v1.VPSService.GetMetrics:output_type -> pilab.cli.v1.GetMetricsResponse
+	135, // 318: pilab.cli.v1.VPSService.GetActivity:output_type -> pilab.cli.v1.GetActivityResponse
+	21,  // 319: pilab.cli.v1.VPSService.CreateOrganization:output_type -> pilab.cli.v1.Organization
+	21,  // 320: pilab.cli.v1.VPSService.GetOrganization:output_type -> pilab.cli.v1.Organization
+	140, // 321: pilab.cli.v1.VPSService.ListOrganizations:output_type -> pilab.cli.v1.ListOrganizationsResponse
+	21,  // 322: pilab.cli.v1.VPSService.UpdateOrganization:output_type -> pilab.cli.v1.Organization
+	205, // 323: pilab.cli.v1.VPSService.DeleteOrganization:output_type -> google.protobuf.Empty
+	20,  // 324: pilab.cli.v1.VPSService.CreateUser:output_type -> pilab.cli.v1.User
+	20,  // 325: pilab.cli.v1.VPSService.GetUser:output_type -> pilab.cli.v1.User
+	146, // 326: pilab.cli.v1.VPSService.ListUsers:output_type -> pilab.cli.v1.ListUsersResponse
+	20,  // 327: pilab.cli.v1.VPSService.UpdateUser:output_type -> pilab.cli.v1.User
+	205, // 328: pilab.cli.v1.VPSService.DeleteUser:output_type -> google.protobuf.Empty
+	149, // 329: pilab.cli.v1.VPSService.GetVersion:output_type -> pilab.cli.v1.VersionResponse
+	150, // 330: pilab.cli.v1.VPSService.CreateDatastore:output_type -> pilab.cli.v1.Datastore
+	150, // 331: pilab.cli.v1.VPSService.GetDatastore:output_type -> pilab.cli.v1.Datastore
+	154, // 332: pilab.cli.v1.VPSService.ListDatastores:output_type -> pilab.cli.v1.ListDatastoresResponse
+	205, // 333: pilab.cli.v1.VPSService.DeleteDatastore:output_type -> google.protobuf.Empty
+	205, // 334: pilab.cli.v1.VPSService.MountDatastore:output_type -> google.protobuf.Empty
+	205, // 335: pilab.cli.v1.VPSService.UnmountDatastore:output_type -> google.protobuf.Empty
+	158, // 336: pilab.cli.v1.VPSService.GetHostInfo:output_type -> pilab.cli.v1.HostInfo
+	160, // 337: pilab.cli.v1.VPSService.GetNetworkConfig:output_type -> pilab.cli.v1.NetworkConfigResponse
+	161, // 338: pilab.cli.v1.VPSService.GetStorageConfig:output_type -> pilab.cli.v1.StorageConfigResponse
+	163, // 339: pilab.cli.v1.VPSService.GetHostHealth:output_type -> pilab.cli.v1.HostHealthResponse
+	205, // 340: pilab.cli.v1.VPSService.ConfigureNetwork:output_type -> google.protobuf.Empty
 	237, // [237:341] is the sub-list for method output_type
 	133, // [133:237] is the sub-list for method input_type
 	133, // [133:133] is the sub-list for extension type_name

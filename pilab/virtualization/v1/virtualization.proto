@@ -21,7 +21,7 @@
 
 syntax = "proto3";
 
-package pilab.cloud.virtualization.v1;
+package pilab.virtualization.v1;
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/virtualization/v1;virtualizationv1";
 

@@ -28,7 +28,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TasksService_ListTasks_FullMethodName = "/pilab.cloud.frontend.v1.TasksService/ListTasks"
+	TasksService_ListTasks_FullMethodName = "/pilab.frontend.v1.TasksService/ListTasks"
 )
 
 // TasksServiceClient is the client API for TasksService service.
@@ -121,7 +121,7 @@ func _TasksService_ListTasks_Handler(srv interface{}, ctx context.Context, dec f
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var TasksService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.frontend.v1.TasksService",
+	ServiceName: "pilab.frontend.v1.TasksService",
 	HandlerType: (*TasksServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

@@ -2780,7 +2780,7 @@ var File_pilab_frontend_v1_management_service_proto protoreflect.FileDescriptor
 
 const file_pilab_frontend_v1_management_service_proto_rawDesc = "" +
 	"\n" +
-	"*pilab/frontend/v1/management_service.proto\x12\x17pilab.cloud.frontend.v1\x1a\x1bgoogle/protobuf/empty.proto\"\xa3\x02\n" +
+	"*pilab/frontend/v1/management_service.proto\x12\x11pilab.frontend.v1\x1a\x1bgoogle/protobuf/empty.proto\"\xa3\x02\n" +
 	"\x11CreateUserRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x12\n" +
@@ -2808,12 +2808,12 @@ const file_pilab_frontend_v1_management_service_proto_rawDesc = "" +
 	"\brole_ids\x18\x05 \x03(\tR\aroleIds\x12$\n" +
 	"\x0erole_group_ids\x18\x06 \x03(\tR\froleGroupIds\"#\n" +
 	"\x11DeleteUserRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"g\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"a\n" +
 	"\x12SearchUsersRequest\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\x12;\n" +
-	"\x06filter\x18\x02 \x01(\v2#.pilab.cloud.frontend.v1.UserFilterR\x06filter\"J\n" +
-	"\x13SearchUsersResponse\x123\n" +
-	"\x05users\x18\x01 \x03(\v2\x1d.pilab.cloud.frontend.v1.UserR\x05users\"N\n" +
+	"\x05query\x18\x01 \x01(\tR\x05query\x125\n" +
+	"\x06filter\x18\x02 \x01(\v2\x1d.pilab.frontend.v1.UserFilterR\x06filter\"D\n" +
+	"\x13SearchUsersResponse\x12-\n" +
+	"\x05users\x18\x01 \x03(\v2\x17.pilab.frontend.v1.UserR\x05users\"N\n" +
 	"\x19ChangeUserPasswordRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12!\n" +
 	"\fnew_password\x18\x02 \x01(\tR\vnewPassword\"\xd0\x02\n" +
@@ -2836,41 +2836,41 @@ const file_pilab_frontend_v1_management_service_proto_rawDesc = "" +
 	"\n" +
 	"UserFilter\x12\x19\n" +
 	"\brole_ids\x18\x01 \x03(\tR\aroleIds\x12$\n" +
-	"\x0erole_group_ids\x18\x02 \x03(\tR\froleGroupIds\"\xaf\x01\n" +
+	"\x0erole_group_ids\x18\x02 \x03(\tR\froleGroupIds\"\xa9\x01\n" +
 	"\x11CreateRoleRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x02 \x01(\tR\vdescription\x12E\n" +
-	"\vpermissions\x18\x03 \x03(\v2#.pilab.cloud.frontend.v1.PermissionR\vpermissions\x12\x1d\n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12?\n" +
+	"\vpermissions\x18\x03 \x03(\v2\x1d.pilab.frontend.v1.PermissionR\vpermissions\x12\x1d\n" +
 	"\n" +
 	"parent_ids\x18\x04 \x03(\tR\tparentIds\" \n" +
 	"\x0eGetRoleRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"*\n" +
 	"\x14GetRoleByNameRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xbf\x01\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xb9\x01\n" +
 	"\x11UpdateRoleRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12E\n" +
-	"\vpermissions\x18\x04 \x03(\v2#.pilab.cloud.frontend.v1.PermissionR\vpermissions\x12\x1d\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12?\n" +
+	"\vpermissions\x18\x04 \x03(\v2\x1d.pilab.frontend.v1.PermissionR\vpermissions\x12\x1d\n" +
 	"\n" +
 	"parent_ids\x18\x05 \x03(\tR\tparentIds\"#\n" +
 	"\x11DeleteRoleRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"g\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"a\n" +
 	"\x12SearchRolesRequest\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\x12;\n" +
-	"\x06filter\x18\x02 \x01(\v2#.pilab.cloud.frontend.v1.RoleFilterR\x06filter\"J\n" +
-	"\x13SearchRolesResponse\x123\n" +
-	"\x05roles\x18\x01 \x03(\v2\x1d.pilab.cloud.frontend.v1.RoleR\x05roles\"\xb2\x01\n" +
+	"\x05query\x18\x01 \x01(\tR\x05query\x125\n" +
+	"\x06filter\x18\x02 \x01(\v2\x1d.pilab.frontend.v1.RoleFilterR\x06filter\"D\n" +
+	"\x13SearchRolesResponse\x12-\n" +
+	"\x05roles\x18\x01 \x03(\v2\x17.pilab.frontend.v1.RoleR\x05roles\"\xac\x01\n" +
 	"\x04Role\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12E\n" +
-	"\vpermissions\x18\x04 \x03(\v2#.pilab.cloud.frontend.v1.PermissionR\vpermissions\x12\x1d\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12?\n" +
+	"\vpermissions\x18\x04 \x03(\v2\x1d.pilab.frontend.v1.PermissionR\vpermissions\x12\x1d\n" +
 	"\n" +
-	"parent_ids\x18\x05 \x03(\tR\tparentIds\"S\n" +
+	"parent_ids\x18\x05 \x03(\tR\tparentIds\"M\n" +
 	"\n" +
-	"RoleFilter\x12E\n" +
-	"\vpermissions\x18\x01 \x03(\v2#.pilab.cloud.frontend.v1.PermissionR\vpermissions\"O\n" +
+	"RoleFilter\x12?\n" +
+	"\vpermissions\x18\x01 \x03(\v2\x1d.pilab.frontend.v1.PermissionR\vpermissions\"O\n" +
 	"\n" +
 	"Permission\x12#\n" +
 	"\rresource_type\x18\x01 \x01(\tR\fresourceType\x12\x1c\n" +
@@ -2882,21 +2882,21 @@ const file_pilab_frontend_v1_management_service_proto_rawDesc = "" +
 	"\rchild_role_id\x18\x01 \x01(\tR\vchildRoleId\x12$\n" +
 	"\x0eparent_role_id\x18\x02 \x01(\tR\fparentRoleId\"0\n" +
 	"\x15GetParentRolesRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\tR\x06roleId\"M\n" +
-	"\x16GetParentRolesResponse\x123\n" +
-	"\x05roles\x18\x01 \x03(\v2\x1d.pilab.cloud.frontend.v1.RoleR\x05roles\"/\n" +
+	"\arole_id\x18\x01 \x01(\tR\x06roleId\"G\n" +
+	"\x16GetParentRolesResponse\x12-\n" +
+	"\x05roles\x18\x01 \x03(\v2\x17.pilab.frontend.v1.RoleR\x05roles\"/\n" +
 	"\x14GetChildRolesRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\tR\x06roleId\"L\n" +
-	"\x15GetChildRolesResponse\x123\n" +
-	"\x05roles\x18\x01 \x03(\v2\x1d.pilab.cloud.frontend.v1.RoleR\x05roles\"3\n" +
+	"\arole_id\x18\x01 \x01(\tR\x06roleId\"F\n" +
+	"\x15GetChildRolesResponse\x12-\n" +
+	"\x05roles\x18\x01 \x03(\v2\x17.pilab.frontend.v1.RoleR\x05roles\"3\n" +
 	"\x18GetAllParentRolesRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\tR\x06roleId\"P\n" +
-	"\x19GetAllParentRolesResponse\x123\n" +
-	"\x05roles\x18\x01 \x03(\v2\x1d.pilab.cloud.frontend.v1.RoleR\x05roles\"2\n" +
+	"\arole_id\x18\x01 \x01(\tR\x06roleId\"J\n" +
+	"\x19GetAllParentRolesResponse\x12-\n" +
+	"\x05roles\x18\x01 \x03(\v2\x17.pilab.frontend.v1.RoleR\x05roles\"2\n" +
 	"\x17GetAllChildRolesRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\tR\x06roleId\"O\n" +
-	"\x18GetAllChildRolesResponse\x123\n" +
-	"\x05roles\x18\x01 \x03(\v2\x1d.pilab.cloud.frontend.v1.RoleR\x05roles\"i\n" +
+	"\arole_id\x18\x01 \x01(\tR\x06roleId\"I\n" +
+	"\x18GetAllChildRolesResponse\x12-\n" +
+	"\x05roles\x18\x01 \x03(\v2\x17.pilab.frontend.v1.RoleR\x05roles\"i\n" +
 	"\x16CreateRoleGroupRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x19\n" +
@@ -2911,12 +2911,12 @@ const file_pilab_frontend_v1_management_service_proto_rawDesc = "" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x19\n" +
 	"\brole_ids\x18\x04 \x03(\tR\aroleIds\"(\n" +
 	"\x16DeleteRoleGroupRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"q\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"k\n" +
 	"\x17SearchRoleGroupsRequest\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\x12@\n" +
-	"\x06filter\x18\x02 \x01(\v2(.pilab.cloud.frontend.v1.RoleGroupFilterR\x06filter\"_\n" +
-	"\x18SearchRoleGroupsResponse\x12C\n" +
-	"\vrole_groups\x18\x01 \x03(\v2\".pilab.cloud.frontend.v1.RoleGroupR\n" +
+	"\x05query\x18\x01 \x01(\tR\x05query\x12:\n" +
+	"\x06filter\x18\x02 \x01(\v2\".pilab.frontend.v1.RoleGroupFilterR\x06filter\"Y\n" +
+	"\x18SearchRoleGroupsResponse\x12=\n" +
+	"\vrole_groups\x18\x01 \x03(\v2\x1c.pilab.frontend.v1.RoleGroupR\n" +
 	"roleGroups\"l\n" +
 	"\tRoleGroup\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
@@ -2932,14 +2932,14 @@ const file_pilab_frontend_v1_management_service_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\"\n" +
 	"\rrole_group_id\x18\x02 \x01(\tR\vroleGroupId\"6\n" +
 	"\x1bGetRoleGroupsForUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"c\n" +
-	"\x1cGetRoleGroupsForUserResponse\x12C\n" +
-	"\vrole_groups\x18\x01 \x03(\v2\".pilab.cloud.frontend.v1.RoleGroupR\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"]\n" +
+	"\x1cGetRoleGroupsForUserResponse\x12=\n" +
+	"\vrole_groups\x18\x01 \x03(\v2\x1c.pilab.frontend.v1.RoleGroupR\n" +
 	"roleGroups\"@\n" +
 	"\x1aGetUsersInRoleGroupRequest\x12\"\n" +
-	"\rrole_group_id\x18\x01 \x01(\tR\vroleGroupId\"R\n" +
-	"\x1bGetUsersInRoleGroupResponse\x123\n" +
-	"\x05users\x18\x01 \x03(\v2\x1d.pilab.cloud.frontend.v1.UserR\x05users\"K\n" +
+	"\rrole_group_id\x18\x01 \x01(\tR\vroleGroupId\"L\n" +
+	"\x1bGetUsersInRoleGroupResponse\x12-\n" +
+	"\x05users\x18\x01 \x03(\v2\x17.pilab.frontend.v1.UserR\x05users\"K\n" +
 	"\x17AssignRoleToUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x17\n" +
 	"\arole_id\x18\x02 \x01(\tR\x06roleId\"O\n" +
@@ -2947,54 +2947,54 @@ const file_pilab_frontend_v1_management_service_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x17\n" +
 	"\arole_id\x18\x02 \x01(\tR\x06roleId\"1\n" +
 	"\x16GetRolesForUserRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"N\n" +
-	"\x17GetRolesForUserResponse\x123\n" +
-	"\x05roles\x18\x01 \x03(\v2\x1d.pilab.cloud.frontend.v1.RoleR\x05roles\"7\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"H\n" +
+	"\x17GetRolesForUserResponse\x12-\n" +
+	"\x05roles\x18\x01 \x03(\v2\x17.pilab.frontend.v1.RoleR\x05roles\"7\n" +
 	"\x1cGetPermissionsForRoleRequest\x12\x17\n" +
-	"\arole_id\x18\x01 \x01(\tR\x06roleId\"f\n" +
-	"\x1dGetPermissionsForRoleResponse\x12E\n" +
-	"\vpermissions\x18\x01 \x03(\v2#.pilab.cloud.frontend.v1.PermissionR\vpermissions2\xcf\x1b\n" +
-	"\x11ManagementService\x12W\n" +
+	"\arole_id\x18\x01 \x01(\tR\x06roleId\"`\n" +
+	"\x1dGetPermissionsForRoleResponse\x12?\n" +
+	"\vpermissions\x18\x01 \x03(\v2\x1d.pilab.frontend.v1.PermissionR\vpermissions2\xf0\x18\n" +
+	"\x11ManagementService\x12K\n" +
 	"\n" +
-	"CreateUser\x12*.pilab.cloud.frontend.v1.CreateUserRequest\x1a\x1d.pilab.cloud.frontend.v1.User\x12Q\n" +
-	"\aGetUser\x12'.pilab.cloud.frontend.v1.GetUserRequest\x1a\x1d.pilab.cloud.frontend.v1.User\x12e\n" +
-	"\x11GetUserByUsername\x121.pilab.cloud.frontend.v1.GetUserByUsernameRequest\x1a\x1d.pilab.cloud.frontend.v1.User\x12_\n" +
-	"\x0eGetUserByEmail\x12..pilab.cloud.frontend.v1.GetUserByEmailRequest\x1a\x1d.pilab.cloud.frontend.v1.User\x12W\n" +
+	"CreateUser\x12$.pilab.frontend.v1.CreateUserRequest\x1a\x17.pilab.frontend.v1.User\x12E\n" +
+	"\aGetUser\x12!.pilab.frontend.v1.GetUserRequest\x1a\x17.pilab.frontend.v1.User\x12Y\n" +
+	"\x11GetUserByUsername\x12+.pilab.frontend.v1.GetUserByUsernameRequest\x1a\x17.pilab.frontend.v1.User\x12S\n" +
+	"\x0eGetUserByEmail\x12(.pilab.frontend.v1.GetUserByEmailRequest\x1a\x17.pilab.frontend.v1.User\x12K\n" +
 	"\n" +
-	"UpdateUser\x12*.pilab.cloud.frontend.v1.UpdateUserRequest\x1a\x1d.pilab.cloud.frontend.v1.User\x12P\n" +
+	"UpdateUser\x12$.pilab.frontend.v1.UpdateUserRequest\x1a\x17.pilab.frontend.v1.User\x12J\n" +
 	"\n" +
-	"DeleteUser\x12*.pilab.cloud.frontend.v1.DeleteUserRequest\x1a\x16.google.protobuf.Empty\x12h\n" +
-	"\vSearchUsers\x12+.pilab.cloud.frontend.v1.SearchUsersRequest\x1a,.pilab.cloud.frontend.v1.SearchUsersResponse\x12`\n" +
-	"\x12ChangeUserPassword\x122.pilab.cloud.frontend.v1.ChangeUserPasswordRequest\x1a\x16.google.protobuf.Empty\x12W\n" +
+	"DeleteUser\x12$.pilab.frontend.v1.DeleteUserRequest\x1a\x16.google.protobuf.Empty\x12\\\n" +
+	"\vSearchUsers\x12%.pilab.frontend.v1.SearchUsersRequest\x1a&.pilab.frontend.v1.SearchUsersResponse\x12Z\n" +
+	"\x12ChangeUserPassword\x12,.pilab.frontend.v1.ChangeUserPasswordRequest\x1a\x16.google.protobuf.Empty\x12K\n" +
 	"\n" +
-	"CreateRole\x12*.pilab.cloud.frontend.v1.CreateRoleRequest\x1a\x1d.pilab.cloud.frontend.v1.Role\x12Q\n" +
-	"\aGetRole\x12'.pilab.cloud.frontend.v1.GetRoleRequest\x1a\x1d.pilab.cloud.frontend.v1.Role\x12]\n" +
-	"\rGetRoleByName\x12-.pilab.cloud.frontend.v1.GetRoleByNameRequest\x1a\x1d.pilab.cloud.frontend.v1.Role\x12W\n" +
+	"CreateRole\x12$.pilab.frontend.v1.CreateRoleRequest\x1a\x17.pilab.frontend.v1.Role\x12E\n" +
+	"\aGetRole\x12!.pilab.frontend.v1.GetRoleRequest\x1a\x17.pilab.frontend.v1.Role\x12Q\n" +
+	"\rGetRoleByName\x12'.pilab.frontend.v1.GetRoleByNameRequest\x1a\x17.pilab.frontend.v1.Role\x12K\n" +
 	"\n" +
-	"UpdateRole\x12*.pilab.cloud.frontend.v1.UpdateRoleRequest\x1a\x1d.pilab.cloud.frontend.v1.Role\x12P\n" +
+	"UpdateRole\x12$.pilab.frontend.v1.UpdateRoleRequest\x1a\x17.pilab.frontend.v1.Role\x12J\n" +
 	"\n" +
-	"DeleteRole\x12*.pilab.cloud.frontend.v1.DeleteRoleRequest\x1a\x16.google.protobuf.Empty\x12h\n" +
-	"\vSearchRoles\x12+.pilab.cloud.frontend.v1.SearchRolesRequest\x1a,.pilab.cloud.frontend.v1.SearchRolesResponse\x12`\n" +
-	"\x12AddRoleInheritance\x122.pilab.cloud.frontend.v1.AddRoleInheritanceRequest\x1a\x16.google.protobuf.Empty\x12f\n" +
-	"\x15RemoveRoleInheritance\x125.pilab.cloud.frontend.v1.RemoveRoleInheritanceRequest\x1a\x16.google.protobuf.Empty\x12q\n" +
-	"\x0eGetParentRoles\x12..pilab.cloud.frontend.v1.GetParentRolesRequest\x1a/.pilab.cloud.frontend.v1.GetParentRolesResponse\x12n\n" +
-	"\rGetChildRoles\x12-.pilab.cloud.frontend.v1.GetChildRolesRequest\x1a..pilab.cloud.frontend.v1.GetChildRolesResponse\x12z\n" +
-	"\x11GetAllParentRoles\x121.pilab.cloud.frontend.v1.GetAllParentRolesRequest\x1a2.pilab.cloud.frontend.v1.GetAllParentRolesResponse\x12w\n" +
-	"\x10GetAllChildRoles\x120.pilab.cloud.frontend.v1.GetAllChildRolesRequest\x1a1.pilab.cloud.frontend.v1.GetAllChildRolesResponse\x12f\n" +
-	"\x0fCreateRoleGroup\x12/.pilab.cloud.frontend.v1.CreateRoleGroupRequest\x1a\".pilab.cloud.frontend.v1.RoleGroup\x12`\n" +
-	"\fGetRoleGroup\x12,.pilab.cloud.frontend.v1.GetRoleGroupRequest\x1a\".pilab.cloud.frontend.v1.RoleGroup\x12l\n" +
-	"\x12GetRoleGroupByName\x122.pilab.cloud.frontend.v1.GetRoleGroupByNameRequest\x1a\".pilab.cloud.frontend.v1.RoleGroup\x12f\n" +
-	"\x0fUpdateRoleGroup\x12/.pilab.cloud.frontend.v1.UpdateRoleGroupRequest\x1a\".pilab.cloud.frontend.v1.RoleGroup\x12Z\n" +
-	"\x0fDeleteRoleGroup\x12/.pilab.cloud.frontend.v1.DeleteRoleGroupRequest\x1a\x16.google.protobuf.Empty\x12w\n" +
-	"\x10SearchRoleGroups\x120.pilab.cloud.frontend.v1.SearchRoleGroupsRequest\x1a1.pilab.cloud.frontend.v1.SearchRoleGroupsResponse\x12`\n" +
-	"\x12AddUserToRoleGroup\x122.pilab.cloud.frontend.v1.AddUserToRoleGroupRequest\x1a\x16.google.protobuf.Empty\x12j\n" +
-	"\x17RemoveUserFromRoleGroup\x127.pilab.cloud.frontend.v1.RemoveUserFromRoleGroupRequest\x1a\x16.google.protobuf.Empty\x12\x83\x01\n" +
-	"\x14GetRoleGroupsForUser\x124.pilab.cloud.frontend.v1.GetRoleGroupsForUserRequest\x1a5.pilab.cloud.frontend.v1.GetRoleGroupsForUserResponse\x12\x80\x01\n" +
-	"\x13GetUsersInRoleGroup\x123.pilab.cloud.frontend.v1.GetUsersInRoleGroupRequest\x1a4.pilab.cloud.frontend.v1.GetUsersInRoleGroupResponse\x12\\\n" +
-	"\x10AssignRoleToUser\x120.pilab.cloud.frontend.v1.AssignRoleToUserRequest\x1a\x16.google.protobuf.Empty\x12d\n" +
-	"\x14UnassignRoleFromUser\x124.pilab.cloud.frontend.v1.UnassignRoleFromUserRequest\x1a\x16.google.protobuf.Empty\x12t\n" +
-	"\x0fGetRolesForUser\x12/.pilab.cloud.frontend.v1.GetRolesForUserRequest\x1a0.pilab.cloud.frontend.v1.GetRolesForUserResponse\x12\x86\x01\n" +
-	"\x15GetPermissionsForRole\x125.pilab.cloud.frontend.v1.GetPermissionsForRoleRequest\x1a6.pilab.cloud.frontend.v1.GetPermissionsForRoleResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1b\x06proto3"
+	"DeleteRole\x12$.pilab.frontend.v1.DeleteRoleRequest\x1a\x16.google.protobuf.Empty\x12\\\n" +
+	"\vSearchRoles\x12%.pilab.frontend.v1.SearchRolesRequest\x1a&.pilab.frontend.v1.SearchRolesResponse\x12Z\n" +
+	"\x12AddRoleInheritance\x12,.pilab.frontend.v1.AddRoleInheritanceRequest\x1a\x16.google.protobuf.Empty\x12`\n" +
+	"\x15RemoveRoleInheritance\x12/.pilab.frontend.v1.RemoveRoleInheritanceRequest\x1a\x16.google.protobuf.Empty\x12e\n" +
+	"\x0eGetParentRoles\x12(.pilab.frontend.v1.GetParentRolesRequest\x1a).pilab.frontend.v1.GetParentRolesResponse\x12b\n" +
+	"\rGetChildRoles\x12'.pilab.frontend.v1.GetChildRolesRequest\x1a(.pilab.frontend.v1.GetChildRolesResponse\x12n\n" +
+	"\x11GetAllParentRoles\x12+.pilab.frontend.v1.GetAllParentRolesRequest\x1a,.pilab.frontend.v1.GetAllParentRolesResponse\x12k\n" +
+	"\x10GetAllChildRoles\x12*.pilab.frontend.v1.GetAllChildRolesRequest\x1a+.pilab.frontend.v1.GetAllChildRolesResponse\x12Z\n" +
+	"\x0fCreateRoleGroup\x12).pilab.frontend.v1.CreateRoleGroupRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\x12T\n" +
+	"\fGetRoleGroup\x12&.pilab.frontend.v1.GetRoleGroupRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\x12`\n" +
+	"\x12GetRoleGroupByName\x12,.pilab.frontend.v1.GetRoleGroupByNameRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\x12Z\n" +
+	"\x0fUpdateRoleGroup\x12).pilab.frontend.v1.UpdateRoleGroupRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\x12T\n" +
+	"\x0fDeleteRoleGroup\x12).pilab.frontend.v1.DeleteRoleGroupRequest\x1a\x16.google.protobuf.Empty\x12k\n" +
+	"\x10SearchRoleGroups\x12*.pilab.frontend.v1.SearchRoleGroupsRequest\x1a+.pilab.frontend.v1.SearchRoleGroupsResponse\x12Z\n" +
+	"\x12AddUserToRoleGroup\x12,.pilab.frontend.v1.AddUserToRoleGroupRequest\x1a\x16.google.protobuf.Empty\x12d\n" +
+	"\x17RemoveUserFromRoleGroup\x121.pilab.frontend.v1.RemoveUserFromRoleGroupRequest\x1a\x16.google.protobuf.Empty\x12w\n" +
+	"\x14GetRoleGroupsForUser\x12..pilab.frontend.v1.GetRoleGroupsForUserRequest\x1a/.pilab.frontend.v1.GetRoleGroupsForUserResponse\x12t\n" +
+	"\x13GetUsersInRoleGroup\x12-.pilab.frontend.v1.GetUsersInRoleGroupRequest\x1a..pilab.frontend.v1.GetUsersInRoleGroupResponse\x12V\n" +
+	"\x10AssignRoleToUser\x12*.pilab.frontend.v1.AssignRoleToUserRequest\x1a\x16.google.protobuf.Empty\x12^\n" +
+	"\x14UnassignRoleFromUser\x12..pilab.frontend.v1.UnassignRoleFromUserRequest\x1a\x16.google.protobuf.Empty\x12h\n" +
+	"\x0fGetRolesForUser\x12).pilab.frontend.v1.GetRolesForUserRequest\x1a*.pilab.frontend.v1.GetRolesForUserResponse\x12z\n" +
+	"\x15GetPermissionsForRole\x12/.pilab.frontend.v1.GetPermissionsForRoleRequest\x1a0.pilab.frontend.v1.GetPermissionsForRoleResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1b\x06proto3"
 
 var (
 	file_pilab_frontend_v1_management_service_proto_rawDescOnce sync.Once
@@ -3010,147 +3010,147 @@ func file_pilab_frontend_v1_management_service_proto_rawDescGZIP() []byte {
 
 var file_pilab_frontend_v1_management_service_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
 var file_pilab_frontend_v1_management_service_proto_goTypes = []any{
-	(*CreateUserRequest)(nil),              // 0: pilab.cloud.frontend.v1.CreateUserRequest
-	(*GetUserRequest)(nil),                 // 1: pilab.cloud.frontend.v1.GetUserRequest
-	(*GetUserByUsernameRequest)(nil),       // 2: pilab.cloud.frontend.v1.GetUserByUsernameRequest
-	(*GetUserByEmailRequest)(nil),          // 3: pilab.cloud.frontend.v1.GetUserByEmailRequest
-	(*UpdateUserRequest)(nil),              // 4: pilab.cloud.frontend.v1.UpdateUserRequest
-	(*DeleteUserRequest)(nil),              // 5: pilab.cloud.frontend.v1.DeleteUserRequest
-	(*SearchUsersRequest)(nil),             // 6: pilab.cloud.frontend.v1.SearchUsersRequest
-	(*SearchUsersResponse)(nil),            // 7: pilab.cloud.frontend.v1.SearchUsersResponse
-	(*ChangeUserPasswordRequest)(nil),      // 8: pilab.cloud.frontend.v1.ChangeUserPasswordRequest
-	(*User)(nil),                           // 9: pilab.cloud.frontend.v1.User
-	(*UserFilter)(nil),                     // 10: pilab.cloud.frontend.v1.UserFilter
-	(*CreateRoleRequest)(nil),              // 11: pilab.cloud.frontend.v1.CreateRoleRequest
-	(*GetRoleRequest)(nil),                 // 12: pilab.cloud.frontend.v1.GetRoleRequest
-	(*GetRoleByNameRequest)(nil),           // 13: pilab.cloud.frontend.v1.GetRoleByNameRequest
-	(*UpdateRoleRequest)(nil),              // 14: pilab.cloud.frontend.v1.UpdateRoleRequest
-	(*DeleteRoleRequest)(nil),              // 15: pilab.cloud.frontend.v1.DeleteRoleRequest
-	(*SearchRolesRequest)(nil),             // 16: pilab.cloud.frontend.v1.SearchRolesRequest
-	(*SearchRolesResponse)(nil),            // 17: pilab.cloud.frontend.v1.SearchRolesResponse
-	(*Role)(nil),                           // 18: pilab.cloud.frontend.v1.Role
-	(*RoleFilter)(nil),                     // 19: pilab.cloud.frontend.v1.RoleFilter
-	(*Permission)(nil),                     // 20: pilab.cloud.frontend.v1.Permission
-	(*AddRoleInheritanceRequest)(nil),      // 21: pilab.cloud.frontend.v1.AddRoleInheritanceRequest
-	(*RemoveRoleInheritanceRequest)(nil),   // 22: pilab.cloud.frontend.v1.RemoveRoleInheritanceRequest
-	(*GetParentRolesRequest)(nil),          // 23: pilab.cloud.frontend.v1.GetParentRolesRequest
-	(*GetParentRolesResponse)(nil),         // 24: pilab.cloud.frontend.v1.GetParentRolesResponse
-	(*GetChildRolesRequest)(nil),           // 25: pilab.cloud.frontend.v1.GetChildRolesRequest
-	(*GetChildRolesResponse)(nil),          // 26: pilab.cloud.frontend.v1.GetChildRolesResponse
-	(*GetAllParentRolesRequest)(nil),       // 27: pilab.cloud.frontend.v1.GetAllParentRolesRequest
-	(*GetAllParentRolesResponse)(nil),      // 28: pilab.cloud.frontend.v1.GetAllParentRolesResponse
-	(*GetAllChildRolesRequest)(nil),        // 29: pilab.cloud.frontend.v1.GetAllChildRolesRequest
-	(*GetAllChildRolesResponse)(nil),       // 30: pilab.cloud.frontend.v1.GetAllChildRolesResponse
-	(*CreateRoleGroupRequest)(nil),         // 31: pilab.cloud.frontend.v1.CreateRoleGroupRequest
-	(*GetRoleGroupRequest)(nil),            // 32: pilab.cloud.frontend.v1.GetRoleGroupRequest
-	(*GetRoleGroupByNameRequest)(nil),      // 33: pilab.cloud.frontend.v1.GetRoleGroupByNameRequest
-	(*UpdateRoleGroupRequest)(nil),         // 34: pilab.cloud.frontend.v1.UpdateRoleGroupRequest
-	(*DeleteRoleGroupRequest)(nil),         // 35: pilab.cloud.frontend.v1.DeleteRoleGroupRequest
-	(*SearchRoleGroupsRequest)(nil),        // 36: pilab.cloud.frontend.v1.SearchRoleGroupsRequest
-	(*SearchRoleGroupsResponse)(nil),       // 37: pilab.cloud.frontend.v1.SearchRoleGroupsResponse
-	(*RoleGroup)(nil),                      // 38: pilab.cloud.frontend.v1.RoleGroup
-	(*RoleGroupFilter)(nil),                // 39: pilab.cloud.frontend.v1.RoleGroupFilter
-	(*AddUserToRoleGroupRequest)(nil),      // 40: pilab.cloud.frontend.v1.AddUserToRoleGroupRequest
-	(*RemoveUserFromRoleGroupRequest)(nil), // 41: pilab.cloud.frontend.v1.RemoveUserFromRoleGroupRequest
-	(*GetRoleGroupsForUserRequest)(nil),    // 42: pilab.cloud.frontend.v1.GetRoleGroupsForUserRequest
-	(*GetRoleGroupsForUserResponse)(nil),   // 43: pilab.cloud.frontend.v1.GetRoleGroupsForUserResponse
-	(*GetUsersInRoleGroupRequest)(nil),     // 44: pilab.cloud.frontend.v1.GetUsersInRoleGroupRequest
-	(*GetUsersInRoleGroupResponse)(nil),    // 45: pilab.cloud.frontend.v1.GetUsersInRoleGroupResponse
-	(*AssignRoleToUserRequest)(nil),        // 46: pilab.cloud.frontend.v1.AssignRoleToUserRequest
-	(*UnassignRoleFromUserRequest)(nil),    // 47: pilab.cloud.frontend.v1.UnassignRoleFromUserRequest
-	(*GetRolesForUserRequest)(nil),         // 48: pilab.cloud.frontend.v1.GetRolesForUserRequest
-	(*GetRolesForUserResponse)(nil),        // 49: pilab.cloud.frontend.v1.GetRolesForUserResponse
-	(*GetPermissionsForRoleRequest)(nil),   // 50: pilab.cloud.frontend.v1.GetPermissionsForRoleRequest
-	(*GetPermissionsForRoleResponse)(nil),  // 51: pilab.cloud.frontend.v1.GetPermissionsForRoleResponse
+	(*CreateUserRequest)(nil),              // 0: pilab.frontend.v1.CreateUserRequest
+	(*GetUserRequest)(nil),                 // 1: pilab.frontend.v1.GetUserRequest
+	(*GetUserByUsernameRequest)(nil),       // 2: pilab.frontend.v1.GetUserByUsernameRequest
+	(*GetUserByEmailRequest)(nil),          // 3: pilab.frontend.v1.GetUserByEmailRequest
+	(*UpdateUserRequest)(nil),              // 4: pilab.frontend.v1.UpdateUserRequest
+	(*DeleteUserRequest)(nil),              // 5: pilab.frontend.v1.DeleteUserRequest
+	(*SearchUsersRequest)(nil),             // 6: pilab.frontend.v1.SearchUsersRequest
+	(*SearchUsersResponse)(nil),            // 7: pilab.frontend.v1.SearchUsersResponse
+	(*ChangeUserPasswordRequest)(nil),      // 8: pilab.frontend.v1.ChangeUserPasswordRequest
+	(*User)(nil),                           // 9: pilab.frontend.v1.User
+	(*UserFilter)(nil),                     // 10: pilab.frontend.v1.UserFilter
+	(*CreateRoleRequest)(nil),              // 11: pilab.frontend.v1.CreateRoleRequest
+	(*GetRoleRequest)(nil),                 // 12: pilab.frontend.v1.GetRoleRequest
+	(*GetRoleByNameRequest)(nil),           // 13: pilab.frontend.v1.GetRoleByNameRequest
+	(*UpdateRoleRequest)(nil),              // 14: pilab.frontend.v1.UpdateRoleRequest
+	(*DeleteRoleRequest)(nil),              // 15: pilab.frontend.v1.DeleteRoleRequest
+	(*SearchRolesRequest)(nil),             // 16: pilab.frontend.v1.SearchRolesRequest
+	(*SearchRolesResponse)(nil),            // 17: pilab.frontend.v1.SearchRolesResponse
+	(*Role)(nil),                           // 18: pilab.frontend.v1.Role
+	(*RoleFilter)(nil),                     // 19: pilab.frontend.v1.RoleFilter
+	(*Permission)(nil),                     // 20: pilab.frontend.v1.Permission
+	(*AddRoleInheritanceRequest)(nil),      // 21: pilab.frontend.v1.AddRoleInheritanceRequest
+	(*RemoveRoleInheritanceRequest)(nil),   // 22: pilab.frontend.v1.RemoveRoleInheritanceRequest
+	(*GetParentRolesRequest)(nil),          // 23: pilab.frontend.v1.GetParentRolesRequest
+	(*GetParentRolesResponse)(nil),         // 24: pilab.frontend.v1.GetParentRolesResponse
+	(*GetChildRolesRequest)(nil),           // 25: pilab.frontend.v1.GetChildRolesRequest
+	(*GetChildRolesResponse)(nil),          // 26: pilab.frontend.v1.GetChildRolesResponse
+	(*GetAllParentRolesRequest)(nil),       // 27: pilab.frontend.v1.GetAllParentRolesRequest
+	(*GetAllParentRolesResponse)(nil),      // 28: pilab.frontend.v1.GetAllParentRolesResponse
+	(*GetAllChildRolesRequest)(nil),        // 29: pilab.frontend.v1.GetAllChildRolesRequest
+	(*GetAllChildRolesResponse)(nil),       // 30: pilab.frontend.v1.GetAllChildRolesResponse
+	(*CreateRoleGroupRequest)(nil),         // 31: pilab.frontend.v1.CreateRoleGroupRequest
+	(*GetRoleGroupRequest)(nil),            // 32: pilab.frontend.v1.GetRoleGroupRequest
+	(*GetRoleGroupByNameRequest)(nil),      // 33: pilab.frontend.v1.GetRoleGroupByNameRequest
+	(*UpdateRoleGroupRequest)(nil),         // 34: pilab.frontend.v1.UpdateRoleGroupRequest
+	(*DeleteRoleGroupRequest)(nil),         // 35: pilab.frontend.v1.DeleteRoleGroupRequest
+	(*SearchRoleGroupsRequest)(nil),        // 36: pilab.frontend.v1.SearchRoleGroupsRequest
+	(*SearchRoleGroupsResponse)(nil),       // 37: pilab.frontend.v1.SearchRoleGroupsResponse
+	(*RoleGroup)(nil),                      // 38: pilab.frontend.v1.RoleGroup
+	(*RoleGroupFilter)(nil),                // 39: pilab.frontend.v1.RoleGroupFilter
+	(*AddUserToRoleGroupRequest)(nil),      // 40: pilab.frontend.v1.AddUserToRoleGroupRequest
+	(*RemoveUserFromRoleGroupRequest)(nil), // 41: pilab.frontend.v1.RemoveUserFromRoleGroupRequest
+	(*GetRoleGroupsForUserRequest)(nil),    // 42: pilab.frontend.v1.GetRoleGroupsForUserRequest
+	(*GetRoleGroupsForUserResponse)(nil),   // 43: pilab.frontend.v1.GetRoleGroupsForUserResponse
+	(*GetUsersInRoleGroupRequest)(nil),     // 44: pilab.frontend.v1.GetUsersInRoleGroupRequest
+	(*GetUsersInRoleGroupResponse)(nil),    // 45: pilab.frontend.v1.GetUsersInRoleGroupResponse
+	(*AssignRoleToUserRequest)(nil),        // 46: pilab.frontend.v1.AssignRoleToUserRequest
+	(*UnassignRoleFromUserRequest)(nil),    // 47: pilab.frontend.v1.UnassignRoleFromUserRequest
+	(*GetRolesForUserRequest)(nil),         // 48: pilab.frontend.v1.GetRolesForUserRequest
+	(*GetRolesForUserResponse)(nil),        // 49: pilab.frontend.v1.GetRolesForUserResponse
+	(*GetPermissionsForRoleRequest)(nil),   // 50: pilab.frontend.v1.GetPermissionsForRoleRequest
+	(*GetPermissionsForRoleResponse)(nil),  // 51: pilab.frontend.v1.GetPermissionsForRoleResponse
 	(*emptypb.Empty)(nil),                  // 52: google.protobuf.Empty
 }
 var file_pilab_frontend_v1_management_service_proto_depIdxs = []int32{
-	10, // 0: pilab.cloud.frontend.v1.SearchUsersRequest.filter:type_name -> pilab.cloud.frontend.v1.UserFilter
-	9,  // 1: pilab.cloud.frontend.v1.SearchUsersResponse.users:type_name -> pilab.cloud.frontend.v1.User
-	20, // 2: pilab.cloud.frontend.v1.CreateRoleRequest.permissions:type_name -> pilab.cloud.frontend.v1.Permission
-	20, // 3: pilab.cloud.frontend.v1.UpdateRoleRequest.permissions:type_name -> pilab.cloud.frontend.v1.Permission
-	19, // 4: pilab.cloud.frontend.v1.SearchRolesRequest.filter:type_name -> pilab.cloud.frontend.v1.RoleFilter
-	18, // 5: pilab.cloud.frontend.v1.SearchRolesResponse.roles:type_name -> pilab.cloud.frontend.v1.Role
-	20, // 6: pilab.cloud.frontend.v1.Role.permissions:type_name -> pilab.cloud.frontend.v1.Permission
-	20, // 7: pilab.cloud.frontend.v1.RoleFilter.permissions:type_name -> pilab.cloud.frontend.v1.Permission
-	18, // 8: pilab.cloud.frontend.v1.GetParentRolesResponse.roles:type_name -> pilab.cloud.frontend.v1.Role
-	18, // 9: pilab.cloud.frontend.v1.GetChildRolesResponse.roles:type_name -> pilab.cloud.frontend.v1.Role
-	18, // 10: pilab.cloud.frontend.v1.GetAllParentRolesResponse.roles:type_name -> pilab.cloud.frontend.v1.Role
-	18, // 11: pilab.cloud.frontend.v1.GetAllChildRolesResponse.roles:type_name -> pilab.cloud.frontend.v1.Role
-	39, // 12: pilab.cloud.frontend.v1.SearchRoleGroupsRequest.filter:type_name -> pilab.cloud.frontend.v1.RoleGroupFilter
-	38, // 13: pilab.cloud.frontend.v1.SearchRoleGroupsResponse.role_groups:type_name -> pilab.cloud.frontend.v1.RoleGroup
-	38, // 14: pilab.cloud.frontend.v1.GetRoleGroupsForUserResponse.role_groups:type_name -> pilab.cloud.frontend.v1.RoleGroup
-	9,  // 15: pilab.cloud.frontend.v1.GetUsersInRoleGroupResponse.users:type_name -> pilab.cloud.frontend.v1.User
-	18, // 16: pilab.cloud.frontend.v1.GetRolesForUserResponse.roles:type_name -> pilab.cloud.frontend.v1.Role
-	20, // 17: pilab.cloud.frontend.v1.GetPermissionsForRoleResponse.permissions:type_name -> pilab.cloud.frontend.v1.Permission
-	0,  // 18: pilab.cloud.frontend.v1.ManagementService.CreateUser:input_type -> pilab.cloud.frontend.v1.CreateUserRequest
-	1,  // 19: pilab.cloud.frontend.v1.ManagementService.GetUser:input_type -> pilab.cloud.frontend.v1.GetUserRequest
-	2,  // 20: pilab.cloud.frontend.v1.ManagementService.GetUserByUsername:input_type -> pilab.cloud.frontend.v1.GetUserByUsernameRequest
-	3,  // 21: pilab.cloud.frontend.v1.ManagementService.GetUserByEmail:input_type -> pilab.cloud.frontend.v1.GetUserByEmailRequest
-	4,  // 22: pilab.cloud.frontend.v1.ManagementService.UpdateUser:input_type -> pilab.cloud.frontend.v1.UpdateUserRequest
-	5,  // 23: pilab.cloud.frontend.v1.ManagementService.DeleteUser:input_type -> pilab.cloud.frontend.v1.DeleteUserRequest
-	6,  // 24: pilab.cloud.frontend.v1.ManagementService.SearchUsers:input_type -> pilab.cloud.frontend.v1.SearchUsersRequest
-	8,  // 25: pilab.cloud.frontend.v1.ManagementService.ChangeUserPassword:input_type -> pilab.cloud.frontend.v1.ChangeUserPasswordRequest
-	11, // 26: pilab.cloud.frontend.v1.ManagementService.CreateRole:input_type -> pilab.cloud.frontend.v1.CreateRoleRequest
-	12, // 27: pilab.cloud.frontend.v1.ManagementService.GetRole:input_type -> pilab.cloud.frontend.v1.GetRoleRequest
-	13, // 28: pilab.cloud.frontend.v1.ManagementService.GetRoleByName:input_type -> pilab.cloud.frontend.v1.GetRoleByNameRequest
-	14, // 29: pilab.cloud.frontend.v1.ManagementService.UpdateRole:input_type -> pilab.cloud.frontend.v1.UpdateRoleRequest
-	15, // 30: pilab.cloud.frontend.v1.ManagementService.DeleteRole:input_type -> pilab.cloud.frontend.v1.DeleteRoleRequest
-	16, // 31: pilab.cloud.frontend.v1.ManagementService.SearchRoles:input_type -> pilab.cloud.frontend.v1.SearchRolesRequest
-	21, // 32: pilab.cloud.frontend.v1.ManagementService.AddRoleInheritance:input_type -> pilab.cloud.frontend.v1.AddRoleInheritanceRequest
-	22, // 33: pilab.cloud.frontend.v1.ManagementService.RemoveRoleInheritance:input_type -> pilab.cloud.frontend.v1.RemoveRoleInheritanceRequest
-	23, // 34: pilab.cloud.frontend.v1.ManagementService.GetParentRoles:input_type -> pilab.cloud.frontend.v1.GetParentRolesRequest
-	25, // 35: pilab.cloud.frontend.v1.ManagementService.GetChildRoles:input_type -> pilab.cloud.frontend.v1.GetChildRolesRequest
-	27, // 36: pilab.cloud.frontend.v1.ManagementService.GetAllParentRoles:input_type -> pilab.cloud.frontend.v1.GetAllParentRolesRequest
-	29, // 37: pilab.cloud.frontend.v1.ManagementService.GetAllChildRoles:input_type -> pilab.cloud.frontend.v1.GetAllChildRolesRequest
-	31, // 38: pilab.cloud.frontend.v1.ManagementService.CreateRoleGroup:input_type -> pilab.cloud.frontend.v1.CreateRoleGroupRequest
-	32, // 39: pilab.cloud.frontend.v1.ManagementService.GetRoleGroup:input_type -> pilab.cloud.frontend.v1.GetRoleGroupRequest
-	33, // 40: pilab.cloud.frontend.v1.ManagementService.GetRoleGroupByName:input_type -> pilab.cloud.frontend.v1.GetRoleGroupByNameRequest
-	34, // 41: pilab.cloud.frontend.v1.ManagementService.UpdateRoleGroup:input_type -> pilab.cloud.frontend.v1.UpdateRoleGroupRequest
-	35, // 42: pilab.cloud.frontend.v1.ManagementService.DeleteRoleGroup:input_type -> pilab.cloud.frontend.v1.DeleteRoleGroupRequest
-	36, // 43: pilab.cloud.frontend.v1.ManagementService.SearchRoleGroups:input_type -> pilab.cloud.frontend.v1.SearchRoleGroupsRequest
-	40, // 44: pilab.cloud.frontend.v1.ManagementService.AddUserToRoleGroup:input_type -> pilab.cloud.frontend.v1.AddUserToRoleGroupRequest
-	41, // 45: pilab.cloud.frontend.v1.ManagementService.RemoveUserFromRoleGroup:input_type -> pilab.cloud.frontend.v1.RemoveUserFromRoleGroupRequest
-	42, // 46: pilab.cloud.frontend.v1.ManagementService.GetRoleGroupsForUser:input_type -> pilab.cloud.frontend.v1.GetRoleGroupsForUserRequest
-	44, // 47: pilab.cloud.frontend.v1.ManagementService.GetUsersInRoleGroup:input_type -> pilab.cloud.frontend.v1.GetUsersInRoleGroupRequest
-	46, // 48: pilab.cloud.frontend.v1.ManagementService.AssignRoleToUser:input_type -> pilab.cloud.frontend.v1.AssignRoleToUserRequest
-	47, // 49: pilab.cloud.frontend.v1.ManagementService.UnassignRoleFromUser:input_type -> pilab.cloud.frontend.v1.UnassignRoleFromUserRequest
-	48, // 50: pilab.cloud.frontend.v1.ManagementService.GetRolesForUser:input_type -> pilab.cloud.frontend.v1.GetRolesForUserRequest
-	50, // 51: pilab.cloud.frontend.v1.ManagementService.GetPermissionsForRole:input_type -> pilab.cloud.frontend.v1.GetPermissionsForRoleRequest
-	9,  // 52: pilab.cloud.frontend.v1.ManagementService.CreateUser:output_type -> pilab.cloud.frontend.v1.User
-	9,  // 53: pilab.cloud.frontend.v1.ManagementService.GetUser:output_type -> pilab.cloud.frontend.v1.User
-	9,  // 54: pilab.cloud.frontend.v1.ManagementService.GetUserByUsername:output_type -> pilab.cloud.frontend.v1.User
-	9,  // 55: pilab.cloud.frontend.v1.ManagementService.GetUserByEmail:output_type -> pilab.cloud.frontend.v1.User
-	9,  // 56: pilab.cloud.frontend.v1.ManagementService.UpdateUser:output_type -> pilab.cloud.frontend.v1.User
-	52, // 57: pilab.cloud.frontend.v1.ManagementService.DeleteUser:output_type -> google.protobuf.Empty
-	7,  // 58: pilab.cloud.frontend.v1.ManagementService.SearchUsers:output_type -> pilab.cloud.frontend.v1.SearchUsersResponse
-	52, // 59: pilab.cloud.frontend.v1.ManagementService.ChangeUserPassword:output_type -> google.protobuf.Empty
-	18, // 60: pilab.cloud.frontend.v1.ManagementService.CreateRole:output_type -> pilab.cloud.frontend.v1.Role
-	18, // 61: pilab.cloud.frontend.v1.ManagementService.GetRole:output_type -> pilab.cloud.frontend.v1.Role
-	18, // 62: pilab.cloud.frontend.v1.ManagementService.GetRoleByName:output_type -> pilab.cloud.frontend.v1.Role
-	18, // 63: pilab.cloud.frontend.v1.ManagementService.UpdateRole:output_type -> pilab.cloud.frontend.v1.Role
-	52, // 64: pilab.cloud.frontend.v1.ManagementService.DeleteRole:output_type -> google.protobuf.Empty
-	17, // 65: pilab.cloud.frontend.v1.ManagementService.SearchRoles:output_type -> pilab.cloud.frontend.v1.SearchRolesResponse
-	52, // 66: pilab.cloud.frontend.v1.ManagementService.AddRoleInheritance:output_type -> google.protobuf.Empty
-	52, // 67: pilab.cloud.frontend.v1.ManagementService.RemoveRoleInheritance:output_type -> google.protobuf.Empty
-	24, // 68: pilab.cloud.frontend.v1.ManagementService.GetParentRoles:output_type -> pilab.cloud.frontend.v1.GetParentRolesResponse
-	26, // 69: pilab.cloud.frontend.v1.ManagementService.GetChildRoles:output_type -> pilab.cloud.frontend.v1.GetChildRolesResponse
-	28, // 70: pilab.cloud.frontend.v1.ManagementService.GetAllParentRoles:output_type -> pilab.cloud.frontend.v1.GetAllParentRolesResponse
-	30, // 71: pilab.cloud.frontend.v1.ManagementService.GetAllChildRoles:output_type -> pilab.cloud.frontend.v1.GetAllChildRolesResponse
-	38, // 72: pilab.cloud.frontend.v1.ManagementService.CreateRoleGroup:output_type -> pilab.cloud.frontend.v1.RoleGroup
-	38, // 73: pilab.cloud.frontend.v1.ManagementService.GetRoleGroup:output_type -> pilab.cloud.frontend.v1.RoleGroup
-	38, // 74: pilab.cloud.frontend.v1.ManagementService.GetRoleGroupByName:output_type -> pilab.cloud.frontend.v1.RoleGroup
-	38, // 75: pilab.cloud.frontend.v1.ManagementService.UpdateRoleGroup:output_type -> pilab.cloud.frontend.v1.RoleGroup
-	52, // 76: pilab.cloud.frontend.v1.ManagementService.DeleteRoleGroup:output_type -> google.protobuf.Empty
-	37, // 77: pilab.cloud.frontend.v1.ManagementService.SearchRoleGroups:output_type -> pilab.cloud.frontend.v1.SearchRoleGroupsResponse
-	52, // 78: pilab.cloud.frontend.v1.ManagementService.AddUserToRoleGroup:output_type -> google.protobuf.Empty
-	52, // 79: pilab.cloud.frontend.v1.ManagementService.RemoveUserFromRoleGroup:output_type -> google.protobuf.Empty
-	43, // 80: pilab.cloud.frontend.v1.ManagementService.GetRoleGroupsForUser:output_type -> pilab.cloud.frontend.v1.GetRoleGroupsForUserResponse
-	45, // 81: pilab.cloud.frontend.v1.ManagementService.GetUsersInRoleGroup:output_type -> pilab.cloud.frontend.v1.GetUsersInRoleGroupResponse
-	52, // 82: pilab.cloud.frontend.v1.ManagementService.AssignRoleToUser:output_type -> google.protobuf.Empty
-	52, // 83: pilab.cloud.frontend.v1.ManagementService.UnassignRoleFromUser:output_type -> google.protobuf.Empty
-	49, // 84: pilab.cloud.frontend.v1.ManagementService.GetRolesForUser:output_type -> pilab.cloud.frontend.v1.GetRolesForUserResponse
-	51, // 85: pilab.cloud.frontend.v1.ManagementService.GetPermissionsForRole:output_type -> pilab.cloud.frontend.v1.GetPermissionsForRoleResponse
+	10, // 0: pilab.frontend.v1.SearchUsersRequest.filter:type_name -> pilab.frontend.v1.UserFilter
+	9,  // 1: pilab.frontend.v1.SearchUsersResponse.users:type_name -> pilab.frontend.v1.User
+	20, // 2: pilab.frontend.v1.CreateRoleRequest.permissions:type_name -> pilab.frontend.v1.Permission
+	20, // 3: pilab.frontend.v1.UpdateRoleRequest.permissions:type_name -> pilab.frontend.v1.Permission
+	19, // 4: pilab.frontend.v1.SearchRolesRequest.filter:type_name -> pilab.frontend.v1.RoleFilter
+	18, // 5: pilab.frontend.v1.SearchRolesResponse.roles:type_name -> pilab.frontend.v1.Role
+	20, // 6: pilab.frontend.v1.Role.permissions:type_name -> pilab.frontend.v1.Permission
+	20, // 7: pilab.frontend.v1.RoleFilter.permissions:type_name -> pilab.frontend.v1.Permission
+	18, // 8: pilab.frontend.v1.GetParentRolesResponse.roles:type_name -> pilab.frontend.v1.Role
+	18, // 9: pilab.frontend.v1.GetChildRolesResponse.roles:type_name -> pilab.frontend.v1.Role
+	18, // 10: pilab.frontend.v1.GetAllParentRolesResponse.roles:type_name -> pilab.frontend.v1.Role
+	18, // 11: pilab.frontend.v1.GetAllChildRolesResponse.roles:type_name -> pilab.frontend.v1.Role
+	39, // 12: pilab.frontend.v1.SearchRoleGroupsRequest.filter:type_name -> pilab.frontend.v1.RoleGroupFilter
+	38, // 13: pilab.frontend.v1.SearchRoleGroupsResponse.role_groups:type_name -> pilab.frontend.v1.RoleGroup
+	38, // 14: pilab.frontend.v1.GetRoleGroupsForUserResponse.role_groups:type_name -> pilab.frontend.v1.RoleGroup
+	9,  // 15: pilab.frontend.v1.GetUsersInRoleGroupResponse.users:type_name -> pilab.frontend.v1.User
+	18, // 16: pilab.frontend.v1.GetRolesForUserResponse.roles:type_name -> pilab.frontend.v1.Role
+	20, // 17: pilab.frontend.v1.GetPermissionsForRoleResponse.permissions:type_name -> pilab.frontend.v1.Permission
+	0,  // 18: pilab.frontend.v1.ManagementService.CreateUser:input_type -> pilab.frontend.v1.CreateUserRequest
+	1,  // 19: pilab.frontend.v1.ManagementService.GetUser:input_type -> pilab.frontend.v1.GetUserRequest
+	2,  // 20: pilab.frontend.v1.ManagementService.GetUserByUsername:input_type -> pilab.frontend.v1.GetUserByUsernameRequest
+	3,  // 21: pilab.frontend.v1.ManagementService.GetUserByEmail:input_type -> pilab.frontend.v1.GetUserByEmailRequest
+	4,  // 22: pilab.frontend.v1.ManagementService.UpdateUser:input_type -> pilab.frontend.v1.UpdateUserRequest
+	5,  // 23: pilab.frontend.v1.ManagementService.DeleteUser:input_type -> pilab.frontend.v1.DeleteUserRequest
+	6,  // 24: pilab.frontend.v1.ManagementService.SearchUsers:input_type -> pilab.frontend.v1.SearchUsersRequest
+	8,  // 25: pilab.frontend.v1.ManagementService.ChangeUserPassword:input_type -> pilab.frontend.v1.ChangeUserPasswordRequest
+	11, // 26: pilab.frontend.v1.ManagementService.CreateRole:input_type -> pilab.frontend.v1.CreateRoleRequest
+	12, // 27: pilab.frontend.v1.ManagementService.GetRole:input_type -> pilab.frontend.v1.GetRoleRequest
+	13, // 28: pilab.frontend.v1.ManagementService.GetRoleByName:input_type -> pilab.frontend.v1.GetRoleByNameRequest
+	14, // 29: pilab.frontend.v1.ManagementService.UpdateRole:input_type -> pilab.frontend.v1.UpdateRoleRequest
+	15, // 30: pilab.frontend.v1.ManagementService.DeleteRole:input_type -> pilab.frontend.v1.DeleteRoleRequest
+	16, // 31: pilab.frontend.v1.ManagementService.SearchRoles:input_type -> pilab.frontend.v1.SearchRolesRequest
+	21, // 32: pilab.frontend.v1.ManagementService.AddRoleInheritance:input_type -> pilab.frontend.v1.AddRoleInheritanceRequest
+	22, // 33: pilab.frontend.v1.ManagementService.RemoveRoleInheritance:input_type -> pilab.frontend.v1.RemoveRoleInheritanceRequest
+	23, // 34: pilab.frontend.v1.ManagementService.GetParentRoles:input_type -> pilab.frontend.v1.GetParentRolesRequest
+	25, // 35: pilab.frontend.v1.ManagementService.GetChildRoles:input_type -> pilab.frontend.v1.GetChildRolesRequest
+	27, // 36: pilab.frontend.v1.ManagementService.GetAllParentRoles:input_type -> pilab.frontend.v1.GetAllParentRolesRequest
+	29, // 37: pilab.frontend.v1.ManagementService.GetAllChildRoles:input_type -> pilab.frontend.v1.GetAllChildRolesRequest
+	31, // 38: pilab.frontend.v1.ManagementService.CreateRoleGroup:input_type -> pilab.frontend.v1.CreateRoleGroupRequest
+	32, // 39: pilab.frontend.v1.ManagementService.GetRoleGroup:input_type -> pilab.frontend.v1.GetRoleGroupRequest
+	33, // 40: pilab.frontend.v1.ManagementService.GetRoleGroupByName:input_type -> pilab.frontend.v1.GetRoleGroupByNameRequest
+	34, // 41: pilab.frontend.v1.ManagementService.UpdateRoleGroup:input_type -> pilab.frontend.v1.UpdateRoleGroupRequest
+	35, // 42: pilab.frontend.v1.ManagementService.DeleteRoleGroup:input_type -> pilab.frontend.v1.DeleteRoleGroupRequest
+	36, // 43: pilab.frontend.v1.ManagementService.SearchRoleGroups:input_type -> pilab.frontend.v1.SearchRoleGroupsRequest
+	40, // 44: pilab.frontend.v1.ManagementService.AddUserToRoleGroup:input_type -> pilab.frontend.v1.AddUserToRoleGroupRequest
+	41, // 45: pilab.frontend.v1.ManagementService.RemoveUserFromRoleGroup:input_type -> pilab.frontend.v1.RemoveUserFromRoleGroupRequest
+	42, // 46: pilab.frontend.v1.ManagementService.GetRoleGroupsForUser:input_type -> pilab.frontend.v1.GetRoleGroupsForUserRequest
+	44, // 47: pilab.frontend.v1.ManagementService.GetUsersInRoleGroup:input_type -> pilab.frontend.v1.GetUsersInRoleGroupRequest
+	46, // 48: pilab.frontend.v1.ManagementService.AssignRoleToUser:input_type -> pilab.frontend.v1.AssignRoleToUserRequest
+	47, // 49: pilab.frontend.v1.ManagementService.UnassignRoleFromUser:input_type -> pilab.frontend.v1.UnassignRoleFromUserRequest
+	48, // 50: pilab.frontend.v1.ManagementService.GetRolesForUser:input_type -> pilab.frontend.v1.GetRolesForUserRequest
+	50, // 51: pilab.frontend.v1.ManagementService.GetPermissionsForRole:input_type -> pilab.frontend.v1.GetPermissionsForRoleRequest
+	9,  // 52: pilab.frontend.v1.ManagementService.CreateUser:output_type -> pilab.frontend.v1.User
+	9,  // 53: pilab.frontend.v1.ManagementService.GetUser:output_type -> pilab.frontend.v1.User
+	9,  // 54: pilab.frontend.v1.ManagementService.GetUserByUsername:output_type -> pilab.frontend.v1.User
+	9,  // 55: pilab.frontend.v1.ManagementService.GetUserByEmail:output_type -> pilab.frontend.v1.User
+	9,  // 56: pilab.frontend.v1.ManagementService.UpdateUser:output_type -> pilab.frontend.v1.User
+	52, // 57: pilab.frontend.v1.ManagementService.DeleteUser:output_type -> google.protobuf.Empty
+	7,  // 58: pilab.frontend.v1.ManagementService.SearchUsers:output_type -> pilab.frontend.v1.SearchUsersResponse
+	52, // 59: pilab.frontend.v1.ManagementService.ChangeUserPassword:output_type -> google.protobuf.Empty
+	18, // 60: pilab.frontend.v1.ManagementService.CreateRole:output_type -> pilab.frontend.v1.Role
+	18, // 61: pilab.frontend.v1.ManagementService.GetRole:output_type -> pilab.frontend.v1.Role
+	18, // 62: pilab.frontend.v1.ManagementService.GetRoleByName:output_type -> pilab.frontend.v1.Role
+	18, // 63: pilab.frontend.v1.ManagementService.UpdateRole:output_type -> pilab.frontend.v1.Role
+	52, // 64: pilab.frontend.v1.ManagementService.DeleteRole:output_type -> google.protobuf.Empty
+	17, // 65: pilab.frontend.v1.ManagementService.SearchRoles:output_type -> pilab.frontend.v1.SearchRolesResponse
+	52, // 66: pilab.frontend.v1.ManagementService.AddRoleInheritance:output_type -> google.protobuf.Empty
+	52, // 67: pilab.frontend.v1.ManagementService.RemoveRoleInheritance:output_type -> google.protobuf.Empty
+	24, // 68: pilab.frontend.v1.ManagementService.GetParentRoles:output_type -> pilab.frontend.v1.GetParentRolesResponse
+	26, // 69: pilab.frontend.v1.ManagementService.GetChildRoles:output_type -> pilab.frontend.v1.GetChildRolesResponse
+	28, // 70: pilab.frontend.v1.ManagementService.GetAllParentRoles:output_type -> pilab.frontend.v1.GetAllParentRolesResponse
+	30, // 71: pilab.frontend.v1.ManagementService.GetAllChildRoles:output_type -> pilab.frontend.v1.GetAllChildRolesResponse
+	38, // 72: pilab.frontend.v1.ManagementService.CreateRoleGroup:output_type -> pilab.frontend.v1.RoleGroup
+	38, // 73: pilab.frontend.v1.ManagementService.GetRoleGroup:output_type -> pilab.frontend.v1.RoleGroup
+	38, // 74: pilab.frontend.v1.ManagementService.GetRoleGroupByName:output_type -> pilab.frontend.v1.RoleGroup
+	38, // 75: pilab.frontend.v1.ManagementService.UpdateRoleGroup:output_type -> pilab.frontend.v1.RoleGroup
+	52, // 76: pilab.frontend.v1.ManagementService.DeleteRoleGroup:output_type -> google.protobuf.Empty
+	37, // 77: pilab.frontend.v1.ManagementService.SearchRoleGroups:output_type -> pilab.frontend.v1.SearchRoleGroupsResponse
+	52, // 78: pilab.frontend.v1.ManagementService.AddUserToRoleGroup:output_type -> google.protobuf.Empty
+	52, // 79: pilab.frontend.v1.ManagementService.RemoveUserFromRoleGroup:output_type -> google.protobuf.Empty
+	43, // 80: pilab.frontend.v1.ManagementService.GetRoleGroupsForUser:output_type -> pilab.frontend.v1.GetRoleGroupsForUserResponse
+	45, // 81: pilab.frontend.v1.ManagementService.GetUsersInRoleGroup:output_type -> pilab.frontend.v1.GetUsersInRoleGroupResponse
+	52, // 82: pilab.frontend.v1.ManagementService.AssignRoleToUser:output_type -> google.protobuf.Empty
+	52, // 83: pilab.frontend.v1.ManagementService.UnassignRoleFromUser:output_type -> google.protobuf.Empty
+	49, // 84: pilab.frontend.v1.ManagementService.GetRolesForUser:output_type -> pilab.frontend.v1.GetRolesForUserResponse
+	51, // 85: pilab.frontend.v1.ManagementService.GetPermissionsForRole:output_type -> pilab.frontend.v1.GetPermissionsForRoleResponse
 	52, // [52:86] is the sub-list for method output_type
 	18, // [18:52] is the sub-list for method input_type
 	18, // [18:18] is the sub-list for extension type_name

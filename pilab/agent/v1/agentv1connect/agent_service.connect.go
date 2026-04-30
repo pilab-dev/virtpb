@@ -51,7 +51,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// AgentServiceName is the fully-qualified name of the AgentService service.
-	AgentServiceName = "pilab.cloud.agent.v1.AgentService"
+	AgentServiceName = "pilab.agent.v1.AgentService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -63,41 +63,45 @@ const (
 // period.
 const (
 	// AgentServiceVmMigrateProcedure is the fully-qualified name of the AgentService's VmMigrate RPC.
-	AgentServiceVmMigrateProcedure = "/pilab.cloud.agent.v1.AgentService/VmMigrate"
+	AgentServiceVmMigrateProcedure = "/pilab.agent.v1.AgentService/VmMigrate"
 	// AgentServiceVmIpListProcedure is the fully-qualified name of the AgentService's VmIpList RPC.
-	AgentServiceVmIpListProcedure = "/pilab.cloud.agent.v1.AgentService/VmIpList"
+	AgentServiceVmIpListProcedure = "/pilab.agent.v1.AgentService/VmIpList"
 	// AgentServiceVmChangeUserPasswordProcedure is the fully-qualified name of the AgentService's
 	// VmChangeUserPassword RPC.
-	AgentServiceVmChangeUserPasswordProcedure = "/pilab.cloud.agent.v1.AgentService/VmChangeUserPassword"
+	AgentServiceVmChangeUserPasswordProcedure = "/pilab.agent.v1.AgentService/VmChangeUserPassword"
 	// AgentServiceVmBackupSystemVolumeProcedure is the fully-qualified name of the AgentService's
 	// VmBackupSystemVolume RPC.
-	AgentServiceVmBackupSystemVolumeProcedure = "/pilab.cloud.agent.v1.AgentService/VmBackupSystemVolume"
+	AgentServiceVmBackupSystemVolumeProcedure = "/pilab.agent.v1.AgentService/VmBackupSystemVolume"
 	// AgentServiceVmRestoreSystemVolumeProcedure is the fully-qualified name of the AgentService's
 	// VmRestoreSystemVolume RPC.
-	AgentServiceVmRestoreSystemVolumeProcedure = "/pilab.cloud.agent.v1.AgentService/VmRestoreSystemVolume"
+	AgentServiceVmRestoreSystemVolumeProcedure = "/pilab.agent.v1.AgentService/VmRestoreSystemVolume"
 	// AgentServiceVmAttachCloudInitProcedure is the fully-qualified name of the AgentService's
 	// VmAttachCloudInit RPC.
-	AgentServiceVmAttachCloudInitProcedure = "/pilab.cloud.agent.v1.AgentService/VmAttachCloudInit"
+	AgentServiceVmAttachCloudInitProcedure = "/pilab.agent.v1.AgentService/VmAttachCloudInit"
 	// AgentServiceVmAttachNetworkInterfaceProcedure is the fully-qualified name of the AgentService's
 	// VmAttachNetworkInterface RPC.
-	AgentServiceVmAttachNetworkInterfaceProcedure = "/pilab.cloud.agent.v1.AgentService/VmAttachNetworkInterface"
+	AgentServiceVmAttachNetworkInterfaceProcedure = "/pilab.agent.v1.AgentService/VmAttachNetworkInterface"
 	// AgentServiceVmDetachNetworkInterfaceProcedure is the fully-qualified name of the AgentService's
 	// VmDetachNetworkInterface RPC.
-	AgentServiceVmDetachNetworkInterfaceProcedure = "/pilab.cloud.agent.v1.AgentService/VmDetachNetworkInterface"
+	AgentServiceVmDetachNetworkInterfaceProcedure = "/pilab.agent.v1.AgentService/VmDetachNetworkInterface"
 	// AgentServiceStreamProcedure is the fully-qualified name of the AgentService's Stream RPC.
-	AgentServiceStreamProcedure = "/pilab.cloud.agent.v1.AgentService/Stream"
+	AgentServiceStreamProcedure = "/pilab.agent.v1.AgentService/Stream"
 	// AgentServiceUpdateConfigProcedure is the fully-qualified name of the AgentService's UpdateConfig
 	// RPC.
-	AgentServiceUpdateConfigProcedure = "/pilab.cloud.agent.v1.AgentService/UpdateConfig"
+	AgentServiceUpdateConfigProcedure = "/pilab.agent.v1.AgentService/UpdateConfig"
 	// AgentServiceGetHardwareHealthProcedure is the fully-qualified name of the AgentService's
 	// GetHardwareHealth RPC.
-	AgentServiceGetHardwareHealthProcedure = "/pilab.cloud.agent.v1.AgentService/GetHardwareHealth"
+	AgentServiceGetHardwareHealthProcedure = "/pilab.agent.v1.AgentService/GetHardwareHealth"
 	// AgentServiceGetSensorDataProcedure is the fully-qualified name of the AgentService's
 	// GetSensorData RPC.
-	AgentServiceGetSensorDataProcedure = "/pilab.cloud.agent.v1.AgentService/GetSensorData"
+	AgentServiceGetSensorDataProcedure = "/pilab.agent.v1.AgentService/GetSensorData"
+	// AgentServiceControlProcedure is the fully-qualified name of the AgentService's Control RPC.
+	AgentServiceControlProcedure = "/pilab.agent.v1.AgentService/Control"
+	// AgentServiceStatusProcedure is the fully-qualified name of the AgentService's Status RPC.
+	AgentServiceStatusProcedure = "/pilab.agent.v1.AgentService/Status"
 )
 
-// AgentServiceClient is a client for the pilab.cloud.agent.v1.AgentService service.
+// AgentServiceClient is a client for the pilab.agent.v1.AgentService service.
 type AgentServiceClient interface {
 	// VmMigrate initiates a migration of a virtual machine.
 	VmMigrate(context.Context, *connect.Request[v1.VmMigrateRequest]) (*connect.Response[v1.VmMigrateResponse], error)
@@ -121,9 +125,13 @@ type AgentServiceClient interface {
 	// Hardware monitoring
 	GetHardwareHealth(context.Context, *connect.Request[v1.GetHardwareHealthRequest]) (*connect.Response[v1.GetHardwareHealthResponse], error)
 	GetSensorData(context.Context, *connect.Request[v1.GetSensorDataRequest]) (*connect.Response[v1.GetSensorDataResponse], error)
+	// Control plane
+	Control(context.Context, *connect.Request[v1.ControlRequest]) (*connect.Response[v1.ControlResponse], error)
+	// Status plane
+	Status(context.Context, *connect.Request[v1.StatusRequest]) (*connect.Response[v1.StatusResponse], error)
 }
 
-// NewAgentServiceClient constructs a client for the pilab.cloud.agent.v1.AgentService service. By
+// NewAgentServiceClient constructs a client for the pilab.agent.v1.AgentService service. By
 // default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
 // and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -206,6 +214,18 @@ func NewAgentServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(agentServiceMethods.ByName("GetSensorData")),
 			connect.WithClientOptions(opts...),
 		),
+		control: connect.NewClient[v1.ControlRequest, v1.ControlResponse](
+			httpClient,
+			baseURL+AgentServiceControlProcedure,
+			connect.WithSchema(agentServiceMethods.ByName("Control")),
+			connect.WithClientOptions(opts...),
+		),
+		status: connect.NewClient[v1.StatusRequest, v1.StatusResponse](
+			httpClient,
+			baseURL+AgentServiceStatusProcedure,
+			connect.WithSchema(agentServiceMethods.ByName("Status")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -223,69 +243,81 @@ type agentServiceClient struct {
 	updateConfig             *connect.Client[v1.UpdateConfigRequest, v1.UpdateConfigResponse]
 	getHardwareHealth        *connect.Client[v1.GetHardwareHealthRequest, v1.GetHardwareHealthResponse]
 	getSensorData            *connect.Client[v1.GetSensorDataRequest, v1.GetSensorDataResponse]
+	control                  *connect.Client[v1.ControlRequest, v1.ControlResponse]
+	status                   *connect.Client[v1.StatusRequest, v1.StatusResponse]
 }
 
-// VmMigrate calls pilab.cloud.agent.v1.AgentService.VmMigrate.
+// VmMigrate calls pilab.agent.v1.AgentService.VmMigrate.
 func (c *agentServiceClient) VmMigrate(ctx context.Context, req *connect.Request[v1.VmMigrateRequest]) (*connect.Response[v1.VmMigrateResponse], error) {
 	return c.vmMigrate.CallUnary(ctx, req)
 }
 
-// VmIpList calls pilab.cloud.agent.v1.AgentService.VmIpList.
+// VmIpList calls pilab.agent.v1.AgentService.VmIpList.
 func (c *agentServiceClient) VmIpList(ctx context.Context, req *connect.Request[v1.VmIpListRequest]) (*connect.Response[v1.VmIpListResponse], error) {
 	return c.vmIpList.CallUnary(ctx, req)
 }
 
-// VmChangeUserPassword calls pilab.cloud.agent.v1.AgentService.VmChangeUserPassword.
+// VmChangeUserPassword calls pilab.agent.v1.AgentService.VmChangeUserPassword.
 func (c *agentServiceClient) VmChangeUserPassword(ctx context.Context, req *connect.Request[v1.VmChangeUserPasswordRequest]) (*connect.Response[v1.VmChangeUserPasswordResponse], error) {
 	return c.vmChangeUserPassword.CallUnary(ctx, req)
 }
 
-// VmBackupSystemVolume calls pilab.cloud.agent.v1.AgentService.VmBackupSystemVolume.
+// VmBackupSystemVolume calls pilab.agent.v1.AgentService.VmBackupSystemVolume.
 func (c *agentServiceClient) VmBackupSystemVolume(ctx context.Context, req *connect.Request[v1.VmBackupSystemVolumeRequest]) (*connect.Response[v1.VmBackupSystemVolumeResponse], error) {
 	return c.vmBackupSystemVolume.CallUnary(ctx, req)
 }
 
-// VmRestoreSystemVolume calls pilab.cloud.agent.v1.AgentService.VmRestoreSystemVolume.
+// VmRestoreSystemVolume calls pilab.agent.v1.AgentService.VmRestoreSystemVolume.
 func (c *agentServiceClient) VmRestoreSystemVolume(ctx context.Context, req *connect.Request[v1.VmRestoreSystemVolumeRequest]) (*connect.Response[v1.VmRestoreSystemVolumeResponse], error) {
 	return c.vmRestoreSystemVolume.CallUnary(ctx, req)
 }
 
-// VmAttachCloudInit calls pilab.cloud.agent.v1.AgentService.VmAttachCloudInit.
+// VmAttachCloudInit calls pilab.agent.v1.AgentService.VmAttachCloudInit.
 func (c *agentServiceClient) VmAttachCloudInit(ctx context.Context, req *connect.Request[v1.VmAttachCloudInitRequest]) (*connect.Response[v1.VmAttachCloudInitResponse], error) {
 	return c.vmAttachCloudInit.CallUnary(ctx, req)
 }
 
-// VmAttachNetworkInterface calls pilab.cloud.agent.v1.AgentService.VmAttachNetworkInterface.
+// VmAttachNetworkInterface calls pilab.agent.v1.AgentService.VmAttachNetworkInterface.
 func (c *agentServiceClient) VmAttachNetworkInterface(ctx context.Context, req *connect.Request[v1.VmAttachNetworkInterfaceRequest]) (*connect.Response[v1.VmAttachNetworkInterfaceResponse], error) {
 	return c.vmAttachNetworkInterface.CallUnary(ctx, req)
 }
 
-// VmDetachNetworkInterface calls pilab.cloud.agent.v1.AgentService.VmDetachNetworkInterface.
+// VmDetachNetworkInterface calls pilab.agent.v1.AgentService.VmDetachNetworkInterface.
 func (c *agentServiceClient) VmDetachNetworkInterface(ctx context.Context, req *connect.Request[v1.VmDetachNetworkInterfaceRequest]) (*connect.Response[v1.VmDetachNetworkInterfaceResponse], error) {
 	return c.vmDetachNetworkInterface.CallUnary(ctx, req)
 }
 
-// Stream calls pilab.cloud.agent.v1.AgentService.Stream.
+// Stream calls pilab.agent.v1.AgentService.Stream.
 func (c *agentServiceClient) Stream(ctx context.Context) *connect.BidiStreamForClient[v1.StreamRequest, v1.StreamResponse] {
 	return c.stream.CallBidiStream(ctx)
 }
 
-// UpdateConfig calls pilab.cloud.agent.v1.AgentService.UpdateConfig.
+// UpdateConfig calls pilab.agent.v1.AgentService.UpdateConfig.
 func (c *agentServiceClient) UpdateConfig(ctx context.Context, req *connect.Request[v1.UpdateConfigRequest]) (*connect.Response[v1.UpdateConfigResponse], error) {
 	return c.updateConfig.CallUnary(ctx, req)
 }
 
-// GetHardwareHealth calls pilab.cloud.agent.v1.AgentService.GetHardwareHealth.
+// GetHardwareHealth calls pilab.agent.v1.AgentService.GetHardwareHealth.
 func (c *agentServiceClient) GetHardwareHealth(ctx context.Context, req *connect.Request[v1.GetHardwareHealthRequest]) (*connect.Response[v1.GetHardwareHealthResponse], error) {
 	return c.getHardwareHealth.CallUnary(ctx, req)
 }
 
-// GetSensorData calls pilab.cloud.agent.v1.AgentService.GetSensorData.
+// GetSensorData calls pilab.agent.v1.AgentService.GetSensorData.
 func (c *agentServiceClient) GetSensorData(ctx context.Context, req *connect.Request[v1.GetSensorDataRequest]) (*connect.Response[v1.GetSensorDataResponse], error) {
 	return c.getSensorData.CallUnary(ctx, req)
 }
 
-// AgentServiceHandler is an implementation of the pilab.cloud.agent.v1.AgentService service.
+// Control calls pilab.agent.v1.AgentService.Control.
+func (c *agentServiceClient) Control(ctx context.Context, req *connect.Request[v1.ControlRequest]) (*connect.Response[v1.ControlResponse], error) {
+	return c.control.CallUnary(ctx, req)
+}
+
+// Status calls pilab.agent.v1.AgentService.Status.
+func (c *agentServiceClient) Status(ctx context.Context, req *connect.Request[v1.StatusRequest]) (*connect.Response[v1.StatusResponse], error) {
+	return c.status.CallUnary(ctx, req)
+}
+
+// AgentServiceHandler is an implementation of the pilab.agent.v1.AgentService service.
 type AgentServiceHandler interface {
 	// VmMigrate initiates a migration of a virtual machine.
 	VmMigrate(context.Context, *connect.Request[v1.VmMigrateRequest]) (*connect.Response[v1.VmMigrateResponse], error)
@@ -309,6 +341,10 @@ type AgentServiceHandler interface {
 	// Hardware monitoring
 	GetHardwareHealth(context.Context, *connect.Request[v1.GetHardwareHealthRequest]) (*connect.Response[v1.GetHardwareHealthResponse], error)
 	GetSensorData(context.Context, *connect.Request[v1.GetSensorDataRequest]) (*connect.Response[v1.GetSensorDataResponse], error)
+	// Control plane
+	Control(context.Context, *connect.Request[v1.ControlRequest]) (*connect.Response[v1.ControlResponse], error)
+	// Status plane
+	Status(context.Context, *connect.Request[v1.StatusRequest]) (*connect.Response[v1.StatusResponse], error)
 }
 
 // NewAgentServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -390,7 +426,19 @@ func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(agentServiceMethods.ByName("GetSensorData")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.agent.v1.AgentService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	agentServiceControlHandler := connect.NewUnaryHandler(
+		AgentServiceControlProcedure,
+		svc.Control,
+		connect.WithSchema(agentServiceMethods.ByName("Control")),
+		connect.WithHandlerOptions(opts...),
+	)
+	agentServiceStatusHandler := connect.NewUnaryHandler(
+		AgentServiceStatusProcedure,
+		svc.Status,
+		connect.WithSchema(agentServiceMethods.ByName("Status")),
+		connect.WithHandlerOptions(opts...),
+	)
+	return "/pilab.agent.v1.AgentService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AgentServiceVmMigrateProcedure:
 			agentServiceVmMigrateHandler.ServeHTTP(w, r)
@@ -416,6 +464,10 @@ func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOpti
 			agentServiceGetHardwareHealthHandler.ServeHTTP(w, r)
 		case AgentServiceGetSensorDataProcedure:
 			agentServiceGetSensorDataHandler.ServeHTTP(w, r)
+		case AgentServiceControlProcedure:
+			agentServiceControlHandler.ServeHTTP(w, r)
+		case AgentServiceStatusProcedure:
+			agentServiceStatusHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -426,49 +478,57 @@ func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOpti
 type UnimplementedAgentServiceHandler struct{}
 
 func (UnimplementedAgentServiceHandler) VmMigrate(context.Context, *connect.Request[v1.VmMigrateRequest]) (*connect.Response[v1.VmMigrateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.VmMigrate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.VmMigrate is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) VmIpList(context.Context, *connect.Request[v1.VmIpListRequest]) (*connect.Response[v1.VmIpListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.VmIpList is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.VmIpList is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) VmChangeUserPassword(context.Context, *connect.Request[v1.VmChangeUserPasswordRequest]) (*connect.Response[v1.VmChangeUserPasswordResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.VmChangeUserPassword is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.VmChangeUserPassword is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) VmBackupSystemVolume(context.Context, *connect.Request[v1.VmBackupSystemVolumeRequest]) (*connect.Response[v1.VmBackupSystemVolumeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.VmBackupSystemVolume is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.VmBackupSystemVolume is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) VmRestoreSystemVolume(context.Context, *connect.Request[v1.VmRestoreSystemVolumeRequest]) (*connect.Response[v1.VmRestoreSystemVolumeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.VmRestoreSystemVolume is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.VmRestoreSystemVolume is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) VmAttachCloudInit(context.Context, *connect.Request[v1.VmAttachCloudInitRequest]) (*connect.Response[v1.VmAttachCloudInitResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.VmAttachCloudInit is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.VmAttachCloudInit is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) VmAttachNetworkInterface(context.Context, *connect.Request[v1.VmAttachNetworkInterfaceRequest]) (*connect.Response[v1.VmAttachNetworkInterfaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.VmAttachNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.VmAttachNetworkInterface is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) VmDetachNetworkInterface(context.Context, *connect.Request[v1.VmDetachNetworkInterfaceRequest]) (*connect.Response[v1.VmDetachNetworkInterfaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.VmDetachNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.VmDetachNetworkInterface is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) Stream(context.Context, *connect.BidiStream[v1.StreamRequest, v1.StreamResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.Stream is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.Stream is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) UpdateConfig(context.Context, *connect.Request[v1.UpdateConfigRequest]) (*connect.Response[v1.UpdateConfigResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.UpdateConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.UpdateConfig is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetHardwareHealth(context.Context, *connect.Request[v1.GetHardwareHealthRequest]) (*connect.Response[v1.GetHardwareHealthResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.GetHardwareHealth is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.GetHardwareHealth is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) GetSensorData(context.Context, *connect.Request[v1.GetSensorDataRequest]) (*connect.Response[v1.GetSensorDataResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.AgentService.GetSensorData is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.GetSensorData is not implemented"))
+}
+
+func (UnimplementedAgentServiceHandler) Control(context.Context, *connect.Request[v1.ControlRequest]) (*connect.Response[v1.ControlResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.Control is not implemented"))
+}
+
+func (UnimplementedAgentServiceHandler) Status(context.Context, *connect.Request[v1.StatusRequest]) (*connect.Response[v1.StatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.AgentService.Status is not implemented"))
 }

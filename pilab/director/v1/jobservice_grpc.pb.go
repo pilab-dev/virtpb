@@ -36,8 +36,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	JobService_UpdateJob_FullMethodName = "/pilab.cloud.director.v1.JobService/UpdateJob"
-	JobService_Subscribe_FullMethodName = "/pilab.cloud.director.v1.JobService/Subscribe"
+	JobService_UpdateJob_FullMethodName = "/pilab.director.v1.JobService/UpdateJob"
+	JobService_Subscribe_FullMethodName = "/pilab.director.v1.JobService/Subscribe"
 )
 
 // JobServiceClient is the client API for JobService service.
@@ -165,7 +165,7 @@ type JobService_SubscribeServer = grpc.ServerStreamingServer[SubscribeResponse]
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var JobService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.director.v1.JobService",
+	ServiceName: "pilab.director.v1.JobService",
 	HandlerType: (*JobServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

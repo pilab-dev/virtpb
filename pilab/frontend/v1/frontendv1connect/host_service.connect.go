@@ -41,7 +41,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// HostServiceName is the fully-qualified name of the HostService service.
-	HostServiceName = "pilab.cloud.frontend.v1.HostService"
+	HostServiceName = "pilab.frontend.v1.HostService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -54,60 +54,60 @@ const (
 const (
 	// HostServiceGetHostOverviewProcedure is the fully-qualified name of the HostService's
 	// GetHostOverview RPC.
-	HostServiceGetHostOverviewProcedure = "/pilab.cloud.frontend.v1.HostService/GetHostOverview"
+	HostServiceGetHostOverviewProcedure = "/pilab.frontend.v1.HostService/GetHostOverview"
 	// HostServiceGetMonitoringDataProcedure is the fully-qualified name of the HostService's
 	// GetMonitoringData RPC.
-	HostServiceGetMonitoringDataProcedure = "/pilab.cloud.frontend.v1.HostService/GetMonitoringData"
+	HostServiceGetMonitoringDataProcedure = "/pilab.frontend.v1.HostService/GetMonitoringData"
 	// HostServiceListHostVMsProcedure is the fully-qualified name of the HostService's ListHostVMs RPC.
-	HostServiceListHostVMsProcedure = "/pilab.cloud.frontend.v1.HostService/ListHostVMs"
+	HostServiceListHostVMsProcedure = "/pilab.frontend.v1.HostService/ListHostVMs"
 	// HostServiceGetHostPermissionsProcedure is the fully-qualified name of the HostService's
 	// GetHostPermissions RPC.
-	HostServiceGetHostPermissionsProcedure = "/pilab.cloud.frontend.v1.HostService/GetHostPermissions"
+	HostServiceGetHostPermissionsProcedure = "/pilab.frontend.v1.HostService/GetHostPermissions"
 	// HostServiceListHostDatastoresProcedure is the fully-qualified name of the HostService's
 	// ListHostDatastores RPC.
-	HostServiceListHostDatastoresProcedure = "/pilab.cloud.frontend.v1.HostService/ListHostDatastores"
+	HostServiceListHostDatastoresProcedure = "/pilab.frontend.v1.HostService/ListHostDatastores"
 	// HostServiceMountDatastoreProcedure is the fully-qualified name of the HostService's
 	// MountDatastore RPC.
-	HostServiceMountDatastoreProcedure = "/pilab.cloud.frontend.v1.HostService/MountDatastore"
+	HostServiceMountDatastoreProcedure = "/pilab.frontend.v1.HostService/MountDatastore"
 	// HostServiceUnmountDatastoreProcedure is the fully-qualified name of the HostService's
 	// UnmountDatastore RPC.
-	HostServiceUnmountDatastoreProcedure = "/pilab.cloud.frontend.v1.HostService/UnmountDatastore"
+	HostServiceUnmountDatastoreProcedure = "/pilab.frontend.v1.HostService/UnmountDatastore"
 	// HostServiceGetHostSystemSettingsProcedure is the fully-qualified name of the HostService's
 	// GetHostSystemSettings RPC.
-	HostServiceGetHostSystemSettingsProcedure = "/pilab.cloud.frontend.v1.HostService/GetHostSystemSettings"
+	HostServiceGetHostSystemSettingsProcedure = "/pilab.frontend.v1.HostService/GetHostSystemSettings"
 	// HostServiceUpdateNTPConfigProcedure is the fully-qualified name of the HostService's
 	// UpdateNTPConfig RPC.
-	HostServiceUpdateNTPConfigProcedure = "/pilab.cloud.frontend.v1.HostService/UpdateNTPConfig"
+	HostServiceUpdateNTPConfigProcedure = "/pilab.frontend.v1.HostService/UpdateNTPConfig"
 	// HostServiceUpdateTimezoneProcedure is the fully-qualified name of the HostService's
 	// UpdateTimezone RPC.
-	HostServiceUpdateTimezoneProcedure = "/pilab.cloud.frontend.v1.HostService/UpdateTimezone"
+	HostServiceUpdateTimezoneProcedure = "/pilab.frontend.v1.HostService/UpdateTimezone"
 	// HostServiceUpdateDNSSettingsProcedure is the fully-qualified name of the HostService's
 	// UpdateDNSSettings RPC.
-	HostServiceUpdateDNSSettingsProcedure = "/pilab.cloud.frontend.v1.HostService/UpdateDNSSettings"
+	HostServiceUpdateDNSSettingsProcedure = "/pilab.frontend.v1.HostService/UpdateDNSSettings"
 	// HostServiceUpdateRoutingSettingsProcedure is the fully-qualified name of the HostService's
 	// UpdateRoutingSettings RPC.
-	HostServiceUpdateRoutingSettingsProcedure = "/pilab.cloud.frontend.v1.HostService/UpdateRoutingSettings"
+	HostServiceUpdateRoutingSettingsProcedure = "/pilab.frontend.v1.HostService/UpdateRoutingSettings"
 	// HostServiceGetMaintenanceModeStatusProcedure is the fully-qualified name of the HostService's
 	// GetMaintenanceModeStatus RPC.
-	HostServiceGetMaintenanceModeStatusProcedure = "/pilab.cloud.frontend.v1.HostService/GetMaintenanceModeStatus"
+	HostServiceGetMaintenanceModeStatusProcedure = "/pilab.frontend.v1.HostService/GetMaintenanceModeStatus"
 	// HostServiceEnterMaintenanceModeProcedure is the fully-qualified name of the HostService's
 	// EnterMaintenanceMode RPC.
-	HostServiceEnterMaintenanceModeProcedure = "/pilab.cloud.frontend.v1.HostService/EnterMaintenanceMode"
+	HostServiceEnterMaintenanceModeProcedure = "/pilab.frontend.v1.HostService/EnterMaintenanceMode"
 	// HostServiceExitMaintenanceModeProcedure is the fully-qualified name of the HostService's
 	// ExitMaintenanceMode RPC.
-	HostServiceExitMaintenanceModeProcedure = "/pilab.cloud.frontend.v1.HostService/ExitMaintenanceMode"
+	HostServiceExitMaintenanceModeProcedure = "/pilab.frontend.v1.HostService/ExitMaintenanceMode"
 	// HostServiceListHostNetworkInterfacesProcedure is the fully-qualified name of the HostService's
 	// ListHostNetworkInterfaces RPC.
-	HostServiceListHostNetworkInterfacesProcedure = "/pilab.cloud.frontend.v1.HostService/ListHostNetworkInterfaces"
+	HostServiceListHostNetworkInterfacesProcedure = "/pilab.frontend.v1.HostService/ListHostNetworkInterfaces"
 	// HostServiceEnableNetworkInterfaceProcedure is the fully-qualified name of the HostService's
 	// EnableNetworkInterface RPC.
-	HostServiceEnableNetworkInterfaceProcedure = "/pilab.cloud.frontend.v1.HostService/EnableNetworkInterface"
+	HostServiceEnableNetworkInterfaceProcedure = "/pilab.frontend.v1.HostService/EnableNetworkInterface"
 	// HostServiceDisableNetworkInterfaceProcedure is the fully-qualified name of the HostService's
 	// DisableNetworkInterface RPC.
-	HostServiceDisableNetworkInterfaceProcedure = "/pilab.cloud.frontend.v1.HostService/DisableNetworkInterface"
+	HostServiceDisableNetworkInterfaceProcedure = "/pilab.frontend.v1.HostService/DisableNetworkInterface"
 )
 
-// HostServiceClient is a client for the pilab.cloud.frontend.v1.HostService service.
+// HostServiceClient is a client for the pilab.frontend.v1.HostService service.
 type HostServiceClient interface {
 	// Host Overview
 	GetHostOverview(context.Context, *connect.Request[v1.GetHostOverviewRequest]) (*connect.Response[v1.HostOverview], error)
@@ -137,7 +137,7 @@ type HostServiceClient interface {
 	DisableNetworkInterface(context.Context, *connect.Request[v1.DisableNetworkInterfaceRequest]) (*connect.Response[v1.DisableNetworkInterfaceResponse], error)
 }
 
-// NewHostServiceClient constructs a client for the pilab.cloud.frontend.v1.HostService service. By
+// NewHostServiceClient constructs a client for the pilab.frontend.v1.HostService service. By
 // default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
 // and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -281,97 +281,97 @@ type hostServiceClient struct {
 	disableNetworkInterface   *connect.Client[v1.DisableNetworkInterfaceRequest, v1.DisableNetworkInterfaceResponse]
 }
 
-// GetHostOverview calls pilab.cloud.frontend.v1.HostService.GetHostOverview.
+// GetHostOverview calls pilab.frontend.v1.HostService.GetHostOverview.
 func (c *hostServiceClient) GetHostOverview(ctx context.Context, req *connect.Request[v1.GetHostOverviewRequest]) (*connect.Response[v1.HostOverview], error) {
 	return c.getHostOverview.CallUnary(ctx, req)
 }
 
-// GetMonitoringData calls pilab.cloud.frontend.v1.HostService.GetMonitoringData.
+// GetMonitoringData calls pilab.frontend.v1.HostService.GetMonitoringData.
 func (c *hostServiceClient) GetMonitoringData(ctx context.Context, req *connect.Request[v1.GetMonitoringDataRequest]) (*connect.Response[v1.MonitoringDataResponse], error) {
 	return c.getMonitoringData.CallUnary(ctx, req)
 }
 
-// ListHostVMs calls pilab.cloud.frontend.v1.HostService.ListHostVMs.
+// ListHostVMs calls pilab.frontend.v1.HostService.ListHostVMs.
 func (c *hostServiceClient) ListHostVMs(ctx context.Context, req *connect.Request[v1.ListHostVMsRequest]) (*connect.Response[v1.HostVMsResponse], error) {
 	return c.listHostVMs.CallUnary(ctx, req)
 }
 
-// GetHostPermissions calls pilab.cloud.frontend.v1.HostService.GetHostPermissions.
+// GetHostPermissions calls pilab.frontend.v1.HostService.GetHostPermissions.
 func (c *hostServiceClient) GetHostPermissions(ctx context.Context, req *connect.Request[v1.GetHostPermissionsRequest]) (*connect.Response[v1.HostPermissionsResponse], error) {
 	return c.getHostPermissions.CallUnary(ctx, req)
 }
 
-// ListHostDatastores calls pilab.cloud.frontend.v1.HostService.ListHostDatastores.
+// ListHostDatastores calls pilab.frontend.v1.HostService.ListHostDatastores.
 func (c *hostServiceClient) ListHostDatastores(ctx context.Context, req *connect.Request[v1.ListHostDatastoresRequest]) (*connect.Response[v1.HostDatastoresResponse], error) {
 	return c.listHostDatastores.CallUnary(ctx, req)
 }
 
-// MountDatastore calls pilab.cloud.frontend.v1.HostService.MountDatastore.
+// MountDatastore calls pilab.frontend.v1.HostService.MountDatastore.
 func (c *hostServiceClient) MountDatastore(ctx context.Context, req *connect.Request[v1.MountDatastoreRequest]) (*connect.Response[v1.MountDatastoreResponse], error) {
 	return c.mountDatastore.CallUnary(ctx, req)
 }
 
-// UnmountDatastore calls pilab.cloud.frontend.v1.HostService.UnmountDatastore.
+// UnmountDatastore calls pilab.frontend.v1.HostService.UnmountDatastore.
 func (c *hostServiceClient) UnmountDatastore(ctx context.Context, req *connect.Request[v1.UnmountDatastoreRequest]) (*connect.Response[v1.UnmountDatastoreResponse], error) {
 	return c.unmountDatastore.CallUnary(ctx, req)
 }
 
-// GetHostSystemSettings calls pilab.cloud.frontend.v1.HostService.GetHostSystemSettings.
+// GetHostSystemSettings calls pilab.frontend.v1.HostService.GetHostSystemSettings.
 func (c *hostServiceClient) GetHostSystemSettings(ctx context.Context, req *connect.Request[v1.GetHostSystemSettingsRequest]) (*connect.Response[v1.HostSystemSettingsResponse], error) {
 	return c.getHostSystemSettings.CallUnary(ctx, req)
 }
 
-// UpdateNTPConfig calls pilab.cloud.frontend.v1.HostService.UpdateNTPConfig.
+// UpdateNTPConfig calls pilab.frontend.v1.HostService.UpdateNTPConfig.
 func (c *hostServiceClient) UpdateNTPConfig(ctx context.Context, req *connect.Request[v1.UpdateNTPConfigRequest]) (*connect.Response[v1.UpdateNTPConfigResponse], error) {
 	return c.updateNTPConfig.CallUnary(ctx, req)
 }
 
-// UpdateTimezone calls pilab.cloud.frontend.v1.HostService.UpdateTimezone.
+// UpdateTimezone calls pilab.frontend.v1.HostService.UpdateTimezone.
 func (c *hostServiceClient) UpdateTimezone(ctx context.Context, req *connect.Request[v1.UpdateTimezoneRequest]) (*connect.Response[v1.UpdateTimezoneResponse], error) {
 	return c.updateTimezone.CallUnary(ctx, req)
 }
 
-// UpdateDNSSettings calls pilab.cloud.frontend.v1.HostService.UpdateDNSSettings.
+// UpdateDNSSettings calls pilab.frontend.v1.HostService.UpdateDNSSettings.
 func (c *hostServiceClient) UpdateDNSSettings(ctx context.Context, req *connect.Request[v1.UpdateDNSSettingsRequest]) (*connect.Response[v1.UpdateDNSSettingsResponse], error) {
 	return c.updateDNSSettings.CallUnary(ctx, req)
 }
 
-// UpdateRoutingSettings calls pilab.cloud.frontend.v1.HostService.UpdateRoutingSettings.
+// UpdateRoutingSettings calls pilab.frontend.v1.HostService.UpdateRoutingSettings.
 func (c *hostServiceClient) UpdateRoutingSettings(ctx context.Context, req *connect.Request[v1.UpdateRoutingSettingsRequest]) (*connect.Response[v1.UpdateRoutingSettingsResponse], error) {
 	return c.updateRoutingSettings.CallUnary(ctx, req)
 }
 
-// GetMaintenanceModeStatus calls pilab.cloud.frontend.v1.HostService.GetMaintenanceModeStatus.
+// GetMaintenanceModeStatus calls pilab.frontend.v1.HostService.GetMaintenanceModeStatus.
 func (c *hostServiceClient) GetMaintenanceModeStatus(ctx context.Context, req *connect.Request[v1.GetMaintenanceModeStatusRequest]) (*connect.Response[v1.MaintenanceModeStatusResponse], error) {
 	return c.getMaintenanceModeStatus.CallUnary(ctx, req)
 }
 
-// EnterMaintenanceMode calls pilab.cloud.frontend.v1.HostService.EnterMaintenanceMode.
+// EnterMaintenanceMode calls pilab.frontend.v1.HostService.EnterMaintenanceMode.
 func (c *hostServiceClient) EnterMaintenanceMode(ctx context.Context, req *connect.Request[v1.EnterMaintenanceModeRequest]) (*connect.Response[v1.EnterMaintenanceModeResponse], error) {
 	return c.enterMaintenanceMode.CallUnary(ctx, req)
 }
 
-// ExitMaintenanceMode calls pilab.cloud.frontend.v1.HostService.ExitMaintenanceMode.
+// ExitMaintenanceMode calls pilab.frontend.v1.HostService.ExitMaintenanceMode.
 func (c *hostServiceClient) ExitMaintenanceMode(ctx context.Context, req *connect.Request[v1.ExitMaintenanceModeRequest]) (*connect.Response[v1.ExitMaintenanceModeResponse], error) {
 	return c.exitMaintenanceMode.CallUnary(ctx, req)
 }
 
-// ListHostNetworkInterfaces calls pilab.cloud.frontend.v1.HostService.ListHostNetworkInterfaces.
+// ListHostNetworkInterfaces calls pilab.frontend.v1.HostService.ListHostNetworkInterfaces.
 func (c *hostServiceClient) ListHostNetworkInterfaces(ctx context.Context, req *connect.Request[v1.ListHostNetworkInterfacesRequest]) (*connect.Response[v1.HostNetworkInterfacesResponse], error) {
 	return c.listHostNetworkInterfaces.CallUnary(ctx, req)
 }
 
-// EnableNetworkInterface calls pilab.cloud.frontend.v1.HostService.EnableNetworkInterface.
+// EnableNetworkInterface calls pilab.frontend.v1.HostService.EnableNetworkInterface.
 func (c *hostServiceClient) EnableNetworkInterface(ctx context.Context, req *connect.Request[v1.EnableNetworkInterfaceRequest]) (*connect.Response[v1.EnableNetworkInterfaceResponse], error) {
 	return c.enableNetworkInterface.CallUnary(ctx, req)
 }
 
-// DisableNetworkInterface calls pilab.cloud.frontend.v1.HostService.DisableNetworkInterface.
+// DisableNetworkInterface calls pilab.frontend.v1.HostService.DisableNetworkInterface.
 func (c *hostServiceClient) DisableNetworkInterface(ctx context.Context, req *connect.Request[v1.DisableNetworkInterfaceRequest]) (*connect.Response[v1.DisableNetworkInterfaceResponse], error) {
 	return c.disableNetworkInterface.CallUnary(ctx, req)
 }
 
-// HostServiceHandler is an implementation of the pilab.cloud.frontend.v1.HostService service.
+// HostServiceHandler is an implementation of the pilab.frontend.v1.HostService service.
 type HostServiceHandler interface {
 	// Host Overview
 	GetHostOverview(context.Context, *connect.Request[v1.GetHostOverviewRequest]) (*connect.Response[v1.HostOverview], error)
@@ -516,7 +516,7 @@ func NewHostServiceHandler(svc HostServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(hostServiceMethods.ByName("DisableNetworkInterface")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.frontend.v1.HostService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.frontend.v1.HostService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case HostServiceGetHostOverviewProcedure:
 			hostServiceGetHostOverviewHandler.ServeHTTP(w, r)
@@ -564,73 +564,73 @@ func NewHostServiceHandler(svc HostServiceHandler, opts ...connect.HandlerOption
 type UnimplementedHostServiceHandler struct{}
 
 func (UnimplementedHostServiceHandler) GetHostOverview(context.Context, *connect.Request[v1.GetHostOverviewRequest]) (*connect.Response[v1.HostOverview], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.GetHostOverview is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.GetHostOverview is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) GetMonitoringData(context.Context, *connect.Request[v1.GetMonitoringDataRequest]) (*connect.Response[v1.MonitoringDataResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.GetMonitoringData is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.GetMonitoringData is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) ListHostVMs(context.Context, *connect.Request[v1.ListHostVMsRequest]) (*connect.Response[v1.HostVMsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.ListHostVMs is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.ListHostVMs is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) GetHostPermissions(context.Context, *connect.Request[v1.GetHostPermissionsRequest]) (*connect.Response[v1.HostPermissionsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.GetHostPermissions is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.GetHostPermissions is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) ListHostDatastores(context.Context, *connect.Request[v1.ListHostDatastoresRequest]) (*connect.Response[v1.HostDatastoresResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.ListHostDatastores is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.ListHostDatastores is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) MountDatastore(context.Context, *connect.Request[v1.MountDatastoreRequest]) (*connect.Response[v1.MountDatastoreResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.MountDatastore is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.MountDatastore is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) UnmountDatastore(context.Context, *connect.Request[v1.UnmountDatastoreRequest]) (*connect.Response[v1.UnmountDatastoreResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.UnmountDatastore is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.UnmountDatastore is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) GetHostSystemSettings(context.Context, *connect.Request[v1.GetHostSystemSettingsRequest]) (*connect.Response[v1.HostSystemSettingsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.GetHostSystemSettings is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.GetHostSystemSettings is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) UpdateNTPConfig(context.Context, *connect.Request[v1.UpdateNTPConfigRequest]) (*connect.Response[v1.UpdateNTPConfigResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.UpdateNTPConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.UpdateNTPConfig is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) UpdateTimezone(context.Context, *connect.Request[v1.UpdateTimezoneRequest]) (*connect.Response[v1.UpdateTimezoneResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.UpdateTimezone is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.UpdateTimezone is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) UpdateDNSSettings(context.Context, *connect.Request[v1.UpdateDNSSettingsRequest]) (*connect.Response[v1.UpdateDNSSettingsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.UpdateDNSSettings is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.UpdateDNSSettings is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) UpdateRoutingSettings(context.Context, *connect.Request[v1.UpdateRoutingSettingsRequest]) (*connect.Response[v1.UpdateRoutingSettingsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.UpdateRoutingSettings is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.UpdateRoutingSettings is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) GetMaintenanceModeStatus(context.Context, *connect.Request[v1.GetMaintenanceModeStatusRequest]) (*connect.Response[v1.MaintenanceModeStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.GetMaintenanceModeStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.GetMaintenanceModeStatus is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) EnterMaintenanceMode(context.Context, *connect.Request[v1.EnterMaintenanceModeRequest]) (*connect.Response[v1.EnterMaintenanceModeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.EnterMaintenanceMode is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.EnterMaintenanceMode is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) ExitMaintenanceMode(context.Context, *connect.Request[v1.ExitMaintenanceModeRequest]) (*connect.Response[v1.ExitMaintenanceModeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.ExitMaintenanceMode is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.ExitMaintenanceMode is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) ListHostNetworkInterfaces(context.Context, *connect.Request[v1.ListHostNetworkInterfacesRequest]) (*connect.Response[v1.HostNetworkInterfacesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.ListHostNetworkInterfaces is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.ListHostNetworkInterfaces is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) EnableNetworkInterface(context.Context, *connect.Request[v1.EnableNetworkInterfaceRequest]) (*connect.Response[v1.EnableNetworkInterfaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.EnableNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.EnableNetworkInterface is not implemented"))
 }
 
 func (UnimplementedHostServiceHandler) DisableNetworkInterface(context.Context, *connect.Request[v1.DisableNetworkInterfaceRequest]) (*connect.Response[v1.DisableNetworkInterfaceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.frontend.v1.HostService.DisableNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.frontend.v1.HostService.DisableNetworkInterface is not implemented"))
 }

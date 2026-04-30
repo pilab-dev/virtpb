@@ -38,14 +38,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TaskService_Subscribe_FullMethodName        = "/pilab.cloud.director.v2.TaskService/Subscribe"
-	TaskService_CreateTask_FullMethodName       = "/pilab.cloud.director.v2.TaskService/CreateTask"
-	TaskService_GetTasks_FullMethodName         = "/pilab.cloud.director.v2.TaskService/GetTasks"
-	TaskService_GetTask_FullMethodName          = "/pilab.cloud.director.v2.TaskService/GetTask"
-	TaskService_UpdateTaskStatus_FullMethodName = "/pilab.cloud.director.v2.TaskService/UpdateTaskStatus"
-	TaskService_CancelTask_FullMethodName       = "/pilab.cloud.director.v2.TaskService/CancelTask"
-	TaskService_GetTaskHistory_FullMethodName   = "/pilab.cloud.director.v2.TaskService/GetTaskHistory"
-	TaskService_BatchUpdateTasks_FullMethodName = "/pilab.cloud.director.v2.TaskService/BatchUpdateTasks"
+	TaskService_Subscribe_FullMethodName        = "/pilab.director.v2.TaskService/Subscribe"
+	TaskService_CreateTask_FullMethodName       = "/pilab.director.v2.TaskService/CreateTask"
+	TaskService_GetTasks_FullMethodName         = "/pilab.director.v2.TaskService/GetTasks"
+	TaskService_GetTask_FullMethodName          = "/pilab.director.v2.TaskService/GetTask"
+	TaskService_UpdateTaskStatus_FullMethodName = "/pilab.director.v2.TaskService/UpdateTaskStatus"
+	TaskService_CancelTask_FullMethodName       = "/pilab.director.v2.TaskService/CancelTask"
+	TaskService_GetTaskHistory_FullMethodName   = "/pilab.director.v2.TaskService/GetTaskHistory"
+	TaskService_BatchUpdateTasks_FullMethodName = "/pilab.director.v2.TaskService/BatchUpdateTasks"
 )
 
 // TaskServiceClient is the client API for TaskService service.
@@ -391,7 +391,7 @@ func _TaskService_BatchUpdateTasks_Handler(srv interface{}, ctx context.Context,
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var TaskService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.director.v2.TaskService",
+	ServiceName: "pilab.director.v2.TaskService",
 	HandlerType: (*TaskServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

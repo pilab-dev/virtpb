@@ -39,7 +39,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// JobServiceName is the fully-qualified name of the JobService service.
-	JobServiceName = "pilab.cloud.director.v1.JobService"
+	JobServiceName = "pilab.director.v1.JobService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -51,21 +51,21 @@ const (
 // period.
 const (
 	// JobServiceUpdateJobProcedure is the fully-qualified name of the JobService's UpdateJob RPC.
-	JobServiceUpdateJobProcedure = "/pilab.cloud.director.v1.JobService/UpdateJob"
+	JobServiceUpdateJobProcedure = "/pilab.director.v1.JobService/UpdateJob"
 	// JobServiceSubscribeProcedure is the fully-qualified name of the JobService's Subscribe RPC.
-	JobServiceSubscribeProcedure = "/pilab.cloud.director.v1.JobService/Subscribe"
+	JobServiceSubscribeProcedure = "/pilab.director.v1.JobService/Subscribe"
 )
 
-// JobServiceClient is a client for the pilab.cloud.director.v1.JobService service.
+// JobServiceClient is a client for the pilab.director.v1.JobService service.
 type JobServiceClient interface {
 	UpdateJob(context.Context, *connect.Request[v1.UpdateJobRequest]) (*connect.Response[v1.UpdateJobResponse], error)
 	Subscribe(context.Context, *connect.Request[v1.SubscribeRequest]) (*connect.ServerStreamForClient[v1.SubscribeResponse], error)
 }
 
-// NewJobServiceClient constructs a client for the pilab.cloud.director.v1.JobService service. By
-// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
-// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
+// NewJobServiceClient constructs a client for the pilab.director.v1.JobService service. By default,
+// it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and
+// sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC()
+// or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -94,17 +94,17 @@ type jobServiceClient struct {
 	subscribe *connect.Client[v1.SubscribeRequest, v1.SubscribeResponse]
 }
 
-// UpdateJob calls pilab.cloud.director.v1.JobService.UpdateJob.
+// UpdateJob calls pilab.director.v1.JobService.UpdateJob.
 func (c *jobServiceClient) UpdateJob(ctx context.Context, req *connect.Request[v1.UpdateJobRequest]) (*connect.Response[v1.UpdateJobResponse], error) {
 	return c.updateJob.CallUnary(ctx, req)
 }
 
-// Subscribe calls pilab.cloud.director.v1.JobService.Subscribe.
+// Subscribe calls pilab.director.v1.JobService.Subscribe.
 func (c *jobServiceClient) Subscribe(ctx context.Context, req *connect.Request[v1.SubscribeRequest]) (*connect.ServerStreamForClient[v1.SubscribeResponse], error) {
 	return c.subscribe.CallServerStream(ctx, req)
 }
 
-// JobServiceHandler is an implementation of the pilab.cloud.director.v1.JobService service.
+// JobServiceHandler is an implementation of the pilab.director.v1.JobService service.
 type JobServiceHandler interface {
 	UpdateJob(context.Context, *connect.Request[v1.UpdateJobRequest]) (*connect.Response[v1.UpdateJobResponse], error)
 	Subscribe(context.Context, *connect.Request[v1.SubscribeRequest], *connect.ServerStream[v1.SubscribeResponse]) error
@@ -129,7 +129,7 @@ func NewJobServiceHandler(svc JobServiceHandler, opts ...connect.HandlerOption) 
 		connect.WithSchema(jobServiceMethods.ByName("Subscribe")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.director.v1.JobService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.director.v1.JobService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case JobServiceUpdateJobProcedure:
 			jobServiceUpdateJobHandler.ServeHTTP(w, r)
@@ -145,9 +145,9 @@ func NewJobServiceHandler(svc JobServiceHandler, opts ...connect.HandlerOption) 
 type UnimplementedJobServiceHandler struct{}
 
 func (UnimplementedJobServiceHandler) UpdateJob(context.Context, *connect.Request[v1.UpdateJobRequest]) (*connect.Response[v1.UpdateJobResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v1.JobService.UpdateJob is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v1.JobService.UpdateJob is not implemented"))
 }
 
 func (UnimplementedJobServiceHandler) Subscribe(context.Context, *connect.Request[v1.SubscribeRequest], *connect.ServerStream[v1.SubscribeResponse]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v1.JobService.Subscribe is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v1.JobService.Subscribe is not implemented"))
 }

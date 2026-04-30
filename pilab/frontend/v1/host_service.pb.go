@@ -28,7 +28,6 @@ package frontendv1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -254,7 +253,7 @@ type HostOverview struct {
 	state              protoimpl.MessageState     `protogen:"open.v1"`
 	Hostname           string                     `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
 	Fqdn               string                     `protobuf:"bytes,2,opt,name=fqdn,proto3" json:"fqdn,omitempty"`
-	Status             HostStatus                 `protobuf:"varint,3,opt,name=status,proto3,enum=pilab.cloud.frontend.v1.HostStatus" json:"status,omitempty"`
+	Status             HostStatus                 `protobuf:"varint,3,opt,name=status,proto3,enum=pilab.frontend.v1.HostStatus" json:"status,omitempty"`
 	Uptime             *timestamppb.Timestamp     `protobuf:"bytes,4,opt,name=uptime,proto3" json:"uptime,omitempty"`
 	Manufacturer       string                     `protobuf:"bytes,5,opt,name=manufacturer,proto3" json:"manufacturer,omitempty"`
 	Model              string                     `protobuf:"bytes,6,opt,name=model,proto3" json:"model,omitempty"`
@@ -990,7 +989,7 @@ type VMInfo struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
 	Id               string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name             string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Status           VMStatus               `protobuf:"varint,3,opt,name=status,proto3,enum=pilab.cloud.frontend.v1.VMStatus" json:"status,omitempty"`
+	Status           VMStatus               `protobuf:"varint,3,opt,name=status,proto3,enum=pilab.frontend.v1.VMStatus" json:"status,omitempty"`
 	CpuUsagePercent  float64                `protobuf:"fixed64,4,opt,name=cpu_usage_percent,json=cpuUsagePercent,proto3" json:"cpu_usage_percent,omitempty"`
 	MemoryUsageBytes int64                  `protobuf:"varint,5,opt,name=memory_usage_bytes,json=memoryUsageBytes,proto3" json:"memory_usage_bytes,omitempty"`
 	Uptime           *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=uptime,proto3" json:"uptime,omitempty"`
@@ -1221,7 +1220,7 @@ func (x *HostDatastoresResponse) GetDatastores() []*DatastoreInfo {
 type DatastoreInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Type          DatastoreType          `protobuf:"varint,2,opt,name=type,proto3,enum=pilab.cloud.frontend.v1.DatastoreType" json:"type,omitempty"`
+	Type          DatastoreType          `protobuf:"varint,2,opt,name=type,proto3,enum=pilab.frontend.v1.DatastoreType" json:"type,omitempty"`
 	CapacityGb    int64                  `protobuf:"varint,3,opt,name=capacity_gb,json=capacityGb,proto3" json:"capacity_gb,omitempty"`
 	FreeGb        int64                  `protobuf:"varint,4,opt,name=free_gb,json=freeGb,proto3" json:"free_gb,omitempty"`
 	Path          string                 `protobuf:"bytes,5,opt,name=path,proto3" json:"path,omitempty"`
@@ -1769,7 +1768,7 @@ func (x *HostNetworkInterfacesResponse) GetInterfaces() []*NetworkInterfaceInfo 
 type NetworkInterfaceInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Status        NetworkInterfaceStatus `protobuf:"varint,2,opt,name=status,proto3,enum=pilab.cloud.frontend.v1.NetworkInterfaceStatus" json:"status,omitempty"`
+	Status        NetworkInterfaceStatus `protobuf:"varint,2,opt,name=status,proto3,enum=pilab.frontend.v1.NetworkInterfaceStatus" json:"status,omitempty"`
 	LinkSpeed     string                 `protobuf:"bytes,3,opt,name=link_speed,json=linkSpeed,proto3" json:"link_speed,omitempty"`
 	Duplex        string                 `protobuf:"bytes,4,opt,name=duplex,proto3" json:"duplex,omitempty"`
 	MacAddress    string                 `protobuf:"bytes,5,opt,name=mac_address,json=macAddress,proto3" json:"mac_address,omitempty"`
@@ -3178,23 +3177,23 @@ var File_pilab_frontend_v1_host_service_proto protoreflect.FileDescriptor
 
 const file_pilab_frontend_v1_host_service_proto_rawDesc = "" +
 	"\n" +
-	"$pilab/frontend/v1/host_service.proto\x12\x17pilab.cloud.frontend.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x9a\x05\n" +
+	"$pilab/frontend/v1/host_service.proto\x12\x11pilab.frontend.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfc\x04\n" +
 	"\fHostOverview\x12\x1a\n" +
 	"\bhostname\x18\x01 \x01(\tR\bhostname\x12\x12\n" +
-	"\x04fqdn\x18\x02 \x01(\tR\x04fqdn\x12;\n" +
-	"\x06status\x18\x03 \x01(\x0e2#.pilab.cloud.frontend.v1.HostStatusR\x06status\x122\n" +
+	"\x04fqdn\x18\x02 \x01(\tR\x04fqdn\x125\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1d.pilab.frontend.v1.HostStatusR\x06status\x122\n" +
 	"\x06uptime\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x06uptime\x12\"\n" +
 	"\fmanufacturer\x18\x05 \x01(\tR\fmanufacturer\x12\x14\n" +
 	"\x05model\x18\x06 \x01(\tR\x05model\x12#\n" +
-	"\rserial_number\x18\a \x01(\tR\fserialNumber\x12D\n" +
-	"\vcpu_metrics\x18\b \x01(\v2#.pilab.cloud.frontend.v1.CPUMetricsR\n" +
-	"cpuMetrics\x12M\n" +
-	"\x0ememory_metrics\x18\t \x01(\v2&.pilab.cloud.frontend.v1.MemoryMetricsR\rmemoryMetrics\x12\x19\n" +
+	"\rserial_number\x18\a \x01(\tR\fserialNumber\x12>\n" +
+	"\vcpu_metrics\x18\b \x01(\v2\x1d.pilab.frontend.v1.CPUMetricsR\n" +
+	"cpuMetrics\x12G\n" +
+	"\x0ememory_metrics\x18\t \x01(\v2 .pilab.frontend.v1.MemoryMetricsR\rmemoryMetrics\x12\x19\n" +
 	"\bvm_count\x18\n" +
 	" \x01(\x05R\avmCount\x12,\n" +
-	"\x12active_alert_count\x18\v \x01(\x05R\x10activeAlertCount\x12G\n" +
-	"\frecent_tasks\x18\f \x03(\v2$.pilab.cloud.frontend.v1.TaskSummaryR\vrecentTasks\x12c\n" +
-	"\x13resource_allocation\x18\r \x01(\v22.pilab.cloud.frontend.v1.ResourceAllocationSummaryR\x12resourceAllocation\"1\n" +
+	"\x12active_alert_count\x18\v \x01(\x05R\x10activeAlertCount\x12A\n" +
+	"\frecent_tasks\x18\f \x03(\v2\x1e.pilab.frontend.v1.TaskSummaryR\vrecentTasks\x12]\n" +
+	"\x13resource_allocation\x18\r \x01(\v2,.pilab.frontend.v1.ResourceAllocationSummaryR\x12resourceAllocation\"1\n" +
 	"\n" +
 	"CPUMetrics\x12#\n" +
 	"\rusage_percent\x18\x01 \x01(\x01R\fusagePercent\"4\n" +
@@ -3205,11 +3204,11 @@ const file_pilab_frontend_v1_host_service_proto_rawDesc = "" +
 	"\x04type\x18\x02 \x01(\tR\x04type\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\tR\x06status\x129\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xde\x01\n" +
-	"\x19ResourceAllocationSummary\x128\n" +
-	"\x03cpu\x18\x01 \x01(\v2&.pilab.cloud.frontend.v1.CPUAllocationR\x03cpu\x12A\n" +
-	"\x06memory\x18\x02 \x01(\v2).pilab.cloud.frontend.v1.MemoryAllocationR\x06memory\x12D\n" +
-	"\astorage\x18\x03 \x01(\v2*.pilab.cloud.frontend.v1.StorageAllocationR\astorage\"Y\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\xcc\x01\n" +
+	"\x19ResourceAllocationSummary\x122\n" +
+	"\x03cpu\x18\x01 \x01(\v2 .pilab.frontend.v1.CPUAllocationR\x03cpu\x12;\n" +
+	"\x06memory\x18\x02 \x01(\v2#.pilab.frontend.v1.MemoryAllocationR\x06memory\x12>\n" +
+	"\astorage\x18\x03 \x01(\v2$.pilab.frontend.v1.StorageAllocationR\astorage\"Y\n" +
 	"\rCPUAllocation\x12\x1f\n" +
 	"\vtotal_cores\x18\x01 \x01(\x05R\n" +
 	"totalCores\x12'\n" +
@@ -3227,46 +3226,46 @@ const file_pilab_frontend_v1_host_service_proto_rawDesc = "" +
 	"\tdatastore\x18\x04 \x01(\tR\tdatastore\x129\n" +
 	"\n" +
 	"start_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x125\n" +
-	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\"]\n" +
-	"\x16MonitoringDataResponse\x12C\n" +
-	"\vdata_points\x18\x01 \x03(\v2\".pilab.cloud.frontend.v1.DataPointR\n" +
+	"\bend_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\aendTime\"W\n" +
+	"\x16MonitoringDataResponse\x12=\n" +
+	"\vdata_points\x18\x01 \x03(\v2\x1c.pilab.frontend.v1.DataPointR\n" +
 	"dataPoints\"[\n" +
 	"\tDataPoint\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\x01R\x05value\"D\n" +
-	"\x0fHostVMsResponse\x121\n" +
-	"\x03vms\x18\x01 \x03(\v2\x1f.pilab.cloud.frontend.v1.VMInfoR\x03vms\"\xf5\x01\n" +
+	"\x05value\x18\x02 \x01(\x01R\x05value\">\n" +
+	"\x0fHostVMsResponse\x12+\n" +
+	"\x03vms\x18\x01 \x03(\v2\x19.pilab.frontend.v1.VMInfoR\x03vms\"\xef\x01\n" +
 	"\x06VMInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x129\n" +
-	"\x06status\x18\x03 \x01(\x0e2!.pilab.cloud.frontend.v1.VMStatusR\x06status\x12*\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x123\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1b.pilab.frontend.v1.VMStatusR\x06status\x12*\n" +
 	"\x11cpu_usage_percent\x18\x04 \x01(\x01R\x0fcpuUsagePercent\x12,\n" +
 	"\x12memory_usage_bytes\x18\x05 \x01(\x03R\x10memoryUsageBytes\x122\n" +
-	"\x06uptime\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x06uptime\"g\n" +
-	"\x17HostPermissionsResponse\x12L\n" +
-	"\x10user_permissions\x18\x01 \x03(\v2!.pilab.cloud.frontend.v1.HostUserR\x0fuserPermissions\"y\n" +
+	"\x06uptime\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\x06uptime\"a\n" +
+	"\x17HostPermissionsResponse\x12F\n" +
+	"\x10user_permissions\x18\x01 \x03(\v2\x1b.pilab.frontend.v1.HostUserR\x0fuserPermissions\"y\n" +
 	"\bHostUser\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x129\n" +
 	"\n" +
 	"last_login\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tlastLogin\x12\x16\n" +
-	"\x06groups\x18\x03 \x03(\tR\x06groups\"`\n" +
-	"\x16HostDatastoresResponse\x12F\n" +
+	"\x06groups\x18\x03 \x03(\tR\x06groups\"Z\n" +
+	"\x16HostDatastoresResponse\x12@\n" +
 	"\n" +
-	"datastores\x18\x01 \x03(\v2&.pilab.cloud.frontend.v1.DatastoreInfoR\n" +
-	"datastores\"\xc5\x01\n" +
+	"datastores\x18\x01 \x03(\v2 .pilab.frontend.v1.DatastoreInfoR\n" +
+	"datastores\"\xbf\x01\n" +
 	"\rDatastoreInfo\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12:\n" +
-	"\x04type\x18\x02 \x01(\x0e2&.pilab.cloud.frontend.v1.DatastoreTypeR\x04type\x12\x1f\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x124\n" +
+	"\x04type\x18\x02 \x01(\x0e2 .pilab.frontend.v1.DatastoreTypeR\x04type\x12\x1f\n" +
 	"\vcapacity_gb\x18\x03 \x01(\x03R\n" +
 	"capacityGb\x12\x17\n" +
 	"\afree_gb\x18\x04 \x01(\x03R\x06freeGb\x12\x12\n" +
 	"\x04path\x18\x05 \x01(\tR\x04path\x12\x16\n" +
-	"\x06status\x18\x06 \x01(\tR\x06status\"\x97\x02\n" +
-	"\x1aHostSystemSettingsResponse\x12B\n" +
-	"\ageneral\x18\x01 \x01(\v2(.pilab.cloud.frontend.v1.GeneralSettingsR\ageneral\x129\n" +
-	"\x04time\x18\x02 \x01(\v2%.pilab.cloud.frontend.v1.TimeSettingsR\x04time\x126\n" +
-	"\x03dns\x18\x03 \x01(\v2$.pilab.cloud.frontend.v1.DNSSettingsR\x03dns\x12B\n" +
-	"\arouting\x18\x04 \x01(\v2(.pilab.cloud.frontend.v1.RoutingSettingsR\arouting\"\xdc\x01\n" +
+	"\x06status\x18\x06 \x01(\tR\x06status\"\xff\x01\n" +
+	"\x1aHostSystemSettingsResponse\x12<\n" +
+	"\ageneral\x18\x01 \x01(\v2\".pilab.frontend.v1.GeneralSettingsR\ageneral\x123\n" +
+	"\x04time\x18\x02 \x01(\v2\x1f.pilab.frontend.v1.TimeSettingsR\x04time\x120\n" +
+	"\x03dns\x18\x03 \x01(\v2\x1e.pilab.frontend.v1.DNSSettingsR\x03dns\x12<\n" +
+	"\arouting\x18\x04 \x01(\v2\".pilab.frontend.v1.RoutingSettingsR\arouting\"\xdc\x01\n" +
 	"\x0fGeneralSettings\x12\x1a\n" +
 	"\bhostname\x18\x01 \x01(\tR\bhostname\x12\"\n" +
 	"\fmanufacturer\x18\x02 \x01(\tR\fmanufacturer\x12\x14\n" +
@@ -3282,23 +3281,23 @@ const file_pilab_frontend_v1_host_service_proto_rawDesc = "" +
 	"\vDNSSettings\x12\x1f\n" +
 	"\vdns_servers\x18\x01 \x03(\tR\n" +
 	"dnsServers\x12%\n" +
-	"\x0esearch_domains\x18\x02 \x03(\tR\rsearchDomains\"\x85\x01\n" +
+	"\x0esearch_domains\x18\x02 \x03(\tR\rsearchDomains\"\x7f\n" +
 	"\x0fRoutingSettings\x12'\n" +
-	"\x0fdefault_gateway\x18\x01 \x01(\tR\x0edefaultGateway\x12I\n" +
-	"\rstatic_routes\x18\x02 \x03(\v2$.pilab.cloud.frontend.v1.StaticRouteR\fstaticRoutes\"g\n" +
+	"\x0fdefault_gateway\x18\x01 \x01(\tR\x0edefaultGateway\x12C\n" +
+	"\rstatic_routes\x18\x02 \x03(\v2\x1e.pilab.frontend.v1.StaticRouteR\fstaticRoutes\"g\n" +
 	"\vStaticRoute\x12 \n" +
 	"\vdestination\x18\x01 \x01(\tR\vdestination\x12\x18\n" +
 	"\agateway\x18\x02 \x01(\tR\agateway\x12\x1c\n" +
 	"\tinterface\x18\x03 \x01(\tR\tinterface\"T\n" +
 	"\x1dMaintenanceModeStatusResponse\x123\n" +
-	"\x16is_in_maintenance_mode\x18\x01 \x01(\bR\x13isInMaintenanceMode\"n\n" +
-	"\x1dHostNetworkInterfacesResponse\x12M\n" +
+	"\x16is_in_maintenance_mode\x18\x01 \x01(\bR\x13isInMaintenanceMode\"h\n" +
+	"\x1dHostNetworkInterfacesResponse\x12G\n" +
 	"\n" +
-	"interfaces\x18\x01 \x03(\v2-.pilab.cloud.frontend.v1.NetworkInterfaceInfoR\n" +
-	"interfaces\"\x86\x02\n" +
+	"interfaces\x18\x01 \x03(\v2'.pilab.frontend.v1.NetworkInterfaceInfoR\n" +
+	"interfaces\"\x80\x02\n" +
 	"\x14NetworkInterfaceInfo\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12G\n" +
-	"\x06status\x18\x02 \x01(\x0e2/.pilab.cloud.frontend.v1.NetworkInterfaceStatusR\x06status\x12\x1d\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12A\n" +
+	"\x06status\x18\x02 \x01(\x0e2).pilab.frontend.v1.NetworkInterfaceStatusR\x06status\x12\x1d\n" +
 	"\n" +
 	"link_speed\x18\x03 \x01(\tR\tlinkSpeed\x12\x16\n" +
 	"\x06duplex\x18\x04 \x01(\tR\x06duplex\x12\x1f\n" +
@@ -3344,11 +3343,11 @@ const file_pilab_frontend_v1_host_service_proto_rawDesc = "" +
 	"\bhostname\x18\x01 \x01(\tR\bhostname\x12\x1f\n" +
 	"\vdns_servers\x18\x02 \x03(\tR\n" +
 	"dnsServers\x12%\n" +
-	"\x0esearch_domains\x18\x03 \x03(\tR\rsearchDomains\"\xae\x01\n" +
+	"\x0esearch_domains\x18\x03 \x03(\tR\rsearchDomains\"\xa8\x01\n" +
 	"\x1cUpdateRoutingSettingsRequest\x12\x1a\n" +
 	"\bhostname\x18\x01 \x01(\tR\bhostname\x12'\n" +
-	"\x0fdefault_gateway\x18\x02 \x01(\tR\x0edefaultGateway\x12I\n" +
-	"\rstatic_routes\x18\x03 \x03(\v2$.pilab.cloud.frontend.v1.StaticRouteR\fstaticRoutes\"Z\n" +
+	"\x0fdefault_gateway\x18\x02 \x01(\tR\x0edefaultGateway\x12C\n" +
+	"\rstatic_routes\x18\x03 \x03(\v2\x1e.pilab.frontend.v1.StaticRouteR\fstaticRoutes\"Z\n" +
 	"\x15MountDatastoreRequest\x12\x1a\n" +
 	"\bhostname\x18\x01 \x01(\tR\bhostname\x12%\n" +
 	"\x0edatastore_name\x18\x02 \x01(\tR\rdatastoreName\"\\\n" +
@@ -3392,26 +3391,26 @@ const file_pilab_frontend_v1_host_service_proto_rawDesc = "" +
 	"\x16NetworkInterfaceStatus\x12\x1a\n" +
 	"\x16NIC_STATUS_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14NIC_STATUS_CONNECTED\x10\x01\x12\x1b\n" +
-	"\x17NIC_STATUS_DISCONNECTED\x10\x022\xf2\x11\n" +
-	"\vHostService\x12i\n" +
-	"\x0fGetHostOverview\x12/.pilab.cloud.frontend.v1.GetHostOverviewRequest\x1a%.pilab.cloud.frontend.v1.HostOverview\x12w\n" +
-	"\x11GetMonitoringData\x121.pilab.cloud.frontend.v1.GetMonitoringDataRequest\x1a/.pilab.cloud.frontend.v1.MonitoringDataResponse\x12d\n" +
-	"\vListHostVMs\x12+.pilab.cloud.frontend.v1.ListHostVMsRequest\x1a(.pilab.cloud.frontend.v1.HostVMsResponse\x12z\n" +
-	"\x12GetHostPermissions\x122.pilab.cloud.frontend.v1.GetHostPermissionsRequest\x1a0.pilab.cloud.frontend.v1.HostPermissionsResponse\x12y\n" +
-	"\x12ListHostDatastores\x122.pilab.cloud.frontend.v1.ListHostDatastoresRequest\x1a/.pilab.cloud.frontend.v1.HostDatastoresResponse\x12q\n" +
-	"\x0eMountDatastore\x12..pilab.cloud.frontend.v1.MountDatastoreRequest\x1a/.pilab.cloud.frontend.v1.MountDatastoreResponse\x12w\n" +
-	"\x10UnmountDatastore\x120.pilab.cloud.frontend.v1.UnmountDatastoreRequest\x1a1.pilab.cloud.frontend.v1.UnmountDatastoreResponse\x12\x83\x01\n" +
-	"\x15GetHostSystemSettings\x125.pilab.cloud.frontend.v1.GetHostSystemSettingsRequest\x1a3.pilab.cloud.frontend.v1.HostSystemSettingsResponse\x12t\n" +
-	"\x0fUpdateNTPConfig\x12/.pilab.cloud.frontend.v1.UpdateNTPConfigRequest\x1a0.pilab.cloud.frontend.v1.UpdateNTPConfigResponse\x12q\n" +
-	"\x0eUpdateTimezone\x12..pilab.cloud.frontend.v1.UpdateTimezoneRequest\x1a/.pilab.cloud.frontend.v1.UpdateTimezoneResponse\x12z\n" +
-	"\x11UpdateDNSSettings\x121.pilab.cloud.frontend.v1.UpdateDNSSettingsRequest\x1a2.pilab.cloud.frontend.v1.UpdateDNSSettingsResponse\x12\x86\x01\n" +
-	"\x15UpdateRoutingSettings\x125.pilab.cloud.frontend.v1.UpdateRoutingSettingsRequest\x1a6.pilab.cloud.frontend.v1.UpdateRoutingSettingsResponse\x12\x8c\x01\n" +
-	"\x18GetMaintenanceModeStatus\x128.pilab.cloud.frontend.v1.GetMaintenanceModeStatusRequest\x1a6.pilab.cloud.frontend.v1.MaintenanceModeStatusResponse\x12\x83\x01\n" +
-	"\x14EnterMaintenanceMode\x124.pilab.cloud.frontend.v1.EnterMaintenanceModeRequest\x1a5.pilab.cloud.frontend.v1.EnterMaintenanceModeResponse\x12\x80\x01\n" +
-	"\x13ExitMaintenanceMode\x123.pilab.cloud.frontend.v1.ExitMaintenanceModeRequest\x1a4.pilab.cloud.frontend.v1.ExitMaintenanceModeResponse\x12\x8e\x01\n" +
-	"\x19ListHostNetworkInterfaces\x129.pilab.cloud.frontend.v1.ListHostNetworkInterfacesRequest\x1a6.pilab.cloud.frontend.v1.HostNetworkInterfacesResponse\x12\x89\x01\n" +
-	"\x16EnableNetworkInterface\x126.pilab.cloud.frontend.v1.EnableNetworkInterfaceRequest\x1a7.pilab.cloud.frontend.v1.EnableNetworkInterfaceResponse\x12\x8c\x01\n" +
-	"\x17DisableNetworkInterface\x127.pilab.cloud.frontend.v1.DisableNetworkInterfaceRequest\x1a8.pilab.cloud.frontend.v1.DisableNetworkInterfaceResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1b\x06proto3"
+	"\x17NIC_STATUS_DISCONNECTED\x10\x022\x95\x10\n" +
+	"\vHostService\x12]\n" +
+	"\x0fGetHostOverview\x12).pilab.frontend.v1.GetHostOverviewRequest\x1a\x1f.pilab.frontend.v1.HostOverview\x12k\n" +
+	"\x11GetMonitoringData\x12+.pilab.frontend.v1.GetMonitoringDataRequest\x1a).pilab.frontend.v1.MonitoringDataResponse\x12X\n" +
+	"\vListHostVMs\x12%.pilab.frontend.v1.ListHostVMsRequest\x1a\".pilab.frontend.v1.HostVMsResponse\x12n\n" +
+	"\x12GetHostPermissions\x12,.pilab.frontend.v1.GetHostPermissionsRequest\x1a*.pilab.frontend.v1.HostPermissionsResponse\x12m\n" +
+	"\x12ListHostDatastores\x12,.pilab.frontend.v1.ListHostDatastoresRequest\x1a).pilab.frontend.v1.HostDatastoresResponse\x12e\n" +
+	"\x0eMountDatastore\x12(.pilab.frontend.v1.MountDatastoreRequest\x1a).pilab.frontend.v1.MountDatastoreResponse\x12k\n" +
+	"\x10UnmountDatastore\x12*.pilab.frontend.v1.UnmountDatastoreRequest\x1a+.pilab.frontend.v1.UnmountDatastoreResponse\x12w\n" +
+	"\x15GetHostSystemSettings\x12/.pilab.frontend.v1.GetHostSystemSettingsRequest\x1a-.pilab.frontend.v1.HostSystemSettingsResponse\x12h\n" +
+	"\x0fUpdateNTPConfig\x12).pilab.frontend.v1.UpdateNTPConfigRequest\x1a*.pilab.frontend.v1.UpdateNTPConfigResponse\x12e\n" +
+	"\x0eUpdateTimezone\x12(.pilab.frontend.v1.UpdateTimezoneRequest\x1a).pilab.frontend.v1.UpdateTimezoneResponse\x12n\n" +
+	"\x11UpdateDNSSettings\x12+.pilab.frontend.v1.UpdateDNSSettingsRequest\x1a,.pilab.frontend.v1.UpdateDNSSettingsResponse\x12z\n" +
+	"\x15UpdateRoutingSettings\x12/.pilab.frontend.v1.UpdateRoutingSettingsRequest\x1a0.pilab.frontend.v1.UpdateRoutingSettingsResponse\x12\x80\x01\n" +
+	"\x18GetMaintenanceModeStatus\x122.pilab.frontend.v1.GetMaintenanceModeStatusRequest\x1a0.pilab.frontend.v1.MaintenanceModeStatusResponse\x12w\n" +
+	"\x14EnterMaintenanceMode\x12..pilab.frontend.v1.EnterMaintenanceModeRequest\x1a/.pilab.frontend.v1.EnterMaintenanceModeResponse\x12t\n" +
+	"\x13ExitMaintenanceMode\x12-.pilab.frontend.v1.ExitMaintenanceModeRequest\x1a..pilab.frontend.v1.ExitMaintenanceModeResponse\x12\x82\x01\n" +
+	"\x19ListHostNetworkInterfaces\x123.pilab.frontend.v1.ListHostNetworkInterfacesRequest\x1a0.pilab.frontend.v1.HostNetworkInterfacesResponse\x12}\n" +
+	"\x16EnableNetworkInterface\x120.pilab.frontend.v1.EnableNetworkInterfaceRequest\x1a1.pilab.frontend.v1.EnableNetworkInterfaceResponse\x12\x80\x01\n" +
+	"\x17DisableNetworkInterface\x121.pilab.frontend.v1.DisableNetworkInterfaceRequest\x1a2.pilab.frontend.v1.DisableNetworkInterfaceResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1b\x06proto3"
 
 var (
 	file_pilab_frontend_v1_host_service_proto_rawDescOnce sync.Once
@@ -3428,135 +3427,135 @@ func file_pilab_frontend_v1_host_service_proto_rawDescGZIP() []byte {
 var file_pilab_frontend_v1_host_service_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_pilab_frontend_v1_host_service_proto_msgTypes = make([]protoimpl.MessageInfo, 55)
 var file_pilab_frontend_v1_host_service_proto_goTypes = []any{
-	(HostStatus)(0),                          // 0: pilab.cloud.frontend.v1.HostStatus
-	(VMStatus)(0),                            // 1: pilab.cloud.frontend.v1.VMStatus
-	(DatastoreType)(0),                       // 2: pilab.cloud.frontend.v1.DatastoreType
-	(NetworkInterfaceStatus)(0),              // 3: pilab.cloud.frontend.v1.NetworkInterfaceStatus
-	(*HostOverview)(nil),                     // 4: pilab.cloud.frontend.v1.HostOverview
-	(*CPUMetrics)(nil),                       // 5: pilab.cloud.frontend.v1.CPUMetrics
-	(*MemoryMetrics)(nil),                    // 6: pilab.cloud.frontend.v1.MemoryMetrics
-	(*TaskSummary)(nil),                      // 7: pilab.cloud.frontend.v1.TaskSummary
-	(*ResourceAllocationSummary)(nil),        // 8: pilab.cloud.frontend.v1.ResourceAllocationSummary
-	(*CPUAllocation)(nil),                    // 9: pilab.cloud.frontend.v1.CPUAllocation
-	(*MemoryAllocation)(nil),                 // 10: pilab.cloud.frontend.v1.MemoryAllocation
-	(*StorageAllocation)(nil),                // 11: pilab.cloud.frontend.v1.StorageAllocation
-	(*MonitoringDataRequest)(nil),            // 12: pilab.cloud.frontend.v1.MonitoringDataRequest
-	(*MonitoringDataResponse)(nil),           // 13: pilab.cloud.frontend.v1.MonitoringDataResponse
-	(*DataPoint)(nil),                        // 14: pilab.cloud.frontend.v1.DataPoint
-	(*HostVMsResponse)(nil),                  // 15: pilab.cloud.frontend.v1.HostVMsResponse
-	(*VMInfo)(nil),                           // 16: pilab.cloud.frontend.v1.VMInfo
-	(*HostPermissionsResponse)(nil),          // 17: pilab.cloud.frontend.v1.HostPermissionsResponse
-	(*HostUser)(nil),                         // 18: pilab.cloud.frontend.v1.HostUser
-	(*HostDatastoresResponse)(nil),           // 19: pilab.cloud.frontend.v1.HostDatastoresResponse
-	(*DatastoreInfo)(nil),                    // 20: pilab.cloud.frontend.v1.DatastoreInfo
-	(*HostSystemSettingsResponse)(nil),       // 21: pilab.cloud.frontend.v1.HostSystemSettingsResponse
-	(*GeneralSettings)(nil),                  // 22: pilab.cloud.frontend.v1.GeneralSettings
-	(*TimeSettings)(nil),                     // 23: pilab.cloud.frontend.v1.TimeSettings
-	(*DNSSettings)(nil),                      // 24: pilab.cloud.frontend.v1.DNSSettings
-	(*RoutingSettings)(nil),                  // 25: pilab.cloud.frontend.v1.RoutingSettings
-	(*StaticRoute)(nil),                      // 26: pilab.cloud.frontend.v1.StaticRoute
-	(*MaintenanceModeStatusResponse)(nil),    // 27: pilab.cloud.frontend.v1.MaintenanceModeStatusResponse
-	(*HostNetworkInterfacesResponse)(nil),    // 28: pilab.cloud.frontend.v1.HostNetworkInterfacesResponse
-	(*NetworkInterfaceInfo)(nil),             // 29: pilab.cloud.frontend.v1.NetworkInterfaceInfo
-	(*GetHostOverviewRequest)(nil),           // 30: pilab.cloud.frontend.v1.GetHostOverviewRequest
-	(*GetMonitoringDataRequest)(nil),         // 31: pilab.cloud.frontend.v1.GetMonitoringDataRequest
-	(*ListHostVMsRequest)(nil),               // 32: pilab.cloud.frontend.v1.ListHostVMsRequest
-	(*GetHostPermissionsRequest)(nil),        // 33: pilab.cloud.frontend.v1.GetHostPermissionsRequest
-	(*ListHostDatastoresRequest)(nil),        // 34: pilab.cloud.frontend.v1.ListHostDatastoresRequest
-	(*GetHostSystemSettingsRequest)(nil),     // 35: pilab.cloud.frontend.v1.GetHostSystemSettingsRequest
-	(*GetMaintenanceModeStatusRequest)(nil),  // 36: pilab.cloud.frontend.v1.GetMaintenanceModeStatusRequest
-	(*EnterMaintenanceModeRequest)(nil),      // 37: pilab.cloud.frontend.v1.EnterMaintenanceModeRequest
-	(*ExitMaintenanceModeRequest)(nil),       // 38: pilab.cloud.frontend.v1.ExitMaintenanceModeRequest
-	(*ListHostNetworkInterfacesRequest)(nil), // 39: pilab.cloud.frontend.v1.ListHostNetworkInterfacesRequest
-	(*UpdateNTPConfigRequest)(nil),           // 40: pilab.cloud.frontend.v1.UpdateNTPConfigRequest
-	(*UpdateTimezoneRequest)(nil),            // 41: pilab.cloud.frontend.v1.UpdateTimezoneRequest
-	(*UpdateDNSSettingsRequest)(nil),         // 42: pilab.cloud.frontend.v1.UpdateDNSSettingsRequest
-	(*UpdateRoutingSettingsRequest)(nil),     // 43: pilab.cloud.frontend.v1.UpdateRoutingSettingsRequest
-	(*MountDatastoreRequest)(nil),            // 44: pilab.cloud.frontend.v1.MountDatastoreRequest
-	(*UnmountDatastoreRequest)(nil),          // 45: pilab.cloud.frontend.v1.UnmountDatastoreRequest
-	(*EnableNetworkInterfaceRequest)(nil),    // 46: pilab.cloud.frontend.v1.EnableNetworkInterfaceRequest
-	(*DisableNetworkInterfaceRequest)(nil),   // 47: pilab.cloud.frontend.v1.DisableNetworkInterfaceRequest
-	(*EmptyResponse)(nil),                    // 48: pilab.cloud.frontend.v1.EmptyResponse
-	(*UpdateNTPConfigResponse)(nil),          // 49: pilab.cloud.frontend.v1.UpdateNTPConfigResponse
-	(*UpdateTimezoneResponse)(nil),           // 50: pilab.cloud.frontend.v1.UpdateTimezoneResponse
-	(*UpdateDNSSettingsResponse)(nil),        // 51: pilab.cloud.frontend.v1.UpdateDNSSettingsResponse
-	(*UpdateRoutingSettingsResponse)(nil),    // 52: pilab.cloud.frontend.v1.UpdateRoutingSettingsResponse
-	(*EnterMaintenanceModeResponse)(nil),     // 53: pilab.cloud.frontend.v1.EnterMaintenanceModeResponse
-	(*ExitMaintenanceModeResponse)(nil),      // 54: pilab.cloud.frontend.v1.ExitMaintenanceModeResponse
-	(*MountDatastoreResponse)(nil),           // 55: pilab.cloud.frontend.v1.MountDatastoreResponse
-	(*UnmountDatastoreResponse)(nil),         // 56: pilab.cloud.frontend.v1.UnmountDatastoreResponse
-	(*EnableNetworkInterfaceResponse)(nil),   // 57: pilab.cloud.frontend.v1.EnableNetworkInterfaceResponse
-	(*DisableNetworkInterfaceResponse)(nil),  // 58: pilab.cloud.frontend.v1.DisableNetworkInterfaceResponse
+	(HostStatus)(0),                          // 0: pilab.frontend.v1.HostStatus
+	(VMStatus)(0),                            // 1: pilab.frontend.v1.VMStatus
+	(DatastoreType)(0),                       // 2: pilab.frontend.v1.DatastoreType
+	(NetworkInterfaceStatus)(0),              // 3: pilab.frontend.v1.NetworkInterfaceStatus
+	(*HostOverview)(nil),                     // 4: pilab.frontend.v1.HostOverview
+	(*CPUMetrics)(nil),                       // 5: pilab.frontend.v1.CPUMetrics
+	(*MemoryMetrics)(nil),                    // 6: pilab.frontend.v1.MemoryMetrics
+	(*TaskSummary)(nil),                      // 7: pilab.frontend.v1.TaskSummary
+	(*ResourceAllocationSummary)(nil),        // 8: pilab.frontend.v1.ResourceAllocationSummary
+	(*CPUAllocation)(nil),                    // 9: pilab.frontend.v1.CPUAllocation
+	(*MemoryAllocation)(nil),                 // 10: pilab.frontend.v1.MemoryAllocation
+	(*StorageAllocation)(nil),                // 11: pilab.frontend.v1.StorageAllocation
+	(*MonitoringDataRequest)(nil),            // 12: pilab.frontend.v1.MonitoringDataRequest
+	(*MonitoringDataResponse)(nil),           // 13: pilab.frontend.v1.MonitoringDataResponse
+	(*DataPoint)(nil),                        // 14: pilab.frontend.v1.DataPoint
+	(*HostVMsResponse)(nil),                  // 15: pilab.frontend.v1.HostVMsResponse
+	(*VMInfo)(nil),                           // 16: pilab.frontend.v1.VMInfo
+	(*HostPermissionsResponse)(nil),          // 17: pilab.frontend.v1.HostPermissionsResponse
+	(*HostUser)(nil),                         // 18: pilab.frontend.v1.HostUser
+	(*HostDatastoresResponse)(nil),           // 19: pilab.frontend.v1.HostDatastoresResponse
+	(*DatastoreInfo)(nil),                    // 20: pilab.frontend.v1.DatastoreInfo
+	(*HostSystemSettingsResponse)(nil),       // 21: pilab.frontend.v1.HostSystemSettingsResponse
+	(*GeneralSettings)(nil),                  // 22: pilab.frontend.v1.GeneralSettings
+	(*TimeSettings)(nil),                     // 23: pilab.frontend.v1.TimeSettings
+	(*DNSSettings)(nil),                      // 24: pilab.frontend.v1.DNSSettings
+	(*RoutingSettings)(nil),                  // 25: pilab.frontend.v1.RoutingSettings
+	(*StaticRoute)(nil),                      // 26: pilab.frontend.v1.StaticRoute
+	(*MaintenanceModeStatusResponse)(nil),    // 27: pilab.frontend.v1.MaintenanceModeStatusResponse
+	(*HostNetworkInterfacesResponse)(nil),    // 28: pilab.frontend.v1.HostNetworkInterfacesResponse
+	(*NetworkInterfaceInfo)(nil),             // 29: pilab.frontend.v1.NetworkInterfaceInfo
+	(*GetHostOverviewRequest)(nil),           // 30: pilab.frontend.v1.GetHostOverviewRequest
+	(*GetMonitoringDataRequest)(nil),         // 31: pilab.frontend.v1.GetMonitoringDataRequest
+	(*ListHostVMsRequest)(nil),               // 32: pilab.frontend.v1.ListHostVMsRequest
+	(*GetHostPermissionsRequest)(nil),        // 33: pilab.frontend.v1.GetHostPermissionsRequest
+	(*ListHostDatastoresRequest)(nil),        // 34: pilab.frontend.v1.ListHostDatastoresRequest
+	(*GetHostSystemSettingsRequest)(nil),     // 35: pilab.frontend.v1.GetHostSystemSettingsRequest
+	(*GetMaintenanceModeStatusRequest)(nil),  // 36: pilab.frontend.v1.GetMaintenanceModeStatusRequest
+	(*EnterMaintenanceModeRequest)(nil),      // 37: pilab.frontend.v1.EnterMaintenanceModeRequest
+	(*ExitMaintenanceModeRequest)(nil),       // 38: pilab.frontend.v1.ExitMaintenanceModeRequest
+	(*ListHostNetworkInterfacesRequest)(nil), // 39: pilab.frontend.v1.ListHostNetworkInterfacesRequest
+	(*UpdateNTPConfigRequest)(nil),           // 40: pilab.frontend.v1.UpdateNTPConfigRequest
+	(*UpdateTimezoneRequest)(nil),            // 41: pilab.frontend.v1.UpdateTimezoneRequest
+	(*UpdateDNSSettingsRequest)(nil),         // 42: pilab.frontend.v1.UpdateDNSSettingsRequest
+	(*UpdateRoutingSettingsRequest)(nil),     // 43: pilab.frontend.v1.UpdateRoutingSettingsRequest
+	(*MountDatastoreRequest)(nil),            // 44: pilab.frontend.v1.MountDatastoreRequest
+	(*UnmountDatastoreRequest)(nil),          // 45: pilab.frontend.v1.UnmountDatastoreRequest
+	(*EnableNetworkInterfaceRequest)(nil),    // 46: pilab.frontend.v1.EnableNetworkInterfaceRequest
+	(*DisableNetworkInterfaceRequest)(nil),   // 47: pilab.frontend.v1.DisableNetworkInterfaceRequest
+	(*EmptyResponse)(nil),                    // 48: pilab.frontend.v1.EmptyResponse
+	(*UpdateNTPConfigResponse)(nil),          // 49: pilab.frontend.v1.UpdateNTPConfigResponse
+	(*UpdateTimezoneResponse)(nil),           // 50: pilab.frontend.v1.UpdateTimezoneResponse
+	(*UpdateDNSSettingsResponse)(nil),        // 51: pilab.frontend.v1.UpdateDNSSettingsResponse
+	(*UpdateRoutingSettingsResponse)(nil),    // 52: pilab.frontend.v1.UpdateRoutingSettingsResponse
+	(*EnterMaintenanceModeResponse)(nil),     // 53: pilab.frontend.v1.EnterMaintenanceModeResponse
+	(*ExitMaintenanceModeResponse)(nil),      // 54: pilab.frontend.v1.ExitMaintenanceModeResponse
+	(*MountDatastoreResponse)(nil),           // 55: pilab.frontend.v1.MountDatastoreResponse
+	(*UnmountDatastoreResponse)(nil),         // 56: pilab.frontend.v1.UnmountDatastoreResponse
+	(*EnableNetworkInterfaceResponse)(nil),   // 57: pilab.frontend.v1.EnableNetworkInterfaceResponse
+	(*DisableNetworkInterfaceResponse)(nil),  // 58: pilab.frontend.v1.DisableNetworkInterfaceResponse
 	(*timestamppb.Timestamp)(nil),            // 59: google.protobuf.Timestamp
 }
 var file_pilab_frontend_v1_host_service_proto_depIdxs = []int32{
-	0,  // 0: pilab.cloud.frontend.v1.HostOverview.status:type_name -> pilab.cloud.frontend.v1.HostStatus
-	59, // 1: pilab.cloud.frontend.v1.HostOverview.uptime:type_name -> google.protobuf.Timestamp
-	5,  // 2: pilab.cloud.frontend.v1.HostOverview.cpu_metrics:type_name -> pilab.cloud.frontend.v1.CPUMetrics
-	6,  // 3: pilab.cloud.frontend.v1.HostOverview.memory_metrics:type_name -> pilab.cloud.frontend.v1.MemoryMetrics
-	7,  // 4: pilab.cloud.frontend.v1.HostOverview.recent_tasks:type_name -> pilab.cloud.frontend.v1.TaskSummary
-	8,  // 5: pilab.cloud.frontend.v1.HostOverview.resource_allocation:type_name -> pilab.cloud.frontend.v1.ResourceAllocationSummary
-	59, // 6: pilab.cloud.frontend.v1.TaskSummary.created_at:type_name -> google.protobuf.Timestamp
-	9,  // 7: pilab.cloud.frontend.v1.ResourceAllocationSummary.cpu:type_name -> pilab.cloud.frontend.v1.CPUAllocation
-	10, // 8: pilab.cloud.frontend.v1.ResourceAllocationSummary.memory:type_name -> pilab.cloud.frontend.v1.MemoryAllocation
-	11, // 9: pilab.cloud.frontend.v1.ResourceAllocationSummary.storage:type_name -> pilab.cloud.frontend.v1.StorageAllocation
-	59, // 10: pilab.cloud.frontend.v1.MonitoringDataRequest.start_time:type_name -> google.protobuf.Timestamp
-	59, // 11: pilab.cloud.frontend.v1.MonitoringDataRequest.end_time:type_name -> google.protobuf.Timestamp
-	14, // 12: pilab.cloud.frontend.v1.MonitoringDataResponse.data_points:type_name -> pilab.cloud.frontend.v1.DataPoint
-	59, // 13: pilab.cloud.frontend.v1.DataPoint.timestamp:type_name -> google.protobuf.Timestamp
-	16, // 14: pilab.cloud.frontend.v1.HostVMsResponse.vms:type_name -> pilab.cloud.frontend.v1.VMInfo
-	1,  // 15: pilab.cloud.frontend.v1.VMInfo.status:type_name -> pilab.cloud.frontend.v1.VMStatus
-	59, // 16: pilab.cloud.frontend.v1.VMInfo.uptime:type_name -> google.protobuf.Timestamp
-	18, // 17: pilab.cloud.frontend.v1.HostPermissionsResponse.user_permissions:type_name -> pilab.cloud.frontend.v1.HostUser
-	59, // 18: pilab.cloud.frontend.v1.HostUser.last_login:type_name -> google.protobuf.Timestamp
-	20, // 19: pilab.cloud.frontend.v1.HostDatastoresResponse.datastores:type_name -> pilab.cloud.frontend.v1.DatastoreInfo
-	2,  // 20: pilab.cloud.frontend.v1.DatastoreInfo.type:type_name -> pilab.cloud.frontend.v1.DatastoreType
-	22, // 21: pilab.cloud.frontend.v1.HostSystemSettingsResponse.general:type_name -> pilab.cloud.frontend.v1.GeneralSettings
-	23, // 22: pilab.cloud.frontend.v1.HostSystemSettingsResponse.time:type_name -> pilab.cloud.frontend.v1.TimeSettings
-	24, // 23: pilab.cloud.frontend.v1.HostSystemSettingsResponse.dns:type_name -> pilab.cloud.frontend.v1.DNSSettings
-	25, // 24: pilab.cloud.frontend.v1.HostSystemSettingsResponse.routing:type_name -> pilab.cloud.frontend.v1.RoutingSettings
-	26, // 25: pilab.cloud.frontend.v1.RoutingSettings.static_routes:type_name -> pilab.cloud.frontend.v1.StaticRoute
-	29, // 26: pilab.cloud.frontend.v1.HostNetworkInterfacesResponse.interfaces:type_name -> pilab.cloud.frontend.v1.NetworkInterfaceInfo
-	3,  // 27: pilab.cloud.frontend.v1.NetworkInterfaceInfo.status:type_name -> pilab.cloud.frontend.v1.NetworkInterfaceStatus
-	59, // 28: pilab.cloud.frontend.v1.GetMonitoringDataRequest.start_time:type_name -> google.protobuf.Timestamp
-	59, // 29: pilab.cloud.frontend.v1.GetMonitoringDataRequest.end_time:type_name -> google.protobuf.Timestamp
-	26, // 30: pilab.cloud.frontend.v1.UpdateRoutingSettingsRequest.static_routes:type_name -> pilab.cloud.frontend.v1.StaticRoute
-	30, // 31: pilab.cloud.frontend.v1.HostService.GetHostOverview:input_type -> pilab.cloud.frontend.v1.GetHostOverviewRequest
-	31, // 32: pilab.cloud.frontend.v1.HostService.GetMonitoringData:input_type -> pilab.cloud.frontend.v1.GetMonitoringDataRequest
-	32, // 33: pilab.cloud.frontend.v1.HostService.ListHostVMs:input_type -> pilab.cloud.frontend.v1.ListHostVMsRequest
-	33, // 34: pilab.cloud.frontend.v1.HostService.GetHostPermissions:input_type -> pilab.cloud.frontend.v1.GetHostPermissionsRequest
-	34, // 35: pilab.cloud.frontend.v1.HostService.ListHostDatastores:input_type -> pilab.cloud.frontend.v1.ListHostDatastoresRequest
-	44, // 36: pilab.cloud.frontend.v1.HostService.MountDatastore:input_type -> pilab.cloud.frontend.v1.MountDatastoreRequest
-	45, // 37: pilab.cloud.frontend.v1.HostService.UnmountDatastore:input_type -> pilab.cloud.frontend.v1.UnmountDatastoreRequest
-	35, // 38: pilab.cloud.frontend.v1.HostService.GetHostSystemSettings:input_type -> pilab.cloud.frontend.v1.GetHostSystemSettingsRequest
-	40, // 39: pilab.cloud.frontend.v1.HostService.UpdateNTPConfig:input_type -> pilab.cloud.frontend.v1.UpdateNTPConfigRequest
-	41, // 40: pilab.cloud.frontend.v1.HostService.UpdateTimezone:input_type -> pilab.cloud.frontend.v1.UpdateTimezoneRequest
-	42, // 41: pilab.cloud.frontend.v1.HostService.UpdateDNSSettings:input_type -> pilab.cloud.frontend.v1.UpdateDNSSettingsRequest
-	43, // 42: pilab.cloud.frontend.v1.HostService.UpdateRoutingSettings:input_type -> pilab.cloud.frontend.v1.UpdateRoutingSettingsRequest
-	36, // 43: pilab.cloud.frontend.v1.HostService.GetMaintenanceModeStatus:input_type -> pilab.cloud.frontend.v1.GetMaintenanceModeStatusRequest
-	37, // 44: pilab.cloud.frontend.v1.HostService.EnterMaintenanceMode:input_type -> pilab.cloud.frontend.v1.EnterMaintenanceModeRequest
-	38, // 45: pilab.cloud.frontend.v1.HostService.ExitMaintenanceMode:input_type -> pilab.cloud.frontend.v1.ExitMaintenanceModeRequest
-	39, // 46: pilab.cloud.frontend.v1.HostService.ListHostNetworkInterfaces:input_type -> pilab.cloud.frontend.v1.ListHostNetworkInterfacesRequest
-	46, // 47: pilab.cloud.frontend.v1.HostService.EnableNetworkInterface:input_type -> pilab.cloud.frontend.v1.EnableNetworkInterfaceRequest
-	47, // 48: pilab.cloud.frontend.v1.HostService.DisableNetworkInterface:input_type -> pilab.cloud.frontend.v1.DisableNetworkInterfaceRequest
-	4,  // 49: pilab.cloud.frontend.v1.HostService.GetHostOverview:output_type -> pilab.cloud.frontend.v1.HostOverview
-	13, // 50: pilab.cloud.frontend.v1.HostService.GetMonitoringData:output_type -> pilab.cloud.frontend.v1.MonitoringDataResponse
-	15, // 51: pilab.cloud.frontend.v1.HostService.ListHostVMs:output_type -> pilab.cloud.frontend.v1.HostVMsResponse
-	17, // 52: pilab.cloud.frontend.v1.HostService.GetHostPermissions:output_type -> pilab.cloud.frontend.v1.HostPermissionsResponse
-	19, // 53: pilab.cloud.frontend.v1.HostService.ListHostDatastores:output_type -> pilab.cloud.frontend.v1.HostDatastoresResponse
-	55, // 54: pilab.cloud.frontend.v1.HostService.MountDatastore:output_type -> pilab.cloud.frontend.v1.MountDatastoreResponse
-	56, // 55: pilab.cloud.frontend.v1.HostService.UnmountDatastore:output_type -> pilab.cloud.frontend.v1.UnmountDatastoreResponse
-	21, // 56: pilab.cloud.frontend.v1.HostService.GetHostSystemSettings:output_type -> pilab.cloud.frontend.v1.HostSystemSettingsResponse
-	49, // 57: pilab.cloud.frontend.v1.HostService.UpdateNTPConfig:output_type -> pilab.cloud.frontend.v1.UpdateNTPConfigResponse
-	50, // 58: pilab.cloud.frontend.v1.HostService.UpdateTimezone:output_type -> pilab.cloud.frontend.v1.UpdateTimezoneResponse
-	51, // 59: pilab.cloud.frontend.v1.HostService.UpdateDNSSettings:output_type -> pilab.cloud.frontend.v1.UpdateDNSSettingsResponse
-	52, // 60: pilab.cloud.frontend.v1.HostService.UpdateRoutingSettings:output_type -> pilab.cloud.frontend.v1.UpdateRoutingSettingsResponse
-	27, // 61: pilab.cloud.frontend.v1.HostService.GetMaintenanceModeStatus:output_type -> pilab.cloud.frontend.v1.MaintenanceModeStatusResponse
-	53, // 62: pilab.cloud.frontend.v1.HostService.EnterMaintenanceMode:output_type -> pilab.cloud.frontend.v1.EnterMaintenanceModeResponse
-	54, // 63: pilab.cloud.frontend.v1.HostService.ExitMaintenanceMode:output_type -> pilab.cloud.frontend.v1.ExitMaintenanceModeResponse
-	28, // 64: pilab.cloud.frontend.v1.HostService.ListHostNetworkInterfaces:output_type -> pilab.cloud.frontend.v1.HostNetworkInterfacesResponse
-	57, // 65: pilab.cloud.frontend.v1.HostService.EnableNetworkInterface:output_type -> pilab.cloud.frontend.v1.EnableNetworkInterfaceResponse
-	58, // 66: pilab.cloud.frontend.v1.HostService.DisableNetworkInterface:output_type -> pilab.cloud.frontend.v1.DisableNetworkInterfaceResponse
+	0,  // 0: pilab.frontend.v1.HostOverview.status:type_name -> pilab.frontend.v1.HostStatus
+	59, // 1: pilab.frontend.v1.HostOverview.uptime:type_name -> google.protobuf.Timestamp
+	5,  // 2: pilab.frontend.v1.HostOverview.cpu_metrics:type_name -> pilab.frontend.v1.CPUMetrics
+	6,  // 3: pilab.frontend.v1.HostOverview.memory_metrics:type_name -> pilab.frontend.v1.MemoryMetrics
+	7,  // 4: pilab.frontend.v1.HostOverview.recent_tasks:type_name -> pilab.frontend.v1.TaskSummary
+	8,  // 5: pilab.frontend.v1.HostOverview.resource_allocation:type_name -> pilab.frontend.v1.ResourceAllocationSummary
+	59, // 6: pilab.frontend.v1.TaskSummary.created_at:type_name -> google.protobuf.Timestamp
+	9,  // 7: pilab.frontend.v1.ResourceAllocationSummary.cpu:type_name -> pilab.frontend.v1.CPUAllocation
+	10, // 8: pilab.frontend.v1.ResourceAllocationSummary.memory:type_name -> pilab.frontend.v1.MemoryAllocation
+	11, // 9: pilab.frontend.v1.ResourceAllocationSummary.storage:type_name -> pilab.frontend.v1.StorageAllocation
+	59, // 10: pilab.frontend.v1.MonitoringDataRequest.start_time:type_name -> google.protobuf.Timestamp
+	59, // 11: pilab.frontend.v1.MonitoringDataRequest.end_time:type_name -> google.protobuf.Timestamp
+	14, // 12: pilab.frontend.v1.MonitoringDataResponse.data_points:type_name -> pilab.frontend.v1.DataPoint
+	59, // 13: pilab.frontend.v1.DataPoint.timestamp:type_name -> google.protobuf.Timestamp
+	16, // 14: pilab.frontend.v1.HostVMsResponse.vms:type_name -> pilab.frontend.v1.VMInfo
+	1,  // 15: pilab.frontend.v1.VMInfo.status:type_name -> pilab.frontend.v1.VMStatus
+	59, // 16: pilab.frontend.v1.VMInfo.uptime:type_name -> google.protobuf.Timestamp
+	18, // 17: pilab.frontend.v1.HostPermissionsResponse.user_permissions:type_name -> pilab.frontend.v1.HostUser
+	59, // 18: pilab.frontend.v1.HostUser.last_login:type_name -> google.protobuf.Timestamp
+	20, // 19: pilab.frontend.v1.HostDatastoresResponse.datastores:type_name -> pilab.frontend.v1.DatastoreInfo
+	2,  // 20: pilab.frontend.v1.DatastoreInfo.type:type_name -> pilab.frontend.v1.DatastoreType
+	22, // 21: pilab.frontend.v1.HostSystemSettingsResponse.general:type_name -> pilab.frontend.v1.GeneralSettings
+	23, // 22: pilab.frontend.v1.HostSystemSettingsResponse.time:type_name -> pilab.frontend.v1.TimeSettings
+	24, // 23: pilab.frontend.v1.HostSystemSettingsResponse.dns:type_name -> pilab.frontend.v1.DNSSettings
+	25, // 24: pilab.frontend.v1.HostSystemSettingsResponse.routing:type_name -> pilab.frontend.v1.RoutingSettings
+	26, // 25: pilab.frontend.v1.RoutingSettings.static_routes:type_name -> pilab.frontend.v1.StaticRoute
+	29, // 26: pilab.frontend.v1.HostNetworkInterfacesResponse.interfaces:type_name -> pilab.frontend.v1.NetworkInterfaceInfo
+	3,  // 27: pilab.frontend.v1.NetworkInterfaceInfo.status:type_name -> pilab.frontend.v1.NetworkInterfaceStatus
+	59, // 28: pilab.frontend.v1.GetMonitoringDataRequest.start_time:type_name -> google.protobuf.Timestamp
+	59, // 29: pilab.frontend.v1.GetMonitoringDataRequest.end_time:type_name -> google.protobuf.Timestamp
+	26, // 30: pilab.frontend.v1.UpdateRoutingSettingsRequest.static_routes:type_name -> pilab.frontend.v1.StaticRoute
+	30, // 31: pilab.frontend.v1.HostService.GetHostOverview:input_type -> pilab.frontend.v1.GetHostOverviewRequest
+	31, // 32: pilab.frontend.v1.HostService.GetMonitoringData:input_type -> pilab.frontend.v1.GetMonitoringDataRequest
+	32, // 33: pilab.frontend.v1.HostService.ListHostVMs:input_type -> pilab.frontend.v1.ListHostVMsRequest
+	33, // 34: pilab.frontend.v1.HostService.GetHostPermissions:input_type -> pilab.frontend.v1.GetHostPermissionsRequest
+	34, // 35: pilab.frontend.v1.HostService.ListHostDatastores:input_type -> pilab.frontend.v1.ListHostDatastoresRequest
+	44, // 36: pilab.frontend.v1.HostService.MountDatastore:input_type -> pilab.frontend.v1.MountDatastoreRequest
+	45, // 37: pilab.frontend.v1.HostService.UnmountDatastore:input_type -> pilab.frontend.v1.UnmountDatastoreRequest
+	35, // 38: pilab.frontend.v1.HostService.GetHostSystemSettings:input_type -> pilab.frontend.v1.GetHostSystemSettingsRequest
+	40, // 39: pilab.frontend.v1.HostService.UpdateNTPConfig:input_type -> pilab.frontend.v1.UpdateNTPConfigRequest
+	41, // 40: pilab.frontend.v1.HostService.UpdateTimezone:input_type -> pilab.frontend.v1.UpdateTimezoneRequest
+	42, // 41: pilab.frontend.v1.HostService.UpdateDNSSettings:input_type -> pilab.frontend.v1.UpdateDNSSettingsRequest
+	43, // 42: pilab.frontend.v1.HostService.UpdateRoutingSettings:input_type -> pilab.frontend.v1.UpdateRoutingSettingsRequest
+	36, // 43: pilab.frontend.v1.HostService.GetMaintenanceModeStatus:input_type -> pilab.frontend.v1.GetMaintenanceModeStatusRequest
+	37, // 44: pilab.frontend.v1.HostService.EnterMaintenanceMode:input_type -> pilab.frontend.v1.EnterMaintenanceModeRequest
+	38, // 45: pilab.frontend.v1.HostService.ExitMaintenanceMode:input_type -> pilab.frontend.v1.ExitMaintenanceModeRequest
+	39, // 46: pilab.frontend.v1.HostService.ListHostNetworkInterfaces:input_type -> pilab.frontend.v1.ListHostNetworkInterfacesRequest
+	46, // 47: pilab.frontend.v1.HostService.EnableNetworkInterface:input_type -> pilab.frontend.v1.EnableNetworkInterfaceRequest
+	47, // 48: pilab.frontend.v1.HostService.DisableNetworkInterface:input_type -> pilab.frontend.v1.DisableNetworkInterfaceRequest
+	4,  // 49: pilab.frontend.v1.HostService.GetHostOverview:output_type -> pilab.frontend.v1.HostOverview
+	13, // 50: pilab.frontend.v1.HostService.GetMonitoringData:output_type -> pilab.frontend.v1.MonitoringDataResponse
+	15, // 51: pilab.frontend.v1.HostService.ListHostVMs:output_type -> pilab.frontend.v1.HostVMsResponse
+	17, // 52: pilab.frontend.v1.HostService.GetHostPermissions:output_type -> pilab.frontend.v1.HostPermissionsResponse
+	19, // 53: pilab.frontend.v1.HostService.ListHostDatastores:output_type -> pilab.frontend.v1.HostDatastoresResponse
+	55, // 54: pilab.frontend.v1.HostService.MountDatastore:output_type -> pilab.frontend.v1.MountDatastoreResponse
+	56, // 55: pilab.frontend.v1.HostService.UnmountDatastore:output_type -> pilab.frontend.v1.UnmountDatastoreResponse
+	21, // 56: pilab.frontend.v1.HostService.GetHostSystemSettings:output_type -> pilab.frontend.v1.HostSystemSettingsResponse
+	49, // 57: pilab.frontend.v1.HostService.UpdateNTPConfig:output_type -> pilab.frontend.v1.UpdateNTPConfigResponse
+	50, // 58: pilab.frontend.v1.HostService.UpdateTimezone:output_type -> pilab.frontend.v1.UpdateTimezoneResponse
+	51, // 59: pilab.frontend.v1.HostService.UpdateDNSSettings:output_type -> pilab.frontend.v1.UpdateDNSSettingsResponse
+	52, // 60: pilab.frontend.v1.HostService.UpdateRoutingSettings:output_type -> pilab.frontend.v1.UpdateRoutingSettingsResponse
+	27, // 61: pilab.frontend.v1.HostService.GetMaintenanceModeStatus:output_type -> pilab.frontend.v1.MaintenanceModeStatusResponse
+	53, // 62: pilab.frontend.v1.HostService.EnterMaintenanceMode:output_type -> pilab.frontend.v1.EnterMaintenanceModeResponse
+	54, // 63: pilab.frontend.v1.HostService.ExitMaintenanceMode:output_type -> pilab.frontend.v1.ExitMaintenanceModeResponse
+	28, // 64: pilab.frontend.v1.HostService.ListHostNetworkInterfaces:output_type -> pilab.frontend.v1.HostNetworkInterfacesResponse
+	57, // 65: pilab.frontend.v1.HostService.EnableNetworkInterface:output_type -> pilab.frontend.v1.EnableNetworkInterfaceResponse
+	58, // 66: pilab.frontend.v1.HostService.DisableNetworkInterface:output_type -> pilab.frontend.v1.DisableNetworkInterfaceResponse
 	49, // [49:67] is the sub-list for method output_type
 	31, // [31:49] is the sub-list for method input_type
 	31, // [31:31] is the sub-list for extension type_name

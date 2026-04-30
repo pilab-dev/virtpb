@@ -38,24 +38,24 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	HostService_GetHostOverview_FullMethodName           = "/pilab.cloud.frontend.v1.HostService/GetHostOverview"
-	HostService_GetMonitoringData_FullMethodName         = "/pilab.cloud.frontend.v1.HostService/GetMonitoringData"
-	HostService_ListHostVMs_FullMethodName               = "/pilab.cloud.frontend.v1.HostService/ListHostVMs"
-	HostService_GetHostPermissions_FullMethodName        = "/pilab.cloud.frontend.v1.HostService/GetHostPermissions"
-	HostService_ListHostDatastores_FullMethodName        = "/pilab.cloud.frontend.v1.HostService/ListHostDatastores"
-	HostService_MountDatastore_FullMethodName            = "/pilab.cloud.frontend.v1.HostService/MountDatastore"
-	HostService_UnmountDatastore_FullMethodName          = "/pilab.cloud.frontend.v1.HostService/UnmountDatastore"
-	HostService_GetHostSystemSettings_FullMethodName     = "/pilab.cloud.frontend.v1.HostService/GetHostSystemSettings"
-	HostService_UpdateNTPConfig_FullMethodName           = "/pilab.cloud.frontend.v1.HostService/UpdateNTPConfig"
-	HostService_UpdateTimezone_FullMethodName            = "/pilab.cloud.frontend.v1.HostService/UpdateTimezone"
-	HostService_UpdateDNSSettings_FullMethodName         = "/pilab.cloud.frontend.v1.HostService/UpdateDNSSettings"
-	HostService_UpdateRoutingSettings_FullMethodName     = "/pilab.cloud.frontend.v1.HostService/UpdateRoutingSettings"
-	HostService_GetMaintenanceModeStatus_FullMethodName  = "/pilab.cloud.frontend.v1.HostService/GetMaintenanceModeStatus"
-	HostService_EnterMaintenanceMode_FullMethodName      = "/pilab.cloud.frontend.v1.HostService/EnterMaintenanceMode"
-	HostService_ExitMaintenanceMode_FullMethodName       = "/pilab.cloud.frontend.v1.HostService/ExitMaintenanceMode"
-	HostService_ListHostNetworkInterfaces_FullMethodName = "/pilab.cloud.frontend.v1.HostService/ListHostNetworkInterfaces"
-	HostService_EnableNetworkInterface_FullMethodName    = "/pilab.cloud.frontend.v1.HostService/EnableNetworkInterface"
-	HostService_DisableNetworkInterface_FullMethodName   = "/pilab.cloud.frontend.v1.HostService/DisableNetworkInterface"
+	HostService_GetHostOverview_FullMethodName           = "/pilab.frontend.v1.HostService/GetHostOverview"
+	HostService_GetMonitoringData_FullMethodName         = "/pilab.frontend.v1.HostService/GetMonitoringData"
+	HostService_ListHostVMs_FullMethodName               = "/pilab.frontend.v1.HostService/ListHostVMs"
+	HostService_GetHostPermissions_FullMethodName        = "/pilab.frontend.v1.HostService/GetHostPermissions"
+	HostService_ListHostDatastores_FullMethodName        = "/pilab.frontend.v1.HostService/ListHostDatastores"
+	HostService_MountDatastore_FullMethodName            = "/pilab.frontend.v1.HostService/MountDatastore"
+	HostService_UnmountDatastore_FullMethodName          = "/pilab.frontend.v1.HostService/UnmountDatastore"
+	HostService_GetHostSystemSettings_FullMethodName     = "/pilab.frontend.v1.HostService/GetHostSystemSettings"
+	HostService_UpdateNTPConfig_FullMethodName           = "/pilab.frontend.v1.HostService/UpdateNTPConfig"
+	HostService_UpdateTimezone_FullMethodName            = "/pilab.frontend.v1.HostService/UpdateTimezone"
+	HostService_UpdateDNSSettings_FullMethodName         = "/pilab.frontend.v1.HostService/UpdateDNSSettings"
+	HostService_UpdateRoutingSettings_FullMethodName     = "/pilab.frontend.v1.HostService/UpdateRoutingSettings"
+	HostService_GetMaintenanceModeStatus_FullMethodName  = "/pilab.frontend.v1.HostService/GetMaintenanceModeStatus"
+	HostService_EnterMaintenanceMode_FullMethodName      = "/pilab.frontend.v1.HostService/EnterMaintenanceMode"
+	HostService_ExitMaintenanceMode_FullMethodName       = "/pilab.frontend.v1.HostService/ExitMaintenanceMode"
+	HostService_ListHostNetworkInterfaces_FullMethodName = "/pilab.frontend.v1.HostService/ListHostNetworkInterfaces"
+	HostService_EnableNetworkInterface_FullMethodName    = "/pilab.frontend.v1.HostService/EnableNetworkInterface"
+	HostService_DisableNetworkInterface_FullMethodName   = "/pilab.frontend.v1.HostService/DisableNetworkInterface"
 )
 
 // HostServiceClient is the client API for HostService service.
@@ -721,7 +721,7 @@ func _HostService_DisableNetworkInterface_Handler(srv interface{}, ctx context.C
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var HostService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.frontend.v1.HostService",
+	ServiceName: "pilab.frontend.v1.HostService",
 	HandlerType: (*HostServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

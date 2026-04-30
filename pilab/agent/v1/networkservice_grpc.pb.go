@@ -38,33 +38,33 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	NetworkService_OvsBridgeCreate_FullMethodName  = "/pilab.cloud.agent.v1.NetworkService/OvsBridgeCreate"
-	NetworkService_OvsBridgeDelete_FullMethodName  = "/pilab.cloud.agent.v1.NetworkService/OvsBridgeDelete"
-	NetworkService_OvsBridgeList_FullMethodName    = "/pilab.cloud.agent.v1.NetworkService/OvsBridgeList"
-	NetworkService_OvsBridgeGet_FullMethodName     = "/pilab.cloud.agent.v1.NetworkService/OvsBridgeGet"
-	NetworkService_OvsPortCreate_FullMethodName    = "/pilab.cloud.agent.v1.NetworkService/OvsPortCreate"
-	NetworkService_OvsPortDelete_FullMethodName    = "/pilab.cloud.agent.v1.NetworkService/OvsPortDelete"
-	NetworkService_OvsPortList_FullMethodName      = "/pilab.cloud.agent.v1.NetworkService/OvsPortList"
-	NetworkService_OvsPortGet_FullMethodName       = "/pilab.cloud.agent.v1.NetworkService/OvsPortGet"
-	NetworkService_OvsPortUpdate_FullMethodName    = "/pilab.cloud.agent.v1.NetworkService/OvsPortUpdate"
-	NetworkService_OvsQosRuleCreate_FullMethodName = "/pilab.cloud.agent.v1.NetworkService/OvsQosRuleCreate"
-	NetworkService_OvsQosRuleDelete_FullMethodName = "/pilab.cloud.agent.v1.NetworkService/OvsQosRuleDelete"
-	NetworkService_OvsQosRuleList_FullMethodName   = "/pilab.cloud.agent.v1.NetworkService/OvsQosRuleList"
-	NetworkService_OvsQosRuleGet_FullMethodName    = "/pilab.cloud.agent.v1.NetworkService/OvsQosRuleGet"
-	NetworkService_NetworkCreate_FullMethodName    = "/pilab.cloud.agent.v1.NetworkService/NetworkCreate"
-	NetworkService_NetworkDelete_FullMethodName    = "/pilab.cloud.agent.v1.NetworkService/NetworkDelete"
-	NetworkService_NetworkList_FullMethodName      = "/pilab.cloud.agent.v1.NetworkService/NetworkList"
-	NetworkService_NetworkGet_FullMethodName       = "/pilab.cloud.agent.v1.NetworkService/NetworkGet"
-	NetworkService_NetworkStart_FullMethodName     = "/pilab.cloud.agent.v1.NetworkService/NetworkStart"
-	NetworkService_NetworkStop_FullMethodName      = "/pilab.cloud.agent.v1.NetworkService/NetworkStop"
-	NetworkService_NetworkUpdate_FullMethodName    = "/pilab.cloud.agent.v1.NetworkService/NetworkUpdate"
-	NetworkService_OvsFlowPush_FullMethodName      = "/pilab.cloud.agent.v1.NetworkService/OvsFlowPush"
-	NetworkService_OvsFlowSync_FullMethodName      = "/pilab.cloud.agent.v1.NetworkService/OvsFlowSync"
-	NetworkService_SyncNetwork_FullMethodName      = "/pilab.cloud.agent.v1.NetworkService/SyncNetwork"
-	NetworkService_SyncPort_FullMethodName         = "/pilab.cloud.agent.v1.NetworkService/SyncPort"
-	NetworkService_DeleteNetwork_FullMethodName    = "/pilab.cloud.agent.v1.NetworkService/DeleteNetwork"
-	NetworkService_DeletePort_FullMethodName       = "/pilab.cloud.agent.v1.NetworkService/DeletePort"
-	NetworkService_GetNetworkState_FullMethodName  = "/pilab.cloud.agent.v1.NetworkService/GetNetworkState"
+	NetworkService_OvsBridgeCreate_FullMethodName  = "/pilab.agent.v1.NetworkService/OvsBridgeCreate"
+	NetworkService_OvsBridgeDelete_FullMethodName  = "/pilab.agent.v1.NetworkService/OvsBridgeDelete"
+	NetworkService_OvsBridgeList_FullMethodName    = "/pilab.agent.v1.NetworkService/OvsBridgeList"
+	NetworkService_OvsBridgeGet_FullMethodName     = "/pilab.agent.v1.NetworkService/OvsBridgeGet"
+	NetworkService_OvsPortCreate_FullMethodName    = "/pilab.agent.v1.NetworkService/OvsPortCreate"
+	NetworkService_OvsPortDelete_FullMethodName    = "/pilab.agent.v1.NetworkService/OvsPortDelete"
+	NetworkService_OvsPortList_FullMethodName      = "/pilab.agent.v1.NetworkService/OvsPortList"
+	NetworkService_OvsPortGet_FullMethodName       = "/pilab.agent.v1.NetworkService/OvsPortGet"
+	NetworkService_OvsPortUpdate_FullMethodName    = "/pilab.agent.v1.NetworkService/OvsPortUpdate"
+	NetworkService_OvsQosRuleCreate_FullMethodName = "/pilab.agent.v1.NetworkService/OvsQosRuleCreate"
+	NetworkService_OvsQosRuleDelete_FullMethodName = "/pilab.agent.v1.NetworkService/OvsQosRuleDelete"
+	NetworkService_OvsQosRuleList_FullMethodName   = "/pilab.agent.v1.NetworkService/OvsQosRuleList"
+	NetworkService_OvsQosRuleGet_FullMethodName    = "/pilab.agent.v1.NetworkService/OvsQosRuleGet"
+	NetworkService_NetworkCreate_FullMethodName    = "/pilab.agent.v1.NetworkService/NetworkCreate"
+	NetworkService_NetworkDelete_FullMethodName    = "/pilab.agent.v1.NetworkService/NetworkDelete"
+	NetworkService_NetworkList_FullMethodName      = "/pilab.agent.v1.NetworkService/NetworkList"
+	NetworkService_NetworkGet_FullMethodName       = "/pilab.agent.v1.NetworkService/NetworkGet"
+	NetworkService_NetworkStart_FullMethodName     = "/pilab.agent.v1.NetworkService/NetworkStart"
+	NetworkService_NetworkStop_FullMethodName      = "/pilab.agent.v1.NetworkService/NetworkStop"
+	NetworkService_NetworkUpdate_FullMethodName    = "/pilab.agent.v1.NetworkService/NetworkUpdate"
+	NetworkService_OvsFlowPush_FullMethodName      = "/pilab.agent.v1.NetworkService/OvsFlowPush"
+	NetworkService_OvsFlowSync_FullMethodName      = "/pilab.agent.v1.NetworkService/OvsFlowSync"
+	NetworkService_SyncNetwork_FullMethodName      = "/pilab.agent.v1.NetworkService/SyncNetwork"
+	NetworkService_SyncPort_FullMethodName         = "/pilab.agent.v1.NetworkService/SyncPort"
+	NetworkService_DeleteNetwork_FullMethodName    = "/pilab.agent.v1.NetworkService/DeleteNetwork"
+	NetworkService_DeletePort_FullMethodName       = "/pilab.agent.v1.NetworkService/DeletePort"
+	NetworkService_GetNetworkState_FullMethodName  = "/pilab.agent.v1.NetworkService/GetNetworkState"
 )
 
 // NetworkServiceClient is the client API for NetworkService service.
@@ -1023,7 +1023,7 @@ func _NetworkService_GetNetworkState_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var NetworkService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.agent.v1.NetworkService",
+	ServiceName: "pilab.agent.v1.NetworkService",
 	HandlerType: (*NetworkServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

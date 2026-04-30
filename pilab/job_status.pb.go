@@ -145,7 +145,7 @@ var File_pilab_job_status_proto protoreflect.FileDescriptor
 
 const file_pilab_job_status_proto_rawDesc = "" +
 	"\n" +
-	"\x16pilab/job_status.proto\x12\vpilab.cloud\"\xed\x01\n" +
+	"\x16pilab/job_status.proto\x12\x05pilab\"\xed\x01\n" +
 	"\tJobStatus\x12\x10\n" +
 	"\x03job\x18\x01 \x01(\tR\x03job\x12!\n" +
 	"\felapsed_time\x18\x02 \x01(\x04R\velapsedTime\x12%\n" +
@@ -173,7 +173,7 @@ func file_pilab_job_status_proto_rawDescGZIP() []byte {
 
 var file_pilab_job_status_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_pilab_job_status_proto_goTypes = []any{
-	(*JobStatus)(nil), // 0: pilab.cloud.JobStatus
+	(*JobStatus)(nil), // 0: pilab.JobStatus
 }
 var file_pilab_job_status_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

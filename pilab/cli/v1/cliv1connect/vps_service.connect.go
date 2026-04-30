@@ -57,7 +57,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// VPSServiceName is the fully-qualified name of the VPSService service.
-	VPSServiceName = "pilab.cloud.cli.v1.VPSService"
+	VPSServiceName = "pilab.cli.v1.VPSService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -69,274 +69,274 @@ const (
 // period.
 const (
 	// VPSServiceLoginProcedure is the fully-qualified name of the VPSService's Login RPC.
-	VPSServiceLoginProcedure = "/pilab.cloud.cli.v1.VPSService/Login"
+	VPSServiceLoginProcedure = "/pilab.cli.v1.VPSService/Login"
 	// VPSServiceInitiateDeviceAuthProcedure is the fully-qualified name of the VPSService's
 	// InitiateDeviceAuth RPC.
-	VPSServiceInitiateDeviceAuthProcedure = "/pilab.cloud.cli.v1.VPSService/InitiateDeviceAuth"
+	VPSServiceInitiateDeviceAuthProcedure = "/pilab.cli.v1.VPSService/InitiateDeviceAuth"
 	// VPSServicePollDeviceAuthProcedure is the fully-qualified name of the VPSService's PollDeviceAuth
 	// RPC.
-	VPSServicePollDeviceAuthProcedure = "/pilab.cloud.cli.v1.VPSService/PollDeviceAuth"
+	VPSServicePollDeviceAuthProcedure = "/pilab.cli.v1.VPSService/PollDeviceAuth"
 	// VPSServiceLogoutProcedure is the fully-qualified name of the VPSService's Logout RPC.
-	VPSServiceLogoutProcedure = "/pilab.cloud.cli.v1.VPSService/Logout"
+	VPSServiceLogoutProcedure = "/pilab.cli.v1.VPSService/Logout"
 	// VPSServiceGetCurrentUserProcedure is the fully-qualified name of the VPSService's GetCurrentUser
 	// RPC.
-	VPSServiceGetCurrentUserProcedure = "/pilab.cloud.cli.v1.VPSService/GetCurrentUser"
+	VPSServiceGetCurrentUserProcedure = "/pilab.cli.v1.VPSService/GetCurrentUser"
 	// VPSServiceCreateVMProcedure is the fully-qualified name of the VPSService's CreateVM RPC.
-	VPSServiceCreateVMProcedure = "/pilab.cloud.cli.v1.VPSService/CreateVM"
+	VPSServiceCreateVMProcedure = "/pilab.cli.v1.VPSService/CreateVM"
 	// VPSServiceGetVMProcedure is the fully-qualified name of the VPSService's GetVM RPC.
-	VPSServiceGetVMProcedure = "/pilab.cloud.cli.v1.VPSService/GetVM"
+	VPSServiceGetVMProcedure = "/pilab.cli.v1.VPSService/GetVM"
 	// VPSServiceListVMsProcedure is the fully-qualified name of the VPSService's ListVMs RPC.
-	VPSServiceListVMsProcedure = "/pilab.cloud.cli.v1.VPSService/ListVMs"
+	VPSServiceListVMsProcedure = "/pilab.cli.v1.VPSService/ListVMs"
 	// VPSServiceUpdateVMProcedure is the fully-qualified name of the VPSService's UpdateVM RPC.
-	VPSServiceUpdateVMProcedure = "/pilab.cloud.cli.v1.VPSService/UpdateVM"
+	VPSServiceUpdateVMProcedure = "/pilab.cli.v1.VPSService/UpdateVM"
 	// VPSServiceDeleteVMProcedure is the fully-qualified name of the VPSService's DeleteVM RPC.
-	VPSServiceDeleteVMProcedure = "/pilab.cloud.cli.v1.VPSService/DeleteVM"
+	VPSServiceDeleteVMProcedure = "/pilab.cli.v1.VPSService/DeleteVM"
 	// VPSServiceStartVMProcedure is the fully-qualified name of the VPSService's StartVM RPC.
-	VPSServiceStartVMProcedure = "/pilab.cloud.cli.v1.VPSService/StartVM"
+	VPSServiceStartVMProcedure = "/pilab.cli.v1.VPSService/StartVM"
 	// VPSServiceStopVMProcedure is the fully-qualified name of the VPSService's StopVM RPC.
-	VPSServiceStopVMProcedure = "/pilab.cloud.cli.v1.VPSService/StopVM"
+	VPSServiceStopVMProcedure = "/pilab.cli.v1.VPSService/StopVM"
 	// VPSServiceRestartVMProcedure is the fully-qualified name of the VPSService's RestartVM RPC.
-	VPSServiceRestartVMProcedure = "/pilab.cloud.cli.v1.VPSService/RestartVM"
+	VPSServiceRestartVMProcedure = "/pilab.cli.v1.VPSService/RestartVM"
 	// VPSServicePauseVMProcedure is the fully-qualified name of the VPSService's PauseVM RPC.
-	VPSServicePauseVMProcedure = "/pilab.cloud.cli.v1.VPSService/PauseVM"
+	VPSServicePauseVMProcedure = "/pilab.cli.v1.VPSService/PauseVM"
 	// VPSServiceUnpauseVMProcedure is the fully-qualified name of the VPSService's UnpauseVM RPC.
-	VPSServiceUnpauseVMProcedure = "/pilab.cloud.cli.v1.VPSService/UnpauseVM"
+	VPSServiceUnpauseVMProcedure = "/pilab.cli.v1.VPSService/UnpauseVM"
 	// VPSServiceMigrateVMProcedure is the fully-qualified name of the VPSService's MigrateVM RPC.
-	VPSServiceMigrateVMProcedure = "/pilab.cloud.cli.v1.VPSService/MigrateVM"
+	VPSServiceMigrateVMProcedure = "/pilab.cli.v1.VPSService/MigrateVM"
 	// VPSServiceRebuildVMProcedure is the fully-qualified name of the VPSService's RebuildVM RPC.
-	VPSServiceRebuildVMProcedure = "/pilab.cloud.cli.v1.VPSService/RebuildVM"
+	VPSServiceRebuildVMProcedure = "/pilab.cli.v1.VPSService/RebuildVM"
 	// VPSServiceCloneVMProcedure is the fully-qualified name of the VPSService's CloneVM RPC.
-	VPSServiceCloneVMProcedure = "/pilab.cloud.cli.v1.VPSService/CloneVM"
+	VPSServiceCloneVMProcedure = "/pilab.cli.v1.VPSService/CloneVM"
 	// VPSServiceLinkedCloneVMProcedure is the fully-qualified name of the VPSService's LinkedCloneVM
 	// RPC.
-	VPSServiceLinkedCloneVMProcedure = "/pilab.cloud.cli.v1.VPSService/LinkedCloneVM"
+	VPSServiceLinkedCloneVMProcedure = "/pilab.cli.v1.VPSService/LinkedCloneVM"
 	// VPSServiceGetVMConsoleProcedure is the fully-qualified name of the VPSService's GetVMConsole RPC.
-	VPSServiceGetVMConsoleProcedure = "/pilab.cloud.cli.v1.VPSService/GetVMConsole"
+	VPSServiceGetVMConsoleProcedure = "/pilab.cli.v1.VPSService/GetVMConsole"
 	// VPSServiceUpdateVMResourcesProcedure is the fully-qualified name of the VPSService's
 	// UpdateVMResources RPC.
-	VPSServiceUpdateVMResourcesProcedure = "/pilab.cloud.cli.v1.VPSService/UpdateVMResources"
+	VPSServiceUpdateVMResourcesProcedure = "/pilab.cli.v1.VPSService/UpdateVMResources"
 	// VPSServiceGetVMResourcesProcedure is the fully-qualified name of the VPSService's GetVMResources
 	// RPC.
-	VPSServiceGetVMResourcesProcedure = "/pilab.cloud.cli.v1.VPSService/GetVMResources"
+	VPSServiceGetVMResourcesProcedure = "/pilab.cli.v1.VPSService/GetVMResources"
 	// VPSServiceCreateDiskProcedure is the fully-qualified name of the VPSService's CreateDisk RPC.
-	VPSServiceCreateDiskProcedure = "/pilab.cloud.cli.v1.VPSService/CreateDisk"
+	VPSServiceCreateDiskProcedure = "/pilab.cli.v1.VPSService/CreateDisk"
 	// VPSServiceGetDiskProcedure is the fully-qualified name of the VPSService's GetDisk RPC.
-	VPSServiceGetDiskProcedure = "/pilab.cloud.cli.v1.VPSService/GetDisk"
+	VPSServiceGetDiskProcedure = "/pilab.cli.v1.VPSService/GetDisk"
 	// VPSServiceListDisksProcedure is the fully-qualified name of the VPSService's ListDisks RPC.
-	VPSServiceListDisksProcedure = "/pilab.cloud.cli.v1.VPSService/ListDisks"
+	VPSServiceListDisksProcedure = "/pilab.cli.v1.VPSService/ListDisks"
 	// VPSServiceUpdateDiskProcedure is the fully-qualified name of the VPSService's UpdateDisk RPC.
-	VPSServiceUpdateDiskProcedure = "/pilab.cloud.cli.v1.VPSService/UpdateDisk"
+	VPSServiceUpdateDiskProcedure = "/pilab.cli.v1.VPSService/UpdateDisk"
 	// VPSServiceDeleteDiskProcedure is the fully-qualified name of the VPSService's DeleteDisk RPC.
-	VPSServiceDeleteDiskProcedure = "/pilab.cloud.cli.v1.VPSService/DeleteDisk"
+	VPSServiceDeleteDiskProcedure = "/pilab.cli.v1.VPSService/DeleteDisk"
 	// VPSServiceExtendDiskProcedure is the fully-qualified name of the VPSService's ExtendDisk RPC.
-	VPSServiceExtendDiskProcedure = "/pilab.cloud.cli.v1.VPSService/ExtendDisk"
+	VPSServiceExtendDiskProcedure = "/pilab.cli.v1.VPSService/ExtendDisk"
 	// VPSServiceAttachDiskProcedure is the fully-qualified name of the VPSService's AttachDisk RPC.
-	VPSServiceAttachDiskProcedure = "/pilab.cloud.cli.v1.VPSService/AttachDisk"
+	VPSServiceAttachDiskProcedure = "/pilab.cli.v1.VPSService/AttachDisk"
 	// VPSServiceDetachDiskProcedure is the fully-qualified name of the VPSService's DetachDisk RPC.
-	VPSServiceDetachDiskProcedure = "/pilab.cloud.cli.v1.VPSService/DetachDisk"
+	VPSServiceDetachDiskProcedure = "/pilab.cli.v1.VPSService/DetachDisk"
 	// VPSServiceGetImageProcedure is the fully-qualified name of the VPSService's GetImage RPC.
-	VPSServiceGetImageProcedure = "/pilab.cloud.cli.v1.VPSService/GetImage"
+	VPSServiceGetImageProcedure = "/pilab.cli.v1.VPSService/GetImage"
 	// VPSServiceListImagesProcedure is the fully-qualified name of the VPSService's ListImages RPC.
-	VPSServiceListImagesProcedure = "/pilab.cloud.cli.v1.VPSService/ListImages"
+	VPSServiceListImagesProcedure = "/pilab.cli.v1.VPSService/ListImages"
 	// VPSServiceCreateImageProcedure is the fully-qualified name of the VPSService's CreateImage RPC.
-	VPSServiceCreateImageProcedure = "/pilab.cloud.cli.v1.VPSService/CreateImage"
+	VPSServiceCreateImageProcedure = "/pilab.cli.v1.VPSService/CreateImage"
 	// VPSServiceUploadImageProcedure is the fully-qualified name of the VPSService's UploadImage RPC.
-	VPSServiceUploadImageProcedure = "/pilab.cloud.cli.v1.VPSService/UploadImage"
+	VPSServiceUploadImageProcedure = "/pilab.cli.v1.VPSService/UploadImage"
 	// VPSServiceDeleteImageProcedure is the fully-qualified name of the VPSService's DeleteImage RPC.
-	VPSServiceDeleteImageProcedure = "/pilab.cloud.cli.v1.VPSService/DeleteImage"
+	VPSServiceDeleteImageProcedure = "/pilab.cli.v1.VPSService/DeleteImage"
 	// VPSServiceGetSnapshotProcedure is the fully-qualified name of the VPSService's GetSnapshot RPC.
-	VPSServiceGetSnapshotProcedure = "/pilab.cloud.cli.v1.VPSService/GetSnapshot"
+	VPSServiceGetSnapshotProcedure = "/pilab.cli.v1.VPSService/GetSnapshot"
 	// VPSServiceListSnapshotsProcedure is the fully-qualified name of the VPSService's ListSnapshots
 	// RPC.
-	VPSServiceListSnapshotsProcedure = "/pilab.cloud.cli.v1.VPSService/ListSnapshots"
+	VPSServiceListSnapshotsProcedure = "/pilab.cli.v1.VPSService/ListSnapshots"
 	// VPSServiceCreateSnapshotProcedure is the fully-qualified name of the VPSService's CreateSnapshot
 	// RPC.
-	VPSServiceCreateSnapshotProcedure = "/pilab.cloud.cli.v1.VPSService/CreateSnapshot"
+	VPSServiceCreateSnapshotProcedure = "/pilab.cli.v1.VPSService/CreateSnapshot"
 	// VPSServiceRestoreSnapshotProcedure is the fully-qualified name of the VPSService's
 	// RestoreSnapshot RPC.
-	VPSServiceRestoreSnapshotProcedure = "/pilab.cloud.cli.v1.VPSService/RestoreSnapshot"
+	VPSServiceRestoreSnapshotProcedure = "/pilab.cli.v1.VPSService/RestoreSnapshot"
 	// VPSServiceDeleteSnapshotProcedure is the fully-qualified name of the VPSService's DeleteSnapshot
 	// RPC.
-	VPSServiceDeleteSnapshotProcedure = "/pilab.cloud.cli.v1.VPSService/DeleteSnapshot"
+	VPSServiceDeleteSnapshotProcedure = "/pilab.cli.v1.VPSService/DeleteSnapshot"
 	// VPSServiceConsolidateSnapshotProcedure is the fully-qualified name of the VPSService's
 	// ConsolidateSnapshot RPC.
-	VPSServiceConsolidateSnapshotProcedure = "/pilab.cloud.cli.v1.VPSService/ConsolidateSnapshot"
+	VPSServiceConsolidateSnapshotProcedure = "/pilab.cli.v1.VPSService/ConsolidateSnapshot"
 	// VPSServiceCreateNetworkProcedure is the fully-qualified name of the VPSService's CreateNetwork
 	// RPC.
-	VPSServiceCreateNetworkProcedure = "/pilab.cloud.cli.v1.VPSService/CreateNetwork"
+	VPSServiceCreateNetworkProcedure = "/pilab.cli.v1.VPSService/CreateNetwork"
 	// VPSServiceGetNetworkProcedure is the fully-qualified name of the VPSService's GetNetwork RPC.
-	VPSServiceGetNetworkProcedure = "/pilab.cloud.cli.v1.VPSService/GetNetwork"
+	VPSServiceGetNetworkProcedure = "/pilab.cli.v1.VPSService/GetNetwork"
 	// VPSServiceListNetworksProcedure is the fully-qualified name of the VPSService's ListNetworks RPC.
-	VPSServiceListNetworksProcedure = "/pilab.cloud.cli.v1.VPSService/ListNetworks"
+	VPSServiceListNetworksProcedure = "/pilab.cli.v1.VPSService/ListNetworks"
 	// VPSServiceUpdateNetworkProcedure is the fully-qualified name of the VPSService's UpdateNetwork
 	// RPC.
-	VPSServiceUpdateNetworkProcedure = "/pilab.cloud.cli.v1.VPSService/UpdateNetwork"
+	VPSServiceUpdateNetworkProcedure = "/pilab.cli.v1.VPSService/UpdateNetwork"
 	// VPSServiceDeleteNetworkProcedure is the fully-qualified name of the VPSService's DeleteNetwork
 	// RPC.
-	VPSServiceDeleteNetworkProcedure = "/pilab.cloud.cli.v1.VPSService/DeleteNetwork"
+	VPSServiceDeleteNetworkProcedure = "/pilab.cli.v1.VPSService/DeleteNetwork"
 	// VPSServiceGetNetworkInterfaceProcedure is the fully-qualified name of the VPSService's
 	// GetNetworkInterface RPC.
-	VPSServiceGetNetworkInterfaceProcedure = "/pilab.cloud.cli.v1.VPSService/GetNetworkInterface"
+	VPSServiceGetNetworkInterfaceProcedure = "/pilab.cli.v1.VPSService/GetNetworkInterface"
 	// VPSServiceListNetworkInterfacesProcedure is the fully-qualified name of the VPSService's
 	// ListNetworkInterfaces RPC.
-	VPSServiceListNetworkInterfacesProcedure = "/pilab.cloud.cli.v1.VPSService/ListNetworkInterfaces"
+	VPSServiceListNetworkInterfacesProcedure = "/pilab.cli.v1.VPSService/ListNetworkInterfaces"
 	// VPSServiceAddNetworkInterfaceProcedure is the fully-qualified name of the VPSService's
 	// AddNetworkInterface RPC.
-	VPSServiceAddNetworkInterfaceProcedure = "/pilab.cloud.cli.v1.VPSService/AddNetworkInterface"
+	VPSServiceAddNetworkInterfaceProcedure = "/pilab.cli.v1.VPSService/AddNetworkInterface"
 	// VPSServiceRemoveNetworkInterfaceProcedure is the fully-qualified name of the VPSService's
 	// RemoveNetworkInterface RPC.
-	VPSServiceRemoveNetworkInterfaceProcedure = "/pilab.cloud.cli.v1.VPSService/RemoveNetworkInterface"
+	VPSServiceRemoveNetworkInterfaceProcedure = "/pilab.cli.v1.VPSService/RemoveNetworkInterface"
 	// VPSServiceCreateVSwitchProcedure is the fully-qualified name of the VPSService's CreateVSwitch
 	// RPC.
-	VPSServiceCreateVSwitchProcedure = "/pilab.cloud.cli.v1.VPSService/CreateVSwitch"
+	VPSServiceCreateVSwitchProcedure = "/pilab.cli.v1.VPSService/CreateVSwitch"
 	// VPSServiceGetVSwitchProcedure is the fully-qualified name of the VPSService's GetVSwitch RPC.
-	VPSServiceGetVSwitchProcedure = "/pilab.cloud.cli.v1.VPSService/GetVSwitch"
+	VPSServiceGetVSwitchProcedure = "/pilab.cli.v1.VPSService/GetVSwitch"
 	// VPSServiceListVSwitchesProcedure is the fully-qualified name of the VPSService's ListVSwitches
 	// RPC.
-	VPSServiceListVSwitchesProcedure = "/pilab.cloud.cli.v1.VPSService/ListVSwitches"
+	VPSServiceListVSwitchesProcedure = "/pilab.cli.v1.VPSService/ListVSwitches"
 	// VPSServiceDeleteVSwitchProcedure is the fully-qualified name of the VPSService's DeleteVSwitch
 	// RPC.
-	VPSServiceDeleteVSwitchProcedure = "/pilab.cloud.cli.v1.VPSService/DeleteVSwitch"
+	VPSServiceDeleteVSwitchProcedure = "/pilab.cli.v1.VPSService/DeleteVSwitch"
 	// VPSServiceCreatePortGroupProcedure is the fully-qualified name of the VPSService's
 	// CreatePortGroup RPC.
-	VPSServiceCreatePortGroupProcedure = "/pilab.cloud.cli.v1.VPSService/CreatePortGroup"
+	VPSServiceCreatePortGroupProcedure = "/pilab.cli.v1.VPSService/CreatePortGroup"
 	// VPSServiceGetPortGroupProcedure is the fully-qualified name of the VPSService's GetPortGroup RPC.
-	VPSServiceGetPortGroupProcedure = "/pilab.cloud.cli.v1.VPSService/GetPortGroup"
+	VPSServiceGetPortGroupProcedure = "/pilab.cli.v1.VPSService/GetPortGroup"
 	// VPSServiceListPortGroupsProcedure is the fully-qualified name of the VPSService's ListPortGroups
 	// RPC.
-	VPSServiceListPortGroupsProcedure = "/pilab.cloud.cli.v1.VPSService/ListPortGroups"
+	VPSServiceListPortGroupsProcedure = "/pilab.cli.v1.VPSService/ListPortGroups"
 	// VPSServiceDeletePortGroupProcedure is the fully-qualified name of the VPSService's
 	// DeletePortGroup RPC.
-	VPSServiceDeletePortGroupProcedure = "/pilab.cloud.cli.v1.VPSService/DeletePortGroup"
+	VPSServiceDeletePortGroupProcedure = "/pilab.cli.v1.VPSService/DeletePortGroup"
 	// VPSServiceCreatePublicIPProcedure is the fully-qualified name of the VPSService's CreatePublicIP
 	// RPC.
-	VPSServiceCreatePublicIPProcedure = "/pilab.cloud.cli.v1.VPSService/CreatePublicIP"
+	VPSServiceCreatePublicIPProcedure = "/pilab.cli.v1.VPSService/CreatePublicIP"
 	// VPSServiceGetPublicIPProcedure is the fully-qualified name of the VPSService's GetPublicIP RPC.
-	VPSServiceGetPublicIPProcedure = "/pilab.cloud.cli.v1.VPSService/GetPublicIP"
+	VPSServiceGetPublicIPProcedure = "/pilab.cli.v1.VPSService/GetPublicIP"
 	// VPSServiceListPublicIPsProcedure is the fully-qualified name of the VPSService's ListPublicIPs
 	// RPC.
-	VPSServiceListPublicIPsProcedure = "/pilab.cloud.cli.v1.VPSService/ListPublicIPs"
+	VPSServiceListPublicIPsProcedure = "/pilab.cli.v1.VPSService/ListPublicIPs"
 	// VPSServiceUpdatePublicIPProcedure is the fully-qualified name of the VPSService's UpdatePublicIP
 	// RPC.
-	VPSServiceUpdatePublicIPProcedure = "/pilab.cloud.cli.v1.VPSService/UpdatePublicIP"
+	VPSServiceUpdatePublicIPProcedure = "/pilab.cli.v1.VPSService/UpdatePublicIP"
 	// VPSServiceDeletePublicIPProcedure is the fully-qualified name of the VPSService's DeletePublicIP
 	// RPC.
-	VPSServiceDeletePublicIPProcedure = "/pilab.cloud.cli.v1.VPSService/DeletePublicIP"
+	VPSServiceDeletePublicIPProcedure = "/pilab.cli.v1.VPSService/DeletePublicIP"
 	// VPSServiceAssignPublicIPProcedure is the fully-qualified name of the VPSService's AssignPublicIP
 	// RPC.
-	VPSServiceAssignPublicIPProcedure = "/pilab.cloud.cli.v1.VPSService/AssignPublicIP"
+	VPSServiceAssignPublicIPProcedure = "/pilab.cli.v1.VPSService/AssignPublicIP"
 	// VPSServiceUnassignPublicIPProcedure is the fully-qualified name of the VPSService's
 	// UnassignPublicIP RPC.
-	VPSServiceUnassignPublicIPProcedure = "/pilab.cloud.cli.v1.VPSService/UnassignPublicIP"
+	VPSServiceUnassignPublicIPProcedure = "/pilab.cli.v1.VPSService/UnassignPublicIP"
 	// VPSServiceCreateSecurityGroupProcedure is the fully-qualified name of the VPSService's
 	// CreateSecurityGroup RPC.
-	VPSServiceCreateSecurityGroupProcedure = "/pilab.cloud.cli.v1.VPSService/CreateSecurityGroup"
+	VPSServiceCreateSecurityGroupProcedure = "/pilab.cli.v1.VPSService/CreateSecurityGroup"
 	// VPSServiceGetSecurityGroupProcedure is the fully-qualified name of the VPSService's
 	// GetSecurityGroup RPC.
-	VPSServiceGetSecurityGroupProcedure = "/pilab.cloud.cli.v1.VPSService/GetSecurityGroup"
+	VPSServiceGetSecurityGroupProcedure = "/pilab.cli.v1.VPSService/GetSecurityGroup"
 	// VPSServiceListSecurityGroupsProcedure is the fully-qualified name of the VPSService's
 	// ListSecurityGroups RPC.
-	VPSServiceListSecurityGroupsProcedure = "/pilab.cloud.cli.v1.VPSService/ListSecurityGroups"
+	VPSServiceListSecurityGroupsProcedure = "/pilab.cli.v1.VPSService/ListSecurityGroups"
 	// VPSServiceUpdateSecurityGroupProcedure is the fully-qualified name of the VPSService's
 	// UpdateSecurityGroup RPC.
-	VPSServiceUpdateSecurityGroupProcedure = "/pilab.cloud.cli.v1.VPSService/UpdateSecurityGroup"
+	VPSServiceUpdateSecurityGroupProcedure = "/pilab.cli.v1.VPSService/UpdateSecurityGroup"
 	// VPSServiceDeleteSecurityGroupProcedure is the fully-qualified name of the VPSService's
 	// DeleteSecurityGroup RPC.
-	VPSServiceDeleteSecurityGroupProcedure = "/pilab.cloud.cli.v1.VPSService/DeleteSecurityGroup"
+	VPSServiceDeleteSecurityGroupProcedure = "/pilab.cli.v1.VPSService/DeleteSecurityGroup"
 	// VPSServiceAddSecurityRuleProcedure is the fully-qualified name of the VPSService's
 	// AddSecurityRule RPC.
-	VPSServiceAddSecurityRuleProcedure = "/pilab.cloud.cli.v1.VPSService/AddSecurityRule"
+	VPSServiceAddSecurityRuleProcedure = "/pilab.cli.v1.VPSService/AddSecurityRule"
 	// VPSServiceRemoveSecurityRuleProcedure is the fully-qualified name of the VPSService's
 	// RemoveSecurityRule RPC.
-	VPSServiceRemoveSecurityRuleProcedure = "/pilab.cloud.cli.v1.VPSService/RemoveSecurityRule"
+	VPSServiceRemoveSecurityRuleProcedure = "/pilab.cli.v1.VPSService/RemoveSecurityRule"
 	// VPSServiceCreateTemplateProcedure is the fully-qualified name of the VPSService's CreateTemplate
 	// RPC.
-	VPSServiceCreateTemplateProcedure = "/pilab.cloud.cli.v1.VPSService/CreateTemplate"
+	VPSServiceCreateTemplateProcedure = "/pilab.cli.v1.VPSService/CreateTemplate"
 	// VPSServiceGetTemplateProcedure is the fully-qualified name of the VPSService's GetTemplate RPC.
-	VPSServiceGetTemplateProcedure = "/pilab.cloud.cli.v1.VPSService/GetTemplate"
+	VPSServiceGetTemplateProcedure = "/pilab.cli.v1.VPSService/GetTemplate"
 	// VPSServiceListTemplatesProcedure is the fully-qualified name of the VPSService's ListTemplates
 	// RPC.
-	VPSServiceListTemplatesProcedure = "/pilab.cloud.cli.v1.VPSService/ListTemplates"
+	VPSServiceListTemplatesProcedure = "/pilab.cli.v1.VPSService/ListTemplates"
 	// VPSServiceDeleteTemplateProcedure is the fully-qualified name of the VPSService's DeleteTemplate
 	// RPC.
-	VPSServiceDeleteTemplateProcedure = "/pilab.cloud.cli.v1.VPSService/DeleteTemplate"
+	VPSServiceDeleteTemplateProcedure = "/pilab.cli.v1.VPSService/DeleteTemplate"
 	// VPSServiceListOSTemplatesProcedure is the fully-qualified name of the VPSService's
 	// ListOSTemplates RPC.
-	VPSServiceListOSTemplatesProcedure = "/pilab.cloud.cli.v1.VPSService/ListOSTemplates"
+	VPSServiceListOSTemplatesProcedure = "/pilab.cli.v1.VPSService/ListOSTemplates"
 	// VPSServiceGetOSTemplateProcedure is the fully-qualified name of the VPSService's GetOSTemplate
 	// RPC.
-	VPSServiceGetOSTemplateProcedure = "/pilab.cloud.cli.v1.VPSService/GetOSTemplate"
+	VPSServiceGetOSTemplateProcedure = "/pilab.cli.v1.VPSService/GetOSTemplate"
 	// VPSServiceSyncOSTemplatesProcedure is the fully-qualified name of the VPSService's
 	// SyncOSTemplates RPC.
-	VPSServiceSyncOSTemplatesProcedure = "/pilab.cloud.cli.v1.VPSService/SyncOSTemplates"
+	VPSServiceSyncOSTemplatesProcedure = "/pilab.cli.v1.VPSService/SyncOSTemplates"
 	// VPSServiceCreateVMFromOSTemplateProcedure is the fully-qualified name of the VPSService's
 	// CreateVMFromOSTemplate RPC.
-	VPSServiceCreateVMFromOSTemplateProcedure = "/pilab.cloud.cli.v1.VPSService/CreateVMFromOSTemplate"
+	VPSServiceCreateVMFromOSTemplateProcedure = "/pilab.cli.v1.VPSService/CreateVMFromOSTemplate"
 	// VPSServiceGetMetricsProcedure is the fully-qualified name of the VPSService's GetMetrics RPC.
-	VPSServiceGetMetricsProcedure = "/pilab.cloud.cli.v1.VPSService/GetMetrics"
+	VPSServiceGetMetricsProcedure = "/pilab.cli.v1.VPSService/GetMetrics"
 	// VPSServiceGetActivityProcedure is the fully-qualified name of the VPSService's GetActivity RPC.
-	VPSServiceGetActivityProcedure = "/pilab.cloud.cli.v1.VPSService/GetActivity"
+	VPSServiceGetActivityProcedure = "/pilab.cli.v1.VPSService/GetActivity"
 	// VPSServiceCreateOrganizationProcedure is the fully-qualified name of the VPSService's
 	// CreateOrganization RPC.
-	VPSServiceCreateOrganizationProcedure = "/pilab.cloud.cli.v1.VPSService/CreateOrganization"
+	VPSServiceCreateOrganizationProcedure = "/pilab.cli.v1.VPSService/CreateOrganization"
 	// VPSServiceGetOrganizationProcedure is the fully-qualified name of the VPSService's
 	// GetOrganization RPC.
-	VPSServiceGetOrganizationProcedure = "/pilab.cloud.cli.v1.VPSService/GetOrganization"
+	VPSServiceGetOrganizationProcedure = "/pilab.cli.v1.VPSService/GetOrganization"
 	// VPSServiceListOrganizationsProcedure is the fully-qualified name of the VPSService's
 	// ListOrganizations RPC.
-	VPSServiceListOrganizationsProcedure = "/pilab.cloud.cli.v1.VPSService/ListOrganizations"
+	VPSServiceListOrganizationsProcedure = "/pilab.cli.v1.VPSService/ListOrganizations"
 	// VPSServiceUpdateOrganizationProcedure is the fully-qualified name of the VPSService's
 	// UpdateOrganization RPC.
-	VPSServiceUpdateOrganizationProcedure = "/pilab.cloud.cli.v1.VPSService/UpdateOrganization"
+	VPSServiceUpdateOrganizationProcedure = "/pilab.cli.v1.VPSService/UpdateOrganization"
 	// VPSServiceDeleteOrganizationProcedure is the fully-qualified name of the VPSService's
 	// DeleteOrganization RPC.
-	VPSServiceDeleteOrganizationProcedure = "/pilab.cloud.cli.v1.VPSService/DeleteOrganization"
+	VPSServiceDeleteOrganizationProcedure = "/pilab.cli.v1.VPSService/DeleteOrganization"
 	// VPSServiceCreateUserProcedure is the fully-qualified name of the VPSService's CreateUser RPC.
-	VPSServiceCreateUserProcedure = "/pilab.cloud.cli.v1.VPSService/CreateUser"
+	VPSServiceCreateUserProcedure = "/pilab.cli.v1.VPSService/CreateUser"
 	// VPSServiceGetUserProcedure is the fully-qualified name of the VPSService's GetUser RPC.
-	VPSServiceGetUserProcedure = "/pilab.cloud.cli.v1.VPSService/GetUser"
+	VPSServiceGetUserProcedure = "/pilab.cli.v1.VPSService/GetUser"
 	// VPSServiceListUsersProcedure is the fully-qualified name of the VPSService's ListUsers RPC.
-	VPSServiceListUsersProcedure = "/pilab.cloud.cli.v1.VPSService/ListUsers"
+	VPSServiceListUsersProcedure = "/pilab.cli.v1.VPSService/ListUsers"
 	// VPSServiceUpdateUserProcedure is the fully-qualified name of the VPSService's UpdateUser RPC.
-	VPSServiceUpdateUserProcedure = "/pilab.cloud.cli.v1.VPSService/UpdateUser"
+	VPSServiceUpdateUserProcedure = "/pilab.cli.v1.VPSService/UpdateUser"
 	// VPSServiceDeleteUserProcedure is the fully-qualified name of the VPSService's DeleteUser RPC.
-	VPSServiceDeleteUserProcedure = "/pilab.cloud.cli.v1.VPSService/DeleteUser"
+	VPSServiceDeleteUserProcedure = "/pilab.cli.v1.VPSService/DeleteUser"
 	// VPSServiceGetVersionProcedure is the fully-qualified name of the VPSService's GetVersion RPC.
-	VPSServiceGetVersionProcedure = "/pilab.cloud.cli.v1.VPSService/GetVersion"
+	VPSServiceGetVersionProcedure = "/pilab.cli.v1.VPSService/GetVersion"
 	// VPSServiceCreateDatastoreProcedure is the fully-qualified name of the VPSService's
 	// CreateDatastore RPC.
-	VPSServiceCreateDatastoreProcedure = "/pilab.cloud.cli.v1.VPSService/CreateDatastore"
+	VPSServiceCreateDatastoreProcedure = "/pilab.cli.v1.VPSService/CreateDatastore"
 	// VPSServiceGetDatastoreProcedure is the fully-qualified name of the VPSService's GetDatastore RPC.
-	VPSServiceGetDatastoreProcedure = "/pilab.cloud.cli.v1.VPSService/GetDatastore"
+	VPSServiceGetDatastoreProcedure = "/pilab.cli.v1.VPSService/GetDatastore"
 	// VPSServiceListDatastoresProcedure is the fully-qualified name of the VPSService's ListDatastores
 	// RPC.
-	VPSServiceListDatastoresProcedure = "/pilab.cloud.cli.v1.VPSService/ListDatastores"
+	VPSServiceListDatastoresProcedure = "/pilab.cli.v1.VPSService/ListDatastores"
 	// VPSServiceDeleteDatastoreProcedure is the fully-qualified name of the VPSService's
 	// DeleteDatastore RPC.
-	VPSServiceDeleteDatastoreProcedure = "/pilab.cloud.cli.v1.VPSService/DeleteDatastore"
+	VPSServiceDeleteDatastoreProcedure = "/pilab.cli.v1.VPSService/DeleteDatastore"
 	// VPSServiceMountDatastoreProcedure is the fully-qualified name of the VPSService's MountDatastore
 	// RPC.
-	VPSServiceMountDatastoreProcedure = "/pilab.cloud.cli.v1.VPSService/MountDatastore"
+	VPSServiceMountDatastoreProcedure = "/pilab.cli.v1.VPSService/MountDatastore"
 	// VPSServiceUnmountDatastoreProcedure is the fully-qualified name of the VPSService's
 	// UnmountDatastore RPC.
-	VPSServiceUnmountDatastoreProcedure = "/pilab.cloud.cli.v1.VPSService/UnmountDatastore"
+	VPSServiceUnmountDatastoreProcedure = "/pilab.cli.v1.VPSService/UnmountDatastore"
 	// VPSServiceGetHostInfoProcedure is the fully-qualified name of the VPSService's GetHostInfo RPC.
-	VPSServiceGetHostInfoProcedure = "/pilab.cloud.cli.v1.VPSService/GetHostInfo"
+	VPSServiceGetHostInfoProcedure = "/pilab.cli.v1.VPSService/GetHostInfo"
 	// VPSServiceGetNetworkConfigProcedure is the fully-qualified name of the VPSService's
 	// GetNetworkConfig RPC.
-	VPSServiceGetNetworkConfigProcedure = "/pilab.cloud.cli.v1.VPSService/GetNetworkConfig"
+	VPSServiceGetNetworkConfigProcedure = "/pilab.cli.v1.VPSService/GetNetworkConfig"
 	// VPSServiceGetStorageConfigProcedure is the fully-qualified name of the VPSService's
 	// GetStorageConfig RPC.
-	VPSServiceGetStorageConfigProcedure = "/pilab.cloud.cli.v1.VPSService/GetStorageConfig"
+	VPSServiceGetStorageConfigProcedure = "/pilab.cli.v1.VPSService/GetStorageConfig"
 	// VPSServiceGetHostHealthProcedure is the fully-qualified name of the VPSService's GetHostHealth
 	// RPC.
-	VPSServiceGetHostHealthProcedure = "/pilab.cloud.cli.v1.VPSService/GetHostHealth"
+	VPSServiceGetHostHealthProcedure = "/pilab.cli.v1.VPSService/GetHostHealth"
 	// VPSServiceConfigureNetworkProcedure is the fully-qualified name of the VPSService's
 	// ConfigureNetwork RPC.
-	VPSServiceConfigureNetworkProcedure = "/pilab.cloud.cli.v1.VPSService/ConfigureNetwork"
+	VPSServiceConfigureNetworkProcedure = "/pilab.cli.v1.VPSService/ConfigureNetwork"
 )
 
-// VPSServiceClient is a client for the pilab.cloud.cli.v1.VPSService service.
+// VPSServiceClient is a client for the pilab.cli.v1.VPSService service.
 type VPSServiceClient interface {
 	// Authenticate user and return JWT token (legacy username/password)
 	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
@@ -471,10 +471,10 @@ type VPSServiceClient interface {
 	ConfigureNetwork(context.Context, *connect.Request[v1.ConfigureNetworkRequest]) (*connect.Response[emptypb.Empty], error)
 }
 
-// NewVPSServiceClient constructs a client for the pilab.cloud.cli.v1.VPSService service. By
-// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
-// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
+// NewVPSServiceClient constructs a client for the pilab.cli.v1.VPSService service. By default, it
+// uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and sends
+// uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
+// connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -1217,527 +1217,527 @@ type vPSServiceClient struct {
 	configureNetwork       *connect.Client[v1.ConfigureNetworkRequest, emptypb.Empty]
 }
 
-// Login calls pilab.cloud.cli.v1.VPSService.Login.
+// Login calls pilab.cli.v1.VPSService.Login.
 func (c *vPSServiceClient) Login(ctx context.Context, req *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
 	return c.login.CallUnary(ctx, req)
 }
 
-// InitiateDeviceAuth calls pilab.cloud.cli.v1.VPSService.InitiateDeviceAuth.
+// InitiateDeviceAuth calls pilab.cli.v1.VPSService.InitiateDeviceAuth.
 func (c *vPSServiceClient) InitiateDeviceAuth(ctx context.Context, req *connect.Request[v1.InitiateDeviceAuthRequest]) (*connect.Response[v1.InitiateDeviceAuthResponse], error) {
 	return c.initiateDeviceAuth.CallUnary(ctx, req)
 }
 
-// PollDeviceAuth calls pilab.cloud.cli.v1.VPSService.PollDeviceAuth.
+// PollDeviceAuth calls pilab.cli.v1.VPSService.PollDeviceAuth.
 func (c *vPSServiceClient) PollDeviceAuth(ctx context.Context, req *connect.Request[v1.PollDeviceAuthRequest]) (*connect.Response[v1.PollDeviceAuthResponse], error) {
 	return c.pollDeviceAuth.CallUnary(ctx, req)
 }
 
-// Logout calls pilab.cloud.cli.v1.VPSService.Logout.
+// Logout calls pilab.cli.v1.VPSService.Logout.
 func (c *vPSServiceClient) Logout(ctx context.Context, req *connect.Request[v1.LogoutRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.logout.CallUnary(ctx, req)
 }
 
-// GetCurrentUser calls pilab.cloud.cli.v1.VPSService.GetCurrentUser.
+// GetCurrentUser calls pilab.cli.v1.VPSService.GetCurrentUser.
 func (c *vPSServiceClient) GetCurrentUser(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.User], error) {
 	return c.getCurrentUser.CallUnary(ctx, req)
 }
 
-// CreateVM calls pilab.cloud.cli.v1.VPSService.CreateVM.
+// CreateVM calls pilab.cli.v1.VPSService.CreateVM.
 func (c *vPSServiceClient) CreateVM(ctx context.Context, req *connect.Request[v1.CreateVMRequest]) (*connect.Response[v1.VM], error) {
 	return c.createVM.CallUnary(ctx, req)
 }
 
-// GetVM calls pilab.cloud.cli.v1.VPSService.GetVM.
+// GetVM calls pilab.cli.v1.VPSService.GetVM.
 func (c *vPSServiceClient) GetVM(ctx context.Context, req *connect.Request[v1.GetVMRequest]) (*connect.Response[v1.VM], error) {
 	return c.getVM.CallUnary(ctx, req)
 }
 
-// ListVMs calls pilab.cloud.cli.v1.VPSService.ListVMs.
+// ListVMs calls pilab.cli.v1.VPSService.ListVMs.
 func (c *vPSServiceClient) ListVMs(ctx context.Context, req *connect.Request[v1.ListVMsRequest]) (*connect.Response[v1.ListVMsResponse], error) {
 	return c.listVMs.CallUnary(ctx, req)
 }
 
-// UpdateVM calls pilab.cloud.cli.v1.VPSService.UpdateVM.
+// UpdateVM calls pilab.cli.v1.VPSService.UpdateVM.
 func (c *vPSServiceClient) UpdateVM(ctx context.Context, req *connect.Request[v1.UpdateVMRequest]) (*connect.Response[v1.VM], error) {
 	return c.updateVM.CallUnary(ctx, req)
 }
 
-// DeleteVM calls pilab.cloud.cli.v1.VPSService.DeleteVM.
+// DeleteVM calls pilab.cli.v1.VPSService.DeleteVM.
 func (c *vPSServiceClient) DeleteVM(ctx context.Context, req *connect.Request[v1.DeleteVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteVM.CallUnary(ctx, req)
 }
 
-// StartVM calls pilab.cloud.cli.v1.VPSService.StartVM.
+// StartVM calls pilab.cli.v1.VPSService.StartVM.
 func (c *vPSServiceClient) StartVM(ctx context.Context, req *connect.Request[v1.StartVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.startVM.CallUnary(ctx, req)
 }
 
-// StopVM calls pilab.cloud.cli.v1.VPSService.StopVM.
+// StopVM calls pilab.cli.v1.VPSService.StopVM.
 func (c *vPSServiceClient) StopVM(ctx context.Context, req *connect.Request[v1.StopVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.stopVM.CallUnary(ctx, req)
 }
 
-// RestartVM calls pilab.cloud.cli.v1.VPSService.RestartVM.
+// RestartVM calls pilab.cli.v1.VPSService.RestartVM.
 func (c *vPSServiceClient) RestartVM(ctx context.Context, req *connect.Request[v1.RestartVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.restartVM.CallUnary(ctx, req)
 }
 
-// PauseVM calls pilab.cloud.cli.v1.VPSService.PauseVM.
+// PauseVM calls pilab.cli.v1.VPSService.PauseVM.
 func (c *vPSServiceClient) PauseVM(ctx context.Context, req *connect.Request[v1.PauseVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.pauseVM.CallUnary(ctx, req)
 }
 
-// UnpauseVM calls pilab.cloud.cli.v1.VPSService.UnpauseVM.
+// UnpauseVM calls pilab.cli.v1.VPSService.UnpauseVM.
 func (c *vPSServiceClient) UnpauseVM(ctx context.Context, req *connect.Request[v1.UnpauseVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.unpauseVM.CallUnary(ctx, req)
 }
 
-// MigrateVM calls pilab.cloud.cli.v1.VPSService.MigrateVM.
+// MigrateVM calls pilab.cli.v1.VPSService.MigrateVM.
 func (c *vPSServiceClient) MigrateVM(ctx context.Context, req *connect.Request[v1.MigrateVMRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.migrateVM.CallUnary(ctx, req)
 }
 
-// RebuildVM calls pilab.cloud.cli.v1.VPSService.RebuildVM.
+// RebuildVM calls pilab.cli.v1.VPSService.RebuildVM.
 func (c *vPSServiceClient) RebuildVM(ctx context.Context, req *connect.Request[v1.RebuildVMRequest]) (*connect.Response[v1.VM], error) {
 	return c.rebuildVM.CallUnary(ctx, req)
 }
 
-// CloneVM calls pilab.cloud.cli.v1.VPSService.CloneVM.
+// CloneVM calls pilab.cli.v1.VPSService.CloneVM.
 func (c *vPSServiceClient) CloneVM(ctx context.Context, req *connect.Request[v1.CloneVMRequest]) (*connect.Response[v1.VM], error) {
 	return c.cloneVM.CallUnary(ctx, req)
 }
 
-// LinkedCloneVM calls pilab.cloud.cli.v1.VPSService.LinkedCloneVM.
+// LinkedCloneVM calls pilab.cli.v1.VPSService.LinkedCloneVM.
 func (c *vPSServiceClient) LinkedCloneVM(ctx context.Context, req *connect.Request[v1.LinkedCloneVMRequest]) (*connect.Response[v1.VM], error) {
 	return c.linkedCloneVM.CallUnary(ctx, req)
 }
 
-// GetVMConsole calls pilab.cloud.cli.v1.VPSService.GetVMConsole.
+// GetVMConsole calls pilab.cli.v1.VPSService.GetVMConsole.
 func (c *vPSServiceClient) GetVMConsole(ctx context.Context, req *connect.Request[v1.GetVMConsoleRequest]) (*connect.Response[v1.GetVMConsoleResponse], error) {
 	return c.getVMConsole.CallUnary(ctx, req)
 }
 
-// UpdateVMResources calls pilab.cloud.cli.v1.VPSService.UpdateVMResources.
+// UpdateVMResources calls pilab.cli.v1.VPSService.UpdateVMResources.
 func (c *vPSServiceClient) UpdateVMResources(ctx context.Context, req *connect.Request[v1.UpdateVMResourcesRequest]) (*connect.Response[v1.UpdateVMResourcesResponse], error) {
 	return c.updateVMResources.CallUnary(ctx, req)
 }
 
-// GetVMResources calls pilab.cloud.cli.v1.VPSService.GetVMResources.
+// GetVMResources calls pilab.cli.v1.VPSService.GetVMResources.
 func (c *vPSServiceClient) GetVMResources(ctx context.Context, req *connect.Request[v1.GetVMResourcesRequest]) (*connect.Response[v1.GetVMResourcesResponse], error) {
 	return c.getVMResources.CallUnary(ctx, req)
 }
 
-// CreateDisk calls pilab.cloud.cli.v1.VPSService.CreateDisk.
+// CreateDisk calls pilab.cli.v1.VPSService.CreateDisk.
 func (c *vPSServiceClient) CreateDisk(ctx context.Context, req *connect.Request[v1.CreateDiskRequest]) (*connect.Response[v1.Disk], error) {
 	return c.createDisk.CallUnary(ctx, req)
 }
 
-// GetDisk calls pilab.cloud.cli.v1.VPSService.GetDisk.
+// GetDisk calls pilab.cli.v1.VPSService.GetDisk.
 func (c *vPSServiceClient) GetDisk(ctx context.Context, req *connect.Request[v1.GetDiskRequest]) (*connect.Response[v1.Disk], error) {
 	return c.getDisk.CallUnary(ctx, req)
 }
 
-// ListDisks calls pilab.cloud.cli.v1.VPSService.ListDisks.
+// ListDisks calls pilab.cli.v1.VPSService.ListDisks.
 func (c *vPSServiceClient) ListDisks(ctx context.Context, req *connect.Request[v1.ListDisksRequest]) (*connect.Response[v1.ListDisksResponse], error) {
 	return c.listDisks.CallUnary(ctx, req)
 }
 
-// UpdateDisk calls pilab.cloud.cli.v1.VPSService.UpdateDisk.
+// UpdateDisk calls pilab.cli.v1.VPSService.UpdateDisk.
 func (c *vPSServiceClient) UpdateDisk(ctx context.Context, req *connect.Request[v1.UpdateDiskRequest]) (*connect.Response[v1.Disk], error) {
 	return c.updateDisk.CallUnary(ctx, req)
 }
 
-// DeleteDisk calls pilab.cloud.cli.v1.VPSService.DeleteDisk.
+// DeleteDisk calls pilab.cli.v1.VPSService.DeleteDisk.
 func (c *vPSServiceClient) DeleteDisk(ctx context.Context, req *connect.Request[v1.DeleteDiskRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteDisk.CallUnary(ctx, req)
 }
 
-// ExtendDisk calls pilab.cloud.cli.v1.VPSService.ExtendDisk.
+// ExtendDisk calls pilab.cli.v1.VPSService.ExtendDisk.
 func (c *vPSServiceClient) ExtendDisk(ctx context.Context, req *connect.Request[v1.ExtendDiskRequest]) (*connect.Response[v1.Disk], error) {
 	return c.extendDisk.CallUnary(ctx, req)
 }
 
-// AttachDisk calls pilab.cloud.cli.v1.VPSService.AttachDisk.
+// AttachDisk calls pilab.cli.v1.VPSService.AttachDisk.
 func (c *vPSServiceClient) AttachDisk(ctx context.Context, req *connect.Request[v1.AttachDiskRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.attachDisk.CallUnary(ctx, req)
 }
 
-// DetachDisk calls pilab.cloud.cli.v1.VPSService.DetachDisk.
+// DetachDisk calls pilab.cli.v1.VPSService.DetachDisk.
 func (c *vPSServiceClient) DetachDisk(ctx context.Context, req *connect.Request[v1.DetachDiskRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.detachDisk.CallUnary(ctx, req)
 }
 
-// GetImage calls pilab.cloud.cli.v1.VPSService.GetImage.
+// GetImage calls pilab.cli.v1.VPSService.GetImage.
 func (c *vPSServiceClient) GetImage(ctx context.Context, req *connect.Request[v1.GetImageRequest]) (*connect.Response[v1.Image], error) {
 	return c.getImage.CallUnary(ctx, req)
 }
 
-// ListImages calls pilab.cloud.cli.v1.VPSService.ListImages.
+// ListImages calls pilab.cli.v1.VPSService.ListImages.
 func (c *vPSServiceClient) ListImages(ctx context.Context, req *connect.Request[v1.ListImagesRequest]) (*connect.Response[v1.ListImagesResponse], error) {
 	return c.listImages.CallUnary(ctx, req)
 }
 
-// CreateImage calls pilab.cloud.cli.v1.VPSService.CreateImage.
+// CreateImage calls pilab.cli.v1.VPSService.CreateImage.
 func (c *vPSServiceClient) CreateImage(ctx context.Context, req *connect.Request[v1.CreateImageRequest]) (*connect.Response[v1.Image], error) {
 	return c.createImage.CallUnary(ctx, req)
 }
 
-// UploadImage calls pilab.cloud.cli.v1.VPSService.UploadImage.
+// UploadImage calls pilab.cli.v1.VPSService.UploadImage.
 func (c *vPSServiceClient) UploadImage(ctx context.Context, req *connect.Request[v1.UploadImageRequest]) (*connect.Response[v1.Image], error) {
 	return c.uploadImage.CallUnary(ctx, req)
 }
 
-// DeleteImage calls pilab.cloud.cli.v1.VPSService.DeleteImage.
+// DeleteImage calls pilab.cli.v1.VPSService.DeleteImage.
 func (c *vPSServiceClient) DeleteImage(ctx context.Context, req *connect.Request[v1.DeleteImageRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteImage.CallUnary(ctx, req)
 }
 
-// GetSnapshot calls pilab.cloud.cli.v1.VPSService.GetSnapshot.
+// GetSnapshot calls pilab.cli.v1.VPSService.GetSnapshot.
 func (c *vPSServiceClient) GetSnapshot(ctx context.Context, req *connect.Request[v1.GetSnapshotRequest]) (*connect.Response[v1.Snapshot], error) {
 	return c.getSnapshot.CallUnary(ctx, req)
 }
 
-// ListSnapshots calls pilab.cloud.cli.v1.VPSService.ListSnapshots.
+// ListSnapshots calls pilab.cli.v1.VPSService.ListSnapshots.
 func (c *vPSServiceClient) ListSnapshots(ctx context.Context, req *connect.Request[v1.ListSnapshotsRequest]) (*connect.Response[v1.ListSnapshotsResponse], error) {
 	return c.listSnapshots.CallUnary(ctx, req)
 }
 
-// CreateSnapshot calls pilab.cloud.cli.v1.VPSService.CreateSnapshot.
+// CreateSnapshot calls pilab.cli.v1.VPSService.CreateSnapshot.
 func (c *vPSServiceClient) CreateSnapshot(ctx context.Context, req *connect.Request[v1.CreateSnapshotRequest]) (*connect.Response[v1.Snapshot], error) {
 	return c.createSnapshot.CallUnary(ctx, req)
 }
 
-// RestoreSnapshot calls pilab.cloud.cli.v1.VPSService.RestoreSnapshot.
+// RestoreSnapshot calls pilab.cli.v1.VPSService.RestoreSnapshot.
 func (c *vPSServiceClient) RestoreSnapshot(ctx context.Context, req *connect.Request[v1.RestoreSnapshotRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.restoreSnapshot.CallUnary(ctx, req)
 }
 
-// DeleteSnapshot calls pilab.cloud.cli.v1.VPSService.DeleteSnapshot.
+// DeleteSnapshot calls pilab.cli.v1.VPSService.DeleteSnapshot.
 func (c *vPSServiceClient) DeleteSnapshot(ctx context.Context, req *connect.Request[v1.DeleteSnapshotRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteSnapshot.CallUnary(ctx, req)
 }
 
-// ConsolidateSnapshot calls pilab.cloud.cli.v1.VPSService.ConsolidateSnapshot.
+// ConsolidateSnapshot calls pilab.cli.v1.VPSService.ConsolidateSnapshot.
 func (c *vPSServiceClient) ConsolidateSnapshot(ctx context.Context, req *connect.Request[v1.SnapshotConsolidateRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.consolidateSnapshot.CallUnary(ctx, req)
 }
 
-// CreateNetwork calls pilab.cloud.cli.v1.VPSService.CreateNetwork.
+// CreateNetwork calls pilab.cli.v1.VPSService.CreateNetwork.
 func (c *vPSServiceClient) CreateNetwork(ctx context.Context, req *connect.Request[v1.CreateNetworkRequest]) (*connect.Response[v1.Network], error) {
 	return c.createNetwork.CallUnary(ctx, req)
 }
 
-// GetNetwork calls pilab.cloud.cli.v1.VPSService.GetNetwork.
+// GetNetwork calls pilab.cli.v1.VPSService.GetNetwork.
 func (c *vPSServiceClient) GetNetwork(ctx context.Context, req *connect.Request[v1.GetNetworkRequest]) (*connect.Response[v1.Network], error) {
 	return c.getNetwork.CallUnary(ctx, req)
 }
 
-// ListNetworks calls pilab.cloud.cli.v1.VPSService.ListNetworks.
+// ListNetworks calls pilab.cli.v1.VPSService.ListNetworks.
 func (c *vPSServiceClient) ListNetworks(ctx context.Context, req *connect.Request[v1.ListNetworksRequest]) (*connect.Response[v1.ListNetworksResponse], error) {
 	return c.listNetworks.CallUnary(ctx, req)
 }
 
-// UpdateNetwork calls pilab.cloud.cli.v1.VPSService.UpdateNetwork.
+// UpdateNetwork calls pilab.cli.v1.VPSService.UpdateNetwork.
 func (c *vPSServiceClient) UpdateNetwork(ctx context.Context, req *connect.Request[v1.UpdateNetworkRequest]) (*connect.Response[v1.Network], error) {
 	return c.updateNetwork.CallUnary(ctx, req)
 }
 
-// DeleteNetwork calls pilab.cloud.cli.v1.VPSService.DeleteNetwork.
+// DeleteNetwork calls pilab.cli.v1.VPSService.DeleteNetwork.
 func (c *vPSServiceClient) DeleteNetwork(ctx context.Context, req *connect.Request[v1.DeleteNetworkRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteNetwork.CallUnary(ctx, req)
 }
 
-// GetNetworkInterface calls pilab.cloud.cli.v1.VPSService.GetNetworkInterface.
+// GetNetworkInterface calls pilab.cli.v1.VPSService.GetNetworkInterface.
 func (c *vPSServiceClient) GetNetworkInterface(ctx context.Context, req *connect.Request[v1.GetNetworkInterfaceRequest]) (*connect.Response[v1.NetworkInterface], error) {
 	return c.getNetworkInterface.CallUnary(ctx, req)
 }
 
-// ListNetworkInterfaces calls pilab.cloud.cli.v1.VPSService.ListNetworkInterfaces.
+// ListNetworkInterfaces calls pilab.cli.v1.VPSService.ListNetworkInterfaces.
 func (c *vPSServiceClient) ListNetworkInterfaces(ctx context.Context, req *connect.Request[v1.ListNetworkInterfacesRequest]) (*connect.Response[v1.ListNetworkInterfacesResponse], error) {
 	return c.listNetworkInterfaces.CallUnary(ctx, req)
 }
 
-// AddNetworkInterface calls pilab.cloud.cli.v1.VPSService.AddNetworkInterface.
+// AddNetworkInterface calls pilab.cli.v1.VPSService.AddNetworkInterface.
 func (c *vPSServiceClient) AddNetworkInterface(ctx context.Context, req *connect.Request[v1.AddNetworkInterfaceRequest]) (*connect.Response[v1.NetworkInterface], error) {
 	return c.addNetworkInterface.CallUnary(ctx, req)
 }
 
-// RemoveNetworkInterface calls pilab.cloud.cli.v1.VPSService.RemoveNetworkInterface.
+// RemoveNetworkInterface calls pilab.cli.v1.VPSService.RemoveNetworkInterface.
 func (c *vPSServiceClient) RemoveNetworkInterface(ctx context.Context, req *connect.Request[v1.RemoveNetworkInterfaceRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.removeNetworkInterface.CallUnary(ctx, req)
 }
 
-// CreateVSwitch calls pilab.cloud.cli.v1.VPSService.CreateVSwitch.
+// CreateVSwitch calls pilab.cli.v1.VPSService.CreateVSwitch.
 func (c *vPSServiceClient) CreateVSwitch(ctx context.Context, req *connect.Request[v1.CreateVSwitchRequest]) (*connect.Response[v1.VSwitch], error) {
 	return c.createVSwitch.CallUnary(ctx, req)
 }
 
-// GetVSwitch calls pilab.cloud.cli.v1.VPSService.GetVSwitch.
+// GetVSwitch calls pilab.cli.v1.VPSService.GetVSwitch.
 func (c *vPSServiceClient) GetVSwitch(ctx context.Context, req *connect.Request[v1.GetVSwitchRequest]) (*connect.Response[v1.VSwitch], error) {
 	return c.getVSwitch.CallUnary(ctx, req)
 }
 
-// ListVSwitches calls pilab.cloud.cli.v1.VPSService.ListVSwitches.
+// ListVSwitches calls pilab.cli.v1.VPSService.ListVSwitches.
 func (c *vPSServiceClient) ListVSwitches(ctx context.Context, req *connect.Request[v1.ListVSwitchesRequest]) (*connect.Response[v1.ListVSwitchesResponse], error) {
 	return c.listVSwitches.CallUnary(ctx, req)
 }
 
-// DeleteVSwitch calls pilab.cloud.cli.v1.VPSService.DeleteVSwitch.
+// DeleteVSwitch calls pilab.cli.v1.VPSService.DeleteVSwitch.
 func (c *vPSServiceClient) DeleteVSwitch(ctx context.Context, req *connect.Request[v1.DeleteVSwitchRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteVSwitch.CallUnary(ctx, req)
 }
 
-// CreatePortGroup calls pilab.cloud.cli.v1.VPSService.CreatePortGroup.
+// CreatePortGroup calls pilab.cli.v1.VPSService.CreatePortGroup.
 func (c *vPSServiceClient) CreatePortGroup(ctx context.Context, req *connect.Request[v1.CreatePortGroupRequest]) (*connect.Response[v1.PortGroup], error) {
 	return c.createPortGroup.CallUnary(ctx, req)
 }
 
-// GetPortGroup calls pilab.cloud.cli.v1.VPSService.GetPortGroup.
+// GetPortGroup calls pilab.cli.v1.VPSService.GetPortGroup.
 func (c *vPSServiceClient) GetPortGroup(ctx context.Context, req *connect.Request[v1.GetPortGroupRequest]) (*connect.Response[v1.PortGroup], error) {
 	return c.getPortGroup.CallUnary(ctx, req)
 }
 
-// ListPortGroups calls pilab.cloud.cli.v1.VPSService.ListPortGroups.
+// ListPortGroups calls pilab.cli.v1.VPSService.ListPortGroups.
 func (c *vPSServiceClient) ListPortGroups(ctx context.Context, req *connect.Request[v1.ListPortGroupsRequest]) (*connect.Response[v1.ListPortGroupsResponse], error) {
 	return c.listPortGroups.CallUnary(ctx, req)
 }
 
-// DeletePortGroup calls pilab.cloud.cli.v1.VPSService.DeletePortGroup.
+// DeletePortGroup calls pilab.cli.v1.VPSService.DeletePortGroup.
 func (c *vPSServiceClient) DeletePortGroup(ctx context.Context, req *connect.Request[v1.DeletePortGroupRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deletePortGroup.CallUnary(ctx, req)
 }
 
-// CreatePublicIP calls pilab.cloud.cli.v1.VPSService.CreatePublicIP.
+// CreatePublicIP calls pilab.cli.v1.VPSService.CreatePublicIP.
 func (c *vPSServiceClient) CreatePublicIP(ctx context.Context, req *connect.Request[v1.CreatePublicIPRequest]) (*connect.Response[v1.PublicIP], error) {
 	return c.createPublicIP.CallUnary(ctx, req)
 }
 
-// GetPublicIP calls pilab.cloud.cli.v1.VPSService.GetPublicIP.
+// GetPublicIP calls pilab.cli.v1.VPSService.GetPublicIP.
 func (c *vPSServiceClient) GetPublicIP(ctx context.Context, req *connect.Request[v1.GetPublicIPRequest]) (*connect.Response[v1.PublicIP], error) {
 	return c.getPublicIP.CallUnary(ctx, req)
 }
 
-// ListPublicIPs calls pilab.cloud.cli.v1.VPSService.ListPublicIPs.
+// ListPublicIPs calls pilab.cli.v1.VPSService.ListPublicIPs.
 func (c *vPSServiceClient) ListPublicIPs(ctx context.Context, req *connect.Request[v1.ListPublicIPsRequest]) (*connect.Response[v1.ListPublicIPsResponse], error) {
 	return c.listPublicIPs.CallUnary(ctx, req)
 }
 
-// UpdatePublicIP calls pilab.cloud.cli.v1.VPSService.UpdatePublicIP.
+// UpdatePublicIP calls pilab.cli.v1.VPSService.UpdatePublicIP.
 func (c *vPSServiceClient) UpdatePublicIP(ctx context.Context, req *connect.Request[v1.UpdatePublicIPRequest]) (*connect.Response[v1.PublicIP], error) {
 	return c.updatePublicIP.CallUnary(ctx, req)
 }
 
-// DeletePublicIP calls pilab.cloud.cli.v1.VPSService.DeletePublicIP.
+// DeletePublicIP calls pilab.cli.v1.VPSService.DeletePublicIP.
 func (c *vPSServiceClient) DeletePublicIP(ctx context.Context, req *connect.Request[v1.DeletePublicIPRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deletePublicIP.CallUnary(ctx, req)
 }
 
-// AssignPublicIP calls pilab.cloud.cli.v1.VPSService.AssignPublicIP.
+// AssignPublicIP calls pilab.cli.v1.VPSService.AssignPublicIP.
 func (c *vPSServiceClient) AssignPublicIP(ctx context.Context, req *connect.Request[v1.AssignPublicIPRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.assignPublicIP.CallUnary(ctx, req)
 }
 
-// UnassignPublicIP calls pilab.cloud.cli.v1.VPSService.UnassignPublicIP.
+// UnassignPublicIP calls pilab.cli.v1.VPSService.UnassignPublicIP.
 func (c *vPSServiceClient) UnassignPublicIP(ctx context.Context, req *connect.Request[v1.UnassignPublicIPRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.unassignPublicIP.CallUnary(ctx, req)
 }
 
-// CreateSecurityGroup calls pilab.cloud.cli.v1.VPSService.CreateSecurityGroup.
+// CreateSecurityGroup calls pilab.cli.v1.VPSService.CreateSecurityGroup.
 func (c *vPSServiceClient) CreateSecurityGroup(ctx context.Context, req *connect.Request[v1.CreateSecurityGroupRequest]) (*connect.Response[v1.SecurityGroup], error) {
 	return c.createSecurityGroup.CallUnary(ctx, req)
 }
 
-// GetSecurityGroup calls pilab.cloud.cli.v1.VPSService.GetSecurityGroup.
+// GetSecurityGroup calls pilab.cli.v1.VPSService.GetSecurityGroup.
 func (c *vPSServiceClient) GetSecurityGroup(ctx context.Context, req *connect.Request[v1.GetSecurityGroupRequest]) (*connect.Response[v1.SecurityGroup], error) {
 	return c.getSecurityGroup.CallUnary(ctx, req)
 }
 
-// ListSecurityGroups calls pilab.cloud.cli.v1.VPSService.ListSecurityGroups.
+// ListSecurityGroups calls pilab.cli.v1.VPSService.ListSecurityGroups.
 func (c *vPSServiceClient) ListSecurityGroups(ctx context.Context, req *connect.Request[v1.ListSecurityGroupsRequest]) (*connect.Response[v1.ListSecurityGroupsResponse], error) {
 	return c.listSecurityGroups.CallUnary(ctx, req)
 }
 
-// UpdateSecurityGroup calls pilab.cloud.cli.v1.VPSService.UpdateSecurityGroup.
+// UpdateSecurityGroup calls pilab.cli.v1.VPSService.UpdateSecurityGroup.
 func (c *vPSServiceClient) UpdateSecurityGroup(ctx context.Context, req *connect.Request[v1.UpdateSecurityGroupRequest]) (*connect.Response[v1.SecurityGroup], error) {
 	return c.updateSecurityGroup.CallUnary(ctx, req)
 }
 
-// DeleteSecurityGroup calls pilab.cloud.cli.v1.VPSService.DeleteSecurityGroup.
+// DeleteSecurityGroup calls pilab.cli.v1.VPSService.DeleteSecurityGroup.
 func (c *vPSServiceClient) DeleteSecurityGroup(ctx context.Context, req *connect.Request[v1.DeleteSecurityGroupRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteSecurityGroup.CallUnary(ctx, req)
 }
 
-// AddSecurityRule calls pilab.cloud.cli.v1.VPSService.AddSecurityRule.
+// AddSecurityRule calls pilab.cli.v1.VPSService.AddSecurityRule.
 func (c *vPSServiceClient) AddSecurityRule(ctx context.Context, req *connect.Request[v1.AddSecurityRuleRequest]) (*connect.Response[v1.SecurityRule], error) {
 	return c.addSecurityRule.CallUnary(ctx, req)
 }
 
-// RemoveSecurityRule calls pilab.cloud.cli.v1.VPSService.RemoveSecurityRule.
+// RemoveSecurityRule calls pilab.cli.v1.VPSService.RemoveSecurityRule.
 func (c *vPSServiceClient) RemoveSecurityRule(ctx context.Context, req *connect.Request[v1.RemoveSecurityRuleRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.removeSecurityRule.CallUnary(ctx, req)
 }
 
-// CreateTemplate calls pilab.cloud.cli.v1.VPSService.CreateTemplate.
+// CreateTemplate calls pilab.cli.v1.VPSService.CreateTemplate.
 func (c *vPSServiceClient) CreateTemplate(ctx context.Context, req *connect.Request[v1.CreateTemplateRequest]) (*connect.Response[v1.Template], error) {
 	return c.createTemplate.CallUnary(ctx, req)
 }
 
-// GetTemplate calls pilab.cloud.cli.v1.VPSService.GetTemplate.
+// GetTemplate calls pilab.cli.v1.VPSService.GetTemplate.
 func (c *vPSServiceClient) GetTemplate(ctx context.Context, req *connect.Request[v1.GetTemplateRequest]) (*connect.Response[v1.Template], error) {
 	return c.getTemplate.CallUnary(ctx, req)
 }
 
-// ListTemplates calls pilab.cloud.cli.v1.VPSService.ListTemplates.
+// ListTemplates calls pilab.cli.v1.VPSService.ListTemplates.
 func (c *vPSServiceClient) ListTemplates(ctx context.Context, req *connect.Request[v1.ListTemplatesRequest]) (*connect.Response[v1.ListTemplatesResponse], error) {
 	return c.listTemplates.CallUnary(ctx, req)
 }
 
-// DeleteTemplate calls pilab.cloud.cli.v1.VPSService.DeleteTemplate.
+// DeleteTemplate calls pilab.cli.v1.VPSService.DeleteTemplate.
 func (c *vPSServiceClient) DeleteTemplate(ctx context.Context, req *connect.Request[v1.DeleteTemplateRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteTemplate.CallUnary(ctx, req)
 }
 
-// ListOSTemplates calls pilab.cloud.cli.v1.VPSService.ListOSTemplates.
+// ListOSTemplates calls pilab.cli.v1.VPSService.ListOSTemplates.
 func (c *vPSServiceClient) ListOSTemplates(ctx context.Context, req *connect.Request[v1.ListOSTemplatesRequest]) (*connect.Response[v1.ListOSTemplatesResponse], error) {
 	return c.listOSTemplates.CallUnary(ctx, req)
 }
 
-// GetOSTemplate calls pilab.cloud.cli.v1.VPSService.GetOSTemplate.
+// GetOSTemplate calls pilab.cli.v1.VPSService.GetOSTemplate.
 func (c *vPSServiceClient) GetOSTemplate(ctx context.Context, req *connect.Request[v1.GetOSTemplateRequest]) (*connect.Response[v1.OSTemplate], error) {
 	return c.getOSTemplate.CallUnary(ctx, req)
 }
 
-// SyncOSTemplates calls pilab.cloud.cli.v1.VPSService.SyncOSTemplates.
+// SyncOSTemplates calls pilab.cli.v1.VPSService.SyncOSTemplates.
 func (c *vPSServiceClient) SyncOSTemplates(ctx context.Context, req *connect.Request[v1.SyncOSTemplatesRequest]) (*connect.Response[v1.SyncOSTemplatesResponse], error) {
 	return c.syncOSTemplates.CallUnary(ctx, req)
 }
 
-// CreateVMFromOSTemplate calls pilab.cloud.cli.v1.VPSService.CreateVMFromOSTemplate.
+// CreateVMFromOSTemplate calls pilab.cli.v1.VPSService.CreateVMFromOSTemplate.
 func (c *vPSServiceClient) CreateVMFromOSTemplate(ctx context.Context, req *connect.Request[v1.CreateVMFromOSTemplateRequest]) (*connect.Response[v1.VM], error) {
 	return c.createVMFromOSTemplate.CallUnary(ctx, req)
 }
 
-// GetMetrics calls pilab.cloud.cli.v1.VPSService.GetMetrics.
+// GetMetrics calls pilab.cli.v1.VPSService.GetMetrics.
 func (c *vPSServiceClient) GetMetrics(ctx context.Context, req *connect.Request[v1.GetMetricsRequest]) (*connect.Response[v1.GetMetricsResponse], error) {
 	return c.getMetrics.CallUnary(ctx, req)
 }
 
-// GetActivity calls pilab.cloud.cli.v1.VPSService.GetActivity.
+// GetActivity calls pilab.cli.v1.VPSService.GetActivity.
 func (c *vPSServiceClient) GetActivity(ctx context.Context, req *connect.Request[v1.GetActivityRequest]) (*connect.Response[v1.GetActivityResponse], error) {
 	return c.getActivity.CallUnary(ctx, req)
 }
 
-// CreateOrganization calls pilab.cloud.cli.v1.VPSService.CreateOrganization.
+// CreateOrganization calls pilab.cli.v1.VPSService.CreateOrganization.
 func (c *vPSServiceClient) CreateOrganization(ctx context.Context, req *connect.Request[v1.CreateOrganizationRequest]) (*connect.Response[v1.Organization], error) {
 	return c.createOrganization.CallUnary(ctx, req)
 }
 
-// GetOrganization calls pilab.cloud.cli.v1.VPSService.GetOrganization.
+// GetOrganization calls pilab.cli.v1.VPSService.GetOrganization.
 func (c *vPSServiceClient) GetOrganization(ctx context.Context, req *connect.Request[v1.GetOrganizationRequest]) (*connect.Response[v1.Organization], error) {
 	return c.getOrganization.CallUnary(ctx, req)
 }
 
-// ListOrganizations calls pilab.cloud.cli.v1.VPSService.ListOrganizations.
+// ListOrganizations calls pilab.cli.v1.VPSService.ListOrganizations.
 func (c *vPSServiceClient) ListOrganizations(ctx context.Context, req *connect.Request[v1.ListOrganizationsRequest]) (*connect.Response[v1.ListOrganizationsResponse], error) {
 	return c.listOrganizations.CallUnary(ctx, req)
 }
 
-// UpdateOrganization calls pilab.cloud.cli.v1.VPSService.UpdateOrganization.
+// UpdateOrganization calls pilab.cli.v1.VPSService.UpdateOrganization.
 func (c *vPSServiceClient) UpdateOrganization(ctx context.Context, req *connect.Request[v1.UpdateOrganizationRequest]) (*connect.Response[v1.Organization], error) {
 	return c.updateOrganization.CallUnary(ctx, req)
 }
 
-// DeleteOrganization calls pilab.cloud.cli.v1.VPSService.DeleteOrganization.
+// DeleteOrganization calls pilab.cli.v1.VPSService.DeleteOrganization.
 func (c *vPSServiceClient) DeleteOrganization(ctx context.Context, req *connect.Request[v1.DeleteOrganizationRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteOrganization.CallUnary(ctx, req)
 }
 
-// CreateUser calls pilab.cloud.cli.v1.VPSService.CreateUser.
+// CreateUser calls pilab.cli.v1.VPSService.CreateUser.
 func (c *vPSServiceClient) CreateUser(ctx context.Context, req *connect.Request[v1.CreateUserRequest]) (*connect.Response[v1.User], error) {
 	return c.createUser.CallUnary(ctx, req)
 }
 
-// GetUser calls pilab.cloud.cli.v1.VPSService.GetUser.
+// GetUser calls pilab.cli.v1.VPSService.GetUser.
 func (c *vPSServiceClient) GetUser(ctx context.Context, req *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.User], error) {
 	return c.getUser.CallUnary(ctx, req)
 }
 
-// ListUsers calls pilab.cloud.cli.v1.VPSService.ListUsers.
+// ListUsers calls pilab.cli.v1.VPSService.ListUsers.
 func (c *vPSServiceClient) ListUsers(ctx context.Context, req *connect.Request[v1.ListUsersRequest]) (*connect.Response[v1.ListUsersResponse], error) {
 	return c.listUsers.CallUnary(ctx, req)
 }
 
-// UpdateUser calls pilab.cloud.cli.v1.VPSService.UpdateUser.
+// UpdateUser calls pilab.cli.v1.VPSService.UpdateUser.
 func (c *vPSServiceClient) UpdateUser(ctx context.Context, req *connect.Request[v1.UpdateUserRequest]) (*connect.Response[v1.User], error) {
 	return c.updateUser.CallUnary(ctx, req)
 }
 
-// DeleteUser calls pilab.cloud.cli.v1.VPSService.DeleteUser.
+// DeleteUser calls pilab.cli.v1.VPSService.DeleteUser.
 func (c *vPSServiceClient) DeleteUser(ctx context.Context, req *connect.Request[v1.DeleteUserRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteUser.CallUnary(ctx, req)
 }
 
-// GetVersion calls pilab.cloud.cli.v1.VPSService.GetVersion.
+// GetVersion calls pilab.cli.v1.VPSService.GetVersion.
 func (c *vPSServiceClient) GetVersion(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.VersionResponse], error) {
 	return c.getVersion.CallUnary(ctx, req)
 }
 
-// CreateDatastore calls pilab.cloud.cli.v1.VPSService.CreateDatastore.
+// CreateDatastore calls pilab.cli.v1.VPSService.CreateDatastore.
 func (c *vPSServiceClient) CreateDatastore(ctx context.Context, req *connect.Request[v1.CreateDatastoreRequest]) (*connect.Response[v1.Datastore], error) {
 	return c.createDatastore.CallUnary(ctx, req)
 }
 
-// GetDatastore calls pilab.cloud.cli.v1.VPSService.GetDatastore.
+// GetDatastore calls pilab.cli.v1.VPSService.GetDatastore.
 func (c *vPSServiceClient) GetDatastore(ctx context.Context, req *connect.Request[v1.GetDatastoreRequest]) (*connect.Response[v1.Datastore], error) {
 	return c.getDatastore.CallUnary(ctx, req)
 }
 
-// ListDatastores calls pilab.cloud.cli.v1.VPSService.ListDatastores.
+// ListDatastores calls pilab.cli.v1.VPSService.ListDatastores.
 func (c *vPSServiceClient) ListDatastores(ctx context.Context, req *connect.Request[v1.ListDatastoresRequest]) (*connect.Response[v1.ListDatastoresResponse], error) {
 	return c.listDatastores.CallUnary(ctx, req)
 }
 
-// DeleteDatastore calls pilab.cloud.cli.v1.VPSService.DeleteDatastore.
+// DeleteDatastore calls pilab.cli.v1.VPSService.DeleteDatastore.
 func (c *vPSServiceClient) DeleteDatastore(ctx context.Context, req *connect.Request[v1.DeleteDatastoreRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteDatastore.CallUnary(ctx, req)
 }
 
-// MountDatastore calls pilab.cloud.cli.v1.VPSService.MountDatastore.
+// MountDatastore calls pilab.cli.v1.VPSService.MountDatastore.
 func (c *vPSServiceClient) MountDatastore(ctx context.Context, req *connect.Request[v1.MountDatastoreRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.mountDatastore.CallUnary(ctx, req)
 }
 
-// UnmountDatastore calls pilab.cloud.cli.v1.VPSService.UnmountDatastore.
+// UnmountDatastore calls pilab.cli.v1.VPSService.UnmountDatastore.
 func (c *vPSServiceClient) UnmountDatastore(ctx context.Context, req *connect.Request[v1.UnmountDatastoreRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.unmountDatastore.CallUnary(ctx, req)
 }
 
-// GetHostInfo calls pilab.cloud.cli.v1.VPSService.GetHostInfo.
+// GetHostInfo calls pilab.cli.v1.VPSService.GetHostInfo.
 func (c *vPSServiceClient) GetHostInfo(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.HostInfo], error) {
 	return c.getHostInfo.CallUnary(ctx, req)
 }
 
-// GetNetworkConfig calls pilab.cloud.cli.v1.VPSService.GetNetworkConfig.
+// GetNetworkConfig calls pilab.cli.v1.VPSService.GetNetworkConfig.
 func (c *vPSServiceClient) GetNetworkConfig(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.NetworkConfigResponse], error) {
 	return c.getNetworkConfig.CallUnary(ctx, req)
 }
 
-// GetStorageConfig calls pilab.cloud.cli.v1.VPSService.GetStorageConfig.
+// GetStorageConfig calls pilab.cli.v1.VPSService.GetStorageConfig.
 func (c *vPSServiceClient) GetStorageConfig(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.StorageConfigResponse], error) {
 	return c.getStorageConfig.CallUnary(ctx, req)
 }
 
-// GetHostHealth calls pilab.cloud.cli.v1.VPSService.GetHostHealth.
+// GetHostHealth calls pilab.cli.v1.VPSService.GetHostHealth.
 func (c *vPSServiceClient) GetHostHealth(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[v1.HostHealthResponse], error) {
 	return c.getHostHealth.CallUnary(ctx, req)
 }
 
-// ConfigureNetwork calls pilab.cloud.cli.v1.VPSService.ConfigureNetwork.
+// ConfigureNetwork calls pilab.cli.v1.VPSService.ConfigureNetwork.
 func (c *vPSServiceClient) ConfigureNetwork(ctx context.Context, req *connect.Request[v1.ConfigureNetworkRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.configureNetwork.CallUnary(ctx, req)
 }
 
-// VPSServiceHandler is an implementation of the pilab.cloud.cli.v1.VPSService service.
+// VPSServiceHandler is an implementation of the pilab.cli.v1.VPSService service.
 type VPSServiceHandler interface {
 	// Authenticate user and return JWT token (legacy username/password)
 	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
@@ -2503,7 +2503,7 @@ func NewVPSServiceHandler(svc VPSServiceHandler, opts ...connect.HandlerOption) 
 		connect.WithSchema(vPSServiceMethods.ByName("ConfigureNetwork")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.cli.v1.VPSService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.cli.v1.VPSService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case VPSServiceLoginProcedure:
 			vPSServiceLoginHandler.ServeHTTP(w, r)
@@ -2723,417 +2723,417 @@ func NewVPSServiceHandler(svc VPSServiceHandler, opts ...connect.HandlerOption) 
 type UnimplementedVPSServiceHandler struct{}
 
 func (UnimplementedVPSServiceHandler) Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.Login is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.Login is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) InitiateDeviceAuth(context.Context, *connect.Request[v1.InitiateDeviceAuthRequest]) (*connect.Response[v1.InitiateDeviceAuthResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.InitiateDeviceAuth is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.InitiateDeviceAuth is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) PollDeviceAuth(context.Context, *connect.Request[v1.PollDeviceAuthRequest]) (*connect.Response[v1.PollDeviceAuthResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.PollDeviceAuth is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.PollDeviceAuth is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) Logout(context.Context, *connect.Request[v1.LogoutRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.Logout is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.Logout is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetCurrentUser(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.User], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetCurrentUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetCurrentUser is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateVM(context.Context, *connect.Request[v1.CreateVMRequest]) (*connect.Response[v1.VM], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetVM(context.Context, *connect.Request[v1.GetVMRequest]) (*connect.Response[v1.VM], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListVMs(context.Context, *connect.Request[v1.ListVMsRequest]) (*connect.Response[v1.ListVMsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListVMs is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListVMs is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UpdateVM(context.Context, *connect.Request[v1.UpdateVMRequest]) (*connect.Response[v1.VM], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UpdateVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UpdateVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeleteVM(context.Context, *connect.Request[v1.DeleteVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeleteVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeleteVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) StartVM(context.Context, *connect.Request[v1.StartVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.StartVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.StartVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) StopVM(context.Context, *connect.Request[v1.StopVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.StopVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.StopVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) RestartVM(context.Context, *connect.Request[v1.RestartVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.RestartVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.RestartVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) PauseVM(context.Context, *connect.Request[v1.PauseVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.PauseVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.PauseVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UnpauseVM(context.Context, *connect.Request[v1.UnpauseVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UnpauseVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UnpauseVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) MigrateVM(context.Context, *connect.Request[v1.MigrateVMRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.MigrateVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.MigrateVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) RebuildVM(context.Context, *connect.Request[v1.RebuildVMRequest]) (*connect.Response[v1.VM], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.RebuildVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.RebuildVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CloneVM(context.Context, *connect.Request[v1.CloneVMRequest]) (*connect.Response[v1.VM], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CloneVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CloneVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) LinkedCloneVM(context.Context, *connect.Request[v1.LinkedCloneVMRequest]) (*connect.Response[v1.VM], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.LinkedCloneVM is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.LinkedCloneVM is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetVMConsole(context.Context, *connect.Request[v1.GetVMConsoleRequest]) (*connect.Response[v1.GetVMConsoleResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetVMConsole is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetVMConsole is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UpdateVMResources(context.Context, *connect.Request[v1.UpdateVMResourcesRequest]) (*connect.Response[v1.UpdateVMResourcesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UpdateVMResources is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UpdateVMResources is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetVMResources(context.Context, *connect.Request[v1.GetVMResourcesRequest]) (*connect.Response[v1.GetVMResourcesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetVMResources is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetVMResources is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateDisk(context.Context, *connect.Request[v1.CreateDiskRequest]) (*connect.Response[v1.Disk], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateDisk is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateDisk is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetDisk(context.Context, *connect.Request[v1.GetDiskRequest]) (*connect.Response[v1.Disk], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetDisk is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetDisk is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListDisks(context.Context, *connect.Request[v1.ListDisksRequest]) (*connect.Response[v1.ListDisksResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListDisks is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListDisks is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UpdateDisk(context.Context, *connect.Request[v1.UpdateDiskRequest]) (*connect.Response[v1.Disk], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UpdateDisk is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UpdateDisk is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeleteDisk(context.Context, *connect.Request[v1.DeleteDiskRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeleteDisk is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeleteDisk is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ExtendDisk(context.Context, *connect.Request[v1.ExtendDiskRequest]) (*connect.Response[v1.Disk], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ExtendDisk is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ExtendDisk is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) AttachDisk(context.Context, *connect.Request[v1.AttachDiskRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.AttachDisk is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.AttachDisk is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DetachDisk(context.Context, *connect.Request[v1.DetachDiskRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DetachDisk is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DetachDisk is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetImage(context.Context, *connect.Request[v1.GetImageRequest]) (*connect.Response[v1.Image], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetImage is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetImage is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListImages(context.Context, *connect.Request[v1.ListImagesRequest]) (*connect.Response[v1.ListImagesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListImages is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListImages is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateImage(context.Context, *connect.Request[v1.CreateImageRequest]) (*connect.Response[v1.Image], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateImage is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateImage is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UploadImage(context.Context, *connect.Request[v1.UploadImageRequest]) (*connect.Response[v1.Image], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UploadImage is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UploadImage is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeleteImage(context.Context, *connect.Request[v1.DeleteImageRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeleteImage is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeleteImage is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetSnapshot(context.Context, *connect.Request[v1.GetSnapshotRequest]) (*connect.Response[v1.Snapshot], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetSnapshot is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetSnapshot is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListSnapshots(context.Context, *connect.Request[v1.ListSnapshotsRequest]) (*connect.Response[v1.ListSnapshotsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListSnapshots is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListSnapshots is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateSnapshot(context.Context, *connect.Request[v1.CreateSnapshotRequest]) (*connect.Response[v1.Snapshot], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateSnapshot is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateSnapshot is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) RestoreSnapshot(context.Context, *connect.Request[v1.RestoreSnapshotRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.RestoreSnapshot is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.RestoreSnapshot is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeleteSnapshot(context.Context, *connect.Request[v1.DeleteSnapshotRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeleteSnapshot is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeleteSnapshot is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ConsolidateSnapshot(context.Context, *connect.Request[v1.SnapshotConsolidateRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ConsolidateSnapshot is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ConsolidateSnapshot is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateNetwork(context.Context, *connect.Request[v1.CreateNetworkRequest]) (*connect.Response[v1.Network], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateNetwork is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetNetwork(context.Context, *connect.Request[v1.GetNetworkRequest]) (*connect.Response[v1.Network], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetNetwork is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListNetworks(context.Context, *connect.Request[v1.ListNetworksRequest]) (*connect.Response[v1.ListNetworksResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListNetworks is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListNetworks is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UpdateNetwork(context.Context, *connect.Request[v1.UpdateNetworkRequest]) (*connect.Response[v1.Network], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UpdateNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UpdateNetwork is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeleteNetwork(context.Context, *connect.Request[v1.DeleteNetworkRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeleteNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeleteNetwork is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetNetworkInterface(context.Context, *connect.Request[v1.GetNetworkInterfaceRequest]) (*connect.Response[v1.NetworkInterface], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetNetworkInterface is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListNetworkInterfaces(context.Context, *connect.Request[v1.ListNetworkInterfacesRequest]) (*connect.Response[v1.ListNetworkInterfacesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListNetworkInterfaces is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListNetworkInterfaces is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) AddNetworkInterface(context.Context, *connect.Request[v1.AddNetworkInterfaceRequest]) (*connect.Response[v1.NetworkInterface], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.AddNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.AddNetworkInterface is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) RemoveNetworkInterface(context.Context, *connect.Request[v1.RemoveNetworkInterfaceRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.RemoveNetworkInterface is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.RemoveNetworkInterface is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateVSwitch(context.Context, *connect.Request[v1.CreateVSwitchRequest]) (*connect.Response[v1.VSwitch], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateVSwitch is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateVSwitch is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetVSwitch(context.Context, *connect.Request[v1.GetVSwitchRequest]) (*connect.Response[v1.VSwitch], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetVSwitch is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetVSwitch is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListVSwitches(context.Context, *connect.Request[v1.ListVSwitchesRequest]) (*connect.Response[v1.ListVSwitchesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListVSwitches is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListVSwitches is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeleteVSwitch(context.Context, *connect.Request[v1.DeleteVSwitchRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeleteVSwitch is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeleteVSwitch is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreatePortGroup(context.Context, *connect.Request[v1.CreatePortGroupRequest]) (*connect.Response[v1.PortGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreatePortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreatePortGroup is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetPortGroup(context.Context, *connect.Request[v1.GetPortGroupRequest]) (*connect.Response[v1.PortGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetPortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetPortGroup is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListPortGroups(context.Context, *connect.Request[v1.ListPortGroupsRequest]) (*connect.Response[v1.ListPortGroupsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListPortGroups is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListPortGroups is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeletePortGroup(context.Context, *connect.Request[v1.DeletePortGroupRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeletePortGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeletePortGroup is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreatePublicIP(context.Context, *connect.Request[v1.CreatePublicIPRequest]) (*connect.Response[v1.PublicIP], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreatePublicIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreatePublicIP is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetPublicIP(context.Context, *connect.Request[v1.GetPublicIPRequest]) (*connect.Response[v1.PublicIP], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetPublicIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetPublicIP is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListPublicIPs(context.Context, *connect.Request[v1.ListPublicIPsRequest]) (*connect.Response[v1.ListPublicIPsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListPublicIPs is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListPublicIPs is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UpdatePublicIP(context.Context, *connect.Request[v1.UpdatePublicIPRequest]) (*connect.Response[v1.PublicIP], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UpdatePublicIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UpdatePublicIP is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeletePublicIP(context.Context, *connect.Request[v1.DeletePublicIPRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeletePublicIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeletePublicIP is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) AssignPublicIP(context.Context, *connect.Request[v1.AssignPublicIPRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.AssignPublicIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.AssignPublicIP is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UnassignPublicIP(context.Context, *connect.Request[v1.UnassignPublicIPRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UnassignPublicIP is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UnassignPublicIP is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateSecurityGroup(context.Context, *connect.Request[v1.CreateSecurityGroupRequest]) (*connect.Response[v1.SecurityGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateSecurityGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateSecurityGroup is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetSecurityGroup(context.Context, *connect.Request[v1.GetSecurityGroupRequest]) (*connect.Response[v1.SecurityGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetSecurityGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetSecurityGroup is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListSecurityGroups(context.Context, *connect.Request[v1.ListSecurityGroupsRequest]) (*connect.Response[v1.ListSecurityGroupsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListSecurityGroups is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListSecurityGroups is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UpdateSecurityGroup(context.Context, *connect.Request[v1.UpdateSecurityGroupRequest]) (*connect.Response[v1.SecurityGroup], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UpdateSecurityGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UpdateSecurityGroup is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeleteSecurityGroup(context.Context, *connect.Request[v1.DeleteSecurityGroupRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeleteSecurityGroup is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeleteSecurityGroup is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) AddSecurityRule(context.Context, *connect.Request[v1.AddSecurityRuleRequest]) (*connect.Response[v1.SecurityRule], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.AddSecurityRule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.AddSecurityRule is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) RemoveSecurityRule(context.Context, *connect.Request[v1.RemoveSecurityRuleRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.RemoveSecurityRule is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.RemoveSecurityRule is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateTemplate(context.Context, *connect.Request[v1.CreateTemplateRequest]) (*connect.Response[v1.Template], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateTemplate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateTemplate is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetTemplate(context.Context, *connect.Request[v1.GetTemplateRequest]) (*connect.Response[v1.Template], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetTemplate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetTemplate is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListTemplates(context.Context, *connect.Request[v1.ListTemplatesRequest]) (*connect.Response[v1.ListTemplatesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListTemplates is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListTemplates is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeleteTemplate(context.Context, *connect.Request[v1.DeleteTemplateRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeleteTemplate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeleteTemplate is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListOSTemplates(context.Context, *connect.Request[v1.ListOSTemplatesRequest]) (*connect.Response[v1.ListOSTemplatesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListOSTemplates is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListOSTemplates is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetOSTemplate(context.Context, *connect.Request[v1.GetOSTemplateRequest]) (*connect.Response[v1.OSTemplate], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetOSTemplate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetOSTemplate is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) SyncOSTemplates(context.Context, *connect.Request[v1.SyncOSTemplatesRequest]) (*connect.Response[v1.SyncOSTemplatesResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.SyncOSTemplates is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.SyncOSTemplates is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateVMFromOSTemplate(context.Context, *connect.Request[v1.CreateVMFromOSTemplateRequest]) (*connect.Response[v1.VM], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateVMFromOSTemplate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateVMFromOSTemplate is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetMetrics(context.Context, *connect.Request[v1.GetMetricsRequest]) (*connect.Response[v1.GetMetricsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetMetrics is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetMetrics is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetActivity(context.Context, *connect.Request[v1.GetActivityRequest]) (*connect.Response[v1.GetActivityResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetActivity is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetActivity is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateOrganization(context.Context, *connect.Request[v1.CreateOrganizationRequest]) (*connect.Response[v1.Organization], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateOrganization is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateOrganization is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetOrganization(context.Context, *connect.Request[v1.GetOrganizationRequest]) (*connect.Response[v1.Organization], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetOrganization is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetOrganization is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListOrganizations(context.Context, *connect.Request[v1.ListOrganizationsRequest]) (*connect.Response[v1.ListOrganizationsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListOrganizations is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListOrganizations is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UpdateOrganization(context.Context, *connect.Request[v1.UpdateOrganizationRequest]) (*connect.Response[v1.Organization], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UpdateOrganization is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UpdateOrganization is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeleteOrganization(context.Context, *connect.Request[v1.DeleteOrganizationRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeleteOrganization is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeleteOrganization is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateUser(context.Context, *connect.Request[v1.CreateUserRequest]) (*connect.Response[v1.User], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateUser is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetUser(context.Context, *connect.Request[v1.GetUserRequest]) (*connect.Response[v1.User], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetUser is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListUsers(context.Context, *connect.Request[v1.ListUsersRequest]) (*connect.Response[v1.ListUsersResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListUsers is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListUsers is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UpdateUser(context.Context, *connect.Request[v1.UpdateUserRequest]) (*connect.Response[v1.User], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UpdateUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UpdateUser is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeleteUser(context.Context, *connect.Request[v1.DeleteUserRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeleteUser is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeleteUser is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetVersion(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.VersionResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetVersion is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetVersion is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) CreateDatastore(context.Context, *connect.Request[v1.CreateDatastoreRequest]) (*connect.Response[v1.Datastore], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.CreateDatastore is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.CreateDatastore is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetDatastore(context.Context, *connect.Request[v1.GetDatastoreRequest]) (*connect.Response[v1.Datastore], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetDatastore is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetDatastore is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ListDatastores(context.Context, *connect.Request[v1.ListDatastoresRequest]) (*connect.Response[v1.ListDatastoresResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ListDatastores is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ListDatastores is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) DeleteDatastore(context.Context, *connect.Request[v1.DeleteDatastoreRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.DeleteDatastore is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.DeleteDatastore is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) MountDatastore(context.Context, *connect.Request[v1.MountDatastoreRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.MountDatastore is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.MountDatastore is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) UnmountDatastore(context.Context, *connect.Request[v1.UnmountDatastoreRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.UnmountDatastore is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.UnmountDatastore is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetHostInfo(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.HostInfo], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetHostInfo is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetHostInfo is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetNetworkConfig(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.NetworkConfigResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetNetworkConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetNetworkConfig is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetStorageConfig(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.StorageConfigResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetStorageConfig is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetStorageConfig is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) GetHostHealth(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[v1.HostHealthResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.GetHostHealth is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.GetHostHealth is not implemented"))
 }
 
 func (UnimplementedVPSServiceHandler) ConfigureNetwork(context.Context, *connect.Request[v1.ConfigureNetworkRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.cli.v1.VPSService.ConfigureNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cli.v1.VPSService.ConfigureNetwork is not implemented"))
 }

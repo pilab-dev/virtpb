@@ -40,32 +40,32 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	VMService_CreateVM_FullMethodName               = "/pilab.cloud.vmmanager.v1.VMService/CreateVM"
-	VMService_GetVM_FullMethodName                  = "/pilab.cloud.vmmanager.v1.VMService/GetVM"
-	VMService_ListVMs_FullMethodName                = "/pilab.cloud.vmmanager.v1.VMService/ListVMs"
-	VMService_StartVM_FullMethodName                = "/pilab.cloud.vmmanager.v1.VMService/StartVM"
-	VMService_StopVM_FullMethodName                 = "/pilab.cloud.vmmanager.v1.VMService/StopVM"
-	VMService_RebootVM_FullMethodName               = "/pilab.cloud.vmmanager.v1.VMService/RebootVM"
-	VMService_SuspendVM_FullMethodName              = "/pilab.cloud.vmmanager.v1.VMService/SuspendVM"
-	VMService_ResumeVM_FullMethodName               = "/pilab.cloud.vmmanager.v1.VMService/ResumeVM"
-	VMService_ShutdownVM_FullMethodName             = "/pilab.cloud.vmmanager.v1.VMService/ShutdownVM"
-	VMService_DeleteVM_FullMethodName               = "/pilab.cloud.vmmanager.v1.VMService/DeleteVM"
-	VMService_UpdateVM_FullMethodName               = "/pilab.cloud.vmmanager.v1.VMService/UpdateVM"
-	VMService_AddDisk_FullMethodName                = "/pilab.cloud.vmmanager.v1.VMService/AddDisk"
-	VMService_GetDisk_FullMethodName                = "/pilab.cloud.vmmanager.v1.VMService/GetDisk"
-	VMService_ListDisks_FullMethodName              = "/pilab.cloud.vmmanager.v1.VMService/ListDisks"
-	VMService_RemoveDisk_FullMethodName             = "/pilab.cloud.vmmanager.v1.VMService/RemoveDisk"
-	VMService_ResizeDisk_FullMethodName             = "/pilab.cloud.vmmanager.v1.VMService/ResizeDisk"
-	VMService_AddNetworkInterface_FullMethodName    = "/pilab.cloud.vmmanager.v1.VMService/AddNetworkInterface"
-	VMService_GetNetworkInterface_FullMethodName    = "/pilab.cloud.vmmanager.v1.VMService/GetNetworkInterface"
-	VMService_ListNetworkInterfaces_FullMethodName  = "/pilab.cloud.vmmanager.v1.VMService/ListNetworkInterfaces"
-	VMService_RemoveNetworkInterface_FullMethodName = "/pilab.cloud.vmmanager.v1.VMService/RemoveNetworkInterface"
-	VMService_UpdateNetworkInterface_FullMethodName = "/pilab.cloud.vmmanager.v1.VMService/UpdateNetworkInterface"
-	VMService_AddHardwareDevice_FullMethodName      = "/pilab.cloud.vmmanager.v1.VMService/AddHardwareDevice"
-	VMService_GetHardwareDevice_FullMethodName      = "/pilab.cloud.vmmanager.v1.VMService/GetHardwareDevice"
-	VMService_ListHardwareDevices_FullMethodName    = "/pilab.cloud.vmmanager.v1.VMService/ListHardwareDevices"
-	VMService_RemoveHardwareDevice_FullMethodName   = "/pilab.cloud.vmmanager.v1.VMService/RemoveHardwareDevice"
-	VMService_UpdateHardwareDevice_FullMethodName   = "/pilab.cloud.vmmanager.v1.VMService/UpdateHardwareDevice"
+	VMService_CreateVM_FullMethodName               = "/pilab.vmmanager.v1.VMService/CreateVM"
+	VMService_GetVM_FullMethodName                  = "/pilab.vmmanager.v1.VMService/GetVM"
+	VMService_ListVMs_FullMethodName                = "/pilab.vmmanager.v1.VMService/ListVMs"
+	VMService_StartVM_FullMethodName                = "/pilab.vmmanager.v1.VMService/StartVM"
+	VMService_StopVM_FullMethodName                 = "/pilab.vmmanager.v1.VMService/StopVM"
+	VMService_RebootVM_FullMethodName               = "/pilab.vmmanager.v1.VMService/RebootVM"
+	VMService_SuspendVM_FullMethodName              = "/pilab.vmmanager.v1.VMService/SuspendVM"
+	VMService_ResumeVM_FullMethodName               = "/pilab.vmmanager.v1.VMService/ResumeVM"
+	VMService_ShutdownVM_FullMethodName             = "/pilab.vmmanager.v1.VMService/ShutdownVM"
+	VMService_DeleteVM_FullMethodName               = "/pilab.vmmanager.v1.VMService/DeleteVM"
+	VMService_UpdateVM_FullMethodName               = "/pilab.vmmanager.v1.VMService/UpdateVM"
+	VMService_AddDisk_FullMethodName                = "/pilab.vmmanager.v1.VMService/AddDisk"
+	VMService_GetDisk_FullMethodName                = "/pilab.vmmanager.v1.VMService/GetDisk"
+	VMService_ListDisks_FullMethodName              = "/pilab.vmmanager.v1.VMService/ListDisks"
+	VMService_RemoveDisk_FullMethodName             = "/pilab.vmmanager.v1.VMService/RemoveDisk"
+	VMService_ResizeDisk_FullMethodName             = "/pilab.vmmanager.v1.VMService/ResizeDisk"
+	VMService_AddNetworkInterface_FullMethodName    = "/pilab.vmmanager.v1.VMService/AddNetworkInterface"
+	VMService_GetNetworkInterface_FullMethodName    = "/pilab.vmmanager.v1.VMService/GetNetworkInterface"
+	VMService_ListNetworkInterfaces_FullMethodName  = "/pilab.vmmanager.v1.VMService/ListNetworkInterfaces"
+	VMService_RemoveNetworkInterface_FullMethodName = "/pilab.vmmanager.v1.VMService/RemoveNetworkInterface"
+	VMService_UpdateNetworkInterface_FullMethodName = "/pilab.vmmanager.v1.VMService/UpdateNetworkInterface"
+	VMService_AddHardwareDevice_FullMethodName      = "/pilab.vmmanager.v1.VMService/AddHardwareDevice"
+	VMService_GetHardwareDevice_FullMethodName      = "/pilab.vmmanager.v1.VMService/GetHardwareDevice"
+	VMService_ListHardwareDevices_FullMethodName    = "/pilab.vmmanager.v1.VMService/ListHardwareDevices"
+	VMService_RemoveHardwareDevice_FullMethodName   = "/pilab.vmmanager.v1.VMService/RemoveHardwareDevice"
+	VMService_UpdateHardwareDevice_FullMethodName   = "/pilab.vmmanager.v1.VMService/UpdateHardwareDevice"
 )
 
 // VMServiceClient is the client API for VMService service.
@@ -991,7 +991,7 @@ func _VMService_UpdateHardwareDevice_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var VMService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.vmmanager.v1.VMService",
+	ServiceName: "pilab.vmmanager.v1.VMService",
 	HandlerType: (*VMServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

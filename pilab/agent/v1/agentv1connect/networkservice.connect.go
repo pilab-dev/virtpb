@@ -41,7 +41,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// NetworkServiceName is the fully-qualified name of the NetworkService service.
-	NetworkServiceName = "pilab.cloud.agent.v1.NetworkService"
+	NetworkServiceName = "pilab.agent.v1.NetworkService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -54,87 +54,87 @@ const (
 const (
 	// NetworkServiceOvsBridgeCreateProcedure is the fully-qualified name of the NetworkService's
 	// OvsBridgeCreate RPC.
-	NetworkServiceOvsBridgeCreateProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsBridgeCreate"
+	NetworkServiceOvsBridgeCreateProcedure = "/pilab.agent.v1.NetworkService/OvsBridgeCreate"
 	// NetworkServiceOvsBridgeDeleteProcedure is the fully-qualified name of the NetworkService's
 	// OvsBridgeDelete RPC.
-	NetworkServiceOvsBridgeDeleteProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsBridgeDelete"
+	NetworkServiceOvsBridgeDeleteProcedure = "/pilab.agent.v1.NetworkService/OvsBridgeDelete"
 	// NetworkServiceOvsBridgeListProcedure is the fully-qualified name of the NetworkService's
 	// OvsBridgeList RPC.
-	NetworkServiceOvsBridgeListProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsBridgeList"
+	NetworkServiceOvsBridgeListProcedure = "/pilab.agent.v1.NetworkService/OvsBridgeList"
 	// NetworkServiceOvsBridgeGetProcedure is the fully-qualified name of the NetworkService's
 	// OvsBridgeGet RPC.
-	NetworkServiceOvsBridgeGetProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsBridgeGet"
+	NetworkServiceOvsBridgeGetProcedure = "/pilab.agent.v1.NetworkService/OvsBridgeGet"
 	// NetworkServiceOvsPortCreateProcedure is the fully-qualified name of the NetworkService's
 	// OvsPortCreate RPC.
-	NetworkServiceOvsPortCreateProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsPortCreate"
+	NetworkServiceOvsPortCreateProcedure = "/pilab.agent.v1.NetworkService/OvsPortCreate"
 	// NetworkServiceOvsPortDeleteProcedure is the fully-qualified name of the NetworkService's
 	// OvsPortDelete RPC.
-	NetworkServiceOvsPortDeleteProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsPortDelete"
+	NetworkServiceOvsPortDeleteProcedure = "/pilab.agent.v1.NetworkService/OvsPortDelete"
 	// NetworkServiceOvsPortListProcedure is the fully-qualified name of the NetworkService's
 	// OvsPortList RPC.
-	NetworkServiceOvsPortListProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsPortList"
+	NetworkServiceOvsPortListProcedure = "/pilab.agent.v1.NetworkService/OvsPortList"
 	// NetworkServiceOvsPortGetProcedure is the fully-qualified name of the NetworkService's OvsPortGet
 	// RPC.
-	NetworkServiceOvsPortGetProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsPortGet"
+	NetworkServiceOvsPortGetProcedure = "/pilab.agent.v1.NetworkService/OvsPortGet"
 	// NetworkServiceOvsPortUpdateProcedure is the fully-qualified name of the NetworkService's
 	// OvsPortUpdate RPC.
-	NetworkServiceOvsPortUpdateProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsPortUpdate"
+	NetworkServiceOvsPortUpdateProcedure = "/pilab.agent.v1.NetworkService/OvsPortUpdate"
 	// NetworkServiceOvsQosRuleCreateProcedure is the fully-qualified name of the NetworkService's
 	// OvsQosRuleCreate RPC.
-	NetworkServiceOvsQosRuleCreateProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsQosRuleCreate"
+	NetworkServiceOvsQosRuleCreateProcedure = "/pilab.agent.v1.NetworkService/OvsQosRuleCreate"
 	// NetworkServiceOvsQosRuleDeleteProcedure is the fully-qualified name of the NetworkService's
 	// OvsQosRuleDelete RPC.
-	NetworkServiceOvsQosRuleDeleteProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsQosRuleDelete"
+	NetworkServiceOvsQosRuleDeleteProcedure = "/pilab.agent.v1.NetworkService/OvsQosRuleDelete"
 	// NetworkServiceOvsQosRuleListProcedure is the fully-qualified name of the NetworkService's
 	// OvsQosRuleList RPC.
-	NetworkServiceOvsQosRuleListProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsQosRuleList"
+	NetworkServiceOvsQosRuleListProcedure = "/pilab.agent.v1.NetworkService/OvsQosRuleList"
 	// NetworkServiceOvsQosRuleGetProcedure is the fully-qualified name of the NetworkService's
 	// OvsQosRuleGet RPC.
-	NetworkServiceOvsQosRuleGetProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsQosRuleGet"
+	NetworkServiceOvsQosRuleGetProcedure = "/pilab.agent.v1.NetworkService/OvsQosRuleGet"
 	// NetworkServiceNetworkCreateProcedure is the fully-qualified name of the NetworkService's
 	// NetworkCreate RPC.
-	NetworkServiceNetworkCreateProcedure = "/pilab.cloud.agent.v1.NetworkService/NetworkCreate"
+	NetworkServiceNetworkCreateProcedure = "/pilab.agent.v1.NetworkService/NetworkCreate"
 	// NetworkServiceNetworkDeleteProcedure is the fully-qualified name of the NetworkService's
 	// NetworkDelete RPC.
-	NetworkServiceNetworkDeleteProcedure = "/pilab.cloud.agent.v1.NetworkService/NetworkDelete"
+	NetworkServiceNetworkDeleteProcedure = "/pilab.agent.v1.NetworkService/NetworkDelete"
 	// NetworkServiceNetworkListProcedure is the fully-qualified name of the NetworkService's
 	// NetworkList RPC.
-	NetworkServiceNetworkListProcedure = "/pilab.cloud.agent.v1.NetworkService/NetworkList"
+	NetworkServiceNetworkListProcedure = "/pilab.agent.v1.NetworkService/NetworkList"
 	// NetworkServiceNetworkGetProcedure is the fully-qualified name of the NetworkService's NetworkGet
 	// RPC.
-	NetworkServiceNetworkGetProcedure = "/pilab.cloud.agent.v1.NetworkService/NetworkGet"
+	NetworkServiceNetworkGetProcedure = "/pilab.agent.v1.NetworkService/NetworkGet"
 	// NetworkServiceNetworkStartProcedure is the fully-qualified name of the NetworkService's
 	// NetworkStart RPC.
-	NetworkServiceNetworkStartProcedure = "/pilab.cloud.agent.v1.NetworkService/NetworkStart"
+	NetworkServiceNetworkStartProcedure = "/pilab.agent.v1.NetworkService/NetworkStart"
 	// NetworkServiceNetworkStopProcedure is the fully-qualified name of the NetworkService's
 	// NetworkStop RPC.
-	NetworkServiceNetworkStopProcedure = "/pilab.cloud.agent.v1.NetworkService/NetworkStop"
+	NetworkServiceNetworkStopProcedure = "/pilab.agent.v1.NetworkService/NetworkStop"
 	// NetworkServiceNetworkUpdateProcedure is the fully-qualified name of the NetworkService's
 	// NetworkUpdate RPC.
-	NetworkServiceNetworkUpdateProcedure = "/pilab.cloud.agent.v1.NetworkService/NetworkUpdate"
+	NetworkServiceNetworkUpdateProcedure = "/pilab.agent.v1.NetworkService/NetworkUpdate"
 	// NetworkServiceOvsFlowPushProcedure is the fully-qualified name of the NetworkService's
 	// OvsFlowPush RPC.
-	NetworkServiceOvsFlowPushProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsFlowPush"
+	NetworkServiceOvsFlowPushProcedure = "/pilab.agent.v1.NetworkService/OvsFlowPush"
 	// NetworkServiceOvsFlowSyncProcedure is the fully-qualified name of the NetworkService's
 	// OvsFlowSync RPC.
-	NetworkServiceOvsFlowSyncProcedure = "/pilab.cloud.agent.v1.NetworkService/OvsFlowSync"
+	NetworkServiceOvsFlowSyncProcedure = "/pilab.agent.v1.NetworkService/OvsFlowSync"
 	// NetworkServiceSyncNetworkProcedure is the fully-qualified name of the NetworkService's
 	// SyncNetwork RPC.
-	NetworkServiceSyncNetworkProcedure = "/pilab.cloud.agent.v1.NetworkService/SyncNetwork"
+	NetworkServiceSyncNetworkProcedure = "/pilab.agent.v1.NetworkService/SyncNetwork"
 	// NetworkServiceSyncPortProcedure is the fully-qualified name of the NetworkService's SyncPort RPC.
-	NetworkServiceSyncPortProcedure = "/pilab.cloud.agent.v1.NetworkService/SyncPort"
+	NetworkServiceSyncPortProcedure = "/pilab.agent.v1.NetworkService/SyncPort"
 	// NetworkServiceDeleteNetworkProcedure is the fully-qualified name of the NetworkService's
 	// DeleteNetwork RPC.
-	NetworkServiceDeleteNetworkProcedure = "/pilab.cloud.agent.v1.NetworkService/DeleteNetwork"
+	NetworkServiceDeleteNetworkProcedure = "/pilab.agent.v1.NetworkService/DeleteNetwork"
 	// NetworkServiceDeletePortProcedure is the fully-qualified name of the NetworkService's DeletePort
 	// RPC.
-	NetworkServiceDeletePortProcedure = "/pilab.cloud.agent.v1.NetworkService/DeletePort"
+	NetworkServiceDeletePortProcedure = "/pilab.agent.v1.NetworkService/DeletePort"
 	// NetworkServiceGetNetworkStateProcedure is the fully-qualified name of the NetworkService's
 	// GetNetworkState RPC.
-	NetworkServiceGetNetworkStateProcedure = "/pilab.cloud.agent.v1.NetworkService/GetNetworkState"
+	NetworkServiceGetNetworkStateProcedure = "/pilab.agent.v1.NetworkService/GetNetworkState"
 )
 
-// NetworkServiceClient is a client for the pilab.cloud.agent.v1.NetworkService service.
+// NetworkServiceClient is a client for the pilab.agent.v1.NetworkService service.
 type NetworkServiceClient interface {
 	// OVS Bridge Management
 	OvsBridgeCreate(context.Context, *connect.Request[v1.OvsBridgeCreateRequest]) (*connect.Response[v1.OvsBridgeCreateResponse], error)
@@ -171,9 +171,9 @@ type NetworkServiceClient interface {
 	GetNetworkState(context.Context, *connect.Request[v1.GetNetworkStateRequest]) (*connect.Response[v1.GetNetworkStateResponse], error)
 }
 
-// NewNetworkServiceClient constructs a client for the pilab.cloud.agent.v1.NetworkService service.
-// By default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped
-// responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// NewNetworkServiceClient constructs a client for the pilab.agent.v1.NetworkService service. By
+// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
+// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
@@ -378,142 +378,142 @@ type networkServiceClient struct {
 	getNetworkState  *connect.Client[v1.GetNetworkStateRequest, v1.GetNetworkStateResponse]
 }
 
-// OvsBridgeCreate calls pilab.cloud.agent.v1.NetworkService.OvsBridgeCreate.
+// OvsBridgeCreate calls pilab.agent.v1.NetworkService.OvsBridgeCreate.
 func (c *networkServiceClient) OvsBridgeCreate(ctx context.Context, req *connect.Request[v1.OvsBridgeCreateRequest]) (*connect.Response[v1.OvsBridgeCreateResponse], error) {
 	return c.ovsBridgeCreate.CallUnary(ctx, req)
 }
 
-// OvsBridgeDelete calls pilab.cloud.agent.v1.NetworkService.OvsBridgeDelete.
+// OvsBridgeDelete calls pilab.agent.v1.NetworkService.OvsBridgeDelete.
 func (c *networkServiceClient) OvsBridgeDelete(ctx context.Context, req *connect.Request[v1.OvsBridgeDeleteRequest]) (*connect.Response[v1.OvsBridgeDeleteResponse], error) {
 	return c.ovsBridgeDelete.CallUnary(ctx, req)
 }
 
-// OvsBridgeList calls pilab.cloud.agent.v1.NetworkService.OvsBridgeList.
+// OvsBridgeList calls pilab.agent.v1.NetworkService.OvsBridgeList.
 func (c *networkServiceClient) OvsBridgeList(ctx context.Context, req *connect.Request[v1.OvsBridgeListRequest]) (*connect.Response[v1.OvsBridgeListResponse], error) {
 	return c.ovsBridgeList.CallUnary(ctx, req)
 }
 
-// OvsBridgeGet calls pilab.cloud.agent.v1.NetworkService.OvsBridgeGet.
+// OvsBridgeGet calls pilab.agent.v1.NetworkService.OvsBridgeGet.
 func (c *networkServiceClient) OvsBridgeGet(ctx context.Context, req *connect.Request[v1.OvsBridgeGetRequest]) (*connect.Response[v1.OvsBridgeGetResponse], error) {
 	return c.ovsBridgeGet.CallUnary(ctx, req)
 }
 
-// OvsPortCreate calls pilab.cloud.agent.v1.NetworkService.OvsPortCreate.
+// OvsPortCreate calls pilab.agent.v1.NetworkService.OvsPortCreate.
 func (c *networkServiceClient) OvsPortCreate(ctx context.Context, req *connect.Request[v1.OvsPortCreateRequest]) (*connect.Response[v1.OvsPortCreateResponse], error) {
 	return c.ovsPortCreate.CallUnary(ctx, req)
 }
 
-// OvsPortDelete calls pilab.cloud.agent.v1.NetworkService.OvsPortDelete.
+// OvsPortDelete calls pilab.agent.v1.NetworkService.OvsPortDelete.
 func (c *networkServiceClient) OvsPortDelete(ctx context.Context, req *connect.Request[v1.OvsPortDeleteRequest]) (*connect.Response[v1.OvsPortDeleteResponse], error) {
 	return c.ovsPortDelete.CallUnary(ctx, req)
 }
 
-// OvsPortList calls pilab.cloud.agent.v1.NetworkService.OvsPortList.
+// OvsPortList calls pilab.agent.v1.NetworkService.OvsPortList.
 func (c *networkServiceClient) OvsPortList(ctx context.Context, req *connect.Request[v1.OvsPortListRequest]) (*connect.Response[v1.OvsPortListResponse], error) {
 	return c.ovsPortList.CallUnary(ctx, req)
 }
 
-// OvsPortGet calls pilab.cloud.agent.v1.NetworkService.OvsPortGet.
+// OvsPortGet calls pilab.agent.v1.NetworkService.OvsPortGet.
 func (c *networkServiceClient) OvsPortGet(ctx context.Context, req *connect.Request[v1.OvsPortGetRequest]) (*connect.Response[v1.OvsPortGetResponse], error) {
 	return c.ovsPortGet.CallUnary(ctx, req)
 }
 
-// OvsPortUpdate calls pilab.cloud.agent.v1.NetworkService.OvsPortUpdate.
+// OvsPortUpdate calls pilab.agent.v1.NetworkService.OvsPortUpdate.
 func (c *networkServiceClient) OvsPortUpdate(ctx context.Context, req *connect.Request[v1.OvsPortUpdateRequest]) (*connect.Response[v1.OvsPortUpdateResponse], error) {
 	return c.ovsPortUpdate.CallUnary(ctx, req)
 }
 
-// OvsQosRuleCreate calls pilab.cloud.agent.v1.NetworkService.OvsQosRuleCreate.
+// OvsQosRuleCreate calls pilab.agent.v1.NetworkService.OvsQosRuleCreate.
 func (c *networkServiceClient) OvsQosRuleCreate(ctx context.Context, req *connect.Request[v1.OvsQosRuleCreateRequest]) (*connect.Response[v1.OvsQosRuleCreateResponse], error) {
 	return c.ovsQosRuleCreate.CallUnary(ctx, req)
 }
 
-// OvsQosRuleDelete calls pilab.cloud.agent.v1.NetworkService.OvsQosRuleDelete.
+// OvsQosRuleDelete calls pilab.agent.v1.NetworkService.OvsQosRuleDelete.
 func (c *networkServiceClient) OvsQosRuleDelete(ctx context.Context, req *connect.Request[v1.OvsQosRuleDeleteRequest]) (*connect.Response[v1.OvsQosRuleDeleteResponse], error) {
 	return c.ovsQosRuleDelete.CallUnary(ctx, req)
 }
 
-// OvsQosRuleList calls pilab.cloud.agent.v1.NetworkService.OvsQosRuleList.
+// OvsQosRuleList calls pilab.agent.v1.NetworkService.OvsQosRuleList.
 func (c *networkServiceClient) OvsQosRuleList(ctx context.Context, req *connect.Request[v1.OvsQosRuleListRequest]) (*connect.Response[v1.OvsQosRuleListResponse], error) {
 	return c.ovsQosRuleList.CallUnary(ctx, req)
 }
 
-// OvsQosRuleGet calls pilab.cloud.agent.v1.NetworkService.OvsQosRuleGet.
+// OvsQosRuleGet calls pilab.agent.v1.NetworkService.OvsQosRuleGet.
 func (c *networkServiceClient) OvsQosRuleGet(ctx context.Context, req *connect.Request[v1.OvsQosRuleGetRequest]) (*connect.Response[v1.OvsQosRuleGetResponse], error) {
 	return c.ovsQosRuleGet.CallUnary(ctx, req)
 }
 
-// NetworkCreate calls pilab.cloud.agent.v1.NetworkService.NetworkCreate.
+// NetworkCreate calls pilab.agent.v1.NetworkService.NetworkCreate.
 func (c *networkServiceClient) NetworkCreate(ctx context.Context, req *connect.Request[v1.NetworkCreateRequest]) (*connect.Response[v1.NetworkCreateResponse], error) {
 	return c.networkCreate.CallUnary(ctx, req)
 }
 
-// NetworkDelete calls pilab.cloud.agent.v1.NetworkService.NetworkDelete.
+// NetworkDelete calls pilab.agent.v1.NetworkService.NetworkDelete.
 func (c *networkServiceClient) NetworkDelete(ctx context.Context, req *connect.Request[v1.NetworkDeleteRequest]) (*connect.Response[v1.NetworkDeleteResponse], error) {
 	return c.networkDelete.CallUnary(ctx, req)
 }
 
-// NetworkList calls pilab.cloud.agent.v1.NetworkService.NetworkList.
+// NetworkList calls pilab.agent.v1.NetworkService.NetworkList.
 func (c *networkServiceClient) NetworkList(ctx context.Context, req *connect.Request[v1.NetworkListRequest]) (*connect.Response[v1.NetworkListResponse], error) {
 	return c.networkList.CallUnary(ctx, req)
 }
 
-// NetworkGet calls pilab.cloud.agent.v1.NetworkService.NetworkGet.
+// NetworkGet calls pilab.agent.v1.NetworkService.NetworkGet.
 func (c *networkServiceClient) NetworkGet(ctx context.Context, req *connect.Request[v1.NetworkGetRequest]) (*connect.Response[v1.NetworkGetResponse], error) {
 	return c.networkGet.CallUnary(ctx, req)
 }
 
-// NetworkStart calls pilab.cloud.agent.v1.NetworkService.NetworkStart.
+// NetworkStart calls pilab.agent.v1.NetworkService.NetworkStart.
 func (c *networkServiceClient) NetworkStart(ctx context.Context, req *connect.Request[v1.NetworkStartRequest]) (*connect.Response[v1.NetworkStartResponse], error) {
 	return c.networkStart.CallUnary(ctx, req)
 }
 
-// NetworkStop calls pilab.cloud.agent.v1.NetworkService.NetworkStop.
+// NetworkStop calls pilab.agent.v1.NetworkService.NetworkStop.
 func (c *networkServiceClient) NetworkStop(ctx context.Context, req *connect.Request[v1.NetworkStopRequest]) (*connect.Response[v1.NetworkStopResponse], error) {
 	return c.networkStop.CallUnary(ctx, req)
 }
 
-// NetworkUpdate calls pilab.cloud.agent.v1.NetworkService.NetworkUpdate.
+// NetworkUpdate calls pilab.agent.v1.NetworkService.NetworkUpdate.
 func (c *networkServiceClient) NetworkUpdate(ctx context.Context, req *connect.Request[v1.NetworkUpdateRequest]) (*connect.Response[v1.NetworkUpdateResponse], error) {
 	return c.networkUpdate.CallUnary(ctx, req)
 }
 
-// OvsFlowPush calls pilab.cloud.agent.v1.NetworkService.OvsFlowPush.
+// OvsFlowPush calls pilab.agent.v1.NetworkService.OvsFlowPush.
 func (c *networkServiceClient) OvsFlowPush(ctx context.Context, req *connect.Request[v1.OvsFlowPushRequest]) (*connect.Response[v1.OvsFlowPushResponse], error) {
 	return c.ovsFlowPush.CallUnary(ctx, req)
 }
 
-// OvsFlowSync calls pilab.cloud.agent.v1.NetworkService.OvsFlowSync.
+// OvsFlowSync calls pilab.agent.v1.NetworkService.OvsFlowSync.
 func (c *networkServiceClient) OvsFlowSync(ctx context.Context, req *connect.Request[v1.OvsFlowSyncRequest]) (*connect.Response[v1.OvsFlowSyncResponse], error) {
 	return c.ovsFlowSync.CallUnary(ctx, req)
 }
 
-// SyncNetwork calls pilab.cloud.agent.v1.NetworkService.SyncNetwork.
+// SyncNetwork calls pilab.agent.v1.NetworkService.SyncNetwork.
 func (c *networkServiceClient) SyncNetwork(ctx context.Context, req *connect.Request[v1.SyncNetworkRequest]) (*connect.Response[v1.SyncNetworkResponse], error) {
 	return c.syncNetwork.CallUnary(ctx, req)
 }
 
-// SyncPort calls pilab.cloud.agent.v1.NetworkService.SyncPort.
+// SyncPort calls pilab.agent.v1.NetworkService.SyncPort.
 func (c *networkServiceClient) SyncPort(ctx context.Context, req *connect.Request[v1.SyncPortRequest]) (*connect.Response[v1.SyncPortResponse], error) {
 	return c.syncPort.CallUnary(ctx, req)
 }
 
-// DeleteNetwork calls pilab.cloud.agent.v1.NetworkService.DeleteNetwork.
+// DeleteNetwork calls pilab.agent.v1.NetworkService.DeleteNetwork.
 func (c *networkServiceClient) DeleteNetwork(ctx context.Context, req *connect.Request[v1.DeleteNetworkRequest]) (*connect.Response[v1.DeleteNetworkResponse], error) {
 	return c.deleteNetwork.CallUnary(ctx, req)
 }
 
-// DeletePort calls pilab.cloud.agent.v1.NetworkService.DeletePort.
+// DeletePort calls pilab.agent.v1.NetworkService.DeletePort.
 func (c *networkServiceClient) DeletePort(ctx context.Context, req *connect.Request[v1.DeletePortRequest]) (*connect.Response[v1.DeletePortResponse], error) {
 	return c.deletePort.CallUnary(ctx, req)
 }
 
-// GetNetworkState calls pilab.cloud.agent.v1.NetworkService.GetNetworkState.
+// GetNetworkState calls pilab.agent.v1.NetworkService.GetNetworkState.
 func (c *networkServiceClient) GetNetworkState(ctx context.Context, req *connect.Request[v1.GetNetworkStateRequest]) (*connect.Response[v1.GetNetworkStateResponse], error) {
 	return c.getNetworkState.CallUnary(ctx, req)
 }
 
-// NetworkServiceHandler is an implementation of the pilab.cloud.agent.v1.NetworkService service.
+// NetworkServiceHandler is an implementation of the pilab.agent.v1.NetworkService service.
 type NetworkServiceHandler interface {
 	// OVS Bridge Management
 	OvsBridgeCreate(context.Context, *connect.Request[v1.OvsBridgeCreateRequest]) (*connect.Response[v1.OvsBridgeCreateResponse], error)
@@ -719,7 +719,7 @@ func NewNetworkServiceHandler(svc NetworkServiceHandler, opts ...connect.Handler
 		connect.WithSchema(networkServiceMethods.ByName("GetNetworkState")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.agent.v1.NetworkService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.agent.v1.NetworkService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case NetworkServiceOvsBridgeCreateProcedure:
 			networkServiceOvsBridgeCreateHandler.ServeHTTP(w, r)
@@ -785,109 +785,109 @@ func NewNetworkServiceHandler(svc NetworkServiceHandler, opts ...connect.Handler
 type UnimplementedNetworkServiceHandler struct{}
 
 func (UnimplementedNetworkServiceHandler) OvsBridgeCreate(context.Context, *connect.Request[v1.OvsBridgeCreateRequest]) (*connect.Response[v1.OvsBridgeCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsBridgeCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsBridgeCreate is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsBridgeDelete(context.Context, *connect.Request[v1.OvsBridgeDeleteRequest]) (*connect.Response[v1.OvsBridgeDeleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsBridgeDelete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsBridgeDelete is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsBridgeList(context.Context, *connect.Request[v1.OvsBridgeListRequest]) (*connect.Response[v1.OvsBridgeListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsBridgeList is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsBridgeList is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsBridgeGet(context.Context, *connect.Request[v1.OvsBridgeGetRequest]) (*connect.Response[v1.OvsBridgeGetResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsBridgeGet is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsBridgeGet is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsPortCreate(context.Context, *connect.Request[v1.OvsPortCreateRequest]) (*connect.Response[v1.OvsPortCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsPortCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsPortCreate is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsPortDelete(context.Context, *connect.Request[v1.OvsPortDeleteRequest]) (*connect.Response[v1.OvsPortDeleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsPortDelete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsPortDelete is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsPortList(context.Context, *connect.Request[v1.OvsPortListRequest]) (*connect.Response[v1.OvsPortListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsPortList is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsPortList is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsPortGet(context.Context, *connect.Request[v1.OvsPortGetRequest]) (*connect.Response[v1.OvsPortGetResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsPortGet is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsPortGet is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsPortUpdate(context.Context, *connect.Request[v1.OvsPortUpdateRequest]) (*connect.Response[v1.OvsPortUpdateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsPortUpdate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsPortUpdate is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsQosRuleCreate(context.Context, *connect.Request[v1.OvsQosRuleCreateRequest]) (*connect.Response[v1.OvsQosRuleCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsQosRuleCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsQosRuleCreate is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsQosRuleDelete(context.Context, *connect.Request[v1.OvsQosRuleDeleteRequest]) (*connect.Response[v1.OvsQosRuleDeleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsQosRuleDelete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsQosRuleDelete is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsQosRuleList(context.Context, *connect.Request[v1.OvsQosRuleListRequest]) (*connect.Response[v1.OvsQosRuleListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsQosRuleList is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsQosRuleList is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsQosRuleGet(context.Context, *connect.Request[v1.OvsQosRuleGetRequest]) (*connect.Response[v1.OvsQosRuleGetResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsQosRuleGet is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsQosRuleGet is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) NetworkCreate(context.Context, *connect.Request[v1.NetworkCreateRequest]) (*connect.Response[v1.NetworkCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.NetworkCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.NetworkCreate is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) NetworkDelete(context.Context, *connect.Request[v1.NetworkDeleteRequest]) (*connect.Response[v1.NetworkDeleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.NetworkDelete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.NetworkDelete is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) NetworkList(context.Context, *connect.Request[v1.NetworkListRequest]) (*connect.Response[v1.NetworkListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.NetworkList is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.NetworkList is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) NetworkGet(context.Context, *connect.Request[v1.NetworkGetRequest]) (*connect.Response[v1.NetworkGetResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.NetworkGet is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.NetworkGet is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) NetworkStart(context.Context, *connect.Request[v1.NetworkStartRequest]) (*connect.Response[v1.NetworkStartResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.NetworkStart is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.NetworkStart is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) NetworkStop(context.Context, *connect.Request[v1.NetworkStopRequest]) (*connect.Response[v1.NetworkStopResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.NetworkStop is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.NetworkStop is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) NetworkUpdate(context.Context, *connect.Request[v1.NetworkUpdateRequest]) (*connect.Response[v1.NetworkUpdateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.NetworkUpdate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.NetworkUpdate is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsFlowPush(context.Context, *connect.Request[v1.OvsFlowPushRequest]) (*connect.Response[v1.OvsFlowPushResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsFlowPush is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsFlowPush is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) OvsFlowSync(context.Context, *connect.Request[v1.OvsFlowSyncRequest]) (*connect.Response[v1.OvsFlowSyncResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.OvsFlowSync is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.OvsFlowSync is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) SyncNetwork(context.Context, *connect.Request[v1.SyncNetworkRequest]) (*connect.Response[v1.SyncNetworkResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.SyncNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.SyncNetwork is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) SyncPort(context.Context, *connect.Request[v1.SyncPortRequest]) (*connect.Response[v1.SyncPortResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.SyncPort is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.SyncPort is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) DeleteNetwork(context.Context, *connect.Request[v1.DeleteNetworkRequest]) (*connect.Response[v1.DeleteNetworkResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.DeleteNetwork is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.DeleteNetwork is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) DeletePort(context.Context, *connect.Request[v1.DeletePortRequest]) (*connect.Response[v1.DeletePortResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.DeletePort is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.DeletePort is not implemented"))
 }
 
 func (UnimplementedNetworkServiceHandler) GetNetworkState(context.Context, *connect.Request[v1.GetNetworkStateRequest]) (*connect.Response[v1.GetNetworkStateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.NetworkService.GetNetworkState is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.NetworkService.GetNetworkState is not implemented"))
 }

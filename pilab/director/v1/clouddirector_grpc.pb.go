@@ -40,8 +40,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CloudDirectorService_RegisterAgent_FullMethodName = "/pilab.cloud.director.v1.CloudDirectorService/RegisterAgent"
-	CloudDirectorService_AgentEvents_FullMethodName   = "/pilab.cloud.director.v1.CloudDirectorService/AgentEvents"
+	CloudDirectorService_RegisterAgent_FullMethodName = "/pilab.director.v1.CloudDirectorService/RegisterAgent"
+	CloudDirectorService_AgentEvents_FullMethodName   = "/pilab.director.v1.CloudDirectorService/AgentEvents"
 )
 
 // CloudDirectorServiceClient is the client API for CloudDirectorService service.
@@ -159,7 +159,7 @@ type CloudDirectorService_AgentEventsServer = grpc.BidiStreamingServer[AgentEven
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CloudDirectorService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.director.v1.CloudDirectorService",
+	ServiceName: "pilab.director.v1.CloudDirectorService",
 	HandlerType: (*CloudDirectorServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

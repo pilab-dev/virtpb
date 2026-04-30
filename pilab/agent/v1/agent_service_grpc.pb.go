@@ -48,18 +48,20 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AgentService_VmMigrate_FullMethodName                = "/pilab.cloud.agent.v1.AgentService/VmMigrate"
-	AgentService_VmIpList_FullMethodName                 = "/pilab.cloud.agent.v1.AgentService/VmIpList"
-	AgentService_VmChangeUserPassword_FullMethodName     = "/pilab.cloud.agent.v1.AgentService/VmChangeUserPassword"
-	AgentService_VmBackupSystemVolume_FullMethodName     = "/pilab.cloud.agent.v1.AgentService/VmBackupSystemVolume"
-	AgentService_VmRestoreSystemVolume_FullMethodName    = "/pilab.cloud.agent.v1.AgentService/VmRestoreSystemVolume"
-	AgentService_VmAttachCloudInit_FullMethodName        = "/pilab.cloud.agent.v1.AgentService/VmAttachCloudInit"
-	AgentService_VmAttachNetworkInterface_FullMethodName = "/pilab.cloud.agent.v1.AgentService/VmAttachNetworkInterface"
-	AgentService_VmDetachNetworkInterface_FullMethodName = "/pilab.cloud.agent.v1.AgentService/VmDetachNetworkInterface"
-	AgentService_Stream_FullMethodName                   = "/pilab.cloud.agent.v1.AgentService/Stream"
-	AgentService_UpdateConfig_FullMethodName             = "/pilab.cloud.agent.v1.AgentService/UpdateConfig"
-	AgentService_GetHardwareHealth_FullMethodName        = "/pilab.cloud.agent.v1.AgentService/GetHardwareHealth"
-	AgentService_GetSensorData_FullMethodName            = "/pilab.cloud.agent.v1.AgentService/GetSensorData"
+	AgentService_VmMigrate_FullMethodName                = "/pilab.agent.v1.AgentService/VmMigrate"
+	AgentService_VmIpList_FullMethodName                 = "/pilab.agent.v1.AgentService/VmIpList"
+	AgentService_VmChangeUserPassword_FullMethodName     = "/pilab.agent.v1.AgentService/VmChangeUserPassword"
+	AgentService_VmBackupSystemVolume_FullMethodName     = "/pilab.agent.v1.AgentService/VmBackupSystemVolume"
+	AgentService_VmRestoreSystemVolume_FullMethodName    = "/pilab.agent.v1.AgentService/VmRestoreSystemVolume"
+	AgentService_VmAttachCloudInit_FullMethodName        = "/pilab.agent.v1.AgentService/VmAttachCloudInit"
+	AgentService_VmAttachNetworkInterface_FullMethodName = "/pilab.agent.v1.AgentService/VmAttachNetworkInterface"
+	AgentService_VmDetachNetworkInterface_FullMethodName = "/pilab.agent.v1.AgentService/VmDetachNetworkInterface"
+	AgentService_Stream_FullMethodName                   = "/pilab.agent.v1.AgentService/Stream"
+	AgentService_UpdateConfig_FullMethodName             = "/pilab.agent.v1.AgentService/UpdateConfig"
+	AgentService_GetHardwareHealth_FullMethodName        = "/pilab.agent.v1.AgentService/GetHardwareHealth"
+	AgentService_GetSensorData_FullMethodName            = "/pilab.agent.v1.AgentService/GetSensorData"
+	AgentService_Control_FullMethodName                  = "/pilab.agent.v1.AgentService/Control"
+	AgentService_Status_FullMethodName                   = "/pilab.agent.v1.AgentService/Status"
 )
 
 // AgentServiceClient is the client API for AgentService service.
@@ -88,6 +90,10 @@ type AgentServiceClient interface {
 	// Hardware monitoring
 	GetHardwareHealth(ctx context.Context, in *GetHardwareHealthRequest, opts ...grpc.CallOption) (*GetHardwareHealthResponse, error)
 	GetSensorData(ctx context.Context, in *GetSensorDataRequest, opts ...grpc.CallOption) (*GetSensorDataResponse, error)
+	// Control plane
+	Control(ctx context.Context, in *ControlRequest, opts ...grpc.CallOption) (*ControlResponse, error)
+	// Status plane
+	Status(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error)
 }
 
 type agentServiceClient struct {
@@ -221,6 +227,26 @@ func (c *agentServiceClient) GetSensorData(ctx context.Context, in *GetSensorDat
 	return out, nil
 }
 
+func (c *agentServiceClient) Control(ctx context.Context, in *ControlRequest, opts ...grpc.CallOption) (*ControlResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ControlResponse)
+	err := c.cc.Invoke(ctx, AgentService_Control_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) Status(ctx context.Context, in *StatusRequest, opts ...grpc.CallOption) (*StatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StatusResponse)
+	err := c.cc.Invoke(ctx, AgentService_Status_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AgentServiceServer is the server API for AgentService service.
 // All implementations must embed UnimplementedAgentServiceServer
 // for forward compatibility.
@@ -247,6 +273,10 @@ type AgentServiceServer interface {
 	// Hardware monitoring
 	GetHardwareHealth(context.Context, *GetHardwareHealthRequest) (*GetHardwareHealthResponse, error)
 	GetSensorData(context.Context, *GetSensorDataRequest) (*GetSensorDataResponse, error)
+	// Control plane
+	Control(context.Context, *ControlRequest) (*ControlResponse, error)
+	// Status plane
+	Status(context.Context, *StatusRequest) (*StatusResponse, error)
 	mustEmbedUnimplementedAgentServiceServer()
 }
 
@@ -292,6 +322,12 @@ func (UnimplementedAgentServiceServer) GetHardwareHealth(context.Context, *GetHa
 }
 func (UnimplementedAgentServiceServer) GetSensorData(context.Context, *GetSensorDataRequest) (*GetSensorDataResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetSensorData not implemented")
+}
+func (UnimplementedAgentServiceServer) Control(context.Context, *ControlRequest) (*ControlResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Control not implemented")
+}
+func (UnimplementedAgentServiceServer) Status(context.Context, *StatusRequest) (*StatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method Status not implemented")
 }
 func (UnimplementedAgentServiceServer) mustEmbedUnimplementedAgentServiceServer() {}
 func (UnimplementedAgentServiceServer) testEmbeddedByValue()                      {}
@@ -519,11 +555,47 @@ func _AgentService_GetSensorData_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AgentService_Control_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ControlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).Control(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_Control_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).Control(ctx, req.(*ControlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_Status_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).Status(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_Status_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).Status(ctx, req.(*StatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AgentService_ServiceDesc is the grpc.ServiceDesc for AgentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AgentService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.agent.v1.AgentService",
+	ServiceName: "pilab.agent.v1.AgentService",
 	HandlerType: (*AgentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -569,6 +641,14 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSensorData",
 			Handler:    _AgentService_GetSensorData_Handler,
+		},
+		{
+			MethodName: "Control",
+			Handler:    _AgentService_Control_Handler,
+		},
+		{
+			MethodName: "Status",
+			Handler:    _AgentService_Status_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

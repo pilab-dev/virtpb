@@ -96,7 +96,7 @@ var File_pilab_agent_v1_error_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_error_proto_rawDesc = "" +
 	"\n" +
-	"\x1apilab/agent/v1/error.proto\x12\x14pilab.cloud.agent.v1\"~\n" +
+	"\x1apilab/agent/v1/error.proto\x12\x0epilab.agent.v1\"~\n" +
 	"\rErrorResponse\x12#\n" +
 	"\rerror_message\x18\x01 \x01(\tR\ferrorMessage\x12\x1d\n" +
 	"\n" +
@@ -119,7 +119,7 @@ func file_pilab_agent_v1_error_proto_rawDescGZIP() []byte {
 
 var file_pilab_agent_v1_error_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_pilab_agent_v1_error_proto_goTypes = []any{
-	(*ErrorResponse)(nil), // 0: pilab.cloud.agent.v1.ErrorResponse
+	(*ErrorResponse)(nil), // 0: pilab.agent.v1.ErrorResponse
 }
 var file_pilab_agent_v1_error_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

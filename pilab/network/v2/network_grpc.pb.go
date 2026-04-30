@@ -54,33 +54,33 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	NetworkService_CreateNetwork_FullMethodName      = "/pilab.cloud.network.v2.NetworkService/CreateNetwork"
-	NetworkService_GetNetwork_FullMethodName         = "/pilab.cloud.network.v2.NetworkService/GetNetwork"
-	NetworkService_ListNetworks_FullMethodName       = "/pilab.cloud.network.v2.NetworkService/ListNetworks"
-	NetworkService_UpdateNetwork_FullMethodName      = "/pilab.cloud.network.v2.NetworkService/UpdateNetwork"
-	NetworkService_DeleteNetwork_FullMethodName      = "/pilab.cloud.network.v2.NetworkService/DeleteNetwork"
-	NetworkService_AttachHosts_FullMethodName        = "/pilab.cloud.network.v2.NetworkService/AttachHosts"
-	NetworkService_DetachHosts_FullMethodName        = "/pilab.cloud.network.v2.NetworkService/DetachHosts"
-	NetworkService_CreatePort_FullMethodName         = "/pilab.cloud.network.v2.NetworkService/CreatePort"
-	NetworkService_GetPort_FullMethodName            = "/pilab.cloud.network.v2.NetworkService/GetPort"
-	NetworkService_ListPorts_FullMethodName          = "/pilab.cloud.network.v2.NetworkService/ListPorts"
-	NetworkService_UpdatePort_FullMethodName         = "/pilab.cloud.network.v2.NetworkService/UpdatePort"
-	NetworkService_DeletePort_FullMethodName         = "/pilab.cloud.network.v2.NetworkService/DeletePort"
-	NetworkService_AttachPort_FullMethodName         = "/pilab.cloud.network.v2.NetworkService/AttachPort"
-	NetworkService_DetachPort_FullMethodName         = "/pilab.cloud.network.v2.NetworkService/DetachPort"
-	NetworkService_CreateVLANRange_FullMethodName    = "/pilab.cloud.network.v2.NetworkService/CreateVLANRange"
-	NetworkService_ListVLANRanges_FullMethodName     = "/pilab.cloud.network.v2.NetworkService/ListVLANRanges"
-	NetworkService_AllocateVLAN_FullMethodName       = "/pilab.cloud.network.v2.NetworkService/AllocateVLAN"
-	NetworkService_ReleaseVLAN_FullMethodName        = "/pilab.cloud.network.v2.NetworkService/ReleaseVLAN"
-	NetworkService_CreateVirtualCloud_FullMethodName = "/pilab.cloud.network.v2.NetworkService/CreateVirtualCloud"
-	NetworkService_GetVirtualCloud_FullMethodName    = "/pilab.cloud.network.v2.NetworkService/GetVirtualCloud"
-	NetworkService_ListVirtualClouds_FullMethodName  = "/pilab.cloud.network.v2.NetworkService/ListVirtualClouds"
-	NetworkService_UpdateVirtualCloud_FullMethodName = "/pilab.cloud.network.v2.NetworkService/UpdateVirtualCloud"
-	NetworkService_DeleteVirtualCloud_FullMethodName = "/pilab.cloud.network.v2.NetworkService/DeleteVirtualCloud"
-	NetworkService_AddVNIEndpoint_FullMethodName     = "/pilab.cloud.network.v2.NetworkService/AddVNIEndpoint"
-	NetworkService_RemoveVNIEndpoint_FullMethodName  = "/pilab.cloud.network.v2.NetworkService/RemoveVNIEndpoint"
-	NetworkService_AllocateVNI_FullMethodName        = "/pilab.cloud.network.v2.NetworkService/AllocateVNI"
-	NetworkService_ReleaseVNI_FullMethodName         = "/pilab.cloud.network.v2.NetworkService/ReleaseVNI"
+	NetworkService_CreateNetwork_FullMethodName      = "/pilab.network.v2.NetworkService/CreateNetwork"
+	NetworkService_GetNetwork_FullMethodName         = "/pilab.network.v2.NetworkService/GetNetwork"
+	NetworkService_ListNetworks_FullMethodName       = "/pilab.network.v2.NetworkService/ListNetworks"
+	NetworkService_UpdateNetwork_FullMethodName      = "/pilab.network.v2.NetworkService/UpdateNetwork"
+	NetworkService_DeleteNetwork_FullMethodName      = "/pilab.network.v2.NetworkService/DeleteNetwork"
+	NetworkService_AttachHosts_FullMethodName        = "/pilab.network.v2.NetworkService/AttachHosts"
+	NetworkService_DetachHosts_FullMethodName        = "/pilab.network.v2.NetworkService/DetachHosts"
+	NetworkService_CreatePort_FullMethodName         = "/pilab.network.v2.NetworkService/CreatePort"
+	NetworkService_GetPort_FullMethodName            = "/pilab.network.v2.NetworkService/GetPort"
+	NetworkService_ListPorts_FullMethodName          = "/pilab.network.v2.NetworkService/ListPorts"
+	NetworkService_UpdatePort_FullMethodName         = "/pilab.network.v2.NetworkService/UpdatePort"
+	NetworkService_DeletePort_FullMethodName         = "/pilab.network.v2.NetworkService/DeletePort"
+	NetworkService_AttachPort_FullMethodName         = "/pilab.network.v2.NetworkService/AttachPort"
+	NetworkService_DetachPort_FullMethodName         = "/pilab.network.v2.NetworkService/DetachPort"
+	NetworkService_CreateVLANRange_FullMethodName    = "/pilab.network.v2.NetworkService/CreateVLANRange"
+	NetworkService_ListVLANRanges_FullMethodName     = "/pilab.network.v2.NetworkService/ListVLANRanges"
+	NetworkService_AllocateVLAN_FullMethodName       = "/pilab.network.v2.NetworkService/AllocateVLAN"
+	NetworkService_ReleaseVLAN_FullMethodName        = "/pilab.network.v2.NetworkService/ReleaseVLAN"
+	NetworkService_CreateVirtualCloud_FullMethodName = "/pilab.network.v2.NetworkService/CreateVirtualCloud"
+	NetworkService_GetVirtualCloud_FullMethodName    = "/pilab.network.v2.NetworkService/GetVirtualCloud"
+	NetworkService_ListVirtualClouds_FullMethodName  = "/pilab.network.v2.NetworkService/ListVirtualClouds"
+	NetworkService_UpdateVirtualCloud_FullMethodName = "/pilab.network.v2.NetworkService/UpdateVirtualCloud"
+	NetworkService_DeleteVirtualCloud_FullMethodName = "/pilab.network.v2.NetworkService/DeleteVirtualCloud"
+	NetworkService_AddVNIEndpoint_FullMethodName     = "/pilab.network.v2.NetworkService/AddVNIEndpoint"
+	NetworkService_RemoveVNIEndpoint_FullMethodName  = "/pilab.network.v2.NetworkService/RemoveVNIEndpoint"
+	NetworkService_AllocateVNI_FullMethodName        = "/pilab.network.v2.NetworkService/AllocateVNI"
+	NetworkService_ReleaseVNI_FullMethodName         = "/pilab.network.v2.NetworkService/ReleaseVNI"
 )
 
 // NetworkServiceClient is the client API for NetworkService service.
@@ -1027,7 +1027,7 @@ func _NetworkService_ReleaseVNI_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var NetworkService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.network.v2.NetworkService",
+	ServiceName: "pilab.network.v2.NetworkService",
 	HandlerType: (*NetworkServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1144,24 +1144,24 @@ var NetworkService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	QoSSecurityService_CreateQoSProfile_FullMethodName      = "/pilab.cloud.network.v2.QoSSecurityService/CreateQoSProfile"
-	QoSSecurityService_GetQoSProfile_FullMethodName         = "/pilab.cloud.network.v2.QoSSecurityService/GetQoSProfile"
-	QoSSecurityService_ListQoSProfiles_FullMethodName       = "/pilab.cloud.network.v2.QoSSecurityService/ListQoSProfiles"
-	QoSSecurityService_UpdateQoSProfile_FullMethodName      = "/pilab.cloud.network.v2.QoSSecurityService/UpdateQoSProfile"
-	QoSSecurityService_DeleteQoSProfile_FullMethodName      = "/pilab.cloud.network.v2.QoSSecurityService/DeleteQoSProfile"
-	QoSSecurityService_ApplyQoSProfile_FullMethodName       = "/pilab.cloud.network.v2.QoSSecurityService/ApplyQoSProfile"
-	QoSSecurityService_RemoveQoSProfile_FullMethodName      = "/pilab.cloud.network.v2.QoSSecurityService/RemoveQoSProfile"
-	QoSSecurityService_CreateSecurityProfile_FullMethodName = "/pilab.cloud.network.v2.QoSSecurityService/CreateSecurityProfile"
-	QoSSecurityService_GetSecurityProfile_FullMethodName    = "/pilab.cloud.network.v2.QoSSecurityService/GetSecurityProfile"
-	QoSSecurityService_ListSecurityProfiles_FullMethodName  = "/pilab.cloud.network.v2.QoSSecurityService/ListSecurityProfiles"
-	QoSSecurityService_UpdateSecurityProfile_FullMethodName = "/pilab.cloud.network.v2.QoSSecurityService/UpdateSecurityProfile"
-	QoSSecurityService_DeleteSecurityProfile_FullMethodName = "/pilab.cloud.network.v2.QoSSecurityService/DeleteSecurityProfile"
-	QoSSecurityService_ApplySecurityProfile_FullMethodName  = "/pilab.cloud.network.v2.QoSSecurityService/ApplySecurityProfile"
-	QoSSecurityService_RemoveSecurityProfile_FullMethodName = "/pilab.cloud.network.v2.QoSSecurityService/RemoveSecurityProfile"
-	QoSSecurityService_AddACLRule_FullMethodName            = "/pilab.cloud.network.v2.QoSSecurityService/AddACLRule"
-	QoSSecurityService_UpdateACLRule_FullMethodName         = "/pilab.cloud.network.v2.QoSSecurityService/UpdateACLRule"
-	QoSSecurityService_RemoveACLRule_FullMethodName         = "/pilab.cloud.network.v2.QoSSecurityService/RemoveACLRule"
-	QoSSecurityService_ReorderACLRules_FullMethodName       = "/pilab.cloud.network.v2.QoSSecurityService/ReorderACLRules"
+	QoSSecurityService_CreateQoSProfile_FullMethodName      = "/pilab.network.v2.QoSSecurityService/CreateQoSProfile"
+	QoSSecurityService_GetQoSProfile_FullMethodName         = "/pilab.network.v2.QoSSecurityService/GetQoSProfile"
+	QoSSecurityService_ListQoSProfiles_FullMethodName       = "/pilab.network.v2.QoSSecurityService/ListQoSProfiles"
+	QoSSecurityService_UpdateQoSProfile_FullMethodName      = "/pilab.network.v2.QoSSecurityService/UpdateQoSProfile"
+	QoSSecurityService_DeleteQoSProfile_FullMethodName      = "/pilab.network.v2.QoSSecurityService/DeleteQoSProfile"
+	QoSSecurityService_ApplyQoSProfile_FullMethodName       = "/pilab.network.v2.QoSSecurityService/ApplyQoSProfile"
+	QoSSecurityService_RemoveQoSProfile_FullMethodName      = "/pilab.network.v2.QoSSecurityService/RemoveQoSProfile"
+	QoSSecurityService_CreateSecurityProfile_FullMethodName = "/pilab.network.v2.QoSSecurityService/CreateSecurityProfile"
+	QoSSecurityService_GetSecurityProfile_FullMethodName    = "/pilab.network.v2.QoSSecurityService/GetSecurityProfile"
+	QoSSecurityService_ListSecurityProfiles_FullMethodName  = "/pilab.network.v2.QoSSecurityService/ListSecurityProfiles"
+	QoSSecurityService_UpdateSecurityProfile_FullMethodName = "/pilab.network.v2.QoSSecurityService/UpdateSecurityProfile"
+	QoSSecurityService_DeleteSecurityProfile_FullMethodName = "/pilab.network.v2.QoSSecurityService/DeleteSecurityProfile"
+	QoSSecurityService_ApplySecurityProfile_FullMethodName  = "/pilab.network.v2.QoSSecurityService/ApplySecurityProfile"
+	QoSSecurityService_RemoveSecurityProfile_FullMethodName = "/pilab.network.v2.QoSSecurityService/RemoveSecurityProfile"
+	QoSSecurityService_AddACLRule_FullMethodName            = "/pilab.network.v2.QoSSecurityService/AddACLRule"
+	QoSSecurityService_UpdateACLRule_FullMethodName         = "/pilab.network.v2.QoSSecurityService/UpdateACLRule"
+	QoSSecurityService_RemoveACLRule_FullMethodName         = "/pilab.network.v2.QoSSecurityService/RemoveACLRule"
+	QoSSecurityService_ReorderACLRules_FullMethodName       = "/pilab.network.v2.QoSSecurityService/ReorderACLRules"
 )
 
 // QoSSecurityServiceClient is the client API for QoSSecurityService service.
@@ -1811,7 +1811,7 @@ func _QoSSecurityService_ReorderACLRules_Handler(srv interface{}, ctx context.Co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var QoSSecurityService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.network.v2.QoSSecurityService",
+	ServiceName: "pilab.network.v2.QoSSecurityService",
 	HandlerType: (*QoSSecurityServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -1892,24 +1892,24 @@ var QoSSecurityService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	PublicIPService_AllocatePublicIP_FullMethodName      = "/pilab.cloud.network.v2.PublicIPService/AllocatePublicIP"
-	PublicIPService_GetPublicIP_FullMethodName           = "/pilab.cloud.network.v2.PublicIPService/GetPublicIP"
-	PublicIPService_ListPublicIPs_FullMethodName         = "/pilab.cloud.network.v2.PublicIPService/ListPublicIPs"
-	PublicIPService_ReleasePublicIP_FullMethodName       = "/pilab.cloud.network.v2.PublicIPService/ReleasePublicIP"
-	PublicIPService_AssociatePublicIP_FullMethodName     = "/pilab.cloud.network.v2.PublicIPService/AssociatePublicIP"
-	PublicIPService_DisassociatePublicIP_FullMethodName  = "/pilab.cloud.network.v2.PublicIPService/DisassociatePublicIP"
-	PublicIPService_CreatePortForward_FullMethodName     = "/pilab.cloud.network.v2.PublicIPService/CreatePortForward"
-	PublicIPService_UpdatePortForward_FullMethodName     = "/pilab.cloud.network.v2.PublicIPService/UpdatePortForward"
-	PublicIPService_DeletePortForward_FullMethodName     = "/pilab.cloud.network.v2.PublicIPService/DeletePortForward"
-	PublicIPService_ListPortForwards_FullMethodName      = "/pilab.cloud.network.v2.PublicIPService/ListPortForwards"
-	PublicIPService_CreateFirewallProfile_FullMethodName = "/pilab.cloud.network.v2.PublicIPService/CreateFirewallProfile"
-	PublicIPService_GetFirewallProfile_FullMethodName    = "/pilab.cloud.network.v2.PublicIPService/GetFirewallProfile"
-	PublicIPService_UpdateFirewallProfile_FullMethodName = "/pilab.cloud.network.v2.PublicIPService/UpdateFirewallProfile"
-	PublicIPService_DeleteFirewallProfile_FullMethodName = "/pilab.cloud.network.v2.PublicIPService/DeleteFirewallProfile"
-	PublicIPService_AddFirewallRule_FullMethodName       = "/pilab.cloud.network.v2.PublicIPService/AddFirewallRule"
-	PublicIPService_UpdateFirewallRule_FullMethodName    = "/pilab.cloud.network.v2.PublicIPService/UpdateFirewallRule"
-	PublicIPService_RemoveFirewallRule_FullMethodName    = "/pilab.cloud.network.v2.PublicIPService/RemoveFirewallRule"
-	PublicIPService_ReorderFirewallRules_FullMethodName  = "/pilab.cloud.network.v2.PublicIPService/ReorderFirewallRules"
+	PublicIPService_AllocatePublicIP_FullMethodName      = "/pilab.network.v2.PublicIPService/AllocatePublicIP"
+	PublicIPService_GetPublicIP_FullMethodName           = "/pilab.network.v2.PublicIPService/GetPublicIP"
+	PublicIPService_ListPublicIPs_FullMethodName         = "/pilab.network.v2.PublicIPService/ListPublicIPs"
+	PublicIPService_ReleasePublicIP_FullMethodName       = "/pilab.network.v2.PublicIPService/ReleasePublicIP"
+	PublicIPService_AssociatePublicIP_FullMethodName     = "/pilab.network.v2.PublicIPService/AssociatePublicIP"
+	PublicIPService_DisassociatePublicIP_FullMethodName  = "/pilab.network.v2.PublicIPService/DisassociatePublicIP"
+	PublicIPService_CreatePortForward_FullMethodName     = "/pilab.network.v2.PublicIPService/CreatePortForward"
+	PublicIPService_UpdatePortForward_FullMethodName     = "/pilab.network.v2.PublicIPService/UpdatePortForward"
+	PublicIPService_DeletePortForward_FullMethodName     = "/pilab.network.v2.PublicIPService/DeletePortForward"
+	PublicIPService_ListPortForwards_FullMethodName      = "/pilab.network.v2.PublicIPService/ListPortForwards"
+	PublicIPService_CreateFirewallProfile_FullMethodName = "/pilab.network.v2.PublicIPService/CreateFirewallProfile"
+	PublicIPService_GetFirewallProfile_FullMethodName    = "/pilab.network.v2.PublicIPService/GetFirewallProfile"
+	PublicIPService_UpdateFirewallProfile_FullMethodName = "/pilab.network.v2.PublicIPService/UpdateFirewallProfile"
+	PublicIPService_DeleteFirewallProfile_FullMethodName = "/pilab.network.v2.PublicIPService/DeleteFirewallProfile"
+	PublicIPService_AddFirewallRule_FullMethodName       = "/pilab.network.v2.PublicIPService/AddFirewallRule"
+	PublicIPService_UpdateFirewallRule_FullMethodName    = "/pilab.network.v2.PublicIPService/UpdateFirewallRule"
+	PublicIPService_RemoveFirewallRule_FullMethodName    = "/pilab.network.v2.PublicIPService/RemoveFirewallRule"
+	PublicIPService_ReorderFirewallRules_FullMethodName  = "/pilab.network.v2.PublicIPService/ReorderFirewallRules"
 )
 
 // PublicIPServiceClient is the client API for PublicIPService service.
@@ -2559,7 +2559,7 @@ func _PublicIPService_ReorderFirewallRules_Handler(srv interface{}, ctx context.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var PublicIPService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.network.v2.PublicIPService",
+	ServiceName: "pilab.network.v2.PublicIPService",
 	HandlerType: (*PublicIPServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -2640,18 +2640,18 @@ var PublicIPService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	DVSService_CreateDistributedSwitch_FullMethodName = "/pilab.cloud.network.v2.DVSService/CreateDistributedSwitch"
-	DVSService_GetDistributedSwitch_FullMethodName    = "/pilab.cloud.network.v2.DVSService/GetDistributedSwitch"
-	DVSService_ListDistributedSwitches_FullMethodName = "/pilab.cloud.network.v2.DVSService/ListDistributedSwitches"
-	DVSService_UpdateDistributedSwitch_FullMethodName = "/pilab.cloud.network.v2.DVSService/UpdateDistributedSwitch"
-	DVSService_DeleteDistributedSwitch_FullMethodName = "/pilab.cloud.network.v2.DVSService/DeleteDistributedSwitch"
-	DVSService_AddHostToDVS_FullMethodName            = "/pilab.cloud.network.v2.DVSService/AddHostToDVS"
-	DVSService_RemoveHostFromDVS_FullMethodName       = "/pilab.cloud.network.v2.DVSService/RemoveHostFromDVS"
-	DVSService_CreatePortGroup_FullMethodName         = "/pilab.cloud.network.v2.DVSService/CreatePortGroup"
-	DVSService_GetPortGroup_FullMethodName            = "/pilab.cloud.network.v2.DVSService/GetPortGroup"
-	DVSService_ListPortGroups_FullMethodName          = "/pilab.cloud.network.v2.DVSService/ListPortGroups"
-	DVSService_UpdatePortGroup_FullMethodName         = "/pilab.cloud.network.v2.DVSService/UpdatePortGroup"
-	DVSService_DeletePortGroup_FullMethodName         = "/pilab.cloud.network.v2.DVSService/DeletePortGroup"
+	DVSService_CreateDistributedSwitch_FullMethodName = "/pilab.network.v2.DVSService/CreateDistributedSwitch"
+	DVSService_GetDistributedSwitch_FullMethodName    = "/pilab.network.v2.DVSService/GetDistributedSwitch"
+	DVSService_ListDistributedSwitches_FullMethodName = "/pilab.network.v2.DVSService/ListDistributedSwitches"
+	DVSService_UpdateDistributedSwitch_FullMethodName = "/pilab.network.v2.DVSService/UpdateDistributedSwitch"
+	DVSService_DeleteDistributedSwitch_FullMethodName = "/pilab.network.v2.DVSService/DeleteDistributedSwitch"
+	DVSService_AddHostToDVS_FullMethodName            = "/pilab.network.v2.DVSService/AddHostToDVS"
+	DVSService_RemoveHostFromDVS_FullMethodName       = "/pilab.network.v2.DVSService/RemoveHostFromDVS"
+	DVSService_CreatePortGroup_FullMethodName         = "/pilab.network.v2.DVSService/CreatePortGroup"
+	DVSService_GetPortGroup_FullMethodName            = "/pilab.network.v2.DVSService/GetPortGroup"
+	DVSService_ListPortGroups_FullMethodName          = "/pilab.network.v2.DVSService/ListPortGroups"
+	DVSService_UpdatePortGroup_FullMethodName         = "/pilab.network.v2.DVSService/UpdatePortGroup"
+	DVSService_DeletePortGroup_FullMethodName         = "/pilab.network.v2.DVSService/DeletePortGroup"
 )
 
 // DVSServiceClient is the client API for DVSService service.
@@ -3103,7 +3103,7 @@ func _DVSService_DeletePortGroup_Handler(srv interface{}, ctx context.Context, d
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DVSService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.network.v2.DVSService",
+	ServiceName: "pilab.network.v2.DVSService",
 	HandlerType: (*DVSServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3160,15 +3160,15 @@ var DVSService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	IPAMService_CreateIPPool_FullMethodName    = "/pilab.cloud.network.v2.IPAMService/CreateIPPool"
-	IPAMService_GetIPPool_FullMethodName       = "/pilab.cloud.network.v2.IPAMService/GetIPPool"
-	IPAMService_ListIPPools_FullMethodName     = "/pilab.cloud.network.v2.IPAMService/ListIPPools"
-	IPAMService_UpdateIPPool_FullMethodName    = "/pilab.cloud.network.v2.IPAMService/UpdateIPPool"
-	IPAMService_DeleteIPPool_FullMethodName    = "/pilab.cloud.network.v2.IPAMService/DeleteIPPool"
-	IPAMService_AllocateIP_FullMethodName      = "/pilab.cloud.network.v2.IPAMService/AllocateIP"
-	IPAMService_ReleaseIP_FullMethodName       = "/pilab.cloud.network.v2.IPAMService/ReleaseIP"
-	IPAMService_ListAllocations_FullMethodName = "/pilab.cloud.network.v2.IPAMService/ListAllocations"
-	IPAMService_ReserveIP_FullMethodName       = "/pilab.cloud.network.v2.IPAMService/ReserveIP"
+	IPAMService_CreateIPPool_FullMethodName    = "/pilab.network.v2.IPAMService/CreateIPPool"
+	IPAMService_GetIPPool_FullMethodName       = "/pilab.network.v2.IPAMService/GetIPPool"
+	IPAMService_ListIPPools_FullMethodName     = "/pilab.network.v2.IPAMService/ListIPPools"
+	IPAMService_UpdateIPPool_FullMethodName    = "/pilab.network.v2.IPAMService/UpdateIPPool"
+	IPAMService_DeleteIPPool_FullMethodName    = "/pilab.network.v2.IPAMService/DeleteIPPool"
+	IPAMService_AllocateIP_FullMethodName      = "/pilab.network.v2.IPAMService/AllocateIP"
+	IPAMService_ReleaseIP_FullMethodName       = "/pilab.network.v2.IPAMService/ReleaseIP"
+	IPAMService_ListAllocations_FullMethodName = "/pilab.network.v2.IPAMService/ListAllocations"
+	IPAMService_ReserveIP_FullMethodName       = "/pilab.network.v2.IPAMService/ReserveIP"
 )
 
 // IPAMServiceClient is the client API for IPAMService service.
@@ -3521,7 +3521,7 @@ func _IPAMService_ReserveIP_Handler(srv interface{}, ctx context.Context, dec fu
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var IPAMService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.network.v2.IPAMService",
+	ServiceName: "pilab.network.v2.IPAMService",
 	HandlerType: (*IPAMServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3566,10 +3566,10 @@ var IPAMService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	StatisticsService_GetNetworkStats_FullMethodName  = "/pilab.cloud.network.v2.StatisticsService/GetNetworkStats"
-	StatisticsService_GetPortStats_FullMethodName     = "/pilab.cloud.network.v2.StatisticsService/GetPortStats"
-	StatisticsService_GetQoSStats_FullMethodName      = "/pilab.cloud.network.v2.StatisticsService/GetQoSStats"
-	StatisticsService_GetPublicIPUsage_FullMethodName = "/pilab.cloud.network.v2.StatisticsService/GetPublicIPUsage"
+	StatisticsService_GetNetworkStats_FullMethodName  = "/pilab.network.v2.StatisticsService/GetNetworkStats"
+	StatisticsService_GetPortStats_FullMethodName     = "/pilab.network.v2.StatisticsService/GetPortStats"
+	StatisticsService_GetQoSStats_FullMethodName      = "/pilab.network.v2.StatisticsService/GetQoSStats"
+	StatisticsService_GetPublicIPUsage_FullMethodName = "/pilab.network.v2.StatisticsService/GetPublicIPUsage"
 )
 
 // StatisticsServiceClient is the client API for StatisticsService service.
@@ -3757,7 +3757,7 @@ func _StatisticsService_GetPublicIPUsage_Handler(srv interface{}, ctx context.Co
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var StatisticsService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.network.v2.StatisticsService",
+	ServiceName: "pilab.network.v2.StatisticsService",
 	HandlerType: (*StatisticsServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3782,8 +3782,8 @@ var StatisticsService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	FlowService_ListFlows_FullMethodName = "/pilab.cloud.network.v2.FlowService/ListFlows"
-	FlowService_DebugFlow_FullMethodName = "/pilab.cloud.network.v2.FlowService/DebugFlow"
+	FlowService_ListFlows_FullMethodName = "/pilab.network.v2.FlowService/ListFlows"
+	FlowService_DebugFlow_FullMethodName = "/pilab.network.v2.FlowService/DebugFlow"
 )
 
 // FlowServiceClient is the client API for FlowService service.
@@ -3905,7 +3905,7 @@ func _FlowService_DebugFlow_Handler(srv interface{}, ctx context.Context, dec fu
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var FlowService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.network.v2.FlowService",
+	ServiceName: "pilab.network.v2.FlowService",
 	HandlerType: (*FlowServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -3922,13 +3922,13 @@ var FlowService_ServiceDesc = grpc.ServiceDesc{
 }
 
 const (
-	ClusterBridgeService_CreateClusterBridge_FullMethodName = "/pilab.cloud.network.v2.ClusterBridgeService/CreateClusterBridge"
-	ClusterBridgeService_GetClusterBridge_FullMethodName    = "/pilab.cloud.network.v2.ClusterBridgeService/GetClusterBridge"
-	ClusterBridgeService_ListClusterBridges_FullMethodName  = "/pilab.cloud.network.v2.ClusterBridgeService/ListClusterBridges"
-	ClusterBridgeService_UpdateClusterBridge_FullMethodName = "/pilab.cloud.network.v2.ClusterBridgeService/UpdateClusterBridge"
-	ClusterBridgeService_DeleteClusterBridge_FullMethodName = "/pilab.cloud.network.v2.ClusterBridgeService/DeleteClusterBridge"
-	ClusterBridgeService_AddUplink_FullMethodName           = "/pilab.cloud.network.v2.ClusterBridgeService/AddUplink"
-	ClusterBridgeService_RemoveUplink_FullMethodName        = "/pilab.cloud.network.v2.ClusterBridgeService/RemoveUplink"
+	ClusterBridgeService_CreateClusterBridge_FullMethodName = "/pilab.network.v2.ClusterBridgeService/CreateClusterBridge"
+	ClusterBridgeService_GetClusterBridge_FullMethodName    = "/pilab.network.v2.ClusterBridgeService/GetClusterBridge"
+	ClusterBridgeService_ListClusterBridges_FullMethodName  = "/pilab.network.v2.ClusterBridgeService/ListClusterBridges"
+	ClusterBridgeService_UpdateClusterBridge_FullMethodName = "/pilab.network.v2.ClusterBridgeService/UpdateClusterBridge"
+	ClusterBridgeService_DeleteClusterBridge_FullMethodName = "/pilab.network.v2.ClusterBridgeService/DeleteClusterBridge"
+	ClusterBridgeService_AddUplink_FullMethodName           = "/pilab.network.v2.ClusterBridgeService/AddUplink"
+	ClusterBridgeService_RemoveUplink_FullMethodName        = "/pilab.network.v2.ClusterBridgeService/RemoveUplink"
 )
 
 // ClusterBridgeServiceClient is the client API for ClusterBridgeService service.
@@ -4215,7 +4215,7 @@ func _ClusterBridgeService_RemoveUplink_Handler(srv interface{}, ctx context.Con
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ClusterBridgeService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "pilab.cloud.network.v2.ClusterBridgeService",
+	ServiceName: "pilab.network.v2.ClusterBridgeService",
 	HandlerType: (*ClusterBridgeServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

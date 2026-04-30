@@ -40,7 +40,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// StorageServiceName is the fully-qualified name of the StorageService service.
-	StorageServiceName = "pilab.cloud.agent.v1.StorageService"
+	StorageServiceName = "pilab.agent.v1.StorageService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -53,46 +53,46 @@ const (
 const (
 	// StorageServiceVolumeCreateProcedure is the fully-qualified name of the StorageService's
 	// VolumeCreate RPC.
-	StorageServiceVolumeCreateProcedure = "/pilab.cloud.agent.v1.StorageService/VolumeCreate"
+	StorageServiceVolumeCreateProcedure = "/pilab.agent.v1.StorageService/VolumeCreate"
 	// StorageServiceVolumeDeleteProcedure is the fully-qualified name of the StorageService's
 	// VolumeDelete RPC.
-	StorageServiceVolumeDeleteProcedure = "/pilab.cloud.agent.v1.StorageService/VolumeDelete"
+	StorageServiceVolumeDeleteProcedure = "/pilab.agent.v1.StorageService/VolumeDelete"
 	// StorageServiceVolumeResizeProcedure is the fully-qualified name of the StorageService's
 	// VolumeResize RPC.
-	StorageServiceVolumeResizeProcedure = "/pilab.cloud.agent.v1.StorageService/VolumeResize"
+	StorageServiceVolumeResizeProcedure = "/pilab.agent.v1.StorageService/VolumeResize"
 	// StorageServiceVolumeListProcedure is the fully-qualified name of the StorageService's VolumeList
 	// RPC.
-	StorageServiceVolumeListProcedure = "/pilab.cloud.agent.v1.StorageService/VolumeList"
+	StorageServiceVolumeListProcedure = "/pilab.agent.v1.StorageService/VolumeList"
 	// StorageServiceVolumeGetProcedure is the fully-qualified name of the StorageService's VolumeGet
 	// RPC.
-	StorageServiceVolumeGetProcedure = "/pilab.cloud.agent.v1.StorageService/VolumeGet"
+	StorageServiceVolumeGetProcedure = "/pilab.agent.v1.StorageService/VolumeGet"
 	// StorageServiceVolumeCloneProcedure is the fully-qualified name of the StorageService's
 	// VolumeClone RPC.
-	StorageServiceVolumeCloneProcedure = "/pilab.cloud.agent.v1.StorageService/VolumeClone"
+	StorageServiceVolumeCloneProcedure = "/pilab.agent.v1.StorageService/VolumeClone"
 	// StorageServiceVolumeSnapshotCreateProcedure is the fully-qualified name of the StorageService's
 	// VolumeSnapshotCreate RPC.
-	StorageServiceVolumeSnapshotCreateProcedure = "/pilab.cloud.agent.v1.StorageService/VolumeSnapshotCreate"
+	StorageServiceVolumeSnapshotCreateProcedure = "/pilab.agent.v1.StorageService/VolumeSnapshotCreate"
 	// StorageServiceVolumeSnapshotRevertProcedure is the fully-qualified name of the StorageService's
 	// VolumeSnapshotRevert RPC.
-	StorageServiceVolumeSnapshotRevertProcedure = "/pilab.cloud.agent.v1.StorageService/VolumeSnapshotRevert"
+	StorageServiceVolumeSnapshotRevertProcedure = "/pilab.agent.v1.StorageService/VolumeSnapshotRevert"
 	// StorageServiceVolumeSnapshotDeleteProcedure is the fully-qualified name of the StorageService's
 	// VolumeSnapshotDelete RPC.
-	StorageServiceVolumeSnapshotDeleteProcedure = "/pilab.cloud.agent.v1.StorageService/VolumeSnapshotDelete"
+	StorageServiceVolumeSnapshotDeleteProcedure = "/pilab.agent.v1.StorageService/VolumeSnapshotDelete"
 	// StorageServiceStoragePoolCreateProcedure is the fully-qualified name of the StorageService's
 	// StoragePoolCreate RPC.
-	StorageServiceStoragePoolCreateProcedure = "/pilab.cloud.agent.v1.StorageService/StoragePoolCreate"
+	StorageServiceStoragePoolCreateProcedure = "/pilab.agent.v1.StorageService/StoragePoolCreate"
 	// StorageServiceStoragePoolDeleteProcedure is the fully-qualified name of the StorageService's
 	// StoragePoolDelete RPC.
-	StorageServiceStoragePoolDeleteProcedure = "/pilab.cloud.agent.v1.StorageService/StoragePoolDelete"
+	StorageServiceStoragePoolDeleteProcedure = "/pilab.agent.v1.StorageService/StoragePoolDelete"
 	// StorageServiceStoragePoolListProcedure is the fully-qualified name of the StorageService's
 	// StoragePoolList RPC.
-	StorageServiceStoragePoolListProcedure = "/pilab.cloud.agent.v1.StorageService/StoragePoolList"
+	StorageServiceStoragePoolListProcedure = "/pilab.agent.v1.StorageService/StoragePoolList"
 	// StorageServiceStoragePoolGetProcedure is the fully-qualified name of the StorageService's
 	// StoragePoolGet RPC.
-	StorageServiceStoragePoolGetProcedure = "/pilab.cloud.agent.v1.StorageService/StoragePoolGet"
+	StorageServiceStoragePoolGetProcedure = "/pilab.agent.v1.StorageService/StoragePoolGet"
 )
 
-// StorageServiceClient is a client for the pilab.cloud.agent.v1.StorageService service.
+// StorageServiceClient is a client for the pilab.agent.v1.StorageService service.
 type StorageServiceClient interface {
 	// Volume Management
 	VolumeCreate(context.Context, *connect.Request[v1.VolumeCreateRequest]) (*connect.Response[v1.VolumeCreateResponse], error)
@@ -112,9 +112,9 @@ type StorageServiceClient interface {
 	StoragePoolGet(context.Context, *connect.Request[v1.StoragePoolGetRequest]) (*connect.Response[v1.StoragePoolGetResponse], error)
 }
 
-// NewStorageServiceClient constructs a client for the pilab.cloud.agent.v1.StorageService service.
-// By default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped
-// responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
+// NewStorageServiceClient constructs a client for the pilab.agent.v1.StorageService service. By
+// default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
+// and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
@@ -221,72 +221,72 @@ type storageServiceClient struct {
 	storagePoolGet       *connect.Client[v1.StoragePoolGetRequest, v1.StoragePoolGetResponse]
 }
 
-// VolumeCreate calls pilab.cloud.agent.v1.StorageService.VolumeCreate.
+// VolumeCreate calls pilab.agent.v1.StorageService.VolumeCreate.
 func (c *storageServiceClient) VolumeCreate(ctx context.Context, req *connect.Request[v1.VolumeCreateRequest]) (*connect.Response[v1.VolumeCreateResponse], error) {
 	return c.volumeCreate.CallUnary(ctx, req)
 }
 
-// VolumeDelete calls pilab.cloud.agent.v1.StorageService.VolumeDelete.
+// VolumeDelete calls pilab.agent.v1.StorageService.VolumeDelete.
 func (c *storageServiceClient) VolumeDelete(ctx context.Context, req *connect.Request[v1.VolumeDeleteRequest]) (*connect.Response[v1.VolumeDeleteResponse], error) {
 	return c.volumeDelete.CallUnary(ctx, req)
 }
 
-// VolumeResize calls pilab.cloud.agent.v1.StorageService.VolumeResize.
+// VolumeResize calls pilab.agent.v1.StorageService.VolumeResize.
 func (c *storageServiceClient) VolumeResize(ctx context.Context, req *connect.Request[v1.VolumeResizeRequest]) (*connect.Response[v1.VolumeResizeResponse], error) {
 	return c.volumeResize.CallUnary(ctx, req)
 }
 
-// VolumeList calls pilab.cloud.agent.v1.StorageService.VolumeList.
+// VolumeList calls pilab.agent.v1.StorageService.VolumeList.
 func (c *storageServiceClient) VolumeList(ctx context.Context, req *connect.Request[v1.VolumeListRequest]) (*connect.Response[v1.VolumeListResponse], error) {
 	return c.volumeList.CallUnary(ctx, req)
 }
 
-// VolumeGet calls pilab.cloud.agent.v1.StorageService.VolumeGet.
+// VolumeGet calls pilab.agent.v1.StorageService.VolumeGet.
 func (c *storageServiceClient) VolumeGet(ctx context.Context, req *connect.Request[v1.VolumeGetRequest]) (*connect.Response[v1.VolumeGetResponse], error) {
 	return c.volumeGet.CallUnary(ctx, req)
 }
 
-// VolumeClone calls pilab.cloud.agent.v1.StorageService.VolumeClone.
+// VolumeClone calls pilab.agent.v1.StorageService.VolumeClone.
 func (c *storageServiceClient) VolumeClone(ctx context.Context, req *connect.Request[v1.VolumeCloneRequest]) (*connect.Response[v1.VolumeCloneResponse], error) {
 	return c.volumeClone.CallUnary(ctx, req)
 }
 
-// VolumeSnapshotCreate calls pilab.cloud.agent.v1.StorageService.VolumeSnapshotCreate.
+// VolumeSnapshotCreate calls pilab.agent.v1.StorageService.VolumeSnapshotCreate.
 func (c *storageServiceClient) VolumeSnapshotCreate(ctx context.Context, req *connect.Request[v1.VolumeSnapshotCreateRequest]) (*connect.Response[v1.VolumeSnapshotCreateResponse], error) {
 	return c.volumeSnapshotCreate.CallUnary(ctx, req)
 }
 
-// VolumeSnapshotRevert calls pilab.cloud.agent.v1.StorageService.VolumeSnapshotRevert.
+// VolumeSnapshotRevert calls pilab.agent.v1.StorageService.VolumeSnapshotRevert.
 func (c *storageServiceClient) VolumeSnapshotRevert(ctx context.Context, req *connect.Request[v1.VolumeSnapshotRevertRequest]) (*connect.Response[v1.VolumeSnapshotRevertResponse], error) {
 	return c.volumeSnapshotRevert.CallUnary(ctx, req)
 }
 
-// VolumeSnapshotDelete calls pilab.cloud.agent.v1.StorageService.VolumeSnapshotDelete.
+// VolumeSnapshotDelete calls pilab.agent.v1.StorageService.VolumeSnapshotDelete.
 func (c *storageServiceClient) VolumeSnapshotDelete(ctx context.Context, req *connect.Request[v1.VolumeSnapshotDeleteRequest]) (*connect.Response[v1.VolumeSnapshotDeleteResponse], error) {
 	return c.volumeSnapshotDelete.CallUnary(ctx, req)
 }
 
-// StoragePoolCreate calls pilab.cloud.agent.v1.StorageService.StoragePoolCreate.
+// StoragePoolCreate calls pilab.agent.v1.StorageService.StoragePoolCreate.
 func (c *storageServiceClient) StoragePoolCreate(ctx context.Context, req *connect.Request[v1.StoragePoolCreateRequest]) (*connect.Response[v1.StoragePoolCreateResponse], error) {
 	return c.storagePoolCreate.CallUnary(ctx, req)
 }
 
-// StoragePoolDelete calls pilab.cloud.agent.v1.StorageService.StoragePoolDelete.
+// StoragePoolDelete calls pilab.agent.v1.StorageService.StoragePoolDelete.
 func (c *storageServiceClient) StoragePoolDelete(ctx context.Context, req *connect.Request[v1.StoragePoolDeleteRequest]) (*connect.Response[v1.StoragePoolDeleteResponse], error) {
 	return c.storagePoolDelete.CallUnary(ctx, req)
 }
 
-// StoragePoolList calls pilab.cloud.agent.v1.StorageService.StoragePoolList.
+// StoragePoolList calls pilab.agent.v1.StorageService.StoragePoolList.
 func (c *storageServiceClient) StoragePoolList(ctx context.Context, req *connect.Request[v1.StoragePoolListRequest]) (*connect.Response[v1.StoragePoolListResponse], error) {
 	return c.storagePoolList.CallUnary(ctx, req)
 }
 
-// StoragePoolGet calls pilab.cloud.agent.v1.StorageService.StoragePoolGet.
+// StoragePoolGet calls pilab.agent.v1.StorageService.StoragePoolGet.
 func (c *storageServiceClient) StoragePoolGet(ctx context.Context, req *connect.Request[v1.StoragePoolGetRequest]) (*connect.Response[v1.StoragePoolGetResponse], error) {
 	return c.storagePoolGet.CallUnary(ctx, req)
 }
 
-// StorageServiceHandler is an implementation of the pilab.cloud.agent.v1.StorageService service.
+// StorageServiceHandler is an implementation of the pilab.agent.v1.StorageService service.
 type StorageServiceHandler interface {
 	// Volume Management
 	VolumeCreate(context.Context, *connect.Request[v1.VolumeCreateRequest]) (*connect.Response[v1.VolumeCreateResponse], error)
@@ -391,7 +391,7 @@ func NewStorageServiceHandler(svc StorageServiceHandler, opts ...connect.Handler
 		connect.WithSchema(storageServiceMethods.ByName("StoragePoolGet")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.agent.v1.StorageService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.agent.v1.StorageService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case StorageServiceVolumeCreateProcedure:
 			storageServiceVolumeCreateHandler.ServeHTTP(w, r)
@@ -429,53 +429,53 @@ func NewStorageServiceHandler(svc StorageServiceHandler, opts ...connect.Handler
 type UnimplementedStorageServiceHandler struct{}
 
 func (UnimplementedStorageServiceHandler) VolumeCreate(context.Context, *connect.Request[v1.VolumeCreateRequest]) (*connect.Response[v1.VolumeCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.VolumeCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.VolumeCreate is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) VolumeDelete(context.Context, *connect.Request[v1.VolumeDeleteRequest]) (*connect.Response[v1.VolumeDeleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.VolumeDelete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.VolumeDelete is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) VolumeResize(context.Context, *connect.Request[v1.VolumeResizeRequest]) (*connect.Response[v1.VolumeResizeResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.VolumeResize is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.VolumeResize is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) VolumeList(context.Context, *connect.Request[v1.VolumeListRequest]) (*connect.Response[v1.VolumeListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.VolumeList is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.VolumeList is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) VolumeGet(context.Context, *connect.Request[v1.VolumeGetRequest]) (*connect.Response[v1.VolumeGetResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.VolumeGet is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.VolumeGet is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) VolumeClone(context.Context, *connect.Request[v1.VolumeCloneRequest]) (*connect.Response[v1.VolumeCloneResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.VolumeClone is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.VolumeClone is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) VolumeSnapshotCreate(context.Context, *connect.Request[v1.VolumeSnapshotCreateRequest]) (*connect.Response[v1.VolumeSnapshotCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.VolumeSnapshotCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.VolumeSnapshotCreate is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) VolumeSnapshotRevert(context.Context, *connect.Request[v1.VolumeSnapshotRevertRequest]) (*connect.Response[v1.VolumeSnapshotRevertResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.VolumeSnapshotRevert is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.VolumeSnapshotRevert is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) VolumeSnapshotDelete(context.Context, *connect.Request[v1.VolumeSnapshotDeleteRequest]) (*connect.Response[v1.VolumeSnapshotDeleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.VolumeSnapshotDelete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.VolumeSnapshotDelete is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) StoragePoolCreate(context.Context, *connect.Request[v1.StoragePoolCreateRequest]) (*connect.Response[v1.StoragePoolCreateResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.StoragePoolCreate is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.StoragePoolCreate is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) StoragePoolDelete(context.Context, *connect.Request[v1.StoragePoolDeleteRequest]) (*connect.Response[v1.StoragePoolDeleteResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.StoragePoolDelete is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.StoragePoolDelete is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) StoragePoolList(context.Context, *connect.Request[v1.StoragePoolListRequest]) (*connect.Response[v1.StoragePoolListResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.StoragePoolList is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.StoragePoolList is not implemented"))
 }
 
 func (UnimplementedStorageServiceHandler) StoragePoolGet(context.Context, *connect.Request[v1.StoragePoolGetRequest]) (*connect.Response[v1.StoragePoolGetResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.agent.v1.StorageService.StoragePoolGet is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v1.StorageService.StoragePoolGet is not implemented"))
 }

@@ -41,7 +41,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// TaskServiceName is the fully-qualified name of the TaskService service.
-	TaskServiceName = "pilab.cloud.director.v2.TaskService"
+	TaskServiceName = "pilab.director.v2.TaskService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -53,27 +53,27 @@ const (
 // period.
 const (
 	// TaskServiceSubscribeProcedure is the fully-qualified name of the TaskService's Subscribe RPC.
-	TaskServiceSubscribeProcedure = "/pilab.cloud.director.v2.TaskService/Subscribe"
+	TaskServiceSubscribeProcedure = "/pilab.director.v2.TaskService/Subscribe"
 	// TaskServiceCreateTaskProcedure is the fully-qualified name of the TaskService's CreateTask RPC.
-	TaskServiceCreateTaskProcedure = "/pilab.cloud.director.v2.TaskService/CreateTask"
+	TaskServiceCreateTaskProcedure = "/pilab.director.v2.TaskService/CreateTask"
 	// TaskServiceGetTasksProcedure is the fully-qualified name of the TaskService's GetTasks RPC.
-	TaskServiceGetTasksProcedure = "/pilab.cloud.director.v2.TaskService/GetTasks"
+	TaskServiceGetTasksProcedure = "/pilab.director.v2.TaskService/GetTasks"
 	// TaskServiceGetTaskProcedure is the fully-qualified name of the TaskService's GetTask RPC.
-	TaskServiceGetTaskProcedure = "/pilab.cloud.director.v2.TaskService/GetTask"
+	TaskServiceGetTaskProcedure = "/pilab.director.v2.TaskService/GetTask"
 	// TaskServiceUpdateTaskStatusProcedure is the fully-qualified name of the TaskService's
 	// UpdateTaskStatus RPC.
-	TaskServiceUpdateTaskStatusProcedure = "/pilab.cloud.director.v2.TaskService/UpdateTaskStatus"
+	TaskServiceUpdateTaskStatusProcedure = "/pilab.director.v2.TaskService/UpdateTaskStatus"
 	// TaskServiceCancelTaskProcedure is the fully-qualified name of the TaskService's CancelTask RPC.
-	TaskServiceCancelTaskProcedure = "/pilab.cloud.director.v2.TaskService/CancelTask"
+	TaskServiceCancelTaskProcedure = "/pilab.director.v2.TaskService/CancelTask"
 	// TaskServiceGetTaskHistoryProcedure is the fully-qualified name of the TaskService's
 	// GetTaskHistory RPC.
-	TaskServiceGetTaskHistoryProcedure = "/pilab.cloud.director.v2.TaskService/GetTaskHistory"
+	TaskServiceGetTaskHistoryProcedure = "/pilab.director.v2.TaskService/GetTaskHistory"
 	// TaskServiceBatchUpdateTasksProcedure is the fully-qualified name of the TaskService's
 	// BatchUpdateTasks RPC.
-	TaskServiceBatchUpdateTasksProcedure = "/pilab.cloud.director.v2.TaskService/BatchUpdateTasks"
+	TaskServiceBatchUpdateTasksProcedure = "/pilab.director.v2.TaskService/BatchUpdateTasks"
 )
 
-// TaskServiceClient is a client for the pilab.cloud.director.v2.TaskService service.
+// TaskServiceClient is a client for the pilab.director.v2.TaskService service.
 type TaskServiceClient interface {
 	// Agent subscribes for tasks (gRPC streaming)
 	Subscribe(context.Context, *connect.Request[v2.SubscribeRequest]) (*connect.ServerStreamForClient[v2.Task], error)
@@ -93,7 +93,7 @@ type TaskServiceClient interface {
 	BatchUpdateTasks(context.Context, *connect.Request[v2.BatchUpdateTasksRequest]) (*connect.Response[v2.BatchUpdateTasksResponse], error)
 }
 
-// NewTaskServiceClient constructs a client for the pilab.cloud.director.v2.TaskService service. By
+// NewTaskServiceClient constructs a client for the pilab.director.v2.TaskService service. By
 // default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped responses,
 // and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
 // connect.WithGRPC() or connect.WithGRPCWeb() options.
@@ -167,47 +167,47 @@ type taskServiceClient struct {
 	batchUpdateTasks *connect.Client[v2.BatchUpdateTasksRequest, v2.BatchUpdateTasksResponse]
 }
 
-// Subscribe calls pilab.cloud.director.v2.TaskService.Subscribe.
+// Subscribe calls pilab.director.v2.TaskService.Subscribe.
 func (c *taskServiceClient) Subscribe(ctx context.Context, req *connect.Request[v2.SubscribeRequest]) (*connect.ServerStreamForClient[v2.Task], error) {
 	return c.subscribe.CallServerStream(ctx, req)
 }
 
-// CreateTask calls pilab.cloud.director.v2.TaskService.CreateTask.
+// CreateTask calls pilab.director.v2.TaskService.CreateTask.
 func (c *taskServiceClient) CreateTask(ctx context.Context, req *connect.Request[v2.CreateTaskRequest]) (*connect.Response[v2.CreateTaskResponse], error) {
 	return c.createTask.CallUnary(ctx, req)
 }
 
-// GetTasks calls pilab.cloud.director.v2.TaskService.GetTasks.
+// GetTasks calls pilab.director.v2.TaskService.GetTasks.
 func (c *taskServiceClient) GetTasks(ctx context.Context, req *connect.Request[v2.GetTasksRequest]) (*connect.Response[v2.GetTasksResponse], error) {
 	return c.getTasks.CallUnary(ctx, req)
 }
 
-// GetTask calls pilab.cloud.director.v2.TaskService.GetTask.
+// GetTask calls pilab.director.v2.TaskService.GetTask.
 func (c *taskServiceClient) GetTask(ctx context.Context, req *connect.Request[v2.GetTaskRequest]) (*connect.Response[v2.GetTaskResponse], error) {
 	return c.getTask.CallUnary(ctx, req)
 }
 
-// UpdateTaskStatus calls pilab.cloud.director.v2.TaskService.UpdateTaskStatus.
+// UpdateTaskStatus calls pilab.director.v2.TaskService.UpdateTaskStatus.
 func (c *taskServiceClient) UpdateTaskStatus(ctx context.Context, req *connect.Request[v2.UpdateTaskStatusRequest]) (*connect.Response[v2.UpdateTaskStatusResponse], error) {
 	return c.updateTaskStatus.CallUnary(ctx, req)
 }
 
-// CancelTask calls pilab.cloud.director.v2.TaskService.CancelTask.
+// CancelTask calls pilab.director.v2.TaskService.CancelTask.
 func (c *taskServiceClient) CancelTask(ctx context.Context, req *connect.Request[v2.CancelTaskRequest]) (*connect.Response[v2.CancelTaskResponse], error) {
 	return c.cancelTask.CallUnary(ctx, req)
 }
 
-// GetTaskHistory calls pilab.cloud.director.v2.TaskService.GetTaskHistory.
+// GetTaskHistory calls pilab.director.v2.TaskService.GetTaskHistory.
 func (c *taskServiceClient) GetTaskHistory(ctx context.Context, req *connect.Request[v2.GetTaskHistoryRequest]) (*connect.Response[v2.GetTaskHistoryResponse], error) {
 	return c.getTaskHistory.CallUnary(ctx, req)
 }
 
-// BatchUpdateTasks calls pilab.cloud.director.v2.TaskService.BatchUpdateTasks.
+// BatchUpdateTasks calls pilab.director.v2.TaskService.BatchUpdateTasks.
 func (c *taskServiceClient) BatchUpdateTasks(ctx context.Context, req *connect.Request[v2.BatchUpdateTasksRequest]) (*connect.Response[v2.BatchUpdateTasksResponse], error) {
 	return c.batchUpdateTasks.CallUnary(ctx, req)
 }
 
-// TaskServiceHandler is an implementation of the pilab.cloud.director.v2.TaskService service.
+// TaskServiceHandler is an implementation of the pilab.director.v2.TaskService service.
 type TaskServiceHandler interface {
 	// Agent subscribes for tasks (gRPC streaming)
 	Subscribe(context.Context, *connect.Request[v2.SubscribeRequest], *connect.ServerStream[v2.Task]) error
@@ -282,7 +282,7 @@ func NewTaskServiceHandler(svc TaskServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(taskServiceMethods.ByName("BatchUpdateTasks")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.director.v2.TaskService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.director.v2.TaskService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case TaskServiceSubscribeProcedure:
 			taskServiceSubscribeHandler.ServeHTTP(w, r)
@@ -310,33 +310,33 @@ func NewTaskServiceHandler(svc TaskServiceHandler, opts ...connect.HandlerOption
 type UnimplementedTaskServiceHandler struct{}
 
 func (UnimplementedTaskServiceHandler) Subscribe(context.Context, *connect.Request[v2.SubscribeRequest], *connect.ServerStream[v2.Task]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v2.TaskService.Subscribe is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v2.TaskService.Subscribe is not implemented"))
 }
 
 func (UnimplementedTaskServiceHandler) CreateTask(context.Context, *connect.Request[v2.CreateTaskRequest]) (*connect.Response[v2.CreateTaskResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v2.TaskService.CreateTask is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v2.TaskService.CreateTask is not implemented"))
 }
 
 func (UnimplementedTaskServiceHandler) GetTasks(context.Context, *connect.Request[v2.GetTasksRequest]) (*connect.Response[v2.GetTasksResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v2.TaskService.GetTasks is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v2.TaskService.GetTasks is not implemented"))
 }
 
 func (UnimplementedTaskServiceHandler) GetTask(context.Context, *connect.Request[v2.GetTaskRequest]) (*connect.Response[v2.GetTaskResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v2.TaskService.GetTask is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v2.TaskService.GetTask is not implemented"))
 }
 
 func (UnimplementedTaskServiceHandler) UpdateTaskStatus(context.Context, *connect.Request[v2.UpdateTaskStatusRequest]) (*connect.Response[v2.UpdateTaskStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v2.TaskService.UpdateTaskStatus is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v2.TaskService.UpdateTaskStatus is not implemented"))
 }
 
 func (UnimplementedTaskServiceHandler) CancelTask(context.Context, *connect.Request[v2.CancelTaskRequest]) (*connect.Response[v2.CancelTaskResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v2.TaskService.CancelTask is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v2.TaskService.CancelTask is not implemented"))
 }
 
 func (UnimplementedTaskServiceHandler) GetTaskHistory(context.Context, *connect.Request[v2.GetTaskHistoryRequest]) (*connect.Response[v2.GetTaskHistoryResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v2.TaskService.GetTaskHistory is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v2.TaskService.GetTaskHistory is not implemented"))
 }
 
 func (UnimplementedTaskServiceHandler) BatchUpdateTasks(context.Context, *connect.Request[v2.BatchUpdateTasksRequest]) (*connect.Response[v2.BatchUpdateTasksResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v2.TaskService.BatchUpdateTasks is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v2.TaskService.BatchUpdateTasks is not implemented"))
 }

@@ -16,7 +16,6 @@
 package frontendv1
 
 import (
-	_ "go.pilab.hu/cloud/virtpb/pilab"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -231,7 +230,7 @@ var File_pilab_frontend_v1_tasks_service_proto protoreflect.FileDescriptor
 
 const file_pilab_frontend_v1_tasks_service_proto_rawDesc = "" +
 	"\n" +
-	"%pilab/frontend/v1/tasks_service.proto\x12\x17pilab.cloud.frontend.v1\x1a\x16pilab/vm_metrics.proto\x1a\x16pilab/job_status.proto\x1a\x16pilab/host_stats.proto\"\x86\x02\n" +
+	"%pilab/frontend/v1/tasks_service.proto\x12\x11pilab.frontend.v1\"\x86\x02\n" +
 	"\n" +
 	"TaskStatus\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
@@ -246,11 +245,11 @@ const file_pilab_frontend_v1_tasks_service_proto_rawDesc = "" +
 	"\x06server\x18\t \x01(\tR\x06server\x12\x18\n" +
 	"\adetails\x18\n" +
 	" \x01(\tR\adetails\"\x12\n" +
-	"\x10ListTasksRequest\"N\n" +
-	"\x11ListTasksResponse\x129\n" +
-	"\x05tasks\x18\x01 \x03(\v2#.pilab.cloud.frontend.v1.TaskStatusR\x05tasks2r\n" +
-	"\fTasksService\x12b\n" +
-	"\tListTasks\x12).pilab.cloud.frontend.v1.ListTasksRequest\x1a*.pilab.cloud.frontend.v1.ListTasksResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1b\x06proto3"
+	"\x10ListTasksRequest\"H\n" +
+	"\x11ListTasksResponse\x123\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x1d.pilab.frontend.v1.TaskStatusR\x05tasks2f\n" +
+	"\fTasksService\x12V\n" +
+	"\tListTasks\x12#.pilab.frontend.v1.ListTasksRequest\x1a$.pilab.frontend.v1.ListTasksResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1b\x06proto3"
 
 var (
 	file_pilab_frontend_v1_tasks_service_proto_rawDescOnce sync.Once
@@ -266,14 +265,14 @@ func file_pilab_frontend_v1_tasks_service_proto_rawDescGZIP() []byte {
 
 var file_pilab_frontend_v1_tasks_service_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_pilab_frontend_v1_tasks_service_proto_goTypes = []any{
-	(*TaskStatus)(nil),        // 0: pilab.cloud.frontend.v1.TaskStatus
-	(*ListTasksRequest)(nil),  // 1: pilab.cloud.frontend.v1.ListTasksRequest
-	(*ListTasksResponse)(nil), // 2: pilab.cloud.frontend.v1.ListTasksResponse
+	(*TaskStatus)(nil),        // 0: pilab.frontend.v1.TaskStatus
+	(*ListTasksRequest)(nil),  // 1: pilab.frontend.v1.ListTasksRequest
+	(*ListTasksResponse)(nil), // 2: pilab.frontend.v1.ListTasksResponse
 }
 var file_pilab_frontend_v1_tasks_service_proto_depIdxs = []int32{
-	0, // 0: pilab.cloud.frontend.v1.ListTasksResponse.tasks:type_name -> pilab.cloud.frontend.v1.TaskStatus
-	1, // 1: pilab.cloud.frontend.v1.TasksService.ListTasks:input_type -> pilab.cloud.frontend.v1.ListTasksRequest
-	2, // 2: pilab.cloud.frontend.v1.TasksService.ListTasks:output_type -> pilab.cloud.frontend.v1.ListTasksResponse
+	0, // 0: pilab.frontend.v1.ListTasksResponse.tasks:type_name -> pilab.frontend.v1.TaskStatus
+	1, // 1: pilab.frontend.v1.TasksService.ListTasks:input_type -> pilab.frontend.v1.ListTasksRequest
+	2, // 2: pilab.frontend.v1.TasksService.ListTasks:output_type -> pilab.frontend.v1.ListTasksResponse
 	2, // [2:3] is the sub-list for method output_type
 	1, // [1:2] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

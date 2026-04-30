@@ -106,7 +106,7 @@ var File_pilab_host_stats_proto protoreflect.FileDescriptor
 
 const file_pilab_host_stats_proto_rawDesc = "" +
 	"\n" +
-	"\x16pilab/host_stats.proto\x12\vpilab.cloud\"\x8b\x01\n" +
+	"\x16pilab/host_stats.proto\x12\x05pilab\"\x8b\x01\n" +
 	"\tHostStats\x12\x1b\n" +
 	"\tcpu_usage\x18\x02 \x01(\x02R\bcpuUsage\x12\x1d\n" +
 	"\n" +
@@ -129,7 +129,7 @@ func file_pilab_host_stats_proto_rawDescGZIP() []byte {
 
 var file_pilab_host_stats_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_pilab_host_stats_proto_goTypes = []any{
-	(*HostStats)(nil), // 0: pilab.cloud.HostStats
+	(*HostStats)(nil), // 0: pilab.HostStats
 }
 var file_pilab_host_stats_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

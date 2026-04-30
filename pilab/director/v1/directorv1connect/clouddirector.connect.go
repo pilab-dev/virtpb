@@ -43,7 +43,7 @@ const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// CloudDirectorServiceName is the fully-qualified name of the CloudDirectorService service.
-	CloudDirectorServiceName = "pilab.cloud.director.v1.CloudDirectorService"
+	CloudDirectorServiceName = "pilab.director.v1.CloudDirectorService"
 )
 
 // These constants are the fully-qualified names of the RPCs defined in this package. They're
@@ -56,24 +56,22 @@ const (
 const (
 	// CloudDirectorServiceRegisterAgentProcedure is the fully-qualified name of the
 	// CloudDirectorService's RegisterAgent RPC.
-	CloudDirectorServiceRegisterAgentProcedure = "/pilab.cloud.director.v1.CloudDirectorService/RegisterAgent"
+	CloudDirectorServiceRegisterAgentProcedure = "/pilab.director.v1.CloudDirectorService/RegisterAgent"
 	// CloudDirectorServiceAgentEventsProcedure is the fully-qualified name of the
 	// CloudDirectorService's AgentEvents RPC.
-	CloudDirectorServiceAgentEventsProcedure = "/pilab.cloud.director.v1.CloudDirectorService/AgentEvents"
+	CloudDirectorServiceAgentEventsProcedure = "/pilab.director.v1.CloudDirectorService/AgentEvents"
 )
 
-// CloudDirectorServiceClient is a client for the pilab.cloud.director.v1.CloudDirectorService
-// service.
+// CloudDirectorServiceClient is a client for the pilab.director.v1.CloudDirectorService service.
 type CloudDirectorServiceClient interface {
 	RegisterAgent(context.Context, *connect.Request[v1.RegisterAgentRequest]) (*connect.Response[v1.RegisterAgentResponse], error)
 	AgentEvents(context.Context) *connect.BidiStreamForClient[v1.AgentEventsRequest, v1.ManagerMessage]
 }
 
-// NewCloudDirectorServiceClient constructs a client for the
-// pilab.cloud.director.v1.CloudDirectorService service. By default, it uses the Connect protocol
-// with the binary Protobuf Codec, asks for gzipped responses, and sends uncompressed requests. To
-// use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or connect.WithGRPCWeb()
-// options.
+// NewCloudDirectorServiceClient constructs a client for the pilab.director.v1.CloudDirectorService
+// service. By default, it uses the Connect protocol with the binary Protobuf Codec, asks for
+// gzipped responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply
+// the connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
@@ -102,18 +100,18 @@ type cloudDirectorServiceClient struct {
 	agentEvents   *connect.Client[v1.AgentEventsRequest, v1.ManagerMessage]
 }
 
-// RegisterAgent calls pilab.cloud.director.v1.CloudDirectorService.RegisterAgent.
+// RegisterAgent calls pilab.director.v1.CloudDirectorService.RegisterAgent.
 func (c *cloudDirectorServiceClient) RegisterAgent(ctx context.Context, req *connect.Request[v1.RegisterAgentRequest]) (*connect.Response[v1.RegisterAgentResponse], error) {
 	return c.registerAgent.CallUnary(ctx, req)
 }
 
-// AgentEvents calls pilab.cloud.director.v1.CloudDirectorService.AgentEvents.
+// AgentEvents calls pilab.director.v1.CloudDirectorService.AgentEvents.
 func (c *cloudDirectorServiceClient) AgentEvents(ctx context.Context) *connect.BidiStreamForClient[v1.AgentEventsRequest, v1.ManagerMessage] {
 	return c.agentEvents.CallBidiStream(ctx)
 }
 
-// CloudDirectorServiceHandler is an implementation of the
-// pilab.cloud.director.v1.CloudDirectorService service.
+// CloudDirectorServiceHandler is an implementation of the pilab.director.v1.CloudDirectorService
+// service.
 type CloudDirectorServiceHandler interface {
 	RegisterAgent(context.Context, *connect.Request[v1.RegisterAgentRequest]) (*connect.Response[v1.RegisterAgentResponse], error)
 	AgentEvents(context.Context, *connect.BidiStream[v1.AgentEventsRequest, v1.ManagerMessage]) error
@@ -138,7 +136,7 @@ func NewCloudDirectorServiceHandler(svc CloudDirectorServiceHandler, opts ...con
 		connect.WithSchema(cloudDirectorServiceMethods.ByName("AgentEvents")),
 		connect.WithHandlerOptions(opts...),
 	)
-	return "/pilab.cloud.director.v1.CloudDirectorService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	return "/pilab.director.v1.CloudDirectorService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case CloudDirectorServiceRegisterAgentProcedure:
 			cloudDirectorServiceRegisterAgentHandler.ServeHTTP(w, r)
@@ -154,9 +152,9 @@ func NewCloudDirectorServiceHandler(svc CloudDirectorServiceHandler, opts ...con
 type UnimplementedCloudDirectorServiceHandler struct{}
 
 func (UnimplementedCloudDirectorServiceHandler) RegisterAgent(context.Context, *connect.Request[v1.RegisterAgentRequest]) (*connect.Response[v1.RegisterAgentResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v1.CloudDirectorService.RegisterAgent is not implemented"))
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v1.CloudDirectorService.RegisterAgent is not implemented"))
 }
 
 func (UnimplementedCloudDirectorServiceHandler) AgentEvents(context.Context, *connect.BidiStream[v1.AgentEventsRequest, v1.ManagerMessage]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.cloud.director.v1.CloudDirectorService.AgentEvents is not implemented"))
+	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.director.v1.CloudDirectorService.AgentEvents is not implemented"))
 }
