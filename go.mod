@@ -5,12 +5,14 @@ go 1.25.0
 // This module is version v1.0.4
 
 require (
-	connectrpc.com/connect v1.19.1
-	google.golang.org/grpc v1.79.3
+	connectrpc.com/connect v1.19.2
+	google.golang.org/grpc v1.80.0
 	google.golang.org/protobuf v1.36.11
 )
 
 require (
+	go.opentelemetry.io/otel v1.42.0 // indirect
+	go.opentelemetry.io/otel/sdk/metric v1.42.0 // indirect
 	golang.org/x/net v0.52.0 // indirect
 	golang.org/x/sys v0.42.0 // indirect
 	golang.org/x/text v0.35.0 // indirect

@@ -75,6 +75,8 @@ message CreateVMRequest {
   string user_data = 12;     // Cloud-init user-data (YAML/cloud-config)
   string meta_data = 13;     // Cloud-init meta-data
   string ssh_key = 14;      // SSH public key for cloud-init
+  string firmware = 15;      // "bios" | "uefi" (default: "uefi")
+  EFIConfig efi = 16;        // UEFI configuration
 }
 
 message StartVMRequest {
@@ -141,6 +143,8 @@ message VMInfo {
   string folder = 10;
   google.protobuf.Timestamp created_at = 11;
   google.protobuf.Timestamp updated_at = 12;
+  string firmware = 13;
+  EFIConfig efi = 14;
 }
 
 message CPUConfig {
@@ -484,4 +488,13 @@ message OVSPort {
   string bridge = 2;
   int32 vlan_tag = 3;
   repeated int32 trunks = 4;
+}
+
+// ==================== UEFI Messages ====================
+
+message EFIConfig {
+  string loader_path = 1;      // Path to OVMF_CODE.fd (UEFI firmware)
+  string nvram_path = 2;       // Path to per-VM NVRAM file
+  string nvram_template = 3;    // Path to OVMF_VARS.fd template
+  bool secure_boot = 4;        // Enable secure boot (future)
 }
