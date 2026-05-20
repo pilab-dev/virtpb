@@ -28,14 +28,12 @@
 package directorv1
 
 import (
-	// cloudpb "go.pilab.hu/cloud/virtpb/pilab/common/v1"
+	v1 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
-
-	cloudpb "go.pilab.hu/cloud/pibase/gen/pilab/cloud"
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -180,7 +178,7 @@ func (x *AgentEventsRequest) GetVmDefinition() *VmDefinition {
 	return nil
 }
 
-func (x *AgentEventsRequest) GetHostStats() *cloudpb.HostStats {
+func (x *AgentEventsRequest) GetHostStats() *v1.HostStats {
 	if x != nil {
 		if x, ok := x.Event.(*AgentEventsRequest_HostStats); ok {
 			return x.HostStats
@@ -189,7 +187,7 @@ func (x *AgentEventsRequest) GetHostStats() *cloudpb.HostStats {
 	return nil
 }
 
-func (x *AgentEventsRequest) GetVmMetrics() *cloudpb.VmMetrics {
+func (x *AgentEventsRequest) GetVmMetrics() *v1.VmMetrics {
 	if x != nil {
 		if x, ok := x.Event.(*AgentEventsRequest_VmMetrics); ok {
 			return x.VmMetrics
@@ -198,7 +196,7 @@ func (x *AgentEventsRequest) GetVmMetrics() *cloudpb.VmMetrics {
 	return nil
 }
 
-func (x *AgentEventsRequest) GetJobStatus() *cloudpb.JobStatus {
+func (x *AgentEventsRequest) GetJobStatus() *v1.JobStatus {
 	if x != nil {
 		if x, ok := x.Event.(*AgentEventsRequest_JobStatus); ok {
 			return x.JobStatus
@@ -233,15 +231,15 @@ type AgentEventsRequest_VmDefinition struct {
 }
 
 type AgentEventsRequest_HostStats struct {
-	HostStats *cloudpb.HostStats `protobuf:"bytes,4,opt,name=host_stats,json=hostStats,proto3,oneof"`
+	HostStats *v1.HostStats `protobuf:"bytes,4,opt,name=host_stats,json=hostStats,proto3,oneof"`
 }
 
 type AgentEventsRequest_VmMetrics struct {
-	VmMetrics *cloudpb.VmMetrics `protobuf:"bytes,5,opt,name=vm_metrics,json=vmMetrics,proto3,oneof"`
+	VmMetrics *v1.VmMetrics `protobuf:"bytes,5,opt,name=vm_metrics,json=vmMetrics,proto3,oneof"`
 }
 
 type AgentEventsRequest_JobStatus struct {
-	JobStatus *cloudpb.JobStatus `protobuf:"bytes,6,opt,name=job_status,json=jobStatus,proto3,oneof"`
+	JobStatus *v1.JobStatus `protobuf:"bytes,6,opt,name=job_status,json=jobStatus,proto3,oneof"`
 }
 
 type AgentEventsRequest_VmGuestInfo struct {
@@ -1197,27 +1195,25 @@ func file_pilab_director_v1_clouddirector_proto_rawDescGZIP() []byte {
 	return file_pilab_director_v1_clouddirector_proto_rawDescData
 }
 
-var (
-	file_pilab_director_v1_clouddirector_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
-	file_pilab_director_v1_clouddirector_proto_goTypes  = []any{
-		(*VmGuestInfo)(nil),            // 0: pilab.director.v1.VmGuestInfo
-		(*AgentEventsRequest)(nil),     // 1: pilab.director.v1.AgentEventsRequest
-		(*HeartbeatEvent)(nil),         // 2: pilab.director.v1.HeartbeatEvent
-		(*VmDefinition)(nil),           // 3: pilab.director.v1.VmDefinition
-		(*VmStateEvent)(nil),           // 4: pilab.director.v1.VmStateEvent
-		(*DiskStateEvent)(nil),         // 5: pilab.director.v1.DiskStateEvent
-		(*ManagerMessage)(nil),         // 6: pilab.director.v1.ManagerMessage
-		(*ResourceRefreshRequest)(nil), // 7: pilab.director.v1.ResourceRefreshRequest
-		(*ClusterJoinRequest)(nil),     // 8: pilab.director.v1.ClusterJoinRequest
-		(*ClusterBridgeConfig)(nil),    // 9: pilab.director.v1.ClusterBridgeConfig
-		(*ClusterLeaveRequest)(nil),    // 10: pilab.director.v1.ClusterLeaveRequest
-		(*RegisterAgentRequest)(nil),   // 11: pilab.director.v1.RegisterAgentRequest
-		(*RegisterAgentResponse)(nil),  // 12: pilab.director.v1.RegisterAgentResponse
-		(*cloudpb.HostStats)(nil),      // 13: pilab.common.v1.HostStats
-		(*cloudpb.VmMetrics)(nil),      // 14: pilab.common.v1.VmMetrics
-		(*cloudpb.JobStatus)(nil),      // 15: pilab.common.v1.JobStatus
-	}
-)
+var file_pilab_director_v1_clouddirector_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_pilab_director_v1_clouddirector_proto_goTypes = []any{
+	(*VmGuestInfo)(nil),            // 0: pilab.director.v1.VmGuestInfo
+	(*AgentEventsRequest)(nil),     // 1: pilab.director.v1.AgentEventsRequest
+	(*HeartbeatEvent)(nil),         // 2: pilab.director.v1.HeartbeatEvent
+	(*VmDefinition)(nil),           // 3: pilab.director.v1.VmDefinition
+	(*VmStateEvent)(nil),           // 4: pilab.director.v1.VmStateEvent
+	(*DiskStateEvent)(nil),         // 5: pilab.director.v1.DiskStateEvent
+	(*ManagerMessage)(nil),         // 6: pilab.director.v1.ManagerMessage
+	(*ResourceRefreshRequest)(nil), // 7: pilab.director.v1.ResourceRefreshRequest
+	(*ClusterJoinRequest)(nil),     // 8: pilab.director.v1.ClusterJoinRequest
+	(*ClusterBridgeConfig)(nil),    // 9: pilab.director.v1.ClusterBridgeConfig
+	(*ClusterLeaveRequest)(nil),    // 10: pilab.director.v1.ClusterLeaveRequest
+	(*RegisterAgentRequest)(nil),   // 11: pilab.director.v1.RegisterAgentRequest
+	(*RegisterAgentResponse)(nil),  // 12: pilab.director.v1.RegisterAgentResponse
+	(*v1.HostStats)(nil),           // 13: pilab.common.v1.HostStats
+	(*v1.VmMetrics)(nil),           // 14: pilab.common.v1.VmMetrics
+	(*v1.JobStatus)(nil),           // 15: pilab.common.v1.JobStatus
+}
 var file_pilab_director_v1_clouddirector_proto_depIdxs = []int32{
 	4,  // 0: pilab.director.v1.AgentEventsRequest.vm_state_event:type_name -> pilab.director.v1.VmStateEvent
 	2,  // 1: pilab.director.v1.AgentEventsRequest.heartbeat:type_name -> pilab.director.v1.HeartbeatEvent

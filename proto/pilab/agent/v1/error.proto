@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package pilab.cloud.agent.v1;
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
+
+// Common error response structure
+message ErrorResponse {
+  string error_message = 1;
+  // Optionally include an error code
+  string error_code = 2;
+
+  optional bytes details = 3; // Additional details about the error
+}

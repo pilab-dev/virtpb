@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package pilab.cloud.agent.v1;
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
+
+message StreamRequest {
+  oneof message {
+    OpenStreamMessage open = 1;
+    PayloadMessage payload = 2;
+    CloseMessage close = 3;
+  }
+}
+
+message OpenStreamMessage {
+  string resource = 1;
+  string resource_variant = 2;
+}
+
+message PayloadMessage {
+  bytes data = 1;
+}
+
+message CloseMessage {
+}
+
+message StreamResponse {
+  oneof message {
+    PayloadMessage payload = 1;
+    CloseMessage close = 2;
+  }
+}
