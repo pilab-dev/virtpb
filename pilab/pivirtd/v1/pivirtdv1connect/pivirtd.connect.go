@@ -123,6 +123,12 @@ const (
 	// PivirtdServiceListOVSPortsProcedure is the fully-qualified name of the PivirtdService's
 	// ListOVSPorts RPC.
 	PivirtdServiceListOVSPortsProcedure = "/pilab.virtualization.v1.PivirtdService/ListOVSPorts"
+	// PivirtdServiceSubscribeEventsProcedure is the fully-qualified name of the PivirtdService's
+	// SubscribeEvents RPC.
+	PivirtdServiceSubscribeEventsProcedure = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
+	// PivirtdServiceGetHostResourceProcedure is the fully-qualified name of the PivirtdService's
+	// GetHostResource RPC.
+	PivirtdServiceGetHostResourceProcedure = "/pilab.virtualization.v1.PivirtdService/GetHostResource"
 )
 
 // PivirtdServiceClient is a client for the pilab.virtualization.v1.PivirtdService service.
@@ -168,6 +174,9 @@ type PivirtdServiceClient interface {
 	AddOVSPort(context.Context, *connect.Request[v1.AddOVSPortRequest]) (*connect.Response[v1.NetworkResponse], error)
 	RemoveOVSPort(context.Context, *connect.Request[v1.RemoveOVSPortRequest]) (*connect.Response[v1.DeleteNetworkResponse], error)
 	ListOVSPorts(context.Context, *connect.Request[v1.ListOVSPortsRequest]) (*connect.Response[v1.ListOVSPortsResponse], error)
+	// Host Event Stream
+	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.ServerStreamForClient[v1.HostEvent], error)
+	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
 }
 
 // NewPivirtdServiceClient constructs a client for the pilab.virtualization.v1.PivirtdService
@@ -379,6 +388,18 @@ func NewPivirtdServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(pivirtdServiceMethods.ByName("ListOVSPorts")),
 			connect.WithClientOptions(opts...),
 		),
+		subscribeEvents: connect.NewClient[v1.SubscribeEventsRequest, v1.HostEvent](
+			httpClient,
+			baseURL+PivirtdServiceSubscribeEventsProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("SubscribeEvents")),
+			connect.WithClientOptions(opts...),
+		),
+		getHostResource: connect.NewClient[v1.SubscribeEventsRequest, v1.HostResourceReport](
+			httpClient,
+			baseURL+PivirtdServiceGetHostResourceProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("GetHostResource")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -417,6 +438,8 @@ type pivirtdServiceClient struct {
 	addOVSPort         *connect.Client[v1.AddOVSPortRequest, v1.NetworkResponse]
 	removeOVSPort      *connect.Client[v1.RemoveOVSPortRequest, v1.DeleteNetworkResponse]
 	listOVSPorts       *connect.Client[v1.ListOVSPortsRequest, v1.ListOVSPortsResponse]
+	subscribeEvents    *connect.Client[v1.SubscribeEventsRequest, v1.HostEvent]
+	getHostResource    *connect.Client[v1.SubscribeEventsRequest, v1.HostResourceReport]
 }
 
 // CreateVM calls pilab.virtualization.v1.PivirtdService.CreateVM.
@@ -584,6 +607,16 @@ func (c *pivirtdServiceClient) ListOVSPorts(ctx context.Context, req *connect.Re
 	return c.listOVSPorts.CallUnary(ctx, req)
 }
 
+// SubscribeEvents calls pilab.virtualization.v1.PivirtdService.SubscribeEvents.
+func (c *pivirtdServiceClient) SubscribeEvents(ctx context.Context, req *connect.Request[v1.SubscribeEventsRequest]) (*connect.ServerStreamForClient[v1.HostEvent], error) {
+	return c.subscribeEvents.CallServerStream(ctx, req)
+}
+
+// GetHostResource calls pilab.virtualization.v1.PivirtdService.GetHostResource.
+func (c *pivirtdServiceClient) GetHostResource(ctx context.Context, req *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error) {
+	return c.getHostResource.CallUnary(ctx, req)
+}
+
 // PivirtdServiceHandler is an implementation of the pilab.virtualization.v1.PivirtdService service.
 type PivirtdServiceHandler interface {
 	// VM Lifecycle Management
@@ -627,6 +660,9 @@ type PivirtdServiceHandler interface {
 	AddOVSPort(context.Context, *connect.Request[v1.AddOVSPortRequest]) (*connect.Response[v1.NetworkResponse], error)
 	RemoveOVSPort(context.Context, *connect.Request[v1.RemoveOVSPortRequest]) (*connect.Response[v1.DeleteNetworkResponse], error)
 	ListOVSPorts(context.Context, *connect.Request[v1.ListOVSPortsRequest]) (*connect.Response[v1.ListOVSPortsResponse], error)
+	// Host Event Stream
+	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest], *connect.ServerStream[v1.HostEvent]) error
+	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
 }
 
 // NewPivirtdServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -834,6 +870,18 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 		connect.WithSchema(pivirtdServiceMethods.ByName("ListOVSPorts")),
 		connect.WithHandlerOptions(opts...),
 	)
+	pivirtdServiceSubscribeEventsHandler := connect.NewServerStreamHandler(
+		PivirtdServiceSubscribeEventsProcedure,
+		svc.SubscribeEvents,
+		connect.WithSchema(pivirtdServiceMethods.ByName("SubscribeEvents")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceGetHostResourceHandler := connect.NewUnaryHandler(
+		PivirtdServiceGetHostResourceProcedure,
+		svc.GetHostResource,
+		connect.WithSchema(pivirtdServiceMethods.ByName("GetHostResource")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/pilab.virtualization.v1.PivirtdService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case PivirtdServiceCreateVMProcedure:
@@ -902,6 +950,10 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 			pivirtdServiceRemoveOVSPortHandler.ServeHTTP(w, r)
 		case PivirtdServiceListOVSPortsProcedure:
 			pivirtdServiceListOVSPortsHandler.ServeHTTP(w, r)
+		case PivirtdServiceSubscribeEventsProcedure:
+			pivirtdServiceSubscribeEventsHandler.ServeHTTP(w, r)
+		case PivirtdServiceGetHostResourceProcedure:
+			pivirtdServiceGetHostResourceHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1041,4 +1093,12 @@ func (UnimplementedPivirtdServiceHandler) RemoveOVSPort(context.Context, *connec
 
 func (UnimplementedPivirtdServiceHandler) ListOVSPorts(context.Context, *connect.Request[v1.ListOVSPortsRequest]) (*connect.Response[v1.ListOVSPortsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.ListOVSPorts is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest], *connect.ServerStream[v1.HostEvent]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.SubscribeEvents is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GetHostResource is not implemented"))
 }

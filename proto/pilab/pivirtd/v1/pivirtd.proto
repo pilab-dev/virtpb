@@ -56,6 +56,10 @@ service PivirtdService {
   rpc AddOVSPort(AddOVSPortRequest) returns (NetworkResponse);
   rpc RemoveOVSPort(RemoveOVSPortRequest) returns (DeleteNetworkResponse);
   rpc ListOVSPorts(ListOVSPortsRequest) returns (ListOVSPortsResponse);
+
+  // Host Event Stream
+  rpc SubscribeEvents(SubscribeEventsRequest) returns (stream HostEvent);
+  rpc GetHostResource(SubscribeEventsRequest) returns (HostResourceReport);
 }
 
 // ==================== VM Messages ====================
@@ -77,6 +81,7 @@ message CreateVMRequest {
   string ssh_key = 14;      // SSH public key for cloud-init
   string firmware = 15;      // "bios" | "uefi" (default: "uefi")
   EFIConfig efi = 16;        // UEFI configuration
+  ResourceSpec resources = 17;
 }
 
 message StartVMRequest {
@@ -145,6 +150,7 @@ message VMInfo {
   google.protobuf.Timestamp updated_at = 12;
   string firmware = 13;
   EFIConfig efi = 14;
+  ResourceSpec resources = 15;
 }
 
 message CPUConfig {
@@ -497,4 +503,104 @@ message EFIConfig {
   string nvram_path = 2;       // Path to per-VM NVRAM file
   string nvram_template = 3;    // Path to OVMF_VARS.fd template
   bool secure_boot = 4;        // Enable secure boot (future)
+}
+
+// ==================== Host Events ====================
+
+enum HostEventType {
+  HOST_EVENT_TYPE_UNSPECIFIED = 0;
+  HOST_EVENT_TYPE_VM_CREATED = 1;
+  HOST_EVENT_TYPE_VM_STARTED = 2;
+  HOST_EVENT_TYPE_VM_STOPPED = 3;
+  HOST_EVENT_TYPE_VM_CRASHED = 4;
+  HOST_EVENT_TYPE_VM_PAUSED = 5;
+  HOST_EVENT_TYPE_VM_RESUMED = 6;
+  HOST_EVENT_TYPE_VM_DELETED = 7;
+  HOST_EVENT_TYPE_HEARTBEAT = 20;
+  HOST_EVENT_TYPE_HEALTH_DEGRADED = 21;
+  HOST_EVENT_TYPE_HEALTH_FAILED = 22;
+  HOST_EVENT_TYPE_RESOURCE_CPU_PRESSURE = 30;
+  HOST_EVENT_TYPE_RESOURCE_MEM_PRESSURE = 31;
+  HOST_EVENT_TYPE_RESOURCE_DISK_PRESSURE = 32;
+  HOST_EVENT_TYPE_RESOURCE_REPORT = 40;
+}
+
+message SubscribeEventsRequest {}
+
+message HostEvent {
+  string id = 1;
+  HostEventType type = 2;
+  google.protobuf.Timestamp timestamp = 3;
+  oneof payload {
+    VmLifecycleEvent vm_lifecycle = 10;
+    HostHealthEvent host_health = 11;
+    ResourcePressureEvent resource_pressure = 12;
+    HostResourceReport resource_report = 13;
+  }
+}
+
+message VmLifecycleEvent {
+  string vm_name = 1;
+  string vm_uuid = 2;
+  string previous_state = 3;
+  string new_state = 4;
+}
+
+message HostHealthEvent {
+  string check_name = 1;
+  string status = 2;  // "healthy", "degraded", "failed"
+  string message = 3;
+}
+
+message ResourcePressureEvent {
+  string resource_type = 1;  // "cpu", "memory", "disk"
+  double threshold_percent = 2;
+  double current_percent = 3;
+  string details = 4;
+}
+
+message HostResourceReport {
+  // CPU topology
+  int32 physical_cpus = 1;
+  int32 physical_cores = 2;
+  int32 physical_threads = 3;
+  string cpu_model = 4;
+  int32 cpu_freq_mhz = 5;
+
+  // Memory
+  int64 memory_total_mb = 10;
+  int64 memory_available_mb = 11;
+  int64 memory_reserved_mb = 12;
+  int64 memory_used_by_vms_mb = 13;
+
+  // NUMA topology
+  repeated NUMANode numa_nodes = 20;
+
+  // Hypervisor capability
+  bool kvm_available = 30;
+  bool nested_virtualization = 31;
+  bool vmx_svm_supported = 32;
+  bool hugepages_available = 33;
+  string qemu_version = 34;
+
+  // Storage
+  StorageSummary storage = 40;
+}
+
+message NUMANode {
+  int32 node_id = 1;
+  int64 memory_total_bytes = 2;
+  repeated int32 cpu_core_ids = 3;
+}
+
+message StorageSummary {
+  int64 pool_total_bytes = 1;
+  int64 pool_used_bytes = 2;
+  int64 pool_available_bytes = 3;
+}
+
+message ResourceSpec {
+  int64 memory_limit_bytes = 1;
+  int64 memory_reservation_bytes = 2;
+  int64 cpu_shares = 3;
 }
