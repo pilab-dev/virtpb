@@ -125,7 +125,10 @@ type CreateVMRequest struct {
 	SshKey        string                 `protobuf:"bytes,14,opt,name=ssh_key,json=sshKey,proto3" json:"ssh_key,omitempty"`             // SSH public key for cloud-init
 	Firmware      string                 `protobuf:"bytes,15,opt,name=firmware,proto3" json:"firmware,omitempty"`                       // "bios" | "uefi" (default: "uefi")
 	Efi           *EFIConfig             `protobuf:"bytes,16,opt,name=efi,proto3" json:"efi,omitempty"`                                 // UEFI configuration
-	Resources     *ResourceSpec          `protobuf:"bytes,17,opt,name=resources,proto3" json:"resources,omitempty"`
+	MaxMemoryMb   int32                  `protobuf:"varint,17,opt,name=max_memory_mb,json=maxMemoryMb,proto3" json:"max_memory_mb,omitempty"`
+	MemorySlots   int32                  `protobuf:"varint,18,opt,name=memory_slots,json=memorySlots,proto3" json:"memory_slots,omitempty"`
+	MaxVcpus      int32                  `protobuf:"varint,19,opt,name=max_vcpus,json=maxVcpus,proto3" json:"max_vcpus,omitempty"`
+	Resources     *ResourceSpec          `protobuf:"bytes,20,opt,name=resources,proto3" json:"resources,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -270,6 +273,27 @@ func (x *CreateVMRequest) GetEfi() *EFIConfig {
 		return x.Efi
 	}
 	return nil
+}
+
+func (x *CreateVMRequest) GetMaxMemoryMb() int32 {
+	if x != nil {
+		return x.MaxMemoryMb
+	}
+	return 0
+}
+
+func (x *CreateVMRequest) GetMemorySlots() int32 {
+	if x != nil {
+		return x.MemorySlots
+	}
+	return 0
+}
+
+func (x *CreateVMRequest) GetMaxVcpus() int32 {
+	if x != nil {
+		return x.MaxVcpus
+	}
+	return 0
 }
 
 func (x *CreateVMRequest) GetResources() *ResourceSpec {
@@ -835,7 +859,10 @@ type VMInfo struct {
 	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Firmware      string                 `protobuf:"bytes,13,opt,name=firmware,proto3" json:"firmware,omitempty"`
 	Efi           *EFIConfig             `protobuf:"bytes,14,opt,name=efi,proto3" json:"efi,omitempty"`
-	Resources     *ResourceSpec          `protobuf:"bytes,15,opt,name=resources,proto3" json:"resources,omitempty"`
+	MaxMemoryMb   int32                  `protobuf:"varint,15,opt,name=max_memory_mb,json=maxMemoryMb,proto3" json:"max_memory_mb,omitempty"`
+	MemorySlots   int32                  `protobuf:"varint,16,opt,name=memory_slots,json=memorySlots,proto3" json:"memory_slots,omitempty"`
+	MaxVcpus      int32                  `protobuf:"varint,17,opt,name=max_vcpus,json=maxVcpus,proto3" json:"max_vcpus,omitempty"`
+	Resources     *ResourceSpec          `protobuf:"bytes,18,opt,name=resources,proto3" json:"resources,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -966,6 +993,27 @@ func (x *VMInfo) GetEfi() *EFIConfig {
 		return x.Efi
 	}
 	return nil
+}
+
+func (x *VMInfo) GetMaxMemoryMb() int32 {
+	if x != nil {
+		return x.MaxMemoryMb
+	}
+	return 0
+}
+
+func (x *VMInfo) GetMemorySlots() int32 {
+	if x != nil {
+		return x.MemorySlots
+	}
+	return 0
+}
+
+func (x *VMInfo) GetMaxVcpus() int32 {
+	if x != nil {
+		return x.MaxVcpus
+	}
+	return 0
 }
 
 func (x *VMInfo) GetResources() *ResourceSpec {
@@ -5132,7 +5180,7 @@ var File_pilab_pivirtd_v1_pivirtd_proto protoreflect.FileDescriptor
 
 const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\n" +
-	"\x1epilab/pivirtd/v1/pivirtd.proto\x12\x17pilab.virtualization.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb2\x05\n" +
+	"\x1epilab/pivirtd/v1/pivirtd.proto\x12\x17pilab.virtualization.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x96\x06\n" +
 	"\x0fCreateVMRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
 	"\tmemory_mb\x18\x02 \x01(\x05R\bmemoryMb\x12\x14\n" +
@@ -5151,8 +5199,11 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\tmeta_data\x18\r \x01(\tR\bmetaData\x12\x17\n" +
 	"\assh_key\x18\x0e \x01(\tR\x06sshKey\x12\x1a\n" +
 	"\bfirmware\x18\x0f \x01(\tR\bfirmware\x124\n" +
-	"\x03efi\x18\x10 \x01(\v2\".pilab.virtualization.v1.EFIConfigR\x03efi\x12C\n" +
-	"\tresources\x18\x11 \x01(\v2%.pilab.virtualization.v1.ResourceSpecR\tresources\"$\n" +
+	"\x03efi\x18\x10 \x01(\v2\".pilab.virtualization.v1.EFIConfigR\x03efi\x12\"\n" +
+	"\rmax_memory_mb\x18\x11 \x01(\x05R\vmaxMemoryMb\x12!\n" +
+	"\fmemory_slots\x18\x12 \x01(\x05R\vmemorySlots\x12\x1b\n" +
+	"\tmax_vcpus\x18\x13 \x01(\x05R\bmaxVcpus\x12C\n" +
+	"\tresources\x18\x14 \x01(\v2%.pilab.virtualization.v1.ResourceSpecR\tresources\"$\n" +
 	"\x0eStartVMRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\"9\n" +
 	"\rStopVMRequest\x12\x12\n" +
@@ -5183,7 +5234,7 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"l\n" +
 	"\x0fListVMsResponse\x121\n" +
 	"\x03vms\x18\x01 \x03(\v2\x1f.pilab.virtualization.v1.VMInfoR\x03vms\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xed\x04\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xd1\x05\n" +
 	"\x06VMInfo\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04uuid\x18\x02 \x01(\tR\x04uuid\x12\x14\n" +
@@ -5201,8 +5252,11 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x1a\n" +
 	"\bfirmware\x18\r \x01(\tR\bfirmware\x124\n" +
-	"\x03efi\x18\x0e \x01(\v2\".pilab.virtualization.v1.EFIConfigR\x03efi\x12C\n" +
-	"\tresources\x18\x0f \x01(\v2%.pilab.virtualization.v1.ResourceSpecR\tresources\"r\n" +
+	"\x03efi\x18\x0e \x01(\v2\".pilab.virtualization.v1.EFIConfigR\x03efi\x12\"\n" +
+	"\rmax_memory_mb\x18\x0f \x01(\x05R\vmaxMemoryMb\x12!\n" +
+	"\fmemory_slots\x18\x10 \x01(\x05R\vmemorySlots\x12\x1b\n" +
+	"\tmax_vcpus\x18\x11 \x01(\x05R\bmaxVcpus\x12C\n" +
+	"\tresources\x18\x12 \x01(\v2%.pilab.virtualization.v1.ResourceSpecR\tresources\"r\n" +
 	"\tCPUConfig\x12\x14\n" +
 	"\x05model\x18\x01 \x01(\tR\x05model\x12\x1a\n" +
 	"\btopology\x18\x02 \x01(\tR\btopology\x123\n" +

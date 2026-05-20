@@ -81,7 +81,10 @@ message CreateVMRequest {
   string ssh_key = 14;      // SSH public key for cloud-init
   string firmware = 15;      // "bios" | "uefi" (default: "uefi")
   EFIConfig efi = 16;        // UEFI configuration
-  ResourceSpec resources = 17;
+  int32 max_memory_mb = 17;
+  int32 memory_slots = 18;
+  int32 max_vcpus = 19;
+  ResourceSpec resources = 20;
 }
 
 message StartVMRequest {
@@ -150,7 +153,10 @@ message VMInfo {
   google.protobuf.Timestamp updated_at = 12;
   string firmware = 13;
   EFIConfig efi = 14;
-  ResourceSpec resources = 15;
+  int32 max_memory_mb = 15;
+  int32 memory_slots = 16;
+  int32 max_vcpus = 17;
+  ResourceSpec resources = 18;
 }
 
 message CPUConfig {
