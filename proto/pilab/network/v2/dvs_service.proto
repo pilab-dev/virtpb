@@ -1,12 +1,5 @@
-// =============================================================================
-// DVS Service - Distributed Virtual Switch Management
-// =============================================================================
-// Purpose: Manage distributed virtual switches and port groups.
-//
-// Services:
-// - Distributed Switch CRUD + Host management
-// - Port Group CRUD
-// =============================================================================
+// Package network provides virtual networking services including networks,
+// ports, VLAN/VXLAN management, IPAM, QoS, security, DVS, and statistics.
 
 syntax = "proto3";
 
@@ -19,11 +12,9 @@ import "pilab/network/v2/network_common.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
 
-// -----------------------------------------------------------------------------
-// DVS Service
-// -----------------------------------------------------------------------------
-
+// DVSService manages distributed virtual switches and port groups.
 service DVSService {
+  // Distributed switch operations
   rpc CreateDistributedSwitch(CreateDistributedSwitchRequest) returns (DistributedSwitch);
   rpc GetDistributedSwitch(GetDistributedSwitchRequest) returns (DistributedSwitch);
   rpc ListDistributedSwitches(ListDistributedSwitchesRequest) returns (ListDistributedSwitchesResponse);
@@ -32,6 +23,7 @@ service DVSService {
   rpc AddHostToDVS(AddHostToDVSRequest) returns (google.protobuf.Empty);
   rpc RemoveHostFromDVS(RemoveHostFromDVSRequest) returns (google.protobuf.Empty);
 
+  // Port group operations
   rpc CreatePortGroup(CreatePortGroupRequest) returns (PortGroup);
   rpc GetPortGroup(GetPortGroupRequest) returns (PortGroup);
   rpc ListPortGroups(ListPortGroupsRequest) returns (ListPortGroupsResponse);
@@ -39,10 +31,7 @@ service DVSService {
   rpc DeletePortGroup(DeletePortGroupRequest) returns (google.protobuf.Empty);
 }
 
-// -----------------------------------------------------------------------------
-// Distributed Switch Messages
-// -----------------------------------------------------------------------------
-
+// DistributedSwitch represents a distributed virtual switch.
 message DistributedSwitch {
   string id = 1;
   string name = 2;
@@ -60,6 +49,7 @@ message DistributedSwitch {
   google.protobuf.Timestamp updated_at = 14;
 }
 
+// PortGroup represents a port group on a distributed switch.
 message PortGroup {
   string id = 1;
   string name = 2;
@@ -79,10 +69,7 @@ message PortGroup {
   google.protobuf.Timestamp updated_at = 16;
 }
 
-// -----------------------------------------------------------------------------
-// Request/Response Messages
-// -----------------------------------------------------------------------------
-
+// CreateDistributedSwitchRequest contains parameters for creating a distributed switch.
 message CreateDistributedSwitchRequest {
   string name = 1;
   string tenant_id = 2;
@@ -95,7 +82,9 @@ message CreateDistributedSwitchRequest {
   map<string, string> metadata = 9;
 }
 
-message GetDistributedSwitchRequest { string switch_id = 1; }
+message GetDistributedSwitchRequest {
+  string switch_id = 1;
+}
 
 message ListDistributedSwitchesRequest {
   string tenant_id = 1;
@@ -149,7 +138,9 @@ message CreatePortGroupRequest {
   map<string, string> metadata = 12;
 }
 
-message GetPortGroupRequest { string port_group_id = 1; }
+message GetPortGroupRequest {
+  string port_group_id = 1;
+}
 
 message ListPortGroupsRequest {
   string switch_id = 1;

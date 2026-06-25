@@ -1,13 +1,6 @@
-// =============================================================================
-// Common Error Messages - Shared Across All Services
-// =============================================================================
-// Purpose: Error handling messages used by agent, director, CLI,
-// and other services.
-//
-// This file provides a single source of truth for:
-// - ErrorResponse: Optional error wrapper (used in v1 services)
-// - Error: Detailed error with code, message, details (used in v2 services)
-// =============================================================================
+// Package common provides shared message types for the PiVirt Cloud platform.
+// This package includes VM, host, task, stream, and error definitions used
+// across agent, director, frontend, and other services.
 
 syntax = "proto3";
 
@@ -15,34 +8,16 @@ package pilab.common.v1;
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1";
 
-// -----------------------------------------------------------------------------
-// Error Response (optional wrapper for v1-style RPCs)
-// -----------------------------------------------------------------------------
-
+// ErrorResponse represents an error in v1-style RPC responses.
 message ErrorResponse {
-  string code = 1;           // Error code (e.g., "NOT_FOUND")
-  string message = 2;        // Human-readable error message
-  string details = 3;         // Additional error details
+  string code = 1;
+  string message = 2;
+  string details = 3;
 }
 
-// -----------------------------------------------------------------------------
-// Error (detailed error for v2-style RPCs)
-// -----------------------------------------------------------------------------
-
+// Error represents a detailed error in v2-style RPC responses.
 message Error {
-  string code = 1;           // Error code (e.g., "INVALID_ARGUMENT")
-  string message = 2;        // Human-readable error message
-  string details = 3;         // Additional error details (stack trace, etc.)
+  string code = 1;
+  string message = 2;
+  string details = 3;
 }
-
-// -----------------------------------------------------------------------------
-// Common Error Codes (reference, not an enum to allow extensibility)
-// -----------------------------------------------------------------------------
-// NOT_FOUND: Resource not found
-// ALREADY_EXISTS: Resource already exists
-// INVALID_ARGUMENT: Invalid parameter
-// FAILED_PRECONDITION: Operation cannot be performed
-// INTERNAL: Internal server error
-// UNAVAILABLE: Service unavailable
-// PERMISSION_DENIED: Insufficient permissions
-// UNAUTHENTICATED: Authentication required

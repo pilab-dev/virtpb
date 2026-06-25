@@ -1,3 +1,6 @@
+// Package agent provides host-level services for VM management, storage,
+// networking, snapshots, DCUI, and agent-director communication.
+
 syntax = "proto3";
 
 package pilab.cloud.agent.v1;
@@ -7,17 +10,11 @@ import "pilab/agent/v1/stream.proto";
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
 
 service SnapshotService {
-  // Create creates a snapshot of a virtual machine.
   rpc Create(SnapshotCreateRequest) returns (stream SnapshotCreateResponse);
-  // Restore restores a virtual machine from a snapshot.
   rpc Restore(SnapshotRestoreRequest) returns (SnapshotRestoreResponse);
-  // Delete deletes a snapshot of a virtual machine.
   rpc Delete(SnapshotDeleteRequest) returns (SnapshotDeleteResponse);
-  // Clone clones a virtual machine from a snapshot.
   rpc Clone(SnapshotCloneRequest) returns (SnapshotCloneResponse);
-  // Consolidate merges a snapshot into its parent disk.
   rpc Consolidate(SnapshotConsolidateRequest) returns (SnapshotConsolidateResponse);
-  // List returns all snapshots for a VM.
   rpc List(SnapshotListRequest) returns (SnapshotListResponse);
 }
 
@@ -74,9 +71,6 @@ message SnapshotCloneRequest {
   string vm = 1;
   string snapshot_name = 3;
   string new_vm_name = 4;
-  // TODO: add more fields for customization of the cloned VM.
 }
 
-message SnapshotCloneResponse {
-    // TODO: add fields for the cloned VM response, for example a task id, or sg.
-}
+message SnapshotCloneResponse {}

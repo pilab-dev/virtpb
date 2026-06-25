@@ -1,93 +1,48 @@
-// =============================================================================
-// CLI Service - Consolidated CLI API
-// =============================================================================
-// Purpose: Complete API for the vpsctl command-line tool.
-// All services are defined here to avoid cross-file reference issues.
-//
-// Services:
-// - AuthService: Authentication & user info
-// - VMService: VM lifecycle & resource management
-// - DiskService: Disk management
-// - ImageService: Image management
-// - SnapshotService: Snapshot management
-// - NetworkService: Network, interface, vSwitch, port group
-// - PublicIPService: Public IP management
-// - SecurityService: Security group & rule management
-// - TemplateService: Instance & OS template management
-// - MonitoringService: Metrics & activity logs
-// - AdminService: Organization & user management (admin)
-// - SystemService: Datastore & system configuration
-// =============================================================================
+// Package cli provides the command-line tool API for virtual machine, storage,
+// networking, and system management.
 
 syntax = "proto3";
 
 package pilab.cli.v1;
 
-import "google/protobuf/empty.proto";
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/cli/v1;cliv1";
+
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
 import "pilab/cli/v1/cli_common.proto";
 import "pilab/common/v1/vm.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/pilab/cli/v1;cliv1";
-
-// -----------------------------------------------------------------------------
-// Auth Service
-// -----------------------------------------------------------------------------
-
 service AuthService {
-  // Authenticate user and return JWT token (legacy username/password)
   rpc Login(LoginRequest) returns (LoginResponse);
-  
-  // OAuth2 Device Code Authentication
   rpc InitiateDeviceAuth(InitiateDeviceAuthRequest) returns (InitiateDeviceAuthResponse);
   rpc PollDeviceAuth(PollDeviceAuthRequest) returns (PollDeviceAuthResponse);
-  
-  // Invalidate user token
   rpc Logout(LogoutRequest) returns (google.protobuf.Empty);
-  
-  // Get current user information
   rpc GetCurrentUser(google.protobuf.Empty) returns (User);
 }
 
-// -----------------------------------------------------------------------------
-// VM Service
-// -----------------------------------------------------------------------------
-
 service VMService {
-  // VM Lifecycle Operations
   rpc CreateVM(CreateVMRequest) returns (pilab.common.v1.VM);
   rpc GetVM(GetVMRequest) returns (pilab.common.v1.VM);
   rpc ListVMs(ListVMsRequest) returns (ListVMsResponse);
   rpc UpdateVM(UpdateVMRequest) returns (pilab.common.v1.VM);
   rpc DeleteVM(DeleteVMRequest) returns (google.protobuf.Empty);
-  
-  // VM Power Operations
   rpc StartVM(StartVMRequest) returns (google.protobuf.Empty);
   rpc StopVM(StopVMRequest) returns (google.protobuf.Empty);
   rpc RestartVM(RestartVMRequest) returns (google.protobuf.Empty);
   rpc PauseVM(PauseVMRequest) returns (google.protobuf.Empty);
   rpc UnpauseVM(UnpauseVMRequest) returns (google.protobuf.Empty);
-   
-  // VM Advanced Operations
   rpc MigrateVM(MigrateVMRequest) returns (google.protobuf.Empty);
   rpc RebuildVM(RebuildVMRequest) returns (pilab.common.v1.VM);
   rpc CloneVM(CloneVMRequest) returns (pilab.common.v1.VM);
   rpc LinkedCloneVM(LinkedCloneVMRequest) returns (pilab.common.v1.VM);
   rpc GetVMConsole(GetVMConsoleRequest) returns (GetVMConsoleResponse);
-   
-  // VM Resource Management (Hot-Add)
   rpc UpdateVMResources(UpdateVMResourcesRequest) returns (UpdateVMResourcesResponse);
   rpc GetVMResources(GetVMResourcesRequest) returns (GetVMResourcesResponse);
 }
 
-// -----------------------------------------------------------------------------
-// Disk Service
-// -----------------------------------------------------------------------------
-
 service DiskService {
-  // Disk Management
   rpc CreateDisk(CreateDiskRequest) returns (pilab.common.v1.Disk);
   rpc GetDisk(GetDiskRequest) returns (pilab.common.v1.Disk);
   rpc ListDisks(ListDisksRequest) returns (ListDisksResponse);
@@ -98,10 +53,6 @@ service DiskService {
   rpc DetachDisk(DetachDiskRequest) returns (google.protobuf.Empty);
 }
 
-// -----------------------------------------------------------------------------
-// Image Service
-// -----------------------------------------------------------------------------
-
 service ImageService {
   rpc GetImage(GetImageRequest) returns (Image);
   rpc ListImages(ListImagesRequest) returns (ListImagesResponse);
@@ -109,10 +60,6 @@ service ImageService {
   rpc UploadImage(UploadImageRequest) returns (Image);
   rpc DeleteImage(DeleteImageRequest) returns (google.protobuf.Empty);
 }
-
-// -----------------------------------------------------------------------------
-// Snapshot Service
-// -----------------------------------------------------------------------------
 
 service SnapshotService {
   rpc GetSnapshot(GetSnapshotRequest) returns (pilab.common.v1.Snapshot);
@@ -123,40 +70,25 @@ service SnapshotService {
   rpc ConsolidateSnapshot(SnapshotConsolidateRequest) returns (google.protobuf.Empty);
 }
 
-// -----------------------------------------------------------------------------
-// Network Service
-// -----------------------------------------------------------------------------
-
 service NetworkService {
-  // Network Management
   rpc CreateNetwork(CreateNetworkRequest) returns (Network);
   rpc GetNetwork(GetNetworkRequest) returns (Network);
   rpc ListNetworks(ListNetworksRequest) returns (ListNetworksResponse);
   rpc UpdateNetwork(UpdateNetworkRequest) returns (Network);
   rpc DeleteNetwork(DeleteNetworkRequest) returns (google.protobuf.Empty);
-  
-  // Network Interface Management
   rpc GetNetworkInterface(GetNetworkInterfaceRequest) returns (pilab.common.v1.NetworkInterface);
   rpc ListNetworkInterfaces(ListNetworkInterfacesRequest) returns (ListNetworkInterfacesResponse);
   rpc AddNetworkInterface(AddNetworkInterfaceRequest) returns (pilab.common.v1.NetworkInterface);
   rpc RemoveNetworkInterface(RemoveNetworkInterfaceRequest) returns (google.protobuf.Empty);
-  
-  // vSwitch Management
   rpc CreateVSwitch(CreateVSwitchRequest) returns (VSwitch);
   rpc GetVSwitch(GetVSwitchRequest) returns (VSwitch);
   rpc ListVSwitches(ListVSwitchesRequest) returns (ListVSwitchesResponse);
   rpc DeleteVSwitch(DeleteVSwitchRequest) returns (google.protobuf.Empty);
-  
-  // Port Group Management
   rpc CreatePortGroup(CreatePortGroupRequest) returns (PortGroup);
   rpc GetPortGroup(GetPortGroupRequest) returns (PortGroup);
   rpc ListPortGroups(ListPortGroupsRequest) returns (ListPortGroupsResponse);
   rpc DeletePortGroup(DeletePortGroupRequest) returns (google.protobuf.Empty);
 }
-
-// -----------------------------------------------------------------------------
-// Public IP Service
-// -----------------------------------------------------------------------------
 
 service PublicIPService {
   rpc CreatePublicIP(CreatePublicIPRequest) returns (PublicIP);
@@ -168,63 +100,38 @@ service PublicIPService {
   rpc UnassignPublicIP(UnassignPublicIPRequest) returns (google.protobuf.Empty);
 }
 
-// -----------------------------------------------------------------------------
-// Security Service
-// -----------------------------------------------------------------------------
-
 service SecurityService {
-  // Security Group Management
   rpc CreateSecurityGroup(CreateSecurityGroupRequest) returns (SecurityGroup);
   rpc GetSecurityGroup(GetSecurityGroupRequest) returns (SecurityGroup);
   rpc ListSecurityGroups(ListSecurityGroupsRequest) returns (ListSecurityGroupsResponse);
   rpc UpdateSecurityGroup(UpdateSecurityGroupRequest) returns (SecurityGroup);
   rpc DeleteSecurityGroup(DeleteSecurityGroupRequest) returns (google.protobuf.Empty);
-  
-  // Security Rule Management
   rpc AddSecurityRule(AddSecurityRuleRequest) returns (SecurityRule);
   rpc RemoveSecurityRule(RemoveSecurityRuleRequest) returns (google.protobuf.Empty);
 }
 
-// -----------------------------------------------------------------------------
-// Template Service
-// -----------------------------------------------------------------------------
-
 service TemplateService {
-  // Instance Template Management
   rpc CreateTemplate(CreateTemplateRequest) returns (Template);
   rpc GetTemplate(GetTemplateRequest) returns (Template);
   rpc ListTemplates(ListTemplatesRequest) returns (ListTemplatesResponse);
   rpc DeleteTemplate(DeleteTemplateRequest) returns (google.protobuf.Empty);
-  
-  // OS Template Management (from osinfodb)
   rpc ListOSTemplates(ListOSTemplatesRequest) returns (ListOSTemplatesResponse);
   rpc GetOSTemplate(GetOSTemplateRequest) returns (OSTemplate);
   rpc SyncOSTemplates(SyncOSTemplatesRequest) returns (SyncOSTemplatesResponse);
   rpc CreateVMFromOSTemplate(CreateVMFromOSTemplateRequest) returns (pilab.common.v1.VM);
 }
 
-// -----------------------------------------------------------------------------
-// Monitoring Service
-// -----------------------------------------------------------------------------
-
 service MonitoringService {
   rpc GetMetrics(GetMetricsRequest) returns (GetMetricsResponse);
   rpc GetActivity(GetActivityRequest) returns (GetActivityResponse);
 }
 
-// -----------------------------------------------------------------------------
-// Admin Service
-// -----------------------------------------------------------------------------
-
 service AdminService {
-  // Organization Management (Admin Only)
   rpc CreateOrganization(CreateOrganizationRequest) returns (Organization);
   rpc GetOrganization(GetOrganizationRequest) returns (Organization);
   rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse);
   rpc UpdateOrganization(UpdateOrganizationRequest) returns (Organization);
   rpc DeleteOrganization(DeleteOrganizationRequest) returns (google.protobuf.Empty);
-  
-  // User Management (Admin Only)
   rpc CreateUser(CreateUserRequest) returns (User);
   rpc GetUser(GetUserRequest) returns (User);
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
@@ -232,26 +139,852 @@ service AdminService {
   rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
 }
 
-// -----------------------------------------------------------------------------
-// System Service
-// -----------------------------------------------------------------------------
-
 service SystemService {
-  // Version
   rpc GetVersion(google.protobuf.Empty) returns (VersionResponse);
-  
-  // Datastore Management (DCUI/Local Console)
   rpc CreateDatastore(CreateDatastoreRequest) returns (Datastore);
   rpc GetDatastore(GetDatastoreRequest) returns (Datastore);
   rpc ListDatastores(ListDatastoresRequest) returns (ListDatastoresResponse);
   rpc DeleteDatastore(DeleteDatastoreRequest) returns (google.protobuf.Empty);
   rpc MountDatastore(MountDatastoreRequest) returns (google.protobuf.Empty);
   rpc UnmountDatastore(UnmountDatastoreRequest) returns (google.protobuf.Empty);
-  
-  // System Configuration (DCUI/Local Console)
   rpc GetHostInfo(google.protobuf.Empty) returns (HostInfo);
   rpc GetNetworkConfig(google.protobuf.Empty) returns (NetworkConfigResponse);
   rpc GetStorageConfig(google.protobuf.Empty) returns (StorageConfigResponse);
   rpc GetHostHealth(google.protobuf.Empty) returns (HostHealthResponse);
   rpc ConfigureNetwork(ConfigureNetworkRequest) returns (google.protobuf.Empty);
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+  string organization = 3;
+  string api_server = 4;
+}
+
+message LoginResponse {
+  string token = 1;
+  string refresh_token = 2;
+  User user = 3;
+  Organization organization = 4;
+  google.protobuf.Timestamp expires_at = 5;
+}
+
+message InitiateDeviceAuthRequest {
+  string client_id = 1;
+  repeated string scopes = 2;
+  string audience = 3;
+}
+
+message InitiateDeviceAuthResponse {
+  string device_code = 1;
+  string user_code = 2;
+  string verification_uri = 3;
+  string verification_uri_complete = 4;
+  int32 expires_in = 5;
+  int32 interval = 6;
+  string message = 7;
+}
+
+message PollDeviceAuthRequest {
+  string device_code = 1;
+  string client_id = 2;
+}
+
+message PollDeviceAuthResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  string token_type = 3;
+  int32 expires_in = 4;
+  repeated string scopes = 5;
+  User user = 6;
+  Organization organization = 7;
+  google.protobuf.Timestamp expires_at = 8;
+}
+
+message LogoutRequest {
+  string context_name = 1;
+  bool all = 2;
+}
+
+message CreateVMRequest {
+  string name = 1;
+  string machine_type = 2;
+  string image = 3;
+  int32 root_disk_size_gb = 4;
+  string root_disk_type = 5;
+  string network = 6;
+  string password = 7;
+  repeated string ssh_keys = 8;
+  string userdata = 9;
+  string boot_order = 10;
+  string description = 11;
+  map<string, string> labels = 12;
+  bool preemptible = 13;
+  bool auto_restart_on_maintenance = 14;
+  string zone = 15;
+  repeated string private_networks = 16;
+  string public_ip = 17;
+  repeated string security_groups = 18;
+  string service_account = 19;
+  map<string, string> metadata = 20;
+  bool wait = 21;
+}
+
+message GetVMRequest {
+  string name = 1;
+}
+
+message ListVMsRequest {
+  string organization_id = 1;
+  bool all_organizations = 2;
+  map<string, string> label_selector = 3;
+  map<string, string> field_selector = 4;
+  int32 page_size = 5;
+  string page_token = 6;
+}
+
+message ListVMsResponse {
+  repeated pilab.common.v1.VM vms = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateVMRequest {
+  string name = 1;
+  string machine_type = 2;
+  string description = 3;
+  map<string, string> labels = 4;
+  repeated string add_labels = 5;
+  repeated string remove_labels = 6;
+  string boot_order = 7;
+  string password = 8;
+  repeated string add_ssh_keys = 9;
+  repeated string remove_ssh_keys = 10;
+  bool preemptible = 11;
+  bool auto_restart_on_maintenance = 12;
+  repeated string add_security_groups = 13;
+  repeated string remove_security_groups = 14;
+  string service_account = 15;
+  map<string, string> metadata = 16;
+  string rename = 17;
+}
+
+message DeleteVMRequest {
+  string name = 1;
+  bool delete_disks = 2;
+}
+
+message StartVMRequest {
+  string name = 1;
+  bool wait = 2;
+}
+
+message StopVMRequest {
+  string name = 1;
+  bool force = 2;
+  bool wait = 3;
+}
+
+message RestartVMRequest {
+  string name = 1;
+  bool wait = 2;
+}
+
+message PauseVMRequest {
+  string name = 1;
+}
+
+message UnpauseVMRequest {
+  string name = 1;
+}
+
+message MigrateVMRequest {
+  string name = 1;
+  string destination_host = 2;
+  bool live = 3;
+}
+
+message RebuildVMRequest {
+  string name = 1;
+  string image = 2;
+  string password = 3;
+  repeated string ssh_keys = 4;
+  string userdata = 5;
+  bool wait = 6;
+}
+
+message CloneVMRequest {
+  string source_vm_name = 1;
+  string new_vm_name = 2;
+  bool start = 3;
+  bool reset_network = 4;
+  bool re_password = 5;
+  repeated string new_ssh_keys = 6;
+  string new_public_ip = 7;
+}
+
+message LinkedCloneVMRequest {
+  string source_vm_name = 1;
+  string new_vm_name = 2;
+  string snapshot_name = 3;
+  string image_path = 4;
+  bool start = 5;
+}
+
+message LinkedCloneVMResponse {
+  pilab.common.v1.VM vm = 1;
+}
+
+message GetVMConsoleRequest {
+  string name = 1;
+}
+
+message GetVMConsoleResponse {
+  string console_url = 1;
+  string console_type = 2;
+}
+
+message UpdateVMResourcesRequest {
+  string vm_name = 1;
+  optional int32 cpu_cores = 2;
+  optional int32 memory_mb = 3;
+  bool hot_add = 4;
+}
+
+message UpdateVMResourcesResponse {
+  bool success = 1;
+  pilab.common.v1.VM vm = 2;
+  string message = 3;
+}
+
+message GetVMResourcesRequest {
+  string vm_name = 1;
+}
+
+message GetVMResourcesResponse {
+  string vm_name = 1;
+  int32 current_cpu_cores = 2;
+  int32 current_memory_mb = 3;
+  int32 max_cpu_cores = 4;
+  int32 max_memory_mb = 5;
+  bool cpu_hot_add_enabled = 6;
+  bool memory_hot_add_enabled = 7;
+}
+
+message CreateDiskRequest {
+  string name = 1;
+  int64 size_gb = 2;
+  string disk_type = 3;
+  string storage_pool = 4;
+  string source_snapshot = 5;
+  string source_image = 6;
+  string zone = 7;
+  string description = 8;
+  map<string, string> labels = 9;
+  bool wait = 10;
+}
+
+message GetDiskRequest {
+  string name = 1;
+}
+
+message ListDisksRequest {
+  string vm_name = 1;
+  bool unattached = 2;
+  string disk_type = 3;
+  string zone = 4;
+  int32 page_size = 5;
+  string page_token = 6;
+}
+
+message ListDisksResponse {
+  repeated pilab.common.v1.Disk disks = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateDiskRequest {
+  string name = 1;
+  string description = 2;
+  map<string, string> labels = 3;
+  repeated string add_labels = 4;
+  repeated string remove_labels = 5;
+  string rename = 6;
+}
+
+message DeleteDiskRequest {
+  string name = 1;
+  bool force = 2;
+}
+
+message ExtendDiskRequest {
+  string name = 1;
+  int64 size_gb = 2;
+  string vm_name = 3;
+  bool resize_partition = 4;
+  bool wait = 5;
+}
+
+message AttachDiskRequest {
+  string disk_name = 1;
+  string vm_name = 2;
+  string device_name = 3;
+  bool read_only = 4;
+  bool wait = 5;
+}
+
+message DetachDiskRequest {
+  string disk_name = 1;
+  string vm_name = 2;
+  bool wait = 3;
+}
+
+message GetImageRequest {
+  string name = 1;
+}
+
+message ListImagesRequest {
+  bool public_only = 1;
+  bool private_only = 2;
+  string os_family = 3;
+  string os_version = 4;
+  string family = 5;
+  int32 page_size = 6;
+  string page_token = 7;
+}
+
+message ListImagesResponse {
+  repeated Image images = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message CreateImageRequest {
+  string name = 1;
+  string source_vm = 2;
+  string source_disk = 3;
+  string description = 4;
+  map<string, string> labels = 5;
+  string visibility = 6;
+  string family = 7;
+  bool no_force_shutdown = 8;
+  bool wait = 9;
+}
+
+message UploadImageRequest {
+  string name = 1;
+  bytes image_data = 2;
+  string format = 3;
+  string description = 4;
+  map<string, string> labels = 5;
+  string visibility = 6;
+  bool wait = 7;
+}
+
+message DeleteImageRequest {
+  string name = 1;
+}
+
+message GetSnapshotRequest {
+  string name = 1;
+}
+
+message ListSnapshotsRequest {
+  string vm_name = 1;
+  string disk_name = 2;
+  google.protobuf.Duration older_than = 3;
+  map<string, string> labels = 4;
+  int32 page_size = 5;
+  string page_token = 6;
+}
+
+message ListSnapshotsResponse {
+  repeated pilab.common.v1.Snapshot snapshots = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message CreateSnapshotRequest {
+  string name = 1;
+  string vm_name = 2;
+  string disk_name = 3;
+  string description = 4;
+  map<string, string> labels = 5;
+  google.protobuf.Duration auto_delete_after = 6;
+  bool wait = 7;
+  bool include_memory = 8;
+}
+
+message RestoreSnapshotRequest {
+  string snapshot_name = 1;
+  string vm_name = 2;
+  string disk_name = 3;
+  string new_vm_name = 4;
+  string new_disk_name = 5;
+  bool wait = 6;
+}
+
+message DeleteSnapshotRequest {
+  string name = 1;
+}
+
+message SnapshotConsolidateRequest {
+  string vm_name = 1;
+  string snapshot_name = 2;
+}
+
+message GetNetworkRequest {
+  string name = 1;
+}
+
+message ListNetworksRequest {
+  string scope = 1;
+  string zone = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+}
+
+message ListNetworksResponse {
+  repeated Network networks = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateNetworkRequest {
+  string name = 1;
+  string description = 2;
+  map<string, string> labels = 3;
+  repeated string add_labels = 4;
+  repeated string remove_labels = 5;
+  string rename = 6;
+}
+
+message DeleteNetworkRequest {
+  string name = 1;
+}
+
+message CreateNetworkRequest {
+  string name = 1;
+  string description = 2;
+  string cidr_block = 3;
+  string zone = 4;
+  map<string, string> labels = 5;
+}
+
+message GetNetworkInterfaceRequest {
+  string vm_name = 1;
+}
+
+message ListNetworkInterfacesRequest {
+  string vm_name = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message ListNetworkInterfacesResponse {
+  repeated pilab.common.v1.NetworkInterface network_interfaces = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message AddNetworkInterfaceRequest {
+  string vm_name = 1;
+  string network_name = 2;
+  string private_ip = 3;
+  string mac_address = 4;
+  bool wait = 5;
+}
+
+message RemoveNetworkInterfaceRequest {
+  string vm_name = 1;
+  string interface_id = 2;
+  bool wait = 3;
+}
+
+message CreateVSwitchRequest {
+  string name = 1;
+  string type = 2;
+  int32 mtu = 3;
+  map<string, string> config = 4;
+}
+
+message GetVSwitchRequest {
+  string name = 1;
+}
+
+message ListVSwitchesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListVSwitchesResponse {
+  repeated VSwitch vswitches = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message DeleteVSwitchRequest {
+  string name = 1;
+  bool force = 2;
+}
+
+message CreatePortGroupRequest {
+  string name = 1;
+  string vswitch_name = 2;
+  int32 vlan_id = 3;
+  int32 mtu = 4;
+  bool allow_promiscuous = 5;
+  bool mac_changes = 6;
+  bool forged_transmits = 7;
+}
+
+message GetPortGroupRequest {
+  string name = 1;
+}
+
+message ListPortGroupsRequest {
+  string vswitch_name = 1;
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message ListPortGroupsResponse {
+  repeated PortGroup port_groups = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message DeletePortGroupRequest {
+  string name = 1;
+}
+
+message GetPublicIPRequest {
+  string identifier = 1;
+}
+
+message ListPublicIPsRequest {
+  string assigned_to_vm = 1;
+  bool unassigned = 2;
+  string zone = 3;
+  int32 page_size = 4;
+  string page_token = 5;
+}
+
+message ListPublicIPsResponse {
+  repeated PublicIP public_ips = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdatePublicIPRequest {
+  string identifier = 1;
+  string description = 2;
+  map<string, string> labels = 3;
+  repeated string add_labels = 4;
+  repeated string remove_labels = 5;
+  string rename = 6;
+}
+
+message AssignPublicIPRequest {
+  string identifier = 1;
+  string vm_name = 2;
+  string interface_id = 3;
+  bool wait = 4;
+}
+
+message UnassignPublicIPRequest {
+  string identifier = 1;
+  string vm_name = 2;
+  bool wait = 3;
+}
+
+message CreatePublicIPRequest {
+  string name = 1;
+  string description = 2;
+  string zone = 3;
+  map<string, string> labels = 4;
+}
+
+message DeletePublicIPRequest {
+  string identifier = 1;
+  bool force = 2;
+}
+
+message CreateSecurityGroupRequest {
+  string name = 1;
+  string description = 2;
+  map<string, string> labels = 3;
+  bool wait = 4;
+}
+
+message GetSecurityGroupRequest {
+  string name = 1;
+}
+
+message ListSecurityGroupsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListSecurityGroupsResponse {
+  repeated SecurityGroup security_groups = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateSecurityGroupRequest {
+  string name = 1;
+  string description = 2;
+  map<string, string> labels = 3;
+  repeated string add_labels = 4;
+  repeated string remove_labels = 5;
+  string rename = 6;
+}
+
+message DeleteSecurityGroupRequest {
+  string name = 1;
+}
+
+message AddSecurityRuleRequest {
+  string group_name = 1;
+  string direction = 2;
+  string protocol = 3;
+  string ports = 4;
+  string source_cidr = 5;
+  string source_security_group = 6;
+  string destination_cidr = 7;
+  string destination_security_group = 8;
+  string description = 9;
+  int32 priority = 10;
+}
+
+message RemoveSecurityRuleRequest {
+  string group_name = 1;
+  string rule_id = 2;
+}
+
+message CreateTemplateRequest {
+  string name = 1;
+  string source_vm = 2;
+  string description = 3;
+  map<string, string> labels = 4;
+  string machine_type = 5;
+  string image = 6;
+  int32 root_disk_size_gb = 7;
+  string root_disk_type = 8;
+  string network = 9;
+  repeated string private_networks = 10;
+  repeated string security_groups = 11;
+  repeated string ssh_keys = 12;
+  string userdata = 13;
+  string boot_order = 14;
+  map<string, string> metadata = 15;
+  bool preemptible = 16;
+  bool auto_restart_on_maintenance = 17;
+  bool wait = 18;
+}
+
+message GetTemplateRequest {
+  string name = 1;
+}
+
+message ListTemplatesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListTemplatesResponse {
+  repeated Template templates = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message DeleteTemplateRequest {
+  string name = 1;
+}
+
+message ListOSTemplatesRequest {
+  string family = 1;
+  string vendor = 2;
+  string architecture = 3;
+  bool cloud_init_only = 4;
+  int32 page_size = 5;
+  string page_token = 6;
+}
+
+message ListOSTemplatesResponse {
+  repeated OSTemplate templates = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message GetOSTemplateRequest {
+  string os_id = 1;
+}
+
+message SyncOSTemplatesRequest {
+  bool force = 1;
+}
+
+message SyncOSTemplatesResponse {
+  int32 imported_count = 1;
+  google.protobuf.Timestamp synced_at = 2;
+}
+
+message CreateVMFromOSTemplateRequest {
+  string name = 1;
+  string os_id = 2;
+  int32 cpu_cores = 3;
+  int32 memory_mb = 4;
+  int32 root_disk_size_gb = 5;
+  string password = 6;
+  repeated string ssh_keys = 7;
+  string userdata = 8;
+  string boot_order = 9;
+  string description = 10;
+  map<string, string> labels = 11;
+  bool preemptible = 12;
+  bool auto_restart_on_maintenance = 13;
+  string zone = 14;
+  repeated string private_networks = 15;
+  string public_ip = 16;
+  repeated string security_groups = 17;
+  string machine_type = 18;
+  map<string, string> metadata = 19;
+  bool wait = 20;
+}
+
+
+
+message CreateOrganizationRequest {
+  string name = 1;
+  string description = 2;
+  string owner_user = 3;
+  string owner_password = 4;
+  int32 quota_cpu = 5;
+  int32 quota_ram = 6;
+  int32 quota_disk = 7;
+  bool wait = 8;
+}
+
+message GetOrganizationRequest {
+  string name = 1;
+  bool show_quotas = 2;
+}
+
+message ListOrganizationsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+}
+
+message ListOrganizationsResponse {
+  repeated Organization organizations = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateOrganizationRequest {
+  string name = 1;
+  string description = 2;
+  int32 quota_cpu = 3;
+  int32 quota_ram = 4;
+  int32 quota_disk = 5;
+  repeated string add_members = 6;
+  repeated string remove_members = 7;
+  string rename = 8;
+}
+
+message DeleteOrganizationRequest {
+  string name = 1;
+  bool force = 2;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  string password = 2;
+  string organization = 3;
+  string email = 4;
+  string full_name = 5;
+  repeated string roles = 6;
+  repeated string add_organizations = 7;
+}
+
+message GetUserRequest {
+  string username = 1;
+}
+
+message ListUsersRequest {
+  bool all_organizations = 1;
+  string organization = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message UpdateUserRequest {
+  string username = 1;
+  string password = 2;
+  string email = 3;
+  string full_name = 4;
+  repeated string add_organization = 5;
+  repeated string remove_organization = 6;
+  string set_roles_in_organization = 7;
+  string rename = 8;
+}
+
+message DeleteUserRequest {
+  string username = 1;
+}
+
+message CreateDatastoreRequest {
+  string name = 1;
+  DatastoreType type = 2;
+  map<string, string> connection_info = 3;
+  string organization_id = 4;
+}
+
+message GetDatastoreRequest {
+  string id = 1;
+}
+
+message ListDatastoresRequest {
+  DatastoreType type = 1;
+  bool mounted_only = 2;
+  int32 page_size = 3;
+  string page_token = 4;
+}
+
+message ListDatastoresResponse {
+  repeated Datastore datastores = 1;
+  string next_page_token = 2;
+  int32 total_count = 3;
+}
+
+message DeleteDatastoreRequest {
+  string id = 1;
+  bool force = 2;
+}
+
+message MountDatastoreRequest {
+  string id = 1;
+}
+
+message UnmountDatastoreRequest {
+  string id = 1;
+  bool force = 2;
+}
+
+message ConfigureNetworkRequest {
+  string interface_name = 1;
+  string ip_address = 2;
+  string netmask = 3;
+  string gateway = 4;
+  repeated string dns_servers = 5;
+  bool dhcp = 6;
+  string hostname = 7;
 }

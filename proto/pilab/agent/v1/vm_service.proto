@@ -1,13 +1,33 @@
+// Package agent provides host-level services for VM management, storage,
+// networking, snapshots, DCUI, and agent-director communication.
+
 syntax = "proto3";
 
 package pilab.cloud.agent.v1;
 
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
+
 import "pilab/agent/v1/stream.proto";
 import "pilab/agent/v1/error.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
+service VirtualMachineService {
+  rpc Define(VmDefineRequest) returns (VmDefineResponse);
+  rpc GetDefinition(VmGetDefinitionRequest) returns (VmGetDefinitionResponse);
+  rpc Control(VmControlRequest) returns (VmControlResponse);
+  rpc Status(VmStatusRequest) returns (VmStatusResponse);
+  rpc GuestInfo(VmGuestInfoRequest) returns (VmGuestInfoResponse);
+  rpc AttachISO(VmAttachISORequest) returns (VmAttachISOResponse);
+  rpc DetachISO(VmDetachISORequest) returns (VmDetachISOResponse);
+  rpc CreateVM(CreateVMRequest) returns (CreateVMResponse);
+  rpc StartVM(StartVMRequest) returns (StartVMResponse);
+  rpc UpdateVM(UpdateVMRequest) returns (UpdateVMResponse);
+  rpc WakeOnLAN(WakeOnLANRequest) returns (WakeOnLANResponse);
+  rpc CreatePowerSchedule(CreatePowerScheduleRequest) returns (CreatePowerScheduleResponse);
+  rpc ListPowerSchedules(ListPowerSchedulesRequest) returns (ListPowerSchedulesResponse);
+  rpc UpdatePowerSchedule(UpdatePowerScheduleRequest) returns (UpdatePowerScheduleResponse);
+  rpc DeletePowerSchedule(DeletePowerScheduleRequest) returns (DeletePowerScheduleResponse);
+}
 
-// ControlCommand defines the commands that can be sent to control a virtual machine.
 enum ControlCommand {
   CONTROL_COMMAND_UNKNOWN = 0;
   CONTROL_COMMAND_STOP = 1;
@@ -19,87 +39,35 @@ enum ControlCommand {
   CONTROL_COMMAND_RESET = 7;
 }
 
-service VirtualMachineService {
-  rpc Define(VmDefineRequest) returns (VmDefineResponse);
-  // GetDefinition fetches the definition of a virtual machine.
-  rpc GetDefinition(VmGetDefinitionRequest) returns (VmGetDefinitionResponse);
-  // Control controls the state of a virtual machine.
-  rpc Control(VmControlRequest) returns (VmControlResponse);
-  // Status retrieves the status of a virtual machine.
-  rpc Status(VmStatusRequest) returns (VmStatusResponse);
-  // GuestInfo sends a guest agent command to the client to fetch the guest agent data.
-  rpc GuestInfo(VmGuestInfoRequest) returns (VmGuestInfoResponse);
-  
-  // AttachISO attaches an ISO to a virtual machine.
-  rpc AttachISO(VmAttachISORequest) returns (VmAttachISOResponse);
-  // DetachISO detaches an ISO from a virtual machine.
-  rpc DetachISO(VmDetachISORequest) returns (VmDetachISOResponse);
-
-  // Explicit VM Lifecycle Management (Alternative/Complementary to Define/Control)
-  rpc CreateVM(CreateVMRequest) returns (CreateVMResponse);
-  rpc StartVM(StartVMRequest) returns (StartVMResponse);
-  rpc UpdateVM(UpdateVMRequest) returns (UpdateVMResponse);
-  rpc WakeOnLAN(WakeOnLANRequest) returns (WakeOnLANResponse);
-  // Note: Stop, Reboot, etc. can still use the Control RPC with appropriate commands.
-
-  // Scheduled Power Operations
-  rpc CreatePowerSchedule(CreatePowerScheduleRequest) returns (CreatePowerScheduleResponse);
-  rpc ListPowerSchedules(ListPowerSchedulesRequest) returns (ListPowerSchedulesResponse);
-  rpc UpdatePowerSchedule(UpdatePowerScheduleRequest) returns (UpdatePowerScheduleResponse);
-  rpc DeletePowerSchedule(DeletePowerScheduleRequest) returns (DeletePowerScheduleResponse);
-}
-
 message VmDefineRequest {
-  // VmDefinition is a [vms.VirtualMachine] object in JSON format.
-  // it is used on orphan node fetching and existing VM importing.
   string vm_definition = 1;
-  
-  // If true, the hypervisor will start the machine after definition.
   optional bool boon_on_create = 2;
 }
 
 message VmDefineResponse {
-  // success indicates whether the operation was successful.
   bool success = 1;
-  // message contains additional information about the operation.
   string message = 2;
-  // error contains an optional error response if the operation failed.
   optional ErrorResponse error = 3;
-
-  // The vm_uuid is the UUID of the defined virtual machine.
   string vm_uuid = 4;
 }
 
-// VmGetDefinitionRequest request object for fetching VM definition from the hypervisor.
 message VmGetDefinitionRequest {
-  // VmUuid is the UUID of the virtual machine.
   string vm = 1;
-  // If true, the definition will be fetched from the hypervisor.
-  // If false, it will be fetched from the local cache.
   bool force_fetch = 2;
 }
 
 message VmGetDefinitionResponse {
-  // VmDefinition is a [vms.VirtualMachine] object in JSON format.
-  // it is used on orphan node fetching and existing VM importing.
   string vm_definition = 1;
 }
 
-// VmControlRequest is the request to control a virtual machine state.
 message VmControlRequest {
-  // The virtual machine's uuid.
   string vm = 1;
-  // The command to execute on the virtual machine.
   ControlCommand command = 2;
 }
 
-// VmControlResponse is the response of the VmControlRequest.
 message VmControlResponse {
-  // success indicates whether the operation was successful.
   bool success = 1;
-  // message contains additional information about the operation.
   string message = 2;
-  // error contains an optional error response if the operation failed.
   optional ErrorResponse error = 3;
 }
 
@@ -112,37 +80,24 @@ message VmAttachISOResponse {}
 
 message VmDetachISORequest {
   string vm = 1;
-  // IsoName required to exactly know which CDROM should be targeted.
   string iso_name = 2;
 }
 
 message VmDetachISOResponse {}
 
-// VmStatusRequest is the request message for CloudHostService.VmStatus
 message VmStatusRequest {
   string vm = 1;
 }
 
-// VmStatusResponse is the response message for CloudHostService.VmStatus
 message VmStatusResponse {
-  // Status is the status of the virtual machine (e.g., running, paused, stopped).
   string status = 1;
 }
 
-
-
-// ----------------------------------------------------------------------------
-// Explicit VM Management Messages (Alternative/Complementary)
-// ----------------------------------------------------------------------------
-
-// Basic representation of a Virtual Machine for explicit operations.
-// This might be simplified compared to the full definition used in VmDefineRequest.
 message Disk {
   string path = 1;
   string device = 2;
   string bus = 3;
   string format = 4;
-  // Storage QoS parameters
   int32 read_iops_sec = 5;
   int32 write_iops_sec = 6;
   int64 read_bytes_sec = 7;
@@ -154,91 +109,75 @@ message Disk {
 }
 
 message Firmware {
-  string type = 1; // e.g., "bios", "uefi"
+  string type = 1;
   bool secure_boot = 2;
   bool enrolled_keys = 3;
 }
 
 message TPM {
-  string model = 1; // e.g., "tpm-tis", "tpm-crb"
-  string backend = 2; // e.g., "emulator", "passthrough"
-  string device = 3; // for passthrough backend
+  string model = 1;
+  string backend = 2;
+  string device = 3;
 }
 
 message USBController {
-  string model = 1; // e.g., "nec-xhci" (USB 3.0), "ehci" (USB 2.0), "qusb1" (USB 1.1), "qusb2" (USB 2.0)
-  bool host_device_passthrough = 2; // Enable host device passthrough
-  repeated string passthrough_devices = 3; // List of host USB devices to passthrough
+  string model = 1;
+  bool host_device_passthrough = 2;
+  repeated string passthrough_devices = 3;
 }
 
 message USBDevice {
-  string vendor_id = 1; // USB vendor ID (e.g., "0x0781" for SanDisk)
-  string product_id = 2; // USB product ID
-  string host_bus = 3; // Host bus number
-  string host_device = 4; // Host device number
+  string vendor_id = 1;
+  string product_id = 2;
+  string host_bus = 3;
+  string host_device = 4;
 }
 
 message VMNetworkInterface {
-  string type = 1; // e.g., "bridge", "network"
-  string source = 2; // bridge name or network name
-  string model = 3; // e.g., "virtio", "e1000"
-  string mac = 4; // MAC address
-  // For bonding/teaming
-  repeated string bond_interfaces = 5; // interfaces to bond
-  string bond_mode = 6; // e.g., "active-backup", "balance-rr", "lacp"
+  string type = 1;
+  string source = 2;
+  string model = 3;
+  string mac = 4;
+  repeated string bond_interfaces = 5;
+  string bond_mode = 6;
   bool lacp_enabled = 7;
-  // Wake-on-LAN support
-  bool wake_on_lan = 8; // Enable Wake-on-LAN for this interface
+  bool wake_on_lan = 8;
 }
 
 message VirtualMachine {
   string uuid = 1;
   string name = 2;
-  // Add other core VM properties needed for creation/update
   int32 memory_mb = 3;
   int32 vcpus = 4;
-  // Add fields for disks, network interfaces, etc. if needed for explicit creation/update
   repeated Disk disks = 5;
   Firmware firmware = 6;
   TPM tpm = 7;
   repeated VMNetworkInterface network_interfaces = 8;
   repeated USBController usb_controllers = 9;
-  repeated USBDevice usb_devices = 10; // USB devices to attach to the VM
+  repeated USBDevice usb_devices = 10;
 }
 
 message CreateVMRequest {
-  // Details to create the new virtual machine.
-  // This could be a structured message or a definition string,
-  // depending on the desired level of detail and flexibility.
-  // Using a structured message is generally preferred for type safety.
   VirtualMachine vm_config = 1;
-  // Optional: If true, the hypervisor will start the machine after creation.
   optional bool boot_on_create = 2;
 }
 
 message CreateVMResponse {
-  // success indicates whether the operation was successful.
   bool success = 1;
-  // message contains additional information about the operation.
   string message = 2;
-  // error contains an optional error response if the operation failed.
   optional ErrorResponse error = 3;
-  // The vm_uuid is the UUID of the created virtual machine.
   string vm_uuid = 4;
 }
 
 message StartVMRequest {
-  // The virtual machine's uuid to start.
   string vm_uuid = 1;
 }
 
-message StartVMResponse {
-  // No additional response needed for StartVM
-}
+message StartVMResponse {}
 
 message WakeOnLANRequest {
-  string vm_uuid = 1; // UUID of the VM to wake up
-  string mac_address = 2; // MAC address to send magic packet to (optional, can be retrieved from VM config)
+  string vm_uuid = 1;
+  string mac_address = 2;
 }
 
 message WakeOnLANResponse {
@@ -248,34 +187,20 @@ message WakeOnLANResponse {
 }
 
 message UpdateVMRequest {
-  // The virtual machine's uuid to update.
   string vm_uuid = 1;
-  // The updated virtual machine configuration.
-  // Only fields present and non-default in this message should be updated.
-  // Consider using field masks for partial updates in a real-world scenario.
   VirtualMachine updated_vm_config = 2;
 }
 
 message UpdateVMResponse {
-  // success indicates whether the operation was successful.
   bool success = 1;
-  // message contains additional information about the operation.
   string message = 2;
-  // error contains an optional error response if the operation failed.
   optional ErrorResponse error = 3;
 }
 
-
-// ----------------------------------------------------------------------------
-// Explicit VM Guest Information Messages
-// ----------------------------------------------------------------------------
-
-// VmGuestInfoRequest requests the guest info from the client.
 message VmGuestInfoRequest {
   string vm = 1;
 }
 
-// VmGuestOS the OS information from the guest.
 message VmGuestOS {
   string id = 1;
   string name = 2;
@@ -287,30 +212,23 @@ message VmGuestOS {
   string kernel_version = 8;
 }
 
-// VmGuestInterfaceAddress network interface address.
 message VmGuestInterfaceAddress {
   string type = 1;
   string address = 2;
   uint32 prefix = 3;
 }
 
-// VmGuestNetworkInterface guest network interface object.
 message VmGuestNetworkInterface {
   string name = 1;
   string hwaddr = 2;
   repeated VmGuestInterfaceAddress addresses = 3;
 }
 
-// VmGuestInfoResponse response object containing the guest info.
 message VmGuestInfoResponse {
   string hostname = 1;
   VmGuestOS os = 2;
   repeated VmGuestNetworkInterface interfaces = 3;
 }
-
-// ----------------------------------------------------------------------------
-// Scheduled Power Operations
-// ----------------------------------------------------------------------------
 
 enum PowerAction {
   POWER_ACTION_UNKNOWN = 0;
@@ -331,10 +249,10 @@ message PowerSchedule {
   string vm_uuid = 2;
   PowerAction action = 3;
   RecurrenceType recurrence = 4;
-  string cron_spec = 5; // Cron expression for scheduling
-  int32 day_of_week = 6; // 0-6 for weekly (Sunday=0), or day of month for monthly
-  int32 day_of_month = 7; // 1-31 for monthly recurrence
-  string time = 8; // Time of day in HH:MM format (local timezone)
+  string cron_spec = 5;
+  int32 day_of_week = 6;
+  int32 day_of_month = 7;
+  string time = 8;
   bool enabled = 9;
   int64 created_at = 10;
   int64 updated_at = 11;
@@ -344,10 +262,10 @@ message CreatePowerScheduleRequest {
   string vm_uuid = 1;
   PowerAction action = 2;
   RecurrenceType recurrence = 3;
-  string cron_spec = 4; // Optional: direct cron expression
-  int32 day_of_week = 5; // For weekly recurrence
-  int32 day_of_month = 6; // For monthly recurrence
-  string time = 7; // Required: HH:MM format
+  string cron_spec = 4;
+  int32 day_of_week = 5;
+  int32 day_of_month = 6;
+  string time = 7;
   bool enabled = 8;
 }
 
@@ -358,7 +276,7 @@ message CreatePowerScheduleResponse {
 }
 
 message ListPowerSchedulesRequest {
-  string vm_uuid = 1; // Optional: filter by VM
+  string vm_uuid = 1;
   bool enabled_only = 2;
 }
 

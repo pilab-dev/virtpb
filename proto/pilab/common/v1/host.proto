@@ -1,15 +1,6 @@
-// =============================================================================
-// Common Host & Metrics Messages - Shared Across All Services
-// =============================================================================
-// Purpose: Host-level and VM-level metrics/statistics used by multiple services.
-//
-// This file provides a single source of truth for:
-// - HostStats: Host resource utilization (CPU, memory, disk)
-// - VmMetrics: VM performance metrics (CPU, disk, network, memory)
-// - CPUMetrics, MemoryMetrics, StorageMetrics: Frontend display metrics
-// - SensorData: Hardware sensor readings
-// - DataPoint: Time-series data point for monitoring
-// =============================================================================
+// Package common provides shared message types for the PiVirt Cloud platform.
+// This package includes VM, host, task, stream, and error definitions used
+// across agent, director, frontend, and other services.
 
 syntax = "proto3";
 
@@ -19,120 +10,105 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1";
 
-// -----------------------------------------------------------------------------
-// Host Statistics (from libvirt/hypervisor)
-// -----------------------------------------------------------------------------
-
+// HostStats contains resource utilization metrics for a host.
 message HostStats {
-  float cpu_usage = 1;           // CPU utilization (0.0-100.0)
-  float disk_usage = 2;          // Disk utilization (0.0-100.0)
-  uint64 used_memory = 3;         // Used memory in bytes
-  uint64 total_memory = 4;       // Total memory in bytes
+  float cpu_usage = 1;
+  float disk_usage = 2;
+  uint64 used_memory = 3;
+  uint64 total_memory = 4;
 }
 
-// -----------------------------------------------------------------------------
-// VM Performance Metrics (from libvirt/qemu-guest-agent)
-// -----------------------------------------------------------------------------
-
+// VmMetrics contains performance metrics for a VM.
 message VmMetrics {
-  string vm_id = 1;              // VM UUID
-  string vm_name = 2;            // VM name
-  
-  // CPU metrics
-  uint32 cpu_usage = 3;           // CPU usage percentage
-  
-  // Disk I/O metrics
-  uint32 disk_rd = 4;            // Bytes read
-  uint32 disk_rd_req = 5;        // Read requests
-  uint32 disk_wr = 6;            // Bytes written
-  uint64 disk_wr_req = 7;        // Write requests
-    
-  // Network I/O metrics
-  uint32 network_rx_bytes = 8;     // Bytes received
-  uint32 network_rx_pkt = 9;      // Packets received
-  uint32 network_tx_bytes = 10;    // Bytes transmitted
-  uint32 network_tx_pkt = 11;     // Packets transmitted
-    
-  // Memory metrics
-  uint32 memory_usage = 12;        // Memory used (MB)
-  uint32 memory_total = 13;        // Total memory (MB)
+  string vm_id = 1;
+  string vm_name = 2;
+  uint32 cpu_usage = 3;
+  uint32 disk_rd = 4;
+  uint32 disk_rd_req = 5;
+  uint32 disk_wr = 6;
+  uint64 disk_wr_req = 7;
+  uint32 network_rx_bytes = 8;
+  uint32 network_rx_pkt = 9;
+  uint32 network_tx_bytes = 10;
+  uint32 network_tx_pkt = 11;
+  uint32 memory_usage = 12;
+  uint32 memory_total = 13;
 }
 
-// -----------------------------------------------------------------------------
-// Frontend Display Metrics
-// -----------------------------------------------------------------------------
-
+// CPUMetrics contains CPU utilization metrics.
 message CPUMetrics {
-  double usage_percent = 1;       // CPU usage percentage
+  double usage_percent = 1;
 }
 
+// MemoryMetrics contains memory utilization metrics.
 message MemoryMetrics {
-  double usage_percent = 1;       // Memory usage percentage
+  double usage_percent = 1;
 }
 
+// StorageMetrics contains storage utilization metrics.
 message StorageMetrics {
-  int64 total_gb = 1;            // Total storage in GB
-  int64 used_gb = 2;             // Used storage in GB
+  int64 total_gb = 1;
+  int64 used_gb = 2;
 }
 
+// DataPoint represents a single time-series data point.
 message DataPoint {
   google.protobuf.Timestamp timestamp = 1;
-  double value = 2;                // Metric value
-  string unit = 3;                 // Unit of measurement
+  double value = 2;
+  string unit = 3;
 }
 
+// ResourceAllocationSummary contains allocation summaries for all resources.
 message ResourceAllocationSummary {
   CPUAllocation cpu = 1;
   MemoryAllocation memory = 2;
   StorageAllocation storage = 3;
 }
 
+// CPUAllocation represents CPU core allocation.
 message CPUAllocation {
   int32 total_cores = 1;
   int32 allocated_cores = 2;
 }
 
+// MemoryAllocation represents memory allocation.
 message MemoryAllocation {
   int64 total_gb = 1;
   int64 allocated_gb = 2;
 }
 
+// StorageAllocation represents storage allocation.
 message StorageAllocation {
   int64 total_gb = 1;
   int64 used_gb = 2;
 }
 
-// -----------------------------------------------------------------------------
-// Hardware Sensor Data
-// -----------------------------------------------------------------------------
-
+// SensorData contains hardware sensor readings.
 message SensorData {
-  string name = 1;                 // Sensor name (e.g., "CPU Temp")
-  double value = 2;                // Sensor reading
-  string unit = 3;                 // Unit (C, V, RPM, etc.)
-  string status = 4;               // Status (ok, warning, critical)
-  string sensor_type = 5;           // Type (temperature, voltage, fan)
+  string name = 1;
+  double value = 2;
+  string unit = 3;
+  string status = 4;
+  string sensor_type = 5;
 }
 
+// HardwareHealth contains overall hardware health status.
 message HardwareHealth {
-  string overall_status = 1;        // overall status (ok, degraded, failed)
+  string overall_status = 1;
   repeated SensorData sensors = 2;
   string firmware_version = 3;
   string power_status = 4;
 }
 
-// -----------------------------------------------------------------------------
-// Network Statistics (for monitoring)
-// -----------------------------------------------------------------------------
-
+// NetworkStats contains network interface statistics.
 message NetworkStats {
-  string interface = 1;             // Interface name
-  int64 rx_bytes = 2;              // Received bytes
-  int64 tx_bytes = 3;              // Transmitted bytes
-  int64 rx_packets = 4;            // Received packets
-  int64 tx_packets = 5;            // Transmitted packets
-  int64 rx_errors = 6;             // Receive errors
-  int64 tx_errors = 7;             // Transmit errors
-  int64 rx_drops = 8;              // Receive drops
-  int64 tx_drops = 9;              // Transmit drops
+  string interface = 1;
+  int64 rx_bytes = 2;
+  int64 tx_bytes = 3;
+  int64 rx_packets = 4;
+  int64 tx_packets = 5;
+  int64 rx_errors = 6;
+  int64 tx_errors = 7;
+  int64 rx_drops = 8;
+  int64 tx_drops = 9;
 }

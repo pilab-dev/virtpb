@@ -1,14 +1,5 @@
-// =============================================================================
-// QoS & Security Service - QoS Profiles and Security Profiles
-// =============================================================================
-// Purpose: Manage QoS profiles (rate limiting) and security profiles
-// (port security, ACL rules).
-//
-// Services:
-// - QoS Profile CRUD + Apply/Remove
-// - Security Profile CRUD + Apply/Remove
-// - ACL Rule management
-// =============================================================================
+// Package network provides virtual networking services including networks,
+// ports, VLAN/VXLAN management, IPAM, QoS, security, DVS, and statistics.
 
 syntax = "proto3";
 
@@ -21,11 +12,9 @@ import "pilab/network/v2/network_common.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
 
-// -----------------------------------------------------------------------------
-// QoS & Security Service
-// -----------------------------------------------------------------------------
-
+// QoSSecurityService manages QoS profiles, security profiles, and ACL rules.
 service QoSSecurityService {
+  // QoS profile operations
   rpc CreateQoSProfile(CreateQoSProfileRequest) returns (QoSProfile);
   rpc GetQoSProfile(GetQoSProfileRequest) returns (QoSProfile);
   rpc ListQoSProfiles(ListQoSProfilesRequest) returns (ListQoSProfilesResponse);
@@ -34,6 +23,7 @@ service QoSSecurityService {
   rpc ApplyQoSProfile(ApplyQoSProfileRequest) returns (google.protobuf.Empty);
   rpc RemoveQoSProfile(RemoveQoSProfileRequest) returns (google.protobuf.Empty);
 
+  // Security profile operations
   rpc CreateSecurityProfile(CreateSecurityProfileRequest) returns (SecurityProfile);
   rpc GetSecurityProfile(GetSecurityProfileRequest) returns (SecurityProfile);
   rpc ListSecurityProfiles(ListSecurityProfilesRequest) returns (ListSecurityProfilesResponse);
@@ -41,16 +31,15 @@ service QoSSecurityService {
   rpc DeleteSecurityProfile(DeleteSecurityProfileRequest) returns (google.protobuf.Empty);
   rpc ApplySecurityProfile(ApplySecurityProfileRequest) returns (google.protobuf.Empty);
   rpc RemoveSecurityProfile(RemoveSecurityProfileRequest) returns (google.protobuf.Empty);
+
+  // ACL rule operations
   rpc AddACLRule(AddACLRuleRequest) returns (ACLRule);
   rpc UpdateACLRule(UpdateACLRuleRequest) returns (ACLRule);
   rpc RemoveACLRule(RemoveACLRuleRequest) returns (google.protobuf.Empty);
   rpc ReorderACLRules(ReorderACLRulesRequest) returns (google.protobuf.Empty);
 }
 
-// -----------------------------------------------------------------------------
-// QoS Profile Messages
-// -----------------------------------------------------------------------------
-
+// QoSProfile defines quality of service settings for ports and networks.
 message QoSProfile {
   string id = 1;
   string name = 2;
@@ -68,6 +57,7 @@ message QoSProfile {
   google.protobuf.Timestamp updated_at = 14;
 }
 
+// CreateQoSProfileRequest contains parameters for creating a QoS profile.
 message CreateQoSProfileRequest {
   string name = 1;
   string tenant_id = 2;
@@ -81,7 +71,9 @@ message CreateQoSProfileRequest {
   map<string, string> metadata = 10;
 }
 
-message GetQoSProfileRequest { string qos_profile_id = 1; }
+message GetQoSProfileRequest {
+  string qos_profile_id = 1;
+}
 
 message ListQoSProfilesRequest {
   string tenant_id = 1;
@@ -105,7 +97,9 @@ message UpdateQoSProfileRequest {
   map<string, string> metadata = 7;
 }
 
-message DeleteQoSProfileRequest { string qos_profile_id = 1; }
+message DeleteQoSProfileRequest {
+  string qos_profile_id = 1;
+}
 
 message ApplyQoSProfileRequest {
   string qos_profile_id = 1;
@@ -121,10 +115,7 @@ message RemoveQoSProfileRequest {
   ApplyTarget target = 4;
 }
 
-// -----------------------------------------------------------------------------
-// Security Profile Messages
-// -----------------------------------------------------------------------------
-
+// SecurityProfile defines port security and ACL settings.
 message SecurityProfile {
   string id = 1;
   string name = 2;
@@ -144,6 +135,7 @@ message SecurityProfile {
   google.protobuf.Timestamp updated_at = 16;
 }
 
+// ACLRule defines an access control list rule.
 message ACLRule {
   string id = 1;
   string name = 2;
@@ -164,6 +156,7 @@ message ACLRule {
   int64 byte_count = 17;
 }
 
+// CreateSecurityProfileRequest contains parameters for creating a security profile.
 message CreateSecurityProfileRequest {
   string name = 1;
   string tenant_id = 2;
@@ -180,7 +173,9 @@ message CreateSecurityProfileRequest {
   map<string, string> metadata = 13;
 }
 
-message GetSecurityProfileRequest { string security_profile_id = 1; }
+message GetSecurityProfileRequest {
+  string security_profile_id = 1;
+}
 
 message ListSecurityProfilesRequest {
   string tenant_id = 1;
@@ -205,14 +200,18 @@ message UpdateSecurityProfileRequest {
   map<string, string> metadata = 8;
 }
 
-message DeleteSecurityProfileRequest { string security_profile_id = 1; }
+message DeleteSecurityProfileRequest {
+  string security_profile_id = 1;
+}
 
 message ApplySecurityProfileRequest {
   string security_profile_id = 1;
   string port_id = 2;
 }
 
-message RemoveSecurityProfileRequest { string port_id = 1; }
+message RemoveSecurityProfileRequest {
+  string port_id = 1;
+}
 
 message AddACLRuleRequest {
   string security_profile_id = 1;

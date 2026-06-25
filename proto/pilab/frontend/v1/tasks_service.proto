@@ -1,11 +1,4 @@
-// =============================================================================
-// Tasks Service - Task Listing and Monitoring
-// =============================================================================
-// Purpose: Provides a simple API for listing tasks/operations across the
-// system. Used by frontend to show user-facing task progress.
-//
-// Communication: Unary RPC
-// =============================================================================
+// Package frontend provides the web frontend API for host management and monitoring.
 
 syntax = "proto3";
 
@@ -13,7 +6,6 @@ package pilab.frontend.v1;
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1";
 
-// Service Definition
 service TasksService {
   rpc ListTasks(ListTasksRequest) returns (ListTasksResponse);
 }
@@ -25,14 +17,13 @@ message TaskStatus {
   string status = 4;
   string progress = 5;
   string initiator = 6;
-  string start_time = 7; // ISO 8601
-  string end_time = 8; // ISO 8601
+  string start_time = 7;
+  string end_time = 8;
   string server = 9;
   string details = 10;
 }
 
-message ListTasksRequest {
-}
+message ListTasksRequest {}
 
 message ListTasksResponse {
   repeated TaskStatus tasks = 1;

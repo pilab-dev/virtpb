@@ -1,21 +1,4 @@
-// =============================================================================
-// Host Service - Host Management and Monitoring (Frontend API)
-// =============================================================================
-// Purpose: Provides host management and monitoring API for the web frontend.
-// Allows users to view and manage hypervisor nodes.
-//
-// Communication: Unary RPC for all operations
-//
-// Key Features:
-// - Host Overview: Summary including CPU, memory, VMs, alerts, recent tasks
-// - Monitoring: Time-series metrics (CPU, memory, network, disk)
-// - VM Listing: List VMs running on a specific host
-// - Permissions: Host access control
-// - Datastores: Storage management (mount/unmount)
-// - System Settings: NTP, timezone, DNS, routing configuration
-// - Maintenance Mode: Enter/exit maintenance mode, VM evacuation
-// - Network Interfaces: List and enable/disable NICs
-// =============================================================================
+// Package frontend provides the web frontend API for host management and monitoring.
 
 syntax = "proto3";
 
@@ -24,10 +7,6 @@ package pilab.frontend.v1;
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1";
 
 import "google/protobuf/timestamp.proto";
-
-// ----------------------------------------------------------------------------
-// Enums
-// ----------------------------------------------------------------------------
 
 enum HostStatus {
   HOST_STATUS_UNSPECIFIED = 0;
@@ -49,7 +28,6 @@ enum DatastoreType {
   DATASTORE_TYPE_UNSPECIFIED = 0;
   DATASTORE_TYPE_LVM = 1;
   DATASTORE_TYPE_NFS = 2;
-  // Add other types if necessary
 }
 
 enum NetworkInterfaceStatus {
@@ -57,10 +35,6 @@ enum NetworkInterfaceStatus {
   NIC_STATUS_CONNECTED = 1;
   NIC_STATUS_DISCONNECTED = 2;
 }
-
-// ----------------------------------------------------------------------------
-// Messages
-// ----------------------------------------------------------------------------
 
 message HostOverview {
   string hostname = 1;
@@ -89,7 +63,7 @@ message MemoryMetrics {
 message TaskSummary {
   string id = 1;
   string type = 2;
-  string status     = 3;
+  string status = 3;
   google.protobuf.Timestamp created_at = 4;
 }
 
@@ -100,8 +74,8 @@ message ResourceAllocationSummary {
 }
 
 message CPUAllocation {
-  int32 total_cores       = 1;
-  int32 allocated_cores   = 2;
+  int32 total_cores = 1;
+  int32 allocated_cores = 2;
 }
 
 message MemoryAllocation {
@@ -111,14 +85,14 @@ message MemoryAllocation {
 
 message StorageAllocation {
   int64 total_gb = 1;
-  int64 used_gb   = 2;
+  int64 used_gb = 2;
 }
 
 message MonitoringDataRequest {
   string hostname = 1;
-  string metric =2; // e.g., "cpu_usage", "memory_usage", "network_throughput"
-  string interface = 3; // Optional for network metrics
-  string datastore = 4; // Optional for storage metrics
+  string metric = 2;
+  string interface = 3;
+  string datastore = 4;
   google.protobuf.Timestamp start_time = 5;
   google.protobuf.Timestamp end_time = 6;
 }
@@ -165,7 +139,7 @@ message DatastoreInfo {
   int64 capacity_gb = 3;
   int64 free_gb = 4;
   string path = 5;
-  string status = 6; // e.g., "mounted"
+  string status = 6;
 }
 
 message HostSystemSettingsResponse {
@@ -223,10 +197,6 @@ message NetworkInterfaceInfo {
   string driver = 6;
   repeated string ip_addresses = 7;
 }
-
-// ----------------------------------------------------------------------------
-// Request Messages for Actions
-// ----------------------------------------------------------------------------
 
 message GetHostOverviewRequest {
   string hostname = 1;
@@ -316,58 +286,44 @@ message DisableNetworkInterfaceRequest {
   string interface_name = 2;
 }
 
-// ----------------------------------------------------------------------------
-// Response Messages for Actions (mostly empty for success, can add more details)
-// ----------------------------------------------------------------------------
-
 message EmptyResponse {}
 
 message UpdateNTPConfigResponse {}
+
 message UpdateTimezoneResponse {}
+
 message UpdateDNSSettingsResponse {}
+
 message UpdateRoutingSettingsResponse {}
+
 message EnterMaintenanceModeResponse {}
+
 message ExitMaintenanceModeResponse {}
+
 message MountDatastoreResponse {}
+
 message UnmountDatastoreResponse {}
+
 message EnableNetworkInterfaceResponse {}
+
 message DisableNetworkInterfaceResponse {}
 
-// ----------------------------------------------------------------------------
-// Service Definition
-// ----------------------------------------------------------------------------
-
 service HostService {
-  // Host Overview
   rpc GetHostOverview(GetHostOverviewRequest) returns (HostOverview);
-
-  // Monitoring
   rpc GetMonitoringData(GetMonitoringDataRequest) returns (MonitoringDataResponse);
-
-  // VMs
   rpc ListHostVMs(ListHostVMsRequest) returns (HostVMsResponse);
-
-  // Permissions
   rpc GetHostPermissions(GetHostPermissionsRequest) returns (HostPermissionsResponse);
-
-  // Storage/Datastores
   rpc ListHostDatastores(ListHostDatastoresRequest) returns (HostDatastoresResponse);
   rpc MountDatastore(MountDatastoreRequest) returns (MountDatastoreResponse);
   rpc UnmountDatastore(UnmountDatastoreRequest) returns (UnmountDatastoreResponse);
-
-  // System Settings
   rpc GetHostSystemSettings(GetHostSystemSettingsRequest) returns (HostSystemSettingsResponse);
   rpc UpdateNTPConfig(UpdateNTPConfigRequest) returns (UpdateNTPConfigResponse);
   rpc UpdateTimezone(UpdateTimezoneRequest) returns (UpdateTimezoneResponse);
   rpc UpdateDNSSettings(UpdateDNSSettingsRequest) returns (UpdateDNSSettingsResponse);
   rpc UpdateRoutingSettings(UpdateRoutingSettingsRequest) returns (UpdateRoutingSettingsResponse);
-
-  // Maintenance Mode
   rpc GetMaintenanceModeStatus(GetMaintenanceModeStatusRequest) returns (MaintenanceModeStatusResponse);
   rpc EnterMaintenanceMode(EnterMaintenanceModeRequest) returns (EnterMaintenanceModeResponse);
   rpc ExitMaintenanceMode(ExitMaintenanceModeRequest) returns (ExitMaintenanceModeResponse);
-
-  // Networking/Interfaces
   rpc ListHostNetworkInterfaces(ListHostNetworkInterfacesRequest) returns (HostNetworkInterfacesResponse);
   rpc EnableNetworkInterface(EnableNetworkInterfaceRequest) returns (EnableNetworkInterfaceResponse);
   rpc DisableNetworkInterface(DisableNetworkInterfaceRequest) returns (DisableNetworkInterfaceResponse);

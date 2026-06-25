@@ -1,12 +1,5 @@
-// =============================================================================
-// Flow Service - OpenFlow Rule Debugging
-// =============================================================================
-// Purpose: List and debug OpenFlow rules.
-//
-// Services:
-// - List flows (with filters)
-// - Debug flow (simulate packet matching)
-// =============================================================================
+// Package network provides virtual networking services including networks,
+// ports, VLAN/VXLAN management, IPAM, QoS, security, DVS, and statistics.
 
 syntax = "proto3";
 
@@ -18,19 +11,13 @@ import "pilab/network/v2/network_common.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
 
-// -----------------------------------------------------------------------------
-// Flow Service
-// -----------------------------------------------------------------------------
-
+// FlowService provides OpenFlow rule debugging and inspection.
 service FlowService {
   rpc ListFlows(ListFlowsRequest) returns (ListFlowsResponse);
   rpc DebugFlow(DebugFlowRequest) returns (DebugFlowResponse);
 }
 
-// -----------------------------------------------------------------------------
-// Flow Messages
-// -----------------------------------------------------------------------------
-
+// FlowRule represents an OpenFlow rule on a switch.
 message FlowRule {
   string id = 1;
   string name = 2;
@@ -48,17 +35,15 @@ message FlowRule {
   google.protobuf.Timestamp updated_at = 14;
 }
 
-// -----------------------------------------------------------------------------
-// Request/Response Messages
-// -----------------------------------------------------------------------------
-
 message ListFlowsRequest {
   string port_id = 1;
   string network_id = 2;
   FlowDirection direction = 3;
 }
 
-message ListFlowsResponse { repeated FlowRule flows = 1; }
+message ListFlowsResponse {
+  repeated FlowRule flows = 1;
+}
 
 message DebugFlowRequest {
   string network_id = 1;

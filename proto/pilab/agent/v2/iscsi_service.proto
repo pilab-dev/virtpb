@@ -1,22 +1,5 @@
-// =============================================================================
-// iSCSI Service - iSCSI Storage Target Management
-// =============================================================================
-// Purpose: Manages iSCSI storage connectivity on agent nodes. Used for
-// connecting to SAN storage and using iSCSI LUNs as VM disks.
-//
-// Communication: Unary RPC for all operations
-//
-// Key Operations:
-// - Discover: Scan for available iSCSI targets on a portal
-// - Login/Logout: Connect/disconnect from iSCSI targets
-// - DeleteNode: Remove persistent iSCSI node configuration
-// - Rescan: Refresh SCSI bus after configuration changes
-// - Sessions: List active iSCSI sessions
-// - Nodes: List configured iSCSI nodes
-// - GetLuns: Get available LUNs from a target
-// - GetPaths: Get device paths (including multipath)
-// - CHAP Auth: Configure CHAP authentication (inbound/outbound)
-// =============================================================================
+// Package agent provides host-level services for VM management, storage,
+// networking, snapshots, DCUI, and agent-director communication.
 
 syntax = "proto3";
 
@@ -78,6 +61,7 @@ message ISCSISessionsRequest {}
 
 message ISCSISessionsResponse {
   repeated Session sessions = 1;
+
   message Session {
     string protocol = 1;
     int64 session_id = 2;
@@ -91,6 +75,7 @@ message ISCSINodesRequest {}
 
 message ISCSINodesResponse {
   repeated Node nodes = 1;
+
   message Node {
     string target_name = 1;
     string portal = 2;
@@ -105,6 +90,7 @@ message ISCSIGetLunsRequest {
 
 message ISCSIGetLunsResponse {
   repeated Lun luns = 1;
+
   message Lun {
     int32 number = 1;
     string device = 2;
@@ -118,6 +104,7 @@ message ISCSIGetPathsRequest {
 
 message ISCSIGetPathsResponse {
   repeated Path paths = 1;
+
   message Path {
     string device = 1;
     int32 host = 2;

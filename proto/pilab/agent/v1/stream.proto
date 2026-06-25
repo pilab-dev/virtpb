@@ -1,3 +1,6 @@
+// Package agent provides host-level services for VM management, storage,
+// networking, snapshots, DCUI, and agent-director communication.
+
 syntax = "proto3";
 
 package pilab.cloud.agent.v1;
@@ -21,8 +24,7 @@ message PayloadMessage {
   bytes data = 1;
 }
 
-message CloseMessage {
-}
+message CloseMessage {}
 
 message StreamResponse {
   oneof message {

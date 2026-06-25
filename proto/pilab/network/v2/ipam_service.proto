@@ -1,13 +1,5 @@
-// =============================================================================
-// IPAM Service - IP Pool Management & Allocation
-// =============================================================================
-// Purpose: Manage IP address pools and allocate/deallocate IPs.
-//
-// Services:
-// - IP Pool CRUD
-// - IP Allocation/Release
-// - IP Reservation
-// =============================================================================
+// Package network provides virtual networking services including networks,
+// ports, VLAN/VXLAN management, IPAM, QoS, security, DVS, and statistics.
 
 syntax = "proto3";
 
@@ -20,10 +12,7 @@ import "pilab/network/v2/network_common.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
 
-// -----------------------------------------------------------------------------
-// IPAM Service
-// -----------------------------------------------------------------------------
-
+// IPAMService manages IP address pools and allocations.
 service IPAMService {
   rpc CreateIPPool(CreateIPPoolRequest) returns (IPPool);
   rpc GetIPPool(GetIPPoolRequest) returns (IPPool);
@@ -36,10 +25,7 @@ service IPAMService {
   rpc ReserveIP(ReserveIPRequest) returns (IPReservation);
 }
 
-// -----------------------------------------------------------------------------
-// IPAM Messages
-// -----------------------------------------------------------------------------
-
+// IPPool represents an IP address pool for allocation.
 message IPPool {
   string id = 1;
   string name = 2;
@@ -61,6 +47,7 @@ message IPPool {
   google.protobuf.Timestamp updated_at = 18;
 }
 
+// IPAllocation represents an IP address allocation.
 message IPAllocation {
   string id = 1;
   string pool_id = 2;
@@ -73,6 +60,7 @@ message IPAllocation {
   google.protobuf.Timestamp expires_at = 9;
 }
 
+// IPReservation represents a reserved IP address.
 message IPReservation {
   string id = 1;
   string pool_id = 2;
@@ -82,10 +70,7 @@ message IPReservation {
   google.protobuf.Timestamp reserved_at = 6;
 }
 
-// -----------------------------------------------------------------------------
-// Request/Response Messages
-// -----------------------------------------------------------------------------
-
+// CreateIPPoolRequest contains parameters for creating an IP pool.
 message CreateIPPoolRequest {
   string name = 1;
   string tenant_id = 2;
@@ -104,7 +89,9 @@ message CreateIPPoolRequest {
   map<string, string> metadata = 15;
 }
 
-message GetIPPoolRequest { string pool_id = 1; }
+message GetIPPoolRequest {
+  string pool_id = 1;
+}
 
 message ListIPPoolsRequest {
   string tenant_id = 1;

@@ -1,12 +1,5 @@
-// =============================================================================
-// Cluster Bridge Service - Per-Cluster OVS Bridge Configuration
-// =============================================================================
-// Purpose: Manage OVS bridges per cluster with uplink management.
-//
-// Services:
-// - Cluster Bridge CRUD
-// - Uplink management (add/remove)
-// =============================================================================
+// Package network provides virtual networking services including networks,
+// ports, VLAN/VXLAN management, IPAM, QoS, security, DVS, and statistics.
 
 syntax = "proto3";
 
@@ -19,10 +12,7 @@ import "pilab/network/v2/network_common.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
 
-// -----------------------------------------------------------------------------
-// Cluster Bridge Service
-// -----------------------------------------------------------------------------
-
+// ClusterBridgeService manages OVS bridges per cluster.
 service ClusterBridgeService {
   rpc CreateClusterBridge(CreateClusterBridgeRequest) returns (ClusterBridge);
   rpc GetClusterBridge(GetClusterBridgeRequest) returns (ClusterBridge);
@@ -33,10 +23,7 @@ service ClusterBridgeService {
   rpc RemoveUplink(RemoveUplinkRequest) returns (google.protobuf.Empty);
 }
 
-// -----------------------------------------------------------------------------
-// Cluster Bridge Messages
-// -----------------------------------------------------------------------------
-
+// ClusterBridge represents an OVS bridge configuration for a cluster.
 message ClusterBridge {
   string id = 1;
   string cluster_id = 2;
@@ -51,10 +38,6 @@ message ClusterBridge {
   google.protobuf.Timestamp created_at = 11;
   google.protobuf.Timestamp updated_at = 12;
 }
-
-// -----------------------------------------------------------------------------
-// Request/Response Messages
-// -----------------------------------------------------------------------------
 
 message CreateClusterBridgeRequest {
   string cluster_id = 1;
@@ -72,9 +55,13 @@ message GetClusterBridgeRequest {
   string cluster_id = 2;
 }
 
-message ListClusterBridgesRequest { string cluster_id = 1; }
+message ListClusterBridgesRequest {
+  string cluster_id = 1;
+}
 
-message ListClusterBridgesResponse { repeated ClusterBridge bridges = 1; }
+message ListClusterBridgesResponse {
+  repeated ClusterBridge bridges = 1;
+}
 
 message UpdateClusterBridgeRequest {
   string id = 1;

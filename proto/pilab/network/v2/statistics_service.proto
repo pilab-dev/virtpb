@@ -1,14 +1,5 @@
-// =============================================================================
-// Statistics Service - Network & Port Statistics
-// =============================================================================
-// Purpose: Retrieve statistics for networks, ports, QoS, and public IPs.
-//
-// Services:
-// - Network Stats (bytes, packets, errors, drops)
-// - Port Stats (same metrics)
-// - QoS Stats (tokens, wait time)
-// - Public IP Usage (connections, bandwidth)
-// =============================================================================
+// Package network provides virtual networking services including networks,
+// ports, VLAN/VXLAN management, IPAM, QoS, security, DVS, and statistics.
 
 syntax = "proto3";
 
@@ -20,10 +11,7 @@ import "pilab/network/v2/network_common.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
 
-// -----------------------------------------------------------------------------
-// Statistics Service
-// -----------------------------------------------------------------------------
-
+// StatisticsService retrieves network and port statistics.
 service StatisticsService {
   rpc GetNetworkStats(GetNetworkStatsRequest) returns (NetworkStats);
   rpc GetPortStats(GetPortStatsRequest) returns (PortStats);
@@ -31,10 +19,7 @@ service StatisticsService {
   rpc GetPublicIPUsage(GetPublicIPUsageRequest) returns (PublicIPUsage);
 }
 
-// -----------------------------------------------------------------------------
-// Statistics Messages
-// -----------------------------------------------------------------------------
-
+// NetworkStats contains traffic statistics for a network.
 message NetworkStats {
   string network_id = 1;
   int64 bytes_sent = 2;
@@ -52,6 +37,7 @@ message NetworkStats {
   google.protobuf.Timestamp updated_at = 14;
 }
 
+// PortStats contains traffic statistics for a port.
 message PortStats {
   string port_id = 1;
   int64 bytes_sent = 2;
@@ -69,6 +55,7 @@ message PortStats {
   google.protobuf.Timestamp updated_at = 14;
 }
 
+// QoSStats contains quality of service statistics.
 message QoSStats {
   string qos_profile_id = 9;
   int64 bytes_sent = 1;
@@ -82,6 +69,7 @@ message QoSStats {
   google.protobuf.Timestamp updated_at = 10;
 }
 
+// PublicIPUsage contains usage statistics for a public IP.
 message PublicIPUsage {
   string public_ip_id = 1;
   int64 bytes_sent = 2;
@@ -96,10 +84,6 @@ message PublicIPUsage {
   google.protobuf.Timestamp period_start = 11;
   google.protobuf.Timestamp period_end = 12;
 }
-
-// -----------------------------------------------------------------------------
-// Request Messages
-// -----------------------------------------------------------------------------
 
 message GetNetworkStatsRequest {
   string network_id = 1;

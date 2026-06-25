@@ -1,21 +1,5 @@
-// =============================================================================
-// Management Service - User, Role, and Permission Management
-// =============================================================================
-// Purpose: Central service for user identity and access management. Provides
-// user CRUD, role management, role groups, and permission handling.
-//
-// Communication: Unary RPC for all operations
-//
-// Key Concepts:
-// - Users: Authenticated users with username, email, department, 2FA
-// - Roles: Named permission sets that can be assigned to users
-// - Role Groups: Collections of roles for batch assignment
-// - Role Inheritance: Roles can inherit permissions from parent roles (RBAC)
-// - Permissions: Resource type + operation pairs (e.g., "vm:create", "vm:read")
-// - Direct Assignment: Roles can be assigned directly to users
-//
-// Use Cases: Admin UI user management, API access control, multi-tenancy
-// =============================================================================
+// Package frontend provides the web frontend API for host management, monitoring,
+// user management, and task tracking.
 
 syntax = "proto3";
 
@@ -25,60 +9,43 @@ import "google/protobuf/empty.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1";
 
-// Service definition for user, role, and role group management
 service ManagementService {
-  // User Management
-  rpc CreateUser (CreateUserRequest) returns (User);
-  rpc GetUser (GetUserRequest) returns (User);
-  rpc GetUserByUsername (GetUserByUsernameRequest) returns (User);
-  rpc GetUserByEmail (GetUserByEmailRequest) returns (User);
-  rpc UpdateUser (UpdateUserRequest) returns (User);
-  rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty);
-  rpc SearchUsers (SearchUsersRequest) returns (SearchUsersResponse);
-  rpc ChangeUserPassword (ChangeUserPasswordRequest) returns (google.protobuf.Empty);
-
-  // Role Management
-  rpc CreateRole (CreateRoleRequest) returns (Role);
-  rpc GetRole (GetRoleRequest) returns (Role);
-  rpc GetRoleByName (GetRoleByNameRequest) returns (Role);
-  rpc UpdateRole (UpdateRoleRequest) returns (Role);
-  rpc DeleteRole (DeleteRoleRequest) returns (google.protobuf.Empty);
-  rpc SearchRoles (SearchRolesRequest) returns (SearchRolesResponse);
-
-  // Role Inheritance
-  rpc AddRoleInheritance (AddRoleInheritanceRequest) returns (google.protobuf.Empty);
-  rpc RemoveRoleInheritance (RemoveRoleInheritanceRequest) returns (google.protobuf.Empty);
-  rpc GetParentRoles (GetParentRolesRequest) returns (GetParentRolesResponse);
-  rpc GetChildRoles (GetChildRolesRequest) returns (GetChildRolesResponse);
-  rpc GetAllParentRoles (GetAllParentRolesRequest) returns (GetAllParentRolesResponse);
-  rpc GetAllChildRoles (GetAllChildRolesRequest) returns (GetAllChildRolesResponse);
-
-  // Role Group Management
-  rpc CreateRoleGroup (CreateRoleGroupRequest) returns (RoleGroup);
-  rpc GetRoleGroup (GetRoleGroupRequest) returns (RoleGroup);
-  rpc GetRoleGroupByName (GetRoleGroupByNameRequest) returns (RoleGroup);
-  rpc UpdateRoleGroup (UpdateRoleGroupRequest) returns (RoleGroup);
-  rpc DeleteRoleGroup (DeleteRoleGroupRequest) returns (google.protobuf.Empty);
-  rpc SearchRoleGroups (SearchRoleGroupsRequest) returns (SearchRoleGroupsResponse);
-
-  // Role Group Membership
-  rpc AddUserToRoleGroup (AddUserToRoleGroupRequest) returns (google.protobuf.Empty);
-  rpc RemoveUserFromRoleGroup (RemoveUserFromRoleGroupRequest) returns (google.protobuf.Empty);
-  rpc GetRoleGroupsForUser (GetRoleGroupsForUserRequest) returns (GetRoleGroupsForUserResponse);
-  rpc GetUsersInRoleGroup (GetUsersInRoleGroupRequest) returns (GetUsersInRoleGroupResponse);
-
-  // Assign/Unassign Roles to Users directly
-  rpc AssignRoleToUser (AssignRoleToUserRequest) returns (google.protobuf.Empty);
-  rpc UnassignRoleFromUser (UnassignRoleFromUserRequest) returns (google.protobuf.Empty);
-  rpc GetRolesForUser (GetRolesForUserRequest) returns (GetRolesForUserResponse);
-
-  // Permissions
-  rpc GetPermissionsForRole (GetPermissionsForRoleRequest) returns (GetPermissionsForRoleResponse);
+  rpc CreateUser(CreateUserRequest) returns (User);
+  rpc GetUser(GetUserRequest) returns (User);
+  rpc GetUserByUsername(GetUserByUsernameRequest) returns (User);
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (User);
+  rpc UpdateUser(UpdateUserRequest) returns (User);
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
+  rpc ChangeUserPassword(ChangeUserPasswordRequest) returns (google.protobuf.Empty);
+  rpc CreateRole(CreateRoleRequest) returns (Role);
+  rpc GetRole(GetRoleRequest) returns (Role);
+  rpc GetRoleByName(GetRoleByNameRequest) returns (Role);
+  rpc UpdateRole(UpdateRoleRequest) returns (Role);
+  rpc DeleteRole(DeleteRoleRequest) returns (google.protobuf.Empty);
+  rpc SearchRoles(SearchRolesRequest) returns (SearchRolesResponse);
+  rpc AddRoleInheritance(AddRoleInheritanceRequest) returns (google.protobuf.Empty);
+  rpc RemoveRoleInheritance(RemoveRoleInheritanceRequest) returns (google.protobuf.Empty);
+  rpc GetParentRoles(GetParentRolesRequest) returns (GetParentRolesResponse);
+  rpc GetChildRoles(GetChildRolesRequest) returns (GetChildRolesResponse);
+  rpc GetAllParentRoles(GetAllParentRolesRequest) returns (GetAllParentRolesResponse);
+  rpc GetAllChildRoles(GetAllChildRolesRequest) returns (GetAllChildRolesResponse);
+  rpc CreateRoleGroup(CreateRoleGroupRequest) returns (RoleGroup);
+  rpc GetRoleGroup(GetRoleGroupRequest) returns (RoleGroup);
+  rpc GetRoleGroupByName(GetRoleGroupByNameRequest) returns (RoleGroup);
+  rpc UpdateRoleGroup(UpdateRoleGroupRequest) returns (RoleGroup);
+  rpc DeleteRoleGroup(DeleteRoleGroupRequest) returns (google.protobuf.Empty);
+  rpc SearchRoleGroups(SearchRoleGroupsRequest) returns (SearchRoleGroupsResponse);
+  rpc AddUserToRoleGroup(AddUserToRoleGroupRequest) returns (google.protobuf.Empty);
+  rpc RemoveUserFromRoleGroup(RemoveUserFromRoleGroupRequest) returns (google.protobuf.Empty);
+  rpc GetRoleGroupsForUser(GetRoleGroupsForUserRequest) returns (GetRoleGroupsForUserResponse);
+  rpc GetUsersInRoleGroup(GetUsersInRoleGroupRequest) returns (GetUsersInRoleGroupResponse);
+  rpc AssignRoleToUser(AssignRoleToUserRequest) returns (google.protobuf.Empty);
+  rpc UnassignRoleFromUser(UnassignRoleFromUserRequest) returns (google.protobuf.Empty);
+  rpc GetRolesForUser(GetRolesForUserRequest) returns (GetRolesForUserResponse);
+  rpc GetPermissionsForRole(GetPermissionsForRoleRequest) returns (GetPermissionsForRoleResponse);
 }
 
-// --- Message Definitions ---
-
-// User Management
 message CreateUserRequest {
   string username = 1;
   string email = 2;
@@ -150,7 +117,6 @@ message UserFilter {
   repeated string role_group_ids = 2;
 }
 
-// Role Management
 message CreateRoleRequest {
   string name = 1;
   string description = 2;
@@ -204,7 +170,6 @@ message Permission {
   string operation = 2;
 }
 
-// Role Inheritance
 message AddRoleInheritanceRequest {
   string child_role_id = 1;
   string parent_role_id = 2;
@@ -247,7 +212,6 @@ message GetAllChildRolesResponse {
   repeated Role roles = 1;
 }
 
-// Role Group Management
 message CreateRoleGroupRequest {
   string name = 1;
   string description = 2;
@@ -293,7 +257,6 @@ message RoleGroupFilter {
   repeated string role_ids = 1;
 }
 
-// Role Group Membership
 message AddUserToRoleGroupRequest {
   string user_id = 1;
   string role_group_id = 2;
@@ -320,7 +283,6 @@ message GetUsersInRoleGroupResponse {
   repeated User users = 1;
 }
 
-// Assign/Unassign Roles to Users directly
 message AssignRoleToUserRequest {
   string user_id = 1;
   string role_id = 2;
@@ -339,7 +301,6 @@ message GetRolesForUserResponse {
   repeated Role roles = 1;
 }
 
-// Permissions
 message GetPermissionsForRoleRequest {
   string role_id = 1;
 }

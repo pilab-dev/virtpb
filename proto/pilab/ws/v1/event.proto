@@ -1,23 +1,4 @@
-// =============================================================================
-// WebSocket Event Service - Real-Time Event Streaming
-// =============================================================================
-// Purpose: Provides WebSocket-based real-time event streaming for clients.
-// Used for live updates of job progress, VM state changes, metrics.
-//
-// Communication: WebSocket bidirectional streaming
-//
-// Event Types:
-// - JobCreated: New job/operation started
-// - JobCompleted: Job finished successfully
-// - JobFailed: Job failed with error
-// - VmEvent: VM state change events
-// - HostStats: Host resource utilization updates
-// - VmMetrics: VM performance metrics updates
-//
-// Client Messages:
-// - SubscribeMessage: Subscribe/unsubscribe to events (by job ID or VM ID)
-// - AuthenticateMessage: WebSocket authentication
-// =============================================================================
+// Package ws provides WebSocket-based real-time event streaming for clients.
 
 syntax = "proto3";
 
@@ -56,21 +37,18 @@ message VmEvent {
   string state = 4;
 }
 
-  // Receiving events
-  message Event {
-    oneof payload {
-      pilab.common.v1.JobStatus job_status = 1;
-      JobCreated job_created = 2;
-      JobCompleted job_completed = 3;
-      JobFailed job_failed = 4;
-      VmEvent vm_event = 5;
-      pilab.common.v1.HostStats host_stats_event = 6;
-      pilab.common.v1.VmMetrics vm_metrics = 7;
-    }
+message Event {
+  oneof payload {
+    pilab.common.v1.JobStatus job_status = 1;
+    JobCreated job_created = 2;
+    JobCompleted job_completed = 3;
+    JobFailed job_failed = 4;
+    VmEvent vm_event = 5;
+    pilab.common.v1.HostStats host_stats_event = 6;
+    pilab.common.v1.VmMetrics vm_metrics = 7;
   }
+}
 
-
-// Outbound messages
 message SubscribeMessage {
   oneof payload {
     string job = 1;
@@ -83,10 +61,8 @@ message AuthenticateMessage {
   string token = 1;
 }
 
-message JobListRequest {
-}
+message JobListRequest {}
 
-// Sending requests
 message Requests {
   oneof payload {
     SubscribeMessage subscribe = 1;

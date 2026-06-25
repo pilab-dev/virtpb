@@ -1,23 +1,5 @@
-// =============================================================================
-// DEPRECATED: Cloud Director Service - Main Director-Agent Communication Hub
-// =============================================================================
-// Purpose: Central service for bidirectional communication between the Director
-// (orchestration plane) and Agent nodes (hypervisor hosts).
-//
-// DEPRECATED: This service has been replaced by director/v2/task_service.proto
-// The task service provides a more structured task queue system.
-// However, this service may still be used for real-time event streaming.
-//
-// Communication: Bidirectional streaming gRPC
-// - Agent -> Director: Reports VM state changes, heartbeats, metrics, events
-// - Director -> Agent: Sends VM definitions, cluster configuration, commands
-//
-// Key Concepts:
-// - Agent registration: Nodes register with Director providing full hardware specs
-// - Event streaming: Agents push VM state events, host stats, metrics continuously
-// - Cluster management: Directors can form clusters with bridge configurations
-// - Resource refresh: Director can request agents to refresh resource state
-// =============================================================================
+// Package director provides distributed task orchestration and agent coordination.
+// This package includes task queue management, job tracking, and director-agent communication.
 
 syntax = "proto3";
 
@@ -29,118 +11,104 @@ import "pilab/common/v1/task.proto";
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/director/v1;directorv1";
 
 message VmGuestInfo {
-    // ID of a VM
-    string vm_id = 1;
-    // VM Guest Info in JSON format.
-    string info = 2;
+  string vm_id = 1;
+  string info = 2;
 }
 
-// AgentEventsRequest is the message that is sent from the Host to the director.
 message AgentEventsRequest {
-    oneof event {
-        VmStateEvent vm_state_event = 1;
-        HeartbeatEvent heartbeat = 2;
-        VmDefinition vm_definition = 3;
-        pilab.common.v1.HostStats host_stats = 4;
-        pilab.common.v1.VmMetrics vm_metrics = 5;
-        pilab.common.v1.JobStatus job_status = 6;
-        VmGuestInfo vm_guest_info = 7;
-    }
+  oneof event {
+    VmStateEvent vm_state_event = 1;
+    HeartbeatEvent heartbeat = 2;
+    VmDefinition vm_definition = 3;
+    pilab.common.v1.HostStats host_stats = 4;
+    pilab.common.v1.VmMetrics vm_metrics = 5;
+    pilab.common.v1.JobStatus job_status = 6;
+    VmGuestInfo vm_guest_info = 7;
+  }
 }
 
-// HeartbeatEvent is the message that is sent from the
-// Host to the director to indicate that the Host is still alive.
 message HeartbeatEvent {
-    string host_id = 1;
-    uint32 elapsed_time = 2;
+  string host_id = 1;
+  uint32 elapsed_time = 2;
 }
 
-// VmDefinition is the message that is sent from the director to the Host.
-// The message contains the domain XML of the vm, the UUID of the vm,
-// the state of the vm, the Host ID, and the name of the vm.
 message VmDefinition {
-    string domain_xml = 1;
-    string domain_uuid = 2;
-    uint32 state = 3;
-    string name = 5;
+  string domain_xml = 1;
+  string domain_uuid = 2;
+  uint32 state = 3;
+  string name = 5;
 }
 
-// VmStateEvent is the message that is sent from the Host to the director.
 message VmStateEvent {
-    string vm_id = 1;
-    string vm_name = 2;
-    string event = 3;
-    string detail = 4;
+  string vm_id = 1;
+  string vm_name = 2;
+  string event = 3;
+  string detail = 4;
 }
 
 message DiskStateEvent {
-    string path = 1;
-    string event = 2;
+  string path = 1;
+  string event = 2;
 }
 
 message ManagerMessage {
-    oneof message {
-        ResourceRefreshRequest resource_refresh_request = 2;
-        ClusterJoinRequest cluster_join = 3;
-        ClusterLeaveRequest cluster_leave = 4;
-    }
+  oneof message {
+    ResourceRefreshRequest resource_refresh_request = 2;
+    ClusterJoinRequest cluster_join = 3;
+    ClusterLeaveRequest cluster_leave = 4;
+  }
 }
 
-message ResourceRefreshRequest {
-}
+message ResourceRefreshRequest {}
 
 message ClusterJoinRequest {
-    string cluster_id = 1;
-    repeated ClusterBridgeConfig bridges = 2;
+  string cluster_id = 1;
+  repeated ClusterBridgeConfig bridges = 2;
 }
 
 message ClusterBridgeConfig {
-    string name = 1;
-    string network_type = 2;
-    uint32 vlan = 3;
-    uint32 mtu = 4;
-    repeated string uplinks = 5;
+  string name = 1;
+  string network_type = 2;
+  uint32 vlan = 3;
+  uint32 mtu = 4;
+  repeated string uplinks = 5;
 }
 
 message ClusterLeaveRequest {
-    string cluster_id = 1;
-    bool force = 2;
+  string cluster_id = 1;
+  bool force = 2;
 }
 
 message RegisterAgentRequest {
-    string hostname = 1;
-    string agent_version = 2;
-    uint32 cores_count = 3;
-    string platform = 4;
-    string platform_family = 5;
-    uint32 uptime = 6;
-    string virtualization_system = 7;
-    string virtualization_role = 8;
-    string kernel_version = 10;
-    string kernel_arch = 11;
-
-    // string cpu_model = 12;
-    string cpu_vendor_id = 13;
-    string cpu_family = 14;
-    string cpu_model = 15;
-    string cpu_model_name = 16;
-    uint32 cpu_mhz = 17;
-    uint32 cpu_cache_size = 18;
-    repeated string cpu_flags = 19;
-    uint64 mem_size = 20;
-
-    string host_state = 9999;
+  string hostname = 1;
+  string agent_version = 2;
+  uint32 cores_count = 3;
+  string platform = 4;
+  string platform_family = 5;
+  uint32 uptime = 6;
+  string virtualization_system = 7;
+  string virtualization_role = 8;
+  string kernel_version = 10;
+  string kernel_arch = 11;
+  string cpu_vendor_id = 13;
+  string cpu_family = 14;
+  string cpu_model = 15;
+  string cpu_model_name = 16;
+  uint32 cpu_mhz = 17;
+  uint32 cpu_cache_size = 18;
+  repeated string cpu_flags = 19;
+  uint64 mem_size = 20;
+  string host_state = 9999;
 }
 
 message RegisterAgentResponse {
-    oneof response {
-        string director_welcome = 1;
-        string error_reason = 2;
-    }
+  oneof response {
+    string director_welcome = 1;
+    string error_reason = 2;
+  }
 }
 
-// CloudDirectorService is the service that provides the ability to manage virtual Vms.
 service CloudDirectorService {
-    rpc RegisterAgent(RegisterAgentRequest) returns (RegisterAgentResponse);
-    rpc AgentEvents(stream AgentEventsRequest) returns (stream ManagerMessage);
+  rpc RegisterAgent(RegisterAgentRequest) returns (RegisterAgentResponse);
+  rpc AgentEvents(stream AgentEventsRequest) returns (stream ManagerMessage);
 }

@@ -1,22 +1,5 @@
-// =============================================================================
-// Agent Service v2 - Enhanced Agent with Content Library and OVA Support
-// =============================================================================
-// Purpose: Enhanced version of agent service with content library management,
-// OVA import/export, and more comprehensive VM configuration options.
-//
-// Communication: Mix of unary RPC and streaming (for OVA)
-//
-// New Features over v1:
-// - Content Library: Manage ISOs, templates in central storage
-// - OVA Export: Stream VM to OVA file (server -> client)
-// - OVA Import: Import VM from OVA file (client -> server)
-// - Datastore Management: Create/delete datastores on hosts
-// - Enhanced VM Config: More detailed CPU (topology, pinning, NUMA), memory,
-//   disk, network configuration
-// - Task Management: Track and cancel long-running tasks
-// - Host Configuration: Network, storage, time configuration
-// - Maintenance Mode: Enter/exit with VM evacuation
-// =============================================================================
+// Package agent provides host-level services for VM management, storage,
+// networking, snapshots, DCUI, and agent-director communication.
 
 syntax = "proto3";
 
@@ -32,169 +15,95 @@ import "pilab/common/v1/error.proto";
 import "pilab/common/v1/stream.proto";
 import "pilab/common/v1/task.proto";
 
-// Agent service definition.
 service AgentService {
-  // Host Management
-  rpc RegisterHost(RegisterHostRequest) returns (RegisterHostResponse) {}
-  rpc Heartbeat(HeartbeatRequest) returns (HeartbeatResponse) {}
-  rpc GetHostStatus(GetHostStatusRequest) returns (HostStatus) {}
-
-  // VM Management
-  rpc CreateVM(CreateVMRequest) returns (CreateVMResponse) {}
-  rpc GetVMDetails(GetVMDetailsRequest) returns (GetVMDetailsResponse) {}
-  rpc UpdateVM(UpdateVMRequest) returns (UpdateVMResponse) {}
-  rpc DeleteVM(DeleteVMRequest) returns (DeleteVMResponse) {}
-  rpc StartVM(StartVMRequest) returns (StartVMResponse) {}
-  rpc StopVM(StopVMRequest) returns (StopVMResponse) {}
-  rpc ForceStopVM(ForceStopVMRequest) returns (ForceStopVMResponse) {}
-  rpc RebootVM(RebootVMRequest) returns (RebootVMResponse) {}
-  rpc PauseVM(PauseVMRequest) returns (PauseVMResponse) {}
-  rpc ResumeVM(ResumeVMRequest) returns (ResumeVMResponse) {}
-  rpc InitiateMigration(InitiateMigrationRequest)
-      returns (InitiateMigrationResponse) {}
-  rpc PrepareForMigration(PrepareForMigrationRequest)
-      returns (PrepareForMigrationResponse) {}
-  rpc CreateSnapshot(CreateSnapshotRequest) returns (CreateSnapshotResponse) {}
-  rpc RevertToSnapshot(RevertToSnapshotRequest)
-      returns (RevertToSnapshotResponse) {}
-  rpc DeleteSnapshot(DeleteSnapshotRequest) returns (DeleteSnapshotResponse) {}
-
-  // Task Management
-  rpc GetTaskStatus(GetTaskStatusRequest) returns (Task) {}
-  rpc CancelTask(CancelTaskRequest) returns (CancelTaskResponse) {}
-
-  // Configuration Management (Host-level)
-  rpc ConfigureNetwork(ConfigureNetworkRequest)
-      returns (ConfigureNetworkResponse) {}
-  rpc ConfigureStorage(ConfigureStorageRequest)
-      returns (ConfigureStorageResponse) {}
-  rpc ConfigureTime(ConfigureTimeRequest) returns (ConfigureTimeResponse) {}
-  rpc SetMaintenanceMode(SetMaintenanceModeRequest)
-      returns (SetMaintenanceModeResponse) {}
-  rpc UpdateHost(UpdateHostRequest) returns (UpdateHostResponse) {}
-
-  // Retrieves a list of available items in the content library.
-  rpc GetContentLibraryItems(GetContentLibraryItemsRequest)
-      returns (GetContentLibraryItemsResponse) {}
-
-  // Uploads an item to the content library.
-  rpc UploadContentLibraryItem(stream UploadContentLibraryItemRequest)
-      returns (UploadContentLibraryItemResponse) {}
-
-  // Exports a VM to OVA format (server streams bytes to client).
-  rpc ExportOVA(ExportOVARequest) returns (stream ExportOVAResponse) {}
-
-  // Imports a VM from OVA format (client streams bytes to server).
-  rpc ImportOVA(stream ImportOVARequest) returns (ImportOVAResponse) {}
-
-  // Deletes an item from the content library.
-  rpc DeleteContentLibraryItem(DeleteContentLibraryItemRequest)
-      returns (DeleteContentLibraryItemResponse) {}
-
-  // Retrieves a list of available datastores.
-  rpc GetDatastores(GetDatastoresRequest) returns (GetDatastoresResponse) {}
-
-  // Retrieves details about a specific datastore.
-  rpc GetDatastore(GetDatastoreRequest) returns (GetDatastoreResponse) {}
-
-  // Creates a new datastore.
-  rpc CreateDatastore(CreateDatastoreRequest)
-      returns (CreateDatastoreResponse) {}
-
-  // Deletes a datastore.
-  rpc DeleteDatastore(DeleteDatastoreRequest)
-      returns (DeleteDatastoreResponse) {}
-
-  // Retrieves a list of available networks.
-  rpc GetNetworks(GetNetworksRequest) returns (GetNetworksResponse) {}
-
-  // Retrieves details about a specific network.
-  rpc GetNetwork(GetNetworkRequest) returns (GetNetworkResponse) {}
-
-  // Creates a new network.
-  rpc CreateNetwork(CreateNetworkRequest) returns (CreateNetworkResponse) {}
-
-  // Deletes a network.
-  rpc DeleteNetwork(DeleteNetworkRequest) returns (DeleteNetworkResponse) {}
-
-  // Attaches an ISO image from the content library to a VM.
-  rpc AttachIso(AttachIsoRequest) returns (AttachIsoResponse) {}
-
-  // Detaches an ISO image from a VM.
-  rpc DetachIso(DetachIsoRequest) returns (DetachIsoResponse) {}
-
-  // Clones a VM from a template in the content library.
-  rpc CloneVmFromTemplate(CloneVmFromTemplateRequest)
-      returns (CloneVmFromTemplateResponse) {}
-
-  // Extended VM Operations (from v1)
-  // Get IP addresses of a VM via qemu-guest-agent
-  rpc GetVMGuestIPs(GetVMGuestIPsRequest) returns (GetVMGuestIPsResponse) {}
-  // Change password of a user inside the VM via qemu-guest-agent
-  rpc ChangeVMUserPassword(ChangeVMUserPasswordRequest) returns (ChangeVMUserPasswordResponse) {}
-  // Attach cloud-init ISO to a VM
-  rpc AttachCloudInit(AttachCloudInitRequest) returns (AttachCloudInitResponse) {}
-  // Attach a network interface to a VM
-  rpc AttachNetworkInterface(AttachNetworkInterfaceRequest) returns (AttachNetworkInterfaceResponse) {}
-  // Detach a network interface from a VM
-  rpc DetachNetworkInterface(DetachNetworkInterfaceRequest) returns (DetachNetworkInterfaceResponse) {}
-
-  // VNC/SPICE terminal streaming
-  rpc Stream(stream pilab.common.v1.StreamRequest) returns (stream pilab.common.v1.StreamResponse) {}
-
-  // Hardware monitoring
-  rpc GetHardwareHealth(GetHardwareHealthRequest) returns (GetHardwareHealthResponse) {}
-  rpc GetSensorData(GetSensorDataRequest) returns (GetSensorDataResponse) {}
-
-  // VM Definition (low-level libvirt operations)
-  rpc DefineVM(DefineVMRequest) returns (DefineVMResponse) {}
-  rpc GetVMDefinition(GetVMDefinitionRequest) returns (GetVMDefinitionResponse) {}
-  rpc ControlVM(ControlVMRequest) returns (ControlVMResponse) {}
-  rpc GetVMStatus(GetVMStatusRequest) returns (GetVMStatusResponse) {}
-  rpc GetVMGuestInfo(GetVMGuestInfoRequest) returns (GetVMGuestInfoResponse) {}
-
-  // Power Scheduling
-  rpc CreatePowerSchedule(CreatePowerScheduleRequest) returns (CreatePowerScheduleResponse) {}
-  rpc ListPowerSchedules(ListPowerSchedulesRequest) returns (ListPowerSchedulesResponse) {}
-  rpc UpdatePowerSchedule(UpdatePowerScheduleRequest) returns (UpdatePowerScheduleResponse) {}
-  rpc DeletePowerSchedule(DeletePowerScheduleRequest) returns (DeletePowerScheduleResponse) {}
-
-  // Wake-on-LAN
-  rpc WakeOnLAN(WakeOnLANRequest) returns (WakeOnLANResponse) {}
+  rpc RegisterHost(RegisterHostRequest) returns (RegisterHostResponse);
+  rpc Heartbeat(HeartbeatRequest) returns (HeartbeatResponse);
+  rpc GetHostStatus(GetHostStatusRequest) returns (HostStatus);
+  rpc CreateVM(CreateVMRequest) returns (CreateVMResponse);
+  rpc GetVMDetails(GetVMDetailsRequest) returns (GetVMDetailsResponse);
+  rpc UpdateVM(UpdateVMRequest) returns (UpdateVMResponse);
+  rpc DeleteVM(DeleteVMRequest) returns (DeleteVMResponse);
+  rpc StartVM(StartVMRequest) returns (StartVMResponse);
+  rpc StopVM(StopVMRequest) returns (StopVMResponse);
+  rpc ForceStopVM(ForceStopVMRequest) returns (ForceStopVMResponse);
+  rpc RebootVM(RebootVMRequest) returns (RebootVMResponse);
+  rpc PauseVM(PauseVMRequest) returns (PauseVMResponse);
+  rpc ResumeVM(ResumeVMRequest) returns (ResumeVMResponse);
+  rpc InitiateMigration(InitiateMigrationRequest) returns (InitiateMigrationResponse);
+  rpc PrepareForMigration(PrepareForMigrationRequest) returns (PrepareForMigrationResponse);
+  rpc CreateSnapshot(CreateSnapshotRequest) returns (CreateSnapshotResponse);
+  rpc RevertToSnapshot(RevertToSnapshotRequest) returns (RevertToSnapshotResponse);
+  rpc DeleteSnapshot(DeleteSnapshotRequest) returns (DeleteSnapshotResponse);
+  rpc GetTaskStatus(GetTaskStatusRequest) returns (Task);
+  rpc CancelTask(CancelTaskRequest) returns (CancelTaskResponse);
+  rpc ConfigureNetwork(ConfigureNetworkRequest) returns (ConfigureNetworkResponse);
+  rpc ConfigureStorage(ConfigureStorageRequest) returns (ConfigureStorageResponse);
+  rpc ConfigureTime(ConfigureTimeRequest) returns (ConfigureTimeResponse);
+  rpc SetMaintenanceMode(SetMaintenanceModeRequest) returns (SetMaintenanceModeResponse);
+  rpc UpdateHost(UpdateHostRequest) returns (UpdateHostResponse);
+  rpc GetContentLibraryItems(GetContentLibraryItemsRequest) returns (GetContentLibraryItemsResponse);
+  rpc UploadContentLibraryItem(stream UploadContentLibraryItemRequest) returns (UploadContentLibraryItemResponse);
+  rpc ExportOVA(ExportOVARequest) returns (stream ExportOVAResponse);
+  rpc ImportOVA(stream ImportOVARequest) returns (ImportOVAResponse);
+  rpc DeleteContentLibraryItem(DeleteContentLibraryItemRequest) returns (DeleteContentLibraryItemResponse);
+  rpc GetDatastores(GetDatastoresRequest) returns (GetDatastoresResponse);
+  rpc GetDatastore(GetDatastoreRequest) returns (GetDatastoreResponse);
+  rpc CreateDatastore(CreateDatastoreRequest) returns (CreateDatastoreResponse);
+  rpc DeleteDatastore(DeleteDatastoreRequest) returns (DeleteDatastoreResponse);
+  rpc GetNetworks(GetNetworksRequest) returns (GetNetworksResponse);
+  rpc GetNetwork(GetNetworkRequest) returns (GetNetworkResponse);
+  rpc CreateNetwork(CreateNetworkRequest) returns (CreateNetworkResponse);
+  rpc DeleteNetwork(DeleteNetworkRequest) returns (DeleteNetworkResponse);
+  rpc AttachIso(AttachIsoRequest) returns (AttachIsoResponse);
+  rpc DetachIso(DetachIsoRequest) returns (DetachIsoResponse);
+  rpc CloneVmFromTemplate(CloneVmFromTemplateRequest) returns (CloneVmFromTemplateResponse);
+  rpc GetVMGuestIPs(GetVMGuestIPsRequest) returns (GetVMGuestIPsResponse);
+  rpc ChangeVMUserPassword(ChangeVMUserPasswordRequest) returns (ChangeVMUserPasswordResponse);
+  rpc AttachCloudInit(AttachCloudInitRequest) returns (AttachCloudInitResponse);
+  rpc AttachNetworkInterface(AttachNetworkInterfaceRequest) returns (AttachNetworkInterfaceResponse);
+  rpc DetachNetworkInterface(DetachNetworkInterfaceRequest) returns (DetachNetworkInterfaceResponse);
+  rpc Stream(stream pilab.common.v1.StreamRequest) returns (stream pilab.common.v1.StreamResponse);
+  rpc GetHardwareHealth(GetHardwareHealthRequest) returns (GetHardwareHealthResponse);
+  rpc GetSensorData(GetSensorDataRequest) returns (GetSensorDataResponse);
+  rpc DefineVM(DefineVMRequest) returns (DefineVMResponse);
+  rpc GetVMDefinition(GetVMDefinitionRequest) returns (GetVMDefinitionResponse);
+  rpc ControlVM(ControlVMRequest) returns (ControlVMResponse);
+  rpc GetVMStatus(GetVMStatusRequest) returns (GetVMStatusResponse);
+  rpc GetVMGuestInfo(GetVMGuestInfoRequest) returns (GetVMGuestInfoResponse);
+  rpc CreatePowerSchedule(CreatePowerScheduleRequest) returns (CreatePowerScheduleResponse);
+  rpc ListPowerSchedules(ListPowerSchedulesRequest) returns (ListPowerSchedulesResponse);
+  rpc UpdatePowerSchedule(UpdatePowerScheduleRequest) returns (UpdatePowerScheduleResponse);
+  rpc DeletePowerSchedule(DeletePowerScheduleRequest) returns (DeletePowerScheduleResponse);
+  rpc WakeOnLAN(WakeOnLANRequest) returns (WakeOnLANResponse);
 }
 
-// Represents a generic task.
 message Task {
   string task_id = 1;
-  string status = 2;    // e.g., "pending", "running", "success", "failed"
-  float progress = 3;   // 0.0 to 1.0, if applicable
-  int64 start_time = 4; // Unix timestamp
-  int64 end_time = 5;   // Unix timestamp
-  string error = 6;     // Error message, if any
+  string status = 2;
+  float progress = 3;
+  int64 start_time = 4;
+  int64 end_time = 5;
+  string error = 6;
 }
 
-// Represents CPU topology.
 message CPUTopology {
   uint32 sockets = 1;
   uint32 cores = 2;
   uint32 threads = 3;
 }
 
-// Represents CPU pinning.
 message CPUPinning {
   uint32 vcpu = 1;
   string cpuset = 2;
 }
 
-// Represents NUMA affinity for CPU or memory.
 message NUMAAffinity {
   uint32 node = 1;
-  string cpus = 2;    // For CPU affinity, e.g., "0-1"
-  string memory = 3;  // For memory affinity, e.g., "2048M"
-  uint64 size_mb = 4; // For memory affinity, indicating size in MB
+  string cpus = 2;
+  string memory = 3;
+  uint64 size_mb = 4;
 }
 
-// Represents CPU configuration.
 message CPU {
   uint32 vcpus = 1;
   CPUTopology topology = 2;
@@ -204,7 +113,6 @@ message CPU {
   repeated NUMAAffinity numa_affinity = 6;
 }
 
-// Represents memory configuration.
 message Memory {
   uint64 allocated_mb = 1;
   bool ballooning = 2;
@@ -212,7 +120,6 @@ message Memory {
   repeated NUMAAffinity numa_affinity = 4;
 }
 
-// Represents QoS settings for disk or network interface.
 message QOSSettings {
   uint64 read_iops = 1;
   uint64 write_iops = 2;
@@ -220,10 +127,10 @@ message QOSSettings {
   string egress_bandwidth = 4;
 }
 
-// Represents disk encryption settings.
-message DiskEncryption { bool enabled = 1; }
+message DiskEncryption {
+  bool enabled = 1;
+}
 
-// Represents a disk.
 message Disk {
   string id = 1;
   string datastore = 2;
@@ -236,20 +143,17 @@ message Disk {
   string backing_file = 9;
 }
 
-// Represents a storage adapter.
 message StorageAdapter {
   string type = 1;
   uint32 controllers = 2;
   string controller_type = 3;
 }
 
-// Represents storage configuration.
 message Storage {
   repeated Disk disks = 1;
   repeated StorageAdapter adapters = 2;
 }
 
-// Represents a network interface.
 message NetworkInterface {
   string id = 1;
   string virtual_network = 2;
@@ -259,10 +163,10 @@ message NetworkInterface {
   string pci_passthrough = 6;
 }
 
-// Represents network configuration.
-message Network { repeated NetworkInterface interfaces = 1; }
+message Network {
+  repeated NetworkInterface interfaces = 1;
+}
 
-// Represents BIOS configuration.
 message BIOS {
   string type = 1;
   repeated string boot_order = 2;
@@ -270,9 +174,8 @@ message BIOS {
   bool vtpm = 4;
 }
 
-// Represents input devices.
 message InputDevice {
-  string type = 1; // e.g. "usb", "ps2"
+  string type = 1;
 }
 
 message Input {
@@ -283,30 +186,28 @@ message Input {
   repeated string parallel_ports = 5;
 }
 
-message SerialPort { string device = 1; }
+message SerialPort {
+  string device = 1;
+}
 
-// Represents video configuration.
 message Video {
   string adapter = 1;
   uint32 vram_mb = 2;
   bool acceleration_3d = 3;
 }
 
-// Represents QoS limits for a specific disk.
 message DiskQOSLimit {
   string disk_id = 1;
   uint64 read_iops = 2;
   uint64 write_iops = 3;
 }
 
-// Represents QoS limits for a specific network interface.
 message NetworkQOSLimit {
   string interface_id = 1;
   string ingress_bandwidth = 2;
   string egress_bandwidth = 3;
 }
 
-// Represents overall QoS configuration.
 message QoS {
   uint32 cpu_shares = 1;
   uint64 memory_limit_mb = 2;
@@ -314,7 +215,6 @@ message QoS {
   repeated NetworkQOSLimit network_limits = 4;
 }
 
-// Represents a virtual machine.
 message VirtualMachine {
   string id = 1;
   string name = 2;
@@ -332,13 +232,12 @@ message VirtualMachine {
   map<string, string> metadata = 14;
 }
 
-// Represents host status metrics.
 message HostStatus {
   float cpu_load = 1;
   uint64 memory_usage_mb = 2;
   float network_utilization = 3;
   float storage_utilization = 4;
-  uint64 uptime = 5; // Seconds
+  uint64 uptime = 5;
   map<string, string> metadata = 6;
 }
 
@@ -347,13 +246,14 @@ message CloneVMImageFromMinioRequest {
   string minio_object = 2;
 }
 
-message CloneVMImageFromMinioResponse { string message = 1; }
+message CloneVMImageFromMinioResponse {
+  string message = 1;
+}
 
-// Host Management Messages
 message RegisterHostRequest {
   string director_address = 1;
   string ip_address = 2;
-  string username = 4; // Or other authentication credentials
+  string username = 4;
   string password = 5;
   map<string, string> metadata = 6;
 }
@@ -364,74 +264,118 @@ message RegisterHostResponse {
   string agent_welcome = 3;
 }
 
-message HeartbeatRequest { string host_id = 1; }
-
-message HeartbeatResponse {
-  string status = 1;       // "OK", "MAINTENANCE", etc.
-  repeated Task tasks = 2; // New tasks assigned by the Orchestrator
+message HeartbeatRequest {
+  string host_id = 1;
 }
 
-message GetHostStatusRequest { string host_id = 1; }
+message HeartbeatResponse {
+  string status = 1;
+  repeated Task tasks = 2;
+}
 
-// VM Management Messages
-message CreateVMRequest { VirtualMachine vm = 1; }
+message GetHostStatusRequest {
+  string host_id = 1;
+}
+
+message CreateVMRequest {
+  VirtualMachine vm = 1;
+}
 
 message CreateVMResponse {
   string vm_id = 1;
   string message = 2;
 }
 
-message GetVMDetailsRequest { string vm_id = 1; }
+message GetVMDetailsRequest {
+  string vm_id = 1;
+}
 
-message GetVMDetailsResponse { VirtualMachine vm = 1; }
+message GetVMDetailsResponse {
+  VirtualMachine vm = 1;
+}
 
 message UpdateVMRequest {
   string vm_id = 1;
-  VirtualMachine vm_object = 2; // Update the whole VM object
+  VirtualMachine vm_object = 2;
 }
 
-message UpdateVMResponse { google.protobuf.Empty message = 1; }
+message UpdateVMResponse {
+  google.protobuf.Empty message = 1;
+}
 
-message DeleteVMRequest { string vm_id = 1; }
+message DeleteVMRequest {
+  string vm_id = 1;
+}
 
-message DeleteVMResponse { google.protobuf.Empty message = 1; }
+message DeleteVMResponse {
+  google.protobuf.Empty message = 1;
+}
 
-message StartVMRequest { string vm_id = 1; }
+message StartVMRequest {
+  string vm_id = 1;
+}
 
-message StartVMResponse { google.protobuf.Empty message = 1; }
+message StartVMResponse {
+  google.protobuf.Empty message = 1;
+}
 
-message StopVMRequest { string vm_id = 1; }
+message StopVMRequest {
+  string vm_id = 1;
+}
 
-message StopVMResponse { google.protobuf.Empty message = 1; }
+message StopVMResponse {
+  google.protobuf.Empty message = 1;
+}
 
-message ForceStopVMRequest { string vm_id = 1; }
-message ForceStopVMResponse { google.protobuf.Empty message = 1; }
+message ForceStopVMRequest {
+  string vm_id = 1;
+}
 
-message RebootVMRequest { string vm_id = 1; }
+message ForceStopVMResponse {
+  google.protobuf.Empty message = 1;
+}
 
-message RebootVMResponse { google.protobuf.Empty message = 1; }
+message RebootVMRequest {
+  string vm_id = 1;
+}
 
-message PauseVMRequest { string vm_id = 1; }
+message RebootVMResponse {
+  google.protobuf.Empty message = 1;
+}
 
-message PauseVMResponse { google.protobuf.Empty message = 1; }
+message PauseVMRequest {
+  string vm_id = 1;
+}
 
-message ResumeVMRequest { string vm_id = 1; }
+message PauseVMResponse {
+  google.protobuf.Empty message = 1;
+}
 
-message ResumeVMResponse { google.protobuf.Empty message = 1; }
+message ResumeVMRequest {
+  string vm_id = 1;
+}
+
+message ResumeVMResponse {
+  google.protobuf.Empty message = 1;
+}
 
 message InitiateMigrationRequest {
   string vm_id = 1;
   string target_host = 2;
 }
 
-message InitiateMigrationResponse { google.protobuf.Empty message = 1; }
+message InitiateMigrationResponse {
+  google.protobuf.Empty message = 1;
+}
 
 message PrepareForMigrationRequest {
   string vm_id = 1;
   string source_host = 2;
 }
 
-message PrepareForMigrationResponse { google.protobuf.Empty message = 1; }
+message PrepareForMigrationResponse {
+  google.protobuf.Empty message = 1;
+}
 
 message CreateSnapshotRequest {
   string vm_id = 1;
@@ -450,39 +394,45 @@ message RevertToSnapshotRequest {
   string snapshot_id = 2;
 }
 
-message RevertToSnapshotResponse { google.protobuf.Empty message = 1; }
+message RevertToSnapshotResponse {
+  google.protobuf.Empty message = 1;
+}
 
 message DeleteSnapshotRequest {
   string vm_id = 1;
   string snapshot_id = 2;
 }
 
-message DeleteSnapshotResponse { google.protobuf.Empty message = 1; }
+message DeleteSnapshotResponse {
+  google.protobuf.Empty message = 1;
+}
 
-// Task Management Messages
-message GetTaskStatusRequest { string task_id = 1; }
+message GetTaskStatusRequest {
+  string task_id = 1;
+}
 
-message CancelTaskRequest { string task_id = 1; }
+message CancelTaskRequest {
+  string task_id = 1;
+}
 
-message CancelTaskResponse { google.protobuf.Empty message = 1; }
+message CancelTaskResponse {
+  google.protobuf.Empty message = 1;
+}
 
-// Configuration Management Messages
 message ConfigureNetworkRequest {
   string host_id = 1;
-  // ... network configuration details (e.g., enable/disable interfaces, OVS
-  // settings)
   oneof config_type {
     NetworkInterface network_interface = 2;
     string ovs_config = 3;
-    // other network-specific config
   }
 }
 
-message ConfigureNetworkResponse { google.protobuf.Empty message = 1; }
+message ConfigureNetworkResponse {
+  google.protobuf.Empty message = 1;
+}
 
 message ConfigureStorageRequest {
   string host_id = 1;
-  // ... storage configuration details (e.g., LVM, NFS, iSCSI)
   oneof config_type {
     LVMVolume lvm_volume = 2;
     NFSShare nfs_share = 3;
@@ -490,44 +440,50 @@ message ConfigureStorageRequest {
   }
 }
 
-message ConfigureStorageResponse { google.protobuf.Empty message = 1; }
+message ConfigureStorageResponse {
+  google.protobuf.Empty message = 1;
+}
 
 message ConfigureTimeRequest {
   string host_id = 1;
-  // ... time configuration details (e.g., NTP servers, timezone)
   oneof config_type {
     string ntp_server = 2;
     string timezone = 3;
   }
 }
 
-message ConfigureTimeResponse { google.protobuf.Empty message = 1; }
+message ConfigureTimeResponse {
+  google.protobuf.Empty message = 1;
+}
 
 message SetMaintenanceModeRequest {
   string host_id = 1;
-  bool enter_maintenance = 2; // true to enter, false to exit
-  bool evacuate_vms = 3; // Whether to evacuate VMs before entering maintenance
+  bool enter_maintenance = 2;
+  bool evacuate_vms = 3;
 }
 
-message SetMaintenanceModeResponse { google.protobuf.Empty message = 1; }
+message SetMaintenanceModeResponse {
+  google.protobuf.Empty message = 1;
+}
 
-message UpdateHostRequest { string host_id = 1; }
+message UpdateHostRequest {
+  string host_id = 1;
+}
 
-message UpdateHostResponse { google.protobuf.Empty message = 1; }
+message UpdateHostResponse {
+  google.protobuf.Empty message = 1;
+}
 
-// Additional messages for config types
 message LVMVolume {
   string vg_name = 1;
   string lv_name = 2;
-  string size = 3; // e.g., "10G"
-  // ... other LVM properties
+  string size = 3;
 }
 
 message NFSShare {
   string server = 1;
   string path = 2;
   string mount_point = 3;
-  // ... other NFS properties
 }
 
 message ISCSITarget {
@@ -536,35 +492,29 @@ message ISCSITarget {
   string lun = 3;
 }
 
-// Content Library Management
 message GetContentLibraryItemsRequest {
-  // Filter criteria (optional).
   message Filter {
-    string type = 1;              // "iso", "template", etc.
-    string name = 2;              // Filter by name (can include wildcards).
-    map<string, string> tags = 3; // Filter by tags (key-value pairs).
+    string type = 1;
+    string name = 2;
+    map<string, string> tags = 3;
   }
   Filter filter = 1;
-
-  // Pagination (optional).
   int32 page_size = 2;
   string page_token = 3;
 }
 
 message GetContentLibraryItemsResponse {
   message ContentLibraryItem {
-    string id = 1; // Unique identifier of the item.
+    string id = 1;
     string name = 2;
-    string type = 3;              // "iso", "template", etc.
-    int64 size = 4;               // Size of the item in bytes.
-    string created_at = 5;        // Timestamp of creation.
-    string updated_at = 6;        // Timestamp of last update.
-    map<string, string> tags = 7; // Tags associated with the item.
-    string checksum = 8; // Checksum of the item for integrity verification.
+    string type = 3;
+    int64 size = 4;
+    string created_at = 5;
+    string updated_at = 6;
+    map<string, string> tags = 7;
+    string checksum = 8;
   }
   repeated ContentLibraryItem items = 1;
-
-  // Pagination (optional).
   string next_page_token = 2;
 }
 
@@ -577,63 +527,58 @@ message UploadContentLibraryItemRequest {
 
 message ContentLibraryItemInfo {
   string name = 1;
-  string type = 2; // "iso", "template"
+  string type = 2;
   map<string, string> tags = 3;
 }
 
 message UploadContentLibraryItemResponse {
-  string id = 1;       // Unique identifier of the uploaded item.
-  string checksum = 2; // Checksum of the uploaded item.
+  string id = 1;
+  string checksum = 2;
   pilab.common.v1.Error error = 3;
 }
 
 message DeleteContentLibraryItemRequest {
-  string id = 1; // Unique identifier of the item to delete.
+  string id = 1;
 }
 
-message DeleteContentLibraryItemResponse { pilab.common.v1.Error error = 1; }
-
-// Datastore Management
+message DeleteContentLibraryItemResponse {
+  pilab.common.v1.Error error = 1;
+}
 
 message GetDatastoresRequest {
-  // Pagination (optional).
   int32 page_size = 1;
   string page_token = 2;
 }
 
 message GetDatastoresResponse {
   message Datastore {
-    string id = 1; // Unique identifier of the datastore.
+    string id = 1;
     string name = 2;
-    string type = 3;              // "lvm", "nfs", "directory", "iscsi", "ceph"
-    int64 total_capacity = 4;     // Total capacity in bytes.
-    int64 available_capacity = 5; // Available capacity in bytes.
-    repeated string supported_formats = 6; // "qcow2", "raw", etc.
-    bool is_local = 7; // Indicates whether the datastore is local to the host.
-    // Connection details (e.g., server address, path for NFS).
+    string type = 3;
+    int64 total_capacity = 4;
+    int64 available_capacity = 5;
+    repeated string supported_formats = 6;
+    bool is_local = 7;
     map<string, string> connection_info = 8;
   }
   repeated Datastore datastores = 1;
-
-  // Pagination (optional).
   string next_page_token = 2;
 }
 
 message GetDatastoreRequest {
-  string id = 1; // Unique identifier of the datastore.
+  string id = 1;
 }
 
 message GetDatastoreResponse {
   message Datastore {
-    string id = 1; // Unique identifier of the datastore.
+    string id = 1;
     string name = 2;
-    string type = 3;              // "lvm", "nfs", "directory", "iscsi", "ceph"
-    int64 total_capacity = 4;     // Total capacity in bytes.
-    int64 available_capacity = 5; // Available capacity in bytes.
-    repeated string supported_formats = 6; // "qcow2", "raw", etc.
-    bool is_local = 7; // Indicates whether the datastore is local to the host.
-    map<string, string> connection_info =
-        8; // Connection details (e.g., server address, path for NFS).
+    string type = 3;
+    int64 total_capacity = 4;
+    int64 available_capacity = 5;
+    repeated string supported_formats = 6;
+    bool is_local = 7;
+    map<string, string> connection_info = 8;
   }
   Datastore datastore = 1;
   pilab.common.v1.Error error = 2;
@@ -641,51 +586,43 @@ message GetDatastoreResponse {
 
 message CreateDatastoreRequest {
   string name = 1;
-  string type = 2; // "lvm", "nfs", "directory"
-  // Connection details (e.g., server address, path for NFS, device path
+  string type = 2;
   map<string, string> connection_info = 3;
-  // for lvm).
-  // Other parameters specific to the datastore type (e.g., LVM volume group
-  // name).
-  // ...
 }
 
 message CreateDatastoreResponse {
-  string id = 1; // Unique identifier of the created datastore.
+  string id = 1;
   pilab.common.v1.Error error = 2;
 }
 
 message DeleteDatastoreRequest {
-  string id = 1; // Unique identifier of the datastore to delete.
+  string id = 1;
 }
 
-message DeleteDatastoreResponse { pilab.common.v1.Error error = 1; }
-
-// Network Management
+message DeleteDatastoreResponse {
+  pilab.common.v1.Error error = 1;
+}
 
 message GetNetworksRequest {
-  // Pagination (optional).
   int32 page_size = 1;
   string page_token = 2;
 }
 
 message NetworkDefinition {
-  string id = 1; // Unique identifier of the network.
+  string id = 1;
   string name = 2;
-  string type = 3;        // "bridge", "ovs"
-  string bridge_name = 4; // Name of the bridge device (if applicable).
-  map<string, string> connection_info = 5; // For example: DHCP ranges, etc
+  string type = 3;
+  string bridge_name = 4;
+  map<string, string> connection_info = 5;
 }
 
 message GetNetworksResponse {
   repeated NetworkDefinition networks = 1;
-
-  // Pagination (optional).
   string next_page_token = 2;
 }
 
 message GetNetworkRequest {
-  string id = 1; // Unique identifier of the network.
+  string id = 1;
 }
 
 message GetNetworkResponse {
@@ -695,89 +632,52 @@ message GetNetworkResponse {
 
 message CreateNetworkRequest {
   string name = 1;
-  string type = 2;        // "bridge", "ovs"
-  string bridge_name = 3; // Name of the bridge device (if applicable).
-  // Other parameters specific to the network type (e.g., VLAN ID for OVS).
-  // ...
+  string type = 2;
+  string bridge_name = 3;
 }
 
 message CreateNetworkResponse {
-  string id = 1; // Unique identifier of the created network.
+  string id = 1;
   pilab.common.v1.Error error = 2;
 }
 
 message DeleteNetworkRequest {
-  string id = 1; // Unique identifier of the network to delete.
+  string id = 1;
 }
 
-message DeleteNetworkResponse { pilab.common.v1.Error error = 1; }
+message DeleteNetworkResponse {
+  pilab.common.v1.Error error = 1;
+}
 
 message AttachIsoRequest {
   string vm_id = 1;
-  string iso_id = 2; // from content library item
+  string iso_id = 2;
 }
 
-message AttachIsoResponse { pilab.common.v1.Error error = 1; }
+message AttachIsoResponse {
+  pilab.common.v1.Error error = 1;
+}
 
 message DetachIsoRequest {
   string vm_id = 1;
-  string iso_id = 2; // from content library item
+  string iso_id = 2;
 }
 
-message DetachIsoResponse { pilab.common.v1.Error error = 1; }
+message DetachIsoResponse {
+  pilab.common.v1.Error error = 1;
+}
 
 message CloneVmFromTemplateRequest {
   string template_id = 1;
   string vm_name = 2;
   string datastore_id = 3;
-  map<string, string> vm_overrides =
-      4; // Allows overriding certain VM properties from the template, like CPU,
-  // memory, etc.
+  map<string, string> vm_overrides = 4;
 }
 
 message CloneVmFromTemplateResponse {
   string vm_id = 1;
   pilab.common.v1.Error error = 2;
 }
-
-// Error message imported from pilab.common.v1
-
-// OVA Export Messages
-message ExportOVARequest {
-  string vm_id = 1; // ID of the VM to export
-  string datastore_id = 2; // Optional: Datastore to use for temporary storage
-}
-
-message ExportOVAResponse {
-  bytes chunk_data = 1; // Chunk of OVA file data
-  float progress = 2; // Progress (0.0 to 1.0)
-  string filename = 3; // Optional: Filename for the OVA file
-}
-
-// OVA Import Messages
-message ImportOVARequest {
-  oneof request {
-    ImportOVAInfo metadata = 1; // Metadata about the OVA to import
-    bytes chunk_data = 2; // Chunk of OVA file data
-  }
-}
-
-message ImportOVAInfo {
-  string vm_name = 1; // Name to give the imported VM
-  string datastore_id = 2; // Datastore to store the VM
-  string description = 3; // Optional: Description of the VM
-  map<string, string> metadata = 4; // Optional: Metadata for the VM
-}
-
-message ImportOVAResponse {
-  string vm_id = 1; // ID of the imported VM
-  string message = 2; // Status message
-  pilab.common.v1.Error error = 3; // Error information, if any
-}
-
-// =============================================================================
-// Extended VM Operations Messages (from v1)
-// =============================================================================
 
 message GetVMGuestIPsRequest {
   string vm_id = 1;
@@ -833,12 +733,6 @@ message DetachNetworkInterfaceResponse {
   pilab.common.v1.Error error = 2;
 }
 
-// Stream messages imported from pilab.common.v1
-
-// =============================================================================
-// Hardware Monitoring Messages
-// =============================================================================
-
 message GetHardwareHealthRequest {}
 
 message GetHardwareHealthResponse {
@@ -857,12 +751,6 @@ message GetSensorDataResponse {
   repeated pilab.common.v1.SensorData sensors = 1;
   pilab.common.v1.Error error = 2;
 }
-
-// SensorData imported from pilab.common.v1
-
-// =============================================================================
-// VM Definition/Control Messages (low-level libvirt operations)
-// =============================================================================
 
 enum ControlCommand {
   CONTROL_COMMAND_UNSPECIFIED = 0;
@@ -919,16 +807,10 @@ message GetVMGuestInfoRequest {
   string vm_id = 1;
 }
 
-// VmGuestOS, VmGuestInterfaceAddress, VmGuestNetworkInterface
-// are imported from pilab.common.v1
 message GetVMGuestInfoResponse {
   pilab.common.v1.VmGuestOS os_info = 1;
   repeated pilab.common.v1.VmGuestNetworkInterface network_interfaces = 2;
 }
-
-// =============================================================================
-// Power Scheduling Messages
-// =============================================================================
 
 enum PowerAction {
   POWER_ACTION_UNSPECIFIED = 0;
@@ -1010,10 +892,6 @@ message DeletePowerScheduleResponse {
   pilab.common.v1.Error error = 2;
 }
 
-// =============================================================================
-// Wake-on-LAN Messages
-// =============================================================================
-
 message WakeOnLANRequest {
   string vm_id = 1;
   string mac_address = 2;
@@ -1021,6 +899,37 @@ message WakeOnLANRequest {
 
 message WakeOnLANResponse {
   bool success = 1;
+  string message = 2;
+  pilab.common.v1.Error error = 3;
+}
+
+message ExportOVARequest {
+  string vm_id = 1;
+  string datastore_id = 2;
+}
+
+message ExportOVAResponse {
+  bytes chunk_data = 1;
+  float progress = 2;
+  string filename = 3;
+}
+
+message ImportOVARequest {
+  oneof request {
+    ImportOVAInfo metadata = 1;
+    bytes chunk_data = 2;
+  }
+}
+
+message ImportOVAInfo {
+  string vm_name = 1;
+  string datastore_id = 2;
+  string description = 3;
+  map<string, string> metadata = 4;
+}
+
+message ImportOVAResponse {
+  string vm_id = 1;
   string message = 2;
   pilab.common.v1.Error error = 3;
 }

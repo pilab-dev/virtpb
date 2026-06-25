@@ -1,14 +1,6 @@
-// =============================================================================
-// Common Stream Messages - Shared Across All Services
-// =============================================================================
-// Purpose: Streaming message definitions used by agent and WebSocket
-// services.
-//
-// This file provides a single source of truth for:
-// - StreamRequest/StreamResponse: Bidirectional stream messages
-// - OpenStreamMessage/CloseStreamMessage: Stream control messages
-// - Used for VNC, SPICE, terminal streaming
-// =============================================================================
+// Package common provides shared message types for the PiVirt Cloud platform.
+// This package includes VM, host, task, stream, and error definitions used
+// across agent, director, frontend, and other services.
 
 syntax = "proto3";
 
@@ -16,10 +8,7 @@ package pilab.common.v1;
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1";
 
-// -----------------------------------------------------------------------------
-// Stream Messages (for VNC, SPICE, terminal)
-// -----------------------------------------------------------------------------
-
+// StreamRequest represents a request message in a stream.
 message StreamRequest {
   oneof message {
     OpenStreamMessage open = 1;
@@ -28,6 +17,7 @@ message StreamRequest {
   }
 }
 
+// StreamResponse represents a response message in a stream.
 message StreamResponse {
   oneof message {
     bytes payload = 1;
@@ -35,9 +25,11 @@ message StreamResponse {
   }
 }
 
+// OpenStreamMessage initiates a stream connection.
 message OpenStreamMessage {
-  string resource = 1;           // Resource (e.g., "/vnc/vm-123")
-  string resource_variant = 2;    // Variant (e.g., "vnc", "spice", "term")
+  string resource = 1;
+  string resource_variant = 2;
 }
 
+// CloseStreamMessage closes an active stream connection.
 message CloseStreamMessage {}

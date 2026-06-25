@@ -1,3 +1,6 @@
+// Package agent provides host-level services for VM management, storage,
+// networking, snapshots, DCUI, and agent-director communication.
+
 syntax = "proto3";
 
 package agent_director;
@@ -7,37 +10,21 @@ option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-// Service for communication between the Agent and the Director
 service AgentDirectorService {
-  // --- Status and Health Reporting ---
-  rpc ReportHeartbeat(HeartbeatRequest) returns (HeartbeatResponse) {}
-  rpc ReportHypervisorStatus(HypervisorStatus) returns (google.protobuf.Empty) {
-  }
-  rpc ReportVMStatus(VMStatusUpdate) returns (google.protobuf.Empty) {}
-  rpc ReportDiskStatus(DiskStatusUpdate) returns (google.protobuf.Empty) {}
-  rpc ReportNetworkInterfaceStatus(NetworkInterfaceStatusUpdate)
-      returns (google.protobuf.Empty) {}
-  rpc ReportHardwareStatus(HardwareStatusUpdate)
-      returns (google.protobuf.Empty) {}
-
-  // --- Metrics Collection ---
-  rpc ReportVMMetrics(VMMetrics) returns (google.protobuf.Empty) {}
-  rpc ReportHypervisorResourceUsage(HypervisorResourceUsage)
-      returns (google.protobuf.Empty) {}
-
-  // --- Event and Log Forwarding ---
-  rpc ReportEvent(Event) returns (google.protobuf.Empty) {}
-  rpc StreamLogs(stream LogRequest) returns (stream LogResponse) {}
-
-  // --- Task and Workflow Management ---
-  rpc ReportTaskProgress(TaskProgress) returns (google.protobuf.Empty) {}
-  rpc ReportWorkflowState(WorkflowState) returns (google.protobuf.Empty) {}
-
-  // --- Agent Self-Management ---
-  rpc ReportAgentUpdateStatus(AgentUpdateStatus)
-      returns (google.protobuf.Empty) {}
-  rpc AcknowledgeAgentConfiguration(AgentConfiguration)
-      returns (google.protobuf.Empty) {}
+  rpc ReportHeartbeat(HeartbeatRequest) returns (HeartbeatResponse);
+  rpc ReportHypervisorStatus(HypervisorStatus) returns (google.protobuf.Empty);
+  rpc ReportVMStatus(VMStatusUpdate) returns (google.protobuf.Empty);
+  rpc ReportDiskStatus(DiskStatusUpdate) returns (google.protobuf.Empty);
+  rpc ReportNetworkInterfaceStatus(NetworkInterfaceStatusUpdate) returns (google.protobuf.Empty);
+  rpc ReportHardwareStatus(HardwareStatusUpdate) returns (google.protobuf.Empty);
+  rpc ReportVMMetrics(VMMetrics) returns (google.protobuf.Empty);
+  rpc ReportHypervisorResourceUsage(HypervisorResourceUsage) returns (google.protobuf.Empty);
+  rpc ReportEvent(Event) returns (google.protobuf.Empty);
+  rpc StreamLogs(stream LogRequest) returns (stream LogResponse);
+  rpc ReportTaskProgress(TaskProgress) returns (google.protobuf.Empty);
+  rpc ReportWorkflowState(WorkflowState) returns (google.protobuf.Empty);
+  rpc ReportAgentUpdateStatus(AgentUpdateStatus) returns (google.protobuf.Empty);
+  rpc AcknowledgeAgentConfiguration(AgentConfiguration) returns (google.protobuf.Empty);
 }
 
 enum VMState {
@@ -51,33 +38,32 @@ enum VMState {
   SUSPENDED = 7;
 }
 
-// --- Status and Health Messages ---
 message HardwareStatusUpdate {
   string device_uuid = 1;
-  string vm_uuid = 2;       //(optional)
-  string status = 3;        // "attached", "detached", etc.
-  string error_message = 4; //(optional)
+  string vm_uuid = 2;
+  string status = 3;
+  string error_message = 4;
 }
 
 message DiskStatusUpdate {
   string disk_uuid = 1;
-  string vm_uuid = 2;       //(optional)
-  string status = 3;        // "active", "failed", etc.
-  string error_message = 4; //(optional)
+  string vm_uuid = 2;
+  string status = 3;
+  string error_message = 4;
 }
 
 message NetworkInterfaceStatusUpdate {
   string interface_uuid = 1;
   string vm_uuid = 2;
-  string status = 3;        // "connected", "disconnected"
-  string mac_address = 4;   //(optional)
-  string error_message = 5; //(optional)
+  string status = 3;
+  string mac_address = 4;
+  string error_message = 5;
 }
 
 message VMStatusUpdate {
   string vm_uuid = 1;
   VMState state = 2;
-  string error_message = 3; //(optional)
+  string error_message = 3;
 }
 
 message HeartbeatRequest {
@@ -86,8 +72,6 @@ message HeartbeatRequest {
 }
 
 message HeartbeatResponse {
-  // Can include configuration updates, commands, or other instructions for the
-  // agent.
   string message = 1;
 }
 
@@ -97,7 +81,6 @@ message HypervisorStatus {
     WARNING = 1;
     ERROR = 2;
   }
-
   float cpu_usage = 1;
   int64 memory_total_mb = 2;
   int64 memory_used_mb = 3;
@@ -116,8 +99,6 @@ message NetworkInterfaceStatus {
   bool up = 2;
   float bandwidth_mbps = 3;
 }
-
-// --- Metrics Messages ---
 
 message VMMetrics {
   string vm_uuid = 1;
@@ -159,11 +140,9 @@ message HypervisorResourceUsage {
   }
 }
 
-// --- Event and Log Messages ---
-
 message Event {
   google.protobuf.Timestamp timestamp = 1;
-  string vm_uuid = 2; // Optional, if the event is related to a VM
+  string vm_uuid = 2;
   enum Severity {
     INFO = 0;
     WARNING = 1;
@@ -171,11 +150,11 @@ message Event {
   }
   Severity severity = 3;
   string message = 4;
-  map<string, string> details = 5; // Optional structured details
+  map<string, string> details = 5;
 }
 
 message LogRequest {
-  string source = 1; // "hypervisor" or vm_uuid
+  string source = 1;
   enum LogLevel {
     DEBUG = 0;
     INFO = 1;
@@ -183,7 +162,7 @@ message LogRequest {
     ERROR = 3;
   }
   LogLevel log_level = 2;
-  string filter = 3; // Optional regex filter
+  string filter = 3;
 }
 
 message LogResponse {
@@ -191,8 +170,6 @@ message LogResponse {
   string source = 2;
   string message = 3;
 }
-
-// --- Task and Workflow Messages ---
 
 message TaskProgress {
   string task_id = 1;
@@ -203,8 +180,8 @@ message TaskProgress {
     FAILED = 3;
   }
   TaskStatus status = 2;
-  float progress_percent = 3; // Optional
-  string output = 4;          // Optional output or error messages
+  float progress_percent = 3;
+  string output = 4;
 }
 
 message WorkflowState {
@@ -217,10 +194,8 @@ message WorkflowState {
     FAILED = 3;
   }
   StepState state = 3;
-  map<string, string> output_data = 4; // Output data from the step
+  map<string, string> output_data = 4;
 }
-
-// --- Agent Management Messages ---
 
 message AgentUpdateStatus {
   enum UpdateStatus {
@@ -231,9 +206,9 @@ message AgentUpdateStatus {
     FAILED = 4;
   }
   UpdateStatus status = 1;
-  string message = 2; // Optional details or error message
+  string message = 2;
 }
 
 message AgentConfiguration {
-  string config_data = 1; // Serialized configuration data (e.g., JSON, YAML)
+  string config_data = 1;
 }

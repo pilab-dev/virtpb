@@ -1,14 +1,5 @@
-// =============================================================================
-// Public IP Service - Public IP, Port Forwarding, Firewall
-// =============================================================================
-// Purpose: Manage public IP allocation, port forwarding (NAT),
-// and firewall profiles.
-//
-// Services:
-// - Public IP CRUD + Associate/Disassociate
-// - Port Forward CRUD
-// - Firewall Profile CRUD + Rule management
-// =============================================================================
+// Package network provides virtual networking services including networks,
+// ports, VLAN/VXLAN management, IPAM, QoS, security, DVS, and statistics.
 
 syntax = "proto3";
 
@@ -21,11 +12,9 @@ import "pilab/network/v2/network_common.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
 
-// -----------------------------------------------------------------------------
-// Public IP Service
-// -----------------------------------------------------------------------------
-
+// PublicIPService manages public IP allocation, port forwarding, and firewalls.
 service PublicIPService {
+  // Public IP operations
   rpc AllocatePublicIP(AllocatePublicIPRequest) returns (PublicIP);
   rpc GetPublicIP(GetPublicIPRequest) returns (PublicIP);
   rpc ListPublicIPs(ListPublicIPsRequest) returns (ListPublicIPsResponse);
@@ -33,11 +22,13 @@ service PublicIPService {
   rpc AssociatePublicIP(AssociatePublicIPRequest) returns (PublicIP);
   rpc DisassociatePublicIP(DisassociatePublicIPRequest) returns (google.protobuf.Empty);
 
+  // Port forwarding operations
   rpc CreatePortForward(CreatePortForwardRequest) returns (PortForward);
   rpc UpdatePortForward(UpdatePortForwardRequest) returns (PortForward);
   rpc DeletePortForward(DeletePortForwardRequest) returns (google.protobuf.Empty);
   rpc ListPortForwards(ListPortForwardsRequest) returns (ListPortForwardsResponse);
 
+  // Firewall operations
   rpc CreateFirewallProfile(CreateFirewallProfileRequest) returns (FirewallProfile);
   rpc GetFirewallProfile(GetFirewallProfileRequest) returns (FirewallProfile);
   rpc UpdateFirewallProfile(UpdateFirewallProfileRequest) returns (FirewallProfile);
@@ -48,10 +39,7 @@ service PublicIPService {
   rpc ReorderFirewallRules(ReorderFirewallRulesRequest) returns (google.protobuf.Empty);
 }
 
-// -----------------------------------------------------------------------------
-// Public IP Messages
-// -----------------------------------------------------------------------------
-
+// PublicIP represents a public IP address allocation.
 message PublicIP {
   string id = 1;
   string name = 2;
@@ -69,6 +57,7 @@ message PublicIP {
   google.protobuf.Timestamp allocated_at = 14;
 }
 
+// PortForward represents a NAT port forwarding rule.
 message PortForward {
   string id = 1;
   string public_ip_id = 2;
@@ -83,6 +72,7 @@ message PortForward {
   google.protobuf.Timestamp created_at = 11;
 }
 
+// FirewallProfile defines firewall rules for a public IP.
 message FirewallProfile {
   string id = 1;
   string name = 2;
@@ -99,6 +89,7 @@ message FirewallProfile {
   google.protobuf.Timestamp updated_at = 13;
 }
 
+// FirewallRule defines a single firewall rule.
 message FirewallRule {
   string id = 1;
   string name = 2;
@@ -117,10 +108,7 @@ message FirewallRule {
   google.protobuf.Timestamp created_at = 15;
 }
 
-// -----------------------------------------------------------------------------
-// Request/Response Messages
-// -----------------------------------------------------------------------------
-
+// AllocatePublicIPRequest contains parameters for allocating a public IP.
 message AllocatePublicIPRequest {
   string tenant_id = 1;
   PublicIPType type = 2;
@@ -129,7 +117,9 @@ message AllocatePublicIPRequest {
   string network_id = 5;
 }
 
-message GetPublicIPRequest { string public_ip_id = 1; }
+message GetPublicIPRequest {
+  string public_ip_id = 1;
+}
 
 message ListPublicIPsRequest {
   string tenant_id = 1;
@@ -145,7 +135,9 @@ message ListPublicIPsResponse {
   int32 total = 3;
 }
 
-message ReleasePublicIPRequest { string public_ip_id = 1; }
+message ReleasePublicIPRequest {
+  string public_ip_id = 1;
+}
 
 message AssociatePublicIPRequest {
   string public_ip_id = 1;
@@ -153,7 +145,9 @@ message AssociatePublicIPRequest {
   string internal_ip = 3;
 }
 
-message DisassociatePublicIPRequest { string public_ip_id = 1; }
+message DisassociatePublicIPRequest {
+  string public_ip_id = 1;
+}
 
 message CreatePortForwardRequest {
   string public_ip_id = 1;
@@ -179,9 +173,13 @@ message DeletePortForwardRequest {
   string port_forward_id = 2;
 }
 
-message ListPortForwardsRequest { string public_ip_id = 1; }
+message ListPortForwardsRequest {
+  string public_ip_id = 1;
+}
 
-message ListPortForwardsResponse { repeated PortForward port_forwards = 1; }
+message ListPortForwardsResponse {
+  repeated PortForward port_forwards = 1;
+}
 
 message CreateFirewallProfileRequest {
   string name = 1;
@@ -194,7 +192,9 @@ message CreateFirewallProfileRequest {
   map<string, string> metadata = 8;
 }
 
-message GetFirewallProfileRequest { string firewall_profile_id = 1; }
+message GetFirewallProfileRequest {
+  string firewall_profile_id = 1;
+}
 
 message UpdateFirewallProfileRequest {
   string firewall_profile_id = 1;
@@ -204,7 +204,9 @@ message UpdateFirewallProfileRequest {
   bool default_egress_action = 5;
 }
 
-message DeleteFirewallProfileRequest { string firewall_profile_id = 1; }
+message DeleteFirewallProfileRequest {
+  string firewall_profile_id = 1;
+}
 
 message AddFirewallRuleRequest {
   string firewall_profile_id = 1;

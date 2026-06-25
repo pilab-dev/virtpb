@@ -1,3 +1,6 @@
+// Package agent provides host-level services for VM management, storage,
+// networking, snapshots, DCUI, and agent-director communication.
+
 syntax = "proto3";
 
 package pilab.cloud.agent.v1;
@@ -7,45 +10,20 @@ import "pilab/agent/v1/error.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
 
-// ----------------------------------------------------------------------------
-// Main Agent Service Definition
-// ----------------------------------------------------------------------------
-
 service AgentService {
-  // VmMigrate initiates a migration of a virtual machine.
   rpc VmMigrate(VmMigrateRequest) returns (VmMigrateResponse);
-  // VmIpList returns a list of IP addresses of a virtual machine.
   rpc VmIpList(VmIpListRequest) returns (VmIpListResponse);
-  // VmChangeUserPassword changes the password of a virtual machine.
   rpc VmChangeUserPassword(VmChangeUserPasswordRequest) returns (VmChangeUserPasswordResponse);
-
-  // VmBackupSystemVolume backs up the system volume of a virtual machine.
   rpc VmBackupSystemVolume(VmBackupSystemVolumeRequest) returns (VmBackupSystemVolumeResponse);
-  // VmRestoreSystemVolume restores the system volume of a virtual machine.
   rpc VmRestoreSystemVolume(VmRestoreSystemVolumeRequest) returns (VmRestoreSystemVolumeResponse);
-
-  // VmAttachCloudInit attaches a cloud-init ISO to a virtual machine.
   rpc VmAttachCloudInit(VmAttachCloudInitRequest) returns (VmAttachCloudInitResponse);
-
-  // Attach/Detach Network Interfaces
   rpc VmAttachNetworkInterface(VmAttachNetworkInterfaceRequest) returns (VmAttachNetworkInterfaceResponse);
   rpc VmDetachNetworkInterface(VmDetachNetworkInterfaceRequest) returns (VmDetachNetworkInterfaceResponse);
-
-  // Stream provides a stream to a ReadWriteCloser. Used for VNC, Pseudo Terminal
   rpc Stream(stream StreamRequest) returns (stream StreamResponse);
-
-  // UpdateConfig updates the configuration of an appliance, covering the network, storage, etc.
   rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
-
-  // Hardware monitoring
   rpc GetHardwareHealth(GetHardwareHealthRequest) returns (GetHardwareHealthResponse);
   rpc GetSensorData(GetSensorDataRequest) returns (GetSensorDataResponse);
 }
-
-// ----------------------------------------------------------------------------
-// Agent Service (Core VM Management)
-// ----------------------------------------------------------------------------
-
 
 message VmAttachCloudInitRequest {
   string vm = 1;
@@ -54,25 +32,17 @@ message VmAttachCloudInitRequest {
 
 message VmAttachCloudInitResponse {}
 
-
-// MigrationRequest is the request message for CloudHostService.VmMigrateRequest
 message VmMigrateRequest {
-  // VmUuid is the machine's UUID.
   string vm = 1;
-  // Destination is the destination of the migration (hostname or IP).
   string destination = 2;
-  // Perform a live migration if possible.
   bool live = 3;
-  // Optional: Parameters for live migration (e.g., auto-converge, compression).
   map<string, string> live_migration_options = 4;
 }
 
-// VmMigrateResponse is the response message for CloudHostService.VmMigrateRequest
 message VmMigrateResponse {
   bool success = 1;
   string message = 2;
   optional ErrorResponse error = 3;
-  // You might include a migration ID for tracking.
 }
 
 message VmIpListRequest {
@@ -111,7 +81,6 @@ message VmRestoreSystemVolumeRequest {
 
 message VmRestoreSystemVolumeResponse {}
 
-
 message UpdateConfigRequest {
   string config = 1;
 }
@@ -122,7 +91,6 @@ message UpdateConfigResponse {
   optional ErrorResponse error = 3;
 }
 
-// Hardware monitoring messages
 message GetHardwareHealthRequest {}
 
 message GetHardwareHealthResponse {
@@ -134,7 +102,7 @@ message GetHardwareHealthResponse {
 }
 
 message GetSensorDataRequest {
-  optional string sensor_name = 1; // Optional: filter by sensor name
+  optional string sensor_name = 1;
 }
 
 message GetSensorDataResponse {
@@ -152,9 +120,8 @@ message SensorData {
 
 message VmAttachNetworkInterfaceRequest {
   string vm = 1;
-  string network_name = 2; // Name of the libvirt network or OVS bridge
+  string network_name = 2;
   optional string mac_address = 3;
-  // Options like virtualport type, model, etc.
   map<string, string> options = 4;
 }
 
@@ -165,7 +132,7 @@ message VmAttachNetworkInterfaceResponse {
 
 message VmDetachNetworkInterfaceRequest {
   string vm = 1;
-  string mac_address = 2; // Identify the interface to detach
+  string mac_address = 2;
 }
 
 message VmDetachNetworkInterfaceResponse {

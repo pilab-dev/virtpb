@@ -1,3 +1,6 @@
+// Package agent provides host-level services for VM management, storage,
+// networking, snapshots, DCUI, and agent-director communication.
+
 syntax = "proto3";
 
 package pilab.cloud.agent.v1;
@@ -7,107 +10,30 @@ option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
-// DCUIService provides local console operations for host configuration
-// This mirrors ESXi's DCUI (Direct Console User Interface) functionality
 service DCUIService {
-  // ============================================================================
-  // Host Information
-  // ============================================================================
-
-  // Get comprehensive host information
   rpc GetHostInfo(google.protobuf.Empty) returns (HostInfo);
-
-  // Get system resource usage
   rpc GetSystemResources(google.protobuf.Empty) returns (SystemResources);
-
-  // Get running services status
   rpc GetServiceStatus(google.protobuf.Empty) returns (ServiceStatusList);
-
-  // ============================================================================
-  // Network Configuration
-  // ============================================================================
-
-  // Get network configuration
   rpc GetNetworkConfig(google.protobuf.Empty) returns (NetworkConfig);
-
-  // Configure network interface
   rpc ConfigureNetworkInterface(ConfigureNetworkInterfaceRequest) returns (google.protobuf.Empty);
-
-  // Test network connectivity
   rpc TestNetwork(google.protobuf.Empty) returns (NetworkTestResult);
-
-  // ============================================================================
-  // Storage Configuration
-  // ============================================================================
-
-  // Get storage configuration
   rpc GetStorageConfig(google.protobuf.Empty) returns (StorageConfig);
-
-  // Mount NFS datastore
   rpc MountNFS(MountNFSRequest) returns (google.protobuf.Empty);
-
-  // Unmount NFS datastore
   rpc UnmountNFS(UnmountNFSRequest) returns (google.protobuf.Empty);
-
-  // ============================================================================
-  // System Maintenance
-  // ============================================================================
-
-  // Enable/disable maintenance mode
   rpc SetMaintenanceMode(SetMaintenanceModeRequest) returns (google.protobuf.Empty);
-
-  // Check maintenance mode status
   rpc GetMaintenanceMode(google.protobuf.Empty) returns (MaintenanceModeStatus);
-
-  // Restart services
   rpc RestartService(RestartServiceRequest) returns (google.protobuf.Empty);
-
-  // ============================================================================
-  // Firewall Configuration
-  // ============================================================================
-
-  // Get firewall rules
   rpc GetFirewallRules(google.protobuf.Empty) returns (FirewallRuleList);
-
-  // Add firewall rule
   rpc AddFirewallRule(AddFirewallRuleRequest) returns (google.protobuf.Empty);
-
-  // Remove firewall rule
   rpc RemoveFirewallRule(RemoveFirewallRuleRequest) returns (google.protobuf.Empty);
-
-  // ============================================================================
-  // DNS/NTP Configuration
-  // ============================================================================
-
-  // Get DNS configuration
   rpc GetDNSConfig(google.protobuf.Empty) returns (DNSConfig);
-
-  // Set DNS configuration
   rpc SetDNSConfig(SetDNSConfigRequest) returns (google.protobuf.Empty);
-
-  // Get NTP configuration
   rpc GetNTPConfig(google.protobuf.Empty) returns (NTPConfig);
-
-  // Set NTP configuration
   rpc SetNTPConfig(SetNTPConfigRequest) returns (google.protobuf.Empty);
-
-  // ============================================================================
-  // Cloud Management
-  // ============================================================================
-
-  // Get cloud adoption status
   rpc GetCloudStatus(google.protobuf.Empty) returns (CloudStatus);
-
-  // Adopt this node to a cloud director
   rpc AdoptToCloud(AdoptToCloudRequest) returns (google.protobuf.Empty);
-
-  // Disconnect from cloud director (standalone mode)
   rpc DisconnectFromCloud(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
-
-// ============================================================================
-// Host Information Messages
-// ============================================================================
 
 message HostInfo {
   string hostname = 1;
@@ -178,16 +104,12 @@ message ServiceStatusList {
 message ServiceStatus {
   string name = 1;
   string display_name = 2;
-  string status = 3;  // "running", "stopped", "error"
+  string status = 3;
   bool healthy = 4;
   string description = 5;
   google.protobuf.Timestamp last_started = 6;
   int32 pid = 7;
 }
-
-// ============================================================================
-// Network Configuration Messages
-// ============================================================================
 
 message NetworkConfig {
   string hostname = 1;
@@ -244,10 +166,6 @@ message NetworkTestResult {
   repeated string warnings = 5;
 }
 
-// ============================================================================
-// Storage Configuration Messages
-// ============================================================================
-
 message StorageConfig {
   repeated DatastoreInfo datastores = 1;
   repeated string local_disks = 2;
@@ -259,8 +177,8 @@ message StorageConfig {
 message DatastoreInfo {
   string id = 1;
   string name = 2;
-  string type = 3;  // "local", "nfs", "iscsi", "ceph"
-  string status = 4; // "mounted", "unmounted", "error"
+  string type = 3;
+  string status = 4;
   string mount_path = 5;
   string server = 6;
   string export_path = 7;
@@ -283,10 +201,6 @@ message UnmountNFSRequest {
   bool force = 2;
 }
 
-// ============================================================================
-// Maintenance Mode Messages
-// ============================================================================
-
 message SetMaintenanceModeRequest {
   bool enabled = 1;
   string reason = 2;
@@ -305,10 +219,6 @@ message RestartServiceRequest {
   bool force = 2;
 }
 
-// ============================================================================
-// Firewall Configuration Messages
-// ============================================================================
-
 message FirewallRuleList {
   repeated FirewallRule rules = 1;
 }
@@ -316,11 +226,11 @@ message FirewallRuleList {
 message FirewallRule {
   string id = 1;
   string name = 2;
-  string direction = 3;  // "in", "out"
-  string protocol = 4;   // "tcp", "udp", "icmp", "all"
-  string port = 5;       // "22", "80", "443", or "22,80,443"
-  string action = 6;     // "accept", "drop", "reject"
-  string source = 7;     // CIDR notation
+  string direction = 3;
+  string protocol = 4;
+  string port = 5;
+  string action = 6;
+  string source = 7;
   bool enabled = 8;
 }
 
@@ -336,10 +246,6 @@ message AddFirewallRuleRequest {
 message RemoveFirewallRuleRequest {
   string rule_id = 1;
 }
-
-// ============================================================================
-// DNS/NTP Configuration Messages
-// ============================================================================
 
 message DNSConfig {
   repeated string nameservers = 1;
@@ -369,10 +275,6 @@ message SetNTPConfigRequest {
   bool enabled = 2;
 }
 
-// ============================================================================
-// Cloud Management Messages
-// ============================================================================
-
 message CloudStatus {
   bool adopted = 1;
   string director_address = 2;
@@ -383,5 +285,5 @@ message CloudStatus {
 
 message AdoptToCloudRequest {
   string director_address = 1;
-  string director_token = 2;  // Optional token for authentication
+  string director_token = 2;
 }

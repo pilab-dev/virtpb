@@ -1,23 +1,11 @@
-// =============================================================================
-// Network Common - Shared Enums and Messages for Network Services
-// =============================================================================
-// Purpose: Common enums and messages used across all network services.
-//
-// This file provides shared definitions for:
-// - Protocol, Direction, NetworkType enums
-// - QoS, Security, Firewall enums
-// - RateLimit message
-// =============================================================================
+// Package network provides virtual networking services including networks,
+// ports, VLAN/VXLAN management, IPAM, QoS, security, DVS, and statistics.
 
 syntax = "proto3";
 
 package pilab.network.v2;
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
-
-// -----------------------------------------------------------------------------
-// Common Enums
-// -----------------------------------------------------------------------------
 
 enum Protocol {
   PROTOCOL_UNSPECIFIED = 0;
@@ -202,10 +190,6 @@ enum FlowDirection {
   FLOW_DIRECTION_EGRESS = 2;
   FLOW_DIRECTION_BIDIRECTIONAL = 3;
 }
-
-// -----------------------------------------------------------------------------
-// Common Messages
-// -----------------------------------------------------------------------------
 
 message RateLimit {
   int64 rate = 1;

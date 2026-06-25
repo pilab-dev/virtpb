@@ -1,288 +1,299 @@
+// Package agent provides host-level services for VM management, storage,
+// networking, snapshots, DCUI, and agent-director communication.
+
 syntax = "proto3";
 
 package pilab.cloud.agent.v1;
 
+import "pilab/agent/v1/stream.proto";
+
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1";
 
-import "pilab/agent/v1/agent_service.proto";
-import "pilab/agent/v1/error.proto";
-
-// ----------------------------------------------------------------------------
-// Network Service (OVS and Network Management)
-// ----------------------------------------------------------------------------
-
 service NetworkService {
-    // OVS Bridge Management
-    rpc OvsBridgeCreate(OvsBridgeCreateRequest) returns (OvsBridgeCreateResponse);
-    rpc OvsBridgeDelete(OvsBridgeDeleteRequest) returns (OvsBridgeDeleteResponse);
-    rpc OvsBridgeList(OvsBridgeListRequest) returns (OvsBridgeListResponse);
-    rpc OvsBridgeGet(OvsBridgeGetRequest) returns (OvsBridgeGetResponse);
-  
-    // OVS Port Management
-    rpc OvsPortCreate(OvsPortCreateRequest) returns (OvsPortCreateResponse);
-    rpc OvsPortDelete(OvsPortDeleteRequest) returns (OvsPortDeleteResponse);
-    rpc OvsPortList(OvsPortListRequest) returns (OvsPortListResponse);
-    rpc OvsPortGet(OvsPortGetRequest) returns (OvsPortGetResponse);
-    rpc OvsPortUpdate(OvsPortUpdateRequest) returns (OvsPortUpdateResponse);
-  
-    // OVS QoS Management
-    rpc OvsQosRuleCreate(OvsQosRuleCreateRequest) returns (OvsQosRuleCreateResponse);
-    rpc OvsQosRuleDelete(OvsQosRuleDeleteRequest) returns (OvsQosRuleDeleteResponse);
-    rpc OvsQosRuleList(OvsQosRuleListRequest) returns (OvsQosRuleListResponse);
-    rpc OvsQosRuleGet(OvsQosRuleGetRequest) returns (OvsQosRuleGetResponse);
-  
-    // Libvirt Network Management
-    rpc NetworkCreate(NetworkCreateRequest) returns (NetworkCreateResponse);
-    rpc NetworkDelete(NetworkDeleteRequest) returns (NetworkDeleteResponse);
-    rpc NetworkList(NetworkListRequest) returns (NetworkListResponse);
-    rpc NetworkGet(NetworkGetRequest) returns (NetworkGetResponse);
-    rpc NetworkStart(NetworkStartRequest) returns (NetworkStartResponse);
-    rpc NetworkStop(NetworkStopRequest) returns (NetworkStopResponse);
-    rpc NetworkUpdate(NetworkUpdateRequest) returns (NetworkUpdateResponse);
+  rpc OvsBridgeCreate(OvsBridgeCreateRequest) returns (OvsBridgeCreateResponse);
+  rpc OvsBridgeDelete(OvsBridgeDeleteRequest) returns (OvsBridgeDeleteResponse);
+  rpc OvsBridgeList(OvsBridgeListRequest) returns (OvsBridgeListResponse);
+  rpc OvsBridgeGet(OvsBridgeGetRequest) returns (OvsBridgeGetResponse);
+  rpc OvsPortCreate(OvsPortCreateRequest) returns (OvsPortCreateResponse);
+  rpc OvsPortDelete(OvsPortDeleteRequest) returns (OvsPortDeleteResponse);
+  rpc OvsPortList(OvsPortListRequest) returns (OvsPortListResponse);
+  rpc OvsPortGet(OvsPortGetRequest) returns (OvsPortGetResponse);
+  rpc OvsPortUpdate(OvsPortUpdateRequest) returns (OvsPortUpdateResponse);
+  rpc OvsQosRuleCreate(OvsQosRuleCreateRequest) returns (OvsQosRuleCreateResponse);
+  rpc OvsQosRuleDelete(OvsQosRuleDeleteRequest) returns (OvsQosRuleDeleteResponse);
+  rpc OvsQosRuleList(OvsQosRuleListRequest) returns (OvsQosRuleListResponse);
+  rpc OvsQosRuleGet(OvsQosRuleGetRequest) returns (OvsQosRuleGetResponse);
+  rpc NetworkCreate(NetworkCreateRequest) returns (NetworkCreateResponse);
+  rpc NetworkDelete(NetworkDeleteRequest) returns (NetworkDeleteResponse);
+  rpc NetworkList(NetworkListRequest) returns (NetworkListResponse);
+  rpc NetworkGet(NetworkGetRequest) returns (NetworkGetResponse);
+  rpc NetworkStart(NetworkStartRequest) returns (NetworkStartResponse);
+  rpc NetworkStop(NetworkStopRequest) returns (NetworkStopResponse);
+  rpc NetworkUpdate(NetworkUpdateRequest) returns (NetworkUpdateResponse);
+  rpc OvsFlowPush(OvsFlowPushRequest) returns (OvsFlowPushResponse);
+  rpc OvsFlowSync(OvsFlowSyncRequest) returns (OvsFlowSyncResponse);
+}
 
-    // Flow Management
-    rpc OvsFlowPush(OvsFlowPushRequest) returns (OvsFlowPushResponse);
-    rpc OvsFlowSync(OvsFlowSyncRequest) returns (OvsFlowSyncResponse);
-  }
-  
-  // OVS Bridge Messages
-  message OvsBridge {
-    string name = 1;
-    // Add other relevant bridge details
-  }
-  
-  message OvsBridgeCreateRequest {
-    string name = 1;
-    // Optional: Other bridge configuration options
-  }
-  message OvsBridgeCreateResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-    optional OvsBridge bridge = 3;
-  }
-  message OvsBridgeDeleteRequest {
-    string name = 1;
-  }
-  message OvsBridgeDeleteResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-  }
-  message OvsBridgeListRequest {}
-  message OvsBridgeListResponse {
-    repeated OvsBridge bridges = 1;
-  }
-  message OvsBridgeGetRequest {
-    string name = 1;
-  }
-  message OvsBridgeGetResponse {
-    optional OvsBridge bridge = 1;
-    optional ErrorResponse error = 2;
-  }
-  
-  // OVS Port Messages
-  message OvsPort {
-    string name = 1;
-    string bridge_name = 2;
-    // VM interface association (how to represent this is key)
-    optional string interface_name = 3; // Could be the name of the VM's NIC
-    // Other port details like VLAN tags, etc.
-    repeated string vlan_tags = 4;
-  }
-  
-  message OvsPortCreateRequest {
-    string bridge_name = 1;
-    string name = 2;
-    optional string interface_name = 3;
-    repeated string vlan_tags = 4;
-    // Add other port-specific options
-  }
-  message OvsPortCreateResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-    optional OvsPort port = 3;
-  }
-  message OvsPortDeleteRequest {
-    string name = 1;
-  }
-  message OvsPortDeleteResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-  }
-  message OvsPortListRequest {
-    optional string bridge_name = 1; // List ports for a specific bridge
-  }
-  message OvsPortListResponse {
-    repeated OvsPort ports = 1;
-  }
-  message OvsPortGetRequest {
-    string name = 1;
-  }
-  message OvsPortGetResponse {
-    optional OvsPort port = 1;
-    optional ErrorResponse error = 2;
-  }
-  message OvsPortUpdateRequest {
-    string name = 1;
-    repeated string vlan_tags = 2; // Example of an update
-    // Add other fields to update
-  }
-  message OvsPortUpdateResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-    optional OvsPort port = 3;
-  }
-  
-  // OVS QoS Rule Messages
-  message OvsQosRule {
-    string id = 1; // Unique ID for the rule
-    string port_name = 2;
-    string direction = 3; // "ingress" or "egress"
-    uint64 max_rate = 4; // bits per second
-    uint64 min_rate = 5;
-    uint64 burst = 6; // burst rate in bits per second
-    uint64 burst_ceiling = 7; // burst ceiling
-    int32 priority = 8;
-    optional uint64 peak_rate = 9; // peak rate for token bucket
-  }
-  
-  message OvsQosRuleCreateRequest {
-    string port_name = 1;
-    string direction = 2;
-    uint64 max_rate = 3;
-    uint64 min_rate = 4;
-    uint64 burst = 5;
-    int32 priority = 6;
-    optional uint64 peak_rate = 7;
-  }
-  message OvsQosRuleCreateResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-    optional OvsQosRule rule = 3;
-  }
-  message OvsQosRuleDeleteRequest {
-    string id = 1;
-  }
-  message OvsQosRuleDeleteResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-  }
-  message OvsQosRuleListRequest {
-    optional string port_name = 1; // List rules for a specific port
-  }
-  message OvsQosRuleListResponse {
-    repeated OvsQosRule rules = 1;
-  }
-  message OvsQosRuleGetRequest {
-    string id = 1;
-  }
-  message OvsQosRuleGetResponse {
-    optional OvsQosRule rule = 1;
-    optional ErrorResponse error = 2;
-  }
-  
-  // Libvirt Network Messages
-  message Network {
-    string name = 1;
-    string uuid = 2;
-    string forward_mode = 3; // e.g., "nat", "bridge", "isolated", "passthrough"
-    optional string bridge_name = 4;
-    optional string ip_address = 5;
-    optional string netmask = 6;
-    optional string dhcp_start = 7;
-    optional string dhcp_end = 8;
-    bool persistent = 9; // Whether the network persists across reboots
-    bool autostart = 10; // Whether the network starts automatically
-    string status = 11; // "active", "inactive", "persistent"
-  }
-  
-  message NetworkCreateRequest {
-    string name = 1;
-    string forward_mode = 2; // e.g., "nat", "bridge", "isolated", "passthrough"
-    optional string bridge_name = 3; // For bridged networks
-    optional string ip_address = 4; // e.g., "192.168.100.1"
-    optional string netmask = 5; // e.g., "255.255.255.0"
-    optional string dhcp_start = 6;
-    optional string dhcp_end = 7;
-    bool persistent = 8;
-    bool autostart = 9;
-    int32 mtu = 10;
-  }
-  message NetworkCreateResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-    optional Network network = 3;
-  }
-  message NetworkDeleteRequest {
-    string name = 1;
-    bool force = 2; // Force delete even if VMs are attached
-  }
-  message NetworkDeleteResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-  }
-  message NetworkListRequest {
-    optional bool active_only = 1; // List only active networks
-    optional bool persistent_only = 2; // List only persistent networks
-  }
-  message NetworkListResponse {
-    repeated Network networks = 1;
-  }
-  message NetworkGetRequest {
-    string name = 1;
-  }
-  message NetworkGetResponse {
-    optional Network network = 1;
-    optional ErrorResponse error = 2;
-  }
+message OvsBridge {
+  string name = 1;
+}
 
-  // Additional network operations for director management
-  message NetworkStartRequest {
-    string name = 1;
-  }
-  message NetworkStartResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-  }
-  
-  message NetworkStopRequest {
-    string name = 1;
-  }
-  message NetworkStopResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-  }
+message OvsBridgeCreateRequest {
+  string name = 1;
+}
 
-  message NetworkUpdateRequest {
-    string name = 1;
-    optional string forward_mode = 2;
-    optional bool autostart = 3;
-    optional string dhcp_start = 4;
-    optional string dhcp_end = 5;
-  }
-  message NetworkUpdateResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-    optional Network network = 3;
-  }
+message OvsBridgeCreateResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+  optional OvsBridge bridge = 3;
+}
 
-  // Flow Push Messages
-  message OvsFlowPushRequest {
-    string bridge_name = 1;
-    repeated string flows = 2;  // OpenFlow matching rules
-  }
-  message OvsFlowPushResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-    int32 flows_installed = 3;
-  }
+message OvsBridgeDeleteRequest {
+  string name = 1;
+}
 
-  message OvsFlowSyncRequest {
-    string bridge_name = 1;
-    repeated string flows = 2;  // Complete flow set to sync
-  }
-  message OvsFlowSyncResponse {
-    bool success = 1;
-    optional ErrorResponse error = 2;
-    int32 flows_count = 3;
-  }
-  
+message OvsBridgeDeleteResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+}
+
+message OvsBridgeListRequest {}
+
+message OvsBridgeListResponse {
+  repeated OvsBridge bridges = 1;
+}
+
+message OvsBridgeGetRequest {
+  string name = 1;
+}
+
+message OvsBridgeGetResponse {
+  optional OvsBridge bridge = 1;
+  optional ErrorResponse error = 2;
+}
+
+message OvsPort {
+  string name = 1;
+  string bridge_name = 2;
+  optional string interface_name = 3;
+  repeated string vlan_tags = 4;
+}
+
+message OvsPortCreateRequest {
+  string bridge_name = 1;
+  string name = 2;
+  optional string interface_name = 3;
+  repeated string vlan_tags = 4;
+}
+
+message OvsPortCreateResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+  optional OvsPort port = 3;
+}
+
+message OvsPortDeleteRequest {
+  string name = 1;
+}
+
+message OvsPortDeleteResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+}
+
+message OvsPortListRequest {
+  optional string bridge_name = 1;
+}
+
+message OvsPortListResponse {
+  repeated OvsPort ports = 1;
+}
+
+message OvsPortGetRequest {
+  string name = 1;
+}
+
+message OvsPortGetResponse {
+  optional OvsPort port = 1;
+  optional ErrorResponse error = 2;
+}
+
+message OvsPortUpdateRequest {
+  string name = 1;
+  repeated string vlan_tags = 2;
+}
+
+message OvsPortUpdateResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+  optional OvsPort port = 3;
+}
+
+message OvsQosRule {
+  string id = 1;
+  string port_name = 2;
+  string direction = 3;
+  uint64 max_rate = 4;
+  uint64 min_rate = 5;
+  uint64 burst = 6;
+  uint64 burst_ceiling = 7;
+  int32 priority = 8;
+  optional uint64 peak_rate = 9;
+}
+
+message OvsQosRuleCreateRequest {
+  string port_name = 1;
+  string direction = 2;
+  uint64 max_rate = 3;
+  uint64 min_rate = 4;
+  uint64 burst = 5;
+  int32 priority = 6;
+  optional uint64 peak_rate = 7;
+}
+
+message OvsQosRuleCreateResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+  optional OvsQosRule rule = 3;
+}
+
+message OvsQosRuleDeleteRequest {
+  string id = 1;
+}
+
+message OvsQosRuleDeleteResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+}
+
+message OvsQosRuleListRequest {
+  optional string port_name = 1;
+}
+
+message OvsQosRuleListResponse {
+  repeated OvsQosRule rules = 1;
+}
+
+message OvsQosRuleGetRequest {
+  string id = 1;
+}
+
+message OvsQosRuleGetResponse {
+  optional OvsQosRule rule = 1;
+  optional ErrorResponse error = 2;
+}
+
+message Network {
+  string name = 1;
+  string uuid = 2;
+  string forward_mode = 3;
+  optional string bridge_name = 4;
+  optional string ip_address = 5;
+  optional string netmask = 6;
+  optional string dhcp_start = 7;
+  optional string dhcp_end = 8;
+  bool persistent = 9;
+  bool autostart = 10;
+  string status = 11;
+}
+
+message NetworkCreateRequest {
+  string name = 1;
+  string forward_mode = 2;
+  optional string bridge_name = 3;
+  optional string ip_address = 4;
+  optional string netmask = 5;
+  optional string dhcp_start = 6;
+  optional string dhcp_end = 7;
+  bool persistent = 8;
+  bool autostart = 9;
+  int32 mtu = 10;
+}
+
+message NetworkCreateResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+  optional Network network = 3;
+}
+
+message NetworkDeleteRequest {
+  string name = 1;
+  bool force = 2;
+}
+
+message NetworkDeleteResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+}
+
+message NetworkListRequest {
+  optional bool active_only = 1;
+  optional bool persistent_only = 2;
+}
+
+message NetworkListResponse {
+  repeated Network networks = 1;
+}
+
+message NetworkGetRequest {
+  string name = 1;
+}
+
+message NetworkGetResponse {
+  optional Network network = 1;
+  optional ErrorResponse error = 2;
+}
+
+message NetworkStartRequest {
+  string name = 1;
+}
+
+message NetworkStartResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+}
+
+message NetworkStopRequest {
+  string name = 1;
+}
+
+message NetworkStopResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+}
+
+message NetworkUpdateRequest {
+  string name = 1;
+  optional string forward_mode = 2;
+  optional bool autostart = 3;
+  optional string dhcp_start = 4;
+  optional string dhcp_end = 5;
+}
+
+message NetworkUpdateResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+  optional Network network = 3;
+}
+
+message OvsFlowPushRequest {
+  string bridge_name = 1;
+  repeated string flows = 2;
+}
+
+message OvsFlowPushResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+  int32 flows_installed = 3;
+}
+
+message OvsFlowSyncRequest {
+  string bridge_name = 1;
+  repeated string flows = 2;
+}
+
+message OvsFlowSyncResponse {
+  bool success = 1;
+  optional ErrorResponse error = 2;
+  int32 flows_count = 3;
+}

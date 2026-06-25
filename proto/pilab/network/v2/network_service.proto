@@ -1,16 +1,5 @@
-// =============================================================================
-// Network Service - Virtual Network, Port, VLAN, VXLAN Management
-// =============================================================================
-// Purpose: Manage virtual networks, ports, VLAN ranges, VXLAN
-// virtual clouds, and VNI endpoints.
-//
-// Services:
-// - Network CRUD (VirtualNetwork)
-// - Port CRUD (VirtualPort)
-// - VLAN Range management and allocation
-// - Virtual Cloud (VXLAN) management
-// - VNI Endpoint management
-// =============================================================================
+// Package network provides virtual networking services including networks,
+// ports, VLAN/VXLAN management, IPAM, QoS, security, DVS, and statistics.
 
 syntax = "proto3";
 
@@ -23,11 +12,9 @@ import "pilab/network/v2/network_common.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
 
-// -----------------------------------------------------------------------------
-// Network Service
-// -----------------------------------------------------------------------------
-
+// NetworkService manages virtual networks, ports, VLANs, and virtual clouds.
 service NetworkService {
+  // Network operations
   rpc CreateNetwork(CreateNetworkRequest) returns (VirtualNetwork);
   rpc GetNetwork(GetNetworkRequest) returns (VirtualNetwork);
   rpc ListNetworks(ListNetworksRequest) returns (ListNetworksResponse);
@@ -36,6 +23,7 @@ service NetworkService {
   rpc AttachHosts(AttachHostsRequest) returns (google.protobuf.Empty);
   rpc DetachHosts(DetachHostsRequest) returns (google.protobuf.Empty);
 
+  // Port operations
   rpc CreatePort(CreatePortRequest) returns (VirtualPort);
   rpc GetPort(GetPortRequest) returns (VirtualPort);
   rpc ListPorts(ListPortsRequest) returns (ListPortsResponse);
@@ -44,11 +32,13 @@ service NetworkService {
   rpc AttachPort(AttachPortRequest) returns (google.protobuf.Empty);
   rpc DetachPort(DetachPortRequest) returns (google.protobuf.Empty);
 
+  // VLAN operations
   rpc CreateVLANRange(CreateVLANRangeRequest) returns (VLANRange);
   rpc ListVLANRanges(ListVLANRangesRequest) returns (ListVLANRangesResponse);
   rpc AllocateVLAN(AllocateVLANRequest) returns (VLANAllocation);
   rpc ReleaseVLAN(ReleaseVLANRequest) returns (google.protobuf.Empty);
 
+  // Virtual cloud (VXLAN) operations
   rpc CreateVirtualCloud(CreateVirtualCloudRequest) returns (VirtualCloud);
   rpc GetVirtualCloud(GetVirtualCloudRequest) returns (VirtualCloud);
   rpc ListVirtualClouds(ListVirtualCloudsRequest) returns (ListVirtualCloudsResponse);
@@ -60,10 +50,7 @@ service NetworkService {
   rpc ReleaseVNI(ReleaseVNIRequest) returns (google.protobuf.Empty);
 }
 
-// -----------------------------------------------------------------------------
-// Virtual Network Messages
-// -----------------------------------------------------------------------------
-
+// VirtualNetwork represents a virtual network with its configuration.
 message VirtualNetwork {
   string id = 1;
   string name = 2;
@@ -91,6 +78,7 @@ message VirtualNetwork {
   repeated string uplinks = 24;
 }
 
+// VirtualPort represents a port on a virtual network.
 message VirtualPort {
   string id = 1;
   string name = 2;
@@ -111,6 +99,7 @@ message VirtualPort {
   google.protobuf.Timestamp updated_at = 17;
 }
 
+// VLANRange defines a range of VLAN IDs for allocation.
 message VLANRange {
   string id = 1;
   string tenant_id = 2;
@@ -122,6 +111,7 @@ message VLANRange {
   google.protobuf.Timestamp created_at = 8;
 }
 
+// VLANAllocation represents a VLAN ID allocated to a network.
 message VLANAllocation {
   uint32 vlan_id = 1;
   string range_id = 2;
@@ -130,6 +120,7 @@ message VLANAllocation {
   google.protobuf.Timestamp allocated_at = 5;
 }
 
+// VirtualCloud represents a VXLAN virtual cloud.
 message VirtualCloud {
   string id = 1;
   string name = 2;
@@ -151,6 +142,7 @@ message VirtualCloud {
   google.protobuf.Timestamp updated_at = 18;
 }
 
+// VNIEndpoint represents a VNI endpoint on a host.
 message VNIEndpoint {
   string host_id = 1;
   string ip_address = 2;
@@ -160,6 +152,7 @@ message VNIEndpoint {
   int64 version = 6;
 }
 
+// VNIAllocation represents a VNI allocated to a virtual cloud.
 message VNIAllocation {
   uint32 vni = 1;
   string tenant_id = 2;
@@ -167,10 +160,7 @@ message VNIAllocation {
   google.protobuf.Timestamp allocated_at = 4;
 }
 
-// -----------------------------------------------------------------------------
-// Request/Response Messages
-// -----------------------------------------------------------------------------
-
+// CreateNetworkRequest contains parameters for creating a network.
 message CreateNetworkRequest {
   string name = 1;
   string tenant_id = 2;
@@ -189,7 +179,9 @@ message CreateNetworkRequest {
   map<string, string> metadata = 15;
 }
 
-message GetNetworkRequest { string network_id = 1; }
+message GetNetworkRequest {
+  string network_id = 1;
+}
 
 message ListNetworksRequest {
   string tenant_id = 1;
@@ -244,7 +236,9 @@ message CreatePortRequest {
   map<string, string> metadata = 10;
 }
 
-message GetPortRequest { string port_id = 1; }
+message GetPortRequest {
+  string port_id = 1;
+}
 
 message ListPortsRequest {
   string tenant_id = 1;
@@ -280,7 +274,9 @@ message AttachPortRequest {
   int32 interface_index = 3;
 }
 
-message DetachPortRequest { string port_id = 1; }
+message DetachPortRequest {
+  string port_id = 1;
+}
 
 message CreateVLANRangeRequest {
   string tenant_id = 1;
@@ -290,9 +286,13 @@ message CreateVLANRangeRequest {
   string description = 5;
 }
 
-message ListVLANRangesRequest { string tenant_id = 1; }
+message ListVLANRangesRequest {
+  string tenant_id = 1;
+}
 
-message ListVLANRangesResponse { repeated VLANRange ranges = 1; }
+message ListVLANRangesResponse {
+  repeated VLANRange ranges = 1;
+}
 
 message AllocateVLANRequest {
   string tenant_id = 1;
@@ -300,7 +300,9 @@ message AllocateVLANRequest {
   google.protobuf.StringValue range_id = 3;
 }
 
-message ReleaseVLANRequest { uint32 vlan_id = 1; }
+message ReleaseVLANRequest {
+  uint32 vlan_id = 1;
+}
 
 message CreateVirtualCloudRequest {
   string name = 1;
@@ -318,7 +320,9 @@ message CreateVirtualCloudRequest {
   map<string, string> metadata = 13;
 }
 
-message GetVirtualCloudRequest { string virtual_cloud_id = 1; }
+message GetVirtualCloudRequest {
+  string virtual_cloud_id = 1;
+}
 
 message ListVirtualCloudsRequest {
   string tenant_id = 1;
@@ -366,4 +370,6 @@ message AllocateVNIRequest {
   string virtual_cloud_id = 2;
 }
 
-message ReleaseVNIRequest { uint32 vni = 1; }
+message ReleaseVNIRequest {
+  uint32 vni = 1;
+}
