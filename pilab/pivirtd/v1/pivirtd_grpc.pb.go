@@ -57,6 +57,8 @@ const (
 	PivirtdService_ListOVSPorts_FullMethodName       = "/pilab.virtualization.v1.PivirtdService/ListOVSPorts"
 	PivirtdService_SubscribeEvents_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
 	PivirtdService_GetHostResource_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/GetHostResource"
+	PivirtdService_CreateNetwork_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/CreateNetwork"
+	PivirtdService_AttachVMToNetwork_FullMethodName  = "/pilab.virtualization.v1.PivirtdService/AttachVMToNetwork"
 )
 
 // PivirtdServiceClient is the client API for PivirtdService service.
@@ -98,6 +100,8 @@ type PivirtdServiceClient interface {
 	ListOVSPorts(ctx context.Context, in *ListOVSPortsRequest, opts ...grpc.CallOption) (*ListOVSPortsResponse, error)
 	SubscribeEvents(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HostEvent], error)
 	GetHostResource(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (*HostResourceReport, error)
+	CreateNetwork(ctx context.Context, in *CreateNetworkRequest, opts ...grpc.CallOption) (*CreateNetworkResponse, error)
+	AttachVMToNetwork(ctx context.Context, in *AttachVMToNetworkRequest, opts ...grpc.CallOption) (*AttachVMToNetworkResponse, error)
 }
 
 type pivirtdServiceClient struct {
@@ -476,6 +480,26 @@ func (c *pivirtdServiceClient) GetHostResource(ctx context.Context, in *Subscrib
 	return out, nil
 }
 
+func (c *pivirtdServiceClient) CreateNetwork(ctx context.Context, in *CreateNetworkRequest, opts ...grpc.CallOption) (*CreateNetworkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateNetworkResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_CreateNetwork_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) AttachVMToNetwork(ctx context.Context, in *AttachVMToNetworkRequest, opts ...grpc.CallOption) (*AttachVMToNetworkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AttachVMToNetworkResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_AttachVMToNetwork_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PivirtdServiceServer is the server API for PivirtdService service.
 // All implementations must embed UnimplementedPivirtdServiceServer
 // for forward compatibility.
@@ -515,6 +539,8 @@ type PivirtdServiceServer interface {
 	ListOVSPorts(context.Context, *ListOVSPortsRequest) (*ListOVSPortsResponse, error)
 	SubscribeEvents(*SubscribeEventsRequest, grpc.ServerStreamingServer[HostEvent]) error
 	GetHostResource(context.Context, *SubscribeEventsRequest) (*HostResourceReport, error)
+	CreateNetwork(context.Context, *CreateNetworkRequest) (*CreateNetworkResponse, error)
+	AttachVMToNetwork(context.Context, *AttachVMToNetworkRequest) (*AttachVMToNetworkResponse, error)
 	mustEmbedUnimplementedPivirtdServiceServer()
 }
 
@@ -629,6 +655,12 @@ func (UnimplementedPivirtdServiceServer) SubscribeEvents(*SubscribeEventsRequest
 }
 func (UnimplementedPivirtdServiceServer) GetHostResource(context.Context, *SubscribeEventsRequest) (*HostResourceReport, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetHostResource not implemented")
+}
+func (UnimplementedPivirtdServiceServer) CreateNetwork(context.Context, *CreateNetworkRequest) (*CreateNetworkResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateNetwork not implemented")
+}
+func (UnimplementedPivirtdServiceServer) AttachVMToNetwork(context.Context, *AttachVMToNetworkRequest) (*AttachVMToNetworkResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AttachVMToNetwork not implemented")
 }
 func (UnimplementedPivirtdServiceServer) mustEmbedUnimplementedPivirtdServiceServer() {}
 func (UnimplementedPivirtdServiceServer) testEmbeddedByValue()                        {}
@@ -1267,6 +1299,42 @@ func _PivirtdService_GetHostResource_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PivirtdService_CreateNetwork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateNetworkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).CreateNetwork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_CreateNetwork_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).CreateNetwork(ctx, req.(*CreateNetworkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_AttachVMToNetwork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AttachVMToNetworkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).AttachVMToNetwork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_AttachVMToNetwork_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).AttachVMToNetwork(ctx, req.(*AttachVMToNetworkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PivirtdService_ServiceDesc is the grpc.ServiceDesc for PivirtdService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1405,6 +1473,14 @@ var PivirtdService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetHostResource",
 			Handler:    _PivirtdService_GetHostResource_Handler,
+		},
+		{
+			MethodName: "CreateNetwork",
+			Handler:    _PivirtdService_CreateNetwork_Handler,
+		},
+		{
+			MethodName: "AttachVMToNetwork",
+			Handler:    _PivirtdService_AttachVMToNetwork_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

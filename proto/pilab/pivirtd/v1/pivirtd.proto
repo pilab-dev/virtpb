@@ -45,6 +45,8 @@ service PivirtdService {
   rpc ListOVSPorts(ListOVSPortsRequest) returns (ListOVSPortsResponse);
   rpc SubscribeEvents(SubscribeEventsRequest) returns (stream HostEvent);
   rpc GetHostResource(SubscribeEventsRequest) returns (HostResourceReport);
+  rpc CreateNetwork(CreateNetworkRequest) returns (CreateNetworkResponse);
+  rpc AttachVMToNetwork(AttachVMToNetworkRequest) returns (AttachVMToNetworkResponse);
 }
 
 message CreateVMRequest {
@@ -471,6 +473,43 @@ message OVSPort {
   string bridge = 2;
   int32 vlan_tag = 3;
   repeated int32 trunks = 4;
+}
+
+message CreateNetworkRequest {
+  string name = 1;
+  string subnet_cidr = 2;
+  string gateway = 3;
+  string dhcp_range_start = 4;
+  string dhcp_range_end = 5;
+  string dns_server = 6;
+  int32 vlan_id = 7;
+}
+
+message CreateNetworkResponse {
+  NetworkInfo network = 1;
+  string error = 2;
+}
+
+message NetworkInfo {
+  string name = 1;
+  string bridge_name = 2;
+  string subnet = 3;
+  string gateway = 4;
+  string dhcp_range = 5;
+  string dns_server = 6;
+  int32 vlan_id = 7;
+}
+
+message AttachVMToNetworkRequest {
+  string vm_name = 1;
+  string network_name = 2;
+  string static_ip = 3;
+}
+
+message AttachVMToNetworkResponse {
+  bool success = 1;
+  NetworkInfo network_info = 2;
+  string error = 3;
 }
 
 message EFIConfig {
