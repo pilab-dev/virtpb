@@ -120,6 +120,15 @@ message TPM {
   string device = 3;
 }
 
+// KernelBoot configures direct-kernel boot for a VM.
+// When set, QEMU boots the VM using -kernel, -initrd, and -append instead of
+// booting from a disk image or firmware.
+message KernelBoot {
+  string kernel = 1;   // Path to kernel image (vmlinuz)
+  string initrd = 2;   // Path to initrd image
+  string cmdline = 3;  // Kernel command-line arguments
+}
+
 message USBController {
   string model = 1;
   bool host_device_passthrough = 2;
@@ -155,6 +164,7 @@ message VirtualMachine {
   repeated VMNetworkInterface network_interfaces = 8;
   repeated USBController usb_controllers = 9;
   repeated USBDevice usb_devices = 10;
+  KernelBoot kernel_boot = 11;
 }
 
 message CreateVMRequest {
