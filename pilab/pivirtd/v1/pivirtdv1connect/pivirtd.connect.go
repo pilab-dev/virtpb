@@ -132,6 +132,12 @@ const (
 	// PivirtdServiceGetHostResourceProcedure is the fully-qualified name of the PivirtdService's
 	// GetHostResource RPC.
 	PivirtdServiceGetHostResourceProcedure = "/pilab.virtualization.v1.PivirtdService/GetHostResource"
+	// PivirtdServiceCreateNetworkProcedure is the fully-qualified name of the PivirtdService's
+	// CreateNetwork RPC.
+	PivirtdServiceCreateNetworkProcedure = "/pilab.virtualization.v1.PivirtdService/CreateNetwork"
+	// PivirtdServiceAttachVMToNetworkProcedure is the fully-qualified name of the PivirtdService's
+	// AttachVMToNetwork RPC.
+	PivirtdServiceAttachVMToNetworkProcedure = "/pilab.virtualization.v1.PivirtdService/AttachVMToNetwork"
 )
 
 // PivirtdServiceClient is a client for the pilab.virtualization.v1.PivirtdService service.
@@ -171,6 +177,8 @@ type PivirtdServiceClient interface {
 	ListOVSPorts(context.Context, *connect.Request[v1.ListOVSPortsRequest]) (*connect.Response[v1.ListOVSPortsResponse], error)
 	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.ServerStreamForClient[v1.HostEvent], error)
 	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
+	CreateNetwork(context.Context, *connect.Request[v1.CreateNetworkRequest]) (*connect.Response[v1.CreateNetworkResponse], error)
+	AttachVMToNetwork(context.Context, *connect.Request[v1.AttachVMToNetworkRequest]) (*connect.Response[v1.AttachVMToNetworkResponse], error)
 }
 
 // NewPivirtdServiceClient constructs a client for the pilab.virtualization.v1.PivirtdService
@@ -394,6 +402,18 @@ func NewPivirtdServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(pivirtdServiceMethods.ByName("GetHostResource")),
 			connect.WithClientOptions(opts...),
 		),
+		createNetwork: connect.NewClient[v1.CreateNetworkRequest, v1.CreateNetworkResponse](
+			httpClient,
+			baseURL+PivirtdServiceCreateNetworkProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("CreateNetwork")),
+			connect.WithClientOptions(opts...),
+		),
+		attachVMToNetwork: connect.NewClient[v1.AttachVMToNetworkRequest, v1.AttachVMToNetworkResponse](
+			httpClient,
+			baseURL+PivirtdServiceAttachVMToNetworkProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("AttachVMToNetwork")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -434,6 +454,8 @@ type pivirtdServiceClient struct {
 	listOVSPorts       *connect.Client[v1.ListOVSPortsRequest, v1.ListOVSPortsResponse]
 	subscribeEvents    *connect.Client[v1.SubscribeEventsRequest, v1.HostEvent]
 	getHostResource    *connect.Client[v1.SubscribeEventsRequest, v1.HostResourceReport]
+	createNetwork      *connect.Client[v1.CreateNetworkRequest, v1.CreateNetworkResponse]
+	attachVMToNetwork  *connect.Client[v1.AttachVMToNetworkRequest, v1.AttachVMToNetworkResponse]
 }
 
 // CreateVM calls pilab.virtualization.v1.PivirtdService.CreateVM.
@@ -611,6 +633,16 @@ func (c *pivirtdServiceClient) GetHostResource(ctx context.Context, req *connect
 	return c.getHostResource.CallUnary(ctx, req)
 }
 
+// CreateNetwork calls pilab.virtualization.v1.PivirtdService.CreateNetwork.
+func (c *pivirtdServiceClient) CreateNetwork(ctx context.Context, req *connect.Request[v1.CreateNetworkRequest]) (*connect.Response[v1.CreateNetworkResponse], error) {
+	return c.createNetwork.CallUnary(ctx, req)
+}
+
+// AttachVMToNetwork calls pilab.virtualization.v1.PivirtdService.AttachVMToNetwork.
+func (c *pivirtdServiceClient) AttachVMToNetwork(ctx context.Context, req *connect.Request[v1.AttachVMToNetworkRequest]) (*connect.Response[v1.AttachVMToNetworkResponse], error) {
+	return c.attachVMToNetwork.CallUnary(ctx, req)
+}
+
 // PivirtdServiceHandler is an implementation of the pilab.virtualization.v1.PivirtdService service.
 type PivirtdServiceHandler interface {
 	CreateVM(context.Context, *connect.Request[v1.CreateVMRequest]) (*connect.Response[v1.VMResponse], error)
@@ -648,6 +680,8 @@ type PivirtdServiceHandler interface {
 	ListOVSPorts(context.Context, *connect.Request[v1.ListOVSPortsRequest]) (*connect.Response[v1.ListOVSPortsResponse], error)
 	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest], *connect.ServerStream[v1.HostEvent]) error
 	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
+	CreateNetwork(context.Context, *connect.Request[v1.CreateNetworkRequest]) (*connect.Response[v1.CreateNetworkResponse], error)
+	AttachVMToNetwork(context.Context, *connect.Request[v1.AttachVMToNetworkRequest]) (*connect.Response[v1.AttachVMToNetworkResponse], error)
 }
 
 // NewPivirtdServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -867,6 +901,18 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 		connect.WithSchema(pivirtdServiceMethods.ByName("GetHostResource")),
 		connect.WithHandlerOptions(opts...),
 	)
+	pivirtdServiceCreateNetworkHandler := connect.NewUnaryHandler(
+		PivirtdServiceCreateNetworkProcedure,
+		svc.CreateNetwork,
+		connect.WithSchema(pivirtdServiceMethods.ByName("CreateNetwork")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceAttachVMToNetworkHandler := connect.NewUnaryHandler(
+		PivirtdServiceAttachVMToNetworkProcedure,
+		svc.AttachVMToNetwork,
+		connect.WithSchema(pivirtdServiceMethods.ByName("AttachVMToNetwork")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/pilab.virtualization.v1.PivirtdService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case PivirtdServiceCreateVMProcedure:
@@ -939,6 +985,10 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 			pivirtdServiceSubscribeEventsHandler.ServeHTTP(w, r)
 		case PivirtdServiceGetHostResourceProcedure:
 			pivirtdServiceGetHostResourceHandler.ServeHTTP(w, r)
+		case PivirtdServiceCreateNetworkProcedure:
+			pivirtdServiceCreateNetworkHandler.ServeHTTP(w, r)
+		case PivirtdServiceAttachVMToNetworkProcedure:
+			pivirtdServiceAttachVMToNetworkHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1086,4 +1136,12 @@ func (UnimplementedPivirtdServiceHandler) SubscribeEvents(context.Context, *conn
 
 func (UnimplementedPivirtdServiceHandler) GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GetHostResource is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) CreateNetwork(context.Context, *connect.Request[v1.CreateNetworkRequest]) (*connect.Response[v1.CreateNetworkResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.CreateNetwork is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) AttachVMToNetwork(context.Context, *connect.Request[v1.AttachVMToNetworkRequest]) (*connect.Response[v1.AttachVMToNetworkResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.AttachVMToNetwork is not implemented"))
 }
