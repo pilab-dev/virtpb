@@ -568,3 +568,40 @@ message ResourceSpec {
   int64 memory_reservation_bytes = 2;
   int64 cpu_shares = 3;
 }
+
+// ==================== Production Network Messages ====================
+
+message CreateNetworkRequest {
+  string name = 1;
+  string subnet_cidr = 2;
+  string gateway = 3;
+  string dhcp_range_start = 4;
+  string dhcp_range_end = 5;
+  string dns_server = 6;
+  int32 vlan_id = 7;
+}
+
+message CreateNetworkResponse {
+  NetworkInfo network = 1;
+}
+
+message NetworkInfo {
+  string name = 1;
+  string bridge_name = 2;
+  string subnet = 3;
+  string gateway = 4;
+  string dhcp_range = 5;
+  string dns_server = 6;
+  int32 vlan_id = 7;
+}
+
+message AttachVMToNetworkRequest {
+  string vm_name = 1;
+  string network_name = 2;
+  string static_ip = 3;
+}
+
+message AttachVMToNetworkResponse {
+  bool success = 1;
+  NetworkInfo network_info = 2;
+}
