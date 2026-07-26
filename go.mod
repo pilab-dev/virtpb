@@ -2,7 +2,7 @@ module go.pilab.hu/cloud/virtpb
 
 go 1.25.0
 
-// This module is version v1.0.17
+// This module is version v1.0.18
 
 require (
 	connectrpc.com/connect v1.20.0
