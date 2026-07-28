@@ -1,6 +1,3 @@
-// Package pivirtd provides low-level VM lifecycle management on individual hosts.
-// This service replaces libvirtd with a cleaner, more modern API.
-
 syntax = "proto3";
 
 package pilab.virtualization.v1;
@@ -9,7 +6,9 @@ option go_package = "go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1";
 
 import "google/protobuf/timestamp.proto";
 
+// Main Pivirtd Service - Replacement for libvirtd
 service PivirtdService {
+  // VM Lifecycle Management
   rpc CreateVM(CreateVMRequest) returns (VMResponse);
   rpc StartVM(StartVMRequest) returns (VMResponse);
   rpc StopVM(StopVMRequest) returns (VMResponse);
@@ -17,58 +16,83 @@ service PivirtdService {
   rpc ResumeVM(ResumeVMRequest) returns (VMResponse);
   rpc RebootVM(RebootVMRequest) returns (VMResponse);
   rpc DeleteVM(DeleteVMRequest) returns (DeleteVMResponse);
+  
+  // VM Queries
   rpc ListVMs(ListVMsRequest) returns (ListVMsResponse);
   rpc GetVM(GetVMRequest) returns (VMResponse);
   rpc GetVMStats(GetVMStatsRequest) returns (VMStatsResponse);
+  rpc UpdateVMMemory(UpdateVMMemoryRequest) returns (VMResponse);
+  rpc UpdateVMCpu(UpdateVMCpuRequest) returns (VMResponse);
+  
+  // QMP Passthrough
   rpc ExecuteQMP(ExecuteQMPRequest) returns (ExecuteQMPResponse);
   rpc StreamQMPEvents(StreamQMPRequest) returns (stream QMPEvent);
+  
+  // Snapshot Management
   rpc CreateSnapshot(CreateSnapshotRequest) returns (SnapshotResponse);
   rpc ListSnapshots(ListSnapshotsRequest) returns (ListSnapshotsResponse);
   rpc RestoreSnapshot(RestoreSnapshotRequest) returns (SnapshotResponse);
   rpc DeleteSnapshot(DeleteSnapshotRequest) returns (DeleteSnapshotResponse);
+  
+  // Migration
   rpc MigrateVM(MigrateVMRequest) returns (MigrateVMResponse);
   rpc GetMigrationStatus(GetMigrationStatusRequest) returns (MigrationStatusResponse);
+  
+  // Storage Management
   rpc CreateStoragePool(CreateStoragePoolRequest) returns (StoragePoolResponse);
   rpc ListStoragePools(ListStoragePoolsRequest) returns (ListStoragePoolsResponse);
   rpc DeleteStoragePool(DeleteStoragePoolRequest) returns (DeleteStoragePoolResponse);
+  
+  // Network Management
   rpc CreateTAPDevice(CreateTAPDeviceRequest) returns (NetworkResponse);
   rpc DeleteTAPDevice(DeleteTAPDeviceRequest) returns (DeleteNetworkResponse);
   rpc ListTAPDevices(ListTAPDevicesRequest) returns (ListTAPDevicesResponse);
   rpc CreateBridge(CreateBridgeRequest) returns (NetworkResponse);
   rpc DeleteBridge(DeleteBridgeRequest) returns (DeleteNetworkResponse);
   rpc ListBridges(ListBridgesRequest) returns (ListBridgesResponse);
+
+  // OVS Networking
   rpc CreateOVSBridge(CreateOVSBridgeRequest) returns (NetworkResponse);
   rpc DeleteOVSBridge(DeleteOVSBridgeRequest) returns (DeleteNetworkResponse);
   rpc ListOVSBridges(ListOVSBridgesRequest) returns (ListOVSBridgesResponse);
   rpc AddOVSPort(AddOVSPortRequest) returns (NetworkResponse);
   rpc RemoveOVSPort(RemoveOVSPortRequest) returns (DeleteNetworkResponse);
   rpc ListOVSPorts(ListOVSPortsRequest) returns (ListOVSPortsResponse);
-  rpc SubscribeEvents(SubscribeEventsRequest) returns (stream HostEvent);
-  rpc GetHostResource(SubscribeEventsRequest) returns (HostResourceReport);
+
+  // VM Metadata Labels
+  rpc SetLabels(SetLabelsRequest) returns (SetLabelsResponse);
+  rpc GetLabels(GetLabelsRequest) returns (GetLabelsResponse);
+
+  // VM Provisioning
+  rpc SetProvisioning(SetProvisioningRequest) returns (SetProvisioningResponse);
+
+  // VM Status
+  rpc GetVMStatus(GetVMStatusRequest) returns (GetVMStatusResponse);
 }
+
+// ==================== VM Messages ====================
 
 message CreateVMRequest {
   string name = 1;
   int32 memory_mb = 2;
   int32 vcpus = 3;
-  string machine = 4;
+  string machine = 4;  // e.g., "q35", "pc", "virt"
   CPUConfig cpu = 5;
   repeated DiskConfig disks = 6;
   repeated NetworkConfig networks = 7;
   GraphicsConfig graphics = 8;
   bool autostart = 9;
-  string cloud_image = 10;
-  string disk_path = 11;
-  string user_data = 12;
-  string meta_data = 13;
-  string ssh_key = 14;
-  string firmware = 15;
-  EFIConfig efi = 16;
+  string cloud_image = 10;  // Path to disk image to use
+  string disk_path = 11;    // Target path in VM folder
+  string user_data = 12;     // Cloud-init user-data (YAML/cloud-config)
+  string meta_data = 13;     // Cloud-init meta-data
+  string ssh_key = 14;      // SSH public key for cloud-init
+  string firmware = 15;      // "bios" | "uefi" (default: "uefi")
+  EFIConfig efi = 16;        // UEFI configuration
   int32 max_memory_mb = 17;
   int32 memory_slots = 18;
   int32 max_vcpus = 19;
   ResourceSpec resources = 20;
-  bytes hades_definition = 21; // Serialized JSON/binary hades.VirtualMachine configuration (Option A)
 }
 
 message StartVMRequest {
@@ -77,7 +101,7 @@ message StartVMRequest {
 
 message StopVMRequest {
   string name = 1;
-  bool force = 2;
+  bool force = 2;  // true = SIGKILL, false = ACPI shutdown
 }
 
 message PauseVMRequest {
@@ -90,12 +114,22 @@ message ResumeVMRequest {
 
 message RebootVMRequest {
   string name = 1;
-  bool force = 2;
+  bool force = 2;  // true = reset, false = ACPI reboot
 }
 
 message DeleteVMRequest {
   string name = 1;
-  bool force = 2;
+  bool force = 2;  // stop if running
+}
+
+message UpdateVMMemoryRequest {
+  string name = 1;
+  int32 target_memory_mb = 2;
+}
+
+message UpdateVMCpuRequest {
+  string name = 1;
+  int32 target_vcpu_count = 2;
 }
 
 message GetVMRequest {
@@ -125,7 +159,7 @@ message ListVMsResponse {
 message VMInfo {
   string name = 1;
   string uuid = 2;
-  string state = 3;
+  string state = 3;  // stopped, running, paused, shutting_down, crashed
   int32 memory_mb = 4;
   int32 vcpus = 5;
   string machine = 6;
@@ -140,42 +174,42 @@ message VMInfo {
   int32 max_memory_mb = 15;
   int32 memory_slots = 16;
   int32 max_vcpus = 17;
-  ResourceSpec resources = 18;
-  bytes hades_definition = 19; // Serialized JSON/binary hades.VirtualMachine configuration (Option A)
 }
 
 message CPUConfig {
-  string model = 1;
-  string topology = 2;
+  string model = 1;  // e.g., "host", "qemu64"
+  string topology = 2;  // e.g., "sockets=1,cores=2,threads=1"
   bool nested_virtualization = 3;
 }
 
 message DiskConfig {
   string id = 1;
-  string path = 2;
-  string format = 3;
+  string path = 2;  // relative to VM folder or absolute
+  string format = 3;  // qcow2, raw, qed
   int32 size_gb = 4;
-  string bus = 5;
+  string bus = 5;  // virtio, ide, scsi
   bool readonly = 6;
   bool cache = 7;
 }
 
 message NetworkConfig {
   string id = 1;
-  string type = 2;
+  string type = 2;  // tap, user, bridge
   string tap_name = 3;
   string bridge_name = 4;
-  string model = 5;
+  string model = 5;  // virtio, e1000, rtl8139
   string mac_address = 6;
   bool link_up = 7;
 }
 
 message GraphicsConfig {
-  string type = 1;
+  string type = 1;  // vnc, spice, none
   int32 port = 2;
-  string listen = 3;
+  string listen = 3;  // "127.0.0.1", "0.0.0.0"
   bool password_protected = 4;
 }
+
+// ==================== Stats Messages ====================
 
 message GetVMStatsRequest {
   string name = 1;
@@ -219,27 +253,31 @@ message NetworkStats {
   int64 tx_packets = 5;
 }
 
+// ==================== QMP Messages ====================
+
 message ExecuteQMPRequest {
   string vm_name = 1;
-  string command = 2;
-  string arguments_json = 3;
+  string command = 2;  // e.g., "query-status", "migrate"
+  string arguments_json = 3;  // JSON string of arguments
 }
 
 message ExecuteQMPResponse {
-  string result_json = 1;
+  string result_json = 1;  // JSON string of result
   string error = 2;
 }
 
 message StreamQMPRequest {
   string vm_name = 1;
-  repeated string event_types = 2;
+  repeated string event_types = 2;  // empty = all events
 }
 
 message QMPEvent {
-  string event = 1;
-  string data_json = 2;
+  string event = 1;  // e.g., "SHUTDOWN", "RESET", "VNC_CONNECTED"
+  string data_json = 2;  // JSON string of event data
   google.protobuf.Timestamp timestamp = 3;
 }
+
+// ==================== Snapshot Messages ====================
 
 message CreateSnapshotRequest {
   string vm_name = 1;
@@ -283,9 +321,11 @@ message SnapshotInfo {
   google.protobuf.Timestamp date = 5;
 }
 
+// ==================== Migration Messages ====================
+
 message MigrateVMRequest {
   string vm_name = 1;
-  string destination_uri = 2;
+  string destination_uri = 2;  // e.g., "tcp:192.168.1.100:4444"
   bool incremental = 3;
   bool compress = 4;
 }
@@ -300,7 +340,7 @@ message GetMigrationStatusRequest {
 }
 
 message MigrationStatusResponse {
-  string status = 1;
+  string status = 1;  // "none", "active", "completed", "failed", "cancelled"
   int64 total_time_ms = 2;
   int64 downtime_ms = 3;
   int64 expected_downtime_ms = 4;
@@ -308,10 +348,12 @@ message MigrationStatusResponse {
   double remaining_bytes = 6;
 }
 
+// ==================== Storage Messages ====================
+
 message CreateStoragePoolRequest {
   string name = 1;
-  string type = 2;
-  string path = 3;
+  string type = 2;  // "dir", "iscsi", "lvm"
+  string path = 3;  // path to pool
   map<string, string> options = 4;
 }
 
@@ -338,7 +380,7 @@ message DeleteStoragePoolResponse {
 
 message StoragePool {
   string name = 1;
-  string type = 2;
+  string type = 2;  // "dir", "iscsi", "lvm"
   string path = 3;
   int64 capacity_bytes = 4;
   int64 allocated_bytes = 5;
@@ -346,27 +388,29 @@ message StoragePool {
   bool active = 7;
 }
 
+// ==================== Network Messages ====================
+
 message CreateTAPDeviceRequest {
   string name = 1;
-  string bridge = 2;
+  string bridge = 2;  // bridge to attach to
   bool persistent = 3;
   string owner = 4;
   string group = 5;
-  bool use_ovs = 6;
-  string ovs_bridge = 7;
-  int32 vlan_tag = 8;
-  bool tag_trunk = 9;
+  bool use_ovs = 6;           // attach to OVS bridge
+  string ovs_bridge = 7;         // OVS bridge name
+  int32 vlan_tag = 8;            // VLAN tag
+  bool tag_trunk = 9;            // trunk mode
 }
 
 message CreateBridgeRequest {
   string name = 1;
-  repeated string interfaces = 2;
+  repeated string interfaces = 2;  // physical interfaces to bridge
   string ip_address = 3;
   string netmask = 4;
-  bool open_vswitch = 5;
-  int32 vlan_tag = 6;
-  repeated int32 trunks = 7;
-  string ovs_bridge = 8;
+  bool open_vswitch = 5;           // use OVS instead of Linux bridge
+  int32 vlan_tag = 6;            // VLAN tag for access port
+  repeated int32 trunks = 7;         // VLAN trunk ranges
+  string ovs_bridge = 8;          // parent OVS bridge (e.g., br-int)
 }
 
 message NetworkResponse {
@@ -424,10 +468,12 @@ message NetworkDevice {
   }
 }
 
+// ==================== OVS Messages ====================
+
 message CreateOVSBridgeRequest {
   string name = 1;
-  string parent = 2;
-  bool internal = 3;
+  string parent = 2;           // parent OVS bridge (e.g., br-int)
+  bool internal = 3;          // create internal port
 }
 
 message DeleteOVSBridgeRequest {
@@ -441,10 +487,10 @@ message ListOVSBridgesResponse {
 }
 
 message AddOVSPortRequest {
-  string bridge = 1;
-  string port = 2;
-  int32 vlan_tag = 3;
-  repeated int32 trunks = 4;
+  string bridge = 1;            // OVS bridge name
+  string port = 2;              // port/TAP device name
+  int32 vlan_tag = 3;          // VLAN tag for access port
+  repeated int32 trunks = 4;       // VLAN trunk ranges
 }
 
 message RemoveOVSPortRequest {
@@ -462,8 +508,8 @@ message ListOVSPortsResponse {
 
 message OVSBridge {
   string name = 1;
-  string parent = 2;
-  bool internal = 3;
+  string parent = 2;           // parent bridge
+  bool internal = 3;          // has internal port
 }
 
 message OVSPort {
@@ -473,135 +519,76 @@ message OVSPort {
   repeated int32 trunks = 4;
 }
 
+// ==================== UEFI Messages ====================
+
 message EFIConfig {
-  string loader_path = 1;
-  string nvram_path = 2;
-  string nvram_template = 3;
-  bool secure_boot = 4;
+  string loader_path = 1;      // Path to OVMF_CODE.fd (UEFI firmware)
+  string nvram_path = 2;       // Path to per-VM NVRAM file
+  string nvram_template = 3;    // Path to OVMF_VARS.fd template
+  bool secure_boot = 4;        // Enable secure boot (future)
 }
 
-enum HostEventType {
-  HOST_EVENT_TYPE_UNSPECIFIED = 0;
-  HOST_EVENT_TYPE_VM_CREATED = 1;
-  HOST_EVENT_TYPE_VM_STARTED = 2;
-  HOST_EVENT_TYPE_VM_STOPPED = 3;
-  HOST_EVENT_TYPE_VM_CRASHED = 4;
-  HOST_EVENT_TYPE_VM_PAUSED = 5;
-  HOST_EVENT_TYPE_VM_RESUMED = 6;
-  HOST_EVENT_TYPE_VM_DELETED = 7;
-  HOST_EVENT_TYPE_HEARTBEAT = 20;
-  HOST_EVENT_TYPE_HEALTH_DEGRADED = 21;
-  HOST_EVENT_TYPE_HEALTH_FAILED = 22;
-  HOST_EVENT_TYPE_RESOURCE_CPU_PRESSURE = 30;
-  HOST_EVENT_TYPE_RESOURCE_MEM_PRESSURE = 31;
-  HOST_EVENT_TYPE_RESOURCE_DISK_PRESSURE = 32;
-  HOST_EVENT_TYPE_RESOURCE_REPORT = 40;
-}
+// ==================== Label Messages ====================
 
-message SubscribeEventsRequest {}
-
-message HostEvent {
-  string id = 1;
-  HostEventType type = 2;
-  google.protobuf.Timestamp timestamp = 3;
-  oneof payload {
-    VmLifecycleEvent vm_lifecycle = 10;
-    HostHealthEvent host_health = 11;
-    ResourcePressureEvent resource_pressure = 12;
-    HostResourceReport resource_report = 13;
-  }
-}
-
-message VmLifecycleEvent {
+message SetLabelsRequest {
   string vm_name = 1;
-  string vm_uuid = 2;
-  string previous_state = 3;
-  string new_state = 4;
+  map<string, string> labels = 2;
 }
 
-message HostHealthEvent {
-  string check_name = 1;
+message SetLabelsResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message GetLabelsRequest {
+  string vm_name = 1;
+}
+
+message GetLabelsResponse {
+  map<string, string> labels = 1;
+}
+
+// ==================== Provisioning Messages ====================
+
+message SetProvisioningRequest {
+  string vm_name = 1;
+  bool is_provisioning = 2;
+}
+
+message SetProvisioningResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+// ==================== Status Messages ====================
+
+message GetVMStatusRequest {
+  string vm_name = 1;
+}
+
+message GetVMStatusResponse {
+  string phase = 1;
+  repeated VMCondition conditions = 2;
+  repeated VMEvent events = 3;
+}
+
+message VMCondition {
+  string type = 1;
   string status = 2;
+  string reason = 3;
+  string message = 4;
+}
+
+message VMEvent {
+  string type = 1;
+  string reason = 2;
   string message = 3;
 }
 
-message ResourcePressureEvent {
-  string resource_type = 1;
-  double threshold_percent = 2;
-  double current_percent = 3;
-  string details = 4;
-}
-
-message HostResourceReport {
-  int32 physical_cpus = 1;
-  int32 physical_cores = 2;
-  int32 physical_threads = 3;
-  string cpu_model = 4;
-  int32 cpu_freq_mhz = 5;
-  int64 memory_total_mb = 10;
-  int64 memory_available_mb = 11;
-  int64 memory_reserved_mb = 12;
-  int64 memory_used_by_vms_mb = 13;
-  repeated NUMANode numa_nodes = 20;
-  bool kvm_available = 30;
-  bool nested_virtualization = 31;
-  bool vmx_svm_supported = 32;
-  bool hugepages_available = 33;
-  string qemu_version = 34;
-  StorageSummary storage = 40;
-}
-
-message NUMANode {
-  int32 node_id = 1;
-  int64 memory_total_bytes = 2;
-  repeated int32 cpu_core_ids = 3;
-}
-
-message StorageSummary {
-  int64 pool_total_bytes = 1;
-  int64 pool_used_bytes = 2;
-  int64 pool_available_bytes = 3;
-}
+// ==================== Resource Spec ====================
 
 message ResourceSpec {
   int64 memory_limit_bytes = 1;
   int64 memory_reservation_bytes = 2;
   int64 cpu_shares = 3;
-}
-
-// ==================== Production Network Messages ====================
-
-message CreateNetworkRequest {
-  string name = 1;
-  string subnet_cidr = 2;
-  string gateway = 3;
-  string dhcp_range_start = 4;
-  string dhcp_range_end = 5;
-  string dns_server = 6;
-  int32 vlan_id = 7;
-}
-
-message CreateNetworkResponse {
-  NetworkInfo network = 1;
-}
-
-message NetworkInfo {
-  string name = 1;
-  string bridge_name = 2;
-  string subnet = 3;
-  string gateway = 4;
-  string dhcp_range = 5;
-  string dns_server = 6;
-  int32 vlan_id = 7;
-}
-
-message AttachVMToNetworkRequest {
-  string vm_name = 1;
-  string network_name = 2;
-  string static_ip = 3;
-}
-
-message AttachVMToNetworkResponse {
-  bool success = 1;
-  NetworkInfo network_info = 2;
 }

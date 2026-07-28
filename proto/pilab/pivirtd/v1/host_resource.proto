@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package pilab.virtualization.v1;
+
+option go_package = "go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1";
+
+import "google/protobuf/timestamp.proto";
+
+// ==================== Host Event Types ====================
+
+// HostEventType enumerates the types of host-level VM events.
+enum HostEventType {
+  HOST_EVENT_TYPE_UNSPECIFIED = 0;
+  HOST_EVENT_TYPE_VM_CREATED = 1;
+  HOST_EVENT_TYPE_VM_STARTED = 2;
+  HOST_EVENT_TYPE_VM_STOPPED = 3;
+  HOST_EVENT_TYPE_VM_PAUSED = 4;
+  HOST_EVENT_TYPE_VM_CRASHED = 5;
+  HOST_EVENT_TYPE_VM_RESUMED = 6;
+  HOST_EVENT_TYPE_VM_DELETED = 7;
+}
+
+// ==================== Host Resource Report ====================
+
+// HostResourceReport contains comprehensive host resource information.
+message HostResourceReport {
+  int32 physical_cpus = 1;
+  int32 physical_cores = 2;
+  int32 physical_threads = 3;
+  string cpu_model = 4;
+  int32 cpu_freq_mhz = 5;
+  int64 memory_total_mb = 6;
+  int64 memory_available_mb = 7;
+  int64 memory_used_by_vms_mb = 8;
+  int64 memory_reserved_mb = 16;  // Memory reserved for system/VMs
+  repeated NUMANode numa_nodes = 9;
+  bool kvm_available = 10;
+  bool nested_virtualization = 11;
+  bool vmx_svm_supported = 12;
+  bool hugepages_available = 13;
+  string qemu_version = 14;
+  StorageSummary storage = 15;
+}
+
+// NUMANode represents a single NUMA node's configuration.
+message NUMANode {
+  int32 node_id = 1;
+  int64 memory_total_bytes = 2;
+  repeated int32 cpu_core_ids = 3;
+}
+
+// StorageSummary summarizes the host's storage pool capacities.
+message StorageSummary {
+  int64 pool_total_bytes = 1;
+  int64 pool_available_bytes = 2;
+  int64 pool_used_bytes = 3;
+}
+
+// ==================== Event Streaming ====================
+
+// SubscribeEventsRequest is an empty request to subscribe to VM events.
+message SubscribeEventsRequest {}
+
+// HostEvent represents an event occurring on the host, with a typed payload.
+message HostEvent {
+  string id = 1;
+  HostEventType type = 2;
+  google.protobuf.Timestamp timestamp = 3;
+  oneof payload {
+    VmLifecycleEvent vm_lifecycle = 4;
+  }
+}
+
+// VmLifecycleEvent contains details about a VM state transition.
+message VmLifecycleEvent {
+  string vm_name = 1;
+  string vm_uuid = 2;
+  string previous_state = 3;
+  string new_state = 4;
+}
