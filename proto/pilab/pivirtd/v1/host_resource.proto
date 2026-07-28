@@ -18,6 +18,13 @@ enum HostEventType {
   HOST_EVENT_TYPE_VM_CRASHED = 5;
   HOST_EVENT_TYPE_VM_RESUMED = 6;
   HOST_EVENT_TYPE_VM_DELETED = 7;
+  HOST_EVENT_TYPE_HEARTBEAT = 20;
+  HOST_EVENT_TYPE_HEALTH_DEGRADED = 21;
+  HOST_EVENT_TYPE_HEALTH_FAILED = 22;
+  HOST_EVENT_TYPE_RESOURCE_CPU_PRESSURE = 30;
+  HOST_EVENT_TYPE_RESOURCE_MEM_PRESSURE = 31;
+  HOST_EVENT_TYPE_RESOURCE_DISK_PRESSURE = 32;
+  HOST_EVENT_TYPE_RESOURCE_REPORT = 40;
 }
 
 // ==================== Host Resource Report ====================
@@ -68,6 +75,9 @@ message HostEvent {
   google.protobuf.Timestamp timestamp = 3;
   oneof payload {
     VmLifecycleEvent vm_lifecycle = 4;
+    HostHealthEvent host_health = 5;
+    ResourcePressureEvent resource_pressure = 6;
+    HostResourceReport resource_report = 7;
   }
 }
 
@@ -77,4 +87,19 @@ message VmLifecycleEvent {
   string vm_uuid = 2;
   string previous_state = 3;
   string new_state = 4;
+}
+
+// HostHealthEvent reports a host health check result.
+message HostHealthEvent {
+  string check_name = 1;
+  string status = 2;
+  string message = 3;
+}
+
+// ResourcePressureEvent reports system resource pressure (CPU, memory, disk).
+message ResourcePressureEvent {
+  string resource_type = 1;
+  double threshold_percent = 2;
+  double current_percent = 3;
+  string details = 4;
 }

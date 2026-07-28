@@ -26,37 +26,58 @@ const (
 type HostEventType int32
 
 const (
-	HostEventType_HOST_EVENT_TYPE_UNSPECIFIED HostEventType = 0
-	HostEventType_HOST_EVENT_TYPE_VM_CREATED  HostEventType = 1
-	HostEventType_HOST_EVENT_TYPE_VM_STARTED  HostEventType = 2
-	HostEventType_HOST_EVENT_TYPE_VM_STOPPED  HostEventType = 3
-	HostEventType_HOST_EVENT_TYPE_VM_PAUSED   HostEventType = 4
-	HostEventType_HOST_EVENT_TYPE_VM_CRASHED  HostEventType = 5
-	HostEventType_HOST_EVENT_TYPE_VM_RESUMED  HostEventType = 6
-	HostEventType_HOST_EVENT_TYPE_VM_DELETED  HostEventType = 7
+	HostEventType_HOST_EVENT_TYPE_UNSPECIFIED            HostEventType = 0
+	HostEventType_HOST_EVENT_TYPE_VM_CREATED             HostEventType = 1
+	HostEventType_HOST_EVENT_TYPE_VM_STARTED             HostEventType = 2
+	HostEventType_HOST_EVENT_TYPE_VM_STOPPED             HostEventType = 3
+	HostEventType_HOST_EVENT_TYPE_VM_PAUSED              HostEventType = 4
+	HostEventType_HOST_EVENT_TYPE_VM_CRASHED             HostEventType = 5
+	HostEventType_HOST_EVENT_TYPE_VM_RESUMED             HostEventType = 6
+	HostEventType_HOST_EVENT_TYPE_VM_DELETED             HostEventType = 7
+	HostEventType_HOST_EVENT_TYPE_HEARTBEAT              HostEventType = 20
+	HostEventType_HOST_EVENT_TYPE_HEALTH_DEGRADED        HostEventType = 21
+	HostEventType_HOST_EVENT_TYPE_HEALTH_FAILED          HostEventType = 22
+	HostEventType_HOST_EVENT_TYPE_RESOURCE_CPU_PRESSURE  HostEventType = 30
+	HostEventType_HOST_EVENT_TYPE_RESOURCE_MEM_PRESSURE  HostEventType = 31
+	HostEventType_HOST_EVENT_TYPE_RESOURCE_DISK_PRESSURE HostEventType = 32
+	HostEventType_HOST_EVENT_TYPE_RESOURCE_REPORT        HostEventType = 40
 )
 
 // Enum value maps for HostEventType.
 var (
 	HostEventType_name = map[int32]string{
-		0: "HOST_EVENT_TYPE_UNSPECIFIED",
-		1: "HOST_EVENT_TYPE_VM_CREATED",
-		2: "HOST_EVENT_TYPE_VM_STARTED",
-		3: "HOST_EVENT_TYPE_VM_STOPPED",
-		4: "HOST_EVENT_TYPE_VM_PAUSED",
-		5: "HOST_EVENT_TYPE_VM_CRASHED",
-		6: "HOST_EVENT_TYPE_VM_RESUMED",
-		7: "HOST_EVENT_TYPE_VM_DELETED",
+		0:  "HOST_EVENT_TYPE_UNSPECIFIED",
+		1:  "HOST_EVENT_TYPE_VM_CREATED",
+		2:  "HOST_EVENT_TYPE_VM_STARTED",
+		3:  "HOST_EVENT_TYPE_VM_STOPPED",
+		4:  "HOST_EVENT_TYPE_VM_PAUSED",
+		5:  "HOST_EVENT_TYPE_VM_CRASHED",
+		6:  "HOST_EVENT_TYPE_VM_RESUMED",
+		7:  "HOST_EVENT_TYPE_VM_DELETED",
+		20: "HOST_EVENT_TYPE_HEARTBEAT",
+		21: "HOST_EVENT_TYPE_HEALTH_DEGRADED",
+		22: "HOST_EVENT_TYPE_HEALTH_FAILED",
+		30: "HOST_EVENT_TYPE_RESOURCE_CPU_PRESSURE",
+		31: "HOST_EVENT_TYPE_RESOURCE_MEM_PRESSURE",
+		32: "HOST_EVENT_TYPE_RESOURCE_DISK_PRESSURE",
+		40: "HOST_EVENT_TYPE_RESOURCE_REPORT",
 	}
 	HostEventType_value = map[string]int32{
-		"HOST_EVENT_TYPE_UNSPECIFIED": 0,
-		"HOST_EVENT_TYPE_VM_CREATED":  1,
-		"HOST_EVENT_TYPE_VM_STARTED":  2,
-		"HOST_EVENT_TYPE_VM_STOPPED":  3,
-		"HOST_EVENT_TYPE_VM_PAUSED":   4,
-		"HOST_EVENT_TYPE_VM_CRASHED":  5,
-		"HOST_EVENT_TYPE_VM_RESUMED":  6,
-		"HOST_EVENT_TYPE_VM_DELETED":  7,
+		"HOST_EVENT_TYPE_UNSPECIFIED":            0,
+		"HOST_EVENT_TYPE_VM_CREATED":             1,
+		"HOST_EVENT_TYPE_VM_STARTED":             2,
+		"HOST_EVENT_TYPE_VM_STOPPED":             3,
+		"HOST_EVENT_TYPE_VM_PAUSED":              4,
+		"HOST_EVENT_TYPE_VM_CRASHED":             5,
+		"HOST_EVENT_TYPE_VM_RESUMED":             6,
+		"HOST_EVENT_TYPE_VM_DELETED":             7,
+		"HOST_EVENT_TYPE_HEARTBEAT":              20,
+		"HOST_EVENT_TYPE_HEALTH_DEGRADED":        21,
+		"HOST_EVENT_TYPE_HEALTH_FAILED":          22,
+		"HOST_EVENT_TYPE_RESOURCE_CPU_PRESSURE":  30,
+		"HOST_EVENT_TYPE_RESOURCE_MEM_PRESSURE":  31,
+		"HOST_EVENT_TYPE_RESOURCE_DISK_PRESSURE": 32,
+		"HOST_EVENT_TYPE_RESOURCE_REPORT":        40,
 	}
 )
 
@@ -420,6 +441,9 @@ type HostEvent struct {
 	// Types that are valid to be assigned to Payload:
 	//
 	//	*HostEvent_VmLifecycle
+	//	*HostEvent_HostHealth
+	//	*HostEvent_ResourcePressure
+	//	*HostEvent_ResourceReport
 	Payload       isHostEvent_Payload `protobuf_oneof:"payload"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -492,6 +516,33 @@ func (x *HostEvent) GetVmLifecycle() *VmLifecycleEvent {
 	return nil
 }
 
+func (x *HostEvent) GetHostHealth() *HostHealthEvent {
+	if x != nil {
+		if x, ok := x.Payload.(*HostEvent_HostHealth); ok {
+			return x.HostHealth
+		}
+	}
+	return nil
+}
+
+func (x *HostEvent) GetResourcePressure() *ResourcePressureEvent {
+	if x != nil {
+		if x, ok := x.Payload.(*HostEvent_ResourcePressure); ok {
+			return x.ResourcePressure
+		}
+	}
+	return nil
+}
+
+func (x *HostEvent) GetResourceReport() *HostResourceReport {
+	if x != nil {
+		if x, ok := x.Payload.(*HostEvent_ResourceReport); ok {
+			return x.ResourceReport
+		}
+	}
+	return nil
+}
+
 type isHostEvent_Payload interface {
 	isHostEvent_Payload()
 }
@@ -500,7 +551,25 @@ type HostEvent_VmLifecycle struct {
 	VmLifecycle *VmLifecycleEvent `protobuf:"bytes,4,opt,name=vm_lifecycle,json=vmLifecycle,proto3,oneof"`
 }
 
+type HostEvent_HostHealth struct {
+	HostHealth *HostHealthEvent `protobuf:"bytes,5,opt,name=host_health,json=hostHealth,proto3,oneof"`
+}
+
+type HostEvent_ResourcePressure struct {
+	ResourcePressure *ResourcePressureEvent `protobuf:"bytes,6,opt,name=resource_pressure,json=resourcePressure,proto3,oneof"`
+}
+
+type HostEvent_ResourceReport struct {
+	ResourceReport *HostResourceReport `protobuf:"bytes,7,opt,name=resource_report,json=resourceReport,proto3,oneof"`
+}
+
 func (*HostEvent_VmLifecycle) isHostEvent_Payload() {}
+
+func (*HostEvent_HostHealth) isHostEvent_Payload() {}
+
+func (*HostEvent_ResourcePressure) isHostEvent_Payload() {}
+
+func (*HostEvent_ResourceReport) isHostEvent_Payload() {}
 
 // VmLifecycleEvent contains details about a VM state transition.
 type VmLifecycleEvent struct {
@@ -571,6 +640,136 @@ func (x *VmLifecycleEvent) GetNewState() string {
 	return ""
 }
 
+// HostHealthEvent reports a host health check result.
+type HostHealthEvent struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	CheckName     string                 `protobuf:"bytes,1,opt,name=check_name,json=checkName,proto3" json:"check_name,omitempty"`
+	Status        string                 `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HostHealthEvent) Reset() {
+	*x = HostHealthEvent{}
+	mi := &file_pilab_pivirtd_v1_host_resource_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HostHealthEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HostHealthEvent) ProtoMessage() {}
+
+func (x *HostHealthEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_host_resource_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HostHealthEvent.ProtoReflect.Descriptor instead.
+func (*HostHealthEvent) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_host_resource_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *HostHealthEvent) GetCheckName() string {
+	if x != nil {
+		return x.CheckName
+	}
+	return ""
+}
+
+func (x *HostHealthEvent) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *HostHealthEvent) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+// ResourcePressureEvent reports system resource pressure (CPU, memory, disk).
+type ResourcePressureEvent struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	ResourceType     string                 `protobuf:"bytes,1,opt,name=resource_type,json=resourceType,proto3" json:"resource_type,omitempty"`
+	ThresholdPercent float64                `protobuf:"fixed64,2,opt,name=threshold_percent,json=thresholdPercent,proto3" json:"threshold_percent,omitempty"`
+	CurrentPercent   float64                `protobuf:"fixed64,3,opt,name=current_percent,json=currentPercent,proto3" json:"current_percent,omitempty"`
+	Details          string                 `protobuf:"bytes,4,opt,name=details,proto3" json:"details,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ResourcePressureEvent) Reset() {
+	*x = ResourcePressureEvent{}
+	mi := &file_pilab_pivirtd_v1_host_resource_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResourcePressureEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResourcePressureEvent) ProtoMessage() {}
+
+func (x *ResourcePressureEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_host_resource_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResourcePressureEvent.ProtoReflect.Descriptor instead.
+func (*ResourcePressureEvent) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_host_resource_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ResourcePressureEvent) GetResourceType() string {
+	if x != nil {
+		return x.ResourceType
+	}
+	return ""
+}
+
+func (x *ResourcePressureEvent) GetThresholdPercent() float64 {
+	if x != nil {
+		return x.ThresholdPercent
+	}
+	return 0
+}
+
+func (x *ResourcePressureEvent) GetCurrentPercent() float64 {
+	if x != nil {
+		return x.CurrentPercent
+	}
+	return 0
+}
+
+func (x *ResourcePressureEvent) GetDetails() string {
+	if x != nil {
+		return x.Details
+	}
+	return ""
+}
+
 var File_pilab_pivirtd_v1_host_resource_proto protoreflect.FileDescriptor
 
 const file_pilab_pivirtd_v1_host_resource_proto_rawDesc = "" +
@@ -605,18 +804,32 @@ const file_pilab_pivirtd_v1_host_resource_proto_rawDesc = "" +
 	"\x10pool_total_bytes\x18\x01 \x01(\x03R\x0epoolTotalBytes\x120\n" +
 	"\x14pool_available_bytes\x18\x02 \x01(\x03R\x12poolAvailableBytes\x12&\n" +
 	"\x0fpool_used_bytes\x18\x03 \x01(\x03R\rpoolUsedBytes\"\x18\n" +
-	"\x16SubscribeEventsRequest\"\xec\x01\n" +
+	"\x16SubscribeEventsRequest\"\xf0\x03\n" +
 	"\tHostEvent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12:\n" +
 	"\x04type\x18\x02 \x01(\x0e2&.pilab.virtualization.v1.HostEventTypeR\x04type\x128\n" +
 	"\ttimestamp\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12N\n" +
-	"\fvm_lifecycle\x18\x04 \x01(\v2).pilab.virtualization.v1.VmLifecycleEventH\x00R\vvmLifecycleB\t\n" +
+	"\fvm_lifecycle\x18\x04 \x01(\v2).pilab.virtualization.v1.VmLifecycleEventH\x00R\vvmLifecycle\x12K\n" +
+	"\vhost_health\x18\x05 \x01(\v2(.pilab.virtualization.v1.HostHealthEventH\x00R\n" +
+	"hostHealth\x12]\n" +
+	"\x11resource_pressure\x18\x06 \x01(\v2..pilab.virtualization.v1.ResourcePressureEventH\x00R\x10resourcePressure\x12V\n" +
+	"\x0fresource_report\x18\a \x01(\v2+.pilab.virtualization.v1.HostResourceReportH\x00R\x0eresourceReportB\t\n" +
 	"\apayload\"\x88\x01\n" +
 	"\x10VmLifecycleEvent\x12\x17\n" +
 	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12\x17\n" +
 	"\avm_uuid\x18\x02 \x01(\tR\x06vmUuid\x12%\n" +
 	"\x0eprevious_state\x18\x03 \x01(\tR\rpreviousState\x12\x1b\n" +
-	"\tnew_state\x18\x04 \x01(\tR\bnewState*\x8f\x02\n" +
+	"\tnew_state\x18\x04 \x01(\tR\bnewState\"b\n" +
+	"\x0fHostHealthEvent\x12\x1d\n" +
+	"\n" +
+	"check_name\x18\x01 \x01(\tR\tcheckName\x12\x16\n" +
+	"\x06status\x18\x02 \x01(\tR\x06status\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\"\xac\x01\n" +
+	"\x15ResourcePressureEvent\x12#\n" +
+	"\rresource_type\x18\x01 \x01(\tR\fresourceType\x12+\n" +
+	"\x11threshold_percent\x18\x02 \x01(\x01R\x10thresholdPercent\x12'\n" +
+	"\x0fcurrent_percent\x18\x03 \x01(\x01R\x0ecurrentPercent\x12\x18\n" +
+	"\adetails\x18\x04 \x01(\tR\adetails*\x9d\x04\n" +
 	"\rHostEventType\x12\x1f\n" +
 	"\x1bHOST_EVENT_TYPE_UNSPECIFIED\x10\x00\x12\x1e\n" +
 	"\x1aHOST_EVENT_TYPE_VM_CREATED\x10\x01\x12\x1e\n" +
@@ -625,7 +838,14 @@ const file_pilab_pivirtd_v1_host_resource_proto_rawDesc = "" +
 	"\x19HOST_EVENT_TYPE_VM_PAUSED\x10\x04\x12\x1e\n" +
 	"\x1aHOST_EVENT_TYPE_VM_CRASHED\x10\x05\x12\x1e\n" +
 	"\x1aHOST_EVENT_TYPE_VM_RESUMED\x10\x06\x12\x1e\n" +
-	"\x1aHOST_EVENT_TYPE_VM_DELETED\x10\aB5Z3go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1b\x06proto3"
+	"\x1aHOST_EVENT_TYPE_VM_DELETED\x10\a\x12\x1d\n" +
+	"\x19HOST_EVENT_TYPE_HEARTBEAT\x10\x14\x12#\n" +
+	"\x1fHOST_EVENT_TYPE_HEALTH_DEGRADED\x10\x15\x12!\n" +
+	"\x1dHOST_EVENT_TYPE_HEALTH_FAILED\x10\x16\x12)\n" +
+	"%HOST_EVENT_TYPE_RESOURCE_CPU_PRESSURE\x10\x1e\x12)\n" +
+	"%HOST_EVENT_TYPE_RESOURCE_MEM_PRESSURE\x10\x1f\x12*\n" +
+	"&HOST_EVENT_TYPE_RESOURCE_DISK_PRESSURE\x10 \x12#\n" +
+	"\x1fHOST_EVENT_TYPE_RESOURCE_REPORT\x10(B5Z3go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1b\x06proto3"
 
 var (
 	file_pilab_pivirtd_v1_host_resource_proto_rawDescOnce sync.Once
@@ -640,7 +860,7 @@ func file_pilab_pivirtd_v1_host_resource_proto_rawDescGZIP() []byte {
 }
 
 var file_pilab_pivirtd_v1_host_resource_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_pilab_pivirtd_v1_host_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_pilab_pivirtd_v1_host_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_pilab_pivirtd_v1_host_resource_proto_goTypes = []any{
 	(HostEventType)(0),             // 0: pilab.virtualization.v1.HostEventType
 	(*HostResourceReport)(nil),     // 1: pilab.virtualization.v1.HostResourceReport
@@ -649,19 +869,24 @@ var file_pilab_pivirtd_v1_host_resource_proto_goTypes = []any{
 	(*SubscribeEventsRequest)(nil), // 4: pilab.virtualization.v1.SubscribeEventsRequest
 	(*HostEvent)(nil),              // 5: pilab.virtualization.v1.HostEvent
 	(*VmLifecycleEvent)(nil),       // 6: pilab.virtualization.v1.VmLifecycleEvent
-	(*timestamppb.Timestamp)(nil),  // 7: google.protobuf.Timestamp
+	(*HostHealthEvent)(nil),        // 7: pilab.virtualization.v1.HostHealthEvent
+	(*ResourcePressureEvent)(nil),  // 8: pilab.virtualization.v1.ResourcePressureEvent
+	(*timestamppb.Timestamp)(nil),  // 9: google.protobuf.Timestamp
 }
 var file_pilab_pivirtd_v1_host_resource_proto_depIdxs = []int32{
 	2, // 0: pilab.virtualization.v1.HostResourceReport.numa_nodes:type_name -> pilab.virtualization.v1.NUMANode
 	3, // 1: pilab.virtualization.v1.HostResourceReport.storage:type_name -> pilab.virtualization.v1.StorageSummary
 	0, // 2: pilab.virtualization.v1.HostEvent.type:type_name -> pilab.virtualization.v1.HostEventType
-	7, // 3: pilab.virtualization.v1.HostEvent.timestamp:type_name -> google.protobuf.Timestamp
+	9, // 3: pilab.virtualization.v1.HostEvent.timestamp:type_name -> google.protobuf.Timestamp
 	6, // 4: pilab.virtualization.v1.HostEvent.vm_lifecycle:type_name -> pilab.virtualization.v1.VmLifecycleEvent
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	7, // 5: pilab.virtualization.v1.HostEvent.host_health:type_name -> pilab.virtualization.v1.HostHealthEvent
+	8, // 6: pilab.virtualization.v1.HostEvent.resource_pressure:type_name -> pilab.virtualization.v1.ResourcePressureEvent
+	1, // 7: pilab.virtualization.v1.HostEvent.resource_report:type_name -> pilab.virtualization.v1.HostResourceReport
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_pilab_pivirtd_v1_host_resource_proto_init() }
@@ -671,6 +896,9 @@ func file_pilab_pivirtd_v1_host_resource_proto_init() {
 	}
 	file_pilab_pivirtd_v1_host_resource_proto_msgTypes[4].OneofWrappers = []any{
 		(*HostEvent_VmLifecycle)(nil),
+		(*HostEvent_HostHealth)(nil),
+		(*HostEvent_ResourcePressure)(nil),
+		(*HostEvent_ResourceReport)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -678,7 +906,7 @@ func file_pilab_pivirtd_v1_host_resource_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pilab_pivirtd_v1_host_resource_proto_rawDesc), len(file_pilab_pivirtd_v1_host_resource_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
