@@ -141,6 +141,12 @@ const (
 	// PivirtdServiceGetVMStatusProcedure is the fully-qualified name of the PivirtdService's
 	// GetVMStatus RPC.
 	PivirtdServiceGetVMStatusProcedure = "/pilab.virtualization.v1.PivirtdService/GetVMStatus"
+	// PivirtdServiceSubscribeEventsProcedure is the fully-qualified name of the PivirtdService's
+	// SubscribeEvents RPC.
+	PivirtdServiceSubscribeEventsProcedure = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
+	// PivirtdServiceGetHostResourceProcedure is the fully-qualified name of the PivirtdService's
+	// GetHostResource RPC.
+	PivirtdServiceGetHostResourceProcedure = "/pilab.virtualization.v1.PivirtdService/GetHostResource"
 )
 
 // PivirtdServiceClient is a client for the pilab.virtualization.v1.PivirtdService service.
@@ -195,6 +201,9 @@ type PivirtdServiceClient interface {
 	SetProvisioning(context.Context, *connect.Request[v1.SetProvisioningRequest]) (*connect.Response[v1.SetProvisioningResponse], error)
 	// VM Status
 	GetVMStatus(context.Context, *connect.Request[v1.GetVMStatusRequest]) (*connect.Response[v1.GetVMStatusResponse], error)
+	// Event Streaming
+	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.ServerStreamForClient[v1.HostEvent], error)
+	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
 }
 
 // NewPivirtdServiceClient constructs a client for the pilab.virtualization.v1.PivirtdService
@@ -442,6 +451,18 @@ func NewPivirtdServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(pivirtdServiceMethods.ByName("GetVMStatus")),
 			connect.WithClientOptions(opts...),
 		),
+		subscribeEvents: connect.NewClient[v1.SubscribeEventsRequest, v1.HostEvent](
+			httpClient,
+			baseURL+PivirtdServiceSubscribeEventsProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("SubscribeEvents")),
+			connect.WithClientOptions(opts...),
+		),
+		getHostResource: connect.NewClient[v1.SubscribeEventsRequest, v1.HostResourceReport](
+			httpClient,
+			baseURL+PivirtdServiceGetHostResourceProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("GetHostResource")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -486,6 +507,8 @@ type pivirtdServiceClient struct {
 	getLabels          *connect.Client[v1.GetLabelsRequest, v1.GetLabelsResponse]
 	setProvisioning    *connect.Client[v1.SetProvisioningRequest, v1.SetProvisioningResponse]
 	getVMStatus        *connect.Client[v1.GetVMStatusRequest, v1.GetVMStatusResponse]
+	subscribeEvents    *connect.Client[v1.SubscribeEventsRequest, v1.HostEvent]
+	getHostResource    *connect.Client[v1.SubscribeEventsRequest, v1.HostResourceReport]
 }
 
 // CreateVM calls pilab.virtualization.v1.PivirtdService.CreateVM.
@@ -683,6 +706,16 @@ func (c *pivirtdServiceClient) GetVMStatus(ctx context.Context, req *connect.Req
 	return c.getVMStatus.CallUnary(ctx, req)
 }
 
+// SubscribeEvents calls pilab.virtualization.v1.PivirtdService.SubscribeEvents.
+func (c *pivirtdServiceClient) SubscribeEvents(ctx context.Context, req *connect.Request[v1.SubscribeEventsRequest]) (*connect.ServerStreamForClient[v1.HostEvent], error) {
+	return c.subscribeEvents.CallServerStream(ctx, req)
+}
+
+// GetHostResource calls pilab.virtualization.v1.PivirtdService.GetHostResource.
+func (c *pivirtdServiceClient) GetHostResource(ctx context.Context, req *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error) {
+	return c.getHostResource.CallUnary(ctx, req)
+}
+
 // PivirtdServiceHandler is an implementation of the pilab.virtualization.v1.PivirtdService service.
 type PivirtdServiceHandler interface {
 	// VM Lifecycle Management
@@ -735,6 +768,9 @@ type PivirtdServiceHandler interface {
 	SetProvisioning(context.Context, *connect.Request[v1.SetProvisioningRequest]) (*connect.Response[v1.SetProvisioningResponse], error)
 	// VM Status
 	GetVMStatus(context.Context, *connect.Request[v1.GetVMStatusRequest]) (*connect.Response[v1.GetVMStatusResponse], error)
+	// Event Streaming
+	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest], *connect.ServerStream[v1.HostEvent]) error
+	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
 }
 
 // NewPivirtdServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -978,6 +1014,18 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 		connect.WithSchema(pivirtdServiceMethods.ByName("GetVMStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
+	pivirtdServiceSubscribeEventsHandler := connect.NewServerStreamHandler(
+		PivirtdServiceSubscribeEventsProcedure,
+		svc.SubscribeEvents,
+		connect.WithSchema(pivirtdServiceMethods.ByName("SubscribeEvents")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceGetHostResourceHandler := connect.NewUnaryHandler(
+		PivirtdServiceGetHostResourceProcedure,
+		svc.GetHostResource,
+		connect.WithSchema(pivirtdServiceMethods.ByName("GetHostResource")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/pilab.virtualization.v1.PivirtdService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case PivirtdServiceCreateVMProcedure:
@@ -1058,6 +1106,10 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 			pivirtdServiceSetProvisioningHandler.ServeHTTP(w, r)
 		case PivirtdServiceGetVMStatusProcedure:
 			pivirtdServiceGetVMStatusHandler.ServeHTTP(w, r)
+		case PivirtdServiceSubscribeEventsProcedure:
+			pivirtdServiceSubscribeEventsHandler.ServeHTTP(w, r)
+		case PivirtdServiceGetHostResourceProcedure:
+			pivirtdServiceGetHostResourceHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1221,4 +1273,12 @@ func (UnimplementedPivirtdServiceHandler) SetProvisioning(context.Context, *conn
 
 func (UnimplementedPivirtdServiceHandler) GetVMStatus(context.Context, *connect.Request[v1.GetVMStatusRequest]) (*connect.Response[v1.GetVMStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GetVMStatus is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest], *connect.ServerStream[v1.HostEvent]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.SubscribeEvents is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GetHostResource is not implemented"))
 }

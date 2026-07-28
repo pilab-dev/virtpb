@@ -58,6 +58,8 @@ const (
 	PivirtdService_GetLabels_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/GetLabels"
 	PivirtdService_SetProvisioning_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/SetProvisioning"
 	PivirtdService_GetVMStatus_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/GetVMStatus"
+	PivirtdService_SubscribeEvents_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
+	PivirtdService_GetHostResource_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/GetHostResource"
 )
 
 // PivirtdServiceClient is the client API for PivirtdService service.
@@ -116,6 +118,9 @@ type PivirtdServiceClient interface {
 	SetProvisioning(ctx context.Context, in *SetProvisioningRequest, opts ...grpc.CallOption) (*SetProvisioningResponse, error)
 	// VM Status
 	GetVMStatus(ctx context.Context, in *GetVMStatusRequest, opts ...grpc.CallOption) (*GetVMStatusResponse, error)
+	// Event Streaming
+	SubscribeEvents(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HostEvent], error)
+	GetHostResource(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (*HostResourceReport, error)
 }
 
 type pivirtdServiceClient struct {
@@ -525,6 +530,35 @@ func (c *pivirtdServiceClient) GetVMStatus(ctx context.Context, in *GetVMStatusR
 	return out, nil
 }
 
+func (c *pivirtdServiceClient) SubscribeEvents(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HostEvent], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &PivirtdService_ServiceDesc.Streams[1], PivirtdService_SubscribeEvents_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[SubscribeEventsRequest, HostEvent]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type PivirtdService_SubscribeEventsClient = grpc.ServerStreamingClient[HostEvent]
+
+func (c *pivirtdServiceClient) GetHostResource(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (*HostResourceReport, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HostResourceReport)
+	err := c.cc.Invoke(ctx, PivirtdService_GetHostResource_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PivirtdServiceServer is the server API for PivirtdService service.
 // All implementations must embed UnimplementedPivirtdServiceServer
 // for forward compatibility.
@@ -581,6 +615,9 @@ type PivirtdServiceServer interface {
 	SetProvisioning(context.Context, *SetProvisioningRequest) (*SetProvisioningResponse, error)
 	// VM Status
 	GetVMStatus(context.Context, *GetVMStatusRequest) (*GetVMStatusResponse, error)
+	// Event Streaming
+	SubscribeEvents(*SubscribeEventsRequest, grpc.ServerStreamingServer[HostEvent]) error
+	GetHostResource(context.Context, *SubscribeEventsRequest) (*HostResourceReport, error)
 	mustEmbedUnimplementedPivirtdServiceServer()
 }
 
@@ -707,6 +744,12 @@ func (UnimplementedPivirtdServiceServer) SetProvisioning(context.Context, *SetPr
 }
 func (UnimplementedPivirtdServiceServer) GetVMStatus(context.Context, *GetVMStatusRequest) (*GetVMStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetVMStatus not implemented")
+}
+func (UnimplementedPivirtdServiceServer) SubscribeEvents(*SubscribeEventsRequest, grpc.ServerStreamingServer[HostEvent]) error {
+	return status.Error(codes.Unimplemented, "method SubscribeEvents not implemented")
+}
+func (UnimplementedPivirtdServiceServer) GetHostResource(context.Context, *SubscribeEventsRequest) (*HostResourceReport, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetHostResource not implemented")
 }
 func (UnimplementedPivirtdServiceServer) mustEmbedUnimplementedPivirtdServiceServer() {}
 func (UnimplementedPivirtdServiceServer) testEmbeddedByValue()                        {}
@@ -1424,6 +1467,35 @@ func _PivirtdService_GetVMStatus_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PivirtdService_SubscribeEvents_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(SubscribeEventsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PivirtdServiceServer).SubscribeEvents(m, &grpc.GenericServerStream[SubscribeEventsRequest, HostEvent]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type PivirtdService_SubscribeEventsServer = grpc.ServerStreamingServer[HostEvent]
+
+func _PivirtdService_GetHostResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubscribeEventsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).GetHostResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_GetHostResource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).GetHostResource(ctx, req.(*SubscribeEventsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PivirtdService_ServiceDesc is the grpc.ServiceDesc for PivirtdService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1583,11 +1655,20 @@ var PivirtdService_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetVMStatus",
 			Handler:    _PivirtdService_GetVMStatus_Handler,
 		},
+		{
+			MethodName: "GetHostResource",
+			Handler:    _PivirtdService_GetHostResource_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "StreamQMPEvents",
 			Handler:       _PivirtdService_StreamQMPEvents_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "SubscribeEvents",
+			Handler:       _PivirtdService_SubscribeEvents_Handler,
 			ServerStreams: true,
 		},
 	},

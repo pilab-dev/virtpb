@@ -5,6 +5,7 @@ package pilab.virtualization.v1;
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1";
 
 import "google/protobuf/timestamp.proto";
+import "pilab/pivirtd/v1/host_resource.proto";
 
 // Main Pivirtd Service - Replacement for libvirtd
 service PivirtdService {
@@ -68,6 +69,10 @@ service PivirtdService {
 
   // VM Status
   rpc GetVMStatus(GetVMStatusRequest) returns (GetVMStatusResponse);
+
+  // Event Streaming
+  rpc SubscribeEvents(SubscribeEventsRequest) returns (stream HostEvent);
+  rpc GetHostResource(SubscribeEventsRequest) returns (HostResourceReport);
 }
 
 // ==================== VM Messages ====================

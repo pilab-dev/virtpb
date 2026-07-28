@@ -5060,7 +5060,7 @@ var File_pilab_pivirtd_v1_pivirtd_proto protoreflect.FileDescriptor
 
 const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\n" +
-	"\x1epilab/pivirtd/v1/pivirtd.proto\x12\x17pilab.virtualization.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x96\x06\n" +
+	"\x1epilab/pivirtd/v1/pivirtd.proto\x12\x17pilab.virtualization.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a$pilab/pivirtd/v1/host_resource.proto\"\x96\x06\n" +
 	"\x0fCreateVMRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
 	"\tmemory_mb\x18\x02 \x01(\x05R\bmemoryMb\x12\x14\n" +
@@ -5442,7 +5442,7 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\x12memory_limit_bytes\x18\x01 \x01(\x03R\x10memoryLimitBytes\x128\n" +
 	"\x18memory_reservation_bytes\x18\x02 \x01(\x03R\x16memoryReservationBytes\x12\x1d\n" +
 	"\n" +
-	"cpu_shares\x18\x03 \x01(\x03R\tcpuShares2\x91 \n" +
+	"cpu_shares\x18\x03 \x01(\x03R\tcpuShares2\xec!\n" +
 	"\x0ePivirtdService\x12Y\n" +
 	"\bCreateVM\x12(.pilab.virtualization.v1.CreateVMRequest\x1a#.pilab.virtualization.v1.VMResponse\x12W\n" +
 	"\aStartVM\x12'.pilab.virtualization.v1.StartVMRequest\x1a#.pilab.virtualization.v1.VMResponse\x12U\n" +
@@ -5485,7 +5485,9 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\tSetLabels\x12).pilab.virtualization.v1.SetLabelsRequest\x1a*.pilab.virtualization.v1.SetLabelsResponse\x12b\n" +
 	"\tGetLabels\x12).pilab.virtualization.v1.GetLabelsRequest\x1a*.pilab.virtualization.v1.GetLabelsResponse\x12t\n" +
 	"\x0fSetProvisioning\x12/.pilab.virtualization.v1.SetProvisioningRequest\x1a0.pilab.virtualization.v1.SetProvisioningResponse\x12h\n" +
-	"\vGetVMStatus\x12+.pilab.virtualization.v1.GetVMStatusRequest\x1a,.pilab.virtualization.v1.GetVMStatusResponseB5Z3go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1b\x06proto3"
+	"\vGetVMStatus\x12+.pilab.virtualization.v1.GetVMStatusRequest\x1a,.pilab.virtualization.v1.GetVMStatusResponse\x12h\n" +
+	"\x0fSubscribeEvents\x12/.pilab.virtualization.v1.SubscribeEventsRequest\x1a\".pilab.virtualization.v1.HostEvent0\x01\x12o\n" +
+	"\x0fGetHostResource\x12/.pilab.virtualization.v1.SubscribeEventsRequest\x1a+.pilab.virtualization.v1.HostResourceReportB5Z3go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1b\x06proto3"
 
 var (
 	file_pilab_pivirtd_v1_pivirtd_proto_rawDescOnce sync.Once
@@ -5588,6 +5590,9 @@ var file_pilab_pivirtd_v1_pivirtd_proto_goTypes = []any{
 	nil,                               // 84: pilab.virtualization.v1.SetLabelsRequest.LabelsEntry
 	nil,                               // 85: pilab.virtualization.v1.GetLabelsResponse.LabelsEntry
 	(*timestamppb.Timestamp)(nil),     // 86: google.protobuf.Timestamp
+	(*SubscribeEventsRequest)(nil),    // 87: pilab.virtualization.v1.SubscribeEventsRequest
+	(*HostEvent)(nil),                 // 88: pilab.virtualization.v1.HostEvent
+	(*HostResourceReport)(nil),        // 89: pilab.virtualization.v1.HostResourceReport
 }
 var file_pilab_pivirtd_v1_pivirtd_proto_depIdxs = []int32{
 	15, // 0: pilab.virtualization.v1.CreateVMRequest.cpu:type_name -> pilab.virtualization.v1.CPUConfig
@@ -5668,47 +5673,51 @@ var file_pilab_pivirtd_v1_pivirtd_proto_depIdxs = []int32{
 	74, // 75: pilab.virtualization.v1.PivirtdService.GetLabels:input_type -> pilab.virtualization.v1.GetLabelsRequest
 	76, // 76: pilab.virtualization.v1.PivirtdService.SetProvisioning:input_type -> pilab.virtualization.v1.SetProvisioningRequest
 	78, // 77: pilab.virtualization.v1.PivirtdService.GetVMStatus:input_type -> pilab.virtualization.v1.GetVMStatusRequest
-	11, // 78: pilab.virtualization.v1.PivirtdService.CreateVM:output_type -> pilab.virtualization.v1.VMResponse
-	11, // 79: pilab.virtualization.v1.PivirtdService.StartVM:output_type -> pilab.virtualization.v1.VMResponse
-	11, // 80: pilab.virtualization.v1.PivirtdService.StopVM:output_type -> pilab.virtualization.v1.VMResponse
-	11, // 81: pilab.virtualization.v1.PivirtdService.PauseVM:output_type -> pilab.virtualization.v1.VMResponse
-	11, // 82: pilab.virtualization.v1.PivirtdService.ResumeVM:output_type -> pilab.virtualization.v1.VMResponse
-	11, // 83: pilab.virtualization.v1.PivirtdService.RebootVM:output_type -> pilab.virtualization.v1.VMResponse
-	12, // 84: pilab.virtualization.v1.PivirtdService.DeleteVM:output_type -> pilab.virtualization.v1.DeleteVMResponse
-	13, // 85: pilab.virtualization.v1.PivirtdService.ListVMs:output_type -> pilab.virtualization.v1.ListVMsResponse
-	11, // 86: pilab.virtualization.v1.PivirtdService.GetVM:output_type -> pilab.virtualization.v1.VMResponse
-	20, // 87: pilab.virtualization.v1.PivirtdService.GetVMStats:output_type -> pilab.virtualization.v1.VMStatsResponse
-	11, // 88: pilab.virtualization.v1.PivirtdService.UpdateVMMemory:output_type -> pilab.virtualization.v1.VMResponse
-	11, // 89: pilab.virtualization.v1.PivirtdService.UpdateVMCpu:output_type -> pilab.virtualization.v1.VMResponse
-	26, // 90: pilab.virtualization.v1.PivirtdService.ExecuteQMP:output_type -> pilab.virtualization.v1.ExecuteQMPResponse
-	28, // 91: pilab.virtualization.v1.PivirtdService.StreamQMPEvents:output_type -> pilab.virtualization.v1.QMPEvent
-	34, // 92: pilab.virtualization.v1.PivirtdService.CreateSnapshot:output_type -> pilab.virtualization.v1.SnapshotResponse
-	31, // 93: pilab.virtualization.v1.PivirtdService.ListSnapshots:output_type -> pilab.virtualization.v1.ListSnapshotsResponse
-	34, // 94: pilab.virtualization.v1.PivirtdService.RestoreSnapshot:output_type -> pilab.virtualization.v1.SnapshotResponse
-	35, // 95: pilab.virtualization.v1.PivirtdService.DeleteSnapshot:output_type -> pilab.virtualization.v1.DeleteSnapshotResponse
-	38, // 96: pilab.virtualization.v1.PivirtdService.MigrateVM:output_type -> pilab.virtualization.v1.MigrateVMResponse
-	40, // 97: pilab.virtualization.v1.PivirtdService.GetMigrationStatus:output_type -> pilab.virtualization.v1.MigrationStatusResponse
-	42, // 98: pilab.virtualization.v1.PivirtdService.CreateStoragePool:output_type -> pilab.virtualization.v1.StoragePoolResponse
-	44, // 99: pilab.virtualization.v1.PivirtdService.ListStoragePools:output_type -> pilab.virtualization.v1.ListStoragePoolsResponse
-	46, // 100: pilab.virtualization.v1.PivirtdService.DeleteStoragePool:output_type -> pilab.virtualization.v1.DeleteStoragePoolResponse
-	50, // 101: pilab.virtualization.v1.PivirtdService.CreateTAPDevice:output_type -> pilab.virtualization.v1.NetworkResponse
-	57, // 102: pilab.virtualization.v1.PivirtdService.DeleteTAPDevice:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
-	52, // 103: pilab.virtualization.v1.PivirtdService.ListTAPDevices:output_type -> pilab.virtualization.v1.ListTAPDevicesResponse
-	50, // 104: pilab.virtualization.v1.PivirtdService.CreateBridge:output_type -> pilab.virtualization.v1.NetworkResponse
-	57, // 105: pilab.virtualization.v1.PivirtdService.DeleteBridge:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
-	54, // 106: pilab.virtualization.v1.PivirtdService.ListBridges:output_type -> pilab.virtualization.v1.ListBridgesResponse
-	50, // 107: pilab.virtualization.v1.PivirtdService.CreateOVSBridge:output_type -> pilab.virtualization.v1.NetworkResponse
-	57, // 108: pilab.virtualization.v1.PivirtdService.DeleteOVSBridge:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
-	64, // 109: pilab.virtualization.v1.PivirtdService.ListOVSBridges:output_type -> pilab.virtualization.v1.ListOVSBridgesResponse
-	50, // 110: pilab.virtualization.v1.PivirtdService.AddOVSPort:output_type -> pilab.virtualization.v1.NetworkResponse
-	57, // 111: pilab.virtualization.v1.PivirtdService.RemoveOVSPort:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
-	68, // 112: pilab.virtualization.v1.PivirtdService.ListOVSPorts:output_type -> pilab.virtualization.v1.ListOVSPortsResponse
-	73, // 113: pilab.virtualization.v1.PivirtdService.SetLabels:output_type -> pilab.virtualization.v1.SetLabelsResponse
-	75, // 114: pilab.virtualization.v1.PivirtdService.GetLabels:output_type -> pilab.virtualization.v1.GetLabelsResponse
-	77, // 115: pilab.virtualization.v1.PivirtdService.SetProvisioning:output_type -> pilab.virtualization.v1.SetProvisioningResponse
-	79, // 116: pilab.virtualization.v1.PivirtdService.GetVMStatus:output_type -> pilab.virtualization.v1.GetVMStatusResponse
-	78, // [78:117] is the sub-list for method output_type
-	39, // [39:78] is the sub-list for method input_type
+	87, // 78: pilab.virtualization.v1.PivirtdService.SubscribeEvents:input_type -> pilab.virtualization.v1.SubscribeEventsRequest
+	87, // 79: pilab.virtualization.v1.PivirtdService.GetHostResource:input_type -> pilab.virtualization.v1.SubscribeEventsRequest
+	11, // 80: pilab.virtualization.v1.PivirtdService.CreateVM:output_type -> pilab.virtualization.v1.VMResponse
+	11, // 81: pilab.virtualization.v1.PivirtdService.StartVM:output_type -> pilab.virtualization.v1.VMResponse
+	11, // 82: pilab.virtualization.v1.PivirtdService.StopVM:output_type -> pilab.virtualization.v1.VMResponse
+	11, // 83: pilab.virtualization.v1.PivirtdService.PauseVM:output_type -> pilab.virtualization.v1.VMResponse
+	11, // 84: pilab.virtualization.v1.PivirtdService.ResumeVM:output_type -> pilab.virtualization.v1.VMResponse
+	11, // 85: pilab.virtualization.v1.PivirtdService.RebootVM:output_type -> pilab.virtualization.v1.VMResponse
+	12, // 86: pilab.virtualization.v1.PivirtdService.DeleteVM:output_type -> pilab.virtualization.v1.DeleteVMResponse
+	13, // 87: pilab.virtualization.v1.PivirtdService.ListVMs:output_type -> pilab.virtualization.v1.ListVMsResponse
+	11, // 88: pilab.virtualization.v1.PivirtdService.GetVM:output_type -> pilab.virtualization.v1.VMResponse
+	20, // 89: pilab.virtualization.v1.PivirtdService.GetVMStats:output_type -> pilab.virtualization.v1.VMStatsResponse
+	11, // 90: pilab.virtualization.v1.PivirtdService.UpdateVMMemory:output_type -> pilab.virtualization.v1.VMResponse
+	11, // 91: pilab.virtualization.v1.PivirtdService.UpdateVMCpu:output_type -> pilab.virtualization.v1.VMResponse
+	26, // 92: pilab.virtualization.v1.PivirtdService.ExecuteQMP:output_type -> pilab.virtualization.v1.ExecuteQMPResponse
+	28, // 93: pilab.virtualization.v1.PivirtdService.StreamQMPEvents:output_type -> pilab.virtualization.v1.QMPEvent
+	34, // 94: pilab.virtualization.v1.PivirtdService.CreateSnapshot:output_type -> pilab.virtualization.v1.SnapshotResponse
+	31, // 95: pilab.virtualization.v1.PivirtdService.ListSnapshots:output_type -> pilab.virtualization.v1.ListSnapshotsResponse
+	34, // 96: pilab.virtualization.v1.PivirtdService.RestoreSnapshot:output_type -> pilab.virtualization.v1.SnapshotResponse
+	35, // 97: pilab.virtualization.v1.PivirtdService.DeleteSnapshot:output_type -> pilab.virtualization.v1.DeleteSnapshotResponse
+	38, // 98: pilab.virtualization.v1.PivirtdService.MigrateVM:output_type -> pilab.virtualization.v1.MigrateVMResponse
+	40, // 99: pilab.virtualization.v1.PivirtdService.GetMigrationStatus:output_type -> pilab.virtualization.v1.MigrationStatusResponse
+	42, // 100: pilab.virtualization.v1.PivirtdService.CreateStoragePool:output_type -> pilab.virtualization.v1.StoragePoolResponse
+	44, // 101: pilab.virtualization.v1.PivirtdService.ListStoragePools:output_type -> pilab.virtualization.v1.ListStoragePoolsResponse
+	46, // 102: pilab.virtualization.v1.PivirtdService.DeleteStoragePool:output_type -> pilab.virtualization.v1.DeleteStoragePoolResponse
+	50, // 103: pilab.virtualization.v1.PivirtdService.CreateTAPDevice:output_type -> pilab.virtualization.v1.NetworkResponse
+	57, // 104: pilab.virtualization.v1.PivirtdService.DeleteTAPDevice:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
+	52, // 105: pilab.virtualization.v1.PivirtdService.ListTAPDevices:output_type -> pilab.virtualization.v1.ListTAPDevicesResponse
+	50, // 106: pilab.virtualization.v1.PivirtdService.CreateBridge:output_type -> pilab.virtualization.v1.NetworkResponse
+	57, // 107: pilab.virtualization.v1.PivirtdService.DeleteBridge:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
+	54, // 108: pilab.virtualization.v1.PivirtdService.ListBridges:output_type -> pilab.virtualization.v1.ListBridgesResponse
+	50, // 109: pilab.virtualization.v1.PivirtdService.CreateOVSBridge:output_type -> pilab.virtualization.v1.NetworkResponse
+	57, // 110: pilab.virtualization.v1.PivirtdService.DeleteOVSBridge:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
+	64, // 111: pilab.virtualization.v1.PivirtdService.ListOVSBridges:output_type -> pilab.virtualization.v1.ListOVSBridgesResponse
+	50, // 112: pilab.virtualization.v1.PivirtdService.AddOVSPort:output_type -> pilab.virtualization.v1.NetworkResponse
+	57, // 113: pilab.virtualization.v1.PivirtdService.RemoveOVSPort:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
+	68, // 114: pilab.virtualization.v1.PivirtdService.ListOVSPorts:output_type -> pilab.virtualization.v1.ListOVSPortsResponse
+	73, // 115: pilab.virtualization.v1.PivirtdService.SetLabels:output_type -> pilab.virtualization.v1.SetLabelsResponse
+	75, // 116: pilab.virtualization.v1.PivirtdService.GetLabels:output_type -> pilab.virtualization.v1.GetLabelsResponse
+	77, // 117: pilab.virtualization.v1.PivirtdService.SetProvisioning:output_type -> pilab.virtualization.v1.SetProvisioningResponse
+	79, // 118: pilab.virtualization.v1.PivirtdService.GetVMStatus:output_type -> pilab.virtualization.v1.GetVMStatusResponse
+	88, // 119: pilab.virtualization.v1.PivirtdService.SubscribeEvents:output_type -> pilab.virtualization.v1.HostEvent
+	89, // 120: pilab.virtualization.v1.PivirtdService.GetHostResource:output_type -> pilab.virtualization.v1.HostResourceReport
+	80, // [80:121] is the sub-list for method output_type
+	39, // [39:80] is the sub-list for method input_type
 	39, // [39:39] is the sub-list for extension type_name
 	39, // [39:39] is the sub-list for extension extendee
 	0,  // [0:39] is the sub-list for field type_name
@@ -5719,6 +5728,7 @@ func file_pilab_pivirtd_v1_pivirtd_proto_init() {
 	if File_pilab_pivirtd_v1_pivirtd_proto != nil {
 		return
 	}
+	file_pilab_pivirtd_v1_host_resource_proto_init()
 	file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[60].OneofWrappers = []any{
 		(*NetworkDevice_Tap)(nil),
 		(*NetworkDevice_Bridge)(nil),
