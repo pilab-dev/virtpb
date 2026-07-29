@@ -179,6 +179,7 @@ message VMInfo {
   int32 max_memory_mb = 15;
   int32 memory_slots = 16;
   int32 max_vcpus = 17;
+  bytes yaml_spec = 18;  // Raw hades.VirtualMachine YAML specification
 }
 
 message CPUConfig {

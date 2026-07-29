@@ -881,6 +881,7 @@ type VMInfo struct {
 	MaxMemoryMb   int32                  `protobuf:"varint,15,opt,name=max_memory_mb,json=maxMemoryMb,proto3" json:"max_memory_mb,omitempty"`
 	MemorySlots   int32                  `protobuf:"varint,16,opt,name=memory_slots,json=memorySlots,proto3" json:"memory_slots,omitempty"`
 	MaxVcpus      int32                  `protobuf:"varint,17,opt,name=max_vcpus,json=maxVcpus,proto3" json:"max_vcpus,omitempty"`
+	YamlSpec      []byte                 `protobuf:"bytes,18,opt,name=yaml_spec,json=yamlSpec,proto3" json:"yaml_spec,omitempty"` // Raw hades.VirtualMachine YAML specification
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1032,6 +1033,13 @@ func (x *VMInfo) GetMaxVcpus() int32 {
 		return x.MaxVcpus
 	}
 	return 0
+}
+
+func (x *VMInfo) GetYamlSpec() []byte {
+	if x != nil {
+		return x.YamlSpec
+	}
+	return nil
 }
 
 type CPUConfig struct {
@@ -5120,7 +5128,7 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\x05error\x18\x02 \x01(\tR\x05error\"l\n" +
 	"\x0fListVMsResponse\x121\n" +
 	"\x03vms\x18\x01 \x03(\v2\x1f.pilab.virtualization.v1.VMInfoR\x03vms\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\x8c\x05\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xa9\x05\n" +
 	"\x06VMInfo\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
 	"\x04uuid\x18\x02 \x01(\tR\x04uuid\x12\x14\n" +
@@ -5141,7 +5149,8 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\x03efi\x18\x0e \x01(\v2\".pilab.virtualization.v1.EFIConfigR\x03efi\x12\"\n" +
 	"\rmax_memory_mb\x18\x0f \x01(\x05R\vmaxMemoryMb\x12!\n" +
 	"\fmemory_slots\x18\x10 \x01(\x05R\vmemorySlots\x12\x1b\n" +
-	"\tmax_vcpus\x18\x11 \x01(\x05R\bmaxVcpus\"r\n" +
+	"\tmax_vcpus\x18\x11 \x01(\x05R\bmaxVcpus\x12\x1b\n" +
+	"\tyaml_spec\x18\x12 \x01(\fR\byamlSpec\"r\n" +
 	"\tCPUConfig\x12\x14\n" +
 	"\x05model\x18\x01 \x01(\tR\x05model\x12\x1a\n" +
 	"\btopology\x18\x02 \x01(\tR\btopology\x123\n" +
