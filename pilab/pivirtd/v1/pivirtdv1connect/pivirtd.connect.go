@@ -146,6 +146,15 @@ const (
 	// PivirtdServiceGetVMStatusProcedure is the fully-qualified name of the PivirtdService's
 	// GetVMStatus RPC.
 	PivirtdServiceGetVMStatusProcedure = "/pilab.virtualization.v1.PivirtdService/GetVMStatus"
+	// PivirtdServiceStartDiskMoveProcedure is the fully-qualified name of the PivirtdService's
+	// StartDiskMove RPC.
+	PivirtdServiceStartDiskMoveProcedure = "/pilab.virtualization.v1.PivirtdService/StartDiskMove"
+	// PivirtdServiceGetDiskMoveStatusProcedure is the fully-qualified name of the PivirtdService's
+	// GetDiskMoveStatus RPC.
+	PivirtdServiceGetDiskMoveStatusProcedure = "/pilab.virtualization.v1.PivirtdService/GetDiskMoveStatus"
+	// PivirtdServiceCancelDiskMoveProcedure is the fully-qualified name of the PivirtdService's
+	// CancelDiskMove RPC.
+	PivirtdServiceCancelDiskMoveProcedure = "/pilab.virtualization.v1.PivirtdService/CancelDiskMove"
 	// PivirtdServiceSubscribeEventsProcedure is the fully-qualified name of the PivirtdService's
 	// SubscribeEvents RPC.
 	PivirtdServiceSubscribeEventsProcedure = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
@@ -209,6 +218,10 @@ type PivirtdServiceClient interface {
 	SetProvisioning(context.Context, *connect.Request[v1.SetProvisioningRequest]) (*connect.Response[v1.SetProvisioningResponse], error)
 	// VM Status
 	GetVMStatus(context.Context, *connect.Request[v1.GetVMStatusRequest]) (*connect.Response[v1.GetVMStatusResponse], error)
+	// Disk Move (live block job mirroring)
+	StartDiskMove(context.Context, *connect.Request[v1.StartDiskMoveRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error)
+	GetDiskMoveStatus(context.Context, *connect.Request[v1.GetDiskMoveStatusRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error)
+	CancelDiskMove(context.Context, *connect.Request[v1.CancelDiskMoveRequest]) (*connect.Response[v1.DiskMoveResponse], error)
 	// Event Streaming
 	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.ServerStreamForClient[v1.HostEvent], error)
 	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
@@ -471,6 +484,24 @@ func NewPivirtdServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(pivirtdServiceMethods.ByName("GetVMStatus")),
 			connect.WithClientOptions(opts...),
 		),
+		startDiskMove: connect.NewClient[v1.StartDiskMoveRequest, v1.DiskMoveStatusResponse](
+			httpClient,
+			baseURL+PivirtdServiceStartDiskMoveProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("StartDiskMove")),
+			connect.WithClientOptions(opts...),
+		),
+		getDiskMoveStatus: connect.NewClient[v1.GetDiskMoveStatusRequest, v1.DiskMoveStatusResponse](
+			httpClient,
+			baseURL+PivirtdServiceGetDiskMoveStatusProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("GetDiskMoveStatus")),
+			connect.WithClientOptions(opts...),
+		),
+		cancelDiskMove: connect.NewClient[v1.CancelDiskMoveRequest, v1.DiskMoveResponse](
+			httpClient,
+			baseURL+PivirtdServiceCancelDiskMoveProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("CancelDiskMove")),
+			connect.WithClientOptions(opts...),
+		),
 		subscribeEvents: connect.NewClient[v1.SubscribeEventsRequest, v1.HostEvent](
 			httpClient,
 			baseURL+PivirtdServiceSubscribeEventsProcedure,
@@ -529,6 +560,9 @@ type pivirtdServiceClient struct {
 	getLabels          *connect.Client[v1.GetLabelsRequest, v1.GetLabelsResponse]
 	setProvisioning    *connect.Client[v1.SetProvisioningRequest, v1.SetProvisioningResponse]
 	getVMStatus        *connect.Client[v1.GetVMStatusRequest, v1.GetVMStatusResponse]
+	startDiskMove      *connect.Client[v1.StartDiskMoveRequest, v1.DiskMoveStatusResponse]
+	getDiskMoveStatus  *connect.Client[v1.GetDiskMoveStatusRequest, v1.DiskMoveStatusResponse]
+	cancelDiskMove     *connect.Client[v1.CancelDiskMoveRequest, v1.DiskMoveResponse]
 	subscribeEvents    *connect.Client[v1.SubscribeEventsRequest, v1.HostEvent]
 	getHostResource    *connect.Client[v1.SubscribeEventsRequest, v1.HostResourceReport]
 }
@@ -738,6 +772,21 @@ func (c *pivirtdServiceClient) GetVMStatus(ctx context.Context, req *connect.Req
 	return c.getVMStatus.CallUnary(ctx, req)
 }
 
+// StartDiskMove calls pilab.virtualization.v1.PivirtdService.StartDiskMove.
+func (c *pivirtdServiceClient) StartDiskMove(ctx context.Context, req *connect.Request[v1.StartDiskMoveRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error) {
+	return c.startDiskMove.CallUnary(ctx, req)
+}
+
+// GetDiskMoveStatus calls pilab.virtualization.v1.PivirtdService.GetDiskMoveStatus.
+func (c *pivirtdServiceClient) GetDiskMoveStatus(ctx context.Context, req *connect.Request[v1.GetDiskMoveStatusRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error) {
+	return c.getDiskMoveStatus.CallUnary(ctx, req)
+}
+
+// CancelDiskMove calls pilab.virtualization.v1.PivirtdService.CancelDiskMove.
+func (c *pivirtdServiceClient) CancelDiskMove(ctx context.Context, req *connect.Request[v1.CancelDiskMoveRequest]) (*connect.Response[v1.DiskMoveResponse], error) {
+	return c.cancelDiskMove.CallUnary(ctx, req)
+}
+
 // SubscribeEvents calls pilab.virtualization.v1.PivirtdService.SubscribeEvents.
 func (c *pivirtdServiceClient) SubscribeEvents(ctx context.Context, req *connect.Request[v1.SubscribeEventsRequest]) (*connect.ServerStreamForClient[v1.HostEvent], error) {
 	return c.subscribeEvents.CallServerStream(ctx, req)
@@ -803,6 +852,10 @@ type PivirtdServiceHandler interface {
 	SetProvisioning(context.Context, *connect.Request[v1.SetProvisioningRequest]) (*connect.Response[v1.SetProvisioningResponse], error)
 	// VM Status
 	GetVMStatus(context.Context, *connect.Request[v1.GetVMStatusRequest]) (*connect.Response[v1.GetVMStatusResponse], error)
+	// Disk Move (live block job mirroring)
+	StartDiskMove(context.Context, *connect.Request[v1.StartDiskMoveRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error)
+	GetDiskMoveStatus(context.Context, *connect.Request[v1.GetDiskMoveStatusRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error)
+	CancelDiskMove(context.Context, *connect.Request[v1.CancelDiskMoveRequest]) (*connect.Response[v1.DiskMoveResponse], error)
 	// Event Streaming
 	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest], *connect.ServerStream[v1.HostEvent]) error
 	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
@@ -1061,6 +1114,24 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 		connect.WithSchema(pivirtdServiceMethods.ByName("GetVMStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
+	pivirtdServiceStartDiskMoveHandler := connect.NewUnaryHandler(
+		PivirtdServiceStartDiskMoveProcedure,
+		svc.StartDiskMove,
+		connect.WithSchema(pivirtdServiceMethods.ByName("StartDiskMove")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceGetDiskMoveStatusHandler := connect.NewUnaryHandler(
+		PivirtdServiceGetDiskMoveStatusProcedure,
+		svc.GetDiskMoveStatus,
+		connect.WithSchema(pivirtdServiceMethods.ByName("GetDiskMoveStatus")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceCancelDiskMoveHandler := connect.NewUnaryHandler(
+		PivirtdServiceCancelDiskMoveProcedure,
+		svc.CancelDiskMove,
+		connect.WithSchema(pivirtdServiceMethods.ByName("CancelDiskMove")),
+		connect.WithHandlerOptions(opts...),
+	)
 	pivirtdServiceSubscribeEventsHandler := connect.NewServerStreamHandler(
 		PivirtdServiceSubscribeEventsProcedure,
 		svc.SubscribeEvents,
@@ -1157,6 +1228,12 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 			pivirtdServiceSetProvisioningHandler.ServeHTTP(w, r)
 		case PivirtdServiceGetVMStatusProcedure:
 			pivirtdServiceGetVMStatusHandler.ServeHTTP(w, r)
+		case PivirtdServiceStartDiskMoveProcedure:
+			pivirtdServiceStartDiskMoveHandler.ServeHTTP(w, r)
+		case PivirtdServiceGetDiskMoveStatusProcedure:
+			pivirtdServiceGetDiskMoveStatusHandler.ServeHTTP(w, r)
+		case PivirtdServiceCancelDiskMoveProcedure:
+			pivirtdServiceCancelDiskMoveHandler.ServeHTTP(w, r)
 		case PivirtdServiceSubscribeEventsProcedure:
 			pivirtdServiceSubscribeEventsHandler.ServeHTTP(w, r)
 		case PivirtdServiceGetHostResourceProcedure:
@@ -1332,6 +1409,18 @@ func (UnimplementedPivirtdServiceHandler) SetProvisioning(context.Context, *conn
 
 func (UnimplementedPivirtdServiceHandler) GetVMStatus(context.Context, *connect.Request[v1.GetVMStatusRequest]) (*connect.Response[v1.GetVMStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GetVMStatus is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) StartDiskMove(context.Context, *connect.Request[v1.StartDiskMoveRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.StartDiskMove is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) GetDiskMoveStatus(context.Context, *connect.Request[v1.GetDiskMoveStatusRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GetDiskMoveStatus is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) CancelDiskMove(context.Context, *connect.Request[v1.CancelDiskMoveRequest]) (*connect.Response[v1.DiskMoveResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.CancelDiskMove is not implemented"))
 }
 
 func (UnimplementedPivirtdServiceHandler) SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest], *connect.ServerStream[v1.HostEvent]) error {

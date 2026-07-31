@@ -60,6 +60,9 @@ const (
 	PivirtdService_GetLabels_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/GetLabels"
 	PivirtdService_SetProvisioning_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/SetProvisioning"
 	PivirtdService_GetVMStatus_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/GetVMStatus"
+	PivirtdService_StartDiskMove_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/StartDiskMove"
+	PivirtdService_GetDiskMoveStatus_FullMethodName  = "/pilab.virtualization.v1.PivirtdService/GetDiskMoveStatus"
+	PivirtdService_CancelDiskMove_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/CancelDiskMove"
 	PivirtdService_SubscribeEvents_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
 	PivirtdService_GetHostResource_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/GetHostResource"
 )
@@ -123,6 +126,10 @@ type PivirtdServiceClient interface {
 	SetProvisioning(ctx context.Context, in *SetProvisioningRequest, opts ...grpc.CallOption) (*SetProvisioningResponse, error)
 	// VM Status
 	GetVMStatus(ctx context.Context, in *GetVMStatusRequest, opts ...grpc.CallOption) (*GetVMStatusResponse, error)
+	// Disk Move (live block job mirroring)
+	StartDiskMove(ctx context.Context, in *StartDiskMoveRequest, opts ...grpc.CallOption) (*DiskMoveStatusResponse, error)
+	GetDiskMoveStatus(ctx context.Context, in *GetDiskMoveStatusRequest, opts ...grpc.CallOption) (*DiskMoveStatusResponse, error)
+	CancelDiskMove(ctx context.Context, in *CancelDiskMoveRequest, opts ...grpc.CallOption) (*DiskMoveResponse, error)
 	// Event Streaming
 	SubscribeEvents(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HostEvent], error)
 	GetHostResource(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (*HostResourceReport, error)
@@ -555,6 +562,36 @@ func (c *pivirtdServiceClient) GetVMStatus(ctx context.Context, in *GetVMStatusR
 	return out, nil
 }
 
+func (c *pivirtdServiceClient) StartDiskMove(ctx context.Context, in *StartDiskMoveRequest, opts ...grpc.CallOption) (*DiskMoveStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DiskMoveStatusResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_StartDiskMove_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) GetDiskMoveStatus(ctx context.Context, in *GetDiskMoveStatusRequest, opts ...grpc.CallOption) (*DiskMoveStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DiskMoveStatusResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_GetDiskMoveStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) CancelDiskMove(ctx context.Context, in *CancelDiskMoveRequest, opts ...grpc.CallOption) (*DiskMoveResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DiskMoveResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_CancelDiskMove_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *pivirtdServiceClient) SubscribeEvents(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HostEvent], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &PivirtdService_ServiceDesc.Streams[1], PivirtdService_SubscribeEvents_FullMethodName, cOpts...)
@@ -643,6 +680,10 @@ type PivirtdServiceServer interface {
 	SetProvisioning(context.Context, *SetProvisioningRequest) (*SetProvisioningResponse, error)
 	// VM Status
 	GetVMStatus(context.Context, *GetVMStatusRequest) (*GetVMStatusResponse, error)
+	// Disk Move (live block job mirroring)
+	StartDiskMove(context.Context, *StartDiskMoveRequest) (*DiskMoveStatusResponse, error)
+	GetDiskMoveStatus(context.Context, *GetDiskMoveStatusRequest) (*DiskMoveStatusResponse, error)
+	CancelDiskMove(context.Context, *CancelDiskMoveRequest) (*DiskMoveResponse, error)
 	// Event Streaming
 	SubscribeEvents(*SubscribeEventsRequest, grpc.ServerStreamingServer[HostEvent]) error
 	GetHostResource(context.Context, *SubscribeEventsRequest) (*HostResourceReport, error)
@@ -778,6 +819,15 @@ func (UnimplementedPivirtdServiceServer) SetProvisioning(context.Context, *SetPr
 }
 func (UnimplementedPivirtdServiceServer) GetVMStatus(context.Context, *GetVMStatusRequest) (*GetVMStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetVMStatus not implemented")
+}
+func (UnimplementedPivirtdServiceServer) StartDiskMove(context.Context, *StartDiskMoveRequest) (*DiskMoveStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartDiskMove not implemented")
+}
+func (UnimplementedPivirtdServiceServer) GetDiskMoveStatus(context.Context, *GetDiskMoveStatusRequest) (*DiskMoveStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDiskMoveStatus not implemented")
+}
+func (UnimplementedPivirtdServiceServer) CancelDiskMove(context.Context, *CancelDiskMoveRequest) (*DiskMoveResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CancelDiskMove not implemented")
 }
 func (UnimplementedPivirtdServiceServer) SubscribeEvents(*SubscribeEventsRequest, grpc.ServerStreamingServer[HostEvent]) error {
 	return status.Error(codes.Unimplemented, "method SubscribeEvents not implemented")
@@ -1537,6 +1587,60 @@ func _PivirtdService_GetVMStatus_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PivirtdService_StartDiskMove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartDiskMoveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).StartDiskMove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_StartDiskMove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).StartDiskMove(ctx, req.(*StartDiskMoveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_GetDiskMoveStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDiskMoveStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).GetDiskMoveStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_GetDiskMoveStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).GetDiskMoveStatus(ctx, req.(*GetDiskMoveStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_CancelDiskMove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelDiskMoveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).CancelDiskMove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_CancelDiskMove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).CancelDiskMove(ctx, req.(*CancelDiskMoveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PivirtdService_SubscribeEvents_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(SubscribeEventsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -1732,6 +1836,18 @@ var PivirtdService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetVMStatus",
 			Handler:    _PivirtdService_GetVMStatus_Handler,
+		},
+		{
+			MethodName: "StartDiskMove",
+			Handler:    _PivirtdService_StartDiskMove_Handler,
+		},
+		{
+			MethodName: "GetDiskMoveStatus",
+			Handler:    _PivirtdService_GetDiskMoveStatus_Handler,
+		},
+		{
+			MethodName: "CancelDiskMove",
+			Handler:    _PivirtdService_CancelDiskMove_Handler,
 		},
 		{
 			MethodName: "GetHostResource",

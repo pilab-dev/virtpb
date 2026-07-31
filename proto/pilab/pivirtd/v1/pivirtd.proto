@@ -74,6 +74,11 @@ service PivirtdService {
   // VM Status
   rpc GetVMStatus(GetVMStatusRequest) returns (GetVMStatusResponse);
 
+  // Disk Move (live block job mirroring)
+  rpc StartDiskMove(StartDiskMoveRequest) returns (DiskMoveStatusResponse);
+  rpc GetDiskMoveStatus(GetDiskMoveStatusRequest) returns (DiskMoveStatusResponse);
+  rpc CancelDiskMove(CancelDiskMoveRequest) returns (DiskMoveResponse);
+
   // Event Streaming
   rpc SubscribeEvents(SubscribeEventsRequest) returns (stream HostEvent);
   rpc GetHostResource(SubscribeEventsRequest) returns (HostResourceReport);
@@ -343,6 +348,56 @@ message CloneSnapshotRequest {
   string new_vm_name = 3;
 }
 
+// ==================== Disk Move Messages ====================
+
+message StartDiskMoveRequest {
+  string vm_name = 1;
+  string device = 2;
+  string target = 3;
+  string format = 4;
+  string sync = 5;
+  int64 speed = 6;
+  int64 granularity = 7;
+  int64 buf_size = 8;
+  string on_source_error = 9;
+  string on_target_error = 10;
+  bool unmap = 11;
+  string bitmap = 12;
+  bool compression = 13;
+}
+
+message GetDiskMoveStatusRequest {
+  string vm_name = 1;
+}
+
+message CancelDiskMoveRequest {
+  string vm_name = 1;
+}
+
+message DiskMoveResponse {
+  bool success = 1;
+  string error = 2;
+  VMJobStatus job = 3;
+}
+
+message DiskMoveStatusResponse {
+  VMJobStatus job = 1;
+}
+
+message VMJobStatus {
+  string type = 1;
+  string device = 2;
+  string status = 3;
+  int64 transferred_bytes = 4;
+  int64 total_bytes = 5;
+  double progress_percent = 6;
+  double speed_bytes_per_sec = 7;
+  int64 eta_seconds = 8;
+  string target = 9;
+  string error = 10;
+  google.protobuf.Timestamp started_at = 11;
+}
+
 // ==================== Migration Messages ====================
 
 message MigrateVMRequest {
@@ -592,6 +647,9 @@ message GetVMStatusResponse {
   string phase = 1;
   repeated VMCondition conditions = 2;
   repeated VMEvent events = 3;
+  bool working = 4;
+  string blocker_task = 5;
+  repeated VMJobStatus jobs = 6;
 }
 
 message VMCondition {
