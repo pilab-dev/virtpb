@@ -78,6 +78,11 @@ const (
 	// PivirtdServiceDeleteSnapshotProcedure is the fully-qualified name of the PivirtdService's
 	// DeleteSnapshot RPC.
 	PivirtdServiceDeleteSnapshotProcedure = "/pilab.virtualization.v1.PivirtdService/DeleteSnapshot"
+	// PivirtdServiceCloneVMProcedure is the fully-qualified name of the PivirtdService's CloneVM RPC.
+	PivirtdServiceCloneVMProcedure = "/pilab.virtualization.v1.PivirtdService/CloneVM"
+	// PivirtdServiceCloneSnapshotProcedure is the fully-qualified name of the PivirtdService's
+	// CloneSnapshot RPC.
+	PivirtdServiceCloneSnapshotProcedure = "/pilab.virtualization.v1.PivirtdService/CloneSnapshot"
 	// PivirtdServiceMigrateVMProcedure is the fully-qualified name of the PivirtdService's MigrateVM
 	// RPC.
 	PivirtdServiceMigrateVMProcedure = "/pilab.virtualization.v1.PivirtdService/MigrateVM"
@@ -173,6 +178,9 @@ type PivirtdServiceClient interface {
 	ListSnapshots(context.Context, *connect.Request[v1.ListSnapshotsRequest]) (*connect.Response[v1.ListSnapshotsResponse], error)
 	RestoreSnapshot(context.Context, *connect.Request[v1.RestoreSnapshotRequest]) (*connect.Response[v1.SnapshotResponse], error)
 	DeleteSnapshot(context.Context, *connect.Request[v1.DeleteSnapshotRequest]) (*connect.Response[v1.DeleteSnapshotResponse], error)
+	// Clone Operations
+	CloneVM(context.Context, *connect.Request[v1.CloneVMRequest]) (*connect.Response[v1.VMResponse], error)
+	CloneSnapshot(context.Context, *connect.Request[v1.CloneSnapshotRequest]) (*connect.Response[v1.VMResponse], error)
 	// Migration
 	MigrateVM(context.Context, *connect.Request[v1.MigrateVMRequest]) (*connect.Response[v1.MigrateVMResponse], error)
 	GetMigrationStatus(context.Context, *connect.Request[v1.GetMigrationStatusRequest]) (*connect.Response[v1.MigrationStatusResponse], error)
@@ -323,6 +331,18 @@ func NewPivirtdServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			httpClient,
 			baseURL+PivirtdServiceDeleteSnapshotProcedure,
 			connect.WithSchema(pivirtdServiceMethods.ByName("DeleteSnapshot")),
+			connect.WithClientOptions(opts...),
+		),
+		cloneVM: connect.NewClient[v1.CloneVMRequest, v1.VMResponse](
+			httpClient,
+			baseURL+PivirtdServiceCloneVMProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("CloneVM")),
+			connect.WithClientOptions(opts...),
+		),
+		cloneSnapshot: connect.NewClient[v1.CloneSnapshotRequest, v1.VMResponse](
+			httpClient,
+			baseURL+PivirtdServiceCloneSnapshotProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("CloneSnapshot")),
 			connect.WithClientOptions(opts...),
 		),
 		migrateVM: connect.NewClient[v1.MigrateVMRequest, v1.MigrateVMResponse](
@@ -486,6 +506,8 @@ type pivirtdServiceClient struct {
 	listSnapshots      *connect.Client[v1.ListSnapshotsRequest, v1.ListSnapshotsResponse]
 	restoreSnapshot    *connect.Client[v1.RestoreSnapshotRequest, v1.SnapshotResponse]
 	deleteSnapshot     *connect.Client[v1.DeleteSnapshotRequest, v1.DeleteSnapshotResponse]
+	cloneVM            *connect.Client[v1.CloneVMRequest, v1.VMResponse]
+	cloneSnapshot      *connect.Client[v1.CloneSnapshotRequest, v1.VMResponse]
 	migrateVM          *connect.Client[v1.MigrateVMRequest, v1.MigrateVMResponse]
 	getMigrationStatus *connect.Client[v1.GetMigrationStatusRequest, v1.MigrationStatusResponse]
 	createStoragePool  *connect.Client[v1.CreateStoragePoolRequest, v1.StoragePoolResponse]
@@ -599,6 +621,16 @@ func (c *pivirtdServiceClient) RestoreSnapshot(ctx context.Context, req *connect
 // DeleteSnapshot calls pilab.virtualization.v1.PivirtdService.DeleteSnapshot.
 func (c *pivirtdServiceClient) DeleteSnapshot(ctx context.Context, req *connect.Request[v1.DeleteSnapshotRequest]) (*connect.Response[v1.DeleteSnapshotResponse], error) {
 	return c.deleteSnapshot.CallUnary(ctx, req)
+}
+
+// CloneVM calls pilab.virtualization.v1.PivirtdService.CloneVM.
+func (c *pivirtdServiceClient) CloneVM(ctx context.Context, req *connect.Request[v1.CloneVMRequest]) (*connect.Response[v1.VMResponse], error) {
+	return c.cloneVM.CallUnary(ctx, req)
+}
+
+// CloneSnapshot calls pilab.virtualization.v1.PivirtdService.CloneSnapshot.
+func (c *pivirtdServiceClient) CloneSnapshot(ctx context.Context, req *connect.Request[v1.CloneSnapshotRequest]) (*connect.Response[v1.VMResponse], error) {
+	return c.cloneSnapshot.CallUnary(ctx, req)
 }
 
 // MigrateVM calls pilab.virtualization.v1.PivirtdService.MigrateVM.
@@ -740,6 +772,9 @@ type PivirtdServiceHandler interface {
 	ListSnapshots(context.Context, *connect.Request[v1.ListSnapshotsRequest]) (*connect.Response[v1.ListSnapshotsResponse], error)
 	RestoreSnapshot(context.Context, *connect.Request[v1.RestoreSnapshotRequest]) (*connect.Response[v1.SnapshotResponse], error)
 	DeleteSnapshot(context.Context, *connect.Request[v1.DeleteSnapshotRequest]) (*connect.Response[v1.DeleteSnapshotResponse], error)
+	// Clone Operations
+	CloneVM(context.Context, *connect.Request[v1.CloneVMRequest]) (*connect.Response[v1.VMResponse], error)
+	CloneSnapshot(context.Context, *connect.Request[v1.CloneSnapshotRequest]) (*connect.Response[v1.VMResponse], error)
 	// Migration
 	MigrateVM(context.Context, *connect.Request[v1.MigrateVMRequest]) (*connect.Response[v1.MigrateVMResponse], error)
 	GetMigrationStatus(context.Context, *connect.Request[v1.GetMigrationStatusRequest]) (*connect.Response[v1.MigrationStatusResponse], error)
@@ -886,6 +921,18 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 		PivirtdServiceDeleteSnapshotProcedure,
 		svc.DeleteSnapshot,
 		connect.WithSchema(pivirtdServiceMethods.ByName("DeleteSnapshot")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceCloneVMHandler := connect.NewUnaryHandler(
+		PivirtdServiceCloneVMProcedure,
+		svc.CloneVM,
+		connect.WithSchema(pivirtdServiceMethods.ByName("CloneVM")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceCloneSnapshotHandler := connect.NewUnaryHandler(
+		PivirtdServiceCloneSnapshotProcedure,
+		svc.CloneSnapshot,
+		connect.WithSchema(pivirtdServiceMethods.ByName("CloneSnapshot")),
 		connect.WithHandlerOptions(opts...),
 	)
 	pivirtdServiceMigrateVMHandler := connect.NewUnaryHandler(
@@ -1064,6 +1111,10 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 			pivirtdServiceRestoreSnapshotHandler.ServeHTTP(w, r)
 		case PivirtdServiceDeleteSnapshotProcedure:
 			pivirtdServiceDeleteSnapshotHandler.ServeHTTP(w, r)
+		case PivirtdServiceCloneVMProcedure:
+			pivirtdServiceCloneVMHandler.ServeHTTP(w, r)
+		case PivirtdServiceCloneSnapshotProcedure:
+			pivirtdServiceCloneSnapshotHandler.ServeHTTP(w, r)
 		case PivirtdServiceMigrateVMProcedure:
 			pivirtdServiceMigrateVMHandler.ServeHTTP(w, r)
 		case PivirtdServiceGetMigrationStatusProcedure:
@@ -1189,6 +1240,14 @@ func (UnimplementedPivirtdServiceHandler) RestoreSnapshot(context.Context, *conn
 
 func (UnimplementedPivirtdServiceHandler) DeleteSnapshot(context.Context, *connect.Request[v1.DeleteSnapshotRequest]) (*connect.Response[v1.DeleteSnapshotResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.DeleteSnapshot is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) CloneVM(context.Context, *connect.Request[v1.CloneVMRequest]) (*connect.Response[v1.VMResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.CloneVM is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) CloneSnapshot(context.Context, *connect.Request[v1.CloneSnapshotRequest]) (*connect.Response[v1.VMResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.CloneSnapshot is not implemented"))
 }
 
 func (UnimplementedPivirtdServiceHandler) MigrateVM(context.Context, *connect.Request[v1.MigrateVMRequest]) (*connect.Response[v1.MigrateVMResponse], error) {

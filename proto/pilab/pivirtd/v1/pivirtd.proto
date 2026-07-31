@@ -35,6 +35,10 @@ service PivirtdService {
   rpc RestoreSnapshot(RestoreSnapshotRequest) returns (SnapshotResponse);
   rpc DeleteSnapshot(DeleteSnapshotRequest) returns (DeleteSnapshotResponse);
   
+  // Clone Operations
+  rpc CloneVM(CloneVMRequest) returns (VMResponse);
+  rpc CloneSnapshot(CloneSnapshotRequest) returns (VMResponse);
+  
   // Migration
   rpc MigrateVM(MigrateVMRequest) returns (MigrateVMResponse);
   rpc GetMigrationStatus(GetMigrationStatusRequest) returns (MigrationStatusResponse);
@@ -325,6 +329,18 @@ message SnapshotInfo {
   string description = 3;
   int64 vm_state_size = 4;
   google.protobuf.Timestamp date = 5;
+}
+
+message CloneVMRequest {
+  string vm_name = 1;
+  string new_vm_name = 2;
+  bool start_after_clone = 3;
+}
+
+message CloneSnapshotRequest {
+  string vm_name = 1;
+  string snapshot_name = 2;
+  string new_vm_name = 3;
 }
 
 // ==================== Migration Messages ====================

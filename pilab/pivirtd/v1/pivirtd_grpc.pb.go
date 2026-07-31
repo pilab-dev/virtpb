@@ -37,6 +37,8 @@ const (
 	PivirtdService_ListSnapshots_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/ListSnapshots"
 	PivirtdService_RestoreSnapshot_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/RestoreSnapshot"
 	PivirtdService_DeleteSnapshot_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/DeleteSnapshot"
+	PivirtdService_CloneVM_FullMethodName            = "/pilab.virtualization.v1.PivirtdService/CloneVM"
+	PivirtdService_CloneSnapshot_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/CloneSnapshot"
 	PivirtdService_MigrateVM_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/MigrateVM"
 	PivirtdService_GetMigrationStatus_FullMethodName = "/pilab.virtualization.v1.PivirtdService/GetMigrationStatus"
 	PivirtdService_CreateStoragePool_FullMethodName  = "/pilab.virtualization.v1.PivirtdService/CreateStoragePool"
@@ -90,6 +92,9 @@ type PivirtdServiceClient interface {
 	ListSnapshots(ctx context.Context, in *ListSnapshotsRequest, opts ...grpc.CallOption) (*ListSnapshotsResponse, error)
 	RestoreSnapshot(ctx context.Context, in *RestoreSnapshotRequest, opts ...grpc.CallOption) (*SnapshotResponse, error)
 	DeleteSnapshot(ctx context.Context, in *DeleteSnapshotRequest, opts ...grpc.CallOption) (*DeleteSnapshotResponse, error)
+	// Clone Operations
+	CloneVM(ctx context.Context, in *CloneVMRequest, opts ...grpc.CallOption) (*VMResponse, error)
+	CloneSnapshot(ctx context.Context, in *CloneSnapshotRequest, opts ...grpc.CallOption) (*VMResponse, error)
 	// Migration
 	MigrateVM(ctx context.Context, in *MigrateVMRequest, opts ...grpc.CallOption) (*MigrateVMResponse, error)
 	GetMigrationStatus(ctx context.Context, in *GetMigrationStatusRequest, opts ...grpc.CallOption) (*MigrationStatusResponse, error)
@@ -314,6 +319,26 @@ func (c *pivirtdServiceClient) DeleteSnapshot(ctx context.Context, in *DeleteSna
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteSnapshotResponse)
 	err := c.cc.Invoke(ctx, PivirtdService_DeleteSnapshot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) CloneVM(ctx context.Context, in *CloneVMRequest, opts ...grpc.CallOption) (*VMResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VMResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_CloneVM_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) CloneSnapshot(ctx context.Context, in *CloneSnapshotRequest, opts ...grpc.CallOption) (*VMResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VMResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_CloneSnapshot_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -587,6 +612,9 @@ type PivirtdServiceServer interface {
 	ListSnapshots(context.Context, *ListSnapshotsRequest) (*ListSnapshotsResponse, error)
 	RestoreSnapshot(context.Context, *RestoreSnapshotRequest) (*SnapshotResponse, error)
 	DeleteSnapshot(context.Context, *DeleteSnapshotRequest) (*DeleteSnapshotResponse, error)
+	// Clone Operations
+	CloneVM(context.Context, *CloneVMRequest) (*VMResponse, error)
+	CloneSnapshot(context.Context, *CloneSnapshotRequest) (*VMResponse, error)
 	// Migration
 	MigrateVM(context.Context, *MigrateVMRequest) (*MigrateVMResponse, error)
 	GetMigrationStatus(context.Context, *GetMigrationStatusRequest) (*MigrationStatusResponse, error)
@@ -681,6 +709,12 @@ func (UnimplementedPivirtdServiceServer) RestoreSnapshot(context.Context, *Resto
 }
 func (UnimplementedPivirtdServiceServer) DeleteSnapshot(context.Context, *DeleteSnapshotRequest) (*DeleteSnapshotResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteSnapshot not implemented")
+}
+func (UnimplementedPivirtdServiceServer) CloneVM(context.Context, *CloneVMRequest) (*VMResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CloneVM not implemented")
+}
+func (UnimplementedPivirtdServiceServer) CloneSnapshot(context.Context, *CloneSnapshotRequest) (*VMResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CloneSnapshot not implemented")
 }
 func (UnimplementedPivirtdServiceServer) MigrateVM(context.Context, *MigrateVMRequest) (*MigrateVMResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method MigrateVM not implemented")
@@ -1085,6 +1119,42 @@ func _PivirtdService_DeleteSnapshot_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PivirtdServiceServer).DeleteSnapshot(ctx, req.(*DeleteSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_CloneVM_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloneVMRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).CloneVM(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_CloneVM_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).CloneVM(ctx, req.(*CloneVMRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_CloneSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloneSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).CloneSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_CloneSnapshot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).CloneSnapshot(ctx, req.(*CloneSnapshotRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1570,6 +1640,14 @@ var PivirtdService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteSnapshot",
 			Handler:    _PivirtdService_DeleteSnapshot_Handler,
+		},
+		{
+			MethodName: "CloneVM",
+			Handler:    _PivirtdService_CloneVM_Handler,
+		},
+		{
+			MethodName: "CloneSnapshot",
+			Handler:    _PivirtdService_CloneSnapshot_Handler,
 		},
 		{
 			MethodName: "MigrateVM",
