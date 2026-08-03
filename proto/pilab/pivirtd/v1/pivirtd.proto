@@ -4,7 +4,9 @@ package pilab.virtualization.v1;
 
 option go_package = "go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1";
 
+import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
+import "pilab/common/v1/vm.proto";
 import "pilab/pivirtd/v1/host_resource.proto";
 
 // Main Pivirtd Service - Replacement for libvirtd
@@ -34,6 +36,8 @@ service PivirtdService {
   rpc ListSnapshots(ListSnapshotsRequest) returns (ListSnapshotsResponse);
   rpc RestoreSnapshot(RestoreSnapshotRequest) returns (SnapshotResponse);
   rpc DeleteSnapshot(DeleteSnapshotRequest) returns (DeleteSnapshotResponse);
+  rpc ConsolidateSnapshot(ConsolidateSnapshotRequest) returns (SnapshotResponse);
+  rpc GetSnapshotStatus(GetSnapshotStatusRequest) returns (SnapshotStatusResponse);
   
   // Clone Operations
   rpc CloneVM(CloneVMRequest) returns (VMResponse);
@@ -298,6 +302,9 @@ message CreateSnapshotRequest {
   string vm_name = 1;
   string snapshot_name = 2;
   string description = 3;
+  bool include_memory = 4;
+  int32 retain_count = 5;
+  google.protobuf.Duration retain_for = 6;
 }
 
 message ListSnapshotsRequest {
@@ -328,12 +335,29 @@ message DeleteSnapshotResponse {
   string error = 2;
 }
 
+message ConsolidateSnapshotRequest {
+  string vm_name = 1;
+  string snapshot_name = 2;
+}
+
+message GetSnapshotStatusRequest {
+  string vm_name = 1;
+}
+
+message SnapshotStatusResponse {
+  VMJobStatus job = 1;
+}
+
 message SnapshotInfo {
   string id = 1;
   string name = 2;
   string description = 3;
   int64 vm_state_size = 4;
   google.protobuf.Timestamp date = 5;
+  string parent_snapshot_id = 6;
+  bool memory_snapshot = 7;
+  int64 memory_size_bytes = 8;
+  pilab.common.v1.SnapshotState state = 9;
 }
 
 message CloneVMRequest {

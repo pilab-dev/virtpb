@@ -44,6 +44,8 @@ enum SnapshotState {
   SNAPSHOT_STATE_READY = 2;
   SNAPSHOT_STATE_ERROR = 3;
   SNAPSHOT_STATE_DELETING = 4;
+  SNAPSHOT_STATE_CONSOLIDATING = 5;
+  SNAPSHOT_STATE_RESTORING = 6;
 }
 
 // VM represents a virtual machine with its configuration and state.

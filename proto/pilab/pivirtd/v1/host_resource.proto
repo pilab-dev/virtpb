@@ -22,6 +22,10 @@ enum HostEventType {
   HOST_EVENT_TYPE_VM_DISK_MOVE_COMPLETED = 9;
   HOST_EVENT_TYPE_VM_DISK_MOVE_FAILED = 10;
   HOST_EVENT_TYPE_VM_DISK_MOVE_CANCELLED = 11;
+  HOST_EVENT_TYPE_VM_SNAPSHOT_STARTED = 12;
+  HOST_EVENT_TYPE_VM_SNAPSHOT_COMPLETED = 13;
+  HOST_EVENT_TYPE_VM_SNAPSHOT_FAILED = 14;
+  HOST_EVENT_TYPE_VM_SNAPSHOT_CANCELLED = 15;
   HOST_EVENT_TYPE_HEARTBEAT = 20;
   HOST_EVENT_TYPE_HEALTH_DEGRADED = 21;
   HOST_EVENT_TYPE_HEALTH_FAILED = 22;
@@ -83,6 +87,7 @@ message HostEvent {
     ResourcePressureEvent resource_pressure = 6;
     HostResourceReport resource_report = 7;
     VmDiskMoveEvent vm_disk_move = 8;
+    VmSnapshotEvent vm_snapshot = 9;
   }
 }
 
@@ -114,6 +119,15 @@ message VmDiskMoveEvent {
   string vm_uuid = 2;
   string device = 3;
   string target = 4;
+  string status = 5;
+  string message = 6;
+}
+
+message VmSnapshotEvent {
+  string vm_name = 1;
+  string vm_uuid = 2;
+  string snapshot_name = 3;
+  string operation = 4;
   string status = 5;
   string message = 6;
 }
