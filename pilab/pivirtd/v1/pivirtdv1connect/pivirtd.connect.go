@@ -78,6 +78,12 @@ const (
 	// PivirtdServiceDeleteSnapshotProcedure is the fully-qualified name of the PivirtdService's
 	// DeleteSnapshot RPC.
 	PivirtdServiceDeleteSnapshotProcedure = "/pilab.virtualization.v1.PivirtdService/DeleteSnapshot"
+	// PivirtdServiceConsolidateSnapshotProcedure is the fully-qualified name of the PivirtdService's
+	// ConsolidateSnapshot RPC.
+	PivirtdServiceConsolidateSnapshotProcedure = "/pilab.virtualization.v1.PivirtdService/ConsolidateSnapshot"
+	// PivirtdServiceGetSnapshotStatusProcedure is the fully-qualified name of the PivirtdService's
+	// GetSnapshotStatus RPC.
+	PivirtdServiceGetSnapshotStatusProcedure = "/pilab.virtualization.v1.PivirtdService/GetSnapshotStatus"
 	// PivirtdServiceCloneVMProcedure is the fully-qualified name of the PivirtdService's CloneVM RPC.
 	PivirtdServiceCloneVMProcedure = "/pilab.virtualization.v1.PivirtdService/CloneVM"
 	// PivirtdServiceCloneSnapshotProcedure is the fully-qualified name of the PivirtdService's
@@ -187,6 +193,8 @@ type PivirtdServiceClient interface {
 	ListSnapshots(context.Context, *connect.Request[v1.ListSnapshotsRequest]) (*connect.Response[v1.ListSnapshotsResponse], error)
 	RestoreSnapshot(context.Context, *connect.Request[v1.RestoreSnapshotRequest]) (*connect.Response[v1.SnapshotResponse], error)
 	DeleteSnapshot(context.Context, *connect.Request[v1.DeleteSnapshotRequest]) (*connect.Response[v1.DeleteSnapshotResponse], error)
+	ConsolidateSnapshot(context.Context, *connect.Request[v1.ConsolidateSnapshotRequest]) (*connect.Response[v1.SnapshotResponse], error)
+	GetSnapshotStatus(context.Context, *connect.Request[v1.GetSnapshotStatusRequest]) (*connect.Response[v1.SnapshotStatusResponse], error)
 	// Clone Operations
 	CloneVM(context.Context, *connect.Request[v1.CloneVMRequest]) (*connect.Response[v1.VMResponse], error)
 	CloneSnapshot(context.Context, *connect.Request[v1.CloneSnapshotRequest]) (*connect.Response[v1.VMResponse], error)
@@ -344,6 +352,18 @@ func NewPivirtdServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			httpClient,
 			baseURL+PivirtdServiceDeleteSnapshotProcedure,
 			connect.WithSchema(pivirtdServiceMethods.ByName("DeleteSnapshot")),
+			connect.WithClientOptions(opts...),
+		),
+		consolidateSnapshot: connect.NewClient[v1.ConsolidateSnapshotRequest, v1.SnapshotResponse](
+			httpClient,
+			baseURL+PivirtdServiceConsolidateSnapshotProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("ConsolidateSnapshot")),
+			connect.WithClientOptions(opts...),
+		),
+		getSnapshotStatus: connect.NewClient[v1.GetSnapshotStatusRequest, v1.SnapshotStatusResponse](
+			httpClient,
+			baseURL+PivirtdServiceGetSnapshotStatusProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("GetSnapshotStatus")),
 			connect.WithClientOptions(opts...),
 		),
 		cloneVM: connect.NewClient[v1.CloneVMRequest, v1.VMResponse](
@@ -519,52 +539,54 @@ func NewPivirtdServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 
 // pivirtdServiceClient implements PivirtdServiceClient.
 type pivirtdServiceClient struct {
-	createVM           *connect.Client[v1.CreateVMRequest, v1.VMResponse]
-	startVM            *connect.Client[v1.StartVMRequest, v1.VMResponse]
-	stopVM             *connect.Client[v1.StopVMRequest, v1.VMResponse]
-	pauseVM            *connect.Client[v1.PauseVMRequest, v1.VMResponse]
-	resumeVM           *connect.Client[v1.ResumeVMRequest, v1.VMResponse]
-	rebootVM           *connect.Client[v1.RebootVMRequest, v1.VMResponse]
-	deleteVM           *connect.Client[v1.DeleteVMRequest, v1.DeleteVMResponse]
-	listVMs            *connect.Client[v1.ListVMsRequest, v1.ListVMsResponse]
-	getVM              *connect.Client[v1.GetVMRequest, v1.VMResponse]
-	getVMStats         *connect.Client[v1.GetVMStatsRequest, v1.VMStatsResponse]
-	updateVMMemory     *connect.Client[v1.UpdateVMMemoryRequest, v1.VMResponse]
-	updateVMCpu        *connect.Client[v1.UpdateVMCpuRequest, v1.VMResponse]
-	executeQMP         *connect.Client[v1.ExecuteQMPRequest, v1.ExecuteQMPResponse]
-	streamQMPEvents    *connect.Client[v1.StreamQMPRequest, v1.QMPEvent]
-	createSnapshot     *connect.Client[v1.CreateSnapshotRequest, v1.SnapshotResponse]
-	listSnapshots      *connect.Client[v1.ListSnapshotsRequest, v1.ListSnapshotsResponse]
-	restoreSnapshot    *connect.Client[v1.RestoreSnapshotRequest, v1.SnapshotResponse]
-	deleteSnapshot     *connect.Client[v1.DeleteSnapshotRequest, v1.DeleteSnapshotResponse]
-	cloneVM            *connect.Client[v1.CloneVMRequest, v1.VMResponse]
-	cloneSnapshot      *connect.Client[v1.CloneSnapshotRequest, v1.VMResponse]
-	migrateVM          *connect.Client[v1.MigrateVMRequest, v1.MigrateVMResponse]
-	getMigrationStatus *connect.Client[v1.GetMigrationStatusRequest, v1.MigrationStatusResponse]
-	createStoragePool  *connect.Client[v1.CreateStoragePoolRequest, v1.StoragePoolResponse]
-	listStoragePools   *connect.Client[v1.ListStoragePoolsRequest, v1.ListStoragePoolsResponse]
-	deleteStoragePool  *connect.Client[v1.DeleteStoragePoolRequest, v1.DeleteStoragePoolResponse]
-	createTAPDevice    *connect.Client[v1.CreateTAPDeviceRequest, v1.NetworkResponse]
-	deleteTAPDevice    *connect.Client[v1.DeleteTAPDeviceRequest, v1.DeleteNetworkResponse]
-	listTAPDevices     *connect.Client[v1.ListTAPDevicesRequest, v1.ListTAPDevicesResponse]
-	createBridge       *connect.Client[v1.CreateBridgeRequest, v1.NetworkResponse]
-	deleteBridge       *connect.Client[v1.DeleteBridgeRequest, v1.DeleteNetworkResponse]
-	listBridges        *connect.Client[v1.ListBridgesRequest, v1.ListBridgesResponse]
-	createOVSBridge    *connect.Client[v1.CreateOVSBridgeRequest, v1.NetworkResponse]
-	deleteOVSBridge    *connect.Client[v1.DeleteOVSBridgeRequest, v1.DeleteNetworkResponse]
-	listOVSBridges     *connect.Client[v1.ListOVSBridgesRequest, v1.ListOVSBridgesResponse]
-	addOVSPort         *connect.Client[v1.AddOVSPortRequest, v1.NetworkResponse]
-	removeOVSPort      *connect.Client[v1.RemoveOVSPortRequest, v1.DeleteNetworkResponse]
-	listOVSPorts       *connect.Client[v1.ListOVSPortsRequest, v1.ListOVSPortsResponse]
-	setLabels          *connect.Client[v1.SetLabelsRequest, v1.SetLabelsResponse]
-	getLabels          *connect.Client[v1.GetLabelsRequest, v1.GetLabelsResponse]
-	setProvisioning    *connect.Client[v1.SetProvisioningRequest, v1.SetProvisioningResponse]
-	getVMStatus        *connect.Client[v1.GetVMStatusRequest, v1.GetVMStatusResponse]
-	startDiskMove      *connect.Client[v1.StartDiskMoveRequest, v1.DiskMoveStatusResponse]
-	getDiskMoveStatus  *connect.Client[v1.GetDiskMoveStatusRequest, v1.DiskMoveStatusResponse]
-	cancelDiskMove     *connect.Client[v1.CancelDiskMoveRequest, v1.DiskMoveResponse]
-	subscribeEvents    *connect.Client[v1.SubscribeEventsRequest, v1.HostEvent]
-	getHostResource    *connect.Client[v1.SubscribeEventsRequest, v1.HostResourceReport]
+	createVM            *connect.Client[v1.CreateVMRequest, v1.VMResponse]
+	startVM             *connect.Client[v1.StartVMRequest, v1.VMResponse]
+	stopVM              *connect.Client[v1.StopVMRequest, v1.VMResponse]
+	pauseVM             *connect.Client[v1.PauseVMRequest, v1.VMResponse]
+	resumeVM            *connect.Client[v1.ResumeVMRequest, v1.VMResponse]
+	rebootVM            *connect.Client[v1.RebootVMRequest, v1.VMResponse]
+	deleteVM            *connect.Client[v1.DeleteVMRequest, v1.DeleteVMResponse]
+	listVMs             *connect.Client[v1.ListVMsRequest, v1.ListVMsResponse]
+	getVM               *connect.Client[v1.GetVMRequest, v1.VMResponse]
+	getVMStats          *connect.Client[v1.GetVMStatsRequest, v1.VMStatsResponse]
+	updateVMMemory      *connect.Client[v1.UpdateVMMemoryRequest, v1.VMResponse]
+	updateVMCpu         *connect.Client[v1.UpdateVMCpuRequest, v1.VMResponse]
+	executeQMP          *connect.Client[v1.ExecuteQMPRequest, v1.ExecuteQMPResponse]
+	streamQMPEvents     *connect.Client[v1.StreamQMPRequest, v1.QMPEvent]
+	createSnapshot      *connect.Client[v1.CreateSnapshotRequest, v1.SnapshotResponse]
+	listSnapshots       *connect.Client[v1.ListSnapshotsRequest, v1.ListSnapshotsResponse]
+	restoreSnapshot     *connect.Client[v1.RestoreSnapshotRequest, v1.SnapshotResponse]
+	deleteSnapshot      *connect.Client[v1.DeleteSnapshotRequest, v1.DeleteSnapshotResponse]
+	consolidateSnapshot *connect.Client[v1.ConsolidateSnapshotRequest, v1.SnapshotResponse]
+	getSnapshotStatus   *connect.Client[v1.GetSnapshotStatusRequest, v1.SnapshotStatusResponse]
+	cloneVM             *connect.Client[v1.CloneVMRequest, v1.VMResponse]
+	cloneSnapshot       *connect.Client[v1.CloneSnapshotRequest, v1.VMResponse]
+	migrateVM           *connect.Client[v1.MigrateVMRequest, v1.MigrateVMResponse]
+	getMigrationStatus  *connect.Client[v1.GetMigrationStatusRequest, v1.MigrationStatusResponse]
+	createStoragePool   *connect.Client[v1.CreateStoragePoolRequest, v1.StoragePoolResponse]
+	listStoragePools    *connect.Client[v1.ListStoragePoolsRequest, v1.ListStoragePoolsResponse]
+	deleteStoragePool   *connect.Client[v1.DeleteStoragePoolRequest, v1.DeleteStoragePoolResponse]
+	createTAPDevice     *connect.Client[v1.CreateTAPDeviceRequest, v1.NetworkResponse]
+	deleteTAPDevice     *connect.Client[v1.DeleteTAPDeviceRequest, v1.DeleteNetworkResponse]
+	listTAPDevices      *connect.Client[v1.ListTAPDevicesRequest, v1.ListTAPDevicesResponse]
+	createBridge        *connect.Client[v1.CreateBridgeRequest, v1.NetworkResponse]
+	deleteBridge        *connect.Client[v1.DeleteBridgeRequest, v1.DeleteNetworkResponse]
+	listBridges         *connect.Client[v1.ListBridgesRequest, v1.ListBridgesResponse]
+	createOVSBridge     *connect.Client[v1.CreateOVSBridgeRequest, v1.NetworkResponse]
+	deleteOVSBridge     *connect.Client[v1.DeleteOVSBridgeRequest, v1.DeleteNetworkResponse]
+	listOVSBridges      *connect.Client[v1.ListOVSBridgesRequest, v1.ListOVSBridgesResponse]
+	addOVSPort          *connect.Client[v1.AddOVSPortRequest, v1.NetworkResponse]
+	removeOVSPort       *connect.Client[v1.RemoveOVSPortRequest, v1.DeleteNetworkResponse]
+	listOVSPorts        *connect.Client[v1.ListOVSPortsRequest, v1.ListOVSPortsResponse]
+	setLabels           *connect.Client[v1.SetLabelsRequest, v1.SetLabelsResponse]
+	getLabels           *connect.Client[v1.GetLabelsRequest, v1.GetLabelsResponse]
+	setProvisioning     *connect.Client[v1.SetProvisioningRequest, v1.SetProvisioningResponse]
+	getVMStatus         *connect.Client[v1.GetVMStatusRequest, v1.GetVMStatusResponse]
+	startDiskMove       *connect.Client[v1.StartDiskMoveRequest, v1.DiskMoveStatusResponse]
+	getDiskMoveStatus   *connect.Client[v1.GetDiskMoveStatusRequest, v1.DiskMoveStatusResponse]
+	cancelDiskMove      *connect.Client[v1.CancelDiskMoveRequest, v1.DiskMoveResponse]
+	subscribeEvents     *connect.Client[v1.SubscribeEventsRequest, v1.HostEvent]
+	getHostResource     *connect.Client[v1.SubscribeEventsRequest, v1.HostResourceReport]
 }
 
 // CreateVM calls pilab.virtualization.v1.PivirtdService.CreateVM.
@@ -655,6 +677,16 @@ func (c *pivirtdServiceClient) RestoreSnapshot(ctx context.Context, req *connect
 // DeleteSnapshot calls pilab.virtualization.v1.PivirtdService.DeleteSnapshot.
 func (c *pivirtdServiceClient) DeleteSnapshot(ctx context.Context, req *connect.Request[v1.DeleteSnapshotRequest]) (*connect.Response[v1.DeleteSnapshotResponse], error) {
 	return c.deleteSnapshot.CallUnary(ctx, req)
+}
+
+// ConsolidateSnapshot calls pilab.virtualization.v1.PivirtdService.ConsolidateSnapshot.
+func (c *pivirtdServiceClient) ConsolidateSnapshot(ctx context.Context, req *connect.Request[v1.ConsolidateSnapshotRequest]) (*connect.Response[v1.SnapshotResponse], error) {
+	return c.consolidateSnapshot.CallUnary(ctx, req)
+}
+
+// GetSnapshotStatus calls pilab.virtualization.v1.PivirtdService.GetSnapshotStatus.
+func (c *pivirtdServiceClient) GetSnapshotStatus(ctx context.Context, req *connect.Request[v1.GetSnapshotStatusRequest]) (*connect.Response[v1.SnapshotStatusResponse], error) {
+	return c.getSnapshotStatus.CallUnary(ctx, req)
 }
 
 // CloneVM calls pilab.virtualization.v1.PivirtdService.CloneVM.
@@ -821,6 +853,8 @@ type PivirtdServiceHandler interface {
 	ListSnapshots(context.Context, *connect.Request[v1.ListSnapshotsRequest]) (*connect.Response[v1.ListSnapshotsResponse], error)
 	RestoreSnapshot(context.Context, *connect.Request[v1.RestoreSnapshotRequest]) (*connect.Response[v1.SnapshotResponse], error)
 	DeleteSnapshot(context.Context, *connect.Request[v1.DeleteSnapshotRequest]) (*connect.Response[v1.DeleteSnapshotResponse], error)
+	ConsolidateSnapshot(context.Context, *connect.Request[v1.ConsolidateSnapshotRequest]) (*connect.Response[v1.SnapshotResponse], error)
+	GetSnapshotStatus(context.Context, *connect.Request[v1.GetSnapshotStatusRequest]) (*connect.Response[v1.SnapshotStatusResponse], error)
 	// Clone Operations
 	CloneVM(context.Context, *connect.Request[v1.CloneVMRequest]) (*connect.Response[v1.VMResponse], error)
 	CloneSnapshot(context.Context, *connect.Request[v1.CloneSnapshotRequest]) (*connect.Response[v1.VMResponse], error)
@@ -974,6 +1008,18 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 		PivirtdServiceDeleteSnapshotProcedure,
 		svc.DeleteSnapshot,
 		connect.WithSchema(pivirtdServiceMethods.ByName("DeleteSnapshot")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceConsolidateSnapshotHandler := connect.NewUnaryHandler(
+		PivirtdServiceConsolidateSnapshotProcedure,
+		svc.ConsolidateSnapshot,
+		connect.WithSchema(pivirtdServiceMethods.ByName("ConsolidateSnapshot")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceGetSnapshotStatusHandler := connect.NewUnaryHandler(
+		PivirtdServiceGetSnapshotStatusProcedure,
+		svc.GetSnapshotStatus,
+		connect.WithSchema(pivirtdServiceMethods.ByName("GetSnapshotStatus")),
 		connect.WithHandlerOptions(opts...),
 	)
 	pivirtdServiceCloneVMHandler := connect.NewUnaryHandler(
@@ -1182,6 +1228,10 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 			pivirtdServiceRestoreSnapshotHandler.ServeHTTP(w, r)
 		case PivirtdServiceDeleteSnapshotProcedure:
 			pivirtdServiceDeleteSnapshotHandler.ServeHTTP(w, r)
+		case PivirtdServiceConsolidateSnapshotProcedure:
+			pivirtdServiceConsolidateSnapshotHandler.ServeHTTP(w, r)
+		case PivirtdServiceGetSnapshotStatusProcedure:
+			pivirtdServiceGetSnapshotStatusHandler.ServeHTTP(w, r)
 		case PivirtdServiceCloneVMProcedure:
 			pivirtdServiceCloneVMHandler.ServeHTTP(w, r)
 		case PivirtdServiceCloneSnapshotProcedure:
@@ -1317,6 +1367,14 @@ func (UnimplementedPivirtdServiceHandler) RestoreSnapshot(context.Context, *conn
 
 func (UnimplementedPivirtdServiceHandler) DeleteSnapshot(context.Context, *connect.Request[v1.DeleteSnapshotRequest]) (*connect.Response[v1.DeleteSnapshotResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.DeleteSnapshot is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) ConsolidateSnapshot(context.Context, *connect.Request[v1.ConsolidateSnapshotRequest]) (*connect.Response[v1.SnapshotResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.ConsolidateSnapshot is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) GetSnapshotStatus(context.Context, *connect.Request[v1.GetSnapshotStatusRequest]) (*connect.Response[v1.SnapshotStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GetSnapshotStatus is not implemented"))
 }
 
 func (UnimplementedPivirtdServiceHandler) CloneVM(context.Context, *connect.Request[v1.CloneVMRequest]) (*connect.Response[v1.VMResponse], error) {

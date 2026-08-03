@@ -169,11 +169,13 @@ func (DiskState) EnumDescriptor() ([]byte, []int) {
 type SnapshotState int32
 
 const (
-	SnapshotState_SNAPSHOT_STATE_UNSPECIFIED SnapshotState = 0
-	SnapshotState_SNAPSHOT_STATE_CREATING    SnapshotState = 1
-	SnapshotState_SNAPSHOT_STATE_READY       SnapshotState = 2
-	SnapshotState_SNAPSHOT_STATE_ERROR       SnapshotState = 3
-	SnapshotState_SNAPSHOT_STATE_DELETING    SnapshotState = 4
+	SnapshotState_SNAPSHOT_STATE_UNSPECIFIED   SnapshotState = 0
+	SnapshotState_SNAPSHOT_STATE_CREATING      SnapshotState = 1
+	SnapshotState_SNAPSHOT_STATE_READY         SnapshotState = 2
+	SnapshotState_SNAPSHOT_STATE_ERROR         SnapshotState = 3
+	SnapshotState_SNAPSHOT_STATE_DELETING      SnapshotState = 4
+	SnapshotState_SNAPSHOT_STATE_CONSOLIDATING SnapshotState = 5
+	SnapshotState_SNAPSHOT_STATE_RESTORING     SnapshotState = 6
 )
 
 // Enum value maps for SnapshotState.
@@ -184,13 +186,17 @@ var (
 		2: "SNAPSHOT_STATE_READY",
 		3: "SNAPSHOT_STATE_ERROR",
 		4: "SNAPSHOT_STATE_DELETING",
+		5: "SNAPSHOT_STATE_CONSOLIDATING",
+		6: "SNAPSHOT_STATE_RESTORING",
 	}
 	SnapshotState_value = map[string]int32{
-		"SNAPSHOT_STATE_UNSPECIFIED": 0,
-		"SNAPSHOT_STATE_CREATING":    1,
-		"SNAPSHOT_STATE_READY":       2,
-		"SNAPSHOT_STATE_ERROR":       3,
-		"SNAPSHOT_STATE_DELETING":    4,
+		"SNAPSHOT_STATE_UNSPECIFIED":   0,
+		"SNAPSHOT_STATE_CREATING":      1,
+		"SNAPSHOT_STATE_READY":         2,
+		"SNAPSHOT_STATE_ERROR":         3,
+		"SNAPSHOT_STATE_DELETING":      4,
+		"SNAPSHOT_STATE_CONSOLIDATING": 5,
+		"SNAPSHOT_STATE_RESTORING":     6,
 	}
 )
 
@@ -1301,13 +1307,15 @@ const file_pilab_common_v1_vm_proto_rawDesc = "" +
 	"\x10DISK_STATE_READY\x10\x02\x12\x17\n" +
 	"\x13DISK_STATE_ATTACHED\x10\x03\x12\x14\n" +
 	"\x10DISK_STATE_ERROR\x10\x04\x12\x17\n" +
-	"\x13DISK_STATE_DELETING\x10\x05*\x9d\x01\n" +
+	"\x13DISK_STATE_DELETING\x10\x05*\xdd\x01\n" +
 	"\rSnapshotState\x12\x1e\n" +
 	"\x1aSNAPSHOT_STATE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17SNAPSHOT_STATE_CREATING\x10\x01\x12\x18\n" +
 	"\x14SNAPSHOT_STATE_READY\x10\x02\x12\x18\n" +
 	"\x14SNAPSHOT_STATE_ERROR\x10\x03\x12\x1b\n" +
-	"\x17SNAPSHOT_STATE_DELETING\x10\x04B3Z1go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1b\x06proto3"
+	"\x17SNAPSHOT_STATE_DELETING\x10\x04\x12 \n" +
+	"\x1cSNAPSHOT_STATE_CONSOLIDATING\x10\x05\x12\x1c\n" +
+	"\x18SNAPSHOT_STATE_RESTORING\x10\x06B3Z1go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1b\x06proto3"
 
 var (
 	file_pilab_common_v1_vm_proto_rawDescOnce sync.Once

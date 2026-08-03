@@ -19,52 +19,54 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PivirtdService_CreateVM_FullMethodName           = "/pilab.virtualization.v1.PivirtdService/CreateVM"
-	PivirtdService_StartVM_FullMethodName            = "/pilab.virtualization.v1.PivirtdService/StartVM"
-	PivirtdService_StopVM_FullMethodName             = "/pilab.virtualization.v1.PivirtdService/StopVM"
-	PivirtdService_PauseVM_FullMethodName            = "/pilab.virtualization.v1.PivirtdService/PauseVM"
-	PivirtdService_ResumeVM_FullMethodName           = "/pilab.virtualization.v1.PivirtdService/ResumeVM"
-	PivirtdService_RebootVM_FullMethodName           = "/pilab.virtualization.v1.PivirtdService/RebootVM"
-	PivirtdService_DeleteVM_FullMethodName           = "/pilab.virtualization.v1.PivirtdService/DeleteVM"
-	PivirtdService_ListVMs_FullMethodName            = "/pilab.virtualization.v1.PivirtdService/ListVMs"
-	PivirtdService_GetVM_FullMethodName              = "/pilab.virtualization.v1.PivirtdService/GetVM"
-	PivirtdService_GetVMStats_FullMethodName         = "/pilab.virtualization.v1.PivirtdService/GetVMStats"
-	PivirtdService_UpdateVMMemory_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/UpdateVMMemory"
-	PivirtdService_UpdateVMCpu_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/UpdateVMCpu"
-	PivirtdService_ExecuteQMP_FullMethodName         = "/pilab.virtualization.v1.PivirtdService/ExecuteQMP"
-	PivirtdService_StreamQMPEvents_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/StreamQMPEvents"
-	PivirtdService_CreateSnapshot_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/CreateSnapshot"
-	PivirtdService_ListSnapshots_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/ListSnapshots"
-	PivirtdService_RestoreSnapshot_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/RestoreSnapshot"
-	PivirtdService_DeleteSnapshot_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/DeleteSnapshot"
-	PivirtdService_CloneVM_FullMethodName            = "/pilab.virtualization.v1.PivirtdService/CloneVM"
-	PivirtdService_CloneSnapshot_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/CloneSnapshot"
-	PivirtdService_MigrateVM_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/MigrateVM"
-	PivirtdService_GetMigrationStatus_FullMethodName = "/pilab.virtualization.v1.PivirtdService/GetMigrationStatus"
-	PivirtdService_CreateStoragePool_FullMethodName  = "/pilab.virtualization.v1.PivirtdService/CreateStoragePool"
-	PivirtdService_ListStoragePools_FullMethodName   = "/pilab.virtualization.v1.PivirtdService/ListStoragePools"
-	PivirtdService_DeleteStoragePool_FullMethodName  = "/pilab.virtualization.v1.PivirtdService/DeleteStoragePool"
-	PivirtdService_CreateTAPDevice_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/CreateTAPDevice"
-	PivirtdService_DeleteTAPDevice_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/DeleteTAPDevice"
-	PivirtdService_ListTAPDevices_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/ListTAPDevices"
-	PivirtdService_CreateBridge_FullMethodName       = "/pilab.virtualization.v1.PivirtdService/CreateBridge"
-	PivirtdService_DeleteBridge_FullMethodName       = "/pilab.virtualization.v1.PivirtdService/DeleteBridge"
-	PivirtdService_ListBridges_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/ListBridges"
-	PivirtdService_CreateOVSBridge_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/CreateOVSBridge"
-	PivirtdService_DeleteOVSBridge_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/DeleteOVSBridge"
-	PivirtdService_ListOVSBridges_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/ListOVSBridges"
-	PivirtdService_AddOVSPort_FullMethodName         = "/pilab.virtualization.v1.PivirtdService/AddOVSPort"
-	PivirtdService_RemoveOVSPort_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/RemoveOVSPort"
-	PivirtdService_ListOVSPorts_FullMethodName       = "/pilab.virtualization.v1.PivirtdService/ListOVSPorts"
-	PivirtdService_SetLabels_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/SetLabels"
-	PivirtdService_GetLabels_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/GetLabels"
-	PivirtdService_SetProvisioning_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/SetProvisioning"
-	PivirtdService_GetVMStatus_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/GetVMStatus"
-	PivirtdService_StartDiskMove_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/StartDiskMove"
-	PivirtdService_GetDiskMoveStatus_FullMethodName  = "/pilab.virtualization.v1.PivirtdService/GetDiskMoveStatus"
-	PivirtdService_CancelDiskMove_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/CancelDiskMove"
-	PivirtdService_SubscribeEvents_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
-	PivirtdService_GetHostResource_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/GetHostResource"
+	PivirtdService_CreateVM_FullMethodName            = "/pilab.virtualization.v1.PivirtdService/CreateVM"
+	PivirtdService_StartVM_FullMethodName             = "/pilab.virtualization.v1.PivirtdService/StartVM"
+	PivirtdService_StopVM_FullMethodName              = "/pilab.virtualization.v1.PivirtdService/StopVM"
+	PivirtdService_PauseVM_FullMethodName             = "/pilab.virtualization.v1.PivirtdService/PauseVM"
+	PivirtdService_ResumeVM_FullMethodName            = "/pilab.virtualization.v1.PivirtdService/ResumeVM"
+	PivirtdService_RebootVM_FullMethodName            = "/pilab.virtualization.v1.PivirtdService/RebootVM"
+	PivirtdService_DeleteVM_FullMethodName            = "/pilab.virtualization.v1.PivirtdService/DeleteVM"
+	PivirtdService_ListVMs_FullMethodName             = "/pilab.virtualization.v1.PivirtdService/ListVMs"
+	PivirtdService_GetVM_FullMethodName               = "/pilab.virtualization.v1.PivirtdService/GetVM"
+	PivirtdService_GetVMStats_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/GetVMStats"
+	PivirtdService_UpdateVMMemory_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/UpdateVMMemory"
+	PivirtdService_UpdateVMCpu_FullMethodName         = "/pilab.virtualization.v1.PivirtdService/UpdateVMCpu"
+	PivirtdService_ExecuteQMP_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/ExecuteQMP"
+	PivirtdService_StreamQMPEvents_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/StreamQMPEvents"
+	PivirtdService_CreateSnapshot_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/CreateSnapshot"
+	PivirtdService_ListSnapshots_FullMethodName       = "/pilab.virtualization.v1.PivirtdService/ListSnapshots"
+	PivirtdService_RestoreSnapshot_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/RestoreSnapshot"
+	PivirtdService_DeleteSnapshot_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/DeleteSnapshot"
+	PivirtdService_ConsolidateSnapshot_FullMethodName = "/pilab.virtualization.v1.PivirtdService/ConsolidateSnapshot"
+	PivirtdService_GetSnapshotStatus_FullMethodName   = "/pilab.virtualization.v1.PivirtdService/GetSnapshotStatus"
+	PivirtdService_CloneVM_FullMethodName             = "/pilab.virtualization.v1.PivirtdService/CloneVM"
+	PivirtdService_CloneSnapshot_FullMethodName       = "/pilab.virtualization.v1.PivirtdService/CloneSnapshot"
+	PivirtdService_MigrateVM_FullMethodName           = "/pilab.virtualization.v1.PivirtdService/MigrateVM"
+	PivirtdService_GetMigrationStatus_FullMethodName  = "/pilab.virtualization.v1.PivirtdService/GetMigrationStatus"
+	PivirtdService_CreateStoragePool_FullMethodName   = "/pilab.virtualization.v1.PivirtdService/CreateStoragePool"
+	PivirtdService_ListStoragePools_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/ListStoragePools"
+	PivirtdService_DeleteStoragePool_FullMethodName   = "/pilab.virtualization.v1.PivirtdService/DeleteStoragePool"
+	PivirtdService_CreateTAPDevice_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/CreateTAPDevice"
+	PivirtdService_DeleteTAPDevice_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/DeleteTAPDevice"
+	PivirtdService_ListTAPDevices_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/ListTAPDevices"
+	PivirtdService_CreateBridge_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/CreateBridge"
+	PivirtdService_DeleteBridge_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/DeleteBridge"
+	PivirtdService_ListBridges_FullMethodName         = "/pilab.virtualization.v1.PivirtdService/ListBridges"
+	PivirtdService_CreateOVSBridge_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/CreateOVSBridge"
+	PivirtdService_DeleteOVSBridge_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/DeleteOVSBridge"
+	PivirtdService_ListOVSBridges_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/ListOVSBridges"
+	PivirtdService_AddOVSPort_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/AddOVSPort"
+	PivirtdService_RemoveOVSPort_FullMethodName       = "/pilab.virtualization.v1.PivirtdService/RemoveOVSPort"
+	PivirtdService_ListOVSPorts_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/ListOVSPorts"
+	PivirtdService_SetLabels_FullMethodName           = "/pilab.virtualization.v1.PivirtdService/SetLabels"
+	PivirtdService_GetLabels_FullMethodName           = "/pilab.virtualization.v1.PivirtdService/GetLabels"
+	PivirtdService_SetProvisioning_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/SetProvisioning"
+	PivirtdService_GetVMStatus_FullMethodName         = "/pilab.virtualization.v1.PivirtdService/GetVMStatus"
+	PivirtdService_StartDiskMove_FullMethodName       = "/pilab.virtualization.v1.PivirtdService/StartDiskMove"
+	PivirtdService_GetDiskMoveStatus_FullMethodName   = "/pilab.virtualization.v1.PivirtdService/GetDiskMoveStatus"
+	PivirtdService_CancelDiskMove_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/CancelDiskMove"
+	PivirtdService_SubscribeEvents_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
+	PivirtdService_GetHostResource_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/GetHostResource"
 )
 
 // PivirtdServiceClient is the client API for PivirtdService service.
@@ -95,6 +97,8 @@ type PivirtdServiceClient interface {
 	ListSnapshots(ctx context.Context, in *ListSnapshotsRequest, opts ...grpc.CallOption) (*ListSnapshotsResponse, error)
 	RestoreSnapshot(ctx context.Context, in *RestoreSnapshotRequest, opts ...grpc.CallOption) (*SnapshotResponse, error)
 	DeleteSnapshot(ctx context.Context, in *DeleteSnapshotRequest, opts ...grpc.CallOption) (*DeleteSnapshotResponse, error)
+	ConsolidateSnapshot(ctx context.Context, in *ConsolidateSnapshotRequest, opts ...grpc.CallOption) (*SnapshotResponse, error)
+	GetSnapshotStatus(ctx context.Context, in *GetSnapshotStatusRequest, opts ...grpc.CallOption) (*SnapshotStatusResponse, error)
 	// Clone Operations
 	CloneVM(ctx context.Context, in *CloneVMRequest, opts ...grpc.CallOption) (*VMResponse, error)
 	CloneSnapshot(ctx context.Context, in *CloneSnapshotRequest, opts ...grpc.CallOption) (*VMResponse, error)
@@ -326,6 +330,26 @@ func (c *pivirtdServiceClient) DeleteSnapshot(ctx context.Context, in *DeleteSna
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteSnapshotResponse)
 	err := c.cc.Invoke(ctx, PivirtdService_DeleteSnapshot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) ConsolidateSnapshot(ctx context.Context, in *ConsolidateSnapshotRequest, opts ...grpc.CallOption) (*SnapshotResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SnapshotResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_ConsolidateSnapshot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) GetSnapshotStatus(ctx context.Context, in *GetSnapshotStatusRequest, opts ...grpc.CallOption) (*SnapshotStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SnapshotStatusResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_GetSnapshotStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -649,6 +673,8 @@ type PivirtdServiceServer interface {
 	ListSnapshots(context.Context, *ListSnapshotsRequest) (*ListSnapshotsResponse, error)
 	RestoreSnapshot(context.Context, *RestoreSnapshotRequest) (*SnapshotResponse, error)
 	DeleteSnapshot(context.Context, *DeleteSnapshotRequest) (*DeleteSnapshotResponse, error)
+	ConsolidateSnapshot(context.Context, *ConsolidateSnapshotRequest) (*SnapshotResponse, error)
+	GetSnapshotStatus(context.Context, *GetSnapshotStatusRequest) (*SnapshotStatusResponse, error)
 	// Clone Operations
 	CloneVM(context.Context, *CloneVMRequest) (*VMResponse, error)
 	CloneSnapshot(context.Context, *CloneSnapshotRequest) (*VMResponse, error)
@@ -750,6 +776,12 @@ func (UnimplementedPivirtdServiceServer) RestoreSnapshot(context.Context, *Resto
 }
 func (UnimplementedPivirtdServiceServer) DeleteSnapshot(context.Context, *DeleteSnapshotRequest) (*DeleteSnapshotResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteSnapshot not implemented")
+}
+func (UnimplementedPivirtdServiceServer) ConsolidateSnapshot(context.Context, *ConsolidateSnapshotRequest) (*SnapshotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConsolidateSnapshot not implemented")
+}
+func (UnimplementedPivirtdServiceServer) GetSnapshotStatus(context.Context, *GetSnapshotStatusRequest) (*SnapshotStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSnapshotStatus not implemented")
 }
 func (UnimplementedPivirtdServiceServer) CloneVM(context.Context, *CloneVMRequest) (*VMResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CloneVM not implemented")
@@ -1169,6 +1201,42 @@ func _PivirtdService_DeleteSnapshot_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PivirtdServiceServer).DeleteSnapshot(ctx, req.(*DeleteSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_ConsolidateSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConsolidateSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).ConsolidateSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_ConsolidateSnapshot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).ConsolidateSnapshot(ctx, req.(*ConsolidateSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_GetSnapshotStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSnapshotStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).GetSnapshotStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_GetSnapshotStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).GetSnapshotStatus(ctx, req.(*GetSnapshotStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1744,6 +1812,14 @@ var PivirtdService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteSnapshot",
 			Handler:    _PivirtdService_DeleteSnapshot_Handler,
+		},
+		{
+			MethodName: "ConsolidateSnapshot",
+			Handler:    _PivirtdService_ConsolidateSnapshot_Handler,
+		},
+		{
+			MethodName: "GetSnapshotStatus",
+			Handler:    _PivirtdService_GetSnapshotStatus_Handler,
 		},
 		{
 			MethodName: "CloneVM",

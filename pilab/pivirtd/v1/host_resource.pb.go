@@ -38,6 +38,10 @@ const (
 	HostEventType_HOST_EVENT_TYPE_VM_DISK_MOVE_COMPLETED HostEventType = 9
 	HostEventType_HOST_EVENT_TYPE_VM_DISK_MOVE_FAILED    HostEventType = 10
 	HostEventType_HOST_EVENT_TYPE_VM_DISK_MOVE_CANCELLED HostEventType = 11
+	HostEventType_HOST_EVENT_TYPE_VM_SNAPSHOT_STARTED    HostEventType = 12
+	HostEventType_HOST_EVENT_TYPE_VM_SNAPSHOT_COMPLETED  HostEventType = 13
+	HostEventType_HOST_EVENT_TYPE_VM_SNAPSHOT_FAILED     HostEventType = 14
+	HostEventType_HOST_EVENT_TYPE_VM_SNAPSHOT_CANCELLED  HostEventType = 15
 	HostEventType_HOST_EVENT_TYPE_HEARTBEAT              HostEventType = 20
 	HostEventType_HOST_EVENT_TYPE_HEALTH_DEGRADED        HostEventType = 21
 	HostEventType_HOST_EVENT_TYPE_HEALTH_FAILED          HostEventType = 22
@@ -62,6 +66,10 @@ var (
 		9:  "HOST_EVENT_TYPE_VM_DISK_MOVE_COMPLETED",
 		10: "HOST_EVENT_TYPE_VM_DISK_MOVE_FAILED",
 		11: "HOST_EVENT_TYPE_VM_DISK_MOVE_CANCELLED",
+		12: "HOST_EVENT_TYPE_VM_SNAPSHOT_STARTED",
+		13: "HOST_EVENT_TYPE_VM_SNAPSHOT_COMPLETED",
+		14: "HOST_EVENT_TYPE_VM_SNAPSHOT_FAILED",
+		15: "HOST_EVENT_TYPE_VM_SNAPSHOT_CANCELLED",
 		20: "HOST_EVENT_TYPE_HEARTBEAT",
 		21: "HOST_EVENT_TYPE_HEALTH_DEGRADED",
 		22: "HOST_EVENT_TYPE_HEALTH_FAILED",
@@ -83,6 +91,10 @@ var (
 		"HOST_EVENT_TYPE_VM_DISK_MOVE_COMPLETED": 9,
 		"HOST_EVENT_TYPE_VM_DISK_MOVE_FAILED":    10,
 		"HOST_EVENT_TYPE_VM_DISK_MOVE_CANCELLED": 11,
+		"HOST_EVENT_TYPE_VM_SNAPSHOT_STARTED":    12,
+		"HOST_EVENT_TYPE_VM_SNAPSHOT_COMPLETED":  13,
+		"HOST_EVENT_TYPE_VM_SNAPSHOT_FAILED":     14,
+		"HOST_EVENT_TYPE_VM_SNAPSHOT_CANCELLED":  15,
 		"HOST_EVENT_TYPE_HEARTBEAT":              20,
 		"HOST_EVENT_TYPE_HEALTH_DEGRADED":        21,
 		"HOST_EVENT_TYPE_HEALTH_FAILED":          22,
@@ -457,6 +469,7 @@ type HostEvent struct {
 	//	*HostEvent_ResourcePressure
 	//	*HostEvent_ResourceReport
 	//	*HostEvent_VmDiskMove
+	//	*HostEvent_VmSnapshot
 	Payload       isHostEvent_Payload `protobuf_oneof:"payload"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -565,6 +578,15 @@ func (x *HostEvent) GetVmDiskMove() *VmDiskMoveEvent {
 	return nil
 }
 
+func (x *HostEvent) GetVmSnapshot() *VmSnapshotEvent {
+	if x != nil {
+		if x, ok := x.Payload.(*HostEvent_VmSnapshot); ok {
+			return x.VmSnapshot
+		}
+	}
+	return nil
+}
+
 type isHostEvent_Payload interface {
 	isHostEvent_Payload()
 }
@@ -589,6 +611,10 @@ type HostEvent_VmDiskMove struct {
 	VmDiskMove *VmDiskMoveEvent `protobuf:"bytes,8,opt,name=vm_disk_move,json=vmDiskMove,proto3,oneof"`
 }
 
+type HostEvent_VmSnapshot struct {
+	VmSnapshot *VmSnapshotEvent `protobuf:"bytes,9,opt,name=vm_snapshot,json=vmSnapshot,proto3,oneof"`
+}
+
 func (*HostEvent_VmLifecycle) isHostEvent_Payload() {}
 
 func (*HostEvent_HostHealth) isHostEvent_Payload() {}
@@ -598,6 +624,8 @@ func (*HostEvent_ResourcePressure) isHostEvent_Payload() {}
 func (*HostEvent_ResourceReport) isHostEvent_Payload() {}
 
 func (*HostEvent_VmDiskMove) isHostEvent_Payload() {}
+
+func (*HostEvent_VmSnapshot) isHostEvent_Payload() {}
 
 // VmLifecycleEvent contains details about a VM state transition.
 type VmLifecycleEvent struct {
@@ -882,6 +910,90 @@ func (x *VmDiskMoveEvent) GetMessage() string {
 	return ""
 }
 
+type VmSnapshotEvent struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VmName        string                 `protobuf:"bytes,1,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
+	VmUuid        string                 `protobuf:"bytes,2,opt,name=vm_uuid,json=vmUuid,proto3" json:"vm_uuid,omitempty"`
+	SnapshotName  string                 `protobuf:"bytes,3,opt,name=snapshot_name,json=snapshotName,proto3" json:"snapshot_name,omitempty"`
+	Operation     string                 `protobuf:"bytes,4,opt,name=operation,proto3" json:"operation,omitempty"`
+	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	Message       string                 `protobuf:"bytes,6,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VmSnapshotEvent) Reset() {
+	*x = VmSnapshotEvent{}
+	mi := &file_pilab_pivirtd_v1_host_resource_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VmSnapshotEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VmSnapshotEvent) ProtoMessage() {}
+
+func (x *VmSnapshotEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_host_resource_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VmSnapshotEvent.ProtoReflect.Descriptor instead.
+func (*VmSnapshotEvent) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_host_resource_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *VmSnapshotEvent) GetVmName() string {
+	if x != nil {
+		return x.VmName
+	}
+	return ""
+}
+
+func (x *VmSnapshotEvent) GetVmUuid() string {
+	if x != nil {
+		return x.VmUuid
+	}
+	return ""
+}
+
+func (x *VmSnapshotEvent) GetSnapshotName() string {
+	if x != nil {
+		return x.SnapshotName
+	}
+	return ""
+}
+
+func (x *VmSnapshotEvent) GetOperation() string {
+	if x != nil {
+		return x.Operation
+	}
+	return ""
+}
+
+func (x *VmSnapshotEvent) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *VmSnapshotEvent) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_pilab_pivirtd_v1_host_resource_proto protoreflect.FileDescriptor
 
 const file_pilab_pivirtd_v1_host_resource_proto_rawDesc = "" +
@@ -916,7 +1028,7 @@ const file_pilab_pivirtd_v1_host_resource_proto_rawDesc = "" +
 	"\x10pool_total_bytes\x18\x01 \x01(\x03R\x0epoolTotalBytes\x120\n" +
 	"\x14pool_available_bytes\x18\x02 \x01(\x03R\x12poolAvailableBytes\x12&\n" +
 	"\x0fpool_used_bytes\x18\x03 \x01(\x03R\rpoolUsedBytes\"\x18\n" +
-	"\x16SubscribeEventsRequest\"\xbe\x04\n" +
+	"\x16SubscribeEventsRequest\"\x8b\x05\n" +
 	"\tHostEvent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12:\n" +
 	"\x04type\x18\x02 \x01(\x0e2&.pilab.virtualization.v1.HostEventTypeR\x04type\x128\n" +
@@ -927,7 +1039,9 @@ const file_pilab_pivirtd_v1_host_resource_proto_rawDesc = "" +
 	"\x11resource_pressure\x18\x06 \x01(\v2..pilab.virtualization.v1.ResourcePressureEventH\x00R\x10resourcePressure\x12V\n" +
 	"\x0fresource_report\x18\a \x01(\v2+.pilab.virtualization.v1.HostResourceReportH\x00R\x0eresourceReport\x12L\n" +
 	"\fvm_disk_move\x18\b \x01(\v2(.pilab.virtualization.v1.VmDiskMoveEventH\x00R\n" +
-	"vmDiskMoveB\t\n" +
+	"vmDiskMove\x12K\n" +
+	"\vvm_snapshot\x18\t \x01(\v2(.pilab.virtualization.v1.VmSnapshotEventH\x00R\n" +
+	"vmSnapshotB\t\n" +
 	"\apayload\"\x88\x01\n" +
 	"\x10VmLifecycleEvent\x12\x17\n" +
 	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12\x17\n" +
@@ -950,7 +1064,14 @@ const file_pilab_pivirtd_v1_host_resource_proto_rawDesc = "" +
 	"\x06device\x18\x03 \x01(\tR\x06device\x12\x16\n" +
 	"\x06target\x18\x04 \x01(\tR\x06target\x12\x16\n" +
 	"\x06status\x18\x05 \x01(\tR\x06status\x12\x18\n" +
-	"\amessage\x18\x06 \x01(\tR\amessage*\xc8\x05\n" +
+	"\amessage\x18\x06 \x01(\tR\amessage\"\xb8\x01\n" +
+	"\x0fVmSnapshotEvent\x12\x17\n" +
+	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12\x17\n" +
+	"\avm_uuid\x18\x02 \x01(\tR\x06vmUuid\x12#\n" +
+	"\rsnapshot_name\x18\x03 \x01(\tR\fsnapshotName\x12\x1c\n" +
+	"\toperation\x18\x04 \x01(\tR\toperation\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06status\x12\x18\n" +
+	"\amessage\x18\x06 \x01(\tR\amessage*\xef\x06\n" +
 	"\rHostEventType\x12\x1f\n" +
 	"\x1bHOST_EVENT_TYPE_UNSPECIFIED\x10\x00\x12\x1e\n" +
 	"\x1aHOST_EVENT_TYPE_VM_CREATED\x10\x01\x12\x1e\n" +
@@ -964,7 +1085,11 @@ const file_pilab_pivirtd_v1_host_resource_proto_rawDesc = "" +
 	"&HOST_EVENT_TYPE_VM_DISK_MOVE_COMPLETED\x10\t\x12'\n" +
 	"#HOST_EVENT_TYPE_VM_DISK_MOVE_FAILED\x10\n" +
 	"\x12*\n" +
-	"&HOST_EVENT_TYPE_VM_DISK_MOVE_CANCELLED\x10\v\x12\x1d\n" +
+	"&HOST_EVENT_TYPE_VM_DISK_MOVE_CANCELLED\x10\v\x12'\n" +
+	"#HOST_EVENT_TYPE_VM_SNAPSHOT_STARTED\x10\f\x12)\n" +
+	"%HOST_EVENT_TYPE_VM_SNAPSHOT_COMPLETED\x10\r\x12&\n" +
+	"\"HOST_EVENT_TYPE_VM_SNAPSHOT_FAILED\x10\x0e\x12)\n" +
+	"%HOST_EVENT_TYPE_VM_SNAPSHOT_CANCELLED\x10\x0f\x12\x1d\n" +
 	"\x19HOST_EVENT_TYPE_HEARTBEAT\x10\x14\x12#\n" +
 	"\x1fHOST_EVENT_TYPE_HEALTH_DEGRADED\x10\x15\x12!\n" +
 	"\x1dHOST_EVENT_TYPE_HEALTH_FAILED\x10\x16\x12)\n" +
@@ -986,7 +1111,7 @@ func file_pilab_pivirtd_v1_host_resource_proto_rawDescGZIP() []byte {
 }
 
 var file_pilab_pivirtd_v1_host_resource_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_pilab_pivirtd_v1_host_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_pilab_pivirtd_v1_host_resource_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_pilab_pivirtd_v1_host_resource_proto_goTypes = []any{
 	(HostEventType)(0),             // 0: pilab.virtualization.v1.HostEventType
 	(*HostResourceReport)(nil),     // 1: pilab.virtualization.v1.HostResourceReport
@@ -998,23 +1123,25 @@ var file_pilab_pivirtd_v1_host_resource_proto_goTypes = []any{
 	(*HostHealthEvent)(nil),        // 7: pilab.virtualization.v1.HostHealthEvent
 	(*ResourcePressureEvent)(nil),  // 8: pilab.virtualization.v1.ResourcePressureEvent
 	(*VmDiskMoveEvent)(nil),        // 9: pilab.virtualization.v1.VmDiskMoveEvent
-	(*timestamppb.Timestamp)(nil),  // 10: google.protobuf.Timestamp
+	(*VmSnapshotEvent)(nil),        // 10: pilab.virtualization.v1.VmSnapshotEvent
+	(*timestamppb.Timestamp)(nil),  // 11: google.protobuf.Timestamp
 }
 var file_pilab_pivirtd_v1_host_resource_proto_depIdxs = []int32{
 	2,  // 0: pilab.virtualization.v1.HostResourceReport.numa_nodes:type_name -> pilab.virtualization.v1.NUMANode
 	3,  // 1: pilab.virtualization.v1.HostResourceReport.storage:type_name -> pilab.virtualization.v1.StorageSummary
 	0,  // 2: pilab.virtualization.v1.HostEvent.type:type_name -> pilab.virtualization.v1.HostEventType
-	10, // 3: pilab.virtualization.v1.HostEvent.timestamp:type_name -> google.protobuf.Timestamp
+	11, // 3: pilab.virtualization.v1.HostEvent.timestamp:type_name -> google.protobuf.Timestamp
 	6,  // 4: pilab.virtualization.v1.HostEvent.vm_lifecycle:type_name -> pilab.virtualization.v1.VmLifecycleEvent
 	7,  // 5: pilab.virtualization.v1.HostEvent.host_health:type_name -> pilab.virtualization.v1.HostHealthEvent
 	8,  // 6: pilab.virtualization.v1.HostEvent.resource_pressure:type_name -> pilab.virtualization.v1.ResourcePressureEvent
 	1,  // 7: pilab.virtualization.v1.HostEvent.resource_report:type_name -> pilab.virtualization.v1.HostResourceReport
 	9,  // 8: pilab.virtualization.v1.HostEvent.vm_disk_move:type_name -> pilab.virtualization.v1.VmDiskMoveEvent
-	9,  // [9:9] is the sub-list for method output_type
-	9,  // [9:9] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	10, // 9: pilab.virtualization.v1.HostEvent.vm_snapshot:type_name -> pilab.virtualization.v1.VmSnapshotEvent
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_pilab_pivirtd_v1_host_resource_proto_init() }
@@ -1028,6 +1155,7 @@ func file_pilab_pivirtd_v1_host_resource_proto_init() {
 		(*HostEvent_ResourcePressure)(nil),
 		(*HostEvent_ResourceReport)(nil),
 		(*HostEvent_VmDiskMove)(nil),
+		(*HostEvent_VmSnapshot)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1035,7 +1163,7 @@ func file_pilab_pivirtd_v1_host_resource_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pilab_pivirtd_v1_host_resource_proto_rawDesc), len(file_pilab_pivirtd_v1_host_resource_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
