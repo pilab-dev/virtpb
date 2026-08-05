@@ -65,6 +65,15 @@ const (
 	PivirtdService_StartDiskMove_FullMethodName       = "/pilab.virtualization.v1.PivirtdService/StartDiskMove"
 	PivirtdService_GetDiskMoveStatus_FullMethodName   = "/pilab.virtualization.v1.PivirtdService/GetDiskMoveStatus"
 	PivirtdService_CancelDiskMove_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/CancelDiskMove"
+	PivirtdService_AttachDisk_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/AttachDisk"
+	PivirtdService_DetachDisk_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/DetachDisk"
+	PivirtdService_AttachNIC_FullMethodName           = "/pilab.virtualization.v1.PivirtdService/AttachNIC"
+	PivirtdService_DetachNIC_FullMethodName           = "/pilab.virtualization.v1.PivirtdService/DetachNIC"
+	PivirtdService_ResizeDisk_FullMethodName          = "/pilab.virtualization.v1.PivirtdService/ResizeDisk"
+	PivirtdService_SetVNCPassword_FullMethodName      = "/pilab.virtualization.v1.PivirtdService/SetVNCPassword"
+	PivirtdService_SetLinkState_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/SetLinkState"
+	PivirtdService_GetSnapshotTree_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/GetSnapshotTree"
+	PivirtdService_GetGuestInfo_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/GetGuestInfo"
 	PivirtdService_SubscribeEvents_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
 	PivirtdService_GetHostResource_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/GetHostResource"
 )
@@ -134,6 +143,19 @@ type PivirtdServiceClient interface {
 	StartDiskMove(ctx context.Context, in *StartDiskMoveRequest, opts ...grpc.CallOption) (*DiskMoveStatusResponse, error)
 	GetDiskMoveStatus(ctx context.Context, in *GetDiskMoveStatusRequest, opts ...grpc.CallOption) (*DiskMoveStatusResponse, error)
 	CancelDiskMove(ctx context.Context, in *CancelDiskMoveRequest, opts ...grpc.CallOption) (*DiskMoveResponse, error)
+	// VM Device Hot-plug
+	AttachDisk(ctx context.Context, in *AttachDiskRequest, opts ...grpc.CallOption) (*VMResponse, error)
+	DetachDisk(ctx context.Context, in *DetachDiskRequest, opts ...grpc.CallOption) (*VMResponse, error)
+	AttachNIC(ctx context.Context, in *AttachNICRequest, opts ...grpc.CallOption) (*VMResponse, error)
+	DetachNIC(ctx context.Context, in *DetachNICRequest, opts ...grpc.CallOption) (*VMResponse, error)
+	// Live Reconfiguration
+	ResizeDisk(ctx context.Context, in *ResizeDiskRequest, opts ...grpc.CallOption) (*VMResponse, error)
+	SetVNCPassword(ctx context.Context, in *SetVNCPasswordRequest, opts ...grpc.CallOption) (*VMResponse, error)
+	SetLinkState(ctx context.Context, in *SetLinkStateRequest, opts ...grpc.CallOption) (*VMResponse, error)
+	// Snapshot Tree
+	GetSnapshotTree(ctx context.Context, in *GetSnapshotTreeRequest, opts ...grpc.CallOption) (*GetSnapshotTreeResponse, error)
+	// Guest Agent
+	GetGuestInfo(ctx context.Context, in *GetGuestInfoRequest, opts ...grpc.CallOption) (*GetGuestInfoResponse, error)
 	// Event Streaming
 	SubscribeEvents(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HostEvent], error)
 	GetHostResource(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (*HostResourceReport, error)
@@ -616,6 +638,96 @@ func (c *pivirtdServiceClient) CancelDiskMove(ctx context.Context, in *CancelDis
 	return out, nil
 }
 
+func (c *pivirtdServiceClient) AttachDisk(ctx context.Context, in *AttachDiskRequest, opts ...grpc.CallOption) (*VMResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VMResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_AttachDisk_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) DetachDisk(ctx context.Context, in *DetachDiskRequest, opts ...grpc.CallOption) (*VMResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VMResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_DetachDisk_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) AttachNIC(ctx context.Context, in *AttachNICRequest, opts ...grpc.CallOption) (*VMResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VMResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_AttachNIC_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) DetachNIC(ctx context.Context, in *DetachNICRequest, opts ...grpc.CallOption) (*VMResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VMResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_DetachNIC_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) ResizeDisk(ctx context.Context, in *ResizeDiskRequest, opts ...grpc.CallOption) (*VMResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VMResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_ResizeDisk_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) SetVNCPassword(ctx context.Context, in *SetVNCPasswordRequest, opts ...grpc.CallOption) (*VMResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VMResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_SetVNCPassword_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) SetLinkState(ctx context.Context, in *SetLinkStateRequest, opts ...grpc.CallOption) (*VMResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VMResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_SetLinkState_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) GetSnapshotTree(ctx context.Context, in *GetSnapshotTreeRequest, opts ...grpc.CallOption) (*GetSnapshotTreeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSnapshotTreeResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_GetSnapshotTree_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) GetGuestInfo(ctx context.Context, in *GetGuestInfoRequest, opts ...grpc.CallOption) (*GetGuestInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGuestInfoResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_GetGuestInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *pivirtdServiceClient) SubscribeEvents(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HostEvent], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &PivirtdService_ServiceDesc.Streams[1], PivirtdService_SubscribeEvents_FullMethodName, cOpts...)
@@ -710,6 +822,19 @@ type PivirtdServiceServer interface {
 	StartDiskMove(context.Context, *StartDiskMoveRequest) (*DiskMoveStatusResponse, error)
 	GetDiskMoveStatus(context.Context, *GetDiskMoveStatusRequest) (*DiskMoveStatusResponse, error)
 	CancelDiskMove(context.Context, *CancelDiskMoveRequest) (*DiskMoveResponse, error)
+	// VM Device Hot-plug
+	AttachDisk(context.Context, *AttachDiskRequest) (*VMResponse, error)
+	DetachDisk(context.Context, *DetachDiskRequest) (*VMResponse, error)
+	AttachNIC(context.Context, *AttachNICRequest) (*VMResponse, error)
+	DetachNIC(context.Context, *DetachNICRequest) (*VMResponse, error)
+	// Live Reconfiguration
+	ResizeDisk(context.Context, *ResizeDiskRequest) (*VMResponse, error)
+	SetVNCPassword(context.Context, *SetVNCPasswordRequest) (*VMResponse, error)
+	SetLinkState(context.Context, *SetLinkStateRequest) (*VMResponse, error)
+	// Snapshot Tree
+	GetSnapshotTree(context.Context, *GetSnapshotTreeRequest) (*GetSnapshotTreeResponse, error)
+	// Guest Agent
+	GetGuestInfo(context.Context, *GetGuestInfoRequest) (*GetGuestInfoResponse, error)
 	// Event Streaming
 	SubscribeEvents(*SubscribeEventsRequest, grpc.ServerStreamingServer[HostEvent]) error
 	GetHostResource(context.Context, *SubscribeEventsRequest) (*HostResourceReport, error)
@@ -860,6 +985,33 @@ func (UnimplementedPivirtdServiceServer) GetDiskMoveStatus(context.Context, *Get
 }
 func (UnimplementedPivirtdServiceServer) CancelDiskMove(context.Context, *CancelDiskMoveRequest) (*DiskMoveResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CancelDiskMove not implemented")
+}
+func (UnimplementedPivirtdServiceServer) AttachDisk(context.Context, *AttachDiskRequest) (*VMResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AttachDisk not implemented")
+}
+func (UnimplementedPivirtdServiceServer) DetachDisk(context.Context, *DetachDiskRequest) (*VMResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DetachDisk not implemented")
+}
+func (UnimplementedPivirtdServiceServer) AttachNIC(context.Context, *AttachNICRequest) (*VMResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AttachNIC not implemented")
+}
+func (UnimplementedPivirtdServiceServer) DetachNIC(context.Context, *DetachNICRequest) (*VMResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DetachNIC not implemented")
+}
+func (UnimplementedPivirtdServiceServer) ResizeDisk(context.Context, *ResizeDiskRequest) (*VMResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResizeDisk not implemented")
+}
+func (UnimplementedPivirtdServiceServer) SetVNCPassword(context.Context, *SetVNCPasswordRequest) (*VMResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetVNCPassword not implemented")
+}
+func (UnimplementedPivirtdServiceServer) SetLinkState(context.Context, *SetLinkStateRequest) (*VMResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetLinkState not implemented")
+}
+func (UnimplementedPivirtdServiceServer) GetSnapshotTree(context.Context, *GetSnapshotTreeRequest) (*GetSnapshotTreeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSnapshotTree not implemented")
+}
+func (UnimplementedPivirtdServiceServer) GetGuestInfo(context.Context, *GetGuestInfoRequest) (*GetGuestInfoResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGuestInfo not implemented")
 }
 func (UnimplementedPivirtdServiceServer) SubscribeEvents(*SubscribeEventsRequest, grpc.ServerStreamingServer[HostEvent]) error {
 	return status.Error(codes.Unimplemented, "method SubscribeEvents not implemented")
@@ -1709,6 +1861,168 @@ func _PivirtdService_CancelDiskMove_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PivirtdService_AttachDisk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AttachDiskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).AttachDisk(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_AttachDisk_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).AttachDisk(ctx, req.(*AttachDiskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_DetachDisk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DetachDiskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).DetachDisk(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_DetachDisk_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).DetachDisk(ctx, req.(*DetachDiskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_AttachNIC_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AttachNICRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).AttachNIC(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_AttachNIC_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).AttachNIC(ctx, req.(*AttachNICRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_DetachNIC_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DetachNICRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).DetachNIC(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_DetachNIC_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).DetachNIC(ctx, req.(*DetachNICRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_ResizeDisk_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResizeDiskRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).ResizeDisk(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_ResizeDisk_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).ResizeDisk(ctx, req.(*ResizeDiskRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_SetVNCPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetVNCPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).SetVNCPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_SetVNCPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).SetVNCPassword(ctx, req.(*SetVNCPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_SetLinkState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetLinkStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).SetLinkState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_SetLinkState_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).SetLinkState(ctx, req.(*SetLinkStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_GetSnapshotTree_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSnapshotTreeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).GetSnapshotTree(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_GetSnapshotTree_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).GetSnapshotTree(ctx, req.(*GetSnapshotTreeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_GetGuestInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGuestInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).GetGuestInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_GetGuestInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).GetGuestInfo(ctx, req.(*GetGuestInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PivirtdService_SubscribeEvents_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(SubscribeEventsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -1924,6 +2238,42 @@ var PivirtdService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CancelDiskMove",
 			Handler:    _PivirtdService_CancelDiskMove_Handler,
+		},
+		{
+			MethodName: "AttachDisk",
+			Handler:    _PivirtdService_AttachDisk_Handler,
+		},
+		{
+			MethodName: "DetachDisk",
+			Handler:    _PivirtdService_DetachDisk_Handler,
+		},
+		{
+			MethodName: "AttachNIC",
+			Handler:    _PivirtdService_AttachNIC_Handler,
+		},
+		{
+			MethodName: "DetachNIC",
+			Handler:    _PivirtdService_DetachNIC_Handler,
+		},
+		{
+			MethodName: "ResizeDisk",
+			Handler:    _PivirtdService_ResizeDisk_Handler,
+		},
+		{
+			MethodName: "SetVNCPassword",
+			Handler:    _PivirtdService_SetVNCPassword_Handler,
+		},
+		{
+			MethodName: "SetLinkState",
+			Handler:    _PivirtdService_SetLinkState_Handler,
+		},
+		{
+			MethodName: "GetSnapshotTree",
+			Handler:    _PivirtdService_GetSnapshotTree_Handler,
+		},
+		{
+			MethodName: "GetGuestInfo",
+			Handler:    _PivirtdService_GetGuestInfo_Handler,
 		},
 		{
 			MethodName: "GetHostResource",

@@ -5862,6 +5862,730 @@ func (x *ResourceSpec) GetCpuShares() int64 {
 	return 0
 }
 
+type AttachDiskRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VmName        string                 `protobuf:"bytes,1,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
+	Disk          *DiskConfig            `protobuf:"bytes,2,opt,name=disk,proto3" json:"disk,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AttachDiskRequest) Reset() {
+	*x = AttachDiskRequest{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[94]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AttachDiskRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AttachDiskRequest) ProtoMessage() {}
+
+func (x *AttachDiskRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[94]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AttachDiskRequest.ProtoReflect.Descriptor instead.
+func (*AttachDiskRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{94}
+}
+
+func (x *AttachDiskRequest) GetVmName() string {
+	if x != nil {
+		return x.VmName
+	}
+	return ""
+}
+
+func (x *AttachDiskRequest) GetDisk() *DiskConfig {
+	if x != nil {
+		return x.Disk
+	}
+	return nil
+}
+
+type DetachDiskRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VmName        string                 `protobuf:"bytes,1,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
+	DiskId        string                 `protobuf:"bytes,2,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DetachDiskRequest) Reset() {
+	*x = DetachDiskRequest{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[95]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DetachDiskRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DetachDiskRequest) ProtoMessage() {}
+
+func (x *DetachDiskRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[95]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DetachDiskRequest.ProtoReflect.Descriptor instead.
+func (*DetachDiskRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{95}
+}
+
+func (x *DetachDiskRequest) GetVmName() string {
+	if x != nil {
+		return x.VmName
+	}
+	return ""
+}
+
+func (x *DetachDiskRequest) GetDiskId() string {
+	if x != nil {
+		return x.DiskId
+	}
+	return ""
+}
+
+type AttachNICRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VmName        string                 `protobuf:"bytes,1,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
+	Nic           *NetworkConfig         `protobuf:"bytes,2,opt,name=nic,proto3" json:"nic,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AttachNICRequest) Reset() {
+	*x = AttachNICRequest{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[96]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AttachNICRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AttachNICRequest) ProtoMessage() {}
+
+func (x *AttachNICRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[96]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AttachNICRequest.ProtoReflect.Descriptor instead.
+func (*AttachNICRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{96}
+}
+
+func (x *AttachNICRequest) GetVmName() string {
+	if x != nil {
+		return x.VmName
+	}
+	return ""
+}
+
+func (x *AttachNICRequest) GetNic() *NetworkConfig {
+	if x != nil {
+		return x.Nic
+	}
+	return nil
+}
+
+type DetachNICRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VmName        string                 `protobuf:"bytes,1,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
+	NicId         string                 `protobuf:"bytes,2,opt,name=nic_id,json=nicId,proto3" json:"nic_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DetachNICRequest) Reset() {
+	*x = DetachNICRequest{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[97]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DetachNICRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DetachNICRequest) ProtoMessage() {}
+
+func (x *DetachNICRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[97]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DetachNICRequest.ProtoReflect.Descriptor instead.
+func (*DetachNICRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{97}
+}
+
+func (x *DetachNICRequest) GetVmName() string {
+	if x != nil {
+		return x.VmName
+	}
+	return ""
+}
+
+func (x *DetachNICRequest) GetNicId() string {
+	if x != nil {
+		return x.NicId
+	}
+	return ""
+}
+
+type ResizeDiskRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VmName        string                 `protobuf:"bytes,1,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
+	DiskId        string                 `protobuf:"bytes,2,opt,name=disk_id,json=diskId,proto3" json:"disk_id,omitempty"`
+	NewSizeGb     int64                  `protobuf:"varint,3,opt,name=new_size_gb,json=newSizeGb,proto3" json:"new_size_gb,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResizeDiskRequest) Reset() {
+	*x = ResizeDiskRequest{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[98]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResizeDiskRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResizeDiskRequest) ProtoMessage() {}
+
+func (x *ResizeDiskRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[98]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResizeDiskRequest.ProtoReflect.Descriptor instead.
+func (*ResizeDiskRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{98}
+}
+
+func (x *ResizeDiskRequest) GetVmName() string {
+	if x != nil {
+		return x.VmName
+	}
+	return ""
+}
+
+func (x *ResizeDiskRequest) GetDiskId() string {
+	if x != nil {
+		return x.DiskId
+	}
+	return ""
+}
+
+func (x *ResizeDiskRequest) GetNewSizeGb() int64 {
+	if x != nil {
+		return x.NewSizeGb
+	}
+	return 0
+}
+
+type SetVNCPasswordRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VmName        string                 `protobuf:"bytes,1,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	ExpireSeconds int32                  `protobuf:"varint,3,opt,name=expire_seconds,json=expireSeconds,proto3" json:"expire_seconds,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetVNCPasswordRequest) Reset() {
+	*x = SetVNCPasswordRequest{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[99]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetVNCPasswordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetVNCPasswordRequest) ProtoMessage() {}
+
+func (x *SetVNCPasswordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[99]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetVNCPasswordRequest.ProtoReflect.Descriptor instead.
+func (*SetVNCPasswordRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{99}
+}
+
+func (x *SetVNCPasswordRequest) GetVmName() string {
+	if x != nil {
+		return x.VmName
+	}
+	return ""
+}
+
+func (x *SetVNCPasswordRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+func (x *SetVNCPasswordRequest) GetExpireSeconds() int32 {
+	if x != nil {
+		return x.ExpireSeconds
+	}
+	return 0
+}
+
+type SetLinkStateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VmName        string                 `protobuf:"bytes,1,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
+	NicId         string                 `protobuf:"bytes,2,opt,name=nic_id,json=nicId,proto3" json:"nic_id,omitempty"`
+	LinkUp        bool                   `protobuf:"varint,3,opt,name=link_up,json=linkUp,proto3" json:"link_up,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetLinkStateRequest) Reset() {
+	*x = SetLinkStateRequest{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[100]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetLinkStateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetLinkStateRequest) ProtoMessage() {}
+
+func (x *SetLinkStateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[100]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetLinkStateRequest.ProtoReflect.Descriptor instead.
+func (*SetLinkStateRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{100}
+}
+
+func (x *SetLinkStateRequest) GetVmName() string {
+	if x != nil {
+		return x.VmName
+	}
+	return ""
+}
+
+func (x *SetLinkStateRequest) GetNicId() string {
+	if x != nil {
+		return x.NicId
+	}
+	return ""
+}
+
+func (x *SetLinkStateRequest) GetLinkUp() bool {
+	if x != nil {
+		return x.LinkUp
+	}
+	return false
+}
+
+type GetSnapshotTreeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VmName        string                 `protobuf:"bytes,1,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSnapshotTreeRequest) Reset() {
+	*x = GetSnapshotTreeRequest{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[101]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSnapshotTreeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSnapshotTreeRequest) ProtoMessage() {}
+
+func (x *GetSnapshotTreeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[101]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSnapshotTreeRequest.ProtoReflect.Descriptor instead.
+func (*GetSnapshotTreeRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{101}
+}
+
+func (x *GetSnapshotTreeRequest) GetVmName() string {
+	if x != nil {
+		return x.VmName
+	}
+	return ""
+}
+
+type GetSnapshotTreeResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Roots         []*SnapshotNode        `protobuf:"bytes,1,rep,name=roots,proto3" json:"roots,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSnapshotTreeResponse) Reset() {
+	*x = GetSnapshotTreeResponse{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[102]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSnapshotTreeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSnapshotTreeResponse) ProtoMessage() {}
+
+func (x *GetSnapshotTreeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[102]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSnapshotTreeResponse.ProtoReflect.Descriptor instead.
+func (*GetSnapshotTreeResponse) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{102}
+}
+
+func (x *GetSnapshotTreeResponse) GetRoots() []*SnapshotNode {
+	if x != nil {
+		return x.Roots
+	}
+	return nil
+}
+
+type SnapshotNode struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Snapshot      *SnapshotInfo          `protobuf:"bytes,1,opt,name=snapshot,proto3" json:"snapshot,omitempty"`
+	Children      []*SnapshotNode        `protobuf:"bytes,2,rep,name=children,proto3" json:"children,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SnapshotNode) Reset() {
+	*x = SnapshotNode{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[103]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SnapshotNode) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SnapshotNode) ProtoMessage() {}
+
+func (x *SnapshotNode) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[103]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SnapshotNode.ProtoReflect.Descriptor instead.
+func (*SnapshotNode) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{103}
+}
+
+func (x *SnapshotNode) GetSnapshot() *SnapshotInfo {
+	if x != nil {
+		return x.Snapshot
+	}
+	return nil
+}
+
+func (x *SnapshotNode) GetChildren() []*SnapshotNode {
+	if x != nil {
+		return x.Children
+	}
+	return nil
+}
+
+type GetGuestInfoRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	VmName        string                 `protobuf:"bytes,1,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetGuestInfoRequest) Reset() {
+	*x = GetGuestInfoRequest{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[104]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGuestInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGuestInfoRequest) ProtoMessage() {}
+
+func (x *GetGuestInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[104]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGuestInfoRequest.ProtoReflect.Descriptor instead.
+func (*GetGuestInfoRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{104}
+}
+
+func (x *GetGuestInfoRequest) GetVmName() string {
+	if x != nil {
+		return x.VmName
+	}
+	return ""
+}
+
+type GetGuestInfoResponse struct {
+	state         protoimpl.MessageState   `protogen:"open.v1"`
+	Hostname      string                   `protobuf:"bytes,1,opt,name=hostname,proto3" json:"hostname,omitempty"`
+	OsId          string                   `protobuf:"bytes,2,opt,name=os_id,json=osId,proto3" json:"os_id,omitempty"`
+	OsName        string                   `protobuf:"bytes,3,opt,name=os_name,json=osName,proto3" json:"os_name,omitempty"`
+	OsVersion     string                   `protobuf:"bytes,4,opt,name=os_version,json=osVersion,proto3" json:"os_version,omitempty"`
+	KernelVersion string                   `protobuf:"bytes,5,opt,name=kernel_version,json=kernelVersion,proto3" json:"kernel_version,omitempty"`
+	Interfaces    []*GuestNetworkInterface `protobuf:"bytes,6,rep,name=interfaces,proto3" json:"interfaces,omitempty"`
+	Error         string                   `protobuf:"bytes,7,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetGuestInfoResponse) Reset() {
+	*x = GetGuestInfoResponse{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[105]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetGuestInfoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGuestInfoResponse) ProtoMessage() {}
+
+func (x *GetGuestInfoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[105]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGuestInfoResponse.ProtoReflect.Descriptor instead.
+func (*GetGuestInfoResponse) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{105}
+}
+
+func (x *GetGuestInfoResponse) GetHostname() string {
+	if x != nil {
+		return x.Hostname
+	}
+	return ""
+}
+
+func (x *GetGuestInfoResponse) GetOsId() string {
+	if x != nil {
+		return x.OsId
+	}
+	return ""
+}
+
+func (x *GetGuestInfoResponse) GetOsName() string {
+	if x != nil {
+		return x.OsName
+	}
+	return ""
+}
+
+func (x *GetGuestInfoResponse) GetOsVersion() string {
+	if x != nil {
+		return x.OsVersion
+	}
+	return ""
+}
+
+func (x *GetGuestInfoResponse) GetKernelVersion() string {
+	if x != nil {
+		return x.KernelVersion
+	}
+	return ""
+}
+
+func (x *GetGuestInfoResponse) GetInterfaces() []*GuestNetworkInterface {
+	if x != nil {
+		return x.Interfaces
+	}
+	return nil
+}
+
+func (x *GetGuestInfoResponse) GetError() string {
+	if x != nil {
+		return x.Error
+	}
+	return ""
+}
+
+type GuestNetworkInterface struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	MacAddress    string                 `protobuf:"bytes,2,opt,name=mac_address,json=macAddress,proto3" json:"mac_address,omitempty"`
+	IpAddresses   []string               `protobuf:"bytes,3,rep,name=ip_addresses,json=ipAddresses,proto3" json:"ip_addresses,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GuestNetworkInterface) Reset() {
+	*x = GuestNetworkInterface{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[106]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GuestNetworkInterface) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GuestNetworkInterface) ProtoMessage() {}
+
+func (x *GuestNetworkInterface) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[106]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GuestNetworkInterface.ProtoReflect.Descriptor instead.
+func (*GuestNetworkInterface) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{106}
+}
+
+func (x *GuestNetworkInterface) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GuestNetworkInterface) GetMacAddress() string {
+	if x != nil {
+		return x.MacAddress
+	}
+	return ""
+}
+
+func (x *GuestNetworkInterface) GetIpAddresses() []string {
+	if x != nil {
+		return x.IpAddresses
+	}
+	return nil
+}
+
 var File_pilab_pivirtd_v1_pivirtd_proto protoreflect.FileDescriptor
 
 const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
@@ -6316,7 +7040,56 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\x12memory_limit_bytes\x18\x01 \x01(\x03R\x10memoryLimitBytes\x128\n" +
 	"\x18memory_reservation_bytes\x18\x02 \x01(\x03R\x16memoryReservationBytes\x12\x1d\n" +
 	"\n" +
-	"cpu_shares\x18\x03 \x01(\x03R\tcpuShares2\xf1'\n" +
+	"cpu_shares\x18\x03 \x01(\x03R\tcpuShares\"e\n" +
+	"\x11AttachDiskRequest\x12\x17\n" +
+	"\avm_name\x18\x01 \x01(\tR\x06vmName\x127\n" +
+	"\x04disk\x18\x02 \x01(\v2#.pilab.virtualization.v1.DiskConfigR\x04disk\"E\n" +
+	"\x11DetachDiskRequest\x12\x17\n" +
+	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12\x17\n" +
+	"\adisk_id\x18\x02 \x01(\tR\x06diskId\"e\n" +
+	"\x10AttachNICRequest\x12\x17\n" +
+	"\avm_name\x18\x01 \x01(\tR\x06vmName\x128\n" +
+	"\x03nic\x18\x02 \x01(\v2&.pilab.virtualization.v1.NetworkConfigR\x03nic\"B\n" +
+	"\x10DetachNICRequest\x12\x17\n" +
+	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12\x15\n" +
+	"\x06nic_id\x18\x02 \x01(\tR\x05nicId\"e\n" +
+	"\x11ResizeDiskRequest\x12\x17\n" +
+	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12\x17\n" +
+	"\adisk_id\x18\x02 \x01(\tR\x06diskId\x12\x1e\n" +
+	"\vnew_size_gb\x18\x03 \x01(\x03R\tnewSizeGb\"s\n" +
+	"\x15SetVNCPasswordRequest\x12\x17\n" +
+	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x12%\n" +
+	"\x0eexpire_seconds\x18\x03 \x01(\x05R\rexpireSeconds\"^\n" +
+	"\x13SetLinkStateRequest\x12\x17\n" +
+	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12\x15\n" +
+	"\x06nic_id\x18\x02 \x01(\tR\x05nicId\x12\x17\n" +
+	"\alink_up\x18\x03 \x01(\bR\x06linkUp\"1\n" +
+	"\x16GetSnapshotTreeRequest\x12\x17\n" +
+	"\avm_name\x18\x01 \x01(\tR\x06vmName\"V\n" +
+	"\x17GetSnapshotTreeResponse\x12;\n" +
+	"\x05roots\x18\x01 \x03(\v2%.pilab.virtualization.v1.SnapshotNodeR\x05roots\"\x94\x01\n" +
+	"\fSnapshotNode\x12A\n" +
+	"\bsnapshot\x18\x01 \x01(\v2%.pilab.virtualization.v1.SnapshotInfoR\bsnapshot\x12A\n" +
+	"\bchildren\x18\x02 \x03(\v2%.pilab.virtualization.v1.SnapshotNodeR\bchildren\".\n" +
+	"\x13GetGuestInfoRequest\x12\x17\n" +
+	"\avm_name\x18\x01 \x01(\tR\x06vmName\"\x8c\x02\n" +
+	"\x14GetGuestInfoResponse\x12\x1a\n" +
+	"\bhostname\x18\x01 \x01(\tR\bhostname\x12\x13\n" +
+	"\x05os_id\x18\x02 \x01(\tR\x04osId\x12\x17\n" +
+	"\aos_name\x18\x03 \x01(\tR\x06osName\x12\x1d\n" +
+	"\n" +
+	"os_version\x18\x04 \x01(\tR\tosVersion\x12%\n" +
+	"\x0ekernel_version\x18\x05 \x01(\tR\rkernelVersion\x12N\n" +
+	"\n" +
+	"interfaces\x18\x06 \x03(\v2..pilab.virtualization.v1.GuestNetworkInterfaceR\n" +
+	"interfaces\x12\x14\n" +
+	"\x05error\x18\a \x01(\tR\x05error\"o\n" +
+	"\x15GuestNetworkInterface\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1f\n" +
+	"\vmac_address\x18\x02 \x01(\tR\n" +
+	"macAddress\x12!\n" +
+	"\fip_addresses\x18\x03 \x03(\tR\vipAddresses2\xf5.\n" +
 	"\x0ePivirtdService\x12Y\n" +
 	"\bCreateVM\x12(.pilab.virtualization.v1.CreateVMRequest\x1a#.pilab.virtualization.v1.VMResponse\x12W\n" +
 	"\aStartVM\x12'.pilab.virtualization.v1.StartVMRequest\x1a#.pilab.virtualization.v1.VMResponse\x12U\n" +
@@ -6366,7 +7139,19 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\vGetVMStatus\x12+.pilab.virtualization.v1.GetVMStatusRequest\x1a,.pilab.virtualization.v1.GetVMStatusResponse\x12o\n" +
 	"\rStartDiskMove\x12-.pilab.virtualization.v1.StartDiskMoveRequest\x1a/.pilab.virtualization.v1.DiskMoveStatusResponse\x12w\n" +
 	"\x11GetDiskMoveStatus\x121.pilab.virtualization.v1.GetDiskMoveStatusRequest\x1a/.pilab.virtualization.v1.DiskMoveStatusResponse\x12k\n" +
-	"\x0eCancelDiskMove\x12..pilab.virtualization.v1.CancelDiskMoveRequest\x1a).pilab.virtualization.v1.DiskMoveResponse\x12h\n" +
+	"\x0eCancelDiskMove\x12..pilab.virtualization.v1.CancelDiskMoveRequest\x1a).pilab.virtualization.v1.DiskMoveResponse\x12]\n" +
+	"\n" +
+	"AttachDisk\x12*.pilab.virtualization.v1.AttachDiskRequest\x1a#.pilab.virtualization.v1.VMResponse\x12]\n" +
+	"\n" +
+	"DetachDisk\x12*.pilab.virtualization.v1.DetachDiskRequest\x1a#.pilab.virtualization.v1.VMResponse\x12[\n" +
+	"\tAttachNIC\x12).pilab.virtualization.v1.AttachNICRequest\x1a#.pilab.virtualization.v1.VMResponse\x12[\n" +
+	"\tDetachNIC\x12).pilab.virtualization.v1.DetachNICRequest\x1a#.pilab.virtualization.v1.VMResponse\x12]\n" +
+	"\n" +
+	"ResizeDisk\x12*.pilab.virtualization.v1.ResizeDiskRequest\x1a#.pilab.virtualization.v1.VMResponse\x12e\n" +
+	"\x0eSetVNCPassword\x12..pilab.virtualization.v1.SetVNCPasswordRequest\x1a#.pilab.virtualization.v1.VMResponse\x12a\n" +
+	"\fSetLinkState\x12,.pilab.virtualization.v1.SetLinkStateRequest\x1a#.pilab.virtualization.v1.VMResponse\x12t\n" +
+	"\x0fGetSnapshotTree\x12/.pilab.virtualization.v1.GetSnapshotTreeRequest\x1a0.pilab.virtualization.v1.GetSnapshotTreeResponse\x12k\n" +
+	"\fGetGuestInfo\x12,.pilab.virtualization.v1.GetGuestInfoRequest\x1a-.pilab.virtualization.v1.GetGuestInfoResponse\x12h\n" +
 	"\x0fSubscribeEvents\x12/.pilab.virtualization.v1.SubscribeEventsRequest\x1a\".pilab.virtualization.v1.HostEvent0\x01\x12o\n" +
 	"\x0fGetHostResource\x12/.pilab.virtualization.v1.SubscribeEventsRequest\x1a+.pilab.virtualization.v1.HostResourceReportB5Z3go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1b\x06proto3"
 
@@ -6382,7 +7167,7 @@ func file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP() []byte {
 	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescData
 }
 
-var file_pilab_pivirtd_v1_pivirtd_proto_msgTypes = make([]protoimpl.MessageInfo, 97)
+var file_pilab_pivirtd_v1_pivirtd_proto_msgTypes = make([]protoimpl.MessageInfo, 110)
 var file_pilab_pivirtd_v1_pivirtd_proto_goTypes = []any{
 	(*CreateVMRequest)(nil),            // 0: pilab.virtualization.v1.CreateVMRequest
 	(*StartVMRequest)(nil),             // 1: pilab.virtualization.v1.StartVMRequest
@@ -6478,15 +7263,28 @@ var file_pilab_pivirtd_v1_pivirtd_proto_goTypes = []any{
 	(*VMCondition)(nil),                // 91: pilab.virtualization.v1.VMCondition
 	(*VMEvent)(nil),                    // 92: pilab.virtualization.v1.VMEvent
 	(*ResourceSpec)(nil),               // 93: pilab.virtualization.v1.ResourceSpec
-	nil,                                // 94: pilab.virtualization.v1.CreateStoragePoolRequest.OptionsEntry
-	nil,                                // 95: pilab.virtualization.v1.SetLabelsRequest.LabelsEntry
-	nil,                                // 96: pilab.virtualization.v1.GetLabelsResponse.LabelsEntry
-	(*timestamppb.Timestamp)(nil),      // 97: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),        // 98: google.protobuf.Duration
-	(v1.SnapshotState)(0),              // 99: pilab.common.v1.SnapshotState
-	(*SubscribeEventsRequest)(nil),     // 100: pilab.virtualization.v1.SubscribeEventsRequest
-	(*HostEvent)(nil),                  // 101: pilab.virtualization.v1.HostEvent
-	(*HostResourceReport)(nil),         // 102: pilab.virtualization.v1.HostResourceReport
+	(*AttachDiskRequest)(nil),          // 94: pilab.virtualization.v1.AttachDiskRequest
+	(*DetachDiskRequest)(nil),          // 95: pilab.virtualization.v1.DetachDiskRequest
+	(*AttachNICRequest)(nil),           // 96: pilab.virtualization.v1.AttachNICRequest
+	(*DetachNICRequest)(nil),           // 97: pilab.virtualization.v1.DetachNICRequest
+	(*ResizeDiskRequest)(nil),          // 98: pilab.virtualization.v1.ResizeDiskRequest
+	(*SetVNCPasswordRequest)(nil),      // 99: pilab.virtualization.v1.SetVNCPasswordRequest
+	(*SetLinkStateRequest)(nil),        // 100: pilab.virtualization.v1.SetLinkStateRequest
+	(*GetSnapshotTreeRequest)(nil),     // 101: pilab.virtualization.v1.GetSnapshotTreeRequest
+	(*GetSnapshotTreeResponse)(nil),    // 102: pilab.virtualization.v1.GetSnapshotTreeResponse
+	(*SnapshotNode)(nil),               // 103: pilab.virtualization.v1.SnapshotNode
+	(*GetGuestInfoRequest)(nil),        // 104: pilab.virtualization.v1.GetGuestInfoRequest
+	(*GetGuestInfoResponse)(nil),       // 105: pilab.virtualization.v1.GetGuestInfoResponse
+	(*GuestNetworkInterface)(nil),      // 106: pilab.virtualization.v1.GuestNetworkInterface
+	nil,                                // 107: pilab.virtualization.v1.CreateStoragePoolRequest.OptionsEntry
+	nil,                                // 108: pilab.virtualization.v1.SetLabelsRequest.LabelsEntry
+	nil,                                // 109: pilab.virtualization.v1.GetLabelsResponse.LabelsEntry
+	(*timestamppb.Timestamp)(nil),      // 110: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),        // 111: google.protobuf.Duration
+	(v1.SnapshotState)(0),              // 112: pilab.common.v1.SnapshotState
+	(*SubscribeEventsRequest)(nil),     // 113: pilab.virtualization.v1.SubscribeEventsRequest
+	(*HostEvent)(nil),                  // 114: pilab.virtualization.v1.HostEvent
+	(*HostResourceReport)(nil),         // 115: pilab.virtualization.v1.HostResourceReport
 }
 var file_pilab_pivirtd_v1_pivirtd_proto_depIdxs = []int32{
 	15,  // 0: pilab.virtualization.v1.CreateVMRequest.cpu:type_name -> pilab.virtualization.v1.CPUConfig
@@ -6500,25 +7298,25 @@ var file_pilab_pivirtd_v1_pivirtd_proto_depIdxs = []int32{
 	15,  // 8: pilab.virtualization.v1.VMInfo.cpu:type_name -> pilab.virtualization.v1.CPUConfig
 	16,  // 9: pilab.virtualization.v1.VMInfo.disks:type_name -> pilab.virtualization.v1.DiskConfig
 	17,  // 10: pilab.virtualization.v1.VMInfo.networks:type_name -> pilab.virtualization.v1.NetworkConfig
-	97,  // 11: pilab.virtualization.v1.VMInfo.created_at:type_name -> google.protobuf.Timestamp
-	97,  // 12: pilab.virtualization.v1.VMInfo.updated_at:type_name -> google.protobuf.Timestamp
+	110, // 11: pilab.virtualization.v1.VMInfo.created_at:type_name -> google.protobuf.Timestamp
+	110, // 12: pilab.virtualization.v1.VMInfo.updated_at:type_name -> google.protobuf.Timestamp
 	82,  // 13: pilab.virtualization.v1.VMInfo.efi:type_name -> pilab.virtualization.v1.EFIConfig
 	21,  // 14: pilab.virtualization.v1.VMStatsResponse.cpu_stats:type_name -> pilab.virtualization.v1.CPUStats
 	22,  // 15: pilab.virtualization.v1.VMStatsResponse.memory_stats:type_name -> pilab.virtualization.v1.MemoryStats
 	23,  // 16: pilab.virtualization.v1.VMStatsResponse.disk_stats:type_name -> pilab.virtualization.v1.DiskStats
 	24,  // 17: pilab.virtualization.v1.VMStatsResponse.network_stats:type_name -> pilab.virtualization.v1.NetworkStats
-	97,  // 18: pilab.virtualization.v1.VMStatsResponse.timestamp:type_name -> google.protobuf.Timestamp
-	97,  // 19: pilab.virtualization.v1.QMPEvent.timestamp:type_name -> google.protobuf.Timestamp
-	98,  // 20: pilab.virtualization.v1.CreateSnapshotRequest.retain_for:type_name -> google.protobuf.Duration
+	110, // 18: pilab.virtualization.v1.VMStatsResponse.timestamp:type_name -> google.protobuf.Timestamp
+	110, // 19: pilab.virtualization.v1.QMPEvent.timestamp:type_name -> google.protobuf.Timestamp
+	111, // 20: pilab.virtualization.v1.CreateSnapshotRequest.retain_for:type_name -> google.protobuf.Duration
 	39,  // 21: pilab.virtualization.v1.ListSnapshotsResponse.snapshots:type_name -> pilab.virtualization.v1.SnapshotInfo
 	39,  // 22: pilab.virtualization.v1.SnapshotResponse.snapshot:type_name -> pilab.virtualization.v1.SnapshotInfo
 	47,  // 23: pilab.virtualization.v1.SnapshotStatusResponse.job:type_name -> pilab.virtualization.v1.VMJobStatus
-	97,  // 24: pilab.virtualization.v1.SnapshotInfo.date:type_name -> google.protobuf.Timestamp
-	99,  // 25: pilab.virtualization.v1.SnapshotInfo.state:type_name -> pilab.common.v1.SnapshotState
+	110, // 24: pilab.virtualization.v1.SnapshotInfo.date:type_name -> google.protobuf.Timestamp
+	112, // 25: pilab.virtualization.v1.SnapshotInfo.state:type_name -> pilab.common.v1.SnapshotState
 	47,  // 26: pilab.virtualization.v1.DiskMoveResponse.job:type_name -> pilab.virtualization.v1.VMJobStatus
 	47,  // 27: pilab.virtualization.v1.DiskMoveStatusResponse.job:type_name -> pilab.virtualization.v1.VMJobStatus
-	97,  // 28: pilab.virtualization.v1.VMJobStatus.started_at:type_name -> google.protobuf.Timestamp
-	94,  // 29: pilab.virtualization.v1.CreateStoragePoolRequest.options:type_name -> pilab.virtualization.v1.CreateStoragePoolRequest.OptionsEntry
+	110, // 28: pilab.virtualization.v1.VMJobStatus.started_at:type_name -> google.protobuf.Timestamp
+	107, // 29: pilab.virtualization.v1.CreateStoragePoolRequest.options:type_name -> pilab.virtualization.v1.CreateStoragePoolRequest.OptionsEntry
 	58,  // 30: pilab.virtualization.v1.StoragePoolResponse.pool:type_name -> pilab.virtualization.v1.StoragePool
 	58,  // 31: pilab.virtualization.v1.ListStoragePoolsResponse.pools:type_name -> pilab.virtualization.v1.StoragePool
 	71,  // 32: pilab.virtualization.v1.NetworkResponse.device:type_name -> pilab.virtualization.v1.NetworkDevice
@@ -6530,112 +7328,136 @@ var file_pilab_pivirtd_v1_pivirtd_proto_depIdxs = []int32{
 	81,  // 38: pilab.virtualization.v1.NetworkDevice.ovs_port:type_name -> pilab.virtualization.v1.OVSPort
 	80,  // 39: pilab.virtualization.v1.ListOVSBridgesResponse.bridges:type_name -> pilab.virtualization.v1.OVSBridge
 	81,  // 40: pilab.virtualization.v1.ListOVSPortsResponse.ports:type_name -> pilab.virtualization.v1.OVSPort
-	95,  // 41: pilab.virtualization.v1.SetLabelsRequest.labels:type_name -> pilab.virtualization.v1.SetLabelsRequest.LabelsEntry
-	96,  // 42: pilab.virtualization.v1.GetLabelsResponse.labels:type_name -> pilab.virtualization.v1.GetLabelsResponse.LabelsEntry
+	108, // 41: pilab.virtualization.v1.SetLabelsRequest.labels:type_name -> pilab.virtualization.v1.SetLabelsRequest.LabelsEntry
+	109, // 42: pilab.virtualization.v1.GetLabelsResponse.labels:type_name -> pilab.virtualization.v1.GetLabelsResponse.LabelsEntry
 	91,  // 43: pilab.virtualization.v1.GetVMStatusResponse.conditions:type_name -> pilab.virtualization.v1.VMCondition
 	92,  // 44: pilab.virtualization.v1.GetVMStatusResponse.events:type_name -> pilab.virtualization.v1.VMEvent
 	47,  // 45: pilab.virtualization.v1.GetVMStatusResponse.jobs:type_name -> pilab.virtualization.v1.VMJobStatus
-	0,   // 46: pilab.virtualization.v1.PivirtdService.CreateVM:input_type -> pilab.virtualization.v1.CreateVMRequest
-	1,   // 47: pilab.virtualization.v1.PivirtdService.StartVM:input_type -> pilab.virtualization.v1.StartVMRequest
-	2,   // 48: pilab.virtualization.v1.PivirtdService.StopVM:input_type -> pilab.virtualization.v1.StopVMRequest
-	3,   // 49: pilab.virtualization.v1.PivirtdService.PauseVM:input_type -> pilab.virtualization.v1.PauseVMRequest
-	4,   // 50: pilab.virtualization.v1.PivirtdService.ResumeVM:input_type -> pilab.virtualization.v1.ResumeVMRequest
-	5,   // 51: pilab.virtualization.v1.PivirtdService.RebootVM:input_type -> pilab.virtualization.v1.RebootVMRequest
-	6,   // 52: pilab.virtualization.v1.PivirtdService.DeleteVM:input_type -> pilab.virtualization.v1.DeleteVMRequest
-	10,  // 53: pilab.virtualization.v1.PivirtdService.ListVMs:input_type -> pilab.virtualization.v1.ListVMsRequest
-	9,   // 54: pilab.virtualization.v1.PivirtdService.GetVM:input_type -> pilab.virtualization.v1.GetVMRequest
-	19,  // 55: pilab.virtualization.v1.PivirtdService.GetVMStats:input_type -> pilab.virtualization.v1.GetVMStatsRequest
-	7,   // 56: pilab.virtualization.v1.PivirtdService.UpdateVMMemory:input_type -> pilab.virtualization.v1.UpdateVMMemoryRequest
-	8,   // 57: pilab.virtualization.v1.PivirtdService.UpdateVMCpu:input_type -> pilab.virtualization.v1.UpdateVMCpuRequest
-	25,  // 58: pilab.virtualization.v1.PivirtdService.ExecuteQMP:input_type -> pilab.virtualization.v1.ExecuteQMPRequest
-	27,  // 59: pilab.virtualization.v1.PivirtdService.StreamQMPEvents:input_type -> pilab.virtualization.v1.StreamQMPRequest
-	29,  // 60: pilab.virtualization.v1.PivirtdService.CreateSnapshot:input_type -> pilab.virtualization.v1.CreateSnapshotRequest
-	30,  // 61: pilab.virtualization.v1.PivirtdService.ListSnapshots:input_type -> pilab.virtualization.v1.ListSnapshotsRequest
-	32,  // 62: pilab.virtualization.v1.PivirtdService.RestoreSnapshot:input_type -> pilab.virtualization.v1.RestoreSnapshotRequest
-	33,  // 63: pilab.virtualization.v1.PivirtdService.DeleteSnapshot:input_type -> pilab.virtualization.v1.DeleteSnapshotRequest
-	36,  // 64: pilab.virtualization.v1.PivirtdService.ConsolidateSnapshot:input_type -> pilab.virtualization.v1.ConsolidateSnapshotRequest
-	37,  // 65: pilab.virtualization.v1.PivirtdService.GetSnapshotStatus:input_type -> pilab.virtualization.v1.GetSnapshotStatusRequest
-	40,  // 66: pilab.virtualization.v1.PivirtdService.CloneVM:input_type -> pilab.virtualization.v1.CloneVMRequest
-	41,  // 67: pilab.virtualization.v1.PivirtdService.CloneSnapshot:input_type -> pilab.virtualization.v1.CloneSnapshotRequest
-	48,  // 68: pilab.virtualization.v1.PivirtdService.MigrateVM:input_type -> pilab.virtualization.v1.MigrateVMRequest
-	50,  // 69: pilab.virtualization.v1.PivirtdService.GetMigrationStatus:input_type -> pilab.virtualization.v1.GetMigrationStatusRequest
-	52,  // 70: pilab.virtualization.v1.PivirtdService.CreateStoragePool:input_type -> pilab.virtualization.v1.CreateStoragePoolRequest
-	54,  // 71: pilab.virtualization.v1.PivirtdService.ListStoragePools:input_type -> pilab.virtualization.v1.ListStoragePoolsRequest
-	56,  // 72: pilab.virtualization.v1.PivirtdService.DeleteStoragePool:input_type -> pilab.virtualization.v1.DeleteStoragePoolRequest
-	59,  // 73: pilab.virtualization.v1.PivirtdService.CreateTAPDevice:input_type -> pilab.virtualization.v1.CreateTAPDeviceRequest
-	66,  // 74: pilab.virtualization.v1.PivirtdService.DeleteTAPDevice:input_type -> pilab.virtualization.v1.DeleteTAPDeviceRequest
-	62,  // 75: pilab.virtualization.v1.PivirtdService.ListTAPDevices:input_type -> pilab.virtualization.v1.ListTAPDevicesRequest
-	60,  // 76: pilab.virtualization.v1.PivirtdService.CreateBridge:input_type -> pilab.virtualization.v1.CreateBridgeRequest
-	67,  // 77: pilab.virtualization.v1.PivirtdService.DeleteBridge:input_type -> pilab.virtualization.v1.DeleteBridgeRequest
-	64,  // 78: pilab.virtualization.v1.PivirtdService.ListBridges:input_type -> pilab.virtualization.v1.ListBridgesRequest
-	72,  // 79: pilab.virtualization.v1.PivirtdService.CreateOVSBridge:input_type -> pilab.virtualization.v1.CreateOVSBridgeRequest
-	73,  // 80: pilab.virtualization.v1.PivirtdService.DeleteOVSBridge:input_type -> pilab.virtualization.v1.DeleteOVSBridgeRequest
-	74,  // 81: pilab.virtualization.v1.PivirtdService.ListOVSBridges:input_type -> pilab.virtualization.v1.ListOVSBridgesRequest
-	76,  // 82: pilab.virtualization.v1.PivirtdService.AddOVSPort:input_type -> pilab.virtualization.v1.AddOVSPortRequest
-	77,  // 83: pilab.virtualization.v1.PivirtdService.RemoveOVSPort:input_type -> pilab.virtualization.v1.RemoveOVSPortRequest
-	78,  // 84: pilab.virtualization.v1.PivirtdService.ListOVSPorts:input_type -> pilab.virtualization.v1.ListOVSPortsRequest
-	83,  // 85: pilab.virtualization.v1.PivirtdService.SetLabels:input_type -> pilab.virtualization.v1.SetLabelsRequest
-	85,  // 86: pilab.virtualization.v1.PivirtdService.GetLabels:input_type -> pilab.virtualization.v1.GetLabelsRequest
-	87,  // 87: pilab.virtualization.v1.PivirtdService.SetProvisioning:input_type -> pilab.virtualization.v1.SetProvisioningRequest
-	89,  // 88: pilab.virtualization.v1.PivirtdService.GetVMStatus:input_type -> pilab.virtualization.v1.GetVMStatusRequest
-	42,  // 89: pilab.virtualization.v1.PivirtdService.StartDiskMove:input_type -> pilab.virtualization.v1.StartDiskMoveRequest
-	43,  // 90: pilab.virtualization.v1.PivirtdService.GetDiskMoveStatus:input_type -> pilab.virtualization.v1.GetDiskMoveStatusRequest
-	44,  // 91: pilab.virtualization.v1.PivirtdService.CancelDiskMove:input_type -> pilab.virtualization.v1.CancelDiskMoveRequest
-	100, // 92: pilab.virtualization.v1.PivirtdService.SubscribeEvents:input_type -> pilab.virtualization.v1.SubscribeEventsRequest
-	100, // 93: pilab.virtualization.v1.PivirtdService.GetHostResource:input_type -> pilab.virtualization.v1.SubscribeEventsRequest
-	11,  // 94: pilab.virtualization.v1.PivirtdService.CreateVM:output_type -> pilab.virtualization.v1.VMResponse
-	11,  // 95: pilab.virtualization.v1.PivirtdService.StartVM:output_type -> pilab.virtualization.v1.VMResponse
-	11,  // 96: pilab.virtualization.v1.PivirtdService.StopVM:output_type -> pilab.virtualization.v1.VMResponse
-	11,  // 97: pilab.virtualization.v1.PivirtdService.PauseVM:output_type -> pilab.virtualization.v1.VMResponse
-	11,  // 98: pilab.virtualization.v1.PivirtdService.ResumeVM:output_type -> pilab.virtualization.v1.VMResponse
-	11,  // 99: pilab.virtualization.v1.PivirtdService.RebootVM:output_type -> pilab.virtualization.v1.VMResponse
-	12,  // 100: pilab.virtualization.v1.PivirtdService.DeleteVM:output_type -> pilab.virtualization.v1.DeleteVMResponse
-	13,  // 101: pilab.virtualization.v1.PivirtdService.ListVMs:output_type -> pilab.virtualization.v1.ListVMsResponse
-	11,  // 102: pilab.virtualization.v1.PivirtdService.GetVM:output_type -> pilab.virtualization.v1.VMResponse
-	20,  // 103: pilab.virtualization.v1.PivirtdService.GetVMStats:output_type -> pilab.virtualization.v1.VMStatsResponse
-	11,  // 104: pilab.virtualization.v1.PivirtdService.UpdateVMMemory:output_type -> pilab.virtualization.v1.VMResponse
-	11,  // 105: pilab.virtualization.v1.PivirtdService.UpdateVMCpu:output_type -> pilab.virtualization.v1.VMResponse
-	26,  // 106: pilab.virtualization.v1.PivirtdService.ExecuteQMP:output_type -> pilab.virtualization.v1.ExecuteQMPResponse
-	28,  // 107: pilab.virtualization.v1.PivirtdService.StreamQMPEvents:output_type -> pilab.virtualization.v1.QMPEvent
-	34,  // 108: pilab.virtualization.v1.PivirtdService.CreateSnapshot:output_type -> pilab.virtualization.v1.SnapshotResponse
-	31,  // 109: pilab.virtualization.v1.PivirtdService.ListSnapshots:output_type -> pilab.virtualization.v1.ListSnapshotsResponse
-	34,  // 110: pilab.virtualization.v1.PivirtdService.RestoreSnapshot:output_type -> pilab.virtualization.v1.SnapshotResponse
-	35,  // 111: pilab.virtualization.v1.PivirtdService.DeleteSnapshot:output_type -> pilab.virtualization.v1.DeleteSnapshotResponse
-	34,  // 112: pilab.virtualization.v1.PivirtdService.ConsolidateSnapshot:output_type -> pilab.virtualization.v1.SnapshotResponse
-	38,  // 113: pilab.virtualization.v1.PivirtdService.GetSnapshotStatus:output_type -> pilab.virtualization.v1.SnapshotStatusResponse
-	11,  // 114: pilab.virtualization.v1.PivirtdService.CloneVM:output_type -> pilab.virtualization.v1.VMResponse
-	11,  // 115: pilab.virtualization.v1.PivirtdService.CloneSnapshot:output_type -> pilab.virtualization.v1.VMResponse
-	49,  // 116: pilab.virtualization.v1.PivirtdService.MigrateVM:output_type -> pilab.virtualization.v1.MigrateVMResponse
-	51,  // 117: pilab.virtualization.v1.PivirtdService.GetMigrationStatus:output_type -> pilab.virtualization.v1.MigrationStatusResponse
-	53,  // 118: pilab.virtualization.v1.PivirtdService.CreateStoragePool:output_type -> pilab.virtualization.v1.StoragePoolResponse
-	55,  // 119: pilab.virtualization.v1.PivirtdService.ListStoragePools:output_type -> pilab.virtualization.v1.ListStoragePoolsResponse
-	57,  // 120: pilab.virtualization.v1.PivirtdService.DeleteStoragePool:output_type -> pilab.virtualization.v1.DeleteStoragePoolResponse
-	61,  // 121: pilab.virtualization.v1.PivirtdService.CreateTAPDevice:output_type -> pilab.virtualization.v1.NetworkResponse
-	68,  // 122: pilab.virtualization.v1.PivirtdService.DeleteTAPDevice:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
-	63,  // 123: pilab.virtualization.v1.PivirtdService.ListTAPDevices:output_type -> pilab.virtualization.v1.ListTAPDevicesResponse
-	61,  // 124: pilab.virtualization.v1.PivirtdService.CreateBridge:output_type -> pilab.virtualization.v1.NetworkResponse
-	68,  // 125: pilab.virtualization.v1.PivirtdService.DeleteBridge:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
-	65,  // 126: pilab.virtualization.v1.PivirtdService.ListBridges:output_type -> pilab.virtualization.v1.ListBridgesResponse
-	61,  // 127: pilab.virtualization.v1.PivirtdService.CreateOVSBridge:output_type -> pilab.virtualization.v1.NetworkResponse
-	68,  // 128: pilab.virtualization.v1.PivirtdService.DeleteOVSBridge:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
-	75,  // 129: pilab.virtualization.v1.PivirtdService.ListOVSBridges:output_type -> pilab.virtualization.v1.ListOVSBridgesResponse
-	61,  // 130: pilab.virtualization.v1.PivirtdService.AddOVSPort:output_type -> pilab.virtualization.v1.NetworkResponse
-	68,  // 131: pilab.virtualization.v1.PivirtdService.RemoveOVSPort:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
-	79,  // 132: pilab.virtualization.v1.PivirtdService.ListOVSPorts:output_type -> pilab.virtualization.v1.ListOVSPortsResponse
-	84,  // 133: pilab.virtualization.v1.PivirtdService.SetLabels:output_type -> pilab.virtualization.v1.SetLabelsResponse
-	86,  // 134: pilab.virtualization.v1.PivirtdService.GetLabels:output_type -> pilab.virtualization.v1.GetLabelsResponse
-	88,  // 135: pilab.virtualization.v1.PivirtdService.SetProvisioning:output_type -> pilab.virtualization.v1.SetProvisioningResponse
-	90,  // 136: pilab.virtualization.v1.PivirtdService.GetVMStatus:output_type -> pilab.virtualization.v1.GetVMStatusResponse
-	46,  // 137: pilab.virtualization.v1.PivirtdService.StartDiskMove:output_type -> pilab.virtualization.v1.DiskMoveStatusResponse
-	46,  // 138: pilab.virtualization.v1.PivirtdService.GetDiskMoveStatus:output_type -> pilab.virtualization.v1.DiskMoveStatusResponse
-	45,  // 139: pilab.virtualization.v1.PivirtdService.CancelDiskMove:output_type -> pilab.virtualization.v1.DiskMoveResponse
-	101, // 140: pilab.virtualization.v1.PivirtdService.SubscribeEvents:output_type -> pilab.virtualization.v1.HostEvent
-	102, // 141: pilab.virtualization.v1.PivirtdService.GetHostResource:output_type -> pilab.virtualization.v1.HostResourceReport
-	94,  // [94:142] is the sub-list for method output_type
-	46,  // [46:94] is the sub-list for method input_type
-	46,  // [46:46] is the sub-list for extension type_name
-	46,  // [46:46] is the sub-list for extension extendee
-	0,   // [0:46] is the sub-list for field type_name
+	16,  // 46: pilab.virtualization.v1.AttachDiskRequest.disk:type_name -> pilab.virtualization.v1.DiskConfig
+	17,  // 47: pilab.virtualization.v1.AttachNICRequest.nic:type_name -> pilab.virtualization.v1.NetworkConfig
+	103, // 48: pilab.virtualization.v1.GetSnapshotTreeResponse.roots:type_name -> pilab.virtualization.v1.SnapshotNode
+	39,  // 49: pilab.virtualization.v1.SnapshotNode.snapshot:type_name -> pilab.virtualization.v1.SnapshotInfo
+	103, // 50: pilab.virtualization.v1.SnapshotNode.children:type_name -> pilab.virtualization.v1.SnapshotNode
+	106, // 51: pilab.virtualization.v1.GetGuestInfoResponse.interfaces:type_name -> pilab.virtualization.v1.GuestNetworkInterface
+	0,   // 52: pilab.virtualization.v1.PivirtdService.CreateVM:input_type -> pilab.virtualization.v1.CreateVMRequest
+	1,   // 53: pilab.virtualization.v1.PivirtdService.StartVM:input_type -> pilab.virtualization.v1.StartVMRequest
+	2,   // 54: pilab.virtualization.v1.PivirtdService.StopVM:input_type -> pilab.virtualization.v1.StopVMRequest
+	3,   // 55: pilab.virtualization.v1.PivirtdService.PauseVM:input_type -> pilab.virtualization.v1.PauseVMRequest
+	4,   // 56: pilab.virtualization.v1.PivirtdService.ResumeVM:input_type -> pilab.virtualization.v1.ResumeVMRequest
+	5,   // 57: pilab.virtualization.v1.PivirtdService.RebootVM:input_type -> pilab.virtualization.v1.RebootVMRequest
+	6,   // 58: pilab.virtualization.v1.PivirtdService.DeleteVM:input_type -> pilab.virtualization.v1.DeleteVMRequest
+	10,  // 59: pilab.virtualization.v1.PivirtdService.ListVMs:input_type -> pilab.virtualization.v1.ListVMsRequest
+	9,   // 60: pilab.virtualization.v1.PivirtdService.GetVM:input_type -> pilab.virtualization.v1.GetVMRequest
+	19,  // 61: pilab.virtualization.v1.PivirtdService.GetVMStats:input_type -> pilab.virtualization.v1.GetVMStatsRequest
+	7,   // 62: pilab.virtualization.v1.PivirtdService.UpdateVMMemory:input_type -> pilab.virtualization.v1.UpdateVMMemoryRequest
+	8,   // 63: pilab.virtualization.v1.PivirtdService.UpdateVMCpu:input_type -> pilab.virtualization.v1.UpdateVMCpuRequest
+	25,  // 64: pilab.virtualization.v1.PivirtdService.ExecuteQMP:input_type -> pilab.virtualization.v1.ExecuteQMPRequest
+	27,  // 65: pilab.virtualization.v1.PivirtdService.StreamQMPEvents:input_type -> pilab.virtualization.v1.StreamQMPRequest
+	29,  // 66: pilab.virtualization.v1.PivirtdService.CreateSnapshot:input_type -> pilab.virtualization.v1.CreateSnapshotRequest
+	30,  // 67: pilab.virtualization.v1.PivirtdService.ListSnapshots:input_type -> pilab.virtualization.v1.ListSnapshotsRequest
+	32,  // 68: pilab.virtualization.v1.PivirtdService.RestoreSnapshot:input_type -> pilab.virtualization.v1.RestoreSnapshotRequest
+	33,  // 69: pilab.virtualization.v1.PivirtdService.DeleteSnapshot:input_type -> pilab.virtualization.v1.DeleteSnapshotRequest
+	36,  // 70: pilab.virtualization.v1.PivirtdService.ConsolidateSnapshot:input_type -> pilab.virtualization.v1.ConsolidateSnapshotRequest
+	37,  // 71: pilab.virtualization.v1.PivirtdService.GetSnapshotStatus:input_type -> pilab.virtualization.v1.GetSnapshotStatusRequest
+	40,  // 72: pilab.virtualization.v1.PivirtdService.CloneVM:input_type -> pilab.virtualization.v1.CloneVMRequest
+	41,  // 73: pilab.virtualization.v1.PivirtdService.CloneSnapshot:input_type -> pilab.virtualization.v1.CloneSnapshotRequest
+	48,  // 74: pilab.virtualization.v1.PivirtdService.MigrateVM:input_type -> pilab.virtualization.v1.MigrateVMRequest
+	50,  // 75: pilab.virtualization.v1.PivirtdService.GetMigrationStatus:input_type -> pilab.virtualization.v1.GetMigrationStatusRequest
+	52,  // 76: pilab.virtualization.v1.PivirtdService.CreateStoragePool:input_type -> pilab.virtualization.v1.CreateStoragePoolRequest
+	54,  // 77: pilab.virtualization.v1.PivirtdService.ListStoragePools:input_type -> pilab.virtualization.v1.ListStoragePoolsRequest
+	56,  // 78: pilab.virtualization.v1.PivirtdService.DeleteStoragePool:input_type -> pilab.virtualization.v1.DeleteStoragePoolRequest
+	59,  // 79: pilab.virtualization.v1.PivirtdService.CreateTAPDevice:input_type -> pilab.virtualization.v1.CreateTAPDeviceRequest
+	66,  // 80: pilab.virtualization.v1.PivirtdService.DeleteTAPDevice:input_type -> pilab.virtualization.v1.DeleteTAPDeviceRequest
+	62,  // 81: pilab.virtualization.v1.PivirtdService.ListTAPDevices:input_type -> pilab.virtualization.v1.ListTAPDevicesRequest
+	60,  // 82: pilab.virtualization.v1.PivirtdService.CreateBridge:input_type -> pilab.virtualization.v1.CreateBridgeRequest
+	67,  // 83: pilab.virtualization.v1.PivirtdService.DeleteBridge:input_type -> pilab.virtualization.v1.DeleteBridgeRequest
+	64,  // 84: pilab.virtualization.v1.PivirtdService.ListBridges:input_type -> pilab.virtualization.v1.ListBridgesRequest
+	72,  // 85: pilab.virtualization.v1.PivirtdService.CreateOVSBridge:input_type -> pilab.virtualization.v1.CreateOVSBridgeRequest
+	73,  // 86: pilab.virtualization.v1.PivirtdService.DeleteOVSBridge:input_type -> pilab.virtualization.v1.DeleteOVSBridgeRequest
+	74,  // 87: pilab.virtualization.v1.PivirtdService.ListOVSBridges:input_type -> pilab.virtualization.v1.ListOVSBridgesRequest
+	76,  // 88: pilab.virtualization.v1.PivirtdService.AddOVSPort:input_type -> pilab.virtualization.v1.AddOVSPortRequest
+	77,  // 89: pilab.virtualization.v1.PivirtdService.RemoveOVSPort:input_type -> pilab.virtualization.v1.RemoveOVSPortRequest
+	78,  // 90: pilab.virtualization.v1.PivirtdService.ListOVSPorts:input_type -> pilab.virtualization.v1.ListOVSPortsRequest
+	83,  // 91: pilab.virtualization.v1.PivirtdService.SetLabels:input_type -> pilab.virtualization.v1.SetLabelsRequest
+	85,  // 92: pilab.virtualization.v1.PivirtdService.GetLabels:input_type -> pilab.virtualization.v1.GetLabelsRequest
+	87,  // 93: pilab.virtualization.v1.PivirtdService.SetProvisioning:input_type -> pilab.virtualization.v1.SetProvisioningRequest
+	89,  // 94: pilab.virtualization.v1.PivirtdService.GetVMStatus:input_type -> pilab.virtualization.v1.GetVMStatusRequest
+	42,  // 95: pilab.virtualization.v1.PivirtdService.StartDiskMove:input_type -> pilab.virtualization.v1.StartDiskMoveRequest
+	43,  // 96: pilab.virtualization.v1.PivirtdService.GetDiskMoveStatus:input_type -> pilab.virtualization.v1.GetDiskMoveStatusRequest
+	44,  // 97: pilab.virtualization.v1.PivirtdService.CancelDiskMove:input_type -> pilab.virtualization.v1.CancelDiskMoveRequest
+	94,  // 98: pilab.virtualization.v1.PivirtdService.AttachDisk:input_type -> pilab.virtualization.v1.AttachDiskRequest
+	95,  // 99: pilab.virtualization.v1.PivirtdService.DetachDisk:input_type -> pilab.virtualization.v1.DetachDiskRequest
+	96,  // 100: pilab.virtualization.v1.PivirtdService.AttachNIC:input_type -> pilab.virtualization.v1.AttachNICRequest
+	97,  // 101: pilab.virtualization.v1.PivirtdService.DetachNIC:input_type -> pilab.virtualization.v1.DetachNICRequest
+	98,  // 102: pilab.virtualization.v1.PivirtdService.ResizeDisk:input_type -> pilab.virtualization.v1.ResizeDiskRequest
+	99,  // 103: pilab.virtualization.v1.PivirtdService.SetVNCPassword:input_type -> pilab.virtualization.v1.SetVNCPasswordRequest
+	100, // 104: pilab.virtualization.v1.PivirtdService.SetLinkState:input_type -> pilab.virtualization.v1.SetLinkStateRequest
+	101, // 105: pilab.virtualization.v1.PivirtdService.GetSnapshotTree:input_type -> pilab.virtualization.v1.GetSnapshotTreeRequest
+	104, // 106: pilab.virtualization.v1.PivirtdService.GetGuestInfo:input_type -> pilab.virtualization.v1.GetGuestInfoRequest
+	113, // 107: pilab.virtualization.v1.PivirtdService.SubscribeEvents:input_type -> pilab.virtualization.v1.SubscribeEventsRequest
+	113, // 108: pilab.virtualization.v1.PivirtdService.GetHostResource:input_type -> pilab.virtualization.v1.SubscribeEventsRequest
+	11,  // 109: pilab.virtualization.v1.PivirtdService.CreateVM:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 110: pilab.virtualization.v1.PivirtdService.StartVM:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 111: pilab.virtualization.v1.PivirtdService.StopVM:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 112: pilab.virtualization.v1.PivirtdService.PauseVM:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 113: pilab.virtualization.v1.PivirtdService.ResumeVM:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 114: pilab.virtualization.v1.PivirtdService.RebootVM:output_type -> pilab.virtualization.v1.VMResponse
+	12,  // 115: pilab.virtualization.v1.PivirtdService.DeleteVM:output_type -> pilab.virtualization.v1.DeleteVMResponse
+	13,  // 116: pilab.virtualization.v1.PivirtdService.ListVMs:output_type -> pilab.virtualization.v1.ListVMsResponse
+	11,  // 117: pilab.virtualization.v1.PivirtdService.GetVM:output_type -> pilab.virtualization.v1.VMResponse
+	20,  // 118: pilab.virtualization.v1.PivirtdService.GetVMStats:output_type -> pilab.virtualization.v1.VMStatsResponse
+	11,  // 119: pilab.virtualization.v1.PivirtdService.UpdateVMMemory:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 120: pilab.virtualization.v1.PivirtdService.UpdateVMCpu:output_type -> pilab.virtualization.v1.VMResponse
+	26,  // 121: pilab.virtualization.v1.PivirtdService.ExecuteQMP:output_type -> pilab.virtualization.v1.ExecuteQMPResponse
+	28,  // 122: pilab.virtualization.v1.PivirtdService.StreamQMPEvents:output_type -> pilab.virtualization.v1.QMPEvent
+	34,  // 123: pilab.virtualization.v1.PivirtdService.CreateSnapshot:output_type -> pilab.virtualization.v1.SnapshotResponse
+	31,  // 124: pilab.virtualization.v1.PivirtdService.ListSnapshots:output_type -> pilab.virtualization.v1.ListSnapshotsResponse
+	34,  // 125: pilab.virtualization.v1.PivirtdService.RestoreSnapshot:output_type -> pilab.virtualization.v1.SnapshotResponse
+	35,  // 126: pilab.virtualization.v1.PivirtdService.DeleteSnapshot:output_type -> pilab.virtualization.v1.DeleteSnapshotResponse
+	34,  // 127: pilab.virtualization.v1.PivirtdService.ConsolidateSnapshot:output_type -> pilab.virtualization.v1.SnapshotResponse
+	38,  // 128: pilab.virtualization.v1.PivirtdService.GetSnapshotStatus:output_type -> pilab.virtualization.v1.SnapshotStatusResponse
+	11,  // 129: pilab.virtualization.v1.PivirtdService.CloneVM:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 130: pilab.virtualization.v1.PivirtdService.CloneSnapshot:output_type -> pilab.virtualization.v1.VMResponse
+	49,  // 131: pilab.virtualization.v1.PivirtdService.MigrateVM:output_type -> pilab.virtualization.v1.MigrateVMResponse
+	51,  // 132: pilab.virtualization.v1.PivirtdService.GetMigrationStatus:output_type -> pilab.virtualization.v1.MigrationStatusResponse
+	53,  // 133: pilab.virtualization.v1.PivirtdService.CreateStoragePool:output_type -> pilab.virtualization.v1.StoragePoolResponse
+	55,  // 134: pilab.virtualization.v1.PivirtdService.ListStoragePools:output_type -> pilab.virtualization.v1.ListStoragePoolsResponse
+	57,  // 135: pilab.virtualization.v1.PivirtdService.DeleteStoragePool:output_type -> pilab.virtualization.v1.DeleteStoragePoolResponse
+	61,  // 136: pilab.virtualization.v1.PivirtdService.CreateTAPDevice:output_type -> pilab.virtualization.v1.NetworkResponse
+	68,  // 137: pilab.virtualization.v1.PivirtdService.DeleteTAPDevice:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
+	63,  // 138: pilab.virtualization.v1.PivirtdService.ListTAPDevices:output_type -> pilab.virtualization.v1.ListTAPDevicesResponse
+	61,  // 139: pilab.virtualization.v1.PivirtdService.CreateBridge:output_type -> pilab.virtualization.v1.NetworkResponse
+	68,  // 140: pilab.virtualization.v1.PivirtdService.DeleteBridge:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
+	65,  // 141: pilab.virtualization.v1.PivirtdService.ListBridges:output_type -> pilab.virtualization.v1.ListBridgesResponse
+	61,  // 142: pilab.virtualization.v1.PivirtdService.CreateOVSBridge:output_type -> pilab.virtualization.v1.NetworkResponse
+	68,  // 143: pilab.virtualization.v1.PivirtdService.DeleteOVSBridge:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
+	75,  // 144: pilab.virtualization.v1.PivirtdService.ListOVSBridges:output_type -> pilab.virtualization.v1.ListOVSBridgesResponse
+	61,  // 145: pilab.virtualization.v1.PivirtdService.AddOVSPort:output_type -> pilab.virtualization.v1.NetworkResponse
+	68,  // 146: pilab.virtualization.v1.PivirtdService.RemoveOVSPort:output_type -> pilab.virtualization.v1.DeleteNetworkResponse
+	79,  // 147: pilab.virtualization.v1.PivirtdService.ListOVSPorts:output_type -> pilab.virtualization.v1.ListOVSPortsResponse
+	84,  // 148: pilab.virtualization.v1.PivirtdService.SetLabels:output_type -> pilab.virtualization.v1.SetLabelsResponse
+	86,  // 149: pilab.virtualization.v1.PivirtdService.GetLabels:output_type -> pilab.virtualization.v1.GetLabelsResponse
+	88,  // 150: pilab.virtualization.v1.PivirtdService.SetProvisioning:output_type -> pilab.virtualization.v1.SetProvisioningResponse
+	90,  // 151: pilab.virtualization.v1.PivirtdService.GetVMStatus:output_type -> pilab.virtualization.v1.GetVMStatusResponse
+	46,  // 152: pilab.virtualization.v1.PivirtdService.StartDiskMove:output_type -> pilab.virtualization.v1.DiskMoveStatusResponse
+	46,  // 153: pilab.virtualization.v1.PivirtdService.GetDiskMoveStatus:output_type -> pilab.virtualization.v1.DiskMoveStatusResponse
+	45,  // 154: pilab.virtualization.v1.PivirtdService.CancelDiskMove:output_type -> pilab.virtualization.v1.DiskMoveResponse
+	11,  // 155: pilab.virtualization.v1.PivirtdService.AttachDisk:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 156: pilab.virtualization.v1.PivirtdService.DetachDisk:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 157: pilab.virtualization.v1.PivirtdService.AttachNIC:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 158: pilab.virtualization.v1.PivirtdService.DetachNIC:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 159: pilab.virtualization.v1.PivirtdService.ResizeDisk:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 160: pilab.virtualization.v1.PivirtdService.SetVNCPassword:output_type -> pilab.virtualization.v1.VMResponse
+	11,  // 161: pilab.virtualization.v1.PivirtdService.SetLinkState:output_type -> pilab.virtualization.v1.VMResponse
+	102, // 162: pilab.virtualization.v1.PivirtdService.GetSnapshotTree:output_type -> pilab.virtualization.v1.GetSnapshotTreeResponse
+	105, // 163: pilab.virtualization.v1.PivirtdService.GetGuestInfo:output_type -> pilab.virtualization.v1.GetGuestInfoResponse
+	114, // 164: pilab.virtualization.v1.PivirtdService.SubscribeEvents:output_type -> pilab.virtualization.v1.HostEvent
+	115, // 165: pilab.virtualization.v1.PivirtdService.GetHostResource:output_type -> pilab.virtualization.v1.HostResourceReport
+	109, // [109:166] is the sub-list for method output_type
+	52,  // [52:109] is the sub-list for method input_type
+	52,  // [52:52] is the sub-list for extension type_name
+	52,  // [52:52] is the sub-list for extension extendee
+	0,   // [0:52] is the sub-list for field type_name
 }
 
 func init() { file_pilab_pivirtd_v1_pivirtd_proto_init() }
@@ -6656,7 +7478,7 @@ func file_pilab_pivirtd_v1_pivirtd_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pilab_pivirtd_v1_pivirtd_proto_rawDesc), len(file_pilab_pivirtd_v1_pivirtd_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   97,
+			NumMessages:   110,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

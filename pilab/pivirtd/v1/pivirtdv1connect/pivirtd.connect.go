@@ -161,6 +161,33 @@ const (
 	// PivirtdServiceCancelDiskMoveProcedure is the fully-qualified name of the PivirtdService's
 	// CancelDiskMove RPC.
 	PivirtdServiceCancelDiskMoveProcedure = "/pilab.virtualization.v1.PivirtdService/CancelDiskMove"
+	// PivirtdServiceAttachDiskProcedure is the fully-qualified name of the PivirtdService's AttachDisk
+	// RPC.
+	PivirtdServiceAttachDiskProcedure = "/pilab.virtualization.v1.PivirtdService/AttachDisk"
+	// PivirtdServiceDetachDiskProcedure is the fully-qualified name of the PivirtdService's DetachDisk
+	// RPC.
+	PivirtdServiceDetachDiskProcedure = "/pilab.virtualization.v1.PivirtdService/DetachDisk"
+	// PivirtdServiceAttachNICProcedure is the fully-qualified name of the PivirtdService's AttachNIC
+	// RPC.
+	PivirtdServiceAttachNICProcedure = "/pilab.virtualization.v1.PivirtdService/AttachNIC"
+	// PivirtdServiceDetachNICProcedure is the fully-qualified name of the PivirtdService's DetachNIC
+	// RPC.
+	PivirtdServiceDetachNICProcedure = "/pilab.virtualization.v1.PivirtdService/DetachNIC"
+	// PivirtdServiceResizeDiskProcedure is the fully-qualified name of the PivirtdService's ResizeDisk
+	// RPC.
+	PivirtdServiceResizeDiskProcedure = "/pilab.virtualization.v1.PivirtdService/ResizeDisk"
+	// PivirtdServiceSetVNCPasswordProcedure is the fully-qualified name of the PivirtdService's
+	// SetVNCPassword RPC.
+	PivirtdServiceSetVNCPasswordProcedure = "/pilab.virtualization.v1.PivirtdService/SetVNCPassword"
+	// PivirtdServiceSetLinkStateProcedure is the fully-qualified name of the PivirtdService's
+	// SetLinkState RPC.
+	PivirtdServiceSetLinkStateProcedure = "/pilab.virtualization.v1.PivirtdService/SetLinkState"
+	// PivirtdServiceGetSnapshotTreeProcedure is the fully-qualified name of the PivirtdService's
+	// GetSnapshotTree RPC.
+	PivirtdServiceGetSnapshotTreeProcedure = "/pilab.virtualization.v1.PivirtdService/GetSnapshotTree"
+	// PivirtdServiceGetGuestInfoProcedure is the fully-qualified name of the PivirtdService's
+	// GetGuestInfo RPC.
+	PivirtdServiceGetGuestInfoProcedure = "/pilab.virtualization.v1.PivirtdService/GetGuestInfo"
 	// PivirtdServiceSubscribeEventsProcedure is the fully-qualified name of the PivirtdService's
 	// SubscribeEvents RPC.
 	PivirtdServiceSubscribeEventsProcedure = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
@@ -230,6 +257,19 @@ type PivirtdServiceClient interface {
 	StartDiskMove(context.Context, *connect.Request[v1.StartDiskMoveRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error)
 	GetDiskMoveStatus(context.Context, *connect.Request[v1.GetDiskMoveStatusRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error)
 	CancelDiskMove(context.Context, *connect.Request[v1.CancelDiskMoveRequest]) (*connect.Response[v1.DiskMoveResponse], error)
+	// VM Device Hot-plug
+	AttachDisk(context.Context, *connect.Request[v1.AttachDiskRequest]) (*connect.Response[v1.VMResponse], error)
+	DetachDisk(context.Context, *connect.Request[v1.DetachDiskRequest]) (*connect.Response[v1.VMResponse], error)
+	AttachNIC(context.Context, *connect.Request[v1.AttachNICRequest]) (*connect.Response[v1.VMResponse], error)
+	DetachNIC(context.Context, *connect.Request[v1.DetachNICRequest]) (*connect.Response[v1.VMResponse], error)
+	// Live Reconfiguration
+	ResizeDisk(context.Context, *connect.Request[v1.ResizeDiskRequest]) (*connect.Response[v1.VMResponse], error)
+	SetVNCPassword(context.Context, *connect.Request[v1.SetVNCPasswordRequest]) (*connect.Response[v1.VMResponse], error)
+	SetLinkState(context.Context, *connect.Request[v1.SetLinkStateRequest]) (*connect.Response[v1.VMResponse], error)
+	// Snapshot Tree
+	GetSnapshotTree(context.Context, *connect.Request[v1.GetSnapshotTreeRequest]) (*connect.Response[v1.GetSnapshotTreeResponse], error)
+	// Guest Agent
+	GetGuestInfo(context.Context, *connect.Request[v1.GetGuestInfoRequest]) (*connect.Response[v1.GetGuestInfoResponse], error)
 	// Event Streaming
 	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.ServerStreamForClient[v1.HostEvent], error)
 	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
@@ -522,6 +562,60 @@ func NewPivirtdServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(pivirtdServiceMethods.ByName("CancelDiskMove")),
 			connect.WithClientOptions(opts...),
 		),
+		attachDisk: connect.NewClient[v1.AttachDiskRequest, v1.VMResponse](
+			httpClient,
+			baseURL+PivirtdServiceAttachDiskProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("AttachDisk")),
+			connect.WithClientOptions(opts...),
+		),
+		detachDisk: connect.NewClient[v1.DetachDiskRequest, v1.VMResponse](
+			httpClient,
+			baseURL+PivirtdServiceDetachDiskProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("DetachDisk")),
+			connect.WithClientOptions(opts...),
+		),
+		attachNIC: connect.NewClient[v1.AttachNICRequest, v1.VMResponse](
+			httpClient,
+			baseURL+PivirtdServiceAttachNICProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("AttachNIC")),
+			connect.WithClientOptions(opts...),
+		),
+		detachNIC: connect.NewClient[v1.DetachNICRequest, v1.VMResponse](
+			httpClient,
+			baseURL+PivirtdServiceDetachNICProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("DetachNIC")),
+			connect.WithClientOptions(opts...),
+		),
+		resizeDisk: connect.NewClient[v1.ResizeDiskRequest, v1.VMResponse](
+			httpClient,
+			baseURL+PivirtdServiceResizeDiskProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("ResizeDisk")),
+			connect.WithClientOptions(opts...),
+		),
+		setVNCPassword: connect.NewClient[v1.SetVNCPasswordRequest, v1.VMResponse](
+			httpClient,
+			baseURL+PivirtdServiceSetVNCPasswordProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("SetVNCPassword")),
+			connect.WithClientOptions(opts...),
+		),
+		setLinkState: connect.NewClient[v1.SetLinkStateRequest, v1.VMResponse](
+			httpClient,
+			baseURL+PivirtdServiceSetLinkStateProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("SetLinkState")),
+			connect.WithClientOptions(opts...),
+		),
+		getSnapshotTree: connect.NewClient[v1.GetSnapshotTreeRequest, v1.GetSnapshotTreeResponse](
+			httpClient,
+			baseURL+PivirtdServiceGetSnapshotTreeProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("GetSnapshotTree")),
+			connect.WithClientOptions(opts...),
+		),
+		getGuestInfo: connect.NewClient[v1.GetGuestInfoRequest, v1.GetGuestInfoResponse](
+			httpClient,
+			baseURL+PivirtdServiceGetGuestInfoProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("GetGuestInfo")),
+			connect.WithClientOptions(opts...),
+		),
 		subscribeEvents: connect.NewClient[v1.SubscribeEventsRequest, v1.HostEvent](
 			httpClient,
 			baseURL+PivirtdServiceSubscribeEventsProcedure,
@@ -585,6 +679,15 @@ type pivirtdServiceClient struct {
 	startDiskMove       *connect.Client[v1.StartDiskMoveRequest, v1.DiskMoveStatusResponse]
 	getDiskMoveStatus   *connect.Client[v1.GetDiskMoveStatusRequest, v1.DiskMoveStatusResponse]
 	cancelDiskMove      *connect.Client[v1.CancelDiskMoveRequest, v1.DiskMoveResponse]
+	attachDisk          *connect.Client[v1.AttachDiskRequest, v1.VMResponse]
+	detachDisk          *connect.Client[v1.DetachDiskRequest, v1.VMResponse]
+	attachNIC           *connect.Client[v1.AttachNICRequest, v1.VMResponse]
+	detachNIC           *connect.Client[v1.DetachNICRequest, v1.VMResponse]
+	resizeDisk          *connect.Client[v1.ResizeDiskRequest, v1.VMResponse]
+	setVNCPassword      *connect.Client[v1.SetVNCPasswordRequest, v1.VMResponse]
+	setLinkState        *connect.Client[v1.SetLinkStateRequest, v1.VMResponse]
+	getSnapshotTree     *connect.Client[v1.GetSnapshotTreeRequest, v1.GetSnapshotTreeResponse]
+	getGuestInfo        *connect.Client[v1.GetGuestInfoRequest, v1.GetGuestInfoResponse]
 	subscribeEvents     *connect.Client[v1.SubscribeEventsRequest, v1.HostEvent]
 	getHostResource     *connect.Client[v1.SubscribeEventsRequest, v1.HostResourceReport]
 }
@@ -819,6 +922,51 @@ func (c *pivirtdServiceClient) CancelDiskMove(ctx context.Context, req *connect.
 	return c.cancelDiskMove.CallUnary(ctx, req)
 }
 
+// AttachDisk calls pilab.virtualization.v1.PivirtdService.AttachDisk.
+func (c *pivirtdServiceClient) AttachDisk(ctx context.Context, req *connect.Request[v1.AttachDiskRequest]) (*connect.Response[v1.VMResponse], error) {
+	return c.attachDisk.CallUnary(ctx, req)
+}
+
+// DetachDisk calls pilab.virtualization.v1.PivirtdService.DetachDisk.
+func (c *pivirtdServiceClient) DetachDisk(ctx context.Context, req *connect.Request[v1.DetachDiskRequest]) (*connect.Response[v1.VMResponse], error) {
+	return c.detachDisk.CallUnary(ctx, req)
+}
+
+// AttachNIC calls pilab.virtualization.v1.PivirtdService.AttachNIC.
+func (c *pivirtdServiceClient) AttachNIC(ctx context.Context, req *connect.Request[v1.AttachNICRequest]) (*connect.Response[v1.VMResponse], error) {
+	return c.attachNIC.CallUnary(ctx, req)
+}
+
+// DetachNIC calls pilab.virtualization.v1.PivirtdService.DetachNIC.
+func (c *pivirtdServiceClient) DetachNIC(ctx context.Context, req *connect.Request[v1.DetachNICRequest]) (*connect.Response[v1.VMResponse], error) {
+	return c.detachNIC.CallUnary(ctx, req)
+}
+
+// ResizeDisk calls pilab.virtualization.v1.PivirtdService.ResizeDisk.
+func (c *pivirtdServiceClient) ResizeDisk(ctx context.Context, req *connect.Request[v1.ResizeDiskRequest]) (*connect.Response[v1.VMResponse], error) {
+	return c.resizeDisk.CallUnary(ctx, req)
+}
+
+// SetVNCPassword calls pilab.virtualization.v1.PivirtdService.SetVNCPassword.
+func (c *pivirtdServiceClient) SetVNCPassword(ctx context.Context, req *connect.Request[v1.SetVNCPasswordRequest]) (*connect.Response[v1.VMResponse], error) {
+	return c.setVNCPassword.CallUnary(ctx, req)
+}
+
+// SetLinkState calls pilab.virtualization.v1.PivirtdService.SetLinkState.
+func (c *pivirtdServiceClient) SetLinkState(ctx context.Context, req *connect.Request[v1.SetLinkStateRequest]) (*connect.Response[v1.VMResponse], error) {
+	return c.setLinkState.CallUnary(ctx, req)
+}
+
+// GetSnapshotTree calls pilab.virtualization.v1.PivirtdService.GetSnapshotTree.
+func (c *pivirtdServiceClient) GetSnapshotTree(ctx context.Context, req *connect.Request[v1.GetSnapshotTreeRequest]) (*connect.Response[v1.GetSnapshotTreeResponse], error) {
+	return c.getSnapshotTree.CallUnary(ctx, req)
+}
+
+// GetGuestInfo calls pilab.virtualization.v1.PivirtdService.GetGuestInfo.
+func (c *pivirtdServiceClient) GetGuestInfo(ctx context.Context, req *connect.Request[v1.GetGuestInfoRequest]) (*connect.Response[v1.GetGuestInfoResponse], error) {
+	return c.getGuestInfo.CallUnary(ctx, req)
+}
+
 // SubscribeEvents calls pilab.virtualization.v1.PivirtdService.SubscribeEvents.
 func (c *pivirtdServiceClient) SubscribeEvents(ctx context.Context, req *connect.Request[v1.SubscribeEventsRequest]) (*connect.ServerStreamForClient[v1.HostEvent], error) {
 	return c.subscribeEvents.CallServerStream(ctx, req)
@@ -890,6 +1038,19 @@ type PivirtdServiceHandler interface {
 	StartDiskMove(context.Context, *connect.Request[v1.StartDiskMoveRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error)
 	GetDiskMoveStatus(context.Context, *connect.Request[v1.GetDiskMoveStatusRequest]) (*connect.Response[v1.DiskMoveStatusResponse], error)
 	CancelDiskMove(context.Context, *connect.Request[v1.CancelDiskMoveRequest]) (*connect.Response[v1.DiskMoveResponse], error)
+	// VM Device Hot-plug
+	AttachDisk(context.Context, *connect.Request[v1.AttachDiskRequest]) (*connect.Response[v1.VMResponse], error)
+	DetachDisk(context.Context, *connect.Request[v1.DetachDiskRequest]) (*connect.Response[v1.VMResponse], error)
+	AttachNIC(context.Context, *connect.Request[v1.AttachNICRequest]) (*connect.Response[v1.VMResponse], error)
+	DetachNIC(context.Context, *connect.Request[v1.DetachNICRequest]) (*connect.Response[v1.VMResponse], error)
+	// Live Reconfiguration
+	ResizeDisk(context.Context, *connect.Request[v1.ResizeDiskRequest]) (*connect.Response[v1.VMResponse], error)
+	SetVNCPassword(context.Context, *connect.Request[v1.SetVNCPasswordRequest]) (*connect.Response[v1.VMResponse], error)
+	SetLinkState(context.Context, *connect.Request[v1.SetLinkStateRequest]) (*connect.Response[v1.VMResponse], error)
+	// Snapshot Tree
+	GetSnapshotTree(context.Context, *connect.Request[v1.GetSnapshotTreeRequest]) (*connect.Response[v1.GetSnapshotTreeResponse], error)
+	// Guest Agent
+	GetGuestInfo(context.Context, *connect.Request[v1.GetGuestInfoRequest]) (*connect.Response[v1.GetGuestInfoResponse], error)
 	// Event Streaming
 	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest], *connect.ServerStream[v1.HostEvent]) error
 	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
@@ -1178,6 +1339,60 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 		connect.WithSchema(pivirtdServiceMethods.ByName("CancelDiskMove")),
 		connect.WithHandlerOptions(opts...),
 	)
+	pivirtdServiceAttachDiskHandler := connect.NewUnaryHandler(
+		PivirtdServiceAttachDiskProcedure,
+		svc.AttachDisk,
+		connect.WithSchema(pivirtdServiceMethods.ByName("AttachDisk")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceDetachDiskHandler := connect.NewUnaryHandler(
+		PivirtdServiceDetachDiskProcedure,
+		svc.DetachDisk,
+		connect.WithSchema(pivirtdServiceMethods.ByName("DetachDisk")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceAttachNICHandler := connect.NewUnaryHandler(
+		PivirtdServiceAttachNICProcedure,
+		svc.AttachNIC,
+		connect.WithSchema(pivirtdServiceMethods.ByName("AttachNIC")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceDetachNICHandler := connect.NewUnaryHandler(
+		PivirtdServiceDetachNICProcedure,
+		svc.DetachNIC,
+		connect.WithSchema(pivirtdServiceMethods.ByName("DetachNIC")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceResizeDiskHandler := connect.NewUnaryHandler(
+		PivirtdServiceResizeDiskProcedure,
+		svc.ResizeDisk,
+		connect.WithSchema(pivirtdServiceMethods.ByName("ResizeDisk")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceSetVNCPasswordHandler := connect.NewUnaryHandler(
+		PivirtdServiceSetVNCPasswordProcedure,
+		svc.SetVNCPassword,
+		connect.WithSchema(pivirtdServiceMethods.ByName("SetVNCPassword")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceSetLinkStateHandler := connect.NewUnaryHandler(
+		PivirtdServiceSetLinkStateProcedure,
+		svc.SetLinkState,
+		connect.WithSchema(pivirtdServiceMethods.ByName("SetLinkState")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceGetSnapshotTreeHandler := connect.NewUnaryHandler(
+		PivirtdServiceGetSnapshotTreeProcedure,
+		svc.GetSnapshotTree,
+		connect.WithSchema(pivirtdServiceMethods.ByName("GetSnapshotTree")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceGetGuestInfoHandler := connect.NewUnaryHandler(
+		PivirtdServiceGetGuestInfoProcedure,
+		svc.GetGuestInfo,
+		connect.WithSchema(pivirtdServiceMethods.ByName("GetGuestInfo")),
+		connect.WithHandlerOptions(opts...),
+	)
 	pivirtdServiceSubscribeEventsHandler := connect.NewServerStreamHandler(
 		PivirtdServiceSubscribeEventsProcedure,
 		svc.SubscribeEvents,
@@ -1284,6 +1499,24 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 			pivirtdServiceGetDiskMoveStatusHandler.ServeHTTP(w, r)
 		case PivirtdServiceCancelDiskMoveProcedure:
 			pivirtdServiceCancelDiskMoveHandler.ServeHTTP(w, r)
+		case PivirtdServiceAttachDiskProcedure:
+			pivirtdServiceAttachDiskHandler.ServeHTTP(w, r)
+		case PivirtdServiceDetachDiskProcedure:
+			pivirtdServiceDetachDiskHandler.ServeHTTP(w, r)
+		case PivirtdServiceAttachNICProcedure:
+			pivirtdServiceAttachNICHandler.ServeHTTP(w, r)
+		case PivirtdServiceDetachNICProcedure:
+			pivirtdServiceDetachNICHandler.ServeHTTP(w, r)
+		case PivirtdServiceResizeDiskProcedure:
+			pivirtdServiceResizeDiskHandler.ServeHTTP(w, r)
+		case PivirtdServiceSetVNCPasswordProcedure:
+			pivirtdServiceSetVNCPasswordHandler.ServeHTTP(w, r)
+		case PivirtdServiceSetLinkStateProcedure:
+			pivirtdServiceSetLinkStateHandler.ServeHTTP(w, r)
+		case PivirtdServiceGetSnapshotTreeProcedure:
+			pivirtdServiceGetSnapshotTreeHandler.ServeHTTP(w, r)
+		case PivirtdServiceGetGuestInfoProcedure:
+			pivirtdServiceGetGuestInfoHandler.ServeHTTP(w, r)
 		case PivirtdServiceSubscribeEventsProcedure:
 			pivirtdServiceSubscribeEventsHandler.ServeHTTP(w, r)
 		case PivirtdServiceGetHostResourceProcedure:
@@ -1479,6 +1712,42 @@ func (UnimplementedPivirtdServiceHandler) GetDiskMoveStatus(context.Context, *co
 
 func (UnimplementedPivirtdServiceHandler) CancelDiskMove(context.Context, *connect.Request[v1.CancelDiskMoveRequest]) (*connect.Response[v1.DiskMoveResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.CancelDiskMove is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) AttachDisk(context.Context, *connect.Request[v1.AttachDiskRequest]) (*connect.Response[v1.VMResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.AttachDisk is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) DetachDisk(context.Context, *connect.Request[v1.DetachDiskRequest]) (*connect.Response[v1.VMResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.DetachDisk is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) AttachNIC(context.Context, *connect.Request[v1.AttachNICRequest]) (*connect.Response[v1.VMResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.AttachNIC is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) DetachNIC(context.Context, *connect.Request[v1.DetachNICRequest]) (*connect.Response[v1.VMResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.DetachNIC is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) ResizeDisk(context.Context, *connect.Request[v1.ResizeDiskRequest]) (*connect.Response[v1.VMResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.ResizeDisk is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) SetVNCPassword(context.Context, *connect.Request[v1.SetVNCPasswordRequest]) (*connect.Response[v1.VMResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.SetVNCPassword is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) SetLinkState(context.Context, *connect.Request[v1.SetLinkStateRequest]) (*connect.Response[v1.VMResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.SetLinkState is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) GetSnapshotTree(context.Context, *connect.Request[v1.GetSnapshotTreeRequest]) (*connect.Response[v1.GetSnapshotTreeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GetSnapshotTree is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) GetGuestInfo(context.Context, *connect.Request[v1.GetGuestInfoRequest]) (*connect.Response[v1.GetGuestInfoResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GetGuestInfo is not implemented"))
 }
 
 func (UnimplementedPivirtdServiceHandler) SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest], *connect.ServerStream[v1.HostEvent]) error {

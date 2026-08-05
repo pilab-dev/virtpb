@@ -83,6 +83,23 @@ service PivirtdService {
   rpc GetDiskMoveStatus(GetDiskMoveStatusRequest) returns (DiskMoveStatusResponse);
   rpc CancelDiskMove(CancelDiskMoveRequest) returns (DiskMoveResponse);
 
+  // VM Device Hot-plug
+  rpc AttachDisk(AttachDiskRequest) returns (VMResponse);
+  rpc DetachDisk(DetachDiskRequest) returns (VMResponse);
+  rpc AttachNIC(AttachNICRequest) returns (VMResponse);
+  rpc DetachNIC(DetachNICRequest) returns (VMResponse);
+
+  // Live Reconfiguration
+  rpc ResizeDisk(ResizeDiskRequest) returns (VMResponse);
+  rpc SetVNCPassword(SetVNCPasswordRequest) returns (VMResponse);
+  rpc SetLinkState(SetLinkStateRequest) returns (VMResponse);
+
+  // Snapshot Tree
+  rpc GetSnapshotTree(GetSnapshotTreeRequest) returns (GetSnapshotTreeResponse);
+
+  // Guest Agent
+  rpc GetGuestInfo(GetGuestInfoRequest) returns (GetGuestInfoResponse);
+
   // Event Streaming
   rpc SubscribeEvents(SubscribeEventsRequest) returns (stream HostEvent);
   rpc GetHostResource(SubscribeEventsRequest) returns (HostResourceReport);
@@ -695,4 +712,83 @@ message ResourceSpec {
   int64 memory_limit_bytes = 1;
   int64 memory_reservation_bytes = 2;
   int64 cpu_shares = 3;
+}
+
+// ==================== Device Hot-plug Messages ====================
+
+message AttachDiskRequest {
+  string vm_name = 1;
+  DiskConfig disk = 2;
+}
+
+message DetachDiskRequest {
+  string vm_name = 1;
+  string disk_id = 2;
+}
+
+message AttachNICRequest {
+  string vm_name = 1;
+  NetworkConfig nic = 2;
+}
+
+message DetachNICRequest {
+  string vm_name = 1;
+  string nic_id = 2;
+}
+
+// ==================== Live Reconfiguration Messages ====================
+
+message ResizeDiskRequest {
+  string vm_name = 1;
+  string disk_id = 2;
+  int64 new_size_gb = 3;
+}
+
+message SetVNCPasswordRequest {
+  string vm_name = 1;
+  string password = 2;
+  int32 expire_seconds = 3;
+}
+
+message SetLinkStateRequest {
+  string vm_name = 1;
+  string nic_id = 2;
+  bool link_up = 3;
+}
+
+// ==================== Snapshot Tree Messages ====================
+
+message GetSnapshotTreeRequest {
+  string vm_name = 1;
+}
+
+message GetSnapshotTreeResponse {
+  repeated SnapshotNode roots = 1;
+}
+
+message SnapshotNode {
+  SnapshotInfo snapshot = 1;
+  repeated SnapshotNode children = 2;
+}
+
+// ==================== Guest Agent Messages ====================
+
+message GetGuestInfoRequest {
+  string vm_name = 1;
+}
+
+message GetGuestInfoResponse {
+  string hostname = 1;
+  string os_id = 2;
+  string os_name = 3;
+  string os_version = 4;
+  string kernel_version = 5;
+  repeated GuestNetworkInterface interfaces = 6;
+  string error = 7;
+}
+
+message GuestNetworkInterface {
+  string name = 1;
+  string mac_address = 2;
+  repeated string ip_addresses = 3;
 }
