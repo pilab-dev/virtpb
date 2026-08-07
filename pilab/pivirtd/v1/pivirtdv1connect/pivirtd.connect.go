@@ -188,6 +188,18 @@ const (
 	// PivirtdServiceGetGuestInfoProcedure is the fully-qualified name of the PivirtdService's
 	// GetGuestInfo RPC.
 	PivirtdServiceGetGuestInfoProcedure = "/pilab.virtualization.v1.PivirtdService/GetGuestInfo"
+	// PivirtdServiceGuestExecProcedure is the fully-qualified name of the PivirtdService's GuestExec
+	// RPC.
+	PivirtdServiceGuestExecProcedure = "/pilab.virtualization.v1.PivirtdService/GuestExec"
+	// PivirtdServiceGetGuestExecStatusProcedure is the fully-qualified name of the PivirtdService's
+	// GetGuestExecStatus RPC.
+	PivirtdServiceGetGuestExecStatusProcedure = "/pilab.virtualization.v1.PivirtdService/GetGuestExecStatus"
+	// PivirtdServiceSetGuestHostnameProcedure is the fully-qualified name of the PivirtdService's
+	// SetGuestHostname RPC.
+	PivirtdServiceSetGuestHostnameProcedure = "/pilab.virtualization.v1.PivirtdService/SetGuestHostname"
+	// PivirtdServiceCustomizeOSProcedure is the fully-qualified name of the PivirtdService's
+	// CustomizeOS RPC.
+	PivirtdServiceCustomizeOSProcedure = "/pilab.virtualization.v1.PivirtdService/CustomizeOS"
 	// PivirtdServiceSubscribeEventsProcedure is the fully-qualified name of the PivirtdService's
 	// SubscribeEvents RPC.
 	PivirtdServiceSubscribeEventsProcedure = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
@@ -270,6 +282,10 @@ type PivirtdServiceClient interface {
 	GetSnapshotTree(context.Context, *connect.Request[v1.GetSnapshotTreeRequest]) (*connect.Response[v1.GetSnapshotTreeResponse], error)
 	// Guest Agent
 	GetGuestInfo(context.Context, *connect.Request[v1.GetGuestInfoRequest]) (*connect.Response[v1.GetGuestInfoResponse], error)
+	GuestExec(context.Context, *connect.Request[v1.GuestExecRequest]) (*connect.Response[v1.GuestExecResponse], error)
+	GetGuestExecStatus(context.Context, *connect.Request[v1.GetGuestExecStatusRequest]) (*connect.Response[v1.GetGuestExecStatusResponse], error)
+	SetGuestHostname(context.Context, *connect.Request[v1.SetGuestHostnameRequest]) (*connect.Response[v1.SetGuestHostnameResponse], error)
+	CustomizeOS(context.Context, *connect.Request[v1.CustomizeOSRequest]) (*connect.Response[v1.CustomizeOSResponse], error)
 	// Event Streaming
 	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.ServerStreamForClient[v1.HostEvent], error)
 	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
@@ -616,6 +632,30 @@ func NewPivirtdServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(pivirtdServiceMethods.ByName("GetGuestInfo")),
 			connect.WithClientOptions(opts...),
 		),
+		guestExec: connect.NewClient[v1.GuestExecRequest, v1.GuestExecResponse](
+			httpClient,
+			baseURL+PivirtdServiceGuestExecProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("GuestExec")),
+			connect.WithClientOptions(opts...),
+		),
+		getGuestExecStatus: connect.NewClient[v1.GetGuestExecStatusRequest, v1.GetGuestExecStatusResponse](
+			httpClient,
+			baseURL+PivirtdServiceGetGuestExecStatusProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("GetGuestExecStatus")),
+			connect.WithClientOptions(opts...),
+		),
+		setGuestHostname: connect.NewClient[v1.SetGuestHostnameRequest, v1.SetGuestHostnameResponse](
+			httpClient,
+			baseURL+PivirtdServiceSetGuestHostnameProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("SetGuestHostname")),
+			connect.WithClientOptions(opts...),
+		),
+		customizeOS: connect.NewClient[v1.CustomizeOSRequest, v1.CustomizeOSResponse](
+			httpClient,
+			baseURL+PivirtdServiceCustomizeOSProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("CustomizeOS")),
+			connect.WithClientOptions(opts...),
+		),
 		subscribeEvents: connect.NewClient[v1.SubscribeEventsRequest, v1.HostEvent](
 			httpClient,
 			baseURL+PivirtdServiceSubscribeEventsProcedure,
@@ -688,6 +728,10 @@ type pivirtdServiceClient struct {
 	setLinkState        *connect.Client[v1.SetLinkStateRequest, v1.VMResponse]
 	getSnapshotTree     *connect.Client[v1.GetSnapshotTreeRequest, v1.GetSnapshotTreeResponse]
 	getGuestInfo        *connect.Client[v1.GetGuestInfoRequest, v1.GetGuestInfoResponse]
+	guestExec           *connect.Client[v1.GuestExecRequest, v1.GuestExecResponse]
+	getGuestExecStatus  *connect.Client[v1.GetGuestExecStatusRequest, v1.GetGuestExecStatusResponse]
+	setGuestHostname    *connect.Client[v1.SetGuestHostnameRequest, v1.SetGuestHostnameResponse]
+	customizeOS         *connect.Client[v1.CustomizeOSRequest, v1.CustomizeOSResponse]
 	subscribeEvents     *connect.Client[v1.SubscribeEventsRequest, v1.HostEvent]
 	getHostResource     *connect.Client[v1.SubscribeEventsRequest, v1.HostResourceReport]
 }
@@ -967,6 +1011,26 @@ func (c *pivirtdServiceClient) GetGuestInfo(ctx context.Context, req *connect.Re
 	return c.getGuestInfo.CallUnary(ctx, req)
 }
 
+// GuestExec calls pilab.virtualization.v1.PivirtdService.GuestExec.
+func (c *pivirtdServiceClient) GuestExec(ctx context.Context, req *connect.Request[v1.GuestExecRequest]) (*connect.Response[v1.GuestExecResponse], error) {
+	return c.guestExec.CallUnary(ctx, req)
+}
+
+// GetGuestExecStatus calls pilab.virtualization.v1.PivirtdService.GetGuestExecStatus.
+func (c *pivirtdServiceClient) GetGuestExecStatus(ctx context.Context, req *connect.Request[v1.GetGuestExecStatusRequest]) (*connect.Response[v1.GetGuestExecStatusResponse], error) {
+	return c.getGuestExecStatus.CallUnary(ctx, req)
+}
+
+// SetGuestHostname calls pilab.virtualization.v1.PivirtdService.SetGuestHostname.
+func (c *pivirtdServiceClient) SetGuestHostname(ctx context.Context, req *connect.Request[v1.SetGuestHostnameRequest]) (*connect.Response[v1.SetGuestHostnameResponse], error) {
+	return c.setGuestHostname.CallUnary(ctx, req)
+}
+
+// CustomizeOS calls pilab.virtualization.v1.PivirtdService.CustomizeOS.
+func (c *pivirtdServiceClient) CustomizeOS(ctx context.Context, req *connect.Request[v1.CustomizeOSRequest]) (*connect.Response[v1.CustomizeOSResponse], error) {
+	return c.customizeOS.CallUnary(ctx, req)
+}
+
 // SubscribeEvents calls pilab.virtualization.v1.PivirtdService.SubscribeEvents.
 func (c *pivirtdServiceClient) SubscribeEvents(ctx context.Context, req *connect.Request[v1.SubscribeEventsRequest]) (*connect.ServerStreamForClient[v1.HostEvent], error) {
 	return c.subscribeEvents.CallServerStream(ctx, req)
@@ -1051,6 +1115,10 @@ type PivirtdServiceHandler interface {
 	GetSnapshotTree(context.Context, *connect.Request[v1.GetSnapshotTreeRequest]) (*connect.Response[v1.GetSnapshotTreeResponse], error)
 	// Guest Agent
 	GetGuestInfo(context.Context, *connect.Request[v1.GetGuestInfoRequest]) (*connect.Response[v1.GetGuestInfoResponse], error)
+	GuestExec(context.Context, *connect.Request[v1.GuestExecRequest]) (*connect.Response[v1.GuestExecResponse], error)
+	GetGuestExecStatus(context.Context, *connect.Request[v1.GetGuestExecStatusRequest]) (*connect.Response[v1.GetGuestExecStatusResponse], error)
+	SetGuestHostname(context.Context, *connect.Request[v1.SetGuestHostnameRequest]) (*connect.Response[v1.SetGuestHostnameResponse], error)
+	CustomizeOS(context.Context, *connect.Request[v1.CustomizeOSRequest]) (*connect.Response[v1.CustomizeOSResponse], error)
 	// Event Streaming
 	SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest], *connect.ServerStream[v1.HostEvent]) error
 	GetHostResource(context.Context, *connect.Request[v1.SubscribeEventsRequest]) (*connect.Response[v1.HostResourceReport], error)
@@ -1393,6 +1461,30 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 		connect.WithSchema(pivirtdServiceMethods.ByName("GetGuestInfo")),
 		connect.WithHandlerOptions(opts...),
 	)
+	pivirtdServiceGuestExecHandler := connect.NewUnaryHandler(
+		PivirtdServiceGuestExecProcedure,
+		svc.GuestExec,
+		connect.WithSchema(pivirtdServiceMethods.ByName("GuestExec")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceGetGuestExecStatusHandler := connect.NewUnaryHandler(
+		PivirtdServiceGetGuestExecStatusProcedure,
+		svc.GetGuestExecStatus,
+		connect.WithSchema(pivirtdServiceMethods.ByName("GetGuestExecStatus")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceSetGuestHostnameHandler := connect.NewUnaryHandler(
+		PivirtdServiceSetGuestHostnameProcedure,
+		svc.SetGuestHostname,
+		connect.WithSchema(pivirtdServiceMethods.ByName("SetGuestHostname")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceCustomizeOSHandler := connect.NewUnaryHandler(
+		PivirtdServiceCustomizeOSProcedure,
+		svc.CustomizeOS,
+		connect.WithSchema(pivirtdServiceMethods.ByName("CustomizeOS")),
+		connect.WithHandlerOptions(opts...),
+	)
 	pivirtdServiceSubscribeEventsHandler := connect.NewServerStreamHandler(
 		PivirtdServiceSubscribeEventsProcedure,
 		svc.SubscribeEvents,
@@ -1517,6 +1609,14 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 			pivirtdServiceGetSnapshotTreeHandler.ServeHTTP(w, r)
 		case PivirtdServiceGetGuestInfoProcedure:
 			pivirtdServiceGetGuestInfoHandler.ServeHTTP(w, r)
+		case PivirtdServiceGuestExecProcedure:
+			pivirtdServiceGuestExecHandler.ServeHTTP(w, r)
+		case PivirtdServiceGetGuestExecStatusProcedure:
+			pivirtdServiceGetGuestExecStatusHandler.ServeHTTP(w, r)
+		case PivirtdServiceSetGuestHostnameProcedure:
+			pivirtdServiceSetGuestHostnameHandler.ServeHTTP(w, r)
+		case PivirtdServiceCustomizeOSProcedure:
+			pivirtdServiceCustomizeOSHandler.ServeHTTP(w, r)
 		case PivirtdServiceSubscribeEventsProcedure:
 			pivirtdServiceSubscribeEventsHandler.ServeHTTP(w, r)
 		case PivirtdServiceGetHostResourceProcedure:
@@ -1748,6 +1848,22 @@ func (UnimplementedPivirtdServiceHandler) GetSnapshotTree(context.Context, *conn
 
 func (UnimplementedPivirtdServiceHandler) GetGuestInfo(context.Context, *connect.Request[v1.GetGuestInfoRequest]) (*connect.Response[v1.GetGuestInfoResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GetGuestInfo is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) GuestExec(context.Context, *connect.Request[v1.GuestExecRequest]) (*connect.Response[v1.GuestExecResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GuestExec is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) GetGuestExecStatus(context.Context, *connect.Request[v1.GetGuestExecStatusRequest]) (*connect.Response[v1.GetGuestExecStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.GetGuestExecStatus is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) SetGuestHostname(context.Context, *connect.Request[v1.SetGuestHostnameRequest]) (*connect.Response[v1.SetGuestHostnameResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.SetGuestHostname is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) CustomizeOS(context.Context, *connect.Request[v1.CustomizeOSRequest]) (*connect.Response[v1.CustomizeOSResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.virtualization.v1.PivirtdService.CustomizeOS is not implemented"))
 }
 
 func (UnimplementedPivirtdServiceHandler) SubscribeEvents(context.Context, *connect.Request[v1.SubscribeEventsRequest], *connect.ServerStream[v1.HostEvent]) error {

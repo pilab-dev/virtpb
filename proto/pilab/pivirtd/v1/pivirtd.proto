@@ -99,6 +99,10 @@ service PivirtdService {
 
   // Guest Agent
   rpc GetGuestInfo(GetGuestInfoRequest) returns (GetGuestInfoResponse);
+  rpc GuestExec(GuestExecRequest) returns (GuestExecResponse);
+  rpc GetGuestExecStatus(GetGuestExecStatusRequest) returns (GetGuestExecStatusResponse);
+  rpc SetGuestHostname(SetGuestHostnameRequest) returns (SetGuestHostnameResponse);
+  rpc CustomizeOS(CustomizeOSRequest) returns (CustomizeOSResponse);
 
   // Event Streaming
   rpc SubscribeEvents(SubscribeEventsRequest) returns (stream HostEvent);
@@ -791,4 +795,56 @@ message GuestNetworkInterface {
   string name = 1;
   string mac_address = 2;
   repeated string ip_addresses = 3;
+}
+
+message GuestExecRequest {
+  string vm_id = 1;
+  string path = 2;  // path to the executable inside the guest
+  repeated string args = 3;
+  repeated string env = 4;  // "KEY=VALUE" entries
+  bytes input_data = 5;
+  bool capture_output = 6;
+}
+
+message GuestExecResponse {
+  string pid = 1;  // QEMU guest agent returns the pid as a string
+}
+
+message GetGuestExecStatusRequest {
+  string vm_id = 1;
+  string pid = 2;
+}
+
+message GetGuestExecStatusResponse {
+  bool exited = 1;
+  int64 exit_code = 2;
+  bytes out_data = 3;
+  bytes err_data = 4;
+  bool out_truncated = 5;
+  bool err_truncated = 6;
+}
+
+message SetGuestHostnameRequest {
+  string vm_id = 1;
+  string hostname = 2;
+}
+
+message SetGuestHostnameResponse {
+  bool ok = 1;
+}
+
+message CustomizeOSRequest {
+  string vm_id = 1;
+  optional string hostname = 2;
+  repeated string ssh_keys = 3;  // public key lines appended to the guest's authorized_keys
+  repeated UserSpec users = 4;  // usernames only — no passwords
+}
+
+message UserSpec {
+  string username = 1;
+}
+
+message CustomizeOSResponse {
+  bool ok = 1;
+  string message = 2;
 }

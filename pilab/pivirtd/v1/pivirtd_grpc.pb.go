@@ -74,6 +74,10 @@ const (
 	PivirtdService_SetLinkState_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/SetLinkState"
 	PivirtdService_GetSnapshotTree_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/GetSnapshotTree"
 	PivirtdService_GetGuestInfo_FullMethodName        = "/pilab.virtualization.v1.PivirtdService/GetGuestInfo"
+	PivirtdService_GuestExec_FullMethodName           = "/pilab.virtualization.v1.PivirtdService/GuestExec"
+	PivirtdService_GetGuestExecStatus_FullMethodName  = "/pilab.virtualization.v1.PivirtdService/GetGuestExecStatus"
+	PivirtdService_SetGuestHostname_FullMethodName    = "/pilab.virtualization.v1.PivirtdService/SetGuestHostname"
+	PivirtdService_CustomizeOS_FullMethodName         = "/pilab.virtualization.v1.PivirtdService/CustomizeOS"
 	PivirtdService_SubscribeEvents_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/SubscribeEvents"
 	PivirtdService_GetHostResource_FullMethodName     = "/pilab.virtualization.v1.PivirtdService/GetHostResource"
 )
@@ -156,6 +160,10 @@ type PivirtdServiceClient interface {
 	GetSnapshotTree(ctx context.Context, in *GetSnapshotTreeRequest, opts ...grpc.CallOption) (*GetSnapshotTreeResponse, error)
 	// Guest Agent
 	GetGuestInfo(ctx context.Context, in *GetGuestInfoRequest, opts ...grpc.CallOption) (*GetGuestInfoResponse, error)
+	GuestExec(ctx context.Context, in *GuestExecRequest, opts ...grpc.CallOption) (*GuestExecResponse, error)
+	GetGuestExecStatus(ctx context.Context, in *GetGuestExecStatusRequest, opts ...grpc.CallOption) (*GetGuestExecStatusResponse, error)
+	SetGuestHostname(ctx context.Context, in *SetGuestHostnameRequest, opts ...grpc.CallOption) (*SetGuestHostnameResponse, error)
+	CustomizeOS(ctx context.Context, in *CustomizeOSRequest, opts ...grpc.CallOption) (*CustomizeOSResponse, error)
 	// Event Streaming
 	SubscribeEvents(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HostEvent], error)
 	GetHostResource(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (*HostResourceReport, error)
@@ -728,6 +736,46 @@ func (c *pivirtdServiceClient) GetGuestInfo(ctx context.Context, in *GetGuestInf
 	return out, nil
 }
 
+func (c *pivirtdServiceClient) GuestExec(ctx context.Context, in *GuestExecRequest, opts ...grpc.CallOption) (*GuestExecResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GuestExecResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_GuestExec_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) GetGuestExecStatus(ctx context.Context, in *GetGuestExecStatusRequest, opts ...grpc.CallOption) (*GetGuestExecStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGuestExecStatusResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_GetGuestExecStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) SetGuestHostname(ctx context.Context, in *SetGuestHostnameRequest, opts ...grpc.CallOption) (*SetGuestHostnameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetGuestHostnameResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_SetGuestHostname_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) CustomizeOS(ctx context.Context, in *CustomizeOSRequest, opts ...grpc.CallOption) (*CustomizeOSResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CustomizeOSResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_CustomizeOS_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *pivirtdServiceClient) SubscribeEvents(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HostEvent], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &PivirtdService_ServiceDesc.Streams[1], PivirtdService_SubscribeEvents_FullMethodName, cOpts...)
@@ -835,6 +883,10 @@ type PivirtdServiceServer interface {
 	GetSnapshotTree(context.Context, *GetSnapshotTreeRequest) (*GetSnapshotTreeResponse, error)
 	// Guest Agent
 	GetGuestInfo(context.Context, *GetGuestInfoRequest) (*GetGuestInfoResponse, error)
+	GuestExec(context.Context, *GuestExecRequest) (*GuestExecResponse, error)
+	GetGuestExecStatus(context.Context, *GetGuestExecStatusRequest) (*GetGuestExecStatusResponse, error)
+	SetGuestHostname(context.Context, *SetGuestHostnameRequest) (*SetGuestHostnameResponse, error)
+	CustomizeOS(context.Context, *CustomizeOSRequest) (*CustomizeOSResponse, error)
 	// Event Streaming
 	SubscribeEvents(*SubscribeEventsRequest, grpc.ServerStreamingServer[HostEvent]) error
 	GetHostResource(context.Context, *SubscribeEventsRequest) (*HostResourceReport, error)
@@ -1012,6 +1064,18 @@ func (UnimplementedPivirtdServiceServer) GetSnapshotTree(context.Context, *GetSn
 }
 func (UnimplementedPivirtdServiceServer) GetGuestInfo(context.Context, *GetGuestInfoRequest) (*GetGuestInfoResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetGuestInfo not implemented")
+}
+func (UnimplementedPivirtdServiceServer) GuestExec(context.Context, *GuestExecRequest) (*GuestExecResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GuestExec not implemented")
+}
+func (UnimplementedPivirtdServiceServer) GetGuestExecStatus(context.Context, *GetGuestExecStatusRequest) (*GetGuestExecStatusResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetGuestExecStatus not implemented")
+}
+func (UnimplementedPivirtdServiceServer) SetGuestHostname(context.Context, *SetGuestHostnameRequest) (*SetGuestHostnameResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetGuestHostname not implemented")
+}
+func (UnimplementedPivirtdServiceServer) CustomizeOS(context.Context, *CustomizeOSRequest) (*CustomizeOSResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CustomizeOS not implemented")
 }
 func (UnimplementedPivirtdServiceServer) SubscribeEvents(*SubscribeEventsRequest, grpc.ServerStreamingServer[HostEvent]) error {
 	return status.Error(codes.Unimplemented, "method SubscribeEvents not implemented")
@@ -2023,6 +2087,78 @@ func _PivirtdService_GetGuestInfo_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PivirtdService_GuestExec_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GuestExecRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).GuestExec(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_GuestExec_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).GuestExec(ctx, req.(*GuestExecRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_GetGuestExecStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGuestExecStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).GetGuestExecStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_GetGuestExecStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).GetGuestExecStatus(ctx, req.(*GetGuestExecStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_SetGuestHostname_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetGuestHostnameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).SetGuestHostname(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_SetGuestHostname_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).SetGuestHostname(ctx, req.(*SetGuestHostnameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_CustomizeOS_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CustomizeOSRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).CustomizeOS(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_CustomizeOS_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).CustomizeOS(ctx, req.(*CustomizeOSRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PivirtdService_SubscribeEvents_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(SubscribeEventsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2274,6 +2410,22 @@ var PivirtdService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetGuestInfo",
 			Handler:    _PivirtdService_GetGuestInfo_Handler,
+		},
+		{
+			MethodName: "GuestExec",
+			Handler:    _PivirtdService_GuestExec_Handler,
+		},
+		{
+			MethodName: "GetGuestExecStatus",
+			Handler:    _PivirtdService_GetGuestExecStatus_Handler,
+		},
+		{
+			MethodName: "SetGuestHostname",
+			Handler:    _PivirtdService_SetGuestHostname_Handler,
+		},
+		{
+			MethodName: "CustomizeOS",
+			Handler:    _PivirtdService_CustomizeOS_Handler,
 		},
 		{
 			MethodName: "GetHostResource",
