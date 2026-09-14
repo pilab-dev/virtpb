@@ -17,6 +17,7 @@ import "pilab/director/v2/task_service.proto";
 import "pilab/pivirtd/v1/host_resource.proto";
 import "pilab/common/v1/host.proto";
 import "pilab/common/v1/phase.proto";
+import "pilab/resource/v1/resource.proto";
 
 service NodeService {
   // Register establishes (first join) or re-establishes (reconnect) a
@@ -95,7 +96,28 @@ message NodeEvent {
     TaskProgressEvent task_progress = 8;
     TaskResultEvent task_result = 9;
     FullInventoryEvent full_inventory = 10;
+    // The node's answer to a ResourceDirective (PIVIRT-172).
+    ResourceResultEvent resource_result = 11;
   }
+}
+
+// ResourceResultEvent reports what applying a ResourceDirective did on the
+// host, one outcome per resource, in the directive's order.
+message ResourceResultEvent {
+  string directive_id = 1;
+  repeated ResourceOutcome outcomes = 2;
+}
+
+message ResourceOutcome {
+  string kind = 1;
+  string name = 2;
+  // "CREATED", "UPDATED", "UNCHANGED", "DELETED" or "FAILED".
+  string outcome = 3;
+  string error = 4;
+  // The host object's generation and observed generation after the apply,
+  // so the director can tell "accepted" from "realized".
+  uint64 generation = 5;
+  uint64 observed_generation = 6;
 }
 
 message HeartbeatEvent {
@@ -172,6 +194,10 @@ message NodeDirective {
     ClusterJoinDirective cluster_join = 5;
     ClusterLeaveDirective cluster_leave = 6;
     DrainDirective drain = 7;
+    // Host objects the director wants applied or removed on this node
+    // (node-resource-apply.md P6, PIVIRT-172). The agent proxies each one
+    // to pivirtd's resource service and answers with a ResourceResultEvent.
+    ResourceDirective resources = 8;
   }
 }
 
@@ -188,6 +214,29 @@ message ResyncDirective {}
 // plumbing only in this phase; no producer exists yet.
 message ConfigDirective {
   google.protobuf.Struct config = 1;
+}
+
+// ResourceDirective carries host objects for the node to apply, in order,
+// and objects to delete. The director compiles cluster objects (VPC,
+// FloatingIP, SecurityGroup) into these; the host never sees a tenant.
+message ResourceDirective {
+  // directive_id correlates the ResourceResultEvent; the director keeps
+  // it stable for a re-send, so a duplicate delivery is idempotent on both
+  // sides (pivirtd's apply is UNCHANGED for an unchanged spec).
+  string directive_id = 1;
+  // apply is ordered: a bridge before the segment on it, an overlay
+  // before the port security that assumes its bridge.
+  repeated pilab.resource.v1.Resource apply = 2;
+  // delete names objects to remove, applied after apply.
+  repeated ResourceRef delete = 3;
+  // field_manager is recorded on every applied object ("director").
+  string field_manager = 4;
+}
+
+message ResourceRef {
+  string kind = 1;
+  string name = 2;
+  string uid = 3;
 }
 
 // ClusterJoinDirective/ClusterLeaveDirective/DrainDirective are transport

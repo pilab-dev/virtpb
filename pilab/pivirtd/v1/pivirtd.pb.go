@@ -3531,7 +3531,7 @@ func (x *MigrationStatusResponse) GetRemainingBytes() float64 {
 type CreateStoragePoolRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` // "dir", "iscsi", "lvm"
+	Type          string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` // "dir", "nfs", "iscsi", "ceph"
 	Path          string                 `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"` // path to pool
 	Options       map[string]string      `protobuf:"bytes,4,rep,name=options,proto3" json:"options,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
@@ -3835,7 +3835,7 @@ func (x *DeleteStoragePoolResponse) GetError() string {
 type StoragePool struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Name           string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Type           string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` // "dir", "nfs", "iscsi"
+	Type           string                 `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"` // "dir", "nfs", "iscsi", "ceph"
 	Path           string                 `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
 	CapacityBytes  int64                  `protobuf:"varint,4,opt,name=capacity_bytes,json=capacityBytes,proto3" json:"capacity_bytes,omitempty"`
 	AllocatedBytes int64                  `protobuf:"varint,5,opt,name=allocated_bytes,json=allocatedBytes,proto3" json:"allocated_bytes,omitempty"`
