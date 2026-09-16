@@ -94,9 +94,18 @@ const (
 	// PivirtdServiceCloneSnapshotProcedure is the fully-qualified name of the PivirtdService's
 	// CloneSnapshot RPC.
 	PivirtdServiceCloneSnapshotProcedure = "/pilab.pivirtd.v1.PivirtdService/CloneSnapshot"
+	// PivirtdServicePrepareIncomingProcedure is the fully-qualified name of the PivirtdService's
+	// PrepareIncoming RPC.
+	PivirtdServicePrepareIncomingProcedure = "/pilab.pivirtd.v1.PivirtdService/PrepareIncoming"
 	// PivirtdServiceMigrateVMProcedure is the fully-qualified name of the PivirtdService's MigrateVM
 	// RPC.
 	PivirtdServiceMigrateVMProcedure = "/pilab.pivirtd.v1.PivirtdService/MigrateVM"
+	// PivirtdServiceFinalizeMigrationProcedure is the fully-qualified name of the PivirtdService's
+	// FinalizeMigration RPC.
+	PivirtdServiceFinalizeMigrationProcedure = "/pilab.pivirtd.v1.PivirtdService/FinalizeMigration"
+	// PivirtdServiceAbortIncomingProcedure is the fully-qualified name of the PivirtdService's
+	// AbortIncoming RPC.
+	PivirtdServiceAbortIncomingProcedure = "/pilab.pivirtd.v1.PivirtdService/AbortIncoming"
 	// PivirtdServiceGetMigrationStatusProcedure is the fully-qualified name of the PivirtdService's
 	// GetMigrationStatus RPC.
 	PivirtdServiceGetMigrationStatusProcedure = "/pilab.pivirtd.v1.PivirtdService/GetMigrationStatus"
@@ -271,7 +280,10 @@ type PivirtdServiceClient interface {
 	CloneVM(context.Context, *connect.Request[v1.CloneVMRequest]) (*connect.Response[v1.VMResponse], error)
 	CloneSnapshot(context.Context, *connect.Request[v1.CloneSnapshotRequest]) (*connect.Response[v1.VMResponse], error)
 	// Migration
+	PrepareIncoming(context.Context, *connect.Request[v1.PrepareIncomingRequest]) (*connect.Response[v1.PrepareIncomingResponse], error)
 	MigrateVM(context.Context, *connect.Request[v1.MigrateVMRequest]) (*connect.Response[v1.MigrateVMResponse], error)
+	FinalizeMigration(context.Context, *connect.Request[v1.FinalizeMigrationRequest]) (*connect.Response[v1.VMResponse], error)
+	AbortIncoming(context.Context, *connect.Request[v1.AbortIncomingRequest]) (*connect.Response[v1.VMResponse], error)
 	GetMigrationStatus(context.Context, *connect.Request[v1.GetMigrationStatusRequest]) (*connect.Response[v1.MigrationStatusResponse], error)
 	// Storage Management
 	CreateStoragePool(context.Context, *connect.Request[v1.CreateStoragePoolRequest]) (*connect.Response[v1.StoragePoolResponse], error)
@@ -490,10 +502,28 @@ func NewPivirtdServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(pivirtdServiceMethods.ByName("CloneSnapshot")),
 			connect.WithClientOptions(opts...),
 		),
+		prepareIncoming: connect.NewClient[v1.PrepareIncomingRequest, v1.PrepareIncomingResponse](
+			httpClient,
+			baseURL+PivirtdServicePrepareIncomingProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("PrepareIncoming")),
+			connect.WithClientOptions(opts...),
+		),
 		migrateVM: connect.NewClient[v1.MigrateVMRequest, v1.MigrateVMResponse](
 			httpClient,
 			baseURL+PivirtdServiceMigrateVMProcedure,
 			connect.WithSchema(pivirtdServiceMethods.ByName("MigrateVM")),
+			connect.WithClientOptions(opts...),
+		),
+		finalizeMigration: connect.NewClient[v1.FinalizeMigrationRequest, v1.VMResponse](
+			httpClient,
+			baseURL+PivirtdServiceFinalizeMigrationProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("FinalizeMigration")),
+			connect.WithClientOptions(opts...),
+		),
+		abortIncoming: connect.NewClient[v1.AbortIncomingRequest, v1.VMResponse](
+			httpClient,
+			baseURL+PivirtdServiceAbortIncomingProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("AbortIncoming")),
 			connect.WithClientOptions(opts...),
 		),
 		getMigrationStatus: connect.NewClient[v1.GetMigrationStatusRequest, v1.MigrationStatusResponse](
@@ -807,7 +837,10 @@ type pivirtdServiceClient struct {
 	getSnapshotStatus     *connect.Client[v1.GetSnapshotStatusRequest, v1.SnapshotStatusResponse]
 	cloneVM               *connect.Client[v1.CloneVMRequest, v1.VMResponse]
 	cloneSnapshot         *connect.Client[v1.CloneSnapshotRequest, v1.VMResponse]
+	prepareIncoming       *connect.Client[v1.PrepareIncomingRequest, v1.PrepareIncomingResponse]
 	migrateVM             *connect.Client[v1.MigrateVMRequest, v1.MigrateVMResponse]
+	finalizeMigration     *connect.Client[v1.FinalizeMigrationRequest, v1.VMResponse]
+	abortIncoming         *connect.Client[v1.AbortIncomingRequest, v1.VMResponse]
 	getMigrationStatus    *connect.Client[v1.GetMigrationStatusRequest, v1.MigrationStatusResponse]
 	createStoragePool     *connect.Client[v1.CreateStoragePoolRequest, v1.StoragePoolResponse]
 	listStoragePools      *connect.Client[v1.ListStoragePoolsRequest, v1.ListStoragePoolsResponse]
@@ -979,9 +1012,24 @@ func (c *pivirtdServiceClient) CloneSnapshot(ctx context.Context, req *connect.R
 	return c.cloneSnapshot.CallUnary(ctx, req)
 }
 
+// PrepareIncoming calls pilab.pivirtd.v1.PivirtdService.PrepareIncoming.
+func (c *pivirtdServiceClient) PrepareIncoming(ctx context.Context, req *connect.Request[v1.PrepareIncomingRequest]) (*connect.Response[v1.PrepareIncomingResponse], error) {
+	return c.prepareIncoming.CallUnary(ctx, req)
+}
+
 // MigrateVM calls pilab.pivirtd.v1.PivirtdService.MigrateVM.
 func (c *pivirtdServiceClient) MigrateVM(ctx context.Context, req *connect.Request[v1.MigrateVMRequest]) (*connect.Response[v1.MigrateVMResponse], error) {
 	return c.migrateVM.CallUnary(ctx, req)
+}
+
+// FinalizeMigration calls pilab.pivirtd.v1.PivirtdService.FinalizeMigration.
+func (c *pivirtdServiceClient) FinalizeMigration(ctx context.Context, req *connect.Request[v1.FinalizeMigrationRequest]) (*connect.Response[v1.VMResponse], error) {
+	return c.finalizeMigration.CallUnary(ctx, req)
+}
+
+// AbortIncoming calls pilab.pivirtd.v1.PivirtdService.AbortIncoming.
+func (c *pivirtdServiceClient) AbortIncoming(ctx context.Context, req *connect.Request[v1.AbortIncomingRequest]) (*connect.Response[v1.VMResponse], error) {
+	return c.abortIncoming.CallUnary(ctx, req)
 }
 
 // GetMigrationStatus calls pilab.pivirtd.v1.PivirtdService.GetMigrationStatus.
@@ -1252,7 +1300,10 @@ type PivirtdServiceHandler interface {
 	CloneVM(context.Context, *connect.Request[v1.CloneVMRequest]) (*connect.Response[v1.VMResponse], error)
 	CloneSnapshot(context.Context, *connect.Request[v1.CloneSnapshotRequest]) (*connect.Response[v1.VMResponse], error)
 	// Migration
+	PrepareIncoming(context.Context, *connect.Request[v1.PrepareIncomingRequest]) (*connect.Response[v1.PrepareIncomingResponse], error)
 	MigrateVM(context.Context, *connect.Request[v1.MigrateVMRequest]) (*connect.Response[v1.MigrateVMResponse], error)
+	FinalizeMigration(context.Context, *connect.Request[v1.FinalizeMigrationRequest]) (*connect.Response[v1.VMResponse], error)
+	AbortIncoming(context.Context, *connect.Request[v1.AbortIncomingRequest]) (*connect.Response[v1.VMResponse], error)
 	GetMigrationStatus(context.Context, *connect.Request[v1.GetMigrationStatusRequest]) (*connect.Response[v1.MigrationStatusResponse], error)
 	// Storage Management
 	CreateStoragePool(context.Context, *connect.Request[v1.CreateStoragePoolRequest]) (*connect.Response[v1.StoragePoolResponse], error)
@@ -1467,10 +1518,28 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 		connect.WithSchema(pivirtdServiceMethods.ByName("CloneSnapshot")),
 		connect.WithHandlerOptions(opts...),
 	)
+	pivirtdServicePrepareIncomingHandler := connect.NewUnaryHandler(
+		PivirtdServicePrepareIncomingProcedure,
+		svc.PrepareIncoming,
+		connect.WithSchema(pivirtdServiceMethods.ByName("PrepareIncoming")),
+		connect.WithHandlerOptions(opts...),
+	)
 	pivirtdServiceMigrateVMHandler := connect.NewUnaryHandler(
 		PivirtdServiceMigrateVMProcedure,
 		svc.MigrateVM,
 		connect.WithSchema(pivirtdServiceMethods.ByName("MigrateVM")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceFinalizeMigrationHandler := connect.NewUnaryHandler(
+		PivirtdServiceFinalizeMigrationProcedure,
+		svc.FinalizeMigration,
+		connect.WithSchema(pivirtdServiceMethods.ByName("FinalizeMigration")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceAbortIncomingHandler := connect.NewUnaryHandler(
+		PivirtdServiceAbortIncomingProcedure,
+		svc.AbortIncoming,
+		connect.WithSchema(pivirtdServiceMethods.ByName("AbortIncoming")),
 		connect.WithHandlerOptions(opts...),
 	)
 	pivirtdServiceGetMigrationStatusHandler := connect.NewUnaryHandler(
@@ -1805,8 +1874,14 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 			pivirtdServiceCloneVMHandler.ServeHTTP(w, r)
 		case PivirtdServiceCloneSnapshotProcedure:
 			pivirtdServiceCloneSnapshotHandler.ServeHTTP(w, r)
+		case PivirtdServicePrepareIncomingProcedure:
+			pivirtdServicePrepareIncomingHandler.ServeHTTP(w, r)
 		case PivirtdServiceMigrateVMProcedure:
 			pivirtdServiceMigrateVMHandler.ServeHTTP(w, r)
+		case PivirtdServiceFinalizeMigrationProcedure:
+			pivirtdServiceFinalizeMigrationHandler.ServeHTTP(w, r)
+		case PivirtdServiceAbortIncomingProcedure:
+			pivirtdServiceAbortIncomingHandler.ServeHTTP(w, r)
 		case PivirtdServiceGetMigrationStatusProcedure:
 			pivirtdServiceGetMigrationStatusHandler.ServeHTTP(w, r)
 		case PivirtdServiceCreateStoragePoolProcedure:
@@ -2006,8 +2081,20 @@ func (UnimplementedPivirtdServiceHandler) CloneSnapshot(context.Context, *connec
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.pivirtd.v1.PivirtdService.CloneSnapshot is not implemented"))
 }
 
+func (UnimplementedPivirtdServiceHandler) PrepareIncoming(context.Context, *connect.Request[v1.PrepareIncomingRequest]) (*connect.Response[v1.PrepareIncomingResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.pivirtd.v1.PivirtdService.PrepareIncoming is not implemented"))
+}
+
 func (UnimplementedPivirtdServiceHandler) MigrateVM(context.Context, *connect.Request[v1.MigrateVMRequest]) (*connect.Response[v1.MigrateVMResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.pivirtd.v1.PivirtdService.MigrateVM is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) FinalizeMigration(context.Context, *connect.Request[v1.FinalizeMigrationRequest]) (*connect.Response[v1.VMResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.pivirtd.v1.PivirtdService.FinalizeMigration is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) AbortIncoming(context.Context, *connect.Request[v1.AbortIncomingRequest]) (*connect.Response[v1.VMResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.pivirtd.v1.PivirtdService.AbortIncoming is not implemented"))
 }
 
 func (UnimplementedPivirtdServiceHandler) GetMigrationStatus(context.Context, *connect.Request[v1.GetMigrationStatusRequest]) (*connect.Response[v1.MigrationStatusResponse], error) {

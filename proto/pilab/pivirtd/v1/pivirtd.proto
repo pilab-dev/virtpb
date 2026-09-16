@@ -48,7 +48,10 @@ service PivirtdService {
   rpc CloneSnapshot(CloneSnapshotRequest) returns (VMResponse);
   
   // Migration
+  rpc PrepareIncoming(PrepareIncomingRequest) returns (PrepareIncomingResponse);
   rpc MigrateVM(MigrateVMRequest) returns (MigrateVMResponse);
+  rpc FinalizeMigration(FinalizeMigrationRequest) returns (VMResponse);
+  rpc AbortIncoming(AbortIncomingRequest) returns (VMResponse);
   rpc GetMigrationStatus(GetMigrationStatusRequest) returns (MigrationStatusResponse);
   
   // Storage Management
@@ -527,11 +530,49 @@ message VMJobStatus {
 
 // ==================== Migration Messages ====================
 
+message VMConfig {
+  string name = 1;
+  int32 memory_mb = 2;
+  int32 vcpus = 3;
+  string machine = 4;
+  CPUConfig cpu = 5;
+  repeated DiskConfig disks = 6;
+  repeated NetworkConfig networks = 7;
+  string firmware = 8;
+  EFIConfig efi = 9;
+  bytes yaml_spec = 10;
+  map<string, string> labels = 11;
+  int32 max_memory_mb = 12;
+  int32 max_vcpus = 13;
+}
+
+message PrepareIncomingRequest {
+  VMConfig config = 1;
+  string listen_address = 2;
+}
+
+message PrepareIncomingResponse {
+  string uri = 1;  // "tcp:<addr>:<port>"
+}
+
+message FinalizeMigrationRequest {
+  string vm_name = 1;
+  bool delete = 2;
+}
+
+message AbortIncomingRequest {
+  string vm_name = 1;
+}
+
 message MigrateVMRequest {
   string vm_name = 1;
   string destination_uri = 2;  // e.g., "tcp:192.168.1.100:4444"
   bool incremental = 3;
   bool compress = 4;
+  int64 max_bandwidth_bytes_sec = 5;
+  int64 downtime_limit_ms = 6;
+  bool postcopy = 7;
+  bool multifd = 8;
 }
 
 message MigrateVMResponse {
