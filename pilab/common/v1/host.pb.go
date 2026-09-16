@@ -95,147 +95,6 @@ func (x *HostStats) GetTotalMemory() uint64 {
 	return 0
 }
 
-// VmMetrics contains performance metrics for a VM.
-type VmMetrics struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	VmId           string                 `protobuf:"bytes,1,opt,name=vm_id,json=vmId,proto3" json:"vm_id,omitempty"`
-	VmName         string                 `protobuf:"bytes,2,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
-	CpuUsage       uint32                 `protobuf:"varint,3,opt,name=cpu_usage,json=cpuUsage,proto3" json:"cpu_usage,omitempty"`
-	DiskRd         uint32                 `protobuf:"varint,4,opt,name=disk_rd,json=diskRd,proto3" json:"disk_rd,omitempty"`
-	DiskRdReq      uint32                 `protobuf:"varint,5,opt,name=disk_rd_req,json=diskRdReq,proto3" json:"disk_rd_req,omitempty"`
-	DiskWr         uint32                 `protobuf:"varint,6,opt,name=disk_wr,json=diskWr,proto3" json:"disk_wr,omitempty"`
-	DiskWrReq      uint64                 `protobuf:"varint,7,opt,name=disk_wr_req,json=diskWrReq,proto3" json:"disk_wr_req,omitempty"`
-	NetworkRxBytes uint32                 `protobuf:"varint,8,opt,name=network_rx_bytes,json=networkRxBytes,proto3" json:"network_rx_bytes,omitempty"`
-	NetworkRxPkt   uint32                 `protobuf:"varint,9,opt,name=network_rx_pkt,json=networkRxPkt,proto3" json:"network_rx_pkt,omitempty"`
-	NetworkTxBytes uint32                 `protobuf:"varint,10,opt,name=network_tx_bytes,json=networkTxBytes,proto3" json:"network_tx_bytes,omitempty"`
-	NetworkTxPkt   uint32                 `protobuf:"varint,11,opt,name=network_tx_pkt,json=networkTxPkt,proto3" json:"network_tx_pkt,omitempty"`
-	MemoryUsage    uint32                 `protobuf:"varint,12,opt,name=memory_usage,json=memoryUsage,proto3" json:"memory_usage,omitempty"`
-	MemoryTotal    uint32                 `protobuf:"varint,13,opt,name=memory_total,json=memoryTotal,proto3" json:"memory_total,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *VmMetrics) Reset() {
-	*x = VmMetrics{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *VmMetrics) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*VmMetrics) ProtoMessage() {}
-
-func (x *VmMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use VmMetrics.ProtoReflect.Descriptor instead.
-func (*VmMetrics) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *VmMetrics) GetVmId() string {
-	if x != nil {
-		return x.VmId
-	}
-	return ""
-}
-
-func (x *VmMetrics) GetVmName() string {
-	if x != nil {
-		return x.VmName
-	}
-	return ""
-}
-
-func (x *VmMetrics) GetCpuUsage() uint32 {
-	if x != nil {
-		return x.CpuUsage
-	}
-	return 0
-}
-
-func (x *VmMetrics) GetDiskRd() uint32 {
-	if x != nil {
-		return x.DiskRd
-	}
-	return 0
-}
-
-func (x *VmMetrics) GetDiskRdReq() uint32 {
-	if x != nil {
-		return x.DiskRdReq
-	}
-	return 0
-}
-
-func (x *VmMetrics) GetDiskWr() uint32 {
-	if x != nil {
-		return x.DiskWr
-	}
-	return 0
-}
-
-func (x *VmMetrics) GetDiskWrReq() uint64 {
-	if x != nil {
-		return x.DiskWrReq
-	}
-	return 0
-}
-
-func (x *VmMetrics) GetNetworkRxBytes() uint32 {
-	if x != nil {
-		return x.NetworkRxBytes
-	}
-	return 0
-}
-
-func (x *VmMetrics) GetNetworkRxPkt() uint32 {
-	if x != nil {
-		return x.NetworkRxPkt
-	}
-	return 0
-}
-
-func (x *VmMetrics) GetNetworkTxBytes() uint32 {
-	if x != nil {
-		return x.NetworkTxBytes
-	}
-	return 0
-}
-
-func (x *VmMetrics) GetNetworkTxPkt() uint32 {
-	if x != nil {
-		return x.NetworkTxPkt
-	}
-	return 0
-}
-
-func (x *VmMetrics) GetMemoryUsage() uint32 {
-	if x != nil {
-		return x.MemoryUsage
-	}
-	return 0
-}
-
-func (x *VmMetrics) GetMemoryTotal() uint32 {
-	if x != nil {
-		return x.MemoryTotal
-	}
-	return 0
-}
-
 // CPUMetrics contains CPU utilization metrics.
 type CPUMetrics struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -246,7 +105,7 @@ type CPUMetrics struct {
 
 func (x *CPUMetrics) Reset() {
 	*x = CPUMetrics{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[2]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -258,7 +117,7 @@ func (x *CPUMetrics) String() string {
 func (*CPUMetrics) ProtoMessage() {}
 
 func (x *CPUMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[2]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -271,7 +130,7 @@ func (x *CPUMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CPUMetrics.ProtoReflect.Descriptor instead.
 func (*CPUMetrics) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{2}
+	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CPUMetrics) GetUsagePercent() float64 {
@@ -291,7 +150,7 @@ type MemoryMetrics struct {
 
 func (x *MemoryMetrics) Reset() {
 	*x = MemoryMetrics{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[3]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -303,7 +162,7 @@ func (x *MemoryMetrics) String() string {
 func (*MemoryMetrics) ProtoMessage() {}
 
 func (x *MemoryMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[3]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -316,7 +175,7 @@ func (x *MemoryMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoryMetrics.ProtoReflect.Descriptor instead.
 func (*MemoryMetrics) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{3}
+	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *MemoryMetrics) GetUsagePercent() float64 {
@@ -337,7 +196,7 @@ type StorageMetrics struct {
 
 func (x *StorageMetrics) Reset() {
 	*x = StorageMetrics{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[4]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -349,7 +208,7 @@ func (x *StorageMetrics) String() string {
 func (*StorageMetrics) ProtoMessage() {}
 
 func (x *StorageMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[4]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -362,7 +221,7 @@ func (x *StorageMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageMetrics.ProtoReflect.Descriptor instead.
 func (*StorageMetrics) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{4}
+	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *StorageMetrics) GetTotalGb() int64 {
@@ -391,7 +250,7 @@ type DataPoint struct {
 
 func (x *DataPoint) Reset() {
 	*x = DataPoint{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[5]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -403,7 +262,7 @@ func (x *DataPoint) String() string {
 func (*DataPoint) ProtoMessage() {}
 
 func (x *DataPoint) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[5]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -416,7 +275,7 @@ func (x *DataPoint) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DataPoint.ProtoReflect.Descriptor instead.
 func (*DataPoint) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{5}
+	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DataPoint) GetTimestamp() *timestamppb.Timestamp {
@@ -452,7 +311,7 @@ type ResourceAllocationSummary struct {
 
 func (x *ResourceAllocationSummary) Reset() {
 	*x = ResourceAllocationSummary{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[6]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -464,7 +323,7 @@ func (x *ResourceAllocationSummary) String() string {
 func (*ResourceAllocationSummary) ProtoMessage() {}
 
 func (x *ResourceAllocationSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[6]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -477,7 +336,7 @@ func (x *ResourceAllocationSummary) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceAllocationSummary.ProtoReflect.Descriptor instead.
 func (*ResourceAllocationSummary) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{6}
+	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ResourceAllocationSummary) GetCpu() *CPUAllocation {
@@ -512,7 +371,7 @@ type CPUAllocation struct {
 
 func (x *CPUAllocation) Reset() {
 	*x = CPUAllocation{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[7]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -524,7 +383,7 @@ func (x *CPUAllocation) String() string {
 func (*CPUAllocation) ProtoMessage() {}
 
 func (x *CPUAllocation) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[7]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -537,7 +396,7 @@ func (x *CPUAllocation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CPUAllocation.ProtoReflect.Descriptor instead.
 func (*CPUAllocation) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{7}
+	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CPUAllocation) GetTotalCores() int32 {
@@ -565,7 +424,7 @@ type MemoryAllocation struct {
 
 func (x *MemoryAllocation) Reset() {
 	*x = MemoryAllocation{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[8]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -577,7 +436,7 @@ func (x *MemoryAllocation) String() string {
 func (*MemoryAllocation) ProtoMessage() {}
 
 func (x *MemoryAllocation) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[8]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -590,7 +449,7 @@ func (x *MemoryAllocation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MemoryAllocation.ProtoReflect.Descriptor instead.
 func (*MemoryAllocation) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{8}
+	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *MemoryAllocation) GetTotalGb() int64 {
@@ -618,7 +477,7 @@ type StorageAllocation struct {
 
 func (x *StorageAllocation) Reset() {
 	*x = StorageAllocation{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[9]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -630,7 +489,7 @@ func (x *StorageAllocation) String() string {
 func (*StorageAllocation) ProtoMessage() {}
 
 func (x *StorageAllocation) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[9]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -643,7 +502,7 @@ func (x *StorageAllocation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StorageAllocation.ProtoReflect.Descriptor instead.
 func (*StorageAllocation) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{9}
+	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *StorageAllocation) GetTotalGb() int64 {
@@ -674,7 +533,7 @@ type SensorData struct {
 
 func (x *SensorData) Reset() {
 	*x = SensorData{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[10]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -686,7 +545,7 @@ func (x *SensorData) String() string {
 func (*SensorData) ProtoMessage() {}
 
 func (x *SensorData) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[10]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -699,7 +558,7 @@ func (x *SensorData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SensorData.ProtoReflect.Descriptor instead.
 func (*SensorData) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{10}
+	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SensorData) GetName() string {
@@ -750,7 +609,7 @@ type HardwareHealth struct {
 
 func (x *HardwareHealth) Reset() {
 	*x = HardwareHealth{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[11]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -762,7 +621,7 @@ func (x *HardwareHealth) String() string {
 func (*HardwareHealth) ProtoMessage() {}
 
 func (x *HardwareHealth) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[11]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -775,7 +634,7 @@ func (x *HardwareHealth) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HardwareHealth.ProtoReflect.Descriptor instead.
 func (*HardwareHealth) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{11}
+	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *HardwareHealth) GetOverallStatus() string {
@@ -824,7 +683,7 @@ type NetworkStats struct {
 
 func (x *NetworkStats) Reset() {
 	*x = NetworkStats{}
-	mi := &file_pilab_common_v1_host_proto_msgTypes[12]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -836,7 +695,7 @@ func (x *NetworkStats) String() string {
 func (*NetworkStats) ProtoMessage() {}
 
 func (x *NetworkStats) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_common_v1_host_proto_msgTypes[12]
+	mi := &file_pilab_common_v1_host_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -849,7 +708,7 @@ func (x *NetworkStats) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkStats.ProtoReflect.Descriptor instead.
 func (*NetworkStats) Descriptor() ([]byte, []int) {
-	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{12}
+	return file_pilab_common_v1_host_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *NetworkStats) GetInterface() string {
@@ -926,22 +785,7 @@ const file_pilab_common_v1_host_proto_rawDesc = "" +
 	"disk_usage\x18\x02 \x01(\x02R\tdiskUsage\x12\x1f\n" +
 	"\vused_memory\x18\x03 \x01(\x04R\n" +
 	"usedMemory\x12!\n" +
-	"\ftotal_memory\x18\x04 \x01(\x04R\vtotalMemory\"\xae\x03\n" +
-	"\tVmMetrics\x12\x13\n" +
-	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x17\n" +
-	"\avm_name\x18\x02 \x01(\tR\x06vmName\x12\x1b\n" +
-	"\tcpu_usage\x18\x03 \x01(\rR\bcpuUsage\x12\x17\n" +
-	"\adisk_rd\x18\x04 \x01(\rR\x06diskRd\x12\x1e\n" +
-	"\vdisk_rd_req\x18\x05 \x01(\rR\tdiskRdReq\x12\x17\n" +
-	"\adisk_wr\x18\x06 \x01(\rR\x06diskWr\x12\x1e\n" +
-	"\vdisk_wr_req\x18\a \x01(\x04R\tdiskWrReq\x12(\n" +
-	"\x10network_rx_bytes\x18\b \x01(\rR\x0enetworkRxBytes\x12$\n" +
-	"\x0enetwork_rx_pkt\x18\t \x01(\rR\fnetworkRxPkt\x12(\n" +
-	"\x10network_tx_bytes\x18\n" +
-	" \x01(\rR\x0enetworkTxBytes\x12$\n" +
-	"\x0enetwork_tx_pkt\x18\v \x01(\rR\fnetworkTxPkt\x12!\n" +
-	"\fmemory_usage\x18\f \x01(\rR\vmemoryUsage\x12!\n" +
-	"\fmemory_total\x18\r \x01(\rR\vmemoryTotal\"1\n" +
+	"\ftotal_memory\x18\x04 \x01(\x04R\vtotalMemory\"1\n" +
 	"\n" +
 	"CPUMetrics\x12#\n" +
 	"\rusage_percent\x18\x01 \x01(\x01R\fusagePercent\"4\n" +
@@ -1006,29 +850,28 @@ func file_pilab_common_v1_host_proto_rawDescGZIP() []byte {
 	return file_pilab_common_v1_host_proto_rawDescData
 }
 
-var file_pilab_common_v1_host_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_pilab_common_v1_host_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_pilab_common_v1_host_proto_goTypes = []any{
 	(*HostStats)(nil),                 // 0: pilab.common.v1.HostStats
-	(*VmMetrics)(nil),                 // 1: pilab.common.v1.VmMetrics
-	(*CPUMetrics)(nil),                // 2: pilab.common.v1.CPUMetrics
-	(*MemoryMetrics)(nil),             // 3: pilab.common.v1.MemoryMetrics
-	(*StorageMetrics)(nil),            // 4: pilab.common.v1.StorageMetrics
-	(*DataPoint)(nil),                 // 5: pilab.common.v1.DataPoint
-	(*ResourceAllocationSummary)(nil), // 6: pilab.common.v1.ResourceAllocationSummary
-	(*CPUAllocation)(nil),             // 7: pilab.common.v1.CPUAllocation
-	(*MemoryAllocation)(nil),          // 8: pilab.common.v1.MemoryAllocation
-	(*StorageAllocation)(nil),         // 9: pilab.common.v1.StorageAllocation
-	(*SensorData)(nil),                // 10: pilab.common.v1.SensorData
-	(*HardwareHealth)(nil),            // 11: pilab.common.v1.HardwareHealth
-	(*NetworkStats)(nil),              // 12: pilab.common.v1.NetworkStats
-	(*timestamppb.Timestamp)(nil),     // 13: google.protobuf.Timestamp
+	(*CPUMetrics)(nil),                // 1: pilab.common.v1.CPUMetrics
+	(*MemoryMetrics)(nil),             // 2: pilab.common.v1.MemoryMetrics
+	(*StorageMetrics)(nil),            // 3: pilab.common.v1.StorageMetrics
+	(*DataPoint)(nil),                 // 4: pilab.common.v1.DataPoint
+	(*ResourceAllocationSummary)(nil), // 5: pilab.common.v1.ResourceAllocationSummary
+	(*CPUAllocation)(nil),             // 6: pilab.common.v1.CPUAllocation
+	(*MemoryAllocation)(nil),          // 7: pilab.common.v1.MemoryAllocation
+	(*StorageAllocation)(nil),         // 8: pilab.common.v1.StorageAllocation
+	(*SensorData)(nil),                // 9: pilab.common.v1.SensorData
+	(*HardwareHealth)(nil),            // 10: pilab.common.v1.HardwareHealth
+	(*NetworkStats)(nil),              // 11: pilab.common.v1.NetworkStats
+	(*timestamppb.Timestamp)(nil),     // 12: google.protobuf.Timestamp
 }
 var file_pilab_common_v1_host_proto_depIdxs = []int32{
-	13, // 0: pilab.common.v1.DataPoint.timestamp:type_name -> google.protobuf.Timestamp
-	7,  // 1: pilab.common.v1.ResourceAllocationSummary.cpu:type_name -> pilab.common.v1.CPUAllocation
-	8,  // 2: pilab.common.v1.ResourceAllocationSummary.memory:type_name -> pilab.common.v1.MemoryAllocation
-	9,  // 3: pilab.common.v1.ResourceAllocationSummary.storage:type_name -> pilab.common.v1.StorageAllocation
-	10, // 4: pilab.common.v1.HardwareHealth.sensors:type_name -> pilab.common.v1.SensorData
+	12, // 0: pilab.common.v1.DataPoint.timestamp:type_name -> google.protobuf.Timestamp
+	6,  // 1: pilab.common.v1.ResourceAllocationSummary.cpu:type_name -> pilab.common.v1.CPUAllocation
+	7,  // 2: pilab.common.v1.ResourceAllocationSummary.memory:type_name -> pilab.common.v1.MemoryAllocation
+	8,  // 3: pilab.common.v1.ResourceAllocationSummary.storage:type_name -> pilab.common.v1.StorageAllocation
+	9,  // 4: pilab.common.v1.HardwareHealth.sensors:type_name -> pilab.common.v1.SensorData
 	5,  // [5:5] is the sub-list for method output_type
 	5,  // [5:5] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
@@ -1047,7 +890,7 @@ func file_pilab_common_v1_host_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pilab_common_v1_host_proto_rawDesc), len(file_pilab_common_v1_host_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

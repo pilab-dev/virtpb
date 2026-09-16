@@ -21,7 +21,6 @@ message AgentEventsRequest {
     HeartbeatEvent heartbeat = 2;
     VmDefinition vm_definition = 3;
     pilab.common.v1.HostStats host_stats = 4;
-    pilab.common.v1.VmMetrics vm_metrics = 5;
     pilab.common.v1.JobStatus job_status = 6;
     VmGuestInfo vm_guest_info = 7;
   }

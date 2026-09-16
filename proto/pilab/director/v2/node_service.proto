@@ -15,7 +15,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 import "pilab/director/v2/task_service.proto";
 import "pilab/pivirtd/v1/host_resource.proto";
-import "pilab/common/v1/host.proto";
+import "pilab/pivirtd/v1/pivirtd.proto";
 import "pilab/common/v1/phase.proto";
 import "pilab/resource/v1/resource.proto";
 
@@ -92,13 +92,41 @@ message NodeEvent {
     HeartbeatEvent heartbeat = 4;
     pilab.pivirtd.v1.HostResourceReport host_report = 5;
     VmStatusEvent vm_status = 6;
-    pilab.common.v1.VmMetrics vm_metrics = 7;
+    VmMetricsBatch vm_metrics = 7;
     TaskProgressEvent task_progress = 8;
     TaskResultEvent task_result = 9;
     FullInventoryEvent full_inventory = 10;
     // The node's answer to a ResourceDirective (PIVIRT-172).
     ResourceResultEvent resource_result = 11;
+    // Host utilisation metrics forwarded from pivirtd's StatsCollector.
+    HostMetricsEvent host_metrics = 12;
   }
+}
+
+// VmMetricsBatch carries one stats snapshot from pivirtd's StatsCollector
+// (PIVIRT-211). One batch per StatsCollector tick; VMs with no uid are dropped.
+message VmMetricsBatch {
+  google.protobuf.Timestamp at = 1;
+  repeated VmMetricsSample samples = 2;
+}
+
+message VmMetricsSample {
+  // uid is the director-minted cluster identity; empty means no uid assigned.
+  string uid = 1;
+  string vm_uuid = 2;
+  string vm_name = 3;
+  double cpu_percent = 4;
+  double host_cpu_percent = 5;
+  int64 mem_total_mb = 6;
+  int64 mem_used_mb = 7;
+  int64 mem_guest_available_mb = 8;
+  repeated pilab.pivirtd.v1.DiskStats disks = 9;
+  repeated pilab.pivirtd.v1.NetworkStats nics = 10;
+}
+
+// HostMetricsEvent wraps pivirtd's HostStats for the session stream.
+message HostMetricsEvent {
+  pilab.pivirtd.v1.HostStats stats = 1;
 }
 
 // ResourceResultEvent reports what applying a ResourceDirective did on the
