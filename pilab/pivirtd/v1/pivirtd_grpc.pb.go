@@ -30,6 +30,7 @@ const (
 	PivirtdService_ListVMs_FullMethodName               = "/pilab.pivirtd.v1.PivirtdService/ListVMs"
 	PivirtdService_GetVM_FullMethodName                 = "/pilab.pivirtd.v1.PivirtdService/GetVM"
 	PivirtdService_GetVMStats_FullMethodName            = "/pilab.pivirtd.v1.PivirtdService/GetVMStats"
+	PivirtdService_StreamVMStats_FullMethodName         = "/pilab.pivirtd.v1.PivirtdService/StreamVMStats"
 	PivirtdService_UpdateVMMemory_FullMethodName        = "/pilab.pivirtd.v1.PivirtdService/UpdateVMMemory"
 	PivirtdService_UpdateVMCpu_FullMethodName           = "/pilab.pivirtd.v1.PivirtdService/UpdateVMCpu"
 	PivirtdService_ExecuteQMP_FullMethodName            = "/pilab.pivirtd.v1.PivirtdService/ExecuteQMP"
@@ -112,6 +113,7 @@ type PivirtdServiceClient interface {
 	ListVMs(ctx context.Context, in *ListVMsRequest, opts ...grpc.CallOption) (*ListVMsResponse, error)
 	GetVM(ctx context.Context, in *GetVMRequest, opts ...grpc.CallOption) (*VMResponse, error)
 	GetVMStats(ctx context.Context, in *GetVMStatsRequest, opts ...grpc.CallOption) (*VMStatsResponse, error)
+	StreamVMStats(ctx context.Context, in *StreamVMStatsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[VMStatsBatch], error)
 	UpdateVMMemory(ctx context.Context, in *UpdateVMMemoryRequest, opts ...grpc.CallOption) (*VMResponse, error)
 	UpdateVMCpu(ctx context.Context, in *UpdateVMCpuRequest, opts ...grpc.CallOption) (*VMResponse, error)
 	// QMP Passthrough
@@ -311,6 +313,25 @@ func (c *pivirtdServiceClient) GetVMStats(ctx context.Context, in *GetVMStatsReq
 	return out, nil
 }
 
+func (c *pivirtdServiceClient) StreamVMStats(ctx context.Context, in *StreamVMStatsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[VMStatsBatch], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &PivirtdService_ServiceDesc.Streams[0], PivirtdService_StreamVMStats_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[StreamVMStatsRequest, VMStatsBatch]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type PivirtdService_StreamVMStatsClient = grpc.ServerStreamingClient[VMStatsBatch]
+
 func (c *pivirtdServiceClient) UpdateVMMemory(ctx context.Context, in *UpdateVMMemoryRequest, opts ...grpc.CallOption) (*VMResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VMResponse)
@@ -343,7 +364,7 @@ func (c *pivirtdServiceClient) ExecuteQMP(ctx context.Context, in *ExecuteQMPReq
 
 func (c *pivirtdServiceClient) StreamQMPEvents(ctx context.Context, in *StreamQMPRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[QMPEvent], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &PivirtdService_ServiceDesc.Streams[0], PivirtdService_StreamQMPEvents_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &PivirtdService_ServiceDesc.Streams[1], PivirtdService_StreamQMPEvents_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -902,7 +923,7 @@ func (c *pivirtdServiceClient) CustomizeOS(ctx context.Context, in *CustomizeOSR
 
 func (c *pivirtdServiceClient) SubscribeEvents(ctx context.Context, in *SubscribeEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[HostEvent], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &PivirtdService_ServiceDesc.Streams[1], PivirtdService_SubscribeEvents_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &PivirtdService_ServiceDesc.Streams[2], PivirtdService_SubscribeEvents_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -949,6 +970,7 @@ type PivirtdServiceServer interface {
 	ListVMs(context.Context, *ListVMsRequest) (*ListVMsResponse, error)
 	GetVM(context.Context, *GetVMRequest) (*VMResponse, error)
 	GetVMStats(context.Context, *GetVMStatsRequest) (*VMStatsResponse, error)
+	StreamVMStats(*StreamVMStatsRequest, grpc.ServerStreamingServer[VMStatsBatch]) error
 	UpdateVMMemory(context.Context, *UpdateVMMemoryRequest) (*VMResponse, error)
 	UpdateVMCpu(context.Context, *UpdateVMCpuRequest) (*VMResponse, error)
 	// QMP Passthrough
@@ -1069,6 +1091,9 @@ func (UnimplementedPivirtdServiceServer) GetVM(context.Context, *GetVMRequest) (
 }
 func (UnimplementedPivirtdServiceServer) GetVMStats(context.Context, *GetVMStatsRequest) (*VMStatsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetVMStats not implemented")
+}
+func (UnimplementedPivirtdServiceServer) StreamVMStats(*StreamVMStatsRequest, grpc.ServerStreamingServer[VMStatsBatch]) error {
+	return status.Error(codes.Unimplemented, "method StreamVMStats not implemented")
 }
 func (UnimplementedPivirtdServiceServer) UpdateVMMemory(context.Context, *UpdateVMMemoryRequest) (*VMResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method UpdateVMMemory not implemented")
@@ -1468,6 +1493,17 @@ func _PivirtdService_GetVMStats_Handler(srv interface{}, ctx context.Context, de
 	}
 	return interceptor(ctx, in, info, handler)
 }
+
+func _PivirtdService_StreamVMStats_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamVMStatsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PivirtdServiceServer).StreamVMStats(m, &grpc.GenericServerStream[StreamVMStatsRequest, VMStatsBatch]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type PivirtdService_StreamVMStatsServer = grpc.ServerStreamingServer[VMStatsBatch]
 
 func _PivirtdService_UpdateVMMemory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateVMMemoryRequest)
@@ -2820,6 +2856,11 @@ var PivirtdService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "StreamVMStats",
+			Handler:       _PivirtdService_StreamVMStats_Handler,
+			ServerStreams: true,
+		},
 		{
 			StreamName:    "StreamQMPEvents",
 			Handler:       _PivirtdService_StreamQMPEvents_Handler,

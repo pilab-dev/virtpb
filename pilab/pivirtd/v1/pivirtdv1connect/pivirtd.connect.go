@@ -56,6 +56,9 @@ const (
 	// PivirtdServiceGetVMStatsProcedure is the fully-qualified name of the PivirtdService's GetVMStats
 	// RPC.
 	PivirtdServiceGetVMStatsProcedure = "/pilab.pivirtd.v1.PivirtdService/GetVMStats"
+	// PivirtdServiceStreamVMStatsProcedure is the fully-qualified name of the PivirtdService's
+	// StreamVMStats RPC.
+	PivirtdServiceStreamVMStatsProcedure = "/pilab.pivirtd.v1.PivirtdService/StreamVMStats"
 	// PivirtdServiceUpdateVMMemoryProcedure is the fully-qualified name of the PivirtdService's
 	// UpdateVMMemory RPC.
 	PivirtdServiceUpdateVMMemoryProcedure = "/pilab.pivirtd.v1.PivirtdService/UpdateVMMemory"
@@ -251,6 +254,7 @@ type PivirtdServiceClient interface {
 	ListVMs(context.Context, *connect.Request[v1.ListVMsRequest]) (*connect.Response[v1.ListVMsResponse], error)
 	GetVM(context.Context, *connect.Request[v1.GetVMRequest]) (*connect.Response[v1.VMResponse], error)
 	GetVMStats(context.Context, *connect.Request[v1.GetVMStatsRequest]) (*connect.Response[v1.VMStatsResponse], error)
+	StreamVMStats(context.Context, *connect.Request[v1.StreamVMStatsRequest]) (*connect.ServerStreamForClient[v1.VMStatsBatch], error)
 	UpdateVMMemory(context.Context, *connect.Request[v1.UpdateVMMemoryRequest]) (*connect.Response[v1.VMResponse], error)
 	UpdateVMCpu(context.Context, *connect.Request[v1.UpdateVMCpuRequest]) (*connect.Response[v1.VMResponse], error)
 	// QMP Passthrough
@@ -406,6 +410,12 @@ func NewPivirtdServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			httpClient,
 			baseURL+PivirtdServiceGetVMStatsProcedure,
 			connect.WithSchema(pivirtdServiceMethods.ByName("GetVMStats")),
+			connect.WithClientOptions(opts...),
+		),
+		streamVMStats: connect.NewClient[v1.StreamVMStatsRequest, v1.VMStatsBatch](
+			httpClient,
+			baseURL+PivirtdServiceStreamVMStatsProcedure,
+			connect.WithSchema(pivirtdServiceMethods.ByName("StreamVMStats")),
 			connect.WithClientOptions(opts...),
 		),
 		updateVMMemory: connect.NewClient[v1.UpdateVMMemoryRequest, v1.VMResponse](
@@ -784,6 +794,7 @@ type pivirtdServiceClient struct {
 	listVMs               *connect.Client[v1.ListVMsRequest, v1.ListVMsResponse]
 	getVM                 *connect.Client[v1.GetVMRequest, v1.VMResponse]
 	getVMStats            *connect.Client[v1.GetVMStatsRequest, v1.VMStatsResponse]
+	streamVMStats         *connect.Client[v1.StreamVMStatsRequest, v1.VMStatsBatch]
 	updateVMMemory        *connect.Client[v1.UpdateVMMemoryRequest, v1.VMResponse]
 	updateVMCpu           *connect.Client[v1.UpdateVMCpuRequest, v1.VMResponse]
 	executeQMP            *connect.Client[v1.ExecuteQMPRequest, v1.ExecuteQMPResponse]
@@ -901,6 +912,11 @@ func (c *pivirtdServiceClient) GetVM(ctx context.Context, req *connect.Request[v
 // GetVMStats calls pilab.pivirtd.v1.PivirtdService.GetVMStats.
 func (c *pivirtdServiceClient) GetVMStats(ctx context.Context, req *connect.Request[v1.GetVMStatsRequest]) (*connect.Response[v1.VMStatsResponse], error) {
 	return c.getVMStats.CallUnary(ctx, req)
+}
+
+// StreamVMStats calls pilab.pivirtd.v1.PivirtdService.StreamVMStats.
+func (c *pivirtdServiceClient) StreamVMStats(ctx context.Context, req *connect.Request[v1.StreamVMStatsRequest]) (*connect.ServerStreamForClient[v1.VMStatsBatch], error) {
+	return c.streamVMStats.CallServerStream(ctx, req)
 }
 
 // UpdateVMMemory calls pilab.pivirtd.v1.PivirtdService.UpdateVMMemory.
@@ -1219,6 +1235,7 @@ type PivirtdServiceHandler interface {
 	ListVMs(context.Context, *connect.Request[v1.ListVMsRequest]) (*connect.Response[v1.ListVMsResponse], error)
 	GetVM(context.Context, *connect.Request[v1.GetVMRequest]) (*connect.Response[v1.VMResponse], error)
 	GetVMStats(context.Context, *connect.Request[v1.GetVMStatsRequest]) (*connect.Response[v1.VMStatsResponse], error)
+	StreamVMStats(context.Context, *connect.Request[v1.StreamVMStatsRequest], *connect.ServerStream[v1.VMStatsBatch]) error
 	UpdateVMMemory(context.Context, *connect.Request[v1.UpdateVMMemoryRequest]) (*connect.Response[v1.VMResponse], error)
 	UpdateVMCpu(context.Context, *connect.Request[v1.UpdateVMCpuRequest]) (*connect.Response[v1.VMResponse], error)
 	// QMP Passthrough
@@ -1370,6 +1387,12 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 		PivirtdServiceGetVMStatsProcedure,
 		svc.GetVMStats,
 		connect.WithSchema(pivirtdServiceMethods.ByName("GetVMStats")),
+		connect.WithHandlerOptions(opts...),
+	)
+	pivirtdServiceStreamVMStatsHandler := connect.NewServerStreamHandler(
+		PivirtdServiceStreamVMStatsProcedure,
+		svc.StreamVMStats,
+		connect.WithSchema(pivirtdServiceMethods.ByName("StreamVMStats")),
 		connect.WithHandlerOptions(opts...),
 	)
 	pivirtdServiceUpdateVMMemoryHandler := connect.NewUnaryHandler(
@@ -1756,6 +1779,8 @@ func NewPivirtdServiceHandler(svc PivirtdServiceHandler, opts ...connect.Handler
 			pivirtdServiceGetVMHandler.ServeHTTP(w, r)
 		case PivirtdServiceGetVMStatsProcedure:
 			pivirtdServiceGetVMStatsHandler.ServeHTTP(w, r)
+		case PivirtdServiceStreamVMStatsProcedure:
+			pivirtdServiceStreamVMStatsHandler.ServeHTTP(w, r)
 		case PivirtdServiceUpdateVMMemoryProcedure:
 			pivirtdServiceUpdateVMMemoryHandler.ServeHTTP(w, r)
 		case PivirtdServiceUpdateVMCpuProcedure:
@@ -1927,6 +1952,10 @@ func (UnimplementedPivirtdServiceHandler) GetVM(context.Context, *connect.Reques
 
 func (UnimplementedPivirtdServiceHandler) GetVMStats(context.Context, *connect.Request[v1.GetVMStatsRequest]) (*connect.Response[v1.VMStatsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.pivirtd.v1.PivirtdService.GetVMStats is not implemented"))
+}
+
+func (UnimplementedPivirtdServiceHandler) StreamVMStats(context.Context, *connect.Request[v1.StreamVMStatsRequest], *connect.ServerStream[v1.VMStatsBatch]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("pilab.pivirtd.v1.PivirtdService.StreamVMStats is not implemented"))
 }
 
 func (UnimplementedPivirtdServiceHandler) UpdateVMMemory(context.Context, *connect.Request[v1.UpdateVMMemoryRequest]) (*connect.Response[v1.VMResponse], error) {
