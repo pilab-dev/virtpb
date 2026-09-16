@@ -27,6 +27,7 @@ service PivirtdService {
   rpc ListVMs(ListVMsRequest) returns (ListVMsResponse);
   rpc GetVM(GetVMRequest) returns (VMResponse);
   rpc GetVMStats(GetVMStatsRequest) returns (VMStatsResponse);
+  rpc StreamVMStats(StreamVMStatsRequest) returns (stream VMStatsBatch);
   rpc UpdateVMMemory(UpdateVMMemoryRequest) returns (VMResponse);
   rpc UpdateVMCpu(UpdateVMCpuRequest) returns (VMResponse);
   
@@ -283,12 +284,18 @@ message VMStatsResponse {
   repeated DiskStats disk_stats = 4;
   repeated NetworkStats network_stats = 5;
   google.protobuf.Timestamp timestamp = 6;
+  // stale is true when the QMP socket for this VM did not respond within the
+  // sample timeout; the stats reflect the previous successful sample.
+  bool stale = 7;
 }
 
 message CPUStats {
   double usage_percent = 1;
   int32 online_vcpus = 2;
   int32 total_vcpus = 3;
+  // host_cpu_percent is the CPU % attributable to this VM's QEMU process
+  // (including vhost and iothreads), read from /proc/<pid>/stat.
+  double host_cpu_percent = 4;
 }
 
 message MemoryStats {
@@ -320,6 +327,52 @@ message NetworkStats {
   int64 tx_bytes = 3;
   int64 rx_packets = 4;
   int64 tx_packets = 5;
+}
+
+// StreamVMStatsRequest filters which VMs are included in each batch.
+// An empty names list streams stats for every running VM.
+message StreamVMStatsRequest {
+  repeated string names = 1;
+}
+
+// VMStatsBatch is one periodic sample emitted by StreamVMStats.
+message VMStatsBatch {
+  google.protobuf.Timestamp at = 1;
+  repeated VMStatsResponse vms = 2;
+  HostStats host_stats = 3;
+}
+
+// HostStats is the per-tick host-level sample accompanying a VMStatsBatch.
+message HostStats {
+  // cpu_busy_percent is 100*(user+nice+system+iowait+irq+softirq)/total from
+  // /proc/stat, averaged over the sample interval.
+  double cpu_busy_percent = 1;
+  double load_avg_1m = 2;
+  double load_avg_5m = 3;
+  double load_avg_15m = 4;
+  int64 mem_available_mb = 5;
+  int64 mem_total_mb = 6;
+  HostPressure pressure = 7;
+}
+
+// PSIPressure holds one PSI metric pair (avg10 and avg60 from
+// /proc/pressure/{cpu,memory,io}).
+message PSIPressure {
+  double avg10 = 1;
+  double avg60 = 2;
+}
+
+// PSIStats holds the some and full PSI values for one resource.
+message PSIStats {
+  PSIPressure some = 1;
+  PSIPressure full = 2;
+}
+
+// HostPressure aggregates PSI readings for cpu, memory and io.
+message HostPressure {
+  PSIStats cpu = 1;
+  PSIStats memory = 2;
+  PSIStats io = 3;
 }
 
 // ==================== QMP Messages ====================

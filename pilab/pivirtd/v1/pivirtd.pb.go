@@ -1453,13 +1453,16 @@ func (x *GetVMStatsRequest) GetName() string {
 }
 
 type VMStatsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	CpuStats      *CPUStats              `protobuf:"bytes,2,opt,name=cpu_stats,json=cpuStats,proto3" json:"cpu_stats,omitempty"`
-	MemoryStats   *MemoryStats           `protobuf:"bytes,3,opt,name=memory_stats,json=memoryStats,proto3" json:"memory_stats,omitempty"`
-	DiskStats     []*DiskStats           `protobuf:"bytes,4,rep,name=disk_stats,json=diskStats,proto3" json:"disk_stats,omitempty"`
-	NetworkStats  []*NetworkStats        `protobuf:"bytes,5,rep,name=network_stats,json=networkStats,proto3" json:"network_stats,omitempty"`
-	Timestamp     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Name         string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	CpuStats     *CPUStats              `protobuf:"bytes,2,opt,name=cpu_stats,json=cpuStats,proto3" json:"cpu_stats,omitempty"`
+	MemoryStats  *MemoryStats           `protobuf:"bytes,3,opt,name=memory_stats,json=memoryStats,proto3" json:"memory_stats,omitempty"`
+	DiskStats    []*DiskStats           `protobuf:"bytes,4,rep,name=disk_stats,json=diskStats,proto3" json:"disk_stats,omitempty"`
+	NetworkStats []*NetworkStats        `protobuf:"bytes,5,rep,name=network_stats,json=networkStats,proto3" json:"network_stats,omitempty"`
+	Timestamp    *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	// stale is true when the QMP socket for this VM did not respond within the
+	// sample timeout; the stats reflect the previous successful sample.
+	Stale         bool `protobuf:"varint,7,opt,name=stale,proto3" json:"stale,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1536,13 +1539,23 @@ func (x *VMStatsResponse) GetTimestamp() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *VMStatsResponse) GetStale() bool {
+	if x != nil {
+		return x.Stale
+	}
+	return false
+}
+
 type CPUStats struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UsagePercent  float64                `protobuf:"fixed64,1,opt,name=usage_percent,json=usagePercent,proto3" json:"usage_percent,omitempty"`
-	OnlineVcpus   int32                  `protobuf:"varint,2,opt,name=online_vcpus,json=onlineVcpus,proto3" json:"online_vcpus,omitempty"`
-	TotalVcpus    int32                  `protobuf:"varint,3,opt,name=total_vcpus,json=totalVcpus,proto3" json:"total_vcpus,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	UsagePercent float64                `protobuf:"fixed64,1,opt,name=usage_percent,json=usagePercent,proto3" json:"usage_percent,omitempty"`
+	OnlineVcpus  int32                  `protobuf:"varint,2,opt,name=online_vcpus,json=onlineVcpus,proto3" json:"online_vcpus,omitempty"`
+	TotalVcpus   int32                  `protobuf:"varint,3,opt,name=total_vcpus,json=totalVcpus,proto3" json:"total_vcpus,omitempty"`
+	// host_cpu_percent is the CPU % attributable to this VM's QEMU process
+	// (including vhost and iothreads), read from /proc/<pid>/stat.
+	HostCpuPercent float64 `protobuf:"fixed64,4,opt,name=host_cpu_percent,json=hostCpuPercent,proto3" json:"host_cpu_percent,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *CPUStats) Reset() {
@@ -1592,6 +1605,13 @@ func (x *CPUStats) GetOnlineVcpus() int32 {
 func (x *CPUStats) GetTotalVcpus() int32 {
 	if x != nil {
 		return x.TotalVcpus
+	}
+	return 0
+}
+
+func (x *CPUStats) GetHostCpuPercent() float64 {
+	if x != nil {
+		return x.HostCpuPercent
 	}
 	return 0
 }
@@ -1852,6 +1872,376 @@ func (x *NetworkStats) GetTxPackets() int64 {
 	return 0
 }
 
+// StreamVMStatsRequest filters which VMs are included in each batch.
+// An empty names list streams stats for every running VM.
+type StreamVMStatsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Names         []string               `protobuf:"bytes,1,rep,name=names,proto3" json:"names,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StreamVMStatsRequest) Reset() {
+	*x = StreamVMStatsRequest{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StreamVMStatsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StreamVMStatsRequest) ProtoMessage() {}
+
+func (x *StreamVMStatsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StreamVMStatsRequest.ProtoReflect.Descriptor instead.
+func (*StreamVMStatsRequest) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *StreamVMStatsRequest) GetNames() []string {
+	if x != nil {
+		return x.Names
+	}
+	return nil
+}
+
+// VMStatsBatch is one periodic sample emitted by StreamVMStats.
+type VMStatsBatch struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	At            *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=at,proto3" json:"at,omitempty"`
+	Vms           []*VMStatsResponse     `protobuf:"bytes,2,rep,name=vms,proto3" json:"vms,omitempty"`
+	HostStats     *HostStats             `protobuf:"bytes,3,opt,name=host_stats,json=hostStats,proto3" json:"host_stats,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VMStatsBatch) Reset() {
+	*x = VMStatsBatch{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VMStatsBatch) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VMStatsBatch) ProtoMessage() {}
+
+func (x *VMStatsBatch) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VMStatsBatch.ProtoReflect.Descriptor instead.
+func (*VMStatsBatch) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *VMStatsBatch) GetAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.At
+	}
+	return nil
+}
+
+func (x *VMStatsBatch) GetVms() []*VMStatsResponse {
+	if x != nil {
+		return x.Vms
+	}
+	return nil
+}
+
+func (x *VMStatsBatch) GetHostStats() *HostStats {
+	if x != nil {
+		return x.HostStats
+	}
+	return nil
+}
+
+// HostStats is the per-tick host-level sample accompanying a VMStatsBatch.
+type HostStats struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// cpu_busy_percent is 100*(user+nice+system+iowait+irq+softirq)/total from
+	// /proc/stat, averaged over the sample interval.
+	CpuBusyPercent float64       `protobuf:"fixed64,1,opt,name=cpu_busy_percent,json=cpuBusyPercent,proto3" json:"cpu_busy_percent,omitempty"`
+	LoadAvg_1M     float64       `protobuf:"fixed64,2,opt,name=load_avg_1m,json=loadAvg1m,proto3" json:"load_avg_1m,omitempty"`
+	LoadAvg_5M     float64       `protobuf:"fixed64,3,opt,name=load_avg_5m,json=loadAvg5m,proto3" json:"load_avg_5m,omitempty"`
+	LoadAvg_15M    float64       `protobuf:"fixed64,4,opt,name=load_avg_15m,json=loadAvg15m,proto3" json:"load_avg_15m,omitempty"`
+	MemAvailableMb int64         `protobuf:"varint,5,opt,name=mem_available_mb,json=memAvailableMb,proto3" json:"mem_available_mb,omitempty"`
+	MemTotalMb     int64         `protobuf:"varint,6,opt,name=mem_total_mb,json=memTotalMb,proto3" json:"mem_total_mb,omitempty"`
+	Pressure       *HostPressure `protobuf:"bytes,7,opt,name=pressure,proto3" json:"pressure,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *HostStats) Reset() {
+	*x = HostStats{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HostStats) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HostStats) ProtoMessage() {}
+
+func (x *HostStats) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HostStats.ProtoReflect.Descriptor instead.
+func (*HostStats) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *HostStats) GetCpuBusyPercent() float64 {
+	if x != nil {
+		return x.CpuBusyPercent
+	}
+	return 0
+}
+
+func (x *HostStats) GetLoadAvg_1M() float64 {
+	if x != nil {
+		return x.LoadAvg_1M
+	}
+	return 0
+}
+
+func (x *HostStats) GetLoadAvg_5M() float64 {
+	if x != nil {
+		return x.LoadAvg_5M
+	}
+	return 0
+}
+
+func (x *HostStats) GetLoadAvg_15M() float64 {
+	if x != nil {
+		return x.LoadAvg_15M
+	}
+	return 0
+}
+
+func (x *HostStats) GetMemAvailableMb() int64 {
+	if x != nil {
+		return x.MemAvailableMb
+	}
+	return 0
+}
+
+func (x *HostStats) GetMemTotalMb() int64 {
+	if x != nil {
+		return x.MemTotalMb
+	}
+	return 0
+}
+
+func (x *HostStats) GetPressure() *HostPressure {
+	if x != nil {
+		return x.Pressure
+	}
+	return nil
+}
+
+// PSIPressure holds one PSI metric pair (avg10 and avg60 from
+// /proc/pressure/{cpu,memory,io}).
+type PSIPressure struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Avg10         float64                `protobuf:"fixed64,1,opt,name=avg10,proto3" json:"avg10,omitempty"`
+	Avg60         float64                `protobuf:"fixed64,2,opt,name=avg60,proto3" json:"avg60,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PSIPressure) Reset() {
+	*x = PSIPressure{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PSIPressure) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PSIPressure) ProtoMessage() {}
+
+func (x *PSIPressure) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PSIPressure.ProtoReflect.Descriptor instead.
+func (*PSIPressure) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *PSIPressure) GetAvg10() float64 {
+	if x != nil {
+		return x.Avg10
+	}
+	return 0
+}
+
+func (x *PSIPressure) GetAvg60() float64 {
+	if x != nil {
+		return x.Avg60
+	}
+	return 0
+}
+
+// PSIStats holds the some and full PSI values for one resource.
+type PSIStats struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Some          *PSIPressure           `protobuf:"bytes,1,opt,name=some,proto3" json:"some,omitempty"`
+	Full          *PSIPressure           `protobuf:"bytes,2,opt,name=full,proto3" json:"full,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PSIStats) Reset() {
+	*x = PSIStats{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PSIStats) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PSIStats) ProtoMessage() {}
+
+func (x *PSIStats) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PSIStats.ProtoReflect.Descriptor instead.
+func (*PSIStats) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *PSIStats) GetSome() *PSIPressure {
+	if x != nil {
+		return x.Some
+	}
+	return nil
+}
+
+func (x *PSIStats) GetFull() *PSIPressure {
+	if x != nil {
+		return x.Full
+	}
+	return nil
+}
+
+// HostPressure aggregates PSI readings for cpu, memory and io.
+type HostPressure struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Cpu           *PSIStats              `protobuf:"bytes,1,opt,name=cpu,proto3" json:"cpu,omitempty"`
+	Memory        *PSIStats              `protobuf:"bytes,2,opt,name=memory,proto3" json:"memory,omitempty"`
+	Io            *PSIStats              `protobuf:"bytes,3,opt,name=io,proto3" json:"io,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HostPressure) Reset() {
+	*x = HostPressure{}
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HostPressure) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HostPressure) ProtoMessage() {}
+
+func (x *HostPressure) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HostPressure.ProtoReflect.Descriptor instead.
+func (*HostPressure) Descriptor() ([]byte, []int) {
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *HostPressure) GetCpu() *PSIStats {
+	if x != nil {
+		return x.Cpu
+	}
+	return nil
+}
+
+func (x *HostPressure) GetMemory() *PSIStats {
+	if x != nil {
+		return x.Memory
+	}
+	return nil
+}
+
+func (x *HostPressure) GetIo() *PSIStats {
+	if x != nil {
+		return x.Io
+	}
+	return nil
+}
+
 type ExecuteQMPRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	VmName        string                 `protobuf:"bytes,1,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
@@ -1863,7 +2253,7 @@ type ExecuteQMPRequest struct {
 
 func (x *ExecuteQMPRequest) Reset() {
 	*x = ExecuteQMPRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[26]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1875,7 +2265,7 @@ func (x *ExecuteQMPRequest) String() string {
 func (*ExecuteQMPRequest) ProtoMessage() {}
 
 func (x *ExecuteQMPRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[26]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1888,7 +2278,7 @@ func (x *ExecuteQMPRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecuteQMPRequest.ProtoReflect.Descriptor instead.
 func (*ExecuteQMPRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{26}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *ExecuteQMPRequest) GetVmName() string {
@@ -1922,7 +2312,7 @@ type ExecuteQMPResponse struct {
 
 func (x *ExecuteQMPResponse) Reset() {
 	*x = ExecuteQMPResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[27]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1934,7 +2324,7 @@ func (x *ExecuteQMPResponse) String() string {
 func (*ExecuteQMPResponse) ProtoMessage() {}
 
 func (x *ExecuteQMPResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[27]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1947,7 +2337,7 @@ func (x *ExecuteQMPResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecuteQMPResponse.ProtoReflect.Descriptor instead.
 func (*ExecuteQMPResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{27}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ExecuteQMPResponse) GetResultJson() string {
@@ -1974,7 +2364,7 @@ type StreamQMPRequest struct {
 
 func (x *StreamQMPRequest) Reset() {
 	*x = StreamQMPRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[28]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1986,7 +2376,7 @@ func (x *StreamQMPRequest) String() string {
 func (*StreamQMPRequest) ProtoMessage() {}
 
 func (x *StreamQMPRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[28]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1999,7 +2389,7 @@ func (x *StreamQMPRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamQMPRequest.ProtoReflect.Descriptor instead.
 func (*StreamQMPRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{28}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *StreamQMPRequest) GetVmName() string {
@@ -2027,7 +2417,7 @@ type QMPEvent struct {
 
 func (x *QMPEvent) Reset() {
 	*x = QMPEvent{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[29]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2039,7 +2429,7 @@ func (x *QMPEvent) String() string {
 func (*QMPEvent) ProtoMessage() {}
 
 func (x *QMPEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[29]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2052,7 +2442,7 @@ func (x *QMPEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QMPEvent.ProtoReflect.Descriptor instead.
 func (*QMPEvent) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{29}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *QMPEvent) GetEvent() string {
@@ -2090,7 +2480,7 @@ type CreateSnapshotRequest struct {
 
 func (x *CreateSnapshotRequest) Reset() {
 	*x = CreateSnapshotRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[30]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2102,7 +2492,7 @@ func (x *CreateSnapshotRequest) String() string {
 func (*CreateSnapshotRequest) ProtoMessage() {}
 
 func (x *CreateSnapshotRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[30]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2115,7 +2505,7 @@ func (x *CreateSnapshotRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSnapshotRequest.ProtoReflect.Descriptor instead.
 func (*CreateSnapshotRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{30}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *CreateSnapshotRequest) GetVmName() string {
@@ -2169,7 +2559,7 @@ type ListSnapshotsRequest struct {
 
 func (x *ListSnapshotsRequest) Reset() {
 	*x = ListSnapshotsRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[31]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2181,7 +2571,7 @@ func (x *ListSnapshotsRequest) String() string {
 func (*ListSnapshotsRequest) ProtoMessage() {}
 
 func (x *ListSnapshotsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[31]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2194,7 +2584,7 @@ func (x *ListSnapshotsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSnapshotsRequest.ProtoReflect.Descriptor instead.
 func (*ListSnapshotsRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{31}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *ListSnapshotsRequest) GetVmName() string {
@@ -2213,7 +2603,7 @@ type ListSnapshotsResponse struct {
 
 func (x *ListSnapshotsResponse) Reset() {
 	*x = ListSnapshotsResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[32]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2225,7 +2615,7 @@ func (x *ListSnapshotsResponse) String() string {
 func (*ListSnapshotsResponse) ProtoMessage() {}
 
 func (x *ListSnapshotsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[32]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2238,7 +2628,7 @@ func (x *ListSnapshotsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSnapshotsResponse.ProtoReflect.Descriptor instead.
 func (*ListSnapshotsResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{32}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *ListSnapshotsResponse) GetSnapshots() []*SnapshotInfo {
@@ -2258,7 +2648,7 @@ type RestoreSnapshotRequest struct {
 
 func (x *RestoreSnapshotRequest) Reset() {
 	*x = RestoreSnapshotRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[33]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2270,7 +2660,7 @@ func (x *RestoreSnapshotRequest) String() string {
 func (*RestoreSnapshotRequest) ProtoMessage() {}
 
 func (x *RestoreSnapshotRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[33]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2283,7 +2673,7 @@ func (x *RestoreSnapshotRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RestoreSnapshotRequest.ProtoReflect.Descriptor instead.
 func (*RestoreSnapshotRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{33}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *RestoreSnapshotRequest) GetVmName() string {
@@ -2310,7 +2700,7 @@ type DeleteSnapshotRequest struct {
 
 func (x *DeleteSnapshotRequest) Reset() {
 	*x = DeleteSnapshotRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[34]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2322,7 +2712,7 @@ func (x *DeleteSnapshotRequest) String() string {
 func (*DeleteSnapshotRequest) ProtoMessage() {}
 
 func (x *DeleteSnapshotRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[34]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2335,7 +2725,7 @@ func (x *DeleteSnapshotRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSnapshotRequest.ProtoReflect.Descriptor instead.
 func (*DeleteSnapshotRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{34}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *DeleteSnapshotRequest) GetVmName() string {
@@ -2362,7 +2752,7 @@ type SnapshotResponse struct {
 
 func (x *SnapshotResponse) Reset() {
 	*x = SnapshotResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[35]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2374,7 +2764,7 @@ func (x *SnapshotResponse) String() string {
 func (*SnapshotResponse) ProtoMessage() {}
 
 func (x *SnapshotResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[35]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2387,7 +2777,7 @@ func (x *SnapshotResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SnapshotResponse.ProtoReflect.Descriptor instead.
 func (*SnapshotResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{35}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *SnapshotResponse) GetSnapshot() *SnapshotInfo {
@@ -2414,7 +2804,7 @@ type DeleteSnapshotResponse struct {
 
 func (x *DeleteSnapshotResponse) Reset() {
 	*x = DeleteSnapshotResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[36]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2426,7 +2816,7 @@ func (x *DeleteSnapshotResponse) String() string {
 func (*DeleteSnapshotResponse) ProtoMessage() {}
 
 func (x *DeleteSnapshotResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[36]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2439,7 +2829,7 @@ func (x *DeleteSnapshotResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSnapshotResponse.ProtoReflect.Descriptor instead.
 func (*DeleteSnapshotResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{36}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *DeleteSnapshotResponse) GetSuccess() bool {
@@ -2466,7 +2856,7 @@ type ConsolidateSnapshotRequest struct {
 
 func (x *ConsolidateSnapshotRequest) Reset() {
 	*x = ConsolidateSnapshotRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[37]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2478,7 +2868,7 @@ func (x *ConsolidateSnapshotRequest) String() string {
 func (*ConsolidateSnapshotRequest) ProtoMessage() {}
 
 func (x *ConsolidateSnapshotRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[37]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2491,7 +2881,7 @@ func (x *ConsolidateSnapshotRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConsolidateSnapshotRequest.ProtoReflect.Descriptor instead.
 func (*ConsolidateSnapshotRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{37}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *ConsolidateSnapshotRequest) GetVmName() string {
@@ -2517,7 +2907,7 @@ type GetSnapshotStatusRequest struct {
 
 func (x *GetSnapshotStatusRequest) Reset() {
 	*x = GetSnapshotStatusRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[38]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2529,7 +2919,7 @@ func (x *GetSnapshotStatusRequest) String() string {
 func (*GetSnapshotStatusRequest) ProtoMessage() {}
 
 func (x *GetSnapshotStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[38]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2542,7 +2932,7 @@ func (x *GetSnapshotStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSnapshotStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetSnapshotStatusRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{38}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *GetSnapshotStatusRequest) GetVmName() string {
@@ -2561,7 +2951,7 @@ type SnapshotStatusResponse struct {
 
 func (x *SnapshotStatusResponse) Reset() {
 	*x = SnapshotStatusResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[39]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2573,7 +2963,7 @@ func (x *SnapshotStatusResponse) String() string {
 func (*SnapshotStatusResponse) ProtoMessage() {}
 
 func (x *SnapshotStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[39]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2586,7 +2976,7 @@ func (x *SnapshotStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SnapshotStatusResponse.ProtoReflect.Descriptor instead.
 func (*SnapshotStatusResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{39}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *SnapshotStatusResponse) GetJob() *VMJobStatus {
@@ -2613,7 +3003,7 @@ type SnapshotInfo struct {
 
 func (x *SnapshotInfo) Reset() {
 	*x = SnapshotInfo{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[40]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2625,7 +3015,7 @@ func (x *SnapshotInfo) String() string {
 func (*SnapshotInfo) ProtoMessage() {}
 
 func (x *SnapshotInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[40]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2638,7 +3028,7 @@ func (x *SnapshotInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SnapshotInfo.ProtoReflect.Descriptor instead.
 func (*SnapshotInfo) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{40}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *SnapshotInfo) GetId() string {
@@ -2715,7 +3105,7 @@ type CloneVMRequest struct {
 
 func (x *CloneVMRequest) Reset() {
 	*x = CloneVMRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[41]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2727,7 +3117,7 @@ func (x *CloneVMRequest) String() string {
 func (*CloneVMRequest) ProtoMessage() {}
 
 func (x *CloneVMRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[41]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2740,7 +3130,7 @@ func (x *CloneVMRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CloneVMRequest.ProtoReflect.Descriptor instead.
 func (*CloneVMRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{41}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *CloneVMRequest) GetVmName() string {
@@ -2775,7 +3165,7 @@ type CloneSnapshotRequest struct {
 
 func (x *CloneSnapshotRequest) Reset() {
 	*x = CloneSnapshotRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[42]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2787,7 +3177,7 @@ func (x *CloneSnapshotRequest) String() string {
 func (*CloneSnapshotRequest) ProtoMessage() {}
 
 func (x *CloneSnapshotRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[42]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2800,7 +3190,7 @@ func (x *CloneSnapshotRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CloneSnapshotRequest.ProtoReflect.Descriptor instead.
 func (*CloneSnapshotRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{42}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *CloneSnapshotRequest) GetVmName() string {
@@ -2845,7 +3235,7 @@ type StartDiskMoveRequest struct {
 
 func (x *StartDiskMoveRequest) Reset() {
 	*x = StartDiskMoveRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[43]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2857,7 +3247,7 @@ func (x *StartDiskMoveRequest) String() string {
 func (*StartDiskMoveRequest) ProtoMessage() {}
 
 func (x *StartDiskMoveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[43]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2870,7 +3260,7 @@ func (x *StartDiskMoveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StartDiskMoveRequest.ProtoReflect.Descriptor instead.
 func (*StartDiskMoveRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{43}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *StartDiskMoveRequest) GetVmName() string {
@@ -2973,7 +3363,7 @@ type GetDiskMoveStatusRequest struct {
 
 func (x *GetDiskMoveStatusRequest) Reset() {
 	*x = GetDiskMoveStatusRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[44]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2985,7 +3375,7 @@ func (x *GetDiskMoveStatusRequest) String() string {
 func (*GetDiskMoveStatusRequest) ProtoMessage() {}
 
 func (x *GetDiskMoveStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[44]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2998,7 +3388,7 @@ func (x *GetDiskMoveStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetDiskMoveStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetDiskMoveStatusRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{44}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *GetDiskMoveStatusRequest) GetVmName() string {
@@ -3017,7 +3407,7 @@ type CancelDiskMoveRequest struct {
 
 func (x *CancelDiskMoveRequest) Reset() {
 	*x = CancelDiskMoveRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[45]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3029,7 +3419,7 @@ func (x *CancelDiskMoveRequest) String() string {
 func (*CancelDiskMoveRequest) ProtoMessage() {}
 
 func (x *CancelDiskMoveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[45]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3042,7 +3432,7 @@ func (x *CancelDiskMoveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelDiskMoveRequest.ProtoReflect.Descriptor instead.
 func (*CancelDiskMoveRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{45}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *CancelDiskMoveRequest) GetVmName() string {
@@ -3063,7 +3453,7 @@ type DiskMoveResponse struct {
 
 func (x *DiskMoveResponse) Reset() {
 	*x = DiskMoveResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[46]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3075,7 +3465,7 @@ func (x *DiskMoveResponse) String() string {
 func (*DiskMoveResponse) ProtoMessage() {}
 
 func (x *DiskMoveResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[46]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3088,7 +3478,7 @@ func (x *DiskMoveResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DiskMoveResponse.ProtoReflect.Descriptor instead.
 func (*DiskMoveResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{46}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *DiskMoveResponse) GetSuccess() bool {
@@ -3121,7 +3511,7 @@ type DiskMoveStatusResponse struct {
 
 func (x *DiskMoveStatusResponse) Reset() {
 	*x = DiskMoveStatusResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[47]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3133,7 +3523,7 @@ func (x *DiskMoveStatusResponse) String() string {
 func (*DiskMoveStatusResponse) ProtoMessage() {}
 
 func (x *DiskMoveStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[47]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3146,7 +3536,7 @@ func (x *DiskMoveStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DiskMoveStatusResponse.ProtoReflect.Descriptor instead.
 func (*DiskMoveStatusResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{47}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *DiskMoveStatusResponse) GetJob() *VMJobStatus {
@@ -3175,7 +3565,7 @@ type VMJobStatus struct {
 
 func (x *VMJobStatus) Reset() {
 	*x = VMJobStatus{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[48]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3187,7 +3577,7 @@ func (x *VMJobStatus) String() string {
 func (*VMJobStatus) ProtoMessage() {}
 
 func (x *VMJobStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[48]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3200,7 +3590,7 @@ func (x *VMJobStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VMJobStatus.ProtoReflect.Descriptor instead.
 func (*VMJobStatus) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{48}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *VMJobStatus) GetType() string {
@@ -3292,7 +3682,7 @@ type MigrateVMRequest struct {
 
 func (x *MigrateVMRequest) Reset() {
 	*x = MigrateVMRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[49]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3304,7 +3694,7 @@ func (x *MigrateVMRequest) String() string {
 func (*MigrateVMRequest) ProtoMessage() {}
 
 func (x *MigrateVMRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[49]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3317,7 +3707,7 @@ func (x *MigrateVMRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MigrateVMRequest.ProtoReflect.Descriptor instead.
 func (*MigrateVMRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{49}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *MigrateVMRequest) GetVmName() string {
@@ -3358,7 +3748,7 @@ type MigrateVMResponse struct {
 
 func (x *MigrateVMResponse) Reset() {
 	*x = MigrateVMResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[50]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3370,7 +3760,7 @@ func (x *MigrateVMResponse) String() string {
 func (*MigrateVMResponse) ProtoMessage() {}
 
 func (x *MigrateVMResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[50]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3383,7 +3773,7 @@ func (x *MigrateVMResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MigrateVMResponse.ProtoReflect.Descriptor instead.
 func (*MigrateVMResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{50}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *MigrateVMResponse) GetSuccess() bool {
@@ -3409,7 +3799,7 @@ type GetMigrationStatusRequest struct {
 
 func (x *GetMigrationStatusRequest) Reset() {
 	*x = GetMigrationStatusRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[51]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3421,7 +3811,7 @@ func (x *GetMigrationStatusRequest) String() string {
 func (*GetMigrationStatusRequest) ProtoMessage() {}
 
 func (x *GetMigrationStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[51]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3434,7 +3824,7 @@ func (x *GetMigrationStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMigrationStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetMigrationStatusRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{51}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *GetMigrationStatusRequest) GetVmName() string {
@@ -3458,7 +3848,7 @@ type MigrationStatusResponse struct {
 
 func (x *MigrationStatusResponse) Reset() {
 	*x = MigrationStatusResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[52]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3470,7 +3860,7 @@ func (x *MigrationStatusResponse) String() string {
 func (*MigrationStatusResponse) ProtoMessage() {}
 
 func (x *MigrationStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[52]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3483,7 +3873,7 @@ func (x *MigrationStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MigrationStatusResponse.ProtoReflect.Descriptor instead.
 func (*MigrationStatusResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{52}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *MigrationStatusResponse) GetStatus() string {
@@ -3540,7 +3930,7 @@ type CreateStoragePoolRequest struct {
 
 func (x *CreateStoragePoolRequest) Reset() {
 	*x = CreateStoragePoolRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[53]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3552,7 +3942,7 @@ func (x *CreateStoragePoolRequest) String() string {
 func (*CreateStoragePoolRequest) ProtoMessage() {}
 
 func (x *CreateStoragePoolRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[53]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3565,7 +3955,7 @@ func (x *CreateStoragePoolRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateStoragePoolRequest.ProtoReflect.Descriptor instead.
 func (*CreateStoragePoolRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{53}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *CreateStoragePoolRequest) GetName() string {
@@ -3606,7 +3996,7 @@ type StoragePoolResponse struct {
 
 func (x *StoragePoolResponse) Reset() {
 	*x = StoragePoolResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[54]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3618,7 +4008,7 @@ func (x *StoragePoolResponse) String() string {
 func (*StoragePoolResponse) ProtoMessage() {}
 
 func (x *StoragePoolResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[54]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3631,7 +4021,7 @@ func (x *StoragePoolResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StoragePoolResponse.ProtoReflect.Descriptor instead.
 func (*StoragePoolResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{54}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *StoragePoolResponse) GetPool() *StoragePool {
@@ -3656,7 +4046,7 @@ type ListStoragePoolsRequest struct {
 
 func (x *ListStoragePoolsRequest) Reset() {
 	*x = ListStoragePoolsRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[55]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3668,7 +4058,7 @@ func (x *ListStoragePoolsRequest) String() string {
 func (*ListStoragePoolsRequest) ProtoMessage() {}
 
 func (x *ListStoragePoolsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[55]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3681,7 +4071,7 @@ func (x *ListStoragePoolsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListStoragePoolsRequest.ProtoReflect.Descriptor instead.
 func (*ListStoragePoolsRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{55}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{61}
 }
 
 type ListStoragePoolsResponse struct {
@@ -3693,7 +4083,7 @@ type ListStoragePoolsResponse struct {
 
 func (x *ListStoragePoolsResponse) Reset() {
 	*x = ListStoragePoolsResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[56]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3705,7 +4095,7 @@ func (x *ListStoragePoolsResponse) String() string {
 func (*ListStoragePoolsResponse) ProtoMessage() {}
 
 func (x *ListStoragePoolsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[56]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3718,7 +4108,7 @@ func (x *ListStoragePoolsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListStoragePoolsResponse.ProtoReflect.Descriptor instead.
 func (*ListStoragePoolsResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{56}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *ListStoragePoolsResponse) GetPools() []*StoragePool {
@@ -3738,7 +4128,7 @@ type DeleteStoragePoolRequest struct {
 
 func (x *DeleteStoragePoolRequest) Reset() {
 	*x = DeleteStoragePoolRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[57]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3750,7 +4140,7 @@ func (x *DeleteStoragePoolRequest) String() string {
 func (*DeleteStoragePoolRequest) ProtoMessage() {}
 
 func (x *DeleteStoragePoolRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[57]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3763,7 +4153,7 @@ func (x *DeleteStoragePoolRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteStoragePoolRequest.ProtoReflect.Descriptor instead.
 func (*DeleteStoragePoolRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{57}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *DeleteStoragePoolRequest) GetName() string {
@@ -3790,7 +4180,7 @@ type DeleteStoragePoolResponse struct {
 
 func (x *DeleteStoragePoolResponse) Reset() {
 	*x = DeleteStoragePoolResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[58]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3802,7 +4192,7 @@ func (x *DeleteStoragePoolResponse) String() string {
 func (*DeleteStoragePoolResponse) ProtoMessage() {}
 
 func (x *DeleteStoragePoolResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[58]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3815,7 +4205,7 @@ func (x *DeleteStoragePoolResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteStoragePoolResponse.ProtoReflect.Descriptor instead.
 func (*DeleteStoragePoolResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{58}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *DeleteStoragePoolResponse) GetSuccess() bool {
@@ -3866,7 +4256,7 @@ type StoragePool struct {
 
 func (x *StoragePool) Reset() {
 	*x = StoragePool{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[59]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3878,7 +4268,7 @@ func (x *StoragePool) String() string {
 func (*StoragePool) ProtoMessage() {}
 
 func (x *StoragePool) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[59]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3891,7 +4281,7 @@ func (x *StoragePool) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StoragePool.ProtoReflect.Descriptor instead.
 func (*StoragePool) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{59}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *StoragePool) GetName() string {
@@ -3994,7 +4384,7 @@ type GetStoragePoolRequest struct {
 
 func (x *GetStoragePoolRequest) Reset() {
 	*x = GetStoragePoolRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[60]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4006,7 +4396,7 @@ func (x *GetStoragePoolRequest) String() string {
 func (*GetStoragePoolRequest) ProtoMessage() {}
 
 func (x *GetStoragePoolRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[60]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4019,7 +4409,7 @@ func (x *GetStoragePoolRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStoragePoolRequest.ProtoReflect.Descriptor instead.
 func (*GetStoragePoolRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{60}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *GetStoragePoolRequest) GetName() string {
@@ -4038,7 +4428,7 @@ type ActivateStoragePoolRequest struct {
 
 func (x *ActivateStoragePoolRequest) Reset() {
 	*x = ActivateStoragePoolRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[61]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4050,7 +4440,7 @@ func (x *ActivateStoragePoolRequest) String() string {
 func (*ActivateStoragePoolRequest) ProtoMessage() {}
 
 func (x *ActivateStoragePoolRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[61]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4063,7 +4453,7 @@ func (x *ActivateStoragePoolRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActivateStoragePoolRequest.ProtoReflect.Descriptor instead.
 func (*ActivateStoragePoolRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{61}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *ActivateStoragePoolRequest) GetName() string {
@@ -4085,7 +4475,7 @@ type DeactivateStoragePoolRequest struct {
 
 func (x *DeactivateStoragePoolRequest) Reset() {
 	*x = DeactivateStoragePoolRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[62]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4097,7 +4487,7 @@ func (x *DeactivateStoragePoolRequest) String() string {
 func (*DeactivateStoragePoolRequest) ProtoMessage() {}
 
 func (x *DeactivateStoragePoolRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[62]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4110,7 +4500,7 @@ func (x *DeactivateStoragePoolRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeactivateStoragePoolRequest.ProtoReflect.Descriptor instead.
 func (*DeactivateStoragePoolRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{62}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *DeactivateStoragePoolRequest) GetName() string {
@@ -4144,7 +4534,7 @@ type CreateTAPDeviceRequest struct {
 
 func (x *CreateTAPDeviceRequest) Reset() {
 	*x = CreateTAPDeviceRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[63]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4156,7 +4546,7 @@ func (x *CreateTAPDeviceRequest) String() string {
 func (*CreateTAPDeviceRequest) ProtoMessage() {}
 
 func (x *CreateTAPDeviceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[63]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4169,7 +4559,7 @@ func (x *CreateTAPDeviceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateTAPDeviceRequest.ProtoReflect.Descriptor instead.
 func (*CreateTAPDeviceRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{63}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *CreateTAPDeviceRequest) GetName() string {
@@ -4251,7 +4641,7 @@ type CreateBridgeRequest struct {
 
 func (x *CreateBridgeRequest) Reset() {
 	*x = CreateBridgeRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[64]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4263,7 +4653,7 @@ func (x *CreateBridgeRequest) String() string {
 func (*CreateBridgeRequest) ProtoMessage() {}
 
 func (x *CreateBridgeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[64]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4276,7 +4666,7 @@ func (x *CreateBridgeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBridgeRequest.ProtoReflect.Descriptor instead.
 func (*CreateBridgeRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{64}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *CreateBridgeRequest) GetName() string {
@@ -4345,7 +4735,7 @@ type NetworkResponse struct {
 
 func (x *NetworkResponse) Reset() {
 	*x = NetworkResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[65]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4357,7 +4747,7 @@ func (x *NetworkResponse) String() string {
 func (*NetworkResponse) ProtoMessage() {}
 
 func (x *NetworkResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[65]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4370,7 +4760,7 @@ func (x *NetworkResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkResponse.ProtoReflect.Descriptor instead.
 func (*NetworkResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{65}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *NetworkResponse) GetDevice() *NetworkDevice {
@@ -4395,7 +4785,7 @@ type ListTAPDevicesRequest struct {
 
 func (x *ListTAPDevicesRequest) Reset() {
 	*x = ListTAPDevicesRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[66]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4407,7 +4797,7 @@ func (x *ListTAPDevicesRequest) String() string {
 func (*ListTAPDevicesRequest) ProtoMessage() {}
 
 func (x *ListTAPDevicesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[66]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4420,7 +4810,7 @@ func (x *ListTAPDevicesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTAPDevicesRequest.ProtoReflect.Descriptor instead.
 func (*ListTAPDevicesRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{66}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{72}
 }
 
 type ListTAPDevicesResponse struct {
@@ -4432,7 +4822,7 @@ type ListTAPDevicesResponse struct {
 
 func (x *ListTAPDevicesResponse) Reset() {
 	*x = ListTAPDevicesResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[67]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4444,7 +4834,7 @@ func (x *ListTAPDevicesResponse) String() string {
 func (*ListTAPDevicesResponse) ProtoMessage() {}
 
 func (x *ListTAPDevicesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[67]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4457,7 +4847,7 @@ func (x *ListTAPDevicesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListTAPDevicesResponse.ProtoReflect.Descriptor instead.
 func (*ListTAPDevicesResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{67}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *ListTAPDevicesResponse) GetTaps() []*TAPDevice {
@@ -4475,7 +4865,7 @@ type ListBridgesRequest struct {
 
 func (x *ListBridgesRequest) Reset() {
 	*x = ListBridgesRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[68]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4487,7 +4877,7 @@ func (x *ListBridgesRequest) String() string {
 func (*ListBridgesRequest) ProtoMessage() {}
 
 func (x *ListBridgesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[68]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4500,7 +4890,7 @@ func (x *ListBridgesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBridgesRequest.ProtoReflect.Descriptor instead.
 func (*ListBridgesRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{68}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{74}
 }
 
 type ListBridgesResponse struct {
@@ -4512,7 +4902,7 @@ type ListBridgesResponse struct {
 
 func (x *ListBridgesResponse) Reset() {
 	*x = ListBridgesResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[69]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4524,7 +4914,7 @@ func (x *ListBridgesResponse) String() string {
 func (*ListBridgesResponse) ProtoMessage() {}
 
 func (x *ListBridgesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[69]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4537,7 +4927,7 @@ func (x *ListBridgesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListBridgesResponse.ProtoReflect.Descriptor instead.
 func (*ListBridgesResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{69}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *ListBridgesResponse) GetBridges() []*Bridge {
@@ -4556,7 +4946,7 @@ type DeleteTAPDeviceRequest struct {
 
 func (x *DeleteTAPDeviceRequest) Reset() {
 	*x = DeleteTAPDeviceRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[70]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4568,7 +4958,7 @@ func (x *DeleteTAPDeviceRequest) String() string {
 func (*DeleteTAPDeviceRequest) ProtoMessage() {}
 
 func (x *DeleteTAPDeviceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[70]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4581,7 +4971,7 @@ func (x *DeleteTAPDeviceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteTAPDeviceRequest.ProtoReflect.Descriptor instead.
 func (*DeleteTAPDeviceRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{70}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *DeleteTAPDeviceRequest) GetName() string {
@@ -4600,7 +4990,7 @@ type DeleteBridgeRequest struct {
 
 func (x *DeleteBridgeRequest) Reset() {
 	*x = DeleteBridgeRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[71]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4612,7 +5002,7 @@ func (x *DeleteBridgeRequest) String() string {
 func (*DeleteBridgeRequest) ProtoMessage() {}
 
 func (x *DeleteBridgeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[71]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4625,7 +5015,7 @@ func (x *DeleteBridgeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteBridgeRequest.ProtoReflect.Descriptor instead.
 func (*DeleteBridgeRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{71}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *DeleteBridgeRequest) GetName() string {
@@ -4645,7 +5035,7 @@ type DeleteNetworkResponse struct {
 
 func (x *DeleteNetworkResponse) Reset() {
 	*x = DeleteNetworkResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[72]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4657,7 +5047,7 @@ func (x *DeleteNetworkResponse) String() string {
 func (*DeleteNetworkResponse) ProtoMessage() {}
 
 func (x *DeleteNetworkResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[72]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4670,7 +5060,7 @@ func (x *DeleteNetworkResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteNetworkResponse.ProtoReflect.Descriptor instead.
 func (*DeleteNetworkResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{72}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *DeleteNetworkResponse) GetSuccess() bool {
@@ -4700,7 +5090,7 @@ type TAPDevice struct {
 
 func (x *TAPDevice) Reset() {
 	*x = TAPDevice{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[73]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4712,7 +5102,7 @@ func (x *TAPDevice) String() string {
 func (*TAPDevice) ProtoMessage() {}
 
 func (x *TAPDevice) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[73]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4725,7 +5115,7 @@ func (x *TAPDevice) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TAPDevice.ProtoReflect.Descriptor instead.
 func (*TAPDevice) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{73}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{79}
 }
 
 func (x *TAPDevice) GetName() string {
@@ -4776,7 +5166,7 @@ type Bridge struct {
 
 func (x *Bridge) Reset() {
 	*x = Bridge{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[74]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4788,7 +5178,7 @@ func (x *Bridge) String() string {
 func (*Bridge) ProtoMessage() {}
 
 func (x *Bridge) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[74]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4801,7 +5191,7 @@ func (x *Bridge) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bridge.ProtoReflect.Descriptor instead.
 func (*Bridge) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{74}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *Bridge) GetName() string {
@@ -4854,7 +5244,7 @@ type NetworkDevice struct {
 
 func (x *NetworkDevice) Reset() {
 	*x = NetworkDevice{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[75]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4866,7 +5256,7 @@ func (x *NetworkDevice) String() string {
 func (*NetworkDevice) ProtoMessage() {}
 
 func (x *NetworkDevice) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[75]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4879,7 +5269,7 @@ func (x *NetworkDevice) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NetworkDevice.ProtoReflect.Descriptor instead.
 func (*NetworkDevice) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{75}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{81}
 }
 
 func (x *NetworkDevice) GetDevice() isNetworkDevice_Device {
@@ -4964,7 +5354,7 @@ type CreateOVSBridgeRequest struct {
 
 func (x *CreateOVSBridgeRequest) Reset() {
 	*x = CreateOVSBridgeRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[76]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4976,7 +5366,7 @@ func (x *CreateOVSBridgeRequest) String() string {
 func (*CreateOVSBridgeRequest) ProtoMessage() {}
 
 func (x *CreateOVSBridgeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[76]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4989,7 +5379,7 @@ func (x *CreateOVSBridgeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOVSBridgeRequest.ProtoReflect.Descriptor instead.
 func (*CreateOVSBridgeRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{76}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *CreateOVSBridgeRequest) GetName() string {
@@ -5022,7 +5412,7 @@ type DeleteOVSBridgeRequest struct {
 
 func (x *DeleteOVSBridgeRequest) Reset() {
 	*x = DeleteOVSBridgeRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[77]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5034,7 +5424,7 @@ func (x *DeleteOVSBridgeRequest) String() string {
 func (*DeleteOVSBridgeRequest) ProtoMessage() {}
 
 func (x *DeleteOVSBridgeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[77]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5047,7 +5437,7 @@ func (x *DeleteOVSBridgeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOVSBridgeRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOVSBridgeRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{77}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{83}
 }
 
 func (x *DeleteOVSBridgeRequest) GetName() string {
@@ -5065,7 +5455,7 @@ type ListOVSBridgesRequest struct {
 
 func (x *ListOVSBridgesRequest) Reset() {
 	*x = ListOVSBridgesRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[78]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5077,7 +5467,7 @@ func (x *ListOVSBridgesRequest) String() string {
 func (*ListOVSBridgesRequest) ProtoMessage() {}
 
 func (x *ListOVSBridgesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[78]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5090,7 +5480,7 @@ func (x *ListOVSBridgesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOVSBridgesRequest.ProtoReflect.Descriptor instead.
 func (*ListOVSBridgesRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{78}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{84}
 }
 
 type ListOVSBridgesResponse struct {
@@ -5102,7 +5492,7 @@ type ListOVSBridgesResponse struct {
 
 func (x *ListOVSBridgesResponse) Reset() {
 	*x = ListOVSBridgesResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[79]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5114,7 +5504,7 @@ func (x *ListOVSBridgesResponse) String() string {
 func (*ListOVSBridgesResponse) ProtoMessage() {}
 
 func (x *ListOVSBridgesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[79]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5127,7 +5517,7 @@ func (x *ListOVSBridgesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOVSBridgesResponse.ProtoReflect.Descriptor instead.
 func (*ListOVSBridgesResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{79}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *ListOVSBridgesResponse) GetBridges() []*OVSBridge {
@@ -5149,7 +5539,7 @@ type AddOVSPortRequest struct {
 
 func (x *AddOVSPortRequest) Reset() {
 	*x = AddOVSPortRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[80]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5161,7 +5551,7 @@ func (x *AddOVSPortRequest) String() string {
 func (*AddOVSPortRequest) ProtoMessage() {}
 
 func (x *AddOVSPortRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[80]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5174,7 +5564,7 @@ func (x *AddOVSPortRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddOVSPortRequest.ProtoReflect.Descriptor instead.
 func (*AddOVSPortRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{80}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{86}
 }
 
 func (x *AddOVSPortRequest) GetBridge() string {
@@ -5215,7 +5605,7 @@ type RemoveOVSPortRequest struct {
 
 func (x *RemoveOVSPortRequest) Reset() {
 	*x = RemoveOVSPortRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[81]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5227,7 +5617,7 @@ func (x *RemoveOVSPortRequest) String() string {
 func (*RemoveOVSPortRequest) ProtoMessage() {}
 
 func (x *RemoveOVSPortRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[81]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5240,7 +5630,7 @@ func (x *RemoveOVSPortRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveOVSPortRequest.ProtoReflect.Descriptor instead.
 func (*RemoveOVSPortRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{81}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{87}
 }
 
 func (x *RemoveOVSPortRequest) GetBridge() string {
@@ -5266,7 +5656,7 @@ type ListOVSPortsRequest struct {
 
 func (x *ListOVSPortsRequest) Reset() {
 	*x = ListOVSPortsRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[82]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5278,7 +5668,7 @@ func (x *ListOVSPortsRequest) String() string {
 func (*ListOVSPortsRequest) ProtoMessage() {}
 
 func (x *ListOVSPortsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[82]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5291,7 +5681,7 @@ func (x *ListOVSPortsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOVSPortsRequest.ProtoReflect.Descriptor instead.
 func (*ListOVSPortsRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{82}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{88}
 }
 
 func (x *ListOVSPortsRequest) GetBridge() string {
@@ -5310,7 +5700,7 @@ type ListOVSPortsResponse struct {
 
 func (x *ListOVSPortsResponse) Reset() {
 	*x = ListOVSPortsResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[83]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5322,7 +5712,7 @@ func (x *ListOVSPortsResponse) String() string {
 func (*ListOVSPortsResponse) ProtoMessage() {}
 
 func (x *ListOVSPortsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[83]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5335,7 +5725,7 @@ func (x *ListOVSPortsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListOVSPortsResponse.ProtoReflect.Descriptor instead.
 func (*ListOVSPortsResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{83}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{89}
 }
 
 func (x *ListOVSPortsResponse) GetPorts() []*OVSPort {
@@ -5356,7 +5746,7 @@ type OVSBridge struct {
 
 func (x *OVSBridge) Reset() {
 	*x = OVSBridge{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[84]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5368,7 +5758,7 @@ func (x *OVSBridge) String() string {
 func (*OVSBridge) ProtoMessage() {}
 
 func (x *OVSBridge) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[84]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5381,7 +5771,7 @@ func (x *OVSBridge) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OVSBridge.ProtoReflect.Descriptor instead.
 func (*OVSBridge) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{84}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *OVSBridge) GetName() string {
@@ -5417,7 +5807,7 @@ type OVSPort struct {
 
 func (x *OVSPort) Reset() {
 	*x = OVSPort{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[85]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5429,7 +5819,7 @@ func (x *OVSPort) String() string {
 func (*OVSPort) ProtoMessage() {}
 
 func (x *OVSPort) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[85]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5442,7 +5832,7 @@ func (x *OVSPort) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OVSPort.ProtoReflect.Descriptor instead.
 func (*OVSPort) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{85}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{91}
 }
 
 func (x *OVSPort) GetName() string {
@@ -5485,7 +5875,7 @@ type EFIConfig struct {
 
 func (x *EFIConfig) Reset() {
 	*x = EFIConfig{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[86]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5497,7 +5887,7 @@ func (x *EFIConfig) String() string {
 func (*EFIConfig) ProtoMessage() {}
 
 func (x *EFIConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[86]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5510,7 +5900,7 @@ func (x *EFIConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EFIConfig.ProtoReflect.Descriptor instead.
 func (*EFIConfig) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{86}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{92}
 }
 
 func (x *EFIConfig) GetLoaderPath() string {
@@ -5551,7 +5941,7 @@ type SetLabelsRequest struct {
 
 func (x *SetLabelsRequest) Reset() {
 	*x = SetLabelsRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[87]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5563,7 +5953,7 @@ func (x *SetLabelsRequest) String() string {
 func (*SetLabelsRequest) ProtoMessage() {}
 
 func (x *SetLabelsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[87]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5576,7 +5966,7 @@ func (x *SetLabelsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetLabelsRequest.ProtoReflect.Descriptor instead.
 func (*SetLabelsRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{87}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *SetLabelsRequest) GetVmName() string {
@@ -5603,7 +5993,7 @@ type SetLabelsResponse struct {
 
 func (x *SetLabelsResponse) Reset() {
 	*x = SetLabelsResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[88]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5615,7 +6005,7 @@ func (x *SetLabelsResponse) String() string {
 func (*SetLabelsResponse) ProtoMessage() {}
 
 func (x *SetLabelsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[88]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5628,7 +6018,7 @@ func (x *SetLabelsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetLabelsResponse.ProtoReflect.Descriptor instead.
 func (*SetLabelsResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{88}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *SetLabelsResponse) GetSuccess() bool {
@@ -5654,7 +6044,7 @@ type GetLabelsRequest struct {
 
 func (x *GetLabelsRequest) Reset() {
 	*x = GetLabelsRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[89]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5666,7 +6056,7 @@ func (x *GetLabelsRequest) String() string {
 func (*GetLabelsRequest) ProtoMessage() {}
 
 func (x *GetLabelsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[89]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5679,7 +6069,7 @@ func (x *GetLabelsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLabelsRequest.ProtoReflect.Descriptor instead.
 func (*GetLabelsRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{89}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *GetLabelsRequest) GetVmName() string {
@@ -5698,7 +6088,7 @@ type GetLabelsResponse struct {
 
 func (x *GetLabelsResponse) Reset() {
 	*x = GetLabelsResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[90]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5710,7 +6100,7 @@ func (x *GetLabelsResponse) String() string {
 func (*GetLabelsResponse) ProtoMessage() {}
 
 func (x *GetLabelsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[90]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5723,7 +6113,7 @@ func (x *GetLabelsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetLabelsResponse.ProtoReflect.Descriptor instead.
 func (*GetLabelsResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{90}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *GetLabelsResponse) GetLabels() map[string]string {
@@ -5743,7 +6133,7 @@ type DeleteLabelRequest struct {
 
 func (x *DeleteLabelRequest) Reset() {
 	*x = DeleteLabelRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[91]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5755,7 +6145,7 @@ func (x *DeleteLabelRequest) String() string {
 func (*DeleteLabelRequest) ProtoMessage() {}
 
 func (x *DeleteLabelRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[91]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5768,7 +6158,7 @@ func (x *DeleteLabelRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteLabelRequest.ProtoReflect.Descriptor instead.
 func (*DeleteLabelRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{91}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{97}
 }
 
 func (x *DeleteLabelRequest) GetVmName() string {
@@ -5794,7 +6184,7 @@ type DeleteLabelResponse struct {
 
 func (x *DeleteLabelResponse) Reset() {
 	*x = DeleteLabelResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[92]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5806,7 +6196,7 @@ func (x *DeleteLabelResponse) String() string {
 func (*DeleteLabelResponse) ProtoMessage() {}
 
 func (x *DeleteLabelResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[92]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5819,7 +6209,7 @@ func (x *DeleteLabelResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteLabelResponse.ProtoReflect.Descriptor instead.
 func (*DeleteLabelResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{92}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{98}
 }
 
 func (x *DeleteLabelResponse) GetSuccess() bool {
@@ -5839,7 +6229,7 @@ type SetProvisioningRequest struct {
 
 func (x *SetProvisioningRequest) Reset() {
 	*x = SetProvisioningRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[93]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5851,7 +6241,7 @@ func (x *SetProvisioningRequest) String() string {
 func (*SetProvisioningRequest) ProtoMessage() {}
 
 func (x *SetProvisioningRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[93]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5864,7 +6254,7 @@ func (x *SetProvisioningRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetProvisioningRequest.ProtoReflect.Descriptor instead.
 func (*SetProvisioningRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{93}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{99}
 }
 
 func (x *SetProvisioningRequest) GetVmName() string {
@@ -5891,7 +6281,7 @@ type SetProvisioningResponse struct {
 
 func (x *SetProvisioningResponse) Reset() {
 	*x = SetProvisioningResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[94]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5903,7 +6293,7 @@ func (x *SetProvisioningResponse) String() string {
 func (*SetProvisioningResponse) ProtoMessage() {}
 
 func (x *SetProvisioningResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[94]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5916,7 +6306,7 @@ func (x *SetProvisioningResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetProvisioningResponse.ProtoReflect.Descriptor instead.
 func (*SetProvisioningResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{94}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{100}
 }
 
 func (x *SetProvisioningResponse) GetSuccess() bool {
@@ -5942,7 +6332,7 @@ type GetVMStatusRequest struct {
 
 func (x *GetVMStatusRequest) Reset() {
 	*x = GetVMStatusRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[95]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5954,7 +6344,7 @@ func (x *GetVMStatusRequest) String() string {
 func (*GetVMStatusRequest) ProtoMessage() {}
 
 func (x *GetVMStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[95]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5967,7 +6357,7 @@ func (x *GetVMStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetVMStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetVMStatusRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{95}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{101}
 }
 
 func (x *GetVMStatusRequest) GetVmName() string {
@@ -5991,7 +6381,7 @@ type GetVMStatusResponse struct {
 
 func (x *GetVMStatusResponse) Reset() {
 	*x = GetVMStatusResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[96]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6003,7 +6393,7 @@ func (x *GetVMStatusResponse) String() string {
 func (*GetVMStatusResponse) ProtoMessage() {}
 
 func (x *GetVMStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[96]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6016,7 +6406,7 @@ func (x *GetVMStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetVMStatusResponse.ProtoReflect.Descriptor instead.
 func (*GetVMStatusResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{96}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{102}
 }
 
 func (x *GetVMStatusResponse) GetPhase() string {
@@ -6073,7 +6463,7 @@ type VMCondition struct {
 
 func (x *VMCondition) Reset() {
 	*x = VMCondition{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[97]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6085,7 +6475,7 @@ func (x *VMCondition) String() string {
 func (*VMCondition) ProtoMessage() {}
 
 func (x *VMCondition) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[97]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6098,7 +6488,7 @@ func (x *VMCondition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VMCondition.ProtoReflect.Descriptor instead.
 func (*VMCondition) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{97}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{103}
 }
 
 func (x *VMCondition) GetType() string {
@@ -6140,7 +6530,7 @@ type VMEvent struct {
 
 func (x *VMEvent) Reset() {
 	*x = VMEvent{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[98]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6152,7 +6542,7 @@ func (x *VMEvent) String() string {
 func (*VMEvent) ProtoMessage() {}
 
 func (x *VMEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[98]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6165,7 +6555,7 @@ func (x *VMEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VMEvent.ProtoReflect.Descriptor instead.
 func (*VMEvent) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{98}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{104}
 }
 
 func (x *VMEvent) GetType() string {
@@ -6200,7 +6590,7 @@ type ResourceSpec struct {
 
 func (x *ResourceSpec) Reset() {
 	*x = ResourceSpec{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[99]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6212,7 +6602,7 @@ func (x *ResourceSpec) String() string {
 func (*ResourceSpec) ProtoMessage() {}
 
 func (x *ResourceSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[99]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6225,7 +6615,7 @@ func (x *ResourceSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceSpec.ProtoReflect.Descriptor instead.
 func (*ResourceSpec) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{99}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{105}
 }
 
 func (x *ResourceSpec) GetMemoryLimitBytes() int64 {
@@ -6259,7 +6649,7 @@ type AttachDiskRequest struct {
 
 func (x *AttachDiskRequest) Reset() {
 	*x = AttachDiskRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[100]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6271,7 +6661,7 @@ func (x *AttachDiskRequest) String() string {
 func (*AttachDiskRequest) ProtoMessage() {}
 
 func (x *AttachDiskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[100]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6284,7 +6674,7 @@ func (x *AttachDiskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachDiskRequest.ProtoReflect.Descriptor instead.
 func (*AttachDiskRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{100}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{106}
 }
 
 func (x *AttachDiskRequest) GetVmName() string {
@@ -6311,7 +6701,7 @@ type DetachDiskRequest struct {
 
 func (x *DetachDiskRequest) Reset() {
 	*x = DetachDiskRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[101]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6323,7 +6713,7 @@ func (x *DetachDiskRequest) String() string {
 func (*DetachDiskRequest) ProtoMessage() {}
 
 func (x *DetachDiskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[101]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6336,7 +6726,7 @@ func (x *DetachDiskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DetachDiskRequest.ProtoReflect.Descriptor instead.
 func (*DetachDiskRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{101}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{107}
 }
 
 func (x *DetachDiskRequest) GetVmName() string {
@@ -6363,7 +6753,7 @@ type AttachNICRequest struct {
 
 func (x *AttachNICRequest) Reset() {
 	*x = AttachNICRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[102]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6375,7 +6765,7 @@ func (x *AttachNICRequest) String() string {
 func (*AttachNICRequest) ProtoMessage() {}
 
 func (x *AttachNICRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[102]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6388,7 +6778,7 @@ func (x *AttachNICRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AttachNICRequest.ProtoReflect.Descriptor instead.
 func (*AttachNICRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{102}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{108}
 }
 
 func (x *AttachNICRequest) GetVmName() string {
@@ -6415,7 +6805,7 @@ type DetachNICRequest struct {
 
 func (x *DetachNICRequest) Reset() {
 	*x = DetachNICRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[103]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[109]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6427,7 +6817,7 @@ func (x *DetachNICRequest) String() string {
 func (*DetachNICRequest) ProtoMessage() {}
 
 func (x *DetachNICRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[103]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[109]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6440,7 +6830,7 @@ func (x *DetachNICRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DetachNICRequest.ProtoReflect.Descriptor instead.
 func (*DetachNICRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{103}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{109}
 }
 
 func (x *DetachNICRequest) GetVmName() string {
@@ -6468,7 +6858,7 @@ type ResizeDiskRequest struct {
 
 func (x *ResizeDiskRequest) Reset() {
 	*x = ResizeDiskRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[104]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6480,7 +6870,7 @@ func (x *ResizeDiskRequest) String() string {
 func (*ResizeDiskRequest) ProtoMessage() {}
 
 func (x *ResizeDiskRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[104]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6493,7 +6883,7 @@ func (x *ResizeDiskRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResizeDiskRequest.ProtoReflect.Descriptor instead.
 func (*ResizeDiskRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{104}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{110}
 }
 
 func (x *ResizeDiskRequest) GetVmName() string {
@@ -6528,7 +6918,7 @@ type SetVNCPasswordRequest struct {
 
 func (x *SetVNCPasswordRequest) Reset() {
 	*x = SetVNCPasswordRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[105]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[111]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6540,7 +6930,7 @@ func (x *SetVNCPasswordRequest) String() string {
 func (*SetVNCPasswordRequest) ProtoMessage() {}
 
 func (x *SetVNCPasswordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[105]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[111]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6553,7 +6943,7 @@ func (x *SetVNCPasswordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetVNCPasswordRequest.ProtoReflect.Descriptor instead.
 func (*SetVNCPasswordRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{105}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{111}
 }
 
 func (x *SetVNCPasswordRequest) GetVmName() string {
@@ -6588,7 +6978,7 @@ type SetLinkStateRequest struct {
 
 func (x *SetLinkStateRequest) Reset() {
 	*x = SetLinkStateRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[106]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[112]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6600,7 +6990,7 @@ func (x *SetLinkStateRequest) String() string {
 func (*SetLinkStateRequest) ProtoMessage() {}
 
 func (x *SetLinkStateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[106]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[112]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6613,7 +7003,7 @@ func (x *SetLinkStateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetLinkStateRequest.ProtoReflect.Descriptor instead.
 func (*SetLinkStateRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{106}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{112}
 }
 
 func (x *SetLinkStateRequest) GetVmName() string {
@@ -6647,7 +7037,7 @@ type RenameVMRequest struct {
 
 func (x *RenameVMRequest) Reset() {
 	*x = RenameVMRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[107]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[113]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6659,7 +7049,7 @@ func (x *RenameVMRequest) String() string {
 func (*RenameVMRequest) ProtoMessage() {}
 
 func (x *RenameVMRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[107]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[113]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6672,7 +7062,7 @@ func (x *RenameVMRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RenameVMRequest.ProtoReflect.Descriptor instead.
 func (*RenameVMRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{107}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{113}
 }
 
 func (x *RenameVMRequest) GetVmName() string {
@@ -6700,7 +7090,7 @@ type ChangeISORequest struct {
 
 func (x *ChangeISORequest) Reset() {
 	*x = ChangeISORequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[108]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[114]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6712,7 +7102,7 @@ func (x *ChangeISORequest) String() string {
 func (*ChangeISORequest) ProtoMessage() {}
 
 func (x *ChangeISORequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[108]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[114]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6725,7 +7115,7 @@ func (x *ChangeISORequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangeISORequest.ProtoReflect.Descriptor instead.
 func (*ChangeISORequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{108}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{114}
 }
 
 func (x *ChangeISORequest) GetVmName() string {
@@ -6759,7 +7149,7 @@ type EjectISORequest struct {
 
 func (x *EjectISORequest) Reset() {
 	*x = EjectISORequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[109]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[115]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6771,7 +7161,7 @@ func (x *EjectISORequest) String() string {
 func (*EjectISORequest) ProtoMessage() {}
 
 func (x *EjectISORequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[109]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[115]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6784,7 +7174,7 @@ func (x *EjectISORequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EjectISORequest.ProtoReflect.Descriptor instead.
 func (*EjectISORequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{109}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{115}
 }
 
 func (x *EjectISORequest) GetVmName() string {
@@ -6810,7 +7200,7 @@ type GetSnapshotTreeRequest struct {
 
 func (x *GetSnapshotTreeRequest) Reset() {
 	*x = GetSnapshotTreeRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[110]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[116]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6822,7 +7212,7 @@ func (x *GetSnapshotTreeRequest) String() string {
 func (*GetSnapshotTreeRequest) ProtoMessage() {}
 
 func (x *GetSnapshotTreeRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[110]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[116]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6835,7 +7225,7 @@ func (x *GetSnapshotTreeRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSnapshotTreeRequest.ProtoReflect.Descriptor instead.
 func (*GetSnapshotTreeRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{110}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{116}
 }
 
 func (x *GetSnapshotTreeRequest) GetVmName() string {
@@ -6854,7 +7244,7 @@ type GetSnapshotTreeResponse struct {
 
 func (x *GetSnapshotTreeResponse) Reset() {
 	*x = GetSnapshotTreeResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[111]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[117]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6866,7 +7256,7 @@ func (x *GetSnapshotTreeResponse) String() string {
 func (*GetSnapshotTreeResponse) ProtoMessage() {}
 
 func (x *GetSnapshotTreeResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[111]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[117]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6879,7 +7269,7 @@ func (x *GetSnapshotTreeResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSnapshotTreeResponse.ProtoReflect.Descriptor instead.
 func (*GetSnapshotTreeResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{111}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{117}
 }
 
 func (x *GetSnapshotTreeResponse) GetRoots() []*SnapshotNode {
@@ -6899,7 +7289,7 @@ type SnapshotNode struct {
 
 func (x *SnapshotNode) Reset() {
 	*x = SnapshotNode{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[112]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[118]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6911,7 +7301,7 @@ func (x *SnapshotNode) String() string {
 func (*SnapshotNode) ProtoMessage() {}
 
 func (x *SnapshotNode) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[112]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[118]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6924,7 +7314,7 @@ func (x *SnapshotNode) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SnapshotNode.ProtoReflect.Descriptor instead.
 func (*SnapshotNode) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{112}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{118}
 }
 
 func (x *SnapshotNode) GetSnapshot() *SnapshotInfo {
@@ -6950,7 +7340,7 @@ type GetGuestInfoRequest struct {
 
 func (x *GetGuestInfoRequest) Reset() {
 	*x = GetGuestInfoRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[113]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[119]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6962,7 +7352,7 @@ func (x *GetGuestInfoRequest) String() string {
 func (*GetGuestInfoRequest) ProtoMessage() {}
 
 func (x *GetGuestInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[113]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[119]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6975,7 +7365,7 @@ func (x *GetGuestInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGuestInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetGuestInfoRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{113}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{119}
 }
 
 func (x *GetGuestInfoRequest) GetVmName() string {
@@ -7000,7 +7390,7 @@ type GetGuestInfoResponse struct {
 
 func (x *GetGuestInfoResponse) Reset() {
 	*x = GetGuestInfoResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[114]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[120]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7012,7 +7402,7 @@ func (x *GetGuestInfoResponse) String() string {
 func (*GetGuestInfoResponse) ProtoMessage() {}
 
 func (x *GetGuestInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[114]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[120]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7025,7 +7415,7 @@ func (x *GetGuestInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGuestInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetGuestInfoResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{114}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{120}
 }
 
 func (x *GetGuestInfoResponse) GetHostname() string {
@@ -7088,7 +7478,7 @@ type GuestNetworkInterface struct {
 
 func (x *GuestNetworkInterface) Reset() {
 	*x = GuestNetworkInterface{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[115]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[121]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7100,7 +7490,7 @@ func (x *GuestNetworkInterface) String() string {
 func (*GuestNetworkInterface) ProtoMessage() {}
 
 func (x *GuestNetworkInterface) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[115]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[121]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7113,7 +7503,7 @@ func (x *GuestNetworkInterface) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GuestNetworkInterface.ProtoReflect.Descriptor instead.
 func (*GuestNetworkInterface) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{115}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{121}
 }
 
 func (x *GuestNetworkInterface) GetName() string {
@@ -7151,7 +7541,7 @@ type GuestExecRequest struct {
 
 func (x *GuestExecRequest) Reset() {
 	*x = GuestExecRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[116]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[122]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7163,7 +7553,7 @@ func (x *GuestExecRequest) String() string {
 func (*GuestExecRequest) ProtoMessage() {}
 
 func (x *GuestExecRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[116]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[122]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7176,7 +7566,7 @@ func (x *GuestExecRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GuestExecRequest.ProtoReflect.Descriptor instead.
 func (*GuestExecRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{116}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{122}
 }
 
 func (x *GuestExecRequest) GetVmId() string {
@@ -7230,7 +7620,7 @@ type GuestExecResponse struct {
 
 func (x *GuestExecResponse) Reset() {
 	*x = GuestExecResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[117]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[123]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7242,7 +7632,7 @@ func (x *GuestExecResponse) String() string {
 func (*GuestExecResponse) ProtoMessage() {}
 
 func (x *GuestExecResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[117]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[123]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7255,7 +7645,7 @@ func (x *GuestExecResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GuestExecResponse.ProtoReflect.Descriptor instead.
 func (*GuestExecResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{117}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{123}
 }
 
 func (x *GuestExecResponse) GetPid() string {
@@ -7275,7 +7665,7 @@ type GetGuestExecStatusRequest struct {
 
 func (x *GetGuestExecStatusRequest) Reset() {
 	*x = GetGuestExecStatusRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[118]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[124]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7287,7 +7677,7 @@ func (x *GetGuestExecStatusRequest) String() string {
 func (*GetGuestExecStatusRequest) ProtoMessage() {}
 
 func (x *GetGuestExecStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[118]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[124]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7300,7 +7690,7 @@ func (x *GetGuestExecStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGuestExecStatusRequest.ProtoReflect.Descriptor instead.
 func (*GetGuestExecStatusRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{118}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{124}
 }
 
 func (x *GetGuestExecStatusRequest) GetVmId() string {
@@ -7331,7 +7721,7 @@ type GetGuestExecStatusResponse struct {
 
 func (x *GetGuestExecStatusResponse) Reset() {
 	*x = GetGuestExecStatusResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[119]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[125]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7343,7 +7733,7 @@ func (x *GetGuestExecStatusResponse) String() string {
 func (*GetGuestExecStatusResponse) ProtoMessage() {}
 
 func (x *GetGuestExecStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[119]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[125]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7356,7 +7746,7 @@ func (x *GetGuestExecStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetGuestExecStatusResponse.ProtoReflect.Descriptor instead.
 func (*GetGuestExecStatusResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{119}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{125}
 }
 
 func (x *GetGuestExecStatusResponse) GetExited() bool {
@@ -7411,7 +7801,7 @@ type SetGuestHostnameRequest struct {
 
 func (x *SetGuestHostnameRequest) Reset() {
 	*x = SetGuestHostnameRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[120]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[126]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7423,7 +7813,7 @@ func (x *SetGuestHostnameRequest) String() string {
 func (*SetGuestHostnameRequest) ProtoMessage() {}
 
 func (x *SetGuestHostnameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[120]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[126]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7436,7 +7826,7 @@ func (x *SetGuestHostnameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetGuestHostnameRequest.ProtoReflect.Descriptor instead.
 func (*SetGuestHostnameRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{120}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{126}
 }
 
 func (x *SetGuestHostnameRequest) GetVmId() string {
@@ -7462,7 +7852,7 @@ type SetGuestHostnameResponse struct {
 
 func (x *SetGuestHostnameResponse) Reset() {
 	*x = SetGuestHostnameResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[121]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[127]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7474,7 +7864,7 @@ func (x *SetGuestHostnameResponse) String() string {
 func (*SetGuestHostnameResponse) ProtoMessage() {}
 
 func (x *SetGuestHostnameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[121]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[127]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7487,7 +7877,7 @@ func (x *SetGuestHostnameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetGuestHostnameResponse.ProtoReflect.Descriptor instead.
 func (*SetGuestHostnameResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{121}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{127}
 }
 
 func (x *SetGuestHostnameResponse) GetOk() bool {
@@ -7509,7 +7899,7 @@ type CustomizeOSRequest struct {
 
 func (x *CustomizeOSRequest) Reset() {
 	*x = CustomizeOSRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[122]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[128]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7521,7 +7911,7 @@ func (x *CustomizeOSRequest) String() string {
 func (*CustomizeOSRequest) ProtoMessage() {}
 
 func (x *CustomizeOSRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[122]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[128]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7534,7 +7924,7 @@ func (x *CustomizeOSRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomizeOSRequest.ProtoReflect.Descriptor instead.
 func (*CustomizeOSRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{122}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{128}
 }
 
 func (x *CustomizeOSRequest) GetVmId() string {
@@ -7574,7 +7964,7 @@ type UserSpec struct {
 
 func (x *UserSpec) Reset() {
 	*x = UserSpec{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[123]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[129]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7586,7 +7976,7 @@ func (x *UserSpec) String() string {
 func (*UserSpec) ProtoMessage() {}
 
 func (x *UserSpec) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[123]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[129]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7599,7 +7989,7 @@ func (x *UserSpec) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserSpec.ProtoReflect.Descriptor instead.
 func (*UserSpec) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{123}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{129}
 }
 
 func (x *UserSpec) GetUsername() string {
@@ -7619,7 +8009,7 @@ type CustomizeOSResponse struct {
 
 func (x *CustomizeOSResponse) Reset() {
 	*x = CustomizeOSResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[124]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[130]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7631,7 +8021,7 @@ func (x *CustomizeOSResponse) String() string {
 func (*CustomizeOSResponse) ProtoMessage() {}
 
 func (x *CustomizeOSResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[124]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[130]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7644,7 +8034,7 @@ func (x *CustomizeOSResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomizeOSResponse.ProtoReflect.Descriptor instead.
 func (*CustomizeOSResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{124}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{130}
 }
 
 func (x *CustomizeOSResponse) GetOk() bool {
@@ -7669,7 +8059,7 @@ type ListNetworkNamespacesRequest struct {
 
 func (x *ListNetworkNamespacesRequest) Reset() {
 	*x = ListNetworkNamespacesRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[125]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[131]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7681,7 +8071,7 @@ func (x *ListNetworkNamespacesRequest) String() string {
 func (*ListNetworkNamespacesRequest) ProtoMessage() {}
 
 func (x *ListNetworkNamespacesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[125]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[131]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7694,7 +8084,7 @@ func (x *ListNetworkNamespacesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNetworkNamespacesRequest.ProtoReflect.Descriptor instead.
 func (*ListNetworkNamespacesRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{125}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{131}
 }
 
 type ListNetworkNamespacesResponse struct {
@@ -7706,7 +8096,7 @@ type ListNetworkNamespacesResponse struct {
 
 func (x *ListNetworkNamespacesResponse) Reset() {
 	*x = ListNetworkNamespacesResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[126]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[132]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7718,7 +8108,7 @@ func (x *ListNetworkNamespacesResponse) String() string {
 func (*ListNetworkNamespacesResponse) ProtoMessage() {}
 
 func (x *ListNetworkNamespacesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[126]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[132]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7731,7 +8121,7 @@ func (x *ListNetworkNamespacesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNetworkNamespacesResponse.ProtoReflect.Descriptor instead.
 func (*ListNetworkNamespacesResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{126}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{132}
 }
 
 func (x *ListNetworkNamespacesResponse) GetNamespaces() []string {
@@ -7758,7 +8148,7 @@ type AdoptableDevice struct {
 
 func (x *AdoptableDevice) Reset() {
 	*x = AdoptableDevice{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[127]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[133]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7770,7 +8160,7 @@ func (x *AdoptableDevice) String() string {
 func (*AdoptableDevice) ProtoMessage() {}
 
 func (x *AdoptableDevice) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[127]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[133]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7783,7 +8173,7 @@ func (x *AdoptableDevice) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AdoptableDevice.ProtoReflect.Descriptor instead.
 func (*AdoptableDevice) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{127}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{133}
 }
 
 func (x *AdoptableDevice) GetKind() string {
@@ -7815,7 +8205,7 @@ type ListAdoptableDevicesRequest struct {
 
 func (x *ListAdoptableDevicesRequest) Reset() {
 	*x = ListAdoptableDevicesRequest{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[128]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[134]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7827,7 +8217,7 @@ func (x *ListAdoptableDevicesRequest) String() string {
 func (*ListAdoptableDevicesRequest) ProtoMessage() {}
 
 func (x *ListAdoptableDevicesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[128]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[134]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7840,7 +8230,7 @@ func (x *ListAdoptableDevicesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAdoptableDevicesRequest.ProtoReflect.Descriptor instead.
 func (*ListAdoptableDevicesRequest) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{128}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{134}
 }
 
 type ListAdoptableDevicesResponse struct {
@@ -7852,7 +8242,7 @@ type ListAdoptableDevicesResponse struct {
 
 func (x *ListAdoptableDevicesResponse) Reset() {
 	*x = ListAdoptableDevicesResponse{}
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[129]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[135]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7864,7 +8254,7 @@ func (x *ListAdoptableDevicesResponse) String() string {
 func (*ListAdoptableDevicesResponse) ProtoMessage() {}
 
 func (x *ListAdoptableDevicesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[129]
+	mi := &file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[135]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7877,7 +8267,7 @@ func (x *ListAdoptableDevicesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAdoptableDevicesResponse.ProtoReflect.Descriptor instead.
 func (*ListAdoptableDevicesResponse) Descriptor() ([]byte, []int) {
-	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{129}
+	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP(), []int{135}
 }
 
 func (x *ListAdoptableDevicesResponse) GetDevices() []*AdoptableDevice {
@@ -8009,7 +8399,7 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\x06listen\x18\x03 \x01(\tR\x06listen\x12-\n" +
 	"\x12password_protected\x18\x04 \x01(\bR\x11passwordProtected\"'\n" +
 	"\x11GetVMStatsRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"\xdb\x02\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\xf1\x02\n" +
 	"\x0fVMStatsResponse\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x127\n" +
 	"\tcpu_stats\x18\x02 \x01(\v2\x1a.pilab.pivirtd.v1.CPUStatsR\bcpuStats\x12@\n" +
@@ -8017,12 +8407,14 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\n" +
 	"disk_stats\x18\x04 \x03(\v2\x1b.pilab.pivirtd.v1.DiskStatsR\tdiskStats\x12C\n" +
 	"\rnetwork_stats\x18\x05 \x03(\v2\x1e.pilab.pivirtd.v1.NetworkStatsR\fnetworkStats\x128\n" +
-	"\ttimestamp\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\"s\n" +
+	"\ttimestamp\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12\x14\n" +
+	"\x05stale\x18\a \x01(\bR\x05stale\"\x9d\x01\n" +
 	"\bCPUStats\x12#\n" +
 	"\rusage_percent\x18\x01 \x01(\x01R\fusagePercent\x12!\n" +
 	"\fonline_vcpus\x18\x02 \x01(\x05R\vonlineVcpus\x12\x1f\n" +
 	"\vtotal_vcpus\x18\x03 \x01(\x05R\n" +
-	"totalVcpus\"\x95\x01\n" +
+	"totalVcpus\x12(\n" +
+	"\x10host_cpu_percent\x18\x04 \x01(\x01R\x0ehostCpuPercent\"\x95\x01\n" +
 	"\vMemoryStats\x12\x19\n" +
 	"\btotal_mb\x18\x01 \x01(\x03R\atotalMb\x12\x17\n" +
 	"\aused_mb\x18\x02 \x01(\x03R\x06usedMb\x12,\n" +
@@ -8048,7 +8440,34 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\n" +
 	"rx_packets\x18\x04 \x01(\x03R\trxPackets\x12\x1d\n" +
 	"\n" +
-	"tx_packets\x18\x05 \x01(\x03R\ttxPackets\"m\n" +
+	"tx_packets\x18\x05 \x01(\x03R\ttxPackets\",\n" +
+	"\x14StreamVMStatsRequest\x12\x14\n" +
+	"\x05names\x18\x01 \x03(\tR\x05names\"\xab\x01\n" +
+	"\fVMStatsBatch\x12*\n" +
+	"\x02at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\x123\n" +
+	"\x03vms\x18\x02 \x03(\v2!.pilab.pivirtd.v1.VMStatsResponseR\x03vms\x12:\n" +
+	"\n" +
+	"host_stats\x18\x03 \x01(\v2\x1b.pilab.pivirtd.v1.HostStatsR\thostStats\"\x9f\x02\n" +
+	"\tHostStats\x12(\n" +
+	"\x10cpu_busy_percent\x18\x01 \x01(\x01R\x0ecpuBusyPercent\x12\x1e\n" +
+	"\vload_avg_1m\x18\x02 \x01(\x01R\tloadAvg1m\x12\x1e\n" +
+	"\vload_avg_5m\x18\x03 \x01(\x01R\tloadAvg5m\x12 \n" +
+	"\fload_avg_15m\x18\x04 \x01(\x01R\n" +
+	"loadAvg15m\x12(\n" +
+	"\x10mem_available_mb\x18\x05 \x01(\x03R\x0ememAvailableMb\x12 \n" +
+	"\fmem_total_mb\x18\x06 \x01(\x03R\n" +
+	"memTotalMb\x12:\n" +
+	"\bpressure\x18\a \x01(\v2\x1e.pilab.pivirtd.v1.HostPressureR\bpressure\"9\n" +
+	"\vPSIPressure\x12\x14\n" +
+	"\x05avg10\x18\x01 \x01(\x01R\x05avg10\x12\x14\n" +
+	"\x05avg60\x18\x02 \x01(\x01R\x05avg60\"p\n" +
+	"\bPSIStats\x121\n" +
+	"\x04some\x18\x01 \x01(\v2\x1d.pilab.pivirtd.v1.PSIPressureR\x04some\x121\n" +
+	"\x04full\x18\x02 \x01(\v2\x1d.pilab.pivirtd.v1.PSIPressureR\x04full\"\x9c\x01\n" +
+	"\fHostPressure\x12,\n" +
+	"\x03cpu\x18\x01 \x01(\v2\x1a.pilab.pivirtd.v1.PSIStatsR\x03cpu\x122\n" +
+	"\x06memory\x18\x02 \x01(\v2\x1a.pilab.pivirtd.v1.PSIStatsR\x06memory\x12*\n" +
+	"\x02io\x18\x03 \x01(\v2\x1a.pilab.pivirtd.v1.PSIStatsR\x02io\"m\n" +
 	"\x11ExecuteQMPRequest\x12\x17\n" +
 	"\avm_name\x18\x01 \x01(\tR\x06vmName\x12\x18\n" +
 	"\acommand\x18\x02 \x01(\tR\acommand\x12%\n" +
@@ -8481,7 +8900,7 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\x06detail\x18\x03 \x01(\tR\x06detail\"\x1d\n" +
 	"\x1bListAdoptableDevicesRequest\"[\n" +
 	"\x1cListAdoptableDevicesResponse\x12;\n" +
-	"\adevices\x18\x01 \x03(\v2!.pilab.pivirtd.v1.AdoptableDeviceR\adevices2\xa93\n" +
+	"\adevices\x18\x01 \x03(\v2!.pilab.pivirtd.v1.AdoptableDeviceR\adevices2\x844\n" +
 	"\x0ePivirtdService\x12K\n" +
 	"\bCreateVM\x12!.pilab.pivirtd.v1.CreateVMRequest\x1a\x1c.pilab.pivirtd.v1.VMResponse\x12N\n" +
 	"\aApplyVM\x12 .pilab.pivirtd.v1.ApplyVMRequest\x1a\x1c.pilab.pivirtd.v1.VMResponse\"\x03\x88\x02\x01\x12I\n" +
@@ -8494,7 +8913,8 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\aListVMs\x12 .pilab.pivirtd.v1.ListVMsRequest\x1a!.pilab.pivirtd.v1.ListVMsResponse\x12E\n" +
 	"\x05GetVM\x12\x1e.pilab.pivirtd.v1.GetVMRequest\x1a\x1c.pilab.pivirtd.v1.VMResponse\x12T\n" +
 	"\n" +
-	"GetVMStats\x12#.pilab.pivirtd.v1.GetVMStatsRequest\x1a!.pilab.pivirtd.v1.VMStatsResponse\x12W\n" +
+	"GetVMStats\x12#.pilab.pivirtd.v1.GetVMStatsRequest\x1a!.pilab.pivirtd.v1.VMStatsResponse\x12Y\n" +
+	"\rStreamVMStats\x12&.pilab.pivirtd.v1.StreamVMStatsRequest\x1a\x1e.pilab.pivirtd.v1.VMStatsBatch0\x01\x12W\n" +
 	"\x0eUpdateVMMemory\x12'.pilab.pivirtd.v1.UpdateVMMemoryRequest\x1a\x1c.pilab.pivirtd.v1.VMResponse\x12Q\n" +
 	"\vUpdateVMCpu\x12$.pilab.pivirtd.v1.UpdateVMCpuRequest\x1a\x1c.pilab.pivirtd.v1.VMResponse\x12W\n" +
 	"\n" +
@@ -8573,7 +8993,7 @@ func file_pilab_pivirtd_v1_pivirtd_proto_rawDescGZIP() []byte {
 	return file_pilab_pivirtd_v1_pivirtd_proto_rawDescData
 }
 
-var file_pilab_pivirtd_v1_pivirtd_proto_msgTypes = make([]protoimpl.MessageInfo, 135)
+var file_pilab_pivirtd_v1_pivirtd_proto_msgTypes = make([]protoimpl.MessageInfo, 141)
 var file_pilab_pivirtd_v1_pivirtd_proto_goTypes = []any{
 	(*CreateVMRequest)(nil),               // 0: pilab.pivirtd.v1.CreateVMRequest
 	(*ApplyVMRequest)(nil),                // 1: pilab.pivirtd.v1.ApplyVMRequest
@@ -8601,326 +9021,343 @@ var file_pilab_pivirtd_v1_pivirtd_proto_goTypes = []any{
 	(*MemoryStats)(nil),                   // 23: pilab.pivirtd.v1.MemoryStats
 	(*DiskStats)(nil),                     // 24: pilab.pivirtd.v1.DiskStats
 	(*NetworkStats)(nil),                  // 25: pilab.pivirtd.v1.NetworkStats
-	(*ExecuteQMPRequest)(nil),             // 26: pilab.pivirtd.v1.ExecuteQMPRequest
-	(*ExecuteQMPResponse)(nil),            // 27: pilab.pivirtd.v1.ExecuteQMPResponse
-	(*StreamQMPRequest)(nil),              // 28: pilab.pivirtd.v1.StreamQMPRequest
-	(*QMPEvent)(nil),                      // 29: pilab.pivirtd.v1.QMPEvent
-	(*CreateSnapshotRequest)(nil),         // 30: pilab.pivirtd.v1.CreateSnapshotRequest
-	(*ListSnapshotsRequest)(nil),          // 31: pilab.pivirtd.v1.ListSnapshotsRequest
-	(*ListSnapshotsResponse)(nil),         // 32: pilab.pivirtd.v1.ListSnapshotsResponse
-	(*RestoreSnapshotRequest)(nil),        // 33: pilab.pivirtd.v1.RestoreSnapshotRequest
-	(*DeleteSnapshotRequest)(nil),         // 34: pilab.pivirtd.v1.DeleteSnapshotRequest
-	(*SnapshotResponse)(nil),              // 35: pilab.pivirtd.v1.SnapshotResponse
-	(*DeleteSnapshotResponse)(nil),        // 36: pilab.pivirtd.v1.DeleteSnapshotResponse
-	(*ConsolidateSnapshotRequest)(nil),    // 37: pilab.pivirtd.v1.ConsolidateSnapshotRequest
-	(*GetSnapshotStatusRequest)(nil),      // 38: pilab.pivirtd.v1.GetSnapshotStatusRequest
-	(*SnapshotStatusResponse)(nil),        // 39: pilab.pivirtd.v1.SnapshotStatusResponse
-	(*SnapshotInfo)(nil),                  // 40: pilab.pivirtd.v1.SnapshotInfo
-	(*CloneVMRequest)(nil),                // 41: pilab.pivirtd.v1.CloneVMRequest
-	(*CloneSnapshotRequest)(nil),          // 42: pilab.pivirtd.v1.CloneSnapshotRequest
-	(*StartDiskMoveRequest)(nil),          // 43: pilab.pivirtd.v1.StartDiskMoveRequest
-	(*GetDiskMoveStatusRequest)(nil),      // 44: pilab.pivirtd.v1.GetDiskMoveStatusRequest
-	(*CancelDiskMoveRequest)(nil),         // 45: pilab.pivirtd.v1.CancelDiskMoveRequest
-	(*DiskMoveResponse)(nil),              // 46: pilab.pivirtd.v1.DiskMoveResponse
-	(*DiskMoveStatusResponse)(nil),        // 47: pilab.pivirtd.v1.DiskMoveStatusResponse
-	(*VMJobStatus)(nil),                   // 48: pilab.pivirtd.v1.VMJobStatus
-	(*MigrateVMRequest)(nil),              // 49: pilab.pivirtd.v1.MigrateVMRequest
-	(*MigrateVMResponse)(nil),             // 50: pilab.pivirtd.v1.MigrateVMResponse
-	(*GetMigrationStatusRequest)(nil),     // 51: pilab.pivirtd.v1.GetMigrationStatusRequest
-	(*MigrationStatusResponse)(nil),       // 52: pilab.pivirtd.v1.MigrationStatusResponse
-	(*CreateStoragePoolRequest)(nil),      // 53: pilab.pivirtd.v1.CreateStoragePoolRequest
-	(*StoragePoolResponse)(nil),           // 54: pilab.pivirtd.v1.StoragePoolResponse
-	(*ListStoragePoolsRequest)(nil),       // 55: pilab.pivirtd.v1.ListStoragePoolsRequest
-	(*ListStoragePoolsResponse)(nil),      // 56: pilab.pivirtd.v1.ListStoragePoolsResponse
-	(*DeleteStoragePoolRequest)(nil),      // 57: pilab.pivirtd.v1.DeleteStoragePoolRequest
-	(*DeleteStoragePoolResponse)(nil),     // 58: pilab.pivirtd.v1.DeleteStoragePoolResponse
-	(*StoragePool)(nil),                   // 59: pilab.pivirtd.v1.StoragePool
-	(*GetStoragePoolRequest)(nil),         // 60: pilab.pivirtd.v1.GetStoragePoolRequest
-	(*ActivateStoragePoolRequest)(nil),    // 61: pilab.pivirtd.v1.ActivateStoragePoolRequest
-	(*DeactivateStoragePoolRequest)(nil),  // 62: pilab.pivirtd.v1.DeactivateStoragePoolRequest
-	(*CreateTAPDeviceRequest)(nil),        // 63: pilab.pivirtd.v1.CreateTAPDeviceRequest
-	(*CreateBridgeRequest)(nil),           // 64: pilab.pivirtd.v1.CreateBridgeRequest
-	(*NetworkResponse)(nil),               // 65: pilab.pivirtd.v1.NetworkResponse
-	(*ListTAPDevicesRequest)(nil),         // 66: pilab.pivirtd.v1.ListTAPDevicesRequest
-	(*ListTAPDevicesResponse)(nil),        // 67: pilab.pivirtd.v1.ListTAPDevicesResponse
-	(*ListBridgesRequest)(nil),            // 68: pilab.pivirtd.v1.ListBridgesRequest
-	(*ListBridgesResponse)(nil),           // 69: pilab.pivirtd.v1.ListBridgesResponse
-	(*DeleteTAPDeviceRequest)(nil),        // 70: pilab.pivirtd.v1.DeleteTAPDeviceRequest
-	(*DeleteBridgeRequest)(nil),           // 71: pilab.pivirtd.v1.DeleteBridgeRequest
-	(*DeleteNetworkResponse)(nil),         // 72: pilab.pivirtd.v1.DeleteNetworkResponse
-	(*TAPDevice)(nil),                     // 73: pilab.pivirtd.v1.TAPDevice
-	(*Bridge)(nil),                        // 74: pilab.pivirtd.v1.Bridge
-	(*NetworkDevice)(nil),                 // 75: pilab.pivirtd.v1.NetworkDevice
-	(*CreateOVSBridgeRequest)(nil),        // 76: pilab.pivirtd.v1.CreateOVSBridgeRequest
-	(*DeleteOVSBridgeRequest)(nil),        // 77: pilab.pivirtd.v1.DeleteOVSBridgeRequest
-	(*ListOVSBridgesRequest)(nil),         // 78: pilab.pivirtd.v1.ListOVSBridgesRequest
-	(*ListOVSBridgesResponse)(nil),        // 79: pilab.pivirtd.v1.ListOVSBridgesResponse
-	(*AddOVSPortRequest)(nil),             // 80: pilab.pivirtd.v1.AddOVSPortRequest
-	(*RemoveOVSPortRequest)(nil),          // 81: pilab.pivirtd.v1.RemoveOVSPortRequest
-	(*ListOVSPortsRequest)(nil),           // 82: pilab.pivirtd.v1.ListOVSPortsRequest
-	(*ListOVSPortsResponse)(nil),          // 83: pilab.pivirtd.v1.ListOVSPortsResponse
-	(*OVSBridge)(nil),                     // 84: pilab.pivirtd.v1.OVSBridge
-	(*OVSPort)(nil),                       // 85: pilab.pivirtd.v1.OVSPort
-	(*EFIConfig)(nil),                     // 86: pilab.pivirtd.v1.EFIConfig
-	(*SetLabelsRequest)(nil),              // 87: pilab.pivirtd.v1.SetLabelsRequest
-	(*SetLabelsResponse)(nil),             // 88: pilab.pivirtd.v1.SetLabelsResponse
-	(*GetLabelsRequest)(nil),              // 89: pilab.pivirtd.v1.GetLabelsRequest
-	(*GetLabelsResponse)(nil),             // 90: pilab.pivirtd.v1.GetLabelsResponse
-	(*DeleteLabelRequest)(nil),            // 91: pilab.pivirtd.v1.DeleteLabelRequest
-	(*DeleteLabelResponse)(nil),           // 92: pilab.pivirtd.v1.DeleteLabelResponse
-	(*SetProvisioningRequest)(nil),        // 93: pilab.pivirtd.v1.SetProvisioningRequest
-	(*SetProvisioningResponse)(nil),       // 94: pilab.pivirtd.v1.SetProvisioningResponse
-	(*GetVMStatusRequest)(nil),            // 95: pilab.pivirtd.v1.GetVMStatusRequest
-	(*GetVMStatusResponse)(nil),           // 96: pilab.pivirtd.v1.GetVMStatusResponse
-	(*VMCondition)(nil),                   // 97: pilab.pivirtd.v1.VMCondition
-	(*VMEvent)(nil),                       // 98: pilab.pivirtd.v1.VMEvent
-	(*ResourceSpec)(nil),                  // 99: pilab.pivirtd.v1.ResourceSpec
-	(*AttachDiskRequest)(nil),             // 100: pilab.pivirtd.v1.AttachDiskRequest
-	(*DetachDiskRequest)(nil),             // 101: pilab.pivirtd.v1.DetachDiskRequest
-	(*AttachNICRequest)(nil),              // 102: pilab.pivirtd.v1.AttachNICRequest
-	(*DetachNICRequest)(nil),              // 103: pilab.pivirtd.v1.DetachNICRequest
-	(*ResizeDiskRequest)(nil),             // 104: pilab.pivirtd.v1.ResizeDiskRequest
-	(*SetVNCPasswordRequest)(nil),         // 105: pilab.pivirtd.v1.SetVNCPasswordRequest
-	(*SetLinkStateRequest)(nil),           // 106: pilab.pivirtd.v1.SetLinkStateRequest
-	(*RenameVMRequest)(nil),               // 107: pilab.pivirtd.v1.RenameVMRequest
-	(*ChangeISORequest)(nil),              // 108: pilab.pivirtd.v1.ChangeISORequest
-	(*EjectISORequest)(nil),               // 109: pilab.pivirtd.v1.EjectISORequest
-	(*GetSnapshotTreeRequest)(nil),        // 110: pilab.pivirtd.v1.GetSnapshotTreeRequest
-	(*GetSnapshotTreeResponse)(nil),       // 111: pilab.pivirtd.v1.GetSnapshotTreeResponse
-	(*SnapshotNode)(nil),                  // 112: pilab.pivirtd.v1.SnapshotNode
-	(*GetGuestInfoRequest)(nil),           // 113: pilab.pivirtd.v1.GetGuestInfoRequest
-	(*GetGuestInfoResponse)(nil),          // 114: pilab.pivirtd.v1.GetGuestInfoResponse
-	(*GuestNetworkInterface)(nil),         // 115: pilab.pivirtd.v1.GuestNetworkInterface
-	(*GuestExecRequest)(nil),              // 116: pilab.pivirtd.v1.GuestExecRequest
-	(*GuestExecResponse)(nil),             // 117: pilab.pivirtd.v1.GuestExecResponse
-	(*GetGuestExecStatusRequest)(nil),     // 118: pilab.pivirtd.v1.GetGuestExecStatusRequest
-	(*GetGuestExecStatusResponse)(nil),    // 119: pilab.pivirtd.v1.GetGuestExecStatusResponse
-	(*SetGuestHostnameRequest)(nil),       // 120: pilab.pivirtd.v1.SetGuestHostnameRequest
-	(*SetGuestHostnameResponse)(nil),      // 121: pilab.pivirtd.v1.SetGuestHostnameResponse
-	(*CustomizeOSRequest)(nil),            // 122: pilab.pivirtd.v1.CustomizeOSRequest
-	(*UserSpec)(nil),                      // 123: pilab.pivirtd.v1.UserSpec
-	(*CustomizeOSResponse)(nil),           // 124: pilab.pivirtd.v1.CustomizeOSResponse
-	(*ListNetworkNamespacesRequest)(nil),  // 125: pilab.pivirtd.v1.ListNetworkNamespacesRequest
-	(*ListNetworkNamespacesResponse)(nil), // 126: pilab.pivirtd.v1.ListNetworkNamespacesResponse
-	(*AdoptableDevice)(nil),               // 127: pilab.pivirtd.v1.AdoptableDevice
-	(*ListAdoptableDevicesRequest)(nil),   // 128: pilab.pivirtd.v1.ListAdoptableDevicesRequest
-	(*ListAdoptableDevicesResponse)(nil),  // 129: pilab.pivirtd.v1.ListAdoptableDevicesResponse
-	nil,                                   // 130: pilab.pivirtd.v1.VMInfo.LabelsEntry
-	nil,                                   // 131: pilab.pivirtd.v1.CreateStoragePoolRequest.OptionsEntry
-	nil,                                   // 132: pilab.pivirtd.v1.StoragePool.OptionsEntry
-	nil,                                   // 133: pilab.pivirtd.v1.SetLabelsRequest.LabelsEntry
-	nil,                                   // 134: pilab.pivirtd.v1.GetLabelsResponse.LabelsEntry
-	(*timestamppb.Timestamp)(nil),         // 135: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),           // 136: google.protobuf.Duration
-	(v1.SnapshotState)(0),                 // 137: pilab.common.v1.SnapshotState
-	(*SubscribeEventsRequest)(nil),        // 138: pilab.pivirtd.v1.SubscribeEventsRequest
-	(*HostEvent)(nil),                     // 139: pilab.pivirtd.v1.HostEvent
-	(*HostResourceReport)(nil),            // 140: pilab.pivirtd.v1.HostResourceReport
+	(*StreamVMStatsRequest)(nil),          // 26: pilab.pivirtd.v1.StreamVMStatsRequest
+	(*VMStatsBatch)(nil),                  // 27: pilab.pivirtd.v1.VMStatsBatch
+	(*HostStats)(nil),                     // 28: pilab.pivirtd.v1.HostStats
+	(*PSIPressure)(nil),                   // 29: pilab.pivirtd.v1.PSIPressure
+	(*PSIStats)(nil),                      // 30: pilab.pivirtd.v1.PSIStats
+	(*HostPressure)(nil),                  // 31: pilab.pivirtd.v1.HostPressure
+	(*ExecuteQMPRequest)(nil),             // 32: pilab.pivirtd.v1.ExecuteQMPRequest
+	(*ExecuteQMPResponse)(nil),            // 33: pilab.pivirtd.v1.ExecuteQMPResponse
+	(*StreamQMPRequest)(nil),              // 34: pilab.pivirtd.v1.StreamQMPRequest
+	(*QMPEvent)(nil),                      // 35: pilab.pivirtd.v1.QMPEvent
+	(*CreateSnapshotRequest)(nil),         // 36: pilab.pivirtd.v1.CreateSnapshotRequest
+	(*ListSnapshotsRequest)(nil),          // 37: pilab.pivirtd.v1.ListSnapshotsRequest
+	(*ListSnapshotsResponse)(nil),         // 38: pilab.pivirtd.v1.ListSnapshotsResponse
+	(*RestoreSnapshotRequest)(nil),        // 39: pilab.pivirtd.v1.RestoreSnapshotRequest
+	(*DeleteSnapshotRequest)(nil),         // 40: pilab.pivirtd.v1.DeleteSnapshotRequest
+	(*SnapshotResponse)(nil),              // 41: pilab.pivirtd.v1.SnapshotResponse
+	(*DeleteSnapshotResponse)(nil),        // 42: pilab.pivirtd.v1.DeleteSnapshotResponse
+	(*ConsolidateSnapshotRequest)(nil),    // 43: pilab.pivirtd.v1.ConsolidateSnapshotRequest
+	(*GetSnapshotStatusRequest)(nil),      // 44: pilab.pivirtd.v1.GetSnapshotStatusRequest
+	(*SnapshotStatusResponse)(nil),        // 45: pilab.pivirtd.v1.SnapshotStatusResponse
+	(*SnapshotInfo)(nil),                  // 46: pilab.pivirtd.v1.SnapshotInfo
+	(*CloneVMRequest)(nil),                // 47: pilab.pivirtd.v1.CloneVMRequest
+	(*CloneSnapshotRequest)(nil),          // 48: pilab.pivirtd.v1.CloneSnapshotRequest
+	(*StartDiskMoveRequest)(nil),          // 49: pilab.pivirtd.v1.StartDiskMoveRequest
+	(*GetDiskMoveStatusRequest)(nil),      // 50: pilab.pivirtd.v1.GetDiskMoveStatusRequest
+	(*CancelDiskMoveRequest)(nil),         // 51: pilab.pivirtd.v1.CancelDiskMoveRequest
+	(*DiskMoveResponse)(nil),              // 52: pilab.pivirtd.v1.DiskMoveResponse
+	(*DiskMoveStatusResponse)(nil),        // 53: pilab.pivirtd.v1.DiskMoveStatusResponse
+	(*VMJobStatus)(nil),                   // 54: pilab.pivirtd.v1.VMJobStatus
+	(*MigrateVMRequest)(nil),              // 55: pilab.pivirtd.v1.MigrateVMRequest
+	(*MigrateVMResponse)(nil),             // 56: pilab.pivirtd.v1.MigrateVMResponse
+	(*GetMigrationStatusRequest)(nil),     // 57: pilab.pivirtd.v1.GetMigrationStatusRequest
+	(*MigrationStatusResponse)(nil),       // 58: pilab.pivirtd.v1.MigrationStatusResponse
+	(*CreateStoragePoolRequest)(nil),      // 59: pilab.pivirtd.v1.CreateStoragePoolRequest
+	(*StoragePoolResponse)(nil),           // 60: pilab.pivirtd.v1.StoragePoolResponse
+	(*ListStoragePoolsRequest)(nil),       // 61: pilab.pivirtd.v1.ListStoragePoolsRequest
+	(*ListStoragePoolsResponse)(nil),      // 62: pilab.pivirtd.v1.ListStoragePoolsResponse
+	(*DeleteStoragePoolRequest)(nil),      // 63: pilab.pivirtd.v1.DeleteStoragePoolRequest
+	(*DeleteStoragePoolResponse)(nil),     // 64: pilab.pivirtd.v1.DeleteStoragePoolResponse
+	(*StoragePool)(nil),                   // 65: pilab.pivirtd.v1.StoragePool
+	(*GetStoragePoolRequest)(nil),         // 66: pilab.pivirtd.v1.GetStoragePoolRequest
+	(*ActivateStoragePoolRequest)(nil),    // 67: pilab.pivirtd.v1.ActivateStoragePoolRequest
+	(*DeactivateStoragePoolRequest)(nil),  // 68: pilab.pivirtd.v1.DeactivateStoragePoolRequest
+	(*CreateTAPDeviceRequest)(nil),        // 69: pilab.pivirtd.v1.CreateTAPDeviceRequest
+	(*CreateBridgeRequest)(nil),           // 70: pilab.pivirtd.v1.CreateBridgeRequest
+	(*NetworkResponse)(nil),               // 71: pilab.pivirtd.v1.NetworkResponse
+	(*ListTAPDevicesRequest)(nil),         // 72: pilab.pivirtd.v1.ListTAPDevicesRequest
+	(*ListTAPDevicesResponse)(nil),        // 73: pilab.pivirtd.v1.ListTAPDevicesResponse
+	(*ListBridgesRequest)(nil),            // 74: pilab.pivirtd.v1.ListBridgesRequest
+	(*ListBridgesResponse)(nil),           // 75: pilab.pivirtd.v1.ListBridgesResponse
+	(*DeleteTAPDeviceRequest)(nil),        // 76: pilab.pivirtd.v1.DeleteTAPDeviceRequest
+	(*DeleteBridgeRequest)(nil),           // 77: pilab.pivirtd.v1.DeleteBridgeRequest
+	(*DeleteNetworkResponse)(nil),         // 78: pilab.pivirtd.v1.DeleteNetworkResponse
+	(*TAPDevice)(nil),                     // 79: pilab.pivirtd.v1.TAPDevice
+	(*Bridge)(nil),                        // 80: pilab.pivirtd.v1.Bridge
+	(*NetworkDevice)(nil),                 // 81: pilab.pivirtd.v1.NetworkDevice
+	(*CreateOVSBridgeRequest)(nil),        // 82: pilab.pivirtd.v1.CreateOVSBridgeRequest
+	(*DeleteOVSBridgeRequest)(nil),        // 83: pilab.pivirtd.v1.DeleteOVSBridgeRequest
+	(*ListOVSBridgesRequest)(nil),         // 84: pilab.pivirtd.v1.ListOVSBridgesRequest
+	(*ListOVSBridgesResponse)(nil),        // 85: pilab.pivirtd.v1.ListOVSBridgesResponse
+	(*AddOVSPortRequest)(nil),             // 86: pilab.pivirtd.v1.AddOVSPortRequest
+	(*RemoveOVSPortRequest)(nil),          // 87: pilab.pivirtd.v1.RemoveOVSPortRequest
+	(*ListOVSPortsRequest)(nil),           // 88: pilab.pivirtd.v1.ListOVSPortsRequest
+	(*ListOVSPortsResponse)(nil),          // 89: pilab.pivirtd.v1.ListOVSPortsResponse
+	(*OVSBridge)(nil),                     // 90: pilab.pivirtd.v1.OVSBridge
+	(*OVSPort)(nil),                       // 91: pilab.pivirtd.v1.OVSPort
+	(*EFIConfig)(nil),                     // 92: pilab.pivirtd.v1.EFIConfig
+	(*SetLabelsRequest)(nil),              // 93: pilab.pivirtd.v1.SetLabelsRequest
+	(*SetLabelsResponse)(nil),             // 94: pilab.pivirtd.v1.SetLabelsResponse
+	(*GetLabelsRequest)(nil),              // 95: pilab.pivirtd.v1.GetLabelsRequest
+	(*GetLabelsResponse)(nil),             // 96: pilab.pivirtd.v1.GetLabelsResponse
+	(*DeleteLabelRequest)(nil),            // 97: pilab.pivirtd.v1.DeleteLabelRequest
+	(*DeleteLabelResponse)(nil),           // 98: pilab.pivirtd.v1.DeleteLabelResponse
+	(*SetProvisioningRequest)(nil),        // 99: pilab.pivirtd.v1.SetProvisioningRequest
+	(*SetProvisioningResponse)(nil),       // 100: pilab.pivirtd.v1.SetProvisioningResponse
+	(*GetVMStatusRequest)(nil),            // 101: pilab.pivirtd.v1.GetVMStatusRequest
+	(*GetVMStatusResponse)(nil),           // 102: pilab.pivirtd.v1.GetVMStatusResponse
+	(*VMCondition)(nil),                   // 103: pilab.pivirtd.v1.VMCondition
+	(*VMEvent)(nil),                       // 104: pilab.pivirtd.v1.VMEvent
+	(*ResourceSpec)(nil),                  // 105: pilab.pivirtd.v1.ResourceSpec
+	(*AttachDiskRequest)(nil),             // 106: pilab.pivirtd.v1.AttachDiskRequest
+	(*DetachDiskRequest)(nil),             // 107: pilab.pivirtd.v1.DetachDiskRequest
+	(*AttachNICRequest)(nil),              // 108: pilab.pivirtd.v1.AttachNICRequest
+	(*DetachNICRequest)(nil),              // 109: pilab.pivirtd.v1.DetachNICRequest
+	(*ResizeDiskRequest)(nil),             // 110: pilab.pivirtd.v1.ResizeDiskRequest
+	(*SetVNCPasswordRequest)(nil),         // 111: pilab.pivirtd.v1.SetVNCPasswordRequest
+	(*SetLinkStateRequest)(nil),           // 112: pilab.pivirtd.v1.SetLinkStateRequest
+	(*RenameVMRequest)(nil),               // 113: pilab.pivirtd.v1.RenameVMRequest
+	(*ChangeISORequest)(nil),              // 114: pilab.pivirtd.v1.ChangeISORequest
+	(*EjectISORequest)(nil),               // 115: pilab.pivirtd.v1.EjectISORequest
+	(*GetSnapshotTreeRequest)(nil),        // 116: pilab.pivirtd.v1.GetSnapshotTreeRequest
+	(*GetSnapshotTreeResponse)(nil),       // 117: pilab.pivirtd.v1.GetSnapshotTreeResponse
+	(*SnapshotNode)(nil),                  // 118: pilab.pivirtd.v1.SnapshotNode
+	(*GetGuestInfoRequest)(nil),           // 119: pilab.pivirtd.v1.GetGuestInfoRequest
+	(*GetGuestInfoResponse)(nil),          // 120: pilab.pivirtd.v1.GetGuestInfoResponse
+	(*GuestNetworkInterface)(nil),         // 121: pilab.pivirtd.v1.GuestNetworkInterface
+	(*GuestExecRequest)(nil),              // 122: pilab.pivirtd.v1.GuestExecRequest
+	(*GuestExecResponse)(nil),             // 123: pilab.pivirtd.v1.GuestExecResponse
+	(*GetGuestExecStatusRequest)(nil),     // 124: pilab.pivirtd.v1.GetGuestExecStatusRequest
+	(*GetGuestExecStatusResponse)(nil),    // 125: pilab.pivirtd.v1.GetGuestExecStatusResponse
+	(*SetGuestHostnameRequest)(nil),       // 126: pilab.pivirtd.v1.SetGuestHostnameRequest
+	(*SetGuestHostnameResponse)(nil),      // 127: pilab.pivirtd.v1.SetGuestHostnameResponse
+	(*CustomizeOSRequest)(nil),            // 128: pilab.pivirtd.v1.CustomizeOSRequest
+	(*UserSpec)(nil),                      // 129: pilab.pivirtd.v1.UserSpec
+	(*CustomizeOSResponse)(nil),           // 130: pilab.pivirtd.v1.CustomizeOSResponse
+	(*ListNetworkNamespacesRequest)(nil),  // 131: pilab.pivirtd.v1.ListNetworkNamespacesRequest
+	(*ListNetworkNamespacesResponse)(nil), // 132: pilab.pivirtd.v1.ListNetworkNamespacesResponse
+	(*AdoptableDevice)(nil),               // 133: pilab.pivirtd.v1.AdoptableDevice
+	(*ListAdoptableDevicesRequest)(nil),   // 134: pilab.pivirtd.v1.ListAdoptableDevicesRequest
+	(*ListAdoptableDevicesResponse)(nil),  // 135: pilab.pivirtd.v1.ListAdoptableDevicesResponse
+	nil,                                   // 136: pilab.pivirtd.v1.VMInfo.LabelsEntry
+	nil,                                   // 137: pilab.pivirtd.v1.CreateStoragePoolRequest.OptionsEntry
+	nil,                                   // 138: pilab.pivirtd.v1.StoragePool.OptionsEntry
+	nil,                                   // 139: pilab.pivirtd.v1.SetLabelsRequest.LabelsEntry
+	nil,                                   // 140: pilab.pivirtd.v1.GetLabelsResponse.LabelsEntry
+	(*timestamppb.Timestamp)(nil),         // 141: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),           // 142: google.protobuf.Duration
+	(v1.SnapshotState)(0),                 // 143: pilab.common.v1.SnapshotState
+	(*SubscribeEventsRequest)(nil),        // 144: pilab.pivirtd.v1.SubscribeEventsRequest
+	(*HostEvent)(nil),                     // 145: pilab.pivirtd.v1.HostEvent
+	(*HostResourceReport)(nil),            // 146: pilab.pivirtd.v1.HostResourceReport
 }
 var file_pilab_pivirtd_v1_pivirtd_proto_depIdxs = []int32{
 	16,  // 0: pilab.pivirtd.v1.CreateVMRequest.cpu:type_name -> pilab.pivirtd.v1.CPUConfig
 	17,  // 1: pilab.pivirtd.v1.CreateVMRequest.disks:type_name -> pilab.pivirtd.v1.DiskConfig
 	18,  // 2: pilab.pivirtd.v1.CreateVMRequest.networks:type_name -> pilab.pivirtd.v1.NetworkConfig
 	19,  // 3: pilab.pivirtd.v1.CreateVMRequest.graphics:type_name -> pilab.pivirtd.v1.GraphicsConfig
-	86,  // 4: pilab.pivirtd.v1.CreateVMRequest.efi:type_name -> pilab.pivirtd.v1.EFIConfig
-	99,  // 5: pilab.pivirtd.v1.CreateVMRequest.resources:type_name -> pilab.pivirtd.v1.ResourceSpec
+	92,  // 4: pilab.pivirtd.v1.CreateVMRequest.efi:type_name -> pilab.pivirtd.v1.EFIConfig
+	105, // 5: pilab.pivirtd.v1.CreateVMRequest.resources:type_name -> pilab.pivirtd.v1.ResourceSpec
 	15,  // 6: pilab.pivirtd.v1.VMResponse.vm:type_name -> pilab.pivirtd.v1.VMInfo
 	15,  // 7: pilab.pivirtd.v1.ListVMsResponse.vms:type_name -> pilab.pivirtd.v1.VMInfo
 	16,  // 8: pilab.pivirtd.v1.VMInfo.cpu:type_name -> pilab.pivirtd.v1.CPUConfig
 	17,  // 9: pilab.pivirtd.v1.VMInfo.disks:type_name -> pilab.pivirtd.v1.DiskConfig
 	18,  // 10: pilab.pivirtd.v1.VMInfo.networks:type_name -> pilab.pivirtd.v1.NetworkConfig
-	135, // 11: pilab.pivirtd.v1.VMInfo.created_at:type_name -> google.protobuf.Timestamp
-	135, // 12: pilab.pivirtd.v1.VMInfo.updated_at:type_name -> google.protobuf.Timestamp
-	86,  // 13: pilab.pivirtd.v1.VMInfo.efi:type_name -> pilab.pivirtd.v1.EFIConfig
-	130, // 14: pilab.pivirtd.v1.VMInfo.labels:type_name -> pilab.pivirtd.v1.VMInfo.LabelsEntry
+	141, // 11: pilab.pivirtd.v1.VMInfo.created_at:type_name -> google.protobuf.Timestamp
+	141, // 12: pilab.pivirtd.v1.VMInfo.updated_at:type_name -> google.protobuf.Timestamp
+	92,  // 13: pilab.pivirtd.v1.VMInfo.efi:type_name -> pilab.pivirtd.v1.EFIConfig
+	136, // 14: pilab.pivirtd.v1.VMInfo.labels:type_name -> pilab.pivirtd.v1.VMInfo.LabelsEntry
 	22,  // 15: pilab.pivirtd.v1.VMStatsResponse.cpu_stats:type_name -> pilab.pivirtd.v1.CPUStats
 	23,  // 16: pilab.pivirtd.v1.VMStatsResponse.memory_stats:type_name -> pilab.pivirtd.v1.MemoryStats
 	24,  // 17: pilab.pivirtd.v1.VMStatsResponse.disk_stats:type_name -> pilab.pivirtd.v1.DiskStats
 	25,  // 18: pilab.pivirtd.v1.VMStatsResponse.network_stats:type_name -> pilab.pivirtd.v1.NetworkStats
-	135, // 19: pilab.pivirtd.v1.VMStatsResponse.timestamp:type_name -> google.protobuf.Timestamp
-	135, // 20: pilab.pivirtd.v1.QMPEvent.timestamp:type_name -> google.protobuf.Timestamp
-	136, // 21: pilab.pivirtd.v1.CreateSnapshotRequest.retain_for:type_name -> google.protobuf.Duration
-	40,  // 22: pilab.pivirtd.v1.ListSnapshotsResponse.snapshots:type_name -> pilab.pivirtd.v1.SnapshotInfo
-	40,  // 23: pilab.pivirtd.v1.SnapshotResponse.snapshot:type_name -> pilab.pivirtd.v1.SnapshotInfo
-	48,  // 24: pilab.pivirtd.v1.SnapshotStatusResponse.job:type_name -> pilab.pivirtd.v1.VMJobStatus
-	135, // 25: pilab.pivirtd.v1.SnapshotInfo.date:type_name -> google.protobuf.Timestamp
-	137, // 26: pilab.pivirtd.v1.SnapshotInfo.state:type_name -> pilab.common.v1.SnapshotState
-	48,  // 27: pilab.pivirtd.v1.DiskMoveResponse.job:type_name -> pilab.pivirtd.v1.VMJobStatus
-	48,  // 28: pilab.pivirtd.v1.DiskMoveStatusResponse.job:type_name -> pilab.pivirtd.v1.VMJobStatus
-	135, // 29: pilab.pivirtd.v1.VMJobStatus.started_at:type_name -> google.protobuf.Timestamp
-	131, // 30: pilab.pivirtd.v1.CreateStoragePoolRequest.options:type_name -> pilab.pivirtd.v1.CreateStoragePoolRequest.OptionsEntry
-	59,  // 31: pilab.pivirtd.v1.StoragePoolResponse.pool:type_name -> pilab.pivirtd.v1.StoragePool
-	59,  // 32: pilab.pivirtd.v1.ListStoragePoolsResponse.pools:type_name -> pilab.pivirtd.v1.StoragePool
-	132, // 33: pilab.pivirtd.v1.StoragePool.options:type_name -> pilab.pivirtd.v1.StoragePool.OptionsEntry
-	75,  // 34: pilab.pivirtd.v1.NetworkResponse.device:type_name -> pilab.pivirtd.v1.NetworkDevice
-	73,  // 35: pilab.pivirtd.v1.ListTAPDevicesResponse.taps:type_name -> pilab.pivirtd.v1.TAPDevice
-	74,  // 36: pilab.pivirtd.v1.ListBridgesResponse.bridges:type_name -> pilab.pivirtd.v1.Bridge
-	73,  // 37: pilab.pivirtd.v1.NetworkDevice.tap:type_name -> pilab.pivirtd.v1.TAPDevice
-	74,  // 38: pilab.pivirtd.v1.NetworkDevice.bridge:type_name -> pilab.pivirtd.v1.Bridge
-	84,  // 39: pilab.pivirtd.v1.NetworkDevice.ovs_bridge:type_name -> pilab.pivirtd.v1.OVSBridge
-	85,  // 40: pilab.pivirtd.v1.NetworkDevice.ovs_port:type_name -> pilab.pivirtd.v1.OVSPort
-	84,  // 41: pilab.pivirtd.v1.ListOVSBridgesResponse.bridges:type_name -> pilab.pivirtd.v1.OVSBridge
-	85,  // 42: pilab.pivirtd.v1.ListOVSPortsResponse.ports:type_name -> pilab.pivirtd.v1.OVSPort
-	133, // 43: pilab.pivirtd.v1.SetLabelsRequest.labels:type_name -> pilab.pivirtd.v1.SetLabelsRequest.LabelsEntry
-	134, // 44: pilab.pivirtd.v1.GetLabelsResponse.labels:type_name -> pilab.pivirtd.v1.GetLabelsResponse.LabelsEntry
-	97,  // 45: pilab.pivirtd.v1.GetVMStatusResponse.conditions:type_name -> pilab.pivirtd.v1.VMCondition
-	98,  // 46: pilab.pivirtd.v1.GetVMStatusResponse.events:type_name -> pilab.pivirtd.v1.VMEvent
-	48,  // 47: pilab.pivirtd.v1.GetVMStatusResponse.jobs:type_name -> pilab.pivirtd.v1.VMJobStatus
-	17,  // 48: pilab.pivirtd.v1.AttachDiskRequest.disk:type_name -> pilab.pivirtd.v1.DiskConfig
-	18,  // 49: pilab.pivirtd.v1.AttachNICRequest.nic:type_name -> pilab.pivirtd.v1.NetworkConfig
-	112, // 50: pilab.pivirtd.v1.GetSnapshotTreeResponse.roots:type_name -> pilab.pivirtd.v1.SnapshotNode
-	40,  // 51: pilab.pivirtd.v1.SnapshotNode.snapshot:type_name -> pilab.pivirtd.v1.SnapshotInfo
-	112, // 52: pilab.pivirtd.v1.SnapshotNode.children:type_name -> pilab.pivirtd.v1.SnapshotNode
-	115, // 53: pilab.pivirtd.v1.GetGuestInfoResponse.interfaces:type_name -> pilab.pivirtd.v1.GuestNetworkInterface
-	123, // 54: pilab.pivirtd.v1.CustomizeOSRequest.users:type_name -> pilab.pivirtd.v1.UserSpec
-	127, // 55: pilab.pivirtd.v1.ListAdoptableDevicesResponse.devices:type_name -> pilab.pivirtd.v1.AdoptableDevice
-	0,   // 56: pilab.pivirtd.v1.PivirtdService.CreateVM:input_type -> pilab.pivirtd.v1.CreateVMRequest
-	1,   // 57: pilab.pivirtd.v1.PivirtdService.ApplyVM:input_type -> pilab.pivirtd.v1.ApplyVMRequest
-	2,   // 58: pilab.pivirtd.v1.PivirtdService.StartVM:input_type -> pilab.pivirtd.v1.StartVMRequest
-	3,   // 59: pilab.pivirtd.v1.PivirtdService.StopVM:input_type -> pilab.pivirtd.v1.StopVMRequest
-	4,   // 60: pilab.pivirtd.v1.PivirtdService.PauseVM:input_type -> pilab.pivirtd.v1.PauseVMRequest
-	5,   // 61: pilab.pivirtd.v1.PivirtdService.ResumeVM:input_type -> pilab.pivirtd.v1.ResumeVMRequest
-	6,   // 62: pilab.pivirtd.v1.PivirtdService.RebootVM:input_type -> pilab.pivirtd.v1.RebootVMRequest
-	7,   // 63: pilab.pivirtd.v1.PivirtdService.DeleteVM:input_type -> pilab.pivirtd.v1.DeleteVMRequest
-	11,  // 64: pilab.pivirtd.v1.PivirtdService.ListVMs:input_type -> pilab.pivirtd.v1.ListVMsRequest
-	10,  // 65: pilab.pivirtd.v1.PivirtdService.GetVM:input_type -> pilab.pivirtd.v1.GetVMRequest
-	20,  // 66: pilab.pivirtd.v1.PivirtdService.GetVMStats:input_type -> pilab.pivirtd.v1.GetVMStatsRequest
-	8,   // 67: pilab.pivirtd.v1.PivirtdService.UpdateVMMemory:input_type -> pilab.pivirtd.v1.UpdateVMMemoryRequest
-	9,   // 68: pilab.pivirtd.v1.PivirtdService.UpdateVMCpu:input_type -> pilab.pivirtd.v1.UpdateVMCpuRequest
-	26,  // 69: pilab.pivirtd.v1.PivirtdService.ExecuteQMP:input_type -> pilab.pivirtd.v1.ExecuteQMPRequest
-	28,  // 70: pilab.pivirtd.v1.PivirtdService.StreamQMPEvents:input_type -> pilab.pivirtd.v1.StreamQMPRequest
-	30,  // 71: pilab.pivirtd.v1.PivirtdService.CreateSnapshot:input_type -> pilab.pivirtd.v1.CreateSnapshotRequest
-	31,  // 72: pilab.pivirtd.v1.PivirtdService.ListSnapshots:input_type -> pilab.pivirtd.v1.ListSnapshotsRequest
-	33,  // 73: pilab.pivirtd.v1.PivirtdService.RestoreSnapshot:input_type -> pilab.pivirtd.v1.RestoreSnapshotRequest
-	34,  // 74: pilab.pivirtd.v1.PivirtdService.DeleteSnapshot:input_type -> pilab.pivirtd.v1.DeleteSnapshotRequest
-	37,  // 75: pilab.pivirtd.v1.PivirtdService.ConsolidateSnapshot:input_type -> pilab.pivirtd.v1.ConsolidateSnapshotRequest
-	38,  // 76: pilab.pivirtd.v1.PivirtdService.GetSnapshotStatus:input_type -> pilab.pivirtd.v1.GetSnapshotStatusRequest
-	41,  // 77: pilab.pivirtd.v1.PivirtdService.CloneVM:input_type -> pilab.pivirtd.v1.CloneVMRequest
-	42,  // 78: pilab.pivirtd.v1.PivirtdService.CloneSnapshot:input_type -> pilab.pivirtd.v1.CloneSnapshotRequest
-	49,  // 79: pilab.pivirtd.v1.PivirtdService.MigrateVM:input_type -> pilab.pivirtd.v1.MigrateVMRequest
-	51,  // 80: pilab.pivirtd.v1.PivirtdService.GetMigrationStatus:input_type -> pilab.pivirtd.v1.GetMigrationStatusRequest
-	53,  // 81: pilab.pivirtd.v1.PivirtdService.CreateStoragePool:input_type -> pilab.pivirtd.v1.CreateStoragePoolRequest
-	55,  // 82: pilab.pivirtd.v1.PivirtdService.ListStoragePools:input_type -> pilab.pivirtd.v1.ListStoragePoolsRequest
-	57,  // 83: pilab.pivirtd.v1.PivirtdService.DeleteStoragePool:input_type -> pilab.pivirtd.v1.DeleteStoragePoolRequest
-	60,  // 84: pilab.pivirtd.v1.PivirtdService.GetStoragePool:input_type -> pilab.pivirtd.v1.GetStoragePoolRequest
-	61,  // 85: pilab.pivirtd.v1.PivirtdService.ActivateStoragePool:input_type -> pilab.pivirtd.v1.ActivateStoragePoolRequest
-	62,  // 86: pilab.pivirtd.v1.PivirtdService.DeactivateStoragePool:input_type -> pilab.pivirtd.v1.DeactivateStoragePoolRequest
-	63,  // 87: pilab.pivirtd.v1.PivirtdService.CreateTAPDevice:input_type -> pilab.pivirtd.v1.CreateTAPDeviceRequest
-	70,  // 88: pilab.pivirtd.v1.PivirtdService.DeleteTAPDevice:input_type -> pilab.pivirtd.v1.DeleteTAPDeviceRequest
-	66,  // 89: pilab.pivirtd.v1.PivirtdService.ListTAPDevices:input_type -> pilab.pivirtd.v1.ListTAPDevicesRequest
-	64,  // 90: pilab.pivirtd.v1.PivirtdService.CreateBridge:input_type -> pilab.pivirtd.v1.CreateBridgeRequest
-	71,  // 91: pilab.pivirtd.v1.PivirtdService.DeleteBridge:input_type -> pilab.pivirtd.v1.DeleteBridgeRequest
-	68,  // 92: pilab.pivirtd.v1.PivirtdService.ListBridges:input_type -> pilab.pivirtd.v1.ListBridgesRequest
-	76,  // 93: pilab.pivirtd.v1.PivirtdService.CreateOVSBridge:input_type -> pilab.pivirtd.v1.CreateOVSBridgeRequest
-	77,  // 94: pilab.pivirtd.v1.PivirtdService.DeleteOVSBridge:input_type -> pilab.pivirtd.v1.DeleteOVSBridgeRequest
-	78,  // 95: pilab.pivirtd.v1.PivirtdService.ListOVSBridges:input_type -> pilab.pivirtd.v1.ListOVSBridgesRequest
-	80,  // 96: pilab.pivirtd.v1.PivirtdService.AddOVSPort:input_type -> pilab.pivirtd.v1.AddOVSPortRequest
-	81,  // 97: pilab.pivirtd.v1.PivirtdService.RemoveOVSPort:input_type -> pilab.pivirtd.v1.RemoveOVSPortRequest
-	82,  // 98: pilab.pivirtd.v1.PivirtdService.ListOVSPorts:input_type -> pilab.pivirtd.v1.ListOVSPortsRequest
-	125, // 99: pilab.pivirtd.v1.PivirtdService.ListNetworkNamespaces:input_type -> pilab.pivirtd.v1.ListNetworkNamespacesRequest
-	128, // 100: pilab.pivirtd.v1.PivirtdService.ListAdoptableDevices:input_type -> pilab.pivirtd.v1.ListAdoptableDevicesRequest
-	87,  // 101: pilab.pivirtd.v1.PivirtdService.SetLabels:input_type -> pilab.pivirtd.v1.SetLabelsRequest
-	89,  // 102: pilab.pivirtd.v1.PivirtdService.GetLabels:input_type -> pilab.pivirtd.v1.GetLabelsRequest
-	91,  // 103: pilab.pivirtd.v1.PivirtdService.DeleteLabel:input_type -> pilab.pivirtd.v1.DeleteLabelRequest
-	93,  // 104: pilab.pivirtd.v1.PivirtdService.SetProvisioning:input_type -> pilab.pivirtd.v1.SetProvisioningRequest
-	95,  // 105: pilab.pivirtd.v1.PivirtdService.GetVMStatus:input_type -> pilab.pivirtd.v1.GetVMStatusRequest
-	43,  // 106: pilab.pivirtd.v1.PivirtdService.StartDiskMove:input_type -> pilab.pivirtd.v1.StartDiskMoveRequest
-	44,  // 107: pilab.pivirtd.v1.PivirtdService.GetDiskMoveStatus:input_type -> pilab.pivirtd.v1.GetDiskMoveStatusRequest
-	45,  // 108: pilab.pivirtd.v1.PivirtdService.CancelDiskMove:input_type -> pilab.pivirtd.v1.CancelDiskMoveRequest
-	100, // 109: pilab.pivirtd.v1.PivirtdService.AttachDisk:input_type -> pilab.pivirtd.v1.AttachDiskRequest
-	101, // 110: pilab.pivirtd.v1.PivirtdService.DetachDisk:input_type -> pilab.pivirtd.v1.DetachDiskRequest
-	102, // 111: pilab.pivirtd.v1.PivirtdService.AttachNIC:input_type -> pilab.pivirtd.v1.AttachNICRequest
-	103, // 112: pilab.pivirtd.v1.PivirtdService.DetachNIC:input_type -> pilab.pivirtd.v1.DetachNICRequest
-	104, // 113: pilab.pivirtd.v1.PivirtdService.ResizeDisk:input_type -> pilab.pivirtd.v1.ResizeDiskRequest
-	105, // 114: pilab.pivirtd.v1.PivirtdService.SetVNCPassword:input_type -> pilab.pivirtd.v1.SetVNCPasswordRequest
-	106, // 115: pilab.pivirtd.v1.PivirtdService.SetLinkState:input_type -> pilab.pivirtd.v1.SetLinkStateRequest
-	107, // 116: pilab.pivirtd.v1.PivirtdService.RenameVM:input_type -> pilab.pivirtd.v1.RenameVMRequest
-	108, // 117: pilab.pivirtd.v1.PivirtdService.ChangeISO:input_type -> pilab.pivirtd.v1.ChangeISORequest
-	109, // 118: pilab.pivirtd.v1.PivirtdService.EjectISO:input_type -> pilab.pivirtd.v1.EjectISORequest
-	110, // 119: pilab.pivirtd.v1.PivirtdService.GetSnapshotTree:input_type -> pilab.pivirtd.v1.GetSnapshotTreeRequest
-	113, // 120: pilab.pivirtd.v1.PivirtdService.GetGuestInfo:input_type -> pilab.pivirtd.v1.GetGuestInfoRequest
-	116, // 121: pilab.pivirtd.v1.PivirtdService.GuestExec:input_type -> pilab.pivirtd.v1.GuestExecRequest
-	118, // 122: pilab.pivirtd.v1.PivirtdService.GetGuestExecStatus:input_type -> pilab.pivirtd.v1.GetGuestExecStatusRequest
-	120, // 123: pilab.pivirtd.v1.PivirtdService.SetGuestHostname:input_type -> pilab.pivirtd.v1.SetGuestHostnameRequest
-	122, // 124: pilab.pivirtd.v1.PivirtdService.CustomizeOS:input_type -> pilab.pivirtd.v1.CustomizeOSRequest
-	138, // 125: pilab.pivirtd.v1.PivirtdService.SubscribeEvents:input_type -> pilab.pivirtd.v1.SubscribeEventsRequest
-	138, // 126: pilab.pivirtd.v1.PivirtdService.GetHostResource:input_type -> pilab.pivirtd.v1.SubscribeEventsRequest
-	12,  // 127: pilab.pivirtd.v1.PivirtdService.CreateVM:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 128: pilab.pivirtd.v1.PivirtdService.ApplyVM:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 129: pilab.pivirtd.v1.PivirtdService.StartVM:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 130: pilab.pivirtd.v1.PivirtdService.StopVM:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 131: pilab.pivirtd.v1.PivirtdService.PauseVM:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 132: pilab.pivirtd.v1.PivirtdService.ResumeVM:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 133: pilab.pivirtd.v1.PivirtdService.RebootVM:output_type -> pilab.pivirtd.v1.VMResponse
-	13,  // 134: pilab.pivirtd.v1.PivirtdService.DeleteVM:output_type -> pilab.pivirtd.v1.DeleteVMResponse
-	14,  // 135: pilab.pivirtd.v1.PivirtdService.ListVMs:output_type -> pilab.pivirtd.v1.ListVMsResponse
-	12,  // 136: pilab.pivirtd.v1.PivirtdService.GetVM:output_type -> pilab.pivirtd.v1.VMResponse
-	21,  // 137: pilab.pivirtd.v1.PivirtdService.GetVMStats:output_type -> pilab.pivirtd.v1.VMStatsResponse
-	12,  // 138: pilab.pivirtd.v1.PivirtdService.UpdateVMMemory:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 139: pilab.pivirtd.v1.PivirtdService.UpdateVMCpu:output_type -> pilab.pivirtd.v1.VMResponse
-	27,  // 140: pilab.pivirtd.v1.PivirtdService.ExecuteQMP:output_type -> pilab.pivirtd.v1.ExecuteQMPResponse
-	29,  // 141: pilab.pivirtd.v1.PivirtdService.StreamQMPEvents:output_type -> pilab.pivirtd.v1.QMPEvent
-	35,  // 142: pilab.pivirtd.v1.PivirtdService.CreateSnapshot:output_type -> pilab.pivirtd.v1.SnapshotResponse
-	32,  // 143: pilab.pivirtd.v1.PivirtdService.ListSnapshots:output_type -> pilab.pivirtd.v1.ListSnapshotsResponse
-	35,  // 144: pilab.pivirtd.v1.PivirtdService.RestoreSnapshot:output_type -> pilab.pivirtd.v1.SnapshotResponse
-	36,  // 145: pilab.pivirtd.v1.PivirtdService.DeleteSnapshot:output_type -> pilab.pivirtd.v1.DeleteSnapshotResponse
-	35,  // 146: pilab.pivirtd.v1.PivirtdService.ConsolidateSnapshot:output_type -> pilab.pivirtd.v1.SnapshotResponse
-	39,  // 147: pilab.pivirtd.v1.PivirtdService.GetSnapshotStatus:output_type -> pilab.pivirtd.v1.SnapshotStatusResponse
-	12,  // 148: pilab.pivirtd.v1.PivirtdService.CloneVM:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 149: pilab.pivirtd.v1.PivirtdService.CloneSnapshot:output_type -> pilab.pivirtd.v1.VMResponse
-	50,  // 150: pilab.pivirtd.v1.PivirtdService.MigrateVM:output_type -> pilab.pivirtd.v1.MigrateVMResponse
-	52,  // 151: pilab.pivirtd.v1.PivirtdService.GetMigrationStatus:output_type -> pilab.pivirtd.v1.MigrationStatusResponse
-	54,  // 152: pilab.pivirtd.v1.PivirtdService.CreateStoragePool:output_type -> pilab.pivirtd.v1.StoragePoolResponse
-	56,  // 153: pilab.pivirtd.v1.PivirtdService.ListStoragePools:output_type -> pilab.pivirtd.v1.ListStoragePoolsResponse
-	58,  // 154: pilab.pivirtd.v1.PivirtdService.DeleteStoragePool:output_type -> pilab.pivirtd.v1.DeleteStoragePoolResponse
-	54,  // 155: pilab.pivirtd.v1.PivirtdService.GetStoragePool:output_type -> pilab.pivirtd.v1.StoragePoolResponse
-	54,  // 156: pilab.pivirtd.v1.PivirtdService.ActivateStoragePool:output_type -> pilab.pivirtd.v1.StoragePoolResponse
-	54,  // 157: pilab.pivirtd.v1.PivirtdService.DeactivateStoragePool:output_type -> pilab.pivirtd.v1.StoragePoolResponse
-	65,  // 158: pilab.pivirtd.v1.PivirtdService.CreateTAPDevice:output_type -> pilab.pivirtd.v1.NetworkResponse
-	72,  // 159: pilab.pivirtd.v1.PivirtdService.DeleteTAPDevice:output_type -> pilab.pivirtd.v1.DeleteNetworkResponse
-	67,  // 160: pilab.pivirtd.v1.PivirtdService.ListTAPDevices:output_type -> pilab.pivirtd.v1.ListTAPDevicesResponse
-	65,  // 161: pilab.pivirtd.v1.PivirtdService.CreateBridge:output_type -> pilab.pivirtd.v1.NetworkResponse
-	72,  // 162: pilab.pivirtd.v1.PivirtdService.DeleteBridge:output_type -> pilab.pivirtd.v1.DeleteNetworkResponse
-	69,  // 163: pilab.pivirtd.v1.PivirtdService.ListBridges:output_type -> pilab.pivirtd.v1.ListBridgesResponse
-	65,  // 164: pilab.pivirtd.v1.PivirtdService.CreateOVSBridge:output_type -> pilab.pivirtd.v1.NetworkResponse
-	72,  // 165: pilab.pivirtd.v1.PivirtdService.DeleteOVSBridge:output_type -> pilab.pivirtd.v1.DeleteNetworkResponse
-	79,  // 166: pilab.pivirtd.v1.PivirtdService.ListOVSBridges:output_type -> pilab.pivirtd.v1.ListOVSBridgesResponse
-	65,  // 167: pilab.pivirtd.v1.PivirtdService.AddOVSPort:output_type -> pilab.pivirtd.v1.NetworkResponse
-	72,  // 168: pilab.pivirtd.v1.PivirtdService.RemoveOVSPort:output_type -> pilab.pivirtd.v1.DeleteNetworkResponse
-	83,  // 169: pilab.pivirtd.v1.PivirtdService.ListOVSPorts:output_type -> pilab.pivirtd.v1.ListOVSPortsResponse
-	126, // 170: pilab.pivirtd.v1.PivirtdService.ListNetworkNamespaces:output_type -> pilab.pivirtd.v1.ListNetworkNamespacesResponse
-	129, // 171: pilab.pivirtd.v1.PivirtdService.ListAdoptableDevices:output_type -> pilab.pivirtd.v1.ListAdoptableDevicesResponse
-	88,  // 172: pilab.pivirtd.v1.PivirtdService.SetLabels:output_type -> pilab.pivirtd.v1.SetLabelsResponse
-	90,  // 173: pilab.pivirtd.v1.PivirtdService.GetLabels:output_type -> pilab.pivirtd.v1.GetLabelsResponse
-	92,  // 174: pilab.pivirtd.v1.PivirtdService.DeleteLabel:output_type -> pilab.pivirtd.v1.DeleteLabelResponse
-	94,  // 175: pilab.pivirtd.v1.PivirtdService.SetProvisioning:output_type -> pilab.pivirtd.v1.SetProvisioningResponse
-	96,  // 176: pilab.pivirtd.v1.PivirtdService.GetVMStatus:output_type -> pilab.pivirtd.v1.GetVMStatusResponse
-	47,  // 177: pilab.pivirtd.v1.PivirtdService.StartDiskMove:output_type -> pilab.pivirtd.v1.DiskMoveStatusResponse
-	47,  // 178: pilab.pivirtd.v1.PivirtdService.GetDiskMoveStatus:output_type -> pilab.pivirtd.v1.DiskMoveStatusResponse
-	46,  // 179: pilab.pivirtd.v1.PivirtdService.CancelDiskMove:output_type -> pilab.pivirtd.v1.DiskMoveResponse
-	12,  // 180: pilab.pivirtd.v1.PivirtdService.AttachDisk:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 181: pilab.pivirtd.v1.PivirtdService.DetachDisk:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 182: pilab.pivirtd.v1.PivirtdService.AttachNIC:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 183: pilab.pivirtd.v1.PivirtdService.DetachNIC:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 184: pilab.pivirtd.v1.PivirtdService.ResizeDisk:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 185: pilab.pivirtd.v1.PivirtdService.SetVNCPassword:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 186: pilab.pivirtd.v1.PivirtdService.SetLinkState:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 187: pilab.pivirtd.v1.PivirtdService.RenameVM:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 188: pilab.pivirtd.v1.PivirtdService.ChangeISO:output_type -> pilab.pivirtd.v1.VMResponse
-	12,  // 189: pilab.pivirtd.v1.PivirtdService.EjectISO:output_type -> pilab.pivirtd.v1.VMResponse
-	111, // 190: pilab.pivirtd.v1.PivirtdService.GetSnapshotTree:output_type -> pilab.pivirtd.v1.GetSnapshotTreeResponse
-	114, // 191: pilab.pivirtd.v1.PivirtdService.GetGuestInfo:output_type -> pilab.pivirtd.v1.GetGuestInfoResponse
-	117, // 192: pilab.pivirtd.v1.PivirtdService.GuestExec:output_type -> pilab.pivirtd.v1.GuestExecResponse
-	119, // 193: pilab.pivirtd.v1.PivirtdService.GetGuestExecStatus:output_type -> pilab.pivirtd.v1.GetGuestExecStatusResponse
-	121, // 194: pilab.pivirtd.v1.PivirtdService.SetGuestHostname:output_type -> pilab.pivirtd.v1.SetGuestHostnameResponse
-	124, // 195: pilab.pivirtd.v1.PivirtdService.CustomizeOS:output_type -> pilab.pivirtd.v1.CustomizeOSResponse
-	139, // 196: pilab.pivirtd.v1.PivirtdService.SubscribeEvents:output_type -> pilab.pivirtd.v1.HostEvent
-	140, // 197: pilab.pivirtd.v1.PivirtdService.GetHostResource:output_type -> pilab.pivirtd.v1.HostResourceReport
-	127, // [127:198] is the sub-list for method output_type
-	56,  // [56:127] is the sub-list for method input_type
-	56,  // [56:56] is the sub-list for extension type_name
-	56,  // [56:56] is the sub-list for extension extendee
-	0,   // [0:56] is the sub-list for field type_name
+	141, // 19: pilab.pivirtd.v1.VMStatsResponse.timestamp:type_name -> google.protobuf.Timestamp
+	141, // 20: pilab.pivirtd.v1.VMStatsBatch.at:type_name -> google.protobuf.Timestamp
+	21,  // 21: pilab.pivirtd.v1.VMStatsBatch.vms:type_name -> pilab.pivirtd.v1.VMStatsResponse
+	28,  // 22: pilab.pivirtd.v1.VMStatsBatch.host_stats:type_name -> pilab.pivirtd.v1.HostStats
+	31,  // 23: pilab.pivirtd.v1.HostStats.pressure:type_name -> pilab.pivirtd.v1.HostPressure
+	29,  // 24: pilab.pivirtd.v1.PSIStats.some:type_name -> pilab.pivirtd.v1.PSIPressure
+	29,  // 25: pilab.pivirtd.v1.PSIStats.full:type_name -> pilab.pivirtd.v1.PSIPressure
+	30,  // 26: pilab.pivirtd.v1.HostPressure.cpu:type_name -> pilab.pivirtd.v1.PSIStats
+	30,  // 27: pilab.pivirtd.v1.HostPressure.memory:type_name -> pilab.pivirtd.v1.PSIStats
+	30,  // 28: pilab.pivirtd.v1.HostPressure.io:type_name -> pilab.pivirtd.v1.PSIStats
+	141, // 29: pilab.pivirtd.v1.QMPEvent.timestamp:type_name -> google.protobuf.Timestamp
+	142, // 30: pilab.pivirtd.v1.CreateSnapshotRequest.retain_for:type_name -> google.protobuf.Duration
+	46,  // 31: pilab.pivirtd.v1.ListSnapshotsResponse.snapshots:type_name -> pilab.pivirtd.v1.SnapshotInfo
+	46,  // 32: pilab.pivirtd.v1.SnapshotResponse.snapshot:type_name -> pilab.pivirtd.v1.SnapshotInfo
+	54,  // 33: pilab.pivirtd.v1.SnapshotStatusResponse.job:type_name -> pilab.pivirtd.v1.VMJobStatus
+	141, // 34: pilab.pivirtd.v1.SnapshotInfo.date:type_name -> google.protobuf.Timestamp
+	143, // 35: pilab.pivirtd.v1.SnapshotInfo.state:type_name -> pilab.common.v1.SnapshotState
+	54,  // 36: pilab.pivirtd.v1.DiskMoveResponse.job:type_name -> pilab.pivirtd.v1.VMJobStatus
+	54,  // 37: pilab.pivirtd.v1.DiskMoveStatusResponse.job:type_name -> pilab.pivirtd.v1.VMJobStatus
+	141, // 38: pilab.pivirtd.v1.VMJobStatus.started_at:type_name -> google.protobuf.Timestamp
+	137, // 39: pilab.pivirtd.v1.CreateStoragePoolRequest.options:type_name -> pilab.pivirtd.v1.CreateStoragePoolRequest.OptionsEntry
+	65,  // 40: pilab.pivirtd.v1.StoragePoolResponse.pool:type_name -> pilab.pivirtd.v1.StoragePool
+	65,  // 41: pilab.pivirtd.v1.ListStoragePoolsResponse.pools:type_name -> pilab.pivirtd.v1.StoragePool
+	138, // 42: pilab.pivirtd.v1.StoragePool.options:type_name -> pilab.pivirtd.v1.StoragePool.OptionsEntry
+	81,  // 43: pilab.pivirtd.v1.NetworkResponse.device:type_name -> pilab.pivirtd.v1.NetworkDevice
+	79,  // 44: pilab.pivirtd.v1.ListTAPDevicesResponse.taps:type_name -> pilab.pivirtd.v1.TAPDevice
+	80,  // 45: pilab.pivirtd.v1.ListBridgesResponse.bridges:type_name -> pilab.pivirtd.v1.Bridge
+	79,  // 46: pilab.pivirtd.v1.NetworkDevice.tap:type_name -> pilab.pivirtd.v1.TAPDevice
+	80,  // 47: pilab.pivirtd.v1.NetworkDevice.bridge:type_name -> pilab.pivirtd.v1.Bridge
+	90,  // 48: pilab.pivirtd.v1.NetworkDevice.ovs_bridge:type_name -> pilab.pivirtd.v1.OVSBridge
+	91,  // 49: pilab.pivirtd.v1.NetworkDevice.ovs_port:type_name -> pilab.pivirtd.v1.OVSPort
+	90,  // 50: pilab.pivirtd.v1.ListOVSBridgesResponse.bridges:type_name -> pilab.pivirtd.v1.OVSBridge
+	91,  // 51: pilab.pivirtd.v1.ListOVSPortsResponse.ports:type_name -> pilab.pivirtd.v1.OVSPort
+	139, // 52: pilab.pivirtd.v1.SetLabelsRequest.labels:type_name -> pilab.pivirtd.v1.SetLabelsRequest.LabelsEntry
+	140, // 53: pilab.pivirtd.v1.GetLabelsResponse.labels:type_name -> pilab.pivirtd.v1.GetLabelsResponse.LabelsEntry
+	103, // 54: pilab.pivirtd.v1.GetVMStatusResponse.conditions:type_name -> pilab.pivirtd.v1.VMCondition
+	104, // 55: pilab.pivirtd.v1.GetVMStatusResponse.events:type_name -> pilab.pivirtd.v1.VMEvent
+	54,  // 56: pilab.pivirtd.v1.GetVMStatusResponse.jobs:type_name -> pilab.pivirtd.v1.VMJobStatus
+	17,  // 57: pilab.pivirtd.v1.AttachDiskRequest.disk:type_name -> pilab.pivirtd.v1.DiskConfig
+	18,  // 58: pilab.pivirtd.v1.AttachNICRequest.nic:type_name -> pilab.pivirtd.v1.NetworkConfig
+	118, // 59: pilab.pivirtd.v1.GetSnapshotTreeResponse.roots:type_name -> pilab.pivirtd.v1.SnapshotNode
+	46,  // 60: pilab.pivirtd.v1.SnapshotNode.snapshot:type_name -> pilab.pivirtd.v1.SnapshotInfo
+	118, // 61: pilab.pivirtd.v1.SnapshotNode.children:type_name -> pilab.pivirtd.v1.SnapshotNode
+	121, // 62: pilab.pivirtd.v1.GetGuestInfoResponse.interfaces:type_name -> pilab.pivirtd.v1.GuestNetworkInterface
+	129, // 63: pilab.pivirtd.v1.CustomizeOSRequest.users:type_name -> pilab.pivirtd.v1.UserSpec
+	133, // 64: pilab.pivirtd.v1.ListAdoptableDevicesResponse.devices:type_name -> pilab.pivirtd.v1.AdoptableDevice
+	0,   // 65: pilab.pivirtd.v1.PivirtdService.CreateVM:input_type -> pilab.pivirtd.v1.CreateVMRequest
+	1,   // 66: pilab.pivirtd.v1.PivirtdService.ApplyVM:input_type -> pilab.pivirtd.v1.ApplyVMRequest
+	2,   // 67: pilab.pivirtd.v1.PivirtdService.StartVM:input_type -> pilab.pivirtd.v1.StartVMRequest
+	3,   // 68: pilab.pivirtd.v1.PivirtdService.StopVM:input_type -> pilab.pivirtd.v1.StopVMRequest
+	4,   // 69: pilab.pivirtd.v1.PivirtdService.PauseVM:input_type -> pilab.pivirtd.v1.PauseVMRequest
+	5,   // 70: pilab.pivirtd.v1.PivirtdService.ResumeVM:input_type -> pilab.pivirtd.v1.ResumeVMRequest
+	6,   // 71: pilab.pivirtd.v1.PivirtdService.RebootVM:input_type -> pilab.pivirtd.v1.RebootVMRequest
+	7,   // 72: pilab.pivirtd.v1.PivirtdService.DeleteVM:input_type -> pilab.pivirtd.v1.DeleteVMRequest
+	11,  // 73: pilab.pivirtd.v1.PivirtdService.ListVMs:input_type -> pilab.pivirtd.v1.ListVMsRequest
+	10,  // 74: pilab.pivirtd.v1.PivirtdService.GetVM:input_type -> pilab.pivirtd.v1.GetVMRequest
+	20,  // 75: pilab.pivirtd.v1.PivirtdService.GetVMStats:input_type -> pilab.pivirtd.v1.GetVMStatsRequest
+	26,  // 76: pilab.pivirtd.v1.PivirtdService.StreamVMStats:input_type -> pilab.pivirtd.v1.StreamVMStatsRequest
+	8,   // 77: pilab.pivirtd.v1.PivirtdService.UpdateVMMemory:input_type -> pilab.pivirtd.v1.UpdateVMMemoryRequest
+	9,   // 78: pilab.pivirtd.v1.PivirtdService.UpdateVMCpu:input_type -> pilab.pivirtd.v1.UpdateVMCpuRequest
+	32,  // 79: pilab.pivirtd.v1.PivirtdService.ExecuteQMP:input_type -> pilab.pivirtd.v1.ExecuteQMPRequest
+	34,  // 80: pilab.pivirtd.v1.PivirtdService.StreamQMPEvents:input_type -> pilab.pivirtd.v1.StreamQMPRequest
+	36,  // 81: pilab.pivirtd.v1.PivirtdService.CreateSnapshot:input_type -> pilab.pivirtd.v1.CreateSnapshotRequest
+	37,  // 82: pilab.pivirtd.v1.PivirtdService.ListSnapshots:input_type -> pilab.pivirtd.v1.ListSnapshotsRequest
+	39,  // 83: pilab.pivirtd.v1.PivirtdService.RestoreSnapshot:input_type -> pilab.pivirtd.v1.RestoreSnapshotRequest
+	40,  // 84: pilab.pivirtd.v1.PivirtdService.DeleteSnapshot:input_type -> pilab.pivirtd.v1.DeleteSnapshotRequest
+	43,  // 85: pilab.pivirtd.v1.PivirtdService.ConsolidateSnapshot:input_type -> pilab.pivirtd.v1.ConsolidateSnapshotRequest
+	44,  // 86: pilab.pivirtd.v1.PivirtdService.GetSnapshotStatus:input_type -> pilab.pivirtd.v1.GetSnapshotStatusRequest
+	47,  // 87: pilab.pivirtd.v1.PivirtdService.CloneVM:input_type -> pilab.pivirtd.v1.CloneVMRequest
+	48,  // 88: pilab.pivirtd.v1.PivirtdService.CloneSnapshot:input_type -> pilab.pivirtd.v1.CloneSnapshotRequest
+	55,  // 89: pilab.pivirtd.v1.PivirtdService.MigrateVM:input_type -> pilab.pivirtd.v1.MigrateVMRequest
+	57,  // 90: pilab.pivirtd.v1.PivirtdService.GetMigrationStatus:input_type -> pilab.pivirtd.v1.GetMigrationStatusRequest
+	59,  // 91: pilab.pivirtd.v1.PivirtdService.CreateStoragePool:input_type -> pilab.pivirtd.v1.CreateStoragePoolRequest
+	61,  // 92: pilab.pivirtd.v1.PivirtdService.ListStoragePools:input_type -> pilab.pivirtd.v1.ListStoragePoolsRequest
+	63,  // 93: pilab.pivirtd.v1.PivirtdService.DeleteStoragePool:input_type -> pilab.pivirtd.v1.DeleteStoragePoolRequest
+	66,  // 94: pilab.pivirtd.v1.PivirtdService.GetStoragePool:input_type -> pilab.pivirtd.v1.GetStoragePoolRequest
+	67,  // 95: pilab.pivirtd.v1.PivirtdService.ActivateStoragePool:input_type -> pilab.pivirtd.v1.ActivateStoragePoolRequest
+	68,  // 96: pilab.pivirtd.v1.PivirtdService.DeactivateStoragePool:input_type -> pilab.pivirtd.v1.DeactivateStoragePoolRequest
+	69,  // 97: pilab.pivirtd.v1.PivirtdService.CreateTAPDevice:input_type -> pilab.pivirtd.v1.CreateTAPDeviceRequest
+	76,  // 98: pilab.pivirtd.v1.PivirtdService.DeleteTAPDevice:input_type -> pilab.pivirtd.v1.DeleteTAPDeviceRequest
+	72,  // 99: pilab.pivirtd.v1.PivirtdService.ListTAPDevices:input_type -> pilab.pivirtd.v1.ListTAPDevicesRequest
+	70,  // 100: pilab.pivirtd.v1.PivirtdService.CreateBridge:input_type -> pilab.pivirtd.v1.CreateBridgeRequest
+	77,  // 101: pilab.pivirtd.v1.PivirtdService.DeleteBridge:input_type -> pilab.pivirtd.v1.DeleteBridgeRequest
+	74,  // 102: pilab.pivirtd.v1.PivirtdService.ListBridges:input_type -> pilab.pivirtd.v1.ListBridgesRequest
+	82,  // 103: pilab.pivirtd.v1.PivirtdService.CreateOVSBridge:input_type -> pilab.pivirtd.v1.CreateOVSBridgeRequest
+	83,  // 104: pilab.pivirtd.v1.PivirtdService.DeleteOVSBridge:input_type -> pilab.pivirtd.v1.DeleteOVSBridgeRequest
+	84,  // 105: pilab.pivirtd.v1.PivirtdService.ListOVSBridges:input_type -> pilab.pivirtd.v1.ListOVSBridgesRequest
+	86,  // 106: pilab.pivirtd.v1.PivirtdService.AddOVSPort:input_type -> pilab.pivirtd.v1.AddOVSPortRequest
+	87,  // 107: pilab.pivirtd.v1.PivirtdService.RemoveOVSPort:input_type -> pilab.pivirtd.v1.RemoveOVSPortRequest
+	88,  // 108: pilab.pivirtd.v1.PivirtdService.ListOVSPorts:input_type -> pilab.pivirtd.v1.ListOVSPortsRequest
+	131, // 109: pilab.pivirtd.v1.PivirtdService.ListNetworkNamespaces:input_type -> pilab.pivirtd.v1.ListNetworkNamespacesRequest
+	134, // 110: pilab.pivirtd.v1.PivirtdService.ListAdoptableDevices:input_type -> pilab.pivirtd.v1.ListAdoptableDevicesRequest
+	93,  // 111: pilab.pivirtd.v1.PivirtdService.SetLabels:input_type -> pilab.pivirtd.v1.SetLabelsRequest
+	95,  // 112: pilab.pivirtd.v1.PivirtdService.GetLabels:input_type -> pilab.pivirtd.v1.GetLabelsRequest
+	97,  // 113: pilab.pivirtd.v1.PivirtdService.DeleteLabel:input_type -> pilab.pivirtd.v1.DeleteLabelRequest
+	99,  // 114: pilab.pivirtd.v1.PivirtdService.SetProvisioning:input_type -> pilab.pivirtd.v1.SetProvisioningRequest
+	101, // 115: pilab.pivirtd.v1.PivirtdService.GetVMStatus:input_type -> pilab.pivirtd.v1.GetVMStatusRequest
+	49,  // 116: pilab.pivirtd.v1.PivirtdService.StartDiskMove:input_type -> pilab.pivirtd.v1.StartDiskMoveRequest
+	50,  // 117: pilab.pivirtd.v1.PivirtdService.GetDiskMoveStatus:input_type -> pilab.pivirtd.v1.GetDiskMoveStatusRequest
+	51,  // 118: pilab.pivirtd.v1.PivirtdService.CancelDiskMove:input_type -> pilab.pivirtd.v1.CancelDiskMoveRequest
+	106, // 119: pilab.pivirtd.v1.PivirtdService.AttachDisk:input_type -> pilab.pivirtd.v1.AttachDiskRequest
+	107, // 120: pilab.pivirtd.v1.PivirtdService.DetachDisk:input_type -> pilab.pivirtd.v1.DetachDiskRequest
+	108, // 121: pilab.pivirtd.v1.PivirtdService.AttachNIC:input_type -> pilab.pivirtd.v1.AttachNICRequest
+	109, // 122: pilab.pivirtd.v1.PivirtdService.DetachNIC:input_type -> pilab.pivirtd.v1.DetachNICRequest
+	110, // 123: pilab.pivirtd.v1.PivirtdService.ResizeDisk:input_type -> pilab.pivirtd.v1.ResizeDiskRequest
+	111, // 124: pilab.pivirtd.v1.PivirtdService.SetVNCPassword:input_type -> pilab.pivirtd.v1.SetVNCPasswordRequest
+	112, // 125: pilab.pivirtd.v1.PivirtdService.SetLinkState:input_type -> pilab.pivirtd.v1.SetLinkStateRequest
+	113, // 126: pilab.pivirtd.v1.PivirtdService.RenameVM:input_type -> pilab.pivirtd.v1.RenameVMRequest
+	114, // 127: pilab.pivirtd.v1.PivirtdService.ChangeISO:input_type -> pilab.pivirtd.v1.ChangeISORequest
+	115, // 128: pilab.pivirtd.v1.PivirtdService.EjectISO:input_type -> pilab.pivirtd.v1.EjectISORequest
+	116, // 129: pilab.pivirtd.v1.PivirtdService.GetSnapshotTree:input_type -> pilab.pivirtd.v1.GetSnapshotTreeRequest
+	119, // 130: pilab.pivirtd.v1.PivirtdService.GetGuestInfo:input_type -> pilab.pivirtd.v1.GetGuestInfoRequest
+	122, // 131: pilab.pivirtd.v1.PivirtdService.GuestExec:input_type -> pilab.pivirtd.v1.GuestExecRequest
+	124, // 132: pilab.pivirtd.v1.PivirtdService.GetGuestExecStatus:input_type -> pilab.pivirtd.v1.GetGuestExecStatusRequest
+	126, // 133: pilab.pivirtd.v1.PivirtdService.SetGuestHostname:input_type -> pilab.pivirtd.v1.SetGuestHostnameRequest
+	128, // 134: pilab.pivirtd.v1.PivirtdService.CustomizeOS:input_type -> pilab.pivirtd.v1.CustomizeOSRequest
+	144, // 135: pilab.pivirtd.v1.PivirtdService.SubscribeEvents:input_type -> pilab.pivirtd.v1.SubscribeEventsRequest
+	144, // 136: pilab.pivirtd.v1.PivirtdService.GetHostResource:input_type -> pilab.pivirtd.v1.SubscribeEventsRequest
+	12,  // 137: pilab.pivirtd.v1.PivirtdService.CreateVM:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 138: pilab.pivirtd.v1.PivirtdService.ApplyVM:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 139: pilab.pivirtd.v1.PivirtdService.StartVM:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 140: pilab.pivirtd.v1.PivirtdService.StopVM:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 141: pilab.pivirtd.v1.PivirtdService.PauseVM:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 142: pilab.pivirtd.v1.PivirtdService.ResumeVM:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 143: pilab.pivirtd.v1.PivirtdService.RebootVM:output_type -> pilab.pivirtd.v1.VMResponse
+	13,  // 144: pilab.pivirtd.v1.PivirtdService.DeleteVM:output_type -> pilab.pivirtd.v1.DeleteVMResponse
+	14,  // 145: pilab.pivirtd.v1.PivirtdService.ListVMs:output_type -> pilab.pivirtd.v1.ListVMsResponse
+	12,  // 146: pilab.pivirtd.v1.PivirtdService.GetVM:output_type -> pilab.pivirtd.v1.VMResponse
+	21,  // 147: pilab.pivirtd.v1.PivirtdService.GetVMStats:output_type -> pilab.pivirtd.v1.VMStatsResponse
+	27,  // 148: pilab.pivirtd.v1.PivirtdService.StreamVMStats:output_type -> pilab.pivirtd.v1.VMStatsBatch
+	12,  // 149: pilab.pivirtd.v1.PivirtdService.UpdateVMMemory:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 150: pilab.pivirtd.v1.PivirtdService.UpdateVMCpu:output_type -> pilab.pivirtd.v1.VMResponse
+	33,  // 151: pilab.pivirtd.v1.PivirtdService.ExecuteQMP:output_type -> pilab.pivirtd.v1.ExecuteQMPResponse
+	35,  // 152: pilab.pivirtd.v1.PivirtdService.StreamQMPEvents:output_type -> pilab.pivirtd.v1.QMPEvent
+	41,  // 153: pilab.pivirtd.v1.PivirtdService.CreateSnapshot:output_type -> pilab.pivirtd.v1.SnapshotResponse
+	38,  // 154: pilab.pivirtd.v1.PivirtdService.ListSnapshots:output_type -> pilab.pivirtd.v1.ListSnapshotsResponse
+	41,  // 155: pilab.pivirtd.v1.PivirtdService.RestoreSnapshot:output_type -> pilab.pivirtd.v1.SnapshotResponse
+	42,  // 156: pilab.pivirtd.v1.PivirtdService.DeleteSnapshot:output_type -> pilab.pivirtd.v1.DeleteSnapshotResponse
+	41,  // 157: pilab.pivirtd.v1.PivirtdService.ConsolidateSnapshot:output_type -> pilab.pivirtd.v1.SnapshotResponse
+	45,  // 158: pilab.pivirtd.v1.PivirtdService.GetSnapshotStatus:output_type -> pilab.pivirtd.v1.SnapshotStatusResponse
+	12,  // 159: pilab.pivirtd.v1.PivirtdService.CloneVM:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 160: pilab.pivirtd.v1.PivirtdService.CloneSnapshot:output_type -> pilab.pivirtd.v1.VMResponse
+	56,  // 161: pilab.pivirtd.v1.PivirtdService.MigrateVM:output_type -> pilab.pivirtd.v1.MigrateVMResponse
+	58,  // 162: pilab.pivirtd.v1.PivirtdService.GetMigrationStatus:output_type -> pilab.pivirtd.v1.MigrationStatusResponse
+	60,  // 163: pilab.pivirtd.v1.PivirtdService.CreateStoragePool:output_type -> pilab.pivirtd.v1.StoragePoolResponse
+	62,  // 164: pilab.pivirtd.v1.PivirtdService.ListStoragePools:output_type -> pilab.pivirtd.v1.ListStoragePoolsResponse
+	64,  // 165: pilab.pivirtd.v1.PivirtdService.DeleteStoragePool:output_type -> pilab.pivirtd.v1.DeleteStoragePoolResponse
+	60,  // 166: pilab.pivirtd.v1.PivirtdService.GetStoragePool:output_type -> pilab.pivirtd.v1.StoragePoolResponse
+	60,  // 167: pilab.pivirtd.v1.PivirtdService.ActivateStoragePool:output_type -> pilab.pivirtd.v1.StoragePoolResponse
+	60,  // 168: pilab.pivirtd.v1.PivirtdService.DeactivateStoragePool:output_type -> pilab.pivirtd.v1.StoragePoolResponse
+	71,  // 169: pilab.pivirtd.v1.PivirtdService.CreateTAPDevice:output_type -> pilab.pivirtd.v1.NetworkResponse
+	78,  // 170: pilab.pivirtd.v1.PivirtdService.DeleteTAPDevice:output_type -> pilab.pivirtd.v1.DeleteNetworkResponse
+	73,  // 171: pilab.pivirtd.v1.PivirtdService.ListTAPDevices:output_type -> pilab.pivirtd.v1.ListTAPDevicesResponse
+	71,  // 172: pilab.pivirtd.v1.PivirtdService.CreateBridge:output_type -> pilab.pivirtd.v1.NetworkResponse
+	78,  // 173: pilab.pivirtd.v1.PivirtdService.DeleteBridge:output_type -> pilab.pivirtd.v1.DeleteNetworkResponse
+	75,  // 174: pilab.pivirtd.v1.PivirtdService.ListBridges:output_type -> pilab.pivirtd.v1.ListBridgesResponse
+	71,  // 175: pilab.pivirtd.v1.PivirtdService.CreateOVSBridge:output_type -> pilab.pivirtd.v1.NetworkResponse
+	78,  // 176: pilab.pivirtd.v1.PivirtdService.DeleteOVSBridge:output_type -> pilab.pivirtd.v1.DeleteNetworkResponse
+	85,  // 177: pilab.pivirtd.v1.PivirtdService.ListOVSBridges:output_type -> pilab.pivirtd.v1.ListOVSBridgesResponse
+	71,  // 178: pilab.pivirtd.v1.PivirtdService.AddOVSPort:output_type -> pilab.pivirtd.v1.NetworkResponse
+	78,  // 179: pilab.pivirtd.v1.PivirtdService.RemoveOVSPort:output_type -> pilab.pivirtd.v1.DeleteNetworkResponse
+	89,  // 180: pilab.pivirtd.v1.PivirtdService.ListOVSPorts:output_type -> pilab.pivirtd.v1.ListOVSPortsResponse
+	132, // 181: pilab.pivirtd.v1.PivirtdService.ListNetworkNamespaces:output_type -> pilab.pivirtd.v1.ListNetworkNamespacesResponse
+	135, // 182: pilab.pivirtd.v1.PivirtdService.ListAdoptableDevices:output_type -> pilab.pivirtd.v1.ListAdoptableDevicesResponse
+	94,  // 183: pilab.pivirtd.v1.PivirtdService.SetLabels:output_type -> pilab.pivirtd.v1.SetLabelsResponse
+	96,  // 184: pilab.pivirtd.v1.PivirtdService.GetLabels:output_type -> pilab.pivirtd.v1.GetLabelsResponse
+	98,  // 185: pilab.pivirtd.v1.PivirtdService.DeleteLabel:output_type -> pilab.pivirtd.v1.DeleteLabelResponse
+	100, // 186: pilab.pivirtd.v1.PivirtdService.SetProvisioning:output_type -> pilab.pivirtd.v1.SetProvisioningResponse
+	102, // 187: pilab.pivirtd.v1.PivirtdService.GetVMStatus:output_type -> pilab.pivirtd.v1.GetVMStatusResponse
+	53,  // 188: pilab.pivirtd.v1.PivirtdService.StartDiskMove:output_type -> pilab.pivirtd.v1.DiskMoveStatusResponse
+	53,  // 189: pilab.pivirtd.v1.PivirtdService.GetDiskMoveStatus:output_type -> pilab.pivirtd.v1.DiskMoveStatusResponse
+	52,  // 190: pilab.pivirtd.v1.PivirtdService.CancelDiskMove:output_type -> pilab.pivirtd.v1.DiskMoveResponse
+	12,  // 191: pilab.pivirtd.v1.PivirtdService.AttachDisk:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 192: pilab.pivirtd.v1.PivirtdService.DetachDisk:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 193: pilab.pivirtd.v1.PivirtdService.AttachNIC:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 194: pilab.pivirtd.v1.PivirtdService.DetachNIC:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 195: pilab.pivirtd.v1.PivirtdService.ResizeDisk:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 196: pilab.pivirtd.v1.PivirtdService.SetVNCPassword:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 197: pilab.pivirtd.v1.PivirtdService.SetLinkState:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 198: pilab.pivirtd.v1.PivirtdService.RenameVM:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 199: pilab.pivirtd.v1.PivirtdService.ChangeISO:output_type -> pilab.pivirtd.v1.VMResponse
+	12,  // 200: pilab.pivirtd.v1.PivirtdService.EjectISO:output_type -> pilab.pivirtd.v1.VMResponse
+	117, // 201: pilab.pivirtd.v1.PivirtdService.GetSnapshotTree:output_type -> pilab.pivirtd.v1.GetSnapshotTreeResponse
+	120, // 202: pilab.pivirtd.v1.PivirtdService.GetGuestInfo:output_type -> pilab.pivirtd.v1.GetGuestInfoResponse
+	123, // 203: pilab.pivirtd.v1.PivirtdService.GuestExec:output_type -> pilab.pivirtd.v1.GuestExecResponse
+	125, // 204: pilab.pivirtd.v1.PivirtdService.GetGuestExecStatus:output_type -> pilab.pivirtd.v1.GetGuestExecStatusResponse
+	127, // 205: pilab.pivirtd.v1.PivirtdService.SetGuestHostname:output_type -> pilab.pivirtd.v1.SetGuestHostnameResponse
+	130, // 206: pilab.pivirtd.v1.PivirtdService.CustomizeOS:output_type -> pilab.pivirtd.v1.CustomizeOSResponse
+	145, // 207: pilab.pivirtd.v1.PivirtdService.SubscribeEvents:output_type -> pilab.pivirtd.v1.HostEvent
+	146, // 208: pilab.pivirtd.v1.PivirtdService.GetHostResource:output_type -> pilab.pivirtd.v1.HostResourceReport
+	137, // [137:209] is the sub-list for method output_type
+	65,  // [65:137] is the sub-list for method input_type
+	65,  // [65:65] is the sub-list for extension type_name
+	65,  // [65:65] is the sub-list for extension extendee
+	0,   // [0:65] is the sub-list for field type_name
 }
 
 func init() { file_pilab_pivirtd_v1_pivirtd_proto_init() }
@@ -8929,20 +9366,20 @@ func file_pilab_pivirtd_v1_pivirtd_proto_init() {
 		return
 	}
 	file_pilab_pivirtd_v1_host_resource_proto_init()
-	file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[75].OneofWrappers = []any{
+	file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[81].OneofWrappers = []any{
 		(*NetworkDevice_Tap)(nil),
 		(*NetworkDevice_Bridge)(nil),
 		(*NetworkDevice_OvsBridge)(nil),
 		(*NetworkDevice_OvsPort)(nil),
 	}
-	file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[122].OneofWrappers = []any{}
+	file_pilab_pivirtd_v1_pivirtd_proto_msgTypes[128].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pilab_pivirtd_v1_pivirtd_proto_rawDesc), len(file_pilab_pivirtd_v1_pivirtd_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   135,
+			NumMessages:   141,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
