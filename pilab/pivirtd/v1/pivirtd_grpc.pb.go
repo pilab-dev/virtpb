@@ -43,7 +43,10 @@ const (
 	PivirtdService_GetSnapshotStatus_FullMethodName     = "/pilab.pivirtd.v1.PivirtdService/GetSnapshotStatus"
 	PivirtdService_CloneVM_FullMethodName               = "/pilab.pivirtd.v1.PivirtdService/CloneVM"
 	PivirtdService_CloneSnapshot_FullMethodName         = "/pilab.pivirtd.v1.PivirtdService/CloneSnapshot"
+	PivirtdService_PrepareIncoming_FullMethodName       = "/pilab.pivirtd.v1.PivirtdService/PrepareIncoming"
 	PivirtdService_MigrateVM_FullMethodName             = "/pilab.pivirtd.v1.PivirtdService/MigrateVM"
+	PivirtdService_FinalizeMigration_FullMethodName     = "/pilab.pivirtd.v1.PivirtdService/FinalizeMigration"
+	PivirtdService_AbortIncoming_FullMethodName         = "/pilab.pivirtd.v1.PivirtdService/AbortIncoming"
 	PivirtdService_GetMigrationStatus_FullMethodName    = "/pilab.pivirtd.v1.PivirtdService/GetMigrationStatus"
 	PivirtdService_CreateStoragePool_FullMethodName     = "/pilab.pivirtd.v1.PivirtdService/CreateStoragePool"
 	PivirtdService_ListStoragePools_FullMethodName      = "/pilab.pivirtd.v1.PivirtdService/ListStoragePools"
@@ -130,7 +133,10 @@ type PivirtdServiceClient interface {
 	CloneVM(ctx context.Context, in *CloneVMRequest, opts ...grpc.CallOption) (*VMResponse, error)
 	CloneSnapshot(ctx context.Context, in *CloneSnapshotRequest, opts ...grpc.CallOption) (*VMResponse, error)
 	// Migration
+	PrepareIncoming(ctx context.Context, in *PrepareIncomingRequest, opts ...grpc.CallOption) (*PrepareIncomingResponse, error)
 	MigrateVM(ctx context.Context, in *MigrateVMRequest, opts ...grpc.CallOption) (*MigrateVMResponse, error)
+	FinalizeMigration(ctx context.Context, in *FinalizeMigrationRequest, opts ...grpc.CallOption) (*VMResponse, error)
+	AbortIncoming(ctx context.Context, in *AbortIncomingRequest, opts ...grpc.CallOption) (*VMResponse, error)
 	GetMigrationStatus(ctx context.Context, in *GetMigrationStatusRequest, opts ...grpc.CallOption) (*MigrationStatusResponse, error)
 	// Storage Management
 	CreateStoragePool(ctx context.Context, in *CreateStoragePoolRequest, opts ...grpc.CallOption) (*StoragePoolResponse, error)
@@ -461,10 +467,40 @@ func (c *pivirtdServiceClient) CloneSnapshot(ctx context.Context, in *CloneSnaps
 	return out, nil
 }
 
+func (c *pivirtdServiceClient) PrepareIncoming(ctx context.Context, in *PrepareIncomingRequest, opts ...grpc.CallOption) (*PrepareIncomingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PrepareIncomingResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_PrepareIncoming_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *pivirtdServiceClient) MigrateVM(ctx context.Context, in *MigrateVMRequest, opts ...grpc.CallOption) (*MigrateVMResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MigrateVMResponse)
 	err := c.cc.Invoke(ctx, PivirtdService_MigrateVM_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) FinalizeMigration(ctx context.Context, in *FinalizeMigrationRequest, opts ...grpc.CallOption) (*VMResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VMResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_FinalizeMigration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pivirtdServiceClient) AbortIncoming(ctx context.Context, in *AbortIncomingRequest, opts ...grpc.CallOption) (*VMResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VMResponse)
+	err := c.cc.Invoke(ctx, PivirtdService_AbortIncoming_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -987,7 +1023,10 @@ type PivirtdServiceServer interface {
 	CloneVM(context.Context, *CloneVMRequest) (*VMResponse, error)
 	CloneSnapshot(context.Context, *CloneSnapshotRequest) (*VMResponse, error)
 	// Migration
+	PrepareIncoming(context.Context, *PrepareIncomingRequest) (*PrepareIncomingResponse, error)
 	MigrateVM(context.Context, *MigrateVMRequest) (*MigrateVMResponse, error)
+	FinalizeMigration(context.Context, *FinalizeMigrationRequest) (*VMResponse, error)
+	AbortIncoming(context.Context, *AbortIncomingRequest) (*VMResponse, error)
 	GetMigrationStatus(context.Context, *GetMigrationStatusRequest) (*MigrationStatusResponse, error)
 	// Storage Management
 	CreateStoragePool(context.Context, *CreateStoragePoolRequest) (*StoragePoolResponse, error)
@@ -1131,8 +1170,17 @@ func (UnimplementedPivirtdServiceServer) CloneVM(context.Context, *CloneVMReques
 func (UnimplementedPivirtdServiceServer) CloneSnapshot(context.Context, *CloneSnapshotRequest) (*VMResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CloneSnapshot not implemented")
 }
+func (UnimplementedPivirtdServiceServer) PrepareIncoming(context.Context, *PrepareIncomingRequest) (*PrepareIncomingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method PrepareIncoming not implemented")
+}
 func (UnimplementedPivirtdServiceServer) MigrateVM(context.Context, *MigrateVMRequest) (*MigrateVMResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method MigrateVM not implemented")
+}
+func (UnimplementedPivirtdServiceServer) FinalizeMigration(context.Context, *FinalizeMigrationRequest) (*VMResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method FinalizeMigration not implemented")
+}
+func (UnimplementedPivirtdServiceServer) AbortIncoming(context.Context, *AbortIncomingRequest) (*VMResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AbortIncoming not implemented")
 }
 func (UnimplementedPivirtdServiceServer) GetMigrationStatus(context.Context, *GetMigrationStatusRequest) (*MigrationStatusResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetMigrationStatus not implemented")
@@ -1714,6 +1762,24 @@ func _PivirtdService_CloneSnapshot_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PivirtdService_PrepareIncoming_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PrepareIncomingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).PrepareIncoming(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_PrepareIncoming_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).PrepareIncoming(ctx, req.(*PrepareIncomingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PivirtdService_MigrateVM_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MigrateVMRequest)
 	if err := dec(in); err != nil {
@@ -1728,6 +1794,42 @@ func _PivirtdService_MigrateVM_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PivirtdServiceServer).MigrateVM(ctx, req.(*MigrateVMRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_FinalizeMigration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FinalizeMigrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).FinalizeMigration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_FinalizeMigration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).FinalizeMigration(ctx, req.(*FinalizeMigrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PivirtdService_AbortIncoming_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AbortIncomingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PivirtdServiceServer).AbortIncoming(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PivirtdService_AbortIncoming_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PivirtdServiceServer).AbortIncoming(ctx, req.(*AbortIncomingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2667,8 +2769,20 @@ var PivirtdService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PivirtdService_CloneSnapshot_Handler,
 		},
 		{
+			MethodName: "PrepareIncoming",
+			Handler:    _PivirtdService_PrepareIncoming_Handler,
+		},
+		{
 			MethodName: "MigrateVM",
 			Handler:    _PivirtdService_MigrateVM_Handler,
+		},
+		{
+			MethodName: "FinalizeMigration",
+			Handler:    _PivirtdService_FinalizeMigration_Handler,
+		},
+		{
+			MethodName: "AbortIncoming",
+			Handler:    _PivirtdService_AbortIncoming_Handler,
 		},
 		{
 			MethodName: "GetMigrationStatus",

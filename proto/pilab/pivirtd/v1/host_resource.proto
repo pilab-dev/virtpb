@@ -33,6 +33,11 @@ enum HostEventType {
   HOST_EVENT_TYPE_RESOURCE_MEM_PRESSURE = 31;
   HOST_EVENT_TYPE_RESOURCE_DISK_PRESSURE = 32;
   HOST_EVENT_TYPE_RESOURCE_REPORT = 40;
+  HOST_EVENT_TYPE_VM_MIGRATION_STARTED = 50;
+  HOST_EVENT_TYPE_VM_MIGRATION_PROGRESS = 51;
+  HOST_EVENT_TYPE_VM_MIGRATION_COMPLETED = 52;
+  HOST_EVENT_TYPE_VM_MIGRATION_FAILED = 53;
+  HOST_EVENT_TYPE_VM_MIGRATION_CANCELLED = 54;
 }
 
 // ==================== Host Resource Report ====================
@@ -88,6 +93,7 @@ message HostEvent {
     HostResourceReport resource_report = 7;
     VmDiskMoveEvent vm_disk_move = 8;
     VmSnapshotEvent vm_snapshot = 9;
+    VmMigrationEvent vm_migration = 10;
   }
 }
 
@@ -130,4 +136,16 @@ message VmSnapshotEvent {
   string operation = 4;
   string status = 5;
   string message = 6;
+}
+
+message VmMigrationEvent {
+  string vm_name = 1;
+  string vm_uuid = 2;
+  string direction = 3;  // "out" | "in"
+  string peer = 4;
+  int64 transferred_bytes = 5;
+  int64 remaining_bytes = 6;
+  int64 expected_downtime_ms = 7;
+  string status = 8;
+  string message = 9;
 }
