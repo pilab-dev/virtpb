@@ -45,7 +45,6 @@ message Event {
     JobFailed job_failed = 4;
     VmEvent vm_event = 5;
     pilab.common.v1.HostStats host_stats_event = 6;
-    pilab.common.v1.VmMetrics vm_metrics = 7;
   }
 }
 

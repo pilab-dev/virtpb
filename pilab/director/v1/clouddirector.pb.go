@@ -85,7 +85,6 @@ type AgentEventsRequest struct {
 	//	*AgentEventsRequest_Heartbeat
 	//	*AgentEventsRequest_VmDefinition
 	//	*AgentEventsRequest_HostStats
-	//	*AgentEventsRequest_VmMetrics
 	//	*AgentEventsRequest_JobStatus
 	//	*AgentEventsRequest_VmGuestInfo
 	Event         isAgentEventsRequest_Event `protobuf_oneof:"event"`
@@ -166,15 +165,6 @@ func (x *AgentEventsRequest) GetHostStats() *v1.HostStats {
 	return nil
 }
 
-func (x *AgentEventsRequest) GetVmMetrics() *v1.VmMetrics {
-	if x != nil {
-		if x, ok := x.Event.(*AgentEventsRequest_VmMetrics); ok {
-			return x.VmMetrics
-		}
-	}
-	return nil
-}
-
 func (x *AgentEventsRequest) GetJobStatus() *v1.JobStatus {
 	if x != nil {
 		if x, ok := x.Event.(*AgentEventsRequest_JobStatus); ok {
@@ -213,10 +203,6 @@ type AgentEventsRequest_HostStats struct {
 	HostStats *v1.HostStats `protobuf:"bytes,4,opt,name=host_stats,json=hostStats,proto3,oneof"`
 }
 
-type AgentEventsRequest_VmMetrics struct {
-	VmMetrics *v1.VmMetrics `protobuf:"bytes,5,opt,name=vm_metrics,json=vmMetrics,proto3,oneof"`
-}
-
 type AgentEventsRequest_JobStatus struct {
 	JobStatus *v1.JobStatus `protobuf:"bytes,6,opt,name=job_status,json=jobStatus,proto3,oneof"`
 }
@@ -232,8 +218,6 @@ func (*AgentEventsRequest_Heartbeat) isAgentEventsRequest_Event() {}
 func (*AgentEventsRequest_VmDefinition) isAgentEventsRequest_Event() {}
 
 func (*AgentEventsRequest_HostStats) isAgentEventsRequest_Event() {}
-
-func (*AgentEventsRequest_VmMetrics) isAgentEventsRequest_Event() {}
 
 func (*AgentEventsRequest_JobStatus) isAgentEventsRequest_Event() {}
 
@@ -1070,15 +1054,13 @@ const file_pilab_director_v1_clouddirector_proto_rawDesc = "" +
 	"%pilab/director/v1/clouddirector.proto\x12\x11pilab.director.v1\x1a\x1apilab/common/v1/host.proto\x1a\x1apilab/common/v1/task.proto\"6\n" +
 	"\vVmGuestInfo\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x12\n" +
-	"\x04info\x18\x02 \x01(\tR\x04info\"\xee\x03\n" +
+	"\x04info\x18\x02 \x01(\tR\x04info\"\xb1\x03\n" +
 	"\x12AgentEventsRequest\x12G\n" +
 	"\x0evm_state_event\x18\x01 \x01(\v2\x1f.pilab.director.v1.VmStateEventH\x00R\fvmStateEvent\x12A\n" +
 	"\theartbeat\x18\x02 \x01(\v2!.pilab.director.v1.HeartbeatEventH\x00R\theartbeat\x12F\n" +
 	"\rvm_definition\x18\x03 \x01(\v2\x1f.pilab.director.v1.VmDefinitionH\x00R\fvmDefinition\x12;\n" +
 	"\n" +
 	"host_stats\x18\x04 \x01(\v2\x1a.pilab.common.v1.HostStatsH\x00R\thostStats\x12;\n" +
-	"\n" +
-	"vm_metrics\x18\x05 \x01(\v2\x1a.pilab.common.v1.VmMetricsH\x00R\tvmMetrics\x12;\n" +
 	"\n" +
 	"job_status\x18\x06 \x01(\v2\x1a.pilab.common.v1.JobStatusH\x00R\tjobStatus\x12D\n" +
 	"\rvm_guest_info\x18\a \x01(\v2\x1e.pilab.director.v1.VmGuestInfoH\x00R\vvmGuestInfoB\a\n" +
@@ -1183,30 +1165,28 @@ var file_pilab_director_v1_clouddirector_proto_goTypes = []any{
 	(*RegisterAgentRequest)(nil),   // 11: pilab.director.v1.RegisterAgentRequest
 	(*RegisterAgentResponse)(nil),  // 12: pilab.director.v1.RegisterAgentResponse
 	(*v1.HostStats)(nil),           // 13: pilab.common.v1.HostStats
-	(*v1.VmMetrics)(nil),           // 14: pilab.common.v1.VmMetrics
-	(*v1.JobStatus)(nil),           // 15: pilab.common.v1.JobStatus
+	(*v1.JobStatus)(nil),           // 14: pilab.common.v1.JobStatus
 }
 var file_pilab_director_v1_clouddirector_proto_depIdxs = []int32{
 	4,  // 0: pilab.director.v1.AgentEventsRequest.vm_state_event:type_name -> pilab.director.v1.VmStateEvent
 	2,  // 1: pilab.director.v1.AgentEventsRequest.heartbeat:type_name -> pilab.director.v1.HeartbeatEvent
 	3,  // 2: pilab.director.v1.AgentEventsRequest.vm_definition:type_name -> pilab.director.v1.VmDefinition
 	13, // 3: pilab.director.v1.AgentEventsRequest.host_stats:type_name -> pilab.common.v1.HostStats
-	14, // 4: pilab.director.v1.AgentEventsRequest.vm_metrics:type_name -> pilab.common.v1.VmMetrics
-	15, // 5: pilab.director.v1.AgentEventsRequest.job_status:type_name -> pilab.common.v1.JobStatus
-	0,  // 6: pilab.director.v1.AgentEventsRequest.vm_guest_info:type_name -> pilab.director.v1.VmGuestInfo
-	7,  // 7: pilab.director.v1.ManagerMessage.resource_refresh_request:type_name -> pilab.director.v1.ResourceRefreshRequest
-	8,  // 8: pilab.director.v1.ManagerMessage.cluster_join:type_name -> pilab.director.v1.ClusterJoinRequest
-	10, // 9: pilab.director.v1.ManagerMessage.cluster_leave:type_name -> pilab.director.v1.ClusterLeaveRequest
-	9,  // 10: pilab.director.v1.ClusterJoinRequest.bridges:type_name -> pilab.director.v1.ClusterBridgeConfig
-	11, // 11: pilab.director.v1.CloudDirectorService.RegisterAgent:input_type -> pilab.director.v1.RegisterAgentRequest
-	1,  // 12: pilab.director.v1.CloudDirectorService.AgentEvents:input_type -> pilab.director.v1.AgentEventsRequest
-	12, // 13: pilab.director.v1.CloudDirectorService.RegisterAgent:output_type -> pilab.director.v1.RegisterAgentResponse
-	6,  // 14: pilab.director.v1.CloudDirectorService.AgentEvents:output_type -> pilab.director.v1.ManagerMessage
-	13, // [13:15] is the sub-list for method output_type
-	11, // [11:13] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	14, // 4: pilab.director.v1.AgentEventsRequest.job_status:type_name -> pilab.common.v1.JobStatus
+	0,  // 5: pilab.director.v1.AgentEventsRequest.vm_guest_info:type_name -> pilab.director.v1.VmGuestInfo
+	7,  // 6: pilab.director.v1.ManagerMessage.resource_refresh_request:type_name -> pilab.director.v1.ResourceRefreshRequest
+	8,  // 7: pilab.director.v1.ManagerMessage.cluster_join:type_name -> pilab.director.v1.ClusterJoinRequest
+	10, // 8: pilab.director.v1.ManagerMessage.cluster_leave:type_name -> pilab.director.v1.ClusterLeaveRequest
+	9,  // 9: pilab.director.v1.ClusterJoinRequest.bridges:type_name -> pilab.director.v1.ClusterBridgeConfig
+	11, // 10: pilab.director.v1.CloudDirectorService.RegisterAgent:input_type -> pilab.director.v1.RegisterAgentRequest
+	1,  // 11: pilab.director.v1.CloudDirectorService.AgentEvents:input_type -> pilab.director.v1.AgentEventsRequest
+	12, // 12: pilab.director.v1.CloudDirectorService.RegisterAgent:output_type -> pilab.director.v1.RegisterAgentResponse
+	6,  // 13: pilab.director.v1.CloudDirectorService.AgentEvents:output_type -> pilab.director.v1.ManagerMessage
+	12, // [12:14] is the sub-list for method output_type
+	10, // [10:12] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_pilab_director_v1_clouddirector_proto_init() }
@@ -1219,7 +1199,6 @@ func file_pilab_director_v1_clouddirector_proto_init() {
 		(*AgentEventsRequest_Heartbeat)(nil),
 		(*AgentEventsRequest_VmDefinition)(nil),
 		(*AgentEventsRequest_HostStats)(nil),
-		(*AgentEventsRequest_VmMetrics)(nil),
 		(*AgentEventsRequest_JobStatus)(nil),
 		(*AgentEventsRequest_VmGuestInfo)(nil),
 	}

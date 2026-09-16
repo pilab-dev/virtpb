@@ -318,7 +318,6 @@ type Event struct {
 	//	*Event_JobFailed
 	//	*Event_VmEvent
 	//	*Event_HostStatsEvent
-	//	*Event_VmMetrics
 	Payload       isEvent_Payload `protobuf_oneof:"payload"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -415,15 +414,6 @@ func (x *Event) GetHostStatsEvent() *v1.HostStats {
 	return nil
 }
 
-func (x *Event) GetVmMetrics() *v1.VmMetrics {
-	if x != nil {
-		if x, ok := x.Payload.(*Event_VmMetrics); ok {
-			return x.VmMetrics
-		}
-	}
-	return nil
-}
-
 type isEvent_Payload interface {
 	isEvent_Payload()
 }
@@ -452,10 +442,6 @@ type Event_HostStatsEvent struct {
 	HostStatsEvent *v1.HostStats `protobuf:"bytes,6,opt,name=host_stats_event,json=hostStatsEvent,proto3,oneof"`
 }
 
-type Event_VmMetrics struct {
-	VmMetrics *v1.VmMetrics `protobuf:"bytes,7,opt,name=vm_metrics,json=vmMetrics,proto3,oneof"`
-}
-
 func (*Event_JobStatus) isEvent_Payload() {}
 
 func (*Event_JobCreated) isEvent_Payload() {}
@@ -467,8 +453,6 @@ func (*Event_JobFailed) isEvent_Payload() {}
 func (*Event_VmEvent) isEvent_Payload() {}
 
 func (*Event_HostStatsEvent) isEvent_Payload() {}
-
-func (*Event_VmMetrics) isEvent_Payload() {}
 
 type SubscribeMessage struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -746,7 +730,7 @@ const file_pilab_ws_v1_event_proto_rawDesc = "" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x14\n" +
 	"\x05event\x18\x02 \x01(\tR\x05event\x12\x16\n" +
 	"\x06detail\x18\x03 \x01(\tR\x06detail\x12\x14\n" +
-	"\x05state\x18\x04 \x01(\tR\x05state\"\xbe\x03\n" +
+	"\x05state\x18\x04 \x01(\tR\x05state\"\x81\x03\n" +
 	"\x05Event\x12;\n" +
 	"\n" +
 	"job_status\x18\x01 \x01(\v2\x1a.pilab.common.v1.JobStatusH\x00R\tjobStatus\x12:\n" +
@@ -756,9 +740,7 @@ const file_pilab_ws_v1_event_proto_rawDesc = "" +
 	"\n" +
 	"job_failed\x18\x04 \x01(\v2\x16.pilab.ws.v1.JobFailedH\x00R\tjobFailed\x121\n" +
 	"\bvm_event\x18\x05 \x01(\v2\x14.pilab.ws.v1.VmEventH\x00R\avmEvent\x12F\n" +
-	"\x10host_stats_event\x18\x06 \x01(\v2\x1a.pilab.common.v1.HostStatsH\x00R\x0ehostStatsEvent\x12;\n" +
-	"\n" +
-	"vm_metrics\x18\a \x01(\v2\x1a.pilab.common.v1.VmMetricsH\x00R\tvmMetricsB\t\n" +
+	"\x10host_stats_event\x18\x06 \x01(\v2\x1a.pilab.common.v1.HostStatsH\x00R\x0ehostStatsEventB\t\n" +
 	"\apayload\"\x7f\n" +
 	"\x10SubscribeMessage\x12\x12\n" +
 	"\x03job\x18\x01 \x01(\tH\x00R\x03job\x12\x15\n" +
@@ -800,7 +782,6 @@ var file_pilab_ws_v1_event_proto_goTypes = []any{
 	(*Requests)(nil),            // 9: pilab.ws.v1.Requests
 	(*v1.JobStatus)(nil),        // 10: pilab.common.v1.JobStatus
 	(*v1.HostStats)(nil),        // 11: pilab.common.v1.HostStats
-	(*v1.VmMetrics)(nil),        // 12: pilab.common.v1.VmMetrics
 }
 var file_pilab_ws_v1_event_proto_depIdxs = []int32{
 	10, // 0: pilab.ws.v1.JobList.jobs:type_name -> pilab.common.v1.JobStatus
@@ -810,14 +791,13 @@ var file_pilab_ws_v1_event_proto_depIdxs = []int32{
 	2,  // 4: pilab.ws.v1.Event.job_failed:type_name -> pilab.ws.v1.JobFailed
 	4,  // 5: pilab.ws.v1.Event.vm_event:type_name -> pilab.ws.v1.VmEvent
 	11, // 6: pilab.ws.v1.Event.host_stats_event:type_name -> pilab.common.v1.HostStats
-	12, // 7: pilab.ws.v1.Event.vm_metrics:type_name -> pilab.common.v1.VmMetrics
-	6,  // 8: pilab.ws.v1.Requests.subscribe:type_name -> pilab.ws.v1.SubscribeMessage
-	7,  // 9: pilab.ws.v1.Requests.authenticate:type_name -> pilab.ws.v1.AuthenticateMessage
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	6,  // 7: pilab.ws.v1.Requests.subscribe:type_name -> pilab.ws.v1.SubscribeMessage
+	7,  // 8: pilab.ws.v1.Requests.authenticate:type_name -> pilab.ws.v1.AuthenticateMessage
+	9,  // [9:9] is the sub-list for method output_type
+	9,  // [9:9] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_pilab_ws_v1_event_proto_init() }
@@ -832,7 +812,6 @@ func file_pilab_ws_v1_event_proto_init() {
 		(*Event_JobFailed)(nil),
 		(*Event_VmEvent)(nil),
 		(*Event_HostStatsEvent)(nil),
-		(*Event_VmMetrics)(nil),
 	}
 	file_pilab_ws_v1_event_proto_msgTypes[6].OneofWrappers = []any{
 		(*SubscribeMessage_Job)(nil),
