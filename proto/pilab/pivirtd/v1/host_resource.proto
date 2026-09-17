@@ -60,6 +60,10 @@ message HostResourceReport {
   bool hugepages_available = 13;
   string qemu_version = 14;
   StorageSummary storage = 15;
+  repeated string cpu_model_flags = 17;
+  repeated StoragePoolSummary pools = 18;
+  string migration_address = 19;
+  int32 max_concurrent_migrations = 20;
 }
 
 // NUMANode represents a single NUMA node's configuration.
@@ -74,6 +78,14 @@ message StorageSummary {
   int64 pool_total_bytes = 1;
   int64 pool_available_bytes = 2;
   int64 pool_used_bytes = 3;
+}
+
+// StoragePoolSummary summarizes a single storage pool's capacity.
+message StoragePoolSummary {
+  string id = 1;
+  string kind = 2;
+  int64 total_bytes = 3;
+  int64 available_bytes = 4;
 }
 
 // ==================== Event Streaming ====================
