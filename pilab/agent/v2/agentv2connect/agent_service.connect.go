@@ -13,6 +13,7 @@ import (
 	errors "errors"
 	v2 "go.pilab.hu/cloud/virtpb/pilab/agent/v2"
 	v1 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	http "net/http"
 	strings "strings"
 )
@@ -73,6 +74,12 @@ const (
 	// AgentServicePrepareForMigrationProcedure is the fully-qualified name of the AgentService's
 	// PrepareForMigration RPC.
 	AgentServicePrepareForMigrationProcedure = "/pilab.agent.v2.AgentService/PrepareForMigration"
+	// AgentServiceConfirmMigrationProcedure is the fully-qualified name of the AgentService's
+	// ConfirmMigration RPC.
+	AgentServiceConfirmMigrationProcedure = "/pilab.agent.v2.AgentService/ConfirmMigration"
+	// AgentServiceAbortMigrationProcedure is the fully-qualified name of the AgentService's
+	// AbortMigration RPC.
+	AgentServiceAbortMigrationProcedure = "/pilab.agent.v2.AgentService/AbortMigration"
 	// AgentServiceCreateSnapshotProcedure is the fully-qualified name of the AgentService's
 	// CreateSnapshot RPC.
 	AgentServiceCreateSnapshotProcedure = "/pilab.agent.v2.AgentService/CreateSnapshot"
@@ -213,6 +220,8 @@ type AgentServiceClient interface {
 	ResumeVM(context.Context, *connect.Request[v2.ResumeVMRequest]) (*connect.Response[v2.ResumeVMResponse], error)
 	InitiateMigration(context.Context, *connect.Request[v2.InitiateMigrationRequest]) (*connect.Response[v2.InitiateMigrationResponse], error)
 	PrepareForMigration(context.Context, *connect.Request[v2.PrepareForMigrationRequest]) (*connect.Response[v2.PrepareForMigrationResponse], error)
+	ConfirmMigration(context.Context, *connect.Request[v2.ConfirmMigrationRequest]) (*connect.Response[emptypb.Empty], error)
+	AbortMigration(context.Context, *connect.Request[v2.AbortMigrationRequest]) (*connect.Response[emptypb.Empty], error)
 	CreateSnapshot(context.Context, *connect.Request[v2.CreateSnapshotRequest]) (*connect.Response[v2.CreateSnapshotResponse], error)
 	RevertToSnapshot(context.Context, *connect.Request[v2.RevertToSnapshotRequest]) (*connect.Response[v2.RevertToSnapshotResponse], error)
 	DeleteSnapshot(context.Context, *connect.Request[v2.DeleteSnapshotRequest]) (*connect.Response[v2.DeleteSnapshotResponse], error)
@@ -358,6 +367,18 @@ func NewAgentServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			httpClient,
 			baseURL+AgentServicePrepareForMigrationProcedure,
 			connect.WithSchema(agentServiceMethods.ByName("PrepareForMigration")),
+			connect.WithClientOptions(opts...),
+		),
+		confirmMigration: connect.NewClient[v2.ConfirmMigrationRequest, emptypb.Empty](
+			httpClient,
+			baseURL+AgentServiceConfirmMigrationProcedure,
+			connect.WithSchema(agentServiceMethods.ByName("ConfirmMigration")),
+			connect.WithClientOptions(opts...),
+		),
+		abortMigration: connect.NewClient[v2.AbortMigrationRequest, emptypb.Empty](
+			httpClient,
+			baseURL+AgentServiceAbortMigrationProcedure,
+			connect.WithSchema(agentServiceMethods.ByName("AbortMigration")),
 			connect.WithClientOptions(opts...),
 		),
 		createSnapshot: connect.NewClient[v2.CreateSnapshotRequest, v2.CreateSnapshotResponse](
@@ -644,6 +665,8 @@ type agentServiceClient struct {
 	resumeVM                 *connect.Client[v2.ResumeVMRequest, v2.ResumeVMResponse]
 	initiateMigration        *connect.Client[v2.InitiateMigrationRequest, v2.InitiateMigrationResponse]
 	prepareForMigration      *connect.Client[v2.PrepareForMigrationRequest, v2.PrepareForMigrationResponse]
+	confirmMigration         *connect.Client[v2.ConfirmMigrationRequest, emptypb.Empty]
+	abortMigration           *connect.Client[v2.AbortMigrationRequest, emptypb.Empty]
 	createSnapshot           *connect.Client[v2.CreateSnapshotRequest, v2.CreateSnapshotResponse]
 	revertToSnapshot         *connect.Client[v2.RevertToSnapshotRequest, v2.RevertToSnapshotResponse]
 	deleteSnapshot           *connect.Client[v2.DeleteSnapshotRequest, v2.DeleteSnapshotResponse]
@@ -763,6 +786,16 @@ func (c *agentServiceClient) InitiateMigration(ctx context.Context, req *connect
 // PrepareForMigration calls pilab.agent.v2.AgentService.PrepareForMigration.
 func (c *agentServiceClient) PrepareForMigration(ctx context.Context, req *connect.Request[v2.PrepareForMigrationRequest]) (*connect.Response[v2.PrepareForMigrationResponse], error) {
 	return c.prepareForMigration.CallUnary(ctx, req)
+}
+
+// ConfirmMigration calls pilab.agent.v2.AgentService.ConfirmMigration.
+func (c *agentServiceClient) ConfirmMigration(ctx context.Context, req *connect.Request[v2.ConfirmMigrationRequest]) (*connect.Response[emptypb.Empty], error) {
+	return c.confirmMigration.CallUnary(ctx, req)
+}
+
+// AbortMigration calls pilab.agent.v2.AgentService.AbortMigration.
+func (c *agentServiceClient) AbortMigration(ctx context.Context, req *connect.Request[v2.AbortMigrationRequest]) (*connect.Response[emptypb.Empty], error) {
+	return c.abortMigration.CallUnary(ctx, req)
 }
 
 // CreateSnapshot calls pilab.agent.v2.AgentService.CreateSnapshot.
@@ -1002,6 +1035,8 @@ type AgentServiceHandler interface {
 	ResumeVM(context.Context, *connect.Request[v2.ResumeVMRequest]) (*connect.Response[v2.ResumeVMResponse], error)
 	InitiateMigration(context.Context, *connect.Request[v2.InitiateMigrationRequest]) (*connect.Response[v2.InitiateMigrationResponse], error)
 	PrepareForMigration(context.Context, *connect.Request[v2.PrepareForMigrationRequest]) (*connect.Response[v2.PrepareForMigrationResponse], error)
+	ConfirmMigration(context.Context, *connect.Request[v2.ConfirmMigrationRequest]) (*connect.Response[emptypb.Empty], error)
+	AbortMigration(context.Context, *connect.Request[v2.AbortMigrationRequest]) (*connect.Response[emptypb.Empty], error)
 	CreateSnapshot(context.Context, *connect.Request[v2.CreateSnapshotRequest]) (*connect.Response[v2.CreateSnapshotResponse], error)
 	RevertToSnapshot(context.Context, *connect.Request[v2.RevertToSnapshotRequest]) (*connect.Response[v2.RevertToSnapshotResponse], error)
 	DeleteSnapshot(context.Context, *connect.Request[v2.DeleteSnapshotRequest]) (*connect.Response[v2.DeleteSnapshotResponse], error)
@@ -1143,6 +1178,18 @@ func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOpti
 		AgentServicePrepareForMigrationProcedure,
 		svc.PrepareForMigration,
 		connect.WithSchema(agentServiceMethods.ByName("PrepareForMigration")),
+		connect.WithHandlerOptions(opts...),
+	)
+	agentServiceConfirmMigrationHandler := connect.NewUnaryHandler(
+		AgentServiceConfirmMigrationProcedure,
+		svc.ConfirmMigration,
+		connect.WithSchema(agentServiceMethods.ByName("ConfirmMigration")),
+		connect.WithHandlerOptions(opts...),
+	)
+	agentServiceAbortMigrationHandler := connect.NewUnaryHandler(
+		AgentServiceAbortMigrationProcedure,
+		svc.AbortMigration,
+		connect.WithSchema(agentServiceMethods.ByName("AbortMigration")),
 		connect.WithHandlerOptions(opts...),
 	)
 	agentServiceCreateSnapshotHandler := connect.NewUnaryHandler(
@@ -1441,6 +1488,10 @@ func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOpti
 			agentServiceInitiateMigrationHandler.ServeHTTP(w, r)
 		case AgentServicePrepareForMigrationProcedure:
 			agentServicePrepareForMigrationHandler.ServeHTTP(w, r)
+		case AgentServiceConfirmMigrationProcedure:
+			agentServiceConfirmMigrationHandler.ServeHTTP(w, r)
+		case AgentServiceAbortMigrationProcedure:
+			agentServiceAbortMigrationHandler.ServeHTTP(w, r)
 		case AgentServiceCreateSnapshotProcedure:
 			agentServiceCreateSnapshotHandler.ServeHTTP(w, r)
 		case AgentServiceRevertToSnapshotProcedure:
@@ -1596,6 +1647,14 @@ func (UnimplementedAgentServiceHandler) InitiateMigration(context.Context, *conn
 
 func (UnimplementedAgentServiceHandler) PrepareForMigration(context.Context, *connect.Request[v2.PrepareForMigrationRequest]) (*connect.Response[v2.PrepareForMigrationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.PrepareForMigration is not implemented"))
+}
+
+func (UnimplementedAgentServiceHandler) ConfirmMigration(context.Context, *connect.Request[v2.ConfirmMigrationRequest]) (*connect.Response[emptypb.Empty], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ConfirmMigration is not implemented"))
+}
+
+func (UnimplementedAgentServiceHandler) AbortMigration(context.Context, *connect.Request[v2.AbortMigrationRequest]) (*connect.Response[emptypb.Empty], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.AbortMigration is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) CreateSnapshot(context.Context, *connect.Request[v2.CreateSnapshotRequest]) (*connect.Response[v2.CreateSnapshotResponse], error) {

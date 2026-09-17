@@ -14,6 +14,7 @@ import "pilab/common/v1/host.proto";
 import "pilab/common/v1/error.proto";
 import "pilab/common/v1/stream.proto";
 import "pilab/common/v1/task.proto";
+import "pilab/pivirtd/v1/pivirtd.proto";
 
 service AgentService {
   rpc RegisterHost(RegisterHostRequest) returns (RegisterHostResponse);
@@ -31,6 +32,8 @@ service AgentService {
   rpc ResumeVM(ResumeVMRequest) returns (ResumeVMResponse);
   rpc InitiateMigration(InitiateMigrationRequest) returns (InitiateMigrationResponse);
   rpc PrepareForMigration(PrepareForMigrationRequest) returns (PrepareForMigrationResponse);
+  rpc ConfirmMigration(ConfirmMigrationRequest) returns (google.protobuf.Empty);
+  rpc AbortMigration(AbortMigrationRequest) returns (google.protobuf.Empty);
   rpc CreateSnapshot(CreateSnapshotRequest) returns (CreateSnapshotResponse);
   rpc RevertToSnapshot(RevertToSnapshotRequest) returns (RevertToSnapshotResponse);
   rpc DeleteSnapshot(DeleteSnapshotRequest) returns (DeleteSnapshotResponse);
@@ -359,22 +362,48 @@ message ResumeVMResponse {
   google.protobuf.Empty message = 1;
 }
 
+message MigrationOptions {
+  bool incremental = 1;
+  bool compress = 2;
+  int64 max_bandwidth_bytes_sec = 3;
+  int64 downtime_limit_ms = 4;
+  bool postcopy = 5;
+  bool multifd = 6;
+}
+
 message InitiateMigrationRequest {
   string vm_id = 1;
   string target_host = 2;
+  MigrationOptions options = 3;
 }
 
 message InitiateMigrationResponse {
-  google.protobuf.Empty message = 1;
+  string task_id = 1;
 }
 
 message PrepareForMigrationRequest {
   string vm_id = 1;
   string source_host = 2;
+  pilab.pivirtd.v1.VMConfig config = 3;
+  string uid = 4;
+  map<string, string> labels = 5;
+  int64 generation = 6;
 }
 
 message PrepareForMigrationResponse {
-  google.protobuf.Empty message = 1;
+  string migration_uri = 1;
+  string prepare_token = 2;
+}
+
+message ConfirmMigrationRequest {
+  string vm_id = 1;
+  string prepare_token = 2;
+}
+
+message AbortMigrationRequest {
+  string vm_id = 1;
+  string prepare_token = 2;
+  string reason = 3;
 }
 
 message CreateSnapshotRequest {
