@@ -15,6 +15,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -38,6 +39,8 @@ const (
 	AgentService_ResumeVM_FullMethodName                 = "/pilab.agent.v2.AgentService/ResumeVM"
 	AgentService_InitiateMigration_FullMethodName        = "/pilab.agent.v2.AgentService/InitiateMigration"
 	AgentService_PrepareForMigration_FullMethodName      = "/pilab.agent.v2.AgentService/PrepareForMigration"
+	AgentService_ConfirmMigration_FullMethodName         = "/pilab.agent.v2.AgentService/ConfirmMigration"
+	AgentService_AbortMigration_FullMethodName           = "/pilab.agent.v2.AgentService/AbortMigration"
 	AgentService_CreateSnapshot_FullMethodName           = "/pilab.agent.v2.AgentService/CreateSnapshot"
 	AgentService_RevertToSnapshot_FullMethodName         = "/pilab.agent.v2.AgentService/RevertToSnapshot"
 	AgentService_DeleteSnapshot_FullMethodName           = "/pilab.agent.v2.AgentService/DeleteSnapshot"
@@ -103,6 +106,8 @@ type AgentServiceClient interface {
 	ResumeVM(ctx context.Context, in *ResumeVMRequest, opts ...grpc.CallOption) (*ResumeVMResponse, error)
 	InitiateMigration(ctx context.Context, in *InitiateMigrationRequest, opts ...grpc.CallOption) (*InitiateMigrationResponse, error)
 	PrepareForMigration(ctx context.Context, in *PrepareForMigrationRequest, opts ...grpc.CallOption) (*PrepareForMigrationResponse, error)
+	ConfirmMigration(ctx context.Context, in *ConfirmMigrationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AbortMigration(ctx context.Context, in *AbortMigrationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CreateSnapshot(ctx context.Context, in *CreateSnapshotRequest, opts ...grpc.CallOption) (*CreateSnapshotResponse, error)
 	RevertToSnapshot(ctx context.Context, in *RevertToSnapshotRequest, opts ...grpc.CallOption) (*RevertToSnapshotResponse, error)
 	DeleteSnapshot(ctx context.Context, in *DeleteSnapshotRequest, opts ...grpc.CallOption) (*DeleteSnapshotResponse, error)
@@ -301,6 +306,26 @@ func (c *agentServiceClient) PrepareForMigration(ctx context.Context, in *Prepar
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PrepareForMigrationResponse)
 	err := c.cc.Invoke(ctx, AgentService_PrepareForMigration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) ConfirmMigration(ctx context.Context, in *ConfirmMigrationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, AgentService_ConfirmMigration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) AbortMigration(ctx context.Context, in *AbortMigrationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, AgentService_AbortMigration_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -784,6 +809,8 @@ type AgentServiceServer interface {
 	ResumeVM(context.Context, *ResumeVMRequest) (*ResumeVMResponse, error)
 	InitiateMigration(context.Context, *InitiateMigrationRequest) (*InitiateMigrationResponse, error)
 	PrepareForMigration(context.Context, *PrepareForMigrationRequest) (*PrepareForMigrationResponse, error)
+	ConfirmMigration(context.Context, *ConfirmMigrationRequest) (*emptypb.Empty, error)
+	AbortMigration(context.Context, *AbortMigrationRequest) (*emptypb.Empty, error)
 	CreateSnapshot(context.Context, *CreateSnapshotRequest) (*CreateSnapshotResponse, error)
 	RevertToSnapshot(context.Context, *RevertToSnapshotRequest) (*RevertToSnapshotResponse, error)
 	DeleteSnapshot(context.Context, *DeleteSnapshotRequest) (*DeleteSnapshotResponse, error)
@@ -882,6 +909,12 @@ func (UnimplementedAgentServiceServer) InitiateMigration(context.Context, *Initi
 }
 func (UnimplementedAgentServiceServer) PrepareForMigration(context.Context, *PrepareForMigrationRequest) (*PrepareForMigrationResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method PrepareForMigration not implemented")
+}
+func (UnimplementedAgentServiceServer) ConfirmMigration(context.Context, *ConfirmMigrationRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConfirmMigration not implemented")
+}
+func (UnimplementedAgentServiceServer) AbortMigration(context.Context, *AbortMigrationRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method AbortMigration not implemented")
 }
 func (UnimplementedAgentServiceServer) CreateSnapshot(context.Context, *CreateSnapshotRequest) (*CreateSnapshotResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CreateSnapshot not implemented")
@@ -1302,6 +1335,42 @@ func _AgentService_PrepareForMigration_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AgentServiceServer).PrepareForMigration(ctx, req.(*PrepareForMigrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_ConfirmMigration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfirmMigrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).ConfirmMigration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_ConfirmMigration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).ConfirmMigration(ctx, req.(*ConfirmMigrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_AbortMigration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AbortMigrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).AbortMigration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_AbortMigration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).AbortMigration(ctx, req.(*AbortMigrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2124,6 +2193,14 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PrepareForMigration",
 			Handler:    _AgentService_PrepareForMigration_Handler,
+		},
+		{
+			MethodName: "ConfirmMigration",
+			Handler:    _AgentService_ConfirmMigration_Handler,
+		},
+		{
+			MethodName: "AbortMigration",
+			Handler:    _AgentService_AbortMigration_Handler,
 		},
 		{
 			MethodName: "CreateSnapshot",
