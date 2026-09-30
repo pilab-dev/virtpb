@@ -1989,7 +1989,7 @@ const file_pilab_network_v2_public_ip_service_proto_rawDesc = "" +
 	"\x0fAddFirewallRule\x12(.pilab.network.v2.AddFirewallRuleRequest\x1a\x1e.pilab.network.v2.FirewallRule\x12a\n" +
 	"\x12UpdateFirewallRule\x12+.pilab.network.v2.UpdateFirewallRuleRequest\x1a\x1e.pilab.network.v2.FirewallRule\x12Y\n" +
 	"\x12RemoveFirewallRule\x12+.pilab.network.v2.RemoveFirewallRuleRequest\x1a\x16.google.protobuf.Empty\x12]\n" +
-	"\x14ReorderFirewallRules\x12-.pilab.network.v2.ReorderFirewallRulesRequest\x1a\x16.google.protobuf.EmptyB5Z3go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2b\x06proto3"
+	"\x14ReorderFirewallRules\x12-.pilab.network.v2.ReorderFirewallRulesRequest\x1a\x16.google.protobuf.EmptyB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_public_ip_service_proto_rawDescOnce sync.Once

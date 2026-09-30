@@ -836,7 +836,7 @@ const file_pilab_common_v1_host_proto_rawDesc = "" +
 	"\trx_errors\x18\x06 \x01(\x03R\brxErrors\x12\x1b\n" +
 	"\ttx_errors\x18\a \x01(\x03R\btxErrors\x12\x19\n" +
 	"\brx_drops\x18\b \x01(\x03R\arxDrops\x12\x19\n" +
-	"\btx_drops\x18\t \x01(\x03R\atxDropsB3Z1go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1b\x06proto3"
+	"\btx_drops\x18\t \x01(\x03R\atxDropsB6Z4go.pilab.hu/cloud/virtpb/v3/pilab/common/v1;commonv1b\x06proto3"
 
 var (
 	file_pilab_common_v1_host_proto_rawDescOnce sync.Once

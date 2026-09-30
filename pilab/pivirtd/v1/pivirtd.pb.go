@@ -7,7 +7,7 @@
 package pivirtdv1
 
 import (
-	v1 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
+	v1 "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
@@ -9378,7 +9378,7 @@ const file_pilab_pivirtd_v1_pivirtd_proto_rawDesc = "" +
 	"\x10SetGuestHostname\x12).pilab.pivirtd.v1.SetGuestHostnameRequest\x1a*.pilab.pivirtd.v1.SetGuestHostnameResponse\x12Z\n" +
 	"\vCustomizeOS\x12$.pilab.pivirtd.v1.CustomizeOSRequest\x1a%.pilab.pivirtd.v1.CustomizeOSResponse\x12Z\n" +
 	"\x0fSubscribeEvents\x12(.pilab.pivirtd.v1.SubscribeEventsRequest\x1a\x1b.pilab.pivirtd.v1.HostEvent0\x01\x12a\n" +
-	"\x0fGetHostResource\x12(.pilab.pivirtd.v1.SubscribeEventsRequest\x1a$.pilab.pivirtd.v1.HostResourceReportB5Z3go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1b\x06proto3"
+	"\x0fGetHostResource\x12(.pilab.pivirtd.v1.SubscribeEventsRequest\x1a$.pilab.pivirtd.v1.HostResourceReportB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/pivirtd/v1;pivirtdv1b\x06proto3"
 
 var (
 	file_pilab_pivirtd_v1_pivirtd_proto_rawDescOnce sync.Once

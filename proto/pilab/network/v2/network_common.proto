@@ -5,7 +5,7 @@ syntax = "proto3";
 
 package pilab.network.v2;
 
-option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2";
 
 enum Protocol {
   PROTOCOL_UNSPECIFIED = 0;

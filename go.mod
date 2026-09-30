@@ -1,4 +1,4 @@
-module go.pilab.hu/cloud/virtpb
+module go.pilab.hu/cloud/virtpb/v3
 
 go 1.25.0
 

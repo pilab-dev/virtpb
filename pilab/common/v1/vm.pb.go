@@ -1360,7 +1360,7 @@ const file_pilab_common_v1_vm_proto_rawDesc = "" +
 	"\x14SNAPSHOT_STATE_ERROR\x10\x03\x12\x1b\n" +
 	"\x17SNAPSHOT_STATE_DELETING\x10\x04\x12 \n" +
 	"\x1cSNAPSHOT_STATE_CONSOLIDATING\x10\x05\x12\x1c\n" +
-	"\x18SNAPSHOT_STATE_RESTORING\x10\x06B3Z1go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1b\x06proto3"
+	"\x18SNAPSHOT_STATE_RESTORING\x10\x06B6Z4go.pilab.hu/cloud/virtpb/v3/pilab/common/v1;commonv1b\x06proto3"
 
 var (
 	file_pilab_common_v1_vm_proto_rawDescOnce sync.Once

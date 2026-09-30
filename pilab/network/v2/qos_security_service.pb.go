@@ -2023,7 +2023,7 @@ const file_pilab_network_v2_qos_security_service_proto_rawDesc = "" +
 	"AddACLRule\x12#.pilab.network.v2.AddACLRuleRequest\x1a\x19.pilab.network.v2.ACLRule\x12R\n" +
 	"\rUpdateACLRule\x12&.pilab.network.v2.UpdateACLRuleRequest\x1a\x19.pilab.network.v2.ACLRule\x12O\n" +
 	"\rRemoveACLRule\x12&.pilab.network.v2.RemoveACLRuleRequest\x1a\x16.google.protobuf.Empty\x12S\n" +
-	"\x0fReorderACLRules\x12(.pilab.network.v2.ReorderACLRulesRequest\x1a\x16.google.protobuf.EmptyB5Z3go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2b\x06proto3"
+	"\x0fReorderACLRules\x12(.pilab.network.v2.ReorderACLRulesRequest\x1a\x16.google.protobuf.EmptyB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_qos_security_service_proto_rawDescOnce sync.Once

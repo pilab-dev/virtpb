@@ -1,6 +1,6 @@
 # virtpb
 
-[![Go Reference](https://pkg.go.dev/badge/go.pilab.hu/cloud/virtpb.svg)](https://pkg.go.dev/go.pilab.hu/cloud/virtpb)
+[![Go Reference](https://pkg.go.dev/badge/go.pilab.hu/cloud/virtpb/v3.svg)](https://pkg.go.dev/go.pilab.hu/cloud/virtpb/v3)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 `virtpb` is the canonical Protocol Buffer schema repository and generated Go client library for **PiVirt Cloud**, a full-stack virtualization orchestration platform. It defines every API contract across the platform — from the low-level hypervisor daemon up to the CLI tool and web frontend — in a single, versioned, language-neutral schema.
@@ -119,7 +119,7 @@ The same `.proto` definitions generate both **gRPC** stubs and **Connect-Go** cl
 Breaking changes are gated by the package version suffix (`v1`, `v2`). The deprecated `director/v1` and modern `director/v2` coexist, allowing gradual migration. Buf's breaking change detection prevents accidental regressions.
 
 ### 4. Single Import, Strong Typing
-Consumers import one Go module (`go.pilab.hu/cloud/virtpb`) and get fully typed request/response messages and service interfaces. No manual marshalling, no runtime reflection, no guessing field names.
+Consumers import one Go module (`go.pilab.hu/cloud/virtpb/v3`) and get fully typed request/response messages and service interfaces. No manual marshalling, no runtime reflection, no guessing field names.
 
 ### 5. Schema-Driven Development
 The `.proto` files are the source of truth. Code generation produces Go types, gRPC registrations, Connect handlers, and OpenTelemetry metadata — all from a single schema definition.
@@ -138,7 +138,7 @@ Because the schema is pure protobuf, it can generate clients in other languages 
 ### Installation
 
 ```bash
-go get go.pilab.hu/cloud/virtpb
+go get go.pilab.hu/cloud/virtpb/v3
 ```
 
 ### Usage
@@ -148,15 +148,15 @@ Import the root package or individual sub-packages:
 ```go
 import (
     // Import specific packages by version
-    pivirtdv1 "go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1"
-    networkv2 "go.pilab.hu/cloud/virtpb/pilab/network/v2"
+    pivirtdv1 "go.pilab.hu/cloud/virtpb/v3/pilab/pivirtd/v1"
+    networkv2 "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2"
 
     // Connect protocol clients
-    "go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1/pivirtdv1connect"
+    "go.pilab.hu/cloud/virtpb/v3/pilab/pivirtd/v1/pivirtdv1connect"
 )
 ```
 
-The generated types are fully compatible with both gRPC and Connect runtimes. See the [GoDoc](https://pkg.go.dev/go.pilab.hu/cloud/virtpb) for the full API reference.
+The generated types are fully compatible with both gRPC and Connect runtimes. See the [GoDoc](https://pkg.go.dev/go.pilab.hu/cloud/virtpb/v3) for the full API reference.
 
 ---
 

@@ -10,7 +10,7 @@
 package directorv1
 
 import (
-	v1 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
+	v1 "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1135,7 +1135,7 @@ const file_pilab_director_v1_clouddirector_proto_rawDesc = "" +
 	"\bresponse2\xd7\x01\n" +
 	"\x14CloudDirectorService\x12b\n" +
 	"\rRegisterAgent\x12'.pilab.director.v1.RegisterAgentRequest\x1a(.pilab.director.v1.RegisterAgentResponse\x12[\n" +
-	"\vAgentEvents\x12%.pilab.director.v1.AgentEventsRequest\x1a!.pilab.director.v1.ManagerMessage(\x010\x01B7Z5go.pilab.hu/cloud/virtpb/pilab/director/v1;directorv1b\x06proto3"
+	"\vAgentEvents\x12%.pilab.director.v1.AgentEventsRequest\x1a!.pilab.director.v1.ManagerMessage(\x010\x01B:Z8go.pilab.hu/cloud/virtpb/v3/pilab/director/v1;directorv1b\x06proto3"
 
 var (
 	file_pilab_director_v1_clouddirector_proto_rawDescOnce sync.Once

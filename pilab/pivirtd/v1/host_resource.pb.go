@@ -1363,7 +1363,7 @@ const file_pilab_pivirtd_v1_host_resource_proto_rawDesc = "" +
 	"%HOST_EVENT_TYPE_VM_MIGRATION_PROGRESS\x103\x12*\n" +
 	"&HOST_EVENT_TYPE_VM_MIGRATION_COMPLETED\x104\x12'\n" +
 	"#HOST_EVENT_TYPE_VM_MIGRATION_FAILED\x105\x12*\n" +
-	"&HOST_EVENT_TYPE_VM_MIGRATION_CANCELLED\x106B5Z3go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1b\x06proto3"
+	"&HOST_EVENT_TYPE_VM_MIGRATION_CANCELLED\x106B8Z6go.pilab.hu/cloud/virtpb/v3/pilab/pivirtd/v1;pivirtdv1b\x06proto3"
 
 var (
 	file_pilab_pivirtd_v1_host_resource_proto_rawDescOnce sync.Once

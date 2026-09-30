@@ -1374,7 +1374,7 @@ const file_pilab_agent_v1_agent_service_proto_rawDesc = "" +
 	"\x06Stream\x12#.pilab.cloud.agent.v1.StreamRequest\x1a$.pilab.cloud.agent.v1.StreamResponse(\x010\x01\x12e\n" +
 	"\fUpdateConfig\x12).pilab.cloud.agent.v1.UpdateConfigRequest\x1a*.pilab.cloud.agent.v1.UpdateConfigResponse\x12t\n" +
 	"\x11GetHardwareHealth\x12..pilab.cloud.agent.v1.GetHardwareHealthRequest\x1a/.pilab.cloud.agent.v1.GetHardwareHealthResponse\x12h\n" +
-	"\rGetSensorData\x12*.pilab.cloud.agent.v1.GetSensorDataRequest\x1a+.pilab.cloud.agent.v1.GetSensorDataResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\rGetSensorData\x12*.pilab.cloud.agent.v1.GetSensorDataRequest\x1a+.pilab.cloud.agent.v1.GetSensorDataResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_agent_service_proto_rawDescOnce sync.Once

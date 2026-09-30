@@ -159,7 +159,7 @@ const file_pilab_common_v1_error_proto_rawDesc = "" +
 	"\x05Error\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12\x18\n" +
-	"\adetails\x18\x03 \x01(\tR\adetailsB3Z1go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1b\x06proto3"
+	"\adetails\x18\x03 \x01(\tR\adetailsB6Z4go.pilab.hu/cloud/virtpb/v3/pilab/common/v1;commonv1b\x06proto3"
 
 var (
 	file_pilab_common_v1_error_proto_rawDescOnce sync.Once

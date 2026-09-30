@@ -109,7 +109,7 @@ const file_pilab_common_v1_phase_proto_rawDesc = "" +
 	"\x0ePHASE_DELETING\x10\x05\x12\x11\n" +
 	"\rPHASE_UNKNOWN\x10\x06\x12\x0e\n" +
 	"\n" +
-	"PHASE_LOST\x10\aB3Z1go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1b\x06proto3"
+	"PHASE_LOST\x10\aB6Z4go.pilab.hu/cloud/virtpb/v3/pilab/common/v1;commonv1b\x06proto3"
 
 var (
 	file_pilab_common_v1_phase_proto_rawDescOnce sync.Once

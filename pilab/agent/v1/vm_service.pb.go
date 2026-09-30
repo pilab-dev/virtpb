@@ -3106,7 +3106,7 @@ const file_pilab_agent_v1_vm_service_proto_rawDesc = "" +
 	"\x13CreatePowerSchedule\x120.pilab.cloud.agent.v1.CreatePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.CreatePowerScheduleResponse\x12w\n" +
 	"\x12ListPowerSchedules\x12/.pilab.cloud.agent.v1.ListPowerSchedulesRequest\x1a0.pilab.cloud.agent.v1.ListPowerSchedulesResponse\x12z\n" +
 	"\x13UpdatePowerSchedule\x120.pilab.cloud.agent.v1.UpdatePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.UpdatePowerScheduleResponse\x12z\n" +
-	"\x13DeletePowerSchedule\x120.pilab.cloud.agent.v1.DeletePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.DeletePowerScheduleResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\x13DeletePowerSchedule\x120.pilab.cloud.agent.v1.DeletePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.DeletePowerScheduleResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_vm_service_proto_rawDescOnce sync.Once

@@ -1745,7 +1745,7 @@ const file_pilab_agent_v1_storageservice_proto_rawDesc = "" +
 	"\x11StoragePoolCreate\x12..pilab.cloud.agent.v1.StoragePoolCreateRequest\x1a/.pilab.cloud.agent.v1.StoragePoolCreateResponse\x12t\n" +
 	"\x11StoragePoolDelete\x12..pilab.cloud.agent.v1.StoragePoolDeleteRequest\x1a/.pilab.cloud.agent.v1.StoragePoolDeleteResponse\x12n\n" +
 	"\x0fStoragePoolList\x12,.pilab.cloud.agent.v1.StoragePoolListRequest\x1a-.pilab.cloud.agent.v1.StoragePoolListResponse\x12k\n" +
-	"\x0eStoragePoolGet\x12+.pilab.cloud.agent.v1.StoragePoolGetRequest\x1a,.pilab.cloud.agent.v1.StoragePoolGetResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\x0eStoragePoolGet\x12+.pilab.cloud.agent.v1.StoragePoolGetRequest\x1a,.pilab.cloud.agent.v1.StoragePoolGetResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_storageservice_proto_rawDescOnce sync.Once

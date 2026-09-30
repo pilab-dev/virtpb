@@ -8,7 +8,7 @@ package pilab.director.v1;
 import "pilab/common/v1/host.proto";
 import "pilab/common/v1/task.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/pilab/director/v1;directorv1";
+option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/director/v1;directorv1";
 
 message VmGuestInfo {
   string vm_id = 1;

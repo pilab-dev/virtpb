@@ -717,7 +717,7 @@ const file_pilab_agent_v1_snapshot_service_proto_rawDesc = "" +
 	"\x06Delete\x12+.pilab.cloud.agent.v1.SnapshotDeleteRequest\x1a,.pilab.cloud.agent.v1.SnapshotDeleteResponse\x12`\n" +
 	"\x05Clone\x12*.pilab.cloud.agent.v1.SnapshotCloneRequest\x1a+.pilab.cloud.agent.v1.SnapshotCloneResponse\x12r\n" +
 	"\vConsolidate\x120.pilab.cloud.agent.v1.SnapshotConsolidateRequest\x1a1.pilab.cloud.agent.v1.SnapshotConsolidateResponse\x12]\n" +
-	"\x04List\x12).pilab.cloud.agent.v1.SnapshotListRequest\x1a*.pilab.cloud.agent.v1.SnapshotListResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\x04List\x12).pilab.cloud.agent.v1.SnapshotListRequest\x1a*.pilab.cloud.agent.v1.SnapshotListResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_snapshot_service_proto_rawDescOnce sync.Once

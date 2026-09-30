@@ -242,7 +242,7 @@ const file_pilab_frontend_v1_tasks_service_proto_rawDesc = "" +
 	"\x11ListTasksResponse\x123\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x1d.pilab.frontend.v1.TaskStatusR\x05tasks2f\n" +
 	"\fTasksService\x12V\n" +
-	"\tListTasks\x12#.pilab.frontend.v1.ListTasksRequest\x1a$.pilab.frontend.v1.ListTasksResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1b\x06proto3"
+	"\tListTasks\x12#.pilab.frontend.v1.ListTasksRequest\x1a$.pilab.frontend.v1.ListTasksResponseB:Z8go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1b\x06proto3"
 
 var (
 	file_pilab_frontend_v1_tasks_service_proto_rawDescOnce sync.Once

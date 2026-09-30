@@ -3373,7 +3373,7 @@ const file_pilab_network_v2_network_service_proto_rawDesc = "" +
 	"\x11RemoveVNIEndpoint\x12*.pilab.network.v2.RemoveVNIEndpointRequest\x1a\x16.google.protobuf.Empty\x12T\n" +
 	"\vAllocateVNI\x12$.pilab.network.v2.AllocateVNIRequest\x1a\x1f.pilab.network.v2.VNIAllocation\x12I\n" +
 	"\n" +
-	"ReleaseVNI\x12#.pilab.network.v2.ReleaseVNIRequest\x1a\x16.google.protobuf.EmptyB5Z3go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2b\x06proto3"
+	"ReleaseVNI\x12#.pilab.network.v2.ReleaseVNIRequest\x1a\x16.google.protobuf.EmptyB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_network_service_proto_rawDescOnce sync.Once

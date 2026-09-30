@@ -2998,7 +2998,7 @@ const file_pilab_agent_v1_networkservice_proto_rawDesc = "" +
 	"\vNetworkStop\x12(.pilab.cloud.agent.v1.NetworkStopRequest\x1a).pilab.cloud.agent.v1.NetworkStopResponse\x12h\n" +
 	"\rNetworkUpdate\x12*.pilab.cloud.agent.v1.NetworkUpdateRequest\x1a+.pilab.cloud.agent.v1.NetworkUpdateResponse\x12b\n" +
 	"\vOvsFlowPush\x12(.pilab.cloud.agent.v1.OvsFlowPushRequest\x1a).pilab.cloud.agent.v1.OvsFlowPushResponse\x12b\n" +
-	"\vOvsFlowSync\x12(.pilab.cloud.agent.v1.OvsFlowSyncRequest\x1a).pilab.cloud.agent.v1.OvsFlowSyncResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\vOvsFlowSync\x12(.pilab.cloud.agent.v1.OvsFlowSyncRequest\x1a).pilab.cloud.agent.v1.OvsFlowSyncResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_networkservice_proto_rawDescOnce sync.Once

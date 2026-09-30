@@ -140,7 +140,7 @@ const file_pilab_common_v1_task_proto_rawDesc = "" +
 	"\n" +
 	"\b_messageB\n" +
 	"\n" +
-	"\b_host_idB3Z1go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1b\x06proto3"
+	"\b_host_idB6Z4go.pilab.hu/cloud/virtpb/v3/pilab/common/v1;commonv1b\x06proto3"
 
 var (
 	file_pilab_common_v1_task_proto_rawDescOnce sync.Once
