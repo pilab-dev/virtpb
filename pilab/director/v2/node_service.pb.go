@@ -14,9 +14,9 @@
 package directorv2
 
 import (
-	v11 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
-	v1 "go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1"
-	v12 "go.pilab.hu/cloud/virtpb/pilab/resource/v1"
+	v11 "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
+	v1 "go.pilab.hu/cloud/virtpb/v3/pilab/pivirtd/v1"
+	v12 "go.pilab.hu/cloud/virtpb/v3/pilab/resource/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -2064,7 +2064,7 @@ const file_pilab_director_v2_node_service_proto_rawDesc = "" +
 	"\vNodeService\x12[\n" +
 	"\bRegister\x12&.pilab.director.v2.RegisterNodeRequest\x1a'.pilab.director.v2.RegisterNodeResponse\x12q\n" +
 	"\x12RequestCertificate\x12,.pilab.director.v2.RequestCertificateRequest\x1a-.pilab.director.v2.RequestCertificateResponse\x12M\n" +
-	"\aSession\x12\x1c.pilab.director.v2.NodeEvent\x1a .pilab.director.v2.NodeDirective(\x010\x01B7Z5go.pilab.hu/cloud/virtpb/pilab/director/v2;directorv2b\x06proto3"
+	"\aSession\x12\x1c.pilab.director.v2.NodeEvent\x1a .pilab.director.v2.NodeDirective(\x010\x01B:Z8go.pilab.hu/cloud/virtpb/v3/pilab/director/v2;directorv2b\x06proto3"
 
 var (
 	file_pilab_director_v2_node_service_proto_rawDescOnce sync.Once

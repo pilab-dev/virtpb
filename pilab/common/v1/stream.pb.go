@@ -314,7 +314,7 @@ const file_pilab_common_v1_stream_proto_rawDesc = "" +
 	"\x11OpenStreamMessage\x12\x1a\n" +
 	"\bresource\x18\x01 \x01(\tR\bresource\x12)\n" +
 	"\x10resource_variant\x18\x02 \x01(\tR\x0fresourceVariant\"\x14\n" +
-	"\x12CloseStreamMessageB3Z1go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1b\x06proto3"
+	"\x12CloseStreamMessageB6Z4go.pilab.hu/cloud/virtpb/v3/pilab/common/v1;commonv1b\x06proto3"
 
 var (
 	file_pilab_common_v1_stream_proto_rawDescOnce sync.Once

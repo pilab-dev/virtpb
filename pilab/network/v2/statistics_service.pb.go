@@ -921,7 +921,7 @@ const file_pilab_network_v2_statistics_service_proto_rawDesc = "" +
 	"\x0fGetNetworkStats\x12(.pilab.network.v2.GetNetworkStatsRequest\x1a\x1e.pilab.network.v2.NetworkStats\x12R\n" +
 	"\fGetPortStats\x12%.pilab.network.v2.GetPortStatsRequest\x1a\x1b.pilab.network.v2.PortStats\x12O\n" +
 	"\vGetQoSStats\x12$.pilab.network.v2.GetQoSStatsRequest\x1a\x1a.pilab.network.v2.QoSStats\x12^\n" +
-	"\x10GetPublicIPUsage\x12).pilab.network.v2.GetPublicIPUsageRequest\x1a\x1f.pilab.network.v2.PublicIPUsageB5Z3go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2b\x06proto3"
+	"\x10GetPublicIPUsage\x12).pilab.network.v2.GetPublicIPUsageRequest\x1a\x1f.pilab.network.v2.PublicIPUsageB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_statistics_service_proto_rawDescOnce sync.Once

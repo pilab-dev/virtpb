@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1"
+	v1 "go.pilab.hu/cloud/virtpb/v3/pilab/pivirtd/v1"
 	http "net/http"
 	strings "strings"
 )

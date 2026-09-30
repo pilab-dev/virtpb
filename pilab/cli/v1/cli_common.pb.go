@@ -10,7 +10,7 @@
 package cliv1
 
 import (
-	_ "go.pilab.hu/cloud/virtpb/pilab/common/v1"
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/known/durationpb"
@@ -3814,7 +3814,7 @@ const file_pilab_cli_v1_cli_common_proto_rawDesc = "" +
 	"\x1cDATASTORE_STATUS_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18DATASTORE_STATUS_MOUNTED\x10\x01\x12\x1e\n" +
 	"\x1aDATASTORE_STATUS_UNMOUNTED\x10\x02\x12\x1a\n" +
-	"\x16DATASTORE_STATUS_ERROR\x10\x03B-Z+go.pilab.hu/cloud/virtpb/pilab/cli/v1;cliv1b\x06proto3"
+	"\x16DATASTORE_STATUS_ERROR\x10\x03B0Z.go.pilab.hu/cloud/virtpb/v3/pilab/cli/v1;cliv1b\x06proto3"
 
 var (
 	file_pilab_cli_v1_cli_common_proto_rawDescOnce sync.Once

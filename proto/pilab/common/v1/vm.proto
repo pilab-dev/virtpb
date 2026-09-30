@@ -9,7 +9,7 @@ package pilab.common.v1;
 import "google/protobuf/timestamp.proto";
 import "pilab/common/v1/phase.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1";
+option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1;commonv1";
 
 // VMState represents the lifecycle state of a virtual machine.
 enum VMState {

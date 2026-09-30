@@ -10,7 +10,7 @@ import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
 import "pilab/network/v2/network_common.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2";
 
 // QoSSecurityService manages QoS profiles, security profiles, and ACL rules.
 service QoSSecurityService {

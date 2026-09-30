@@ -2971,7 +2971,7 @@ const file_pilab_frontend_v1_management_service_proto_rawDesc = "" +
 	"\x10AssignRoleToUser\x12*.pilab.frontend.v1.AssignRoleToUserRequest\x1a\x16.google.protobuf.Empty\x12^\n" +
 	"\x14UnassignRoleFromUser\x12..pilab.frontend.v1.UnassignRoleFromUserRequest\x1a\x16.google.protobuf.Empty\x12h\n" +
 	"\x0fGetRolesForUser\x12).pilab.frontend.v1.GetRolesForUserRequest\x1a*.pilab.frontend.v1.GetRolesForUserResponse\x12z\n" +
-	"\x15GetPermissionsForRole\x12/.pilab.frontend.v1.GetPermissionsForRoleRequest\x1a0.pilab.frontend.v1.GetPermissionsForRoleResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1b\x06proto3"
+	"\x15GetPermissionsForRole\x12/.pilab.frontend.v1.GetPermissionsForRoleRequest\x1a0.pilab.frontend.v1.GetPermissionsForRoleResponseB:Z8go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1b\x06proto3"
 
 var (
 	file_pilab_frontend_v1_management_service_proto_rawDescOnce sync.Once

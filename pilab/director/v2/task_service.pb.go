@@ -1664,7 +1664,7 @@ const file_pilab_director_v2_task_service_proto_rawDesc = "" +
 	"\n" +
 	"CancelTask\x12$.pilab.director.v2.CancelTaskRequest\x1a%.pilab.director.v2.CancelTaskResponse\x12e\n" +
 	"\x0eGetTaskHistory\x12(.pilab.director.v2.GetTaskHistoryRequest\x1a).pilab.director.v2.GetTaskHistoryResponse\x12k\n" +
-	"\x10BatchUpdateTasks\x12*.pilab.director.v2.BatchUpdateTasksRequest\x1a+.pilab.director.v2.BatchUpdateTasksResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/director/v2;directorv2b\x06proto3"
+	"\x10BatchUpdateTasks\x12*.pilab.director.v2.BatchUpdateTasksRequest\x1a+.pilab.director.v2.BatchUpdateTasksResponseB:Z8go.pilab.hu/cloud/virtpb/v3/pilab/director/v2;directorv2b\x06proto3"
 
 var (
 	file_pilab_director_v2_task_service_proto_rawDescOnce sync.Once

@@ -478,7 +478,7 @@ const file_pilab_network_v2_flow_service_proto_rawDesc = "" +
 	"\vexplanation\x18\x03 \x01(\tR\vexplanation2\xb9\x01\n" +
 	"\vFlowService\x12T\n" +
 	"\tListFlows\x12\".pilab.network.v2.ListFlowsRequest\x1a#.pilab.network.v2.ListFlowsResponse\x12T\n" +
-	"\tDebugFlow\x12\".pilab.network.v2.DebugFlowRequest\x1a#.pilab.network.v2.DebugFlowResponseB5Z3go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2b\x06proto3"
+	"\tDebugFlow\x12\".pilab.network.v2.DebugFlowRequest\x1a#.pilab.network.v2.DebugFlowResponseB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_flow_service_proto_rawDescOnce sync.Once

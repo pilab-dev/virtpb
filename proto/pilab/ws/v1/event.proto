@@ -7,7 +7,7 @@ package pilab.ws.v1;
 import "pilab/common/v1/host.proto";
 import "pilab/common/v1/task.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/pilab/ws/v1;wsv1";
+option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/ws/v1;wsv1";
 
 message JobCreated {
   string job = 1;

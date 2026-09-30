@@ -9,7 +9,7 @@
 package wsv1
 
 import (
-	v1 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
+	v1 "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -754,7 +754,7 @@ const file_pilab_ws_v1_event_proto_rawDesc = "" +
 	"\bRequests\x12=\n" +
 	"\tsubscribe\x18\x01 \x01(\v2\x1d.pilab.ws.v1.SubscribeMessageH\x00R\tsubscribe\x12F\n" +
 	"\fauthenticate\x18\x02 \x01(\v2 .pilab.ws.v1.AuthenticateMessageH\x00R\fauthenticateB\t\n" +
-	"\apayloadB+Z)go.pilab.hu/cloud/virtpb/pilab/ws/v1;wsv1b\x06proto3"
+	"\apayloadB.Z,go.pilab.hu/cloud/virtpb/v3/pilab/ws/v1;wsv1b\x06proto3"
 
 var (
 	file_pilab_ws_v1_event_proto_rawDescOnce sync.Once

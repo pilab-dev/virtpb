@@ -1469,7 +1469,7 @@ const file_pilab_agent_v2_iscsi_service_proto_rawDesc = "" +
 	"\bGetPaths\x12$.pilab.agent.v2.ISCSIGetPathsRequest\x1a%.pilab.agent.v2.ISCSIGetPathsResponse\x12f\n" +
 	"\rConfigureCHAP\x12).pilab.agent.v2.ISCSIConfigureCHAPRequest\x1a*.pilab.agent.v2.ISCSIConfigureCHAPResponse\x12{\n" +
 	"\x14ConfigureCHAPInbound\x120.pilab.agent.v2.ISCSIConfigureCHAPInboundRequest\x1a1.pilab.agent.v2.ISCSIConfigureCHAPInboundResponse\x12W\n" +
-	"\bSetLogin\x12$.pilab.agent.v2.ISCSISetLoginRequest\x1a%.pilab.agent.v2.ISCSISetLoginResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v2;agentv2b\x06proto3"
+	"\bSetLogin\x12$.pilab.agent.v2.ISCSISetLoginRequest\x1a%.pilab.agent.v2.ISCSISetLoginResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v2;agentv2b\x06proto3"
 
 var (
 	file_pilab_agent_v2_iscsi_service_proto_rawDescOnce sync.Once

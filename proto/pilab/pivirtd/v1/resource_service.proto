@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package pilab.pivirtd.v1;
 
-option go_package = "go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1";
+option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/pivirtd/v1;pivirtdv1";
 
 import "pilab/resource/v1/resource.proto";
 

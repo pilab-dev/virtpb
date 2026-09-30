@@ -355,7 +355,7 @@ const file_pilab_agent_v1_stream_proto_rawDesc = "" +
 	"\x0eStreamResponse\x12@\n" +
 	"\apayload\x18\x01 \x01(\v2$.pilab.cloud.agent.v1.PayloadMessageH\x00R\apayload\x12:\n" +
 	"\x05close\x18\x02 \x01(\v2\".pilab.cloud.agent.v1.CloseMessageH\x00R\x05closeB\t\n" +
-	"\amessageB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\amessageB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_stream_proto_rawDescOnce sync.Once

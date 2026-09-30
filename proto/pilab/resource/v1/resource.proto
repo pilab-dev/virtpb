@@ -9,7 +9,7 @@ syntax = "proto3";
 
 package pilab.resource.v1;
 
-option go_package = "go.pilab.hu/cloud/virtpb/pilab/resource/v1;resourcev1";
+option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/resource/v1;resourcev1";
 
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";

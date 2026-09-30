@@ -52,19 +52,19 @@
 //     version suffix (v1, v2), and buf breaking-change detection runs against
 //     the schema to prevent accidental regressions.
 //   - Single import, strong typing: Consumers import one Go module
-//     (go.pilab.hu/cloud/virtpb) and get fully typed request/response messages
+//     (go.pilab.hu/cloud/virtpb/v3) and get fully typed request/response messages
 //     and service interfaces — no manual marshalling or ad-hoc API clients.
 //   - OpenTelemetry integration: Generated code carries observability metadata
 //     for distributed tracing and metrics out of the box.
 //
 // # Usage
 //
-//	import "go.pilab.hu/cloud/virtpb"
+//	import "go.pilab.hu/cloud/virtpb/v3"
 //
 // Sub-packages can be imported individually, for example:
 //
-//	import pivirtdv1 "go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1"
-//	import networkv2 "go.pilab.hu/cloud/virtpb/pilab/network/v2"
+//	import pivirtdv1 "go.pilab.hu/cloud/virtpb/v3/pilab/pivirtd/v1"
+//	import networkv2 "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2"
 //
 // # Proto Source
 //
@@ -77,6 +77,6 @@
 //
 // # Module
 //
-//	module: go.pilab.hu/cloud/virtpb
+//	module: go.pilab.hu/cloud/virtpb/v3
 //	version: v1.0.4 (see go.mod)
 package virtpb

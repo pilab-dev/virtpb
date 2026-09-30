@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package pilab.common.v1;
 
-option go_package = "go.pilab.hu/cloud/virtpb/pilab/common/v1;commonv1";
+option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1;commonv1";
 
 // StreamRequest represents a request message in a stream.
 message StreamRequest {

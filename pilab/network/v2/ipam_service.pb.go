@@ -1358,7 +1358,7 @@ const file_pilab_network_v2_ipam_service_proto_rawDesc = "" +
 	"AllocateIP\x12#.pilab.network.v2.AllocateIPRequest\x1a\x1e.pilab.network.v2.IPAllocation\x12G\n" +
 	"\tReleaseIP\x12\".pilab.network.v2.ReleaseIPRequest\x1a\x16.google.protobuf.Empty\x12f\n" +
 	"\x0fListAllocations\x12(.pilab.network.v2.ListAllocationsRequest\x1a).pilab.network.v2.ListAllocationsResponse\x12P\n" +
-	"\tReserveIP\x12\".pilab.network.v2.ReserveIPRequest\x1a\x1f.pilab.network.v2.IPReservationB5Z3go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2b\x06proto3"
+	"\tReserveIP\x12\".pilab.network.v2.ReserveIPRequest\x1a\x1f.pilab.network.v2.IPReservationB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_ipam_service_proto_rawDescOnce sync.Once

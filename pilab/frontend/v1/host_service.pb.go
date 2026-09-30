@@ -3393,7 +3393,7 @@ const file_pilab_frontend_v1_host_service_proto_rawDesc = "" +
 	"\x13ExitMaintenanceMode\x12-.pilab.frontend.v1.ExitMaintenanceModeRequest\x1a..pilab.frontend.v1.ExitMaintenanceModeResponse\x12\x82\x01\n" +
 	"\x19ListHostNetworkInterfaces\x123.pilab.frontend.v1.ListHostNetworkInterfacesRequest\x1a0.pilab.frontend.v1.HostNetworkInterfacesResponse\x12}\n" +
 	"\x16EnableNetworkInterface\x120.pilab.frontend.v1.EnableNetworkInterfaceRequest\x1a1.pilab.frontend.v1.EnableNetworkInterfaceResponse\x12\x80\x01\n" +
-	"\x17DisableNetworkInterface\x121.pilab.frontend.v1.DisableNetworkInterfaceRequest\x1a2.pilab.frontend.v1.DisableNetworkInterfaceResponseB7Z5go.pilab.hu/cloud/virtpb/pilab/frontend/v1;frontendv1b\x06proto3"
+	"\x17DisableNetworkInterface\x121.pilab.frontend.v1.DisableNetworkInterfaceRequest\x1a2.pilab.frontend.v1.DisableNetworkInterfaceResponseB:Z8go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1b\x06proto3"
 
 var (
 	file_pilab_frontend_v1_host_service_proto_rawDescOnce sync.Once

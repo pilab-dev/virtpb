@@ -95,7 +95,7 @@ const file_pilab_agent_v1_error_proto_rawDesc = "" +
 	"error_code\x18\x02 \x01(\tR\terrorCode\x12\x1d\n" +
 	"\adetails\x18\x03 \x01(\fH\x00R\adetails\x88\x01\x01B\n" +
 	"\n" +
-	"\b_detailsB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\b_detailsB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_error_proto_rawDescOnce sync.Once

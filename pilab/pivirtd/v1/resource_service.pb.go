@@ -7,7 +7,7 @@
 package pivirtdv1
 
 import (
-	v1 "go.pilab.hu/cloud/virtpb/pilab/resource/v1"
+	v1 "go.pilab.hu/cloud/virtpb/v3/pilab/resource/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -642,7 +642,7 @@ const file_pilab_pivirtd_v1_resource_service_proto_rawDesc = "" +
 	"\vGetResource\x12$.pilab.pivirtd.v1.GetResourceRequest\x1a%.pilab.pivirtd.v1.GetResourceResponse\x12`\n" +
 	"\rListResources\x12&.pilab.pivirtd.v1.ListResourcesRequest\x1a'.pilab.pivirtd.v1.ListResourcesResponse\x12c\n" +
 	"\x0eDeleteResource\x12'.pilab.pivirtd.v1.DeleteResourceRequest\x1a(.pilab.pivirtd.v1.DeleteResourceResponse\x12T\n" +
-	"\tListKinds\x12\".pilab.pivirtd.v1.ListKindsRequest\x1a#.pilab.pivirtd.v1.ListKindsResponseB5Z3go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1;pivirtdv1b\x06proto3"
+	"\tListKinds\x12\".pilab.pivirtd.v1.ListKindsRequest\x1a#.pilab.pivirtd.v1.ListKindsResponseB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/pivirtd/v1;pivirtdv1b\x06proto3"
 
 var (
 	file_pilab_pivirtd_v1_resource_service_proto_rawDescOnce sync.Once

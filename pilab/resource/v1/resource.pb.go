@@ -871,7 +871,7 @@ const file_pilab_resource_v1_resource_proto_rawDesc = "" +
 	"\x0fOUTCOME_CREATED\x10\x01\x12\x13\n" +
 	"\x0fOUTCOME_UPDATED\x10\x02\x12\x15\n" +
 	"\x11OUTCOME_UNCHANGED\x10\x03\x12\x13\n" +
-	"\x0fOUTCOME_DELETED\x10\x04B7Z5go.pilab.hu/cloud/virtpb/pilab/resource/v1;resourcev1b\x06proto3"
+	"\x0fOUTCOME_DELETED\x10\x04B:Z8go.pilab.hu/cloud/virtpb/v3/pilab/resource/v1;resourcev1b\x06proto3"
 
 var (
 	file_pilab_resource_v1_resource_proto_rawDescOnce sync.Once

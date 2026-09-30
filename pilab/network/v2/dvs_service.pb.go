@@ -1454,7 +1454,7 @@ const file_pilab_network_v2_dvs_service_proto_rawDesc = "" +
 	"\fGetPortGroup\x12%.pilab.network.v2.GetPortGroupRequest\x1a\x1b.pilab.network.v2.PortGroup\x12c\n" +
 	"\x0eListPortGroups\x12'.pilab.network.v2.ListPortGroupsRequest\x1a(.pilab.network.v2.ListPortGroupsResponse\x12X\n" +
 	"\x0fUpdatePortGroup\x12(.pilab.network.v2.UpdatePortGroupRequest\x1a\x1b.pilab.network.v2.PortGroup\x12S\n" +
-	"\x0fDeletePortGroup\x12(.pilab.network.v2.DeletePortGroupRequest\x1a\x16.google.protobuf.EmptyB5Z3go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2b\x06proto3"
+	"\x0fDeletePortGroup\x12(.pilab.network.v2.DeletePortGroupRequest\x1a\x16.google.protobuf.EmptyB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_dvs_service_proto_rawDescOnce sync.Once

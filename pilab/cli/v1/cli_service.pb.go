@@ -10,7 +10,7 @@
 package cliv1
 
 import (
-	v1 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
+	v1 "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
@@ -9231,7 +9231,7 @@ const file_pilab_cli_v1_cli_service_proto_rawDesc = "" +
 	"\x10GetNetworkConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cli.v1.NetworkConfigResponse\x12O\n" +
 	"\x10GetStorageConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cli.v1.StorageConfigResponse\x12I\n" +
 	"\rGetHostHealth\x12\x16.google.protobuf.Empty\x1a .pilab.cli.v1.HostHealthResponse\x12Q\n" +
-	"\x10ConfigureNetwork\x12%.pilab.cli.v1.ConfigureNetworkRequest\x1a\x16.google.protobuf.EmptyB-Z+go.pilab.hu/cloud/virtpb/pilab/cli/v1;cliv1b\x06proto3"
+	"\x10ConfigureNetwork\x12%.pilab.cli.v1.ConfigureNetworkRequest\x1a\x16.google.protobuf.EmptyB0Z.go.pilab.hu/cloud/virtpb/v3/pilab/cli/v1;cliv1b\x06proto3"
 
 var (
 	file_pilab_cli_v1_cli_service_proto_rawDescOnce sync.Once

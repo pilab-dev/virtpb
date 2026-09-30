@@ -11,7 +11,7 @@ package agentv2
 
 import (
 	context "context"
-	v1 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
+	v1 "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

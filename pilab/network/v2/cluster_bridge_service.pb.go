@@ -741,7 +741,7 @@ const file_pilab_network_v2_cluster_bridge_service_proto_rawDesc = "" +
 	"\x13UpdateClusterBridge\x12,.pilab.network.v2.UpdateClusterBridgeRequest\x1a\x1f.pilab.network.v2.ClusterBridge\x12[\n" +
 	"\x13DeleteClusterBridge\x12,.pilab.network.v2.DeleteClusterBridgeRequest\x1a\x16.google.protobuf.Empty\x12G\n" +
 	"\tAddUplink\x12\".pilab.network.v2.AddUplinkRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
-	"\fRemoveUplink\x12%.pilab.network.v2.RemoveUplinkRequest\x1a\x16.google.protobuf.EmptyB5Z3go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2b\x06proto3"
+	"\fRemoveUplink\x12%.pilab.network.v2.RemoveUplinkRequest\x1a\x16.google.protobuf.EmptyB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_cluster_bridge_service_proto_rawDescOnce sync.Once

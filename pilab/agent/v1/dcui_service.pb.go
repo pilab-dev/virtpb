@@ -2694,7 +2694,7 @@ const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"\fSetNTPConfig\x12).pilab.cloud.agent.v1.SetNTPConfigRequest\x1a\x16.google.protobuf.Empty\x12K\n" +
 	"\x0eGetCloudStatus\x12\x16.google.protobuf.Empty\x1a!.pilab.cloud.agent.v1.CloudStatus\x12Q\n" +
 	"\fAdoptToCloud\x12).pilab.cloud.agent.v1.AdoptToCloudRequest\x1a\x16.google.protobuf.Empty\x12E\n" +
-	"\x13DisconnectFromCloud\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.EmptyB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v1;agentv1b\x06proto3"
+	"\x13DisconnectFromCloud\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.EmptyB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_dcui_service_proto_rawDescOnce sync.Once

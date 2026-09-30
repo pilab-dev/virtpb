@@ -10,8 +10,8 @@
 package agentv2
 
 import (
-	v11 "go.pilab.hu/cloud/virtpb/pilab/common/v1"
-	v1 "go.pilab.hu/cloud/virtpb/pilab/pivirtd/v1"
+	v11 "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
+	v1 "go.pilab.hu/cloud/virtpb/v3/pilab/pivirtd/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -9784,7 +9784,7 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\x12ListPowerSchedules\x12).pilab.agent.v2.ListPowerSchedulesRequest\x1a*.pilab.agent.v2.ListPowerSchedulesResponse\x12n\n" +
 	"\x13UpdatePowerSchedule\x12*.pilab.agent.v2.UpdatePowerScheduleRequest\x1a+.pilab.agent.v2.UpdatePowerScheduleResponse\x12n\n" +
 	"\x13DeletePowerSchedule\x12*.pilab.agent.v2.DeletePowerScheduleRequest\x1a+.pilab.agent.v2.DeletePowerScheduleResponse\x12P\n" +
-	"\tWakeOnLAN\x12 .pilab.agent.v2.WakeOnLANRequest\x1a!.pilab.agent.v2.WakeOnLANResponseB1Z/go.pilab.hu/cloud/virtpb/pilab/agent/v2;agentv2b\x06proto3"
+	"\tWakeOnLAN\x12 .pilab.agent.v2.WakeOnLANRequest\x1a!.pilab.agent.v2.WakeOnLANResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v2;agentv2b\x06proto3"
 
 var (
 	file_pilab_agent_v2_agent_service_proto_rawDescOnce sync.Once

@@ -1606,7 +1606,7 @@ const file_pilab_network_v2_network_common_proto_rawDesc = "" +
 	"\x1aFLOW_DIRECTION_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16FLOW_DIRECTION_INGRESS\x10\x01\x12\x19\n" +
 	"\x15FLOW_DIRECTION_EGRESS\x10\x02\x12 \n" +
-	"\x1cFLOW_DIRECTION_BIDIRECTIONAL\x10\x03B5Z3go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2b\x06proto3"
+	"\x1cFLOW_DIRECTION_BIDIRECTIONAL\x10\x03B8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_network_common_proto_rawDescOnce sync.Once

@@ -10,7 +10,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "go.pilab.hu/cloud/virtpb/pilab/frontend/v1"
+	v1 "go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1"
 	http "net/http"
 	strings "strings"
 )

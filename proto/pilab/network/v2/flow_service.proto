@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "pilab/network/v2/network_common.proto";
 
-option go_package = "go.pilab.hu/cloud/virtpb/pilab/network/v2;networkv2";
+option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2";
 
 // FlowService provides OpenFlow rule debugging and inspection.
 service FlowService {
