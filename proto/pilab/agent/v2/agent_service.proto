@@ -78,6 +78,45 @@ service AgentService {
   rpc UpdatePowerSchedule(UpdatePowerScheduleRequest) returns (UpdatePowerScheduleResponse);
   rpc DeletePowerSchedule(DeletePowerScheduleRequest) returns (DeletePowerScheduleResponse);
   rpc WakeOnLAN(WakeOnLANRequest) returns (WakeOnLANResponse);
+
+  // Host Management & DCUI
+  rpc GetHostInfo(GetHostInfoRequest) returns (HostInfo);
+  rpc GetSystemResources(GetSystemResourcesRequest) returns (SystemResources);
+  rpc GetServiceStatus(GetServiceStatusRequest) returns (ServiceStatusList);
+  rpc RestartService(RestartServiceRequest) returns (RestartServiceResponse);
+  rpc GetNetworkConfig(GetNetworkConfigRequest) returns (NetworkConfig);
+  rpc ConfigureNetworkInterface(ConfigureNetworkInterfaceRequest) returns (ConfigureNetworkInterfaceResponse);
+  rpc TestNetwork(TestNetworkRequest) returns (NetworkTestResult);
+  rpc GetStorageConfig(GetStorageConfigRequest) returns (StorageConfig);
+  rpc MountNFS(MountNFSRequest) returns (MountNFSResponse);
+  rpc UnmountNFS(UnmountNFSRequest) returns (UnmountNFSResponse);
+  rpc GetMaintenanceMode(GetMaintenanceModeRequest) returns (MaintenanceModeStatus);
+  rpc GetFirewallRules(GetFirewallRulesRequest) returns (FirewallRuleList);
+  rpc AddFirewallRule(AddFirewallRuleRequest) returns (AddFirewallRuleResponse);
+  rpc RemoveFirewallRule(RemoveFirewallRuleRequest) returns (RemoveFirewallRuleResponse);
+  rpc GetDNSConfig(GetDNSConfigRequest) returns (DNSConfig);
+  rpc SetDNSConfig(SetDNSConfigRequest) returns (SetDNSConfigResponse);
+  rpc GetNTPConfig(GetNTPConfigRequest) returns (NTPConfig);
+  rpc SetNTPConfig(SetNTPConfigRequest) returns (SetNTPConfigResponse);
+  rpc GetCloudStatus(GetCloudStatusRequest) returns (CloudStatus);
+  rpc AdoptToCloud(AdoptToCloudRequest) returns (AdoptToCloudResponse);
+  rpc DisconnectFromCloud(DisconnectFromCloudRequest) returns (DisconnectFromCloudResponse);
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
+
+  // Snapshot Management
+  rpc ListSnapshots(ListSnapshotsRequest) returns (ListSnapshotsResponse);
+  rpc ConsolidateSnapshot(ConsolidateSnapshotRequest) returns (ConsolidateSnapshotResponse);
+  rpc CloneSnapshot(CloneSnapshotRequest) returns (CloneSnapshotResponse);
+
+  // Volume Management
+  rpc CreateVolume(CreateVolumeRequest) returns (CreateVolumeResponse);
+  rpc DeleteVolume(DeleteVolumeRequest) returns (DeleteVolumeResponse);
+  rpc ResizeVolume(ResizeVolumeRequest) returns (ResizeVolumeResponse);
+  rpc ListVolumes(ListVolumesRequest) returns (ListVolumesResponse);
+  rpc GetVolume(GetVolumeRequest) returns (GetVolumeResponse);
+  rpc CloneVolume(CloneVolumeRequest) returns (CloneVolumeResponse);
+  rpc BackupSystemVolume(BackupSystemVolumeRequest) returns (BackupSystemVolumeResponse);
+  rpc RestoreSystemVolume(RestoreSystemVolumeRequest) returns (RestoreSystemVolumeResponse);
 }
 
 message Task {
@@ -233,7 +272,16 @@ message VirtualMachine {
   Video video = 12;
   QoS qos = 13;
   map<string, string> metadata = 14;
+  KernelBoot kernel_boot = 15;
 }
+
+// KernelBoot configures direct-kernel boot for a VM.
+message KernelBoot {
+  string kernel = 1;   // Path to kernel image (vmlinuz)
+  string initrd = 2;   // Path to initrd image
+  string cmdline = 3;  // Kernel command-line arguments
+}
+
 
 message HostStatus {
   float cpu_load = 1;
@@ -489,6 +537,7 @@ message SetMaintenanceModeRequest {
   string host_id = 1;
   bool enter_maintenance = 2;
   bool evacuate_vms = 3;
+  optional string reason = 4;
 }
 
 message SetMaintenanceModeResponse {
@@ -961,4 +1010,440 @@ message ImportOVAResponse {
   string vm_id = 1;
   string message = 2;
   pilab.common.v1.Error error = 3;
+}
+
+// Host management and system resource messages
+
+message GetHostInfoRequest {}
+
+message HostInfo {
+  string hostname = 1;
+  string machine_id = 2;
+  string os_name = 3;
+  string os_version = 4;
+  string kernel_version = 5;
+  string architecture = 6;
+  string hypervisor_type = 7;
+  string hypervisor_version = 8;
+  string agent_version = 9;
+  string api_version = 10;
+  string build_date = 11;
+  int64 uptime_seconds = 12;
+  bool maintenance_mode = 13;
+  string console_access_url = 14;
+}
+
+message GetSystemResourcesRequest {}
+
+message SystemResources {
+  CPUResources cpu = 1;
+  MemoryResources memory = 2;
+  repeated DiskResources disks = 3;
+  repeated NetworkResources networks = 4;
+}
+
+message CPUResources {
+  int32 cores = 1;
+  int32 threads = 2;
+  int32 usage_percent = 3;
+  double load_average = 4;
+  int32 temperature_celsius = 5;
+}
+
+message MemoryResources {
+  int64 total_bytes = 1;
+  int64 used_bytes = 2;
+  int64 available_bytes = 3;
+  int32 usage_percent = 4;
+  int64 swap_total_bytes = 5;
+  int64 swap_used_bytes = 6;
+}
+
+message DiskResources {
+  string device = 1;
+  string mount_point = 2;
+  string filesystem = 3;
+  int64 total_bytes = 4;
+  int64 used_bytes = 5;
+  int64 available_bytes = 6;
+  int32 usage_percent = 7;
+  bool is_mounted = 8;
+}
+
+message NetworkResources {
+  string interface_name = 1;
+  string mac_address = 2;
+  int64 rx_bytes = 3;
+  int64 tx_bytes = 4;
+  int64 rx_packets = 5;
+  int64 tx_packets = 6;
+  bool link_up = 7;
+}
+
+message GetServiceStatusRequest {}
+
+message ServiceStatusList {
+  repeated ServiceStatus services = 1;
+}
+
+message ServiceStatus {
+  string name = 1;
+  string display_name = 2;
+  string status = 3;
+  bool healthy = 4;
+  string description = 5;
+  google.protobuf.Timestamp last_started = 6;
+  int32 pid = 7;
+}
+
+message RestartServiceRequest {
+  string service_name = 1;
+  bool force = 2;
+}
+
+message RestartServiceResponse {}
+
+message GetNetworkConfigRequest {}
+
+message NetworkConfig {
+  string hostname = 1;
+  string domain = 2;
+  string primary_dns = 3;
+  string secondary_dns = 4;
+  repeated HostNetworkInterface interfaces = 5;
+  repeated Route routes = 6;
+}
+
+message HostNetworkInterface {
+  string name = 1;
+  string display_name = 2;
+  string mac_address = 3;
+  bool link_up = 4;
+  bool managed = 5;
+  string ip_address = 6;
+  string netmask = 7;
+  string gateway = 8;
+  repeated string dns_servers = 9;
+  repeated VlanInterface vlans = 10;
+  string bridge_name = 11;
+  repeated string bridges = 12;
+}
+
+message VlanInterface {
+  int32 vlan_id = 1;
+  string name = 2;
+  string ip_address = 3;
+  string netmask = 4;
+}
+
+message Route {
+  string destination = 1;
+  string gateway = 2;
+  string interface_name = 3;
+  int32 metric = 4;
+}
+
+message ConfigureNetworkInterfaceRequest {
+  string interface_name = 1;
+  bool dhcp = 2;
+  string ip_address = 3;
+  string netmask = 4;
+  string gateway = 5;
+  repeated string dns_servers = 6;
+}
+
+message ConfigureNetworkInterfaceResponse {}
+
+message TestNetworkRequest {}
+
+message NetworkTestResult {
+  bool dns_working = 1;
+  bool gateway_reachable = 2;
+  bool internet_reachable = 3;
+  repeated string ntp_servers_reachable = 4;
+  repeated string warnings = 5;
+}
+
+message GetStorageConfigRequest {}
+
+message StorageConfig {
+  repeated DatastoreInfo datastores = 1;
+  repeated string local_disks = 2;
+  int64 total_storage_bytes = 3;
+  int64 used_storage_bytes = 4;
+  int64 available_storage_bytes = 5;
+}
+
+message DatastoreInfo {
+  string id = 1;
+  string name = 2;
+  string type = 3;
+  string status = 4;
+  string mount_path = 5;
+  string server = 6;
+  string export_path = 7;
+  int64 total_bytes = 8;
+  int64 used_bytes = 9;
+  int64 available_bytes = 10;
+  int32 usage_percent = 11;
+}
+
+message MountNFSRequest {
+  string server = 1;
+  string export_path = 2;
+  string mount_point = 3;
+  string datastore_name = 4;
+  map<string, string> options = 5;
+}
+
+message MountNFSResponse {}
+
+message UnmountNFSRequest {
+  string datastore_id = 1;
+  bool force = 2;
+}
+
+message UnmountNFSResponse {}
+
+message GetMaintenanceModeRequest {
+  string host_id = 1;
+}
+
+message MaintenanceModeStatus {
+  bool enabled = 1;
+  string reason = 2;
+  int32 vm_count = 3;
+  repeated string running_vms = 4;
+  bool can_exit_maintenance = 5;
+}
+
+message GetFirewallRulesRequest {}
+
+message FirewallRuleList {
+  repeated FirewallRule rules = 1;
+}
+
+message FirewallRule {
+  string id = 1;
+  string name = 2;
+  string direction = 3;
+  string protocol = 4;
+  string port = 5;
+  string action = 6;
+  string source = 7;
+  bool enabled = 8;
+}
+
+message AddFirewallRuleRequest {
+  string name = 1;
+  string direction = 2;
+  string protocol = 3;
+  string port = 4;
+  string action = 5;
+  string source = 6;
+}
+
+message AddFirewallRuleResponse {}
+
+message RemoveFirewallRuleRequest {
+  string rule_id = 1;
+}
+
+message RemoveFirewallRuleResponse {}
+
+message GetDNSConfigRequest {}
+
+message DNSConfig {
+  repeated string nameservers = 1;
+  string search_domain = 2;
+}
+
+message SetDNSConfigRequest {
+  repeated string nameservers = 1;
+  string search_domain = 2;
+}
+
+message SetDNSConfigResponse {}
+
+message GetNTPConfigRequest {}
+
+message NTPConfig {
+  repeated NtpServer servers = 1;
+  bool ntp_enabled = 2;
+  string ntp_restrict_policy = 3;
+}
+
+message NtpServer {
+  string address = 1;
+  bool reachable = 2;
+  bool synchronized = 3;
+  double offset_ms = 4;
+}
+
+message SetNTPConfigRequest {
+  repeated string servers = 1;
+  bool enabled = 2;
+}
+
+message SetNTPConfigResponse {}
+
+message GetCloudStatusRequest {}
+
+message CloudStatus {
+  bool adopted = 1;
+  string director_address = 2;
+  bool connected = 3;
+  string node_id = 4;
+  google.protobuf.Timestamp last_heartbeat = 5;
+}
+
+message AdoptToCloudRequest {
+  string director_address = 1;
+  string director_token = 2;
+}
+
+message AdoptToCloudResponse {}
+
+message DisconnectFromCloudRequest {}
+
+message DisconnectFromCloudResponse {}
+
+message UpdateConfigRequest {
+  string config = 1;
+}
+
+message UpdateConfigResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// Snapshot Management messages
+
+message ListSnapshotsRequest {
+  string vm_id = 1;
+}
+
+message SnapshotInfo {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  bool memory_snapshot = 4;
+  int64 creation_time = 5;
+  string parent_name = 6;
+}
+
+message ListSnapshotsResponse {
+  repeated SnapshotInfo snapshots = 1;
+}
+
+message ConsolidateSnapshotRequest {
+  string vm_id = 1;
+  string snapshot_name = 2;
+}
+
+message ConsolidateSnapshotResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message CloneSnapshotRequest {
+  string vm_id = 1;
+  string snapshot_name = 2;
+  string new_vm_name = 3;
+}
+
+message CloneSnapshotResponse {
+  bool success = 1;
+  string message = 2;
+  string new_vm_id = 3;
+}
+
+// Volume Management messages
+
+message VolumeInfo {
+  string name = 1;
+  string pool_name = 2;
+  uint64 size_gb = 3;
+  string format = 4;
+  string path = 5;
+}
+
+message CreateVolumeRequest {
+  string name = 1;
+  string pool_name = 2;
+  uint64 size_gb = 3;
+  string format = 4;
+  optional string backing_store = 5;
+}
+
+message CreateVolumeResponse {
+  bool success = 1;
+  VolumeInfo volume = 2;
+}
+
+message DeleteVolumeRequest {
+  string name = 1;
+  string pool_name = 2;
+  bool force = 3;
+}
+
+message DeleteVolumeResponse {
+  bool success = 1;
+}
+
+message ResizeVolumeRequest {
+  string name = 1;
+  string pool_name = 2;
+  uint64 size_gb = 3;
+}
+
+message ResizeVolumeResponse {
+  bool success = 1;
+}
+
+message ListVolumesRequest {
+  optional string pool_name = 1;
+}
+
+message ListVolumesResponse {
+  repeated VolumeInfo volumes = 1;
+}
+
+message GetVolumeRequest {
+  string name = 1;
+  string pool_name = 2;
+}
+
+message GetVolumeResponse {
+  VolumeInfo volume = 1;
+}
+
+message CloneVolumeRequest {
+  string source_name = 1;
+  string source_pool = 2;
+  string new_name = 3;
+  string new_pool = 4;
+  bool shallow = 5;
+}
+
+message CloneVolumeResponse {
+  bool success = 1;
+  VolumeInfo volume = 2;
+}
+
+message BackupSystemVolumeRequest {
+  string vm_id = 1;
+}
+
+message BackupSystemVolumeResponse {
+  string volume_path = 1;
+}
+
+message RestoreSystemVolumeRequest {
+  string vm_id = 1;
+  string backup_path = 2;
+}
+
+message RestoreSystemVolumeResponse {
+  bool success = 1;
 }

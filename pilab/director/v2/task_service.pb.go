@@ -52,7 +52,18 @@ const (
 	// drive-mirror) — resource-model-and-tasks.md §5.8: the agent runs it as
 	// a Task like any other, reporting progress upward via UpdateTaskStatus
 	// instead of the director having to poll for it.
-	TaskType_TASK_TYPE_VM_DISK_MOVE TaskType = 19
+	TaskType_TASK_TYPE_VM_DISK_MOVE             TaskType = 19
+	TaskType_TASK_TYPE_VM_FORCE_STOP            TaskType = 20
+	TaskType_TASK_TYPE_VM_FORCE_RESET           TaskType = 21
+	TaskType_TASK_TYPE_VM_ATTACH_ISO            TaskType = 22
+	TaskType_TASK_TYPE_VM_DETACH_ISO            TaskType = 23
+	TaskType_TASK_TYPE_VM_ATTACH_CLOUD_INIT     TaskType = 24
+	TaskType_TASK_TYPE_VM_DISK_RESIZE           TaskType = 25
+	TaskType_TASK_TYPE_VM_DISK_DELETE           TaskType = 26
+	TaskType_TASK_TYPE_VM_CHANGE_PASSWORD       TaskType = 27
+	TaskType_TASK_TYPE_VM_BACKUP_SYSTEM_VOLUME  TaskType = 28
+	TaskType_TASK_TYPE_VM_RESTORE_SYSTEM_VOLUME TaskType = 29
+	TaskType_TASK_TYPE_VM_SNAPSHOT_CONSOLIDATE  TaskType = 30
 )
 
 // Enum value maps for TaskType.
@@ -78,28 +89,50 @@ var (
 		17: "TASK_TYPE_VM_DETACH_NETWORK",
 		18: "TASK_TYPE_VM_CLONE",
 		19: "TASK_TYPE_VM_DISK_MOVE",
+		20: "TASK_TYPE_VM_FORCE_STOP",
+		21: "TASK_TYPE_VM_FORCE_RESET",
+		22: "TASK_TYPE_VM_ATTACH_ISO",
+		23: "TASK_TYPE_VM_DETACH_ISO",
+		24: "TASK_TYPE_VM_ATTACH_CLOUD_INIT",
+		25: "TASK_TYPE_VM_DISK_RESIZE",
+		26: "TASK_TYPE_VM_DISK_DELETE",
+		27: "TASK_TYPE_VM_CHANGE_PASSWORD",
+		28: "TASK_TYPE_VM_BACKUP_SYSTEM_VOLUME",
+		29: "TASK_TYPE_VM_RESTORE_SYSTEM_VOLUME",
+		30: "TASK_TYPE_VM_SNAPSHOT_CONSOLIDATE",
 	}
 	TaskType_value = map[string]int32{
-		"TASK_TYPE_UNSPECIFIED":         0,
-		"TASK_TYPE_VM_CREATE":           1,
-		"TASK_TYPE_VM_START":            2,
-		"TASK_TYPE_VM_STOP":             3,
-		"TASK_TYPE_VM_RESTART":          4,
-		"TASK_TYPE_VM_PAUSE":            5,
-		"TASK_TYPE_VM_UNPAUSE":          6,
-		"TASK_TYPE_VM_DELETE":           7,
-		"TASK_TYPE_VM_UPDATE":           8,
-		"TASK_TYPE_VM_MIGRATE":          9,
-		"TASK_TYPE_VM_SNAPSHOT_CREATE":  10,
-		"TASK_TYPE_VM_SNAPSHOT_DELETE":  11,
-		"TASK_TYPE_VM_SNAPSHOT_RESTORE": 12,
-		"TASK_TYPE_VM_REVERT":           13,
-		"TASK_TYPE_VM_EXPORT_OVA":       14,
-		"TASK_TYPE_VM_IMPORT_OVA":       15,
-		"TASK_TYPE_VM_ATTACH_NETWORK":   16,
-		"TASK_TYPE_VM_DETACH_NETWORK":   17,
-		"TASK_TYPE_VM_CLONE":            18,
-		"TASK_TYPE_VM_DISK_MOVE":        19,
+		"TASK_TYPE_UNSPECIFIED":              0,
+		"TASK_TYPE_VM_CREATE":                1,
+		"TASK_TYPE_VM_START":                 2,
+		"TASK_TYPE_VM_STOP":                  3,
+		"TASK_TYPE_VM_RESTART":               4,
+		"TASK_TYPE_VM_PAUSE":                 5,
+		"TASK_TYPE_VM_UNPAUSE":               6,
+		"TASK_TYPE_VM_DELETE":                7,
+		"TASK_TYPE_VM_UPDATE":                8,
+		"TASK_TYPE_VM_MIGRATE":               9,
+		"TASK_TYPE_VM_SNAPSHOT_CREATE":       10,
+		"TASK_TYPE_VM_SNAPSHOT_DELETE":       11,
+		"TASK_TYPE_VM_SNAPSHOT_RESTORE":      12,
+		"TASK_TYPE_VM_REVERT":                13,
+		"TASK_TYPE_VM_EXPORT_OVA":            14,
+		"TASK_TYPE_VM_IMPORT_OVA":            15,
+		"TASK_TYPE_VM_ATTACH_NETWORK":        16,
+		"TASK_TYPE_VM_DETACH_NETWORK":        17,
+		"TASK_TYPE_VM_CLONE":                 18,
+		"TASK_TYPE_VM_DISK_MOVE":             19,
+		"TASK_TYPE_VM_FORCE_STOP":            20,
+		"TASK_TYPE_VM_FORCE_RESET":           21,
+		"TASK_TYPE_VM_ATTACH_ISO":            22,
+		"TASK_TYPE_VM_DETACH_ISO":            23,
+		"TASK_TYPE_VM_ATTACH_CLOUD_INIT":     24,
+		"TASK_TYPE_VM_DISK_RESIZE":           25,
+		"TASK_TYPE_VM_DISK_DELETE":           26,
+		"TASK_TYPE_VM_CHANGE_PASSWORD":       27,
+		"TASK_TYPE_VM_BACKUP_SYSTEM_VOLUME":  28,
+		"TASK_TYPE_VM_RESTORE_SYSTEM_VOLUME": 29,
+		"TASK_TYPE_VM_SNAPSHOT_CONSOLIDATE":  30,
 	}
 )
 
@@ -1622,7 +1655,7 @@ const file_pilab_director_v2_task_service_proto_rawDesc = "" +
 	" \x01(\tR\n" +
 	"snapshotId\x12'\n" +
 	"\x0ftimeout_seconds\x18\v \x01(\x03R\x0etimeoutSeconds\x12\x14\n" +
-	"\x05force\x18\f \x01(\bR\x05force*\xb5\x04\n" +
+	"\x05force\x18\f \x01(\bR\x05force*\xa2\a\n" +
 	"\bTaskType\x12\x19\n" +
 	"\x15TASK_TYPE_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13TASK_TYPE_VM_CREATE\x10\x01\x12\x16\n" +
@@ -1644,7 +1677,18 @@ const file_pilab_director_v2_task_service_proto_rawDesc = "" +
 	"\x1bTASK_TYPE_VM_ATTACH_NETWORK\x10\x10\x12\x1f\n" +
 	"\x1bTASK_TYPE_VM_DETACH_NETWORK\x10\x11\x12\x16\n" +
 	"\x12TASK_TYPE_VM_CLONE\x10\x12\x12\x1a\n" +
-	"\x16TASK_TYPE_VM_DISK_MOVE\x10\x13*\xc9\x01\n" +
+	"\x16TASK_TYPE_VM_DISK_MOVE\x10\x13\x12\x1b\n" +
+	"\x17TASK_TYPE_VM_FORCE_STOP\x10\x14\x12\x1c\n" +
+	"\x18TASK_TYPE_VM_FORCE_RESET\x10\x15\x12\x1b\n" +
+	"\x17TASK_TYPE_VM_ATTACH_ISO\x10\x16\x12\x1b\n" +
+	"\x17TASK_TYPE_VM_DETACH_ISO\x10\x17\x12\"\n" +
+	"\x1eTASK_TYPE_VM_ATTACH_CLOUD_INIT\x10\x18\x12\x1c\n" +
+	"\x18TASK_TYPE_VM_DISK_RESIZE\x10\x19\x12\x1c\n" +
+	"\x18TASK_TYPE_VM_DISK_DELETE\x10\x1a\x12 \n" +
+	"\x1cTASK_TYPE_VM_CHANGE_PASSWORD\x10\x1b\x12%\n" +
+	"!TASK_TYPE_VM_BACKUP_SYSTEM_VOLUME\x10\x1c\x12&\n" +
+	"\"TASK_TYPE_VM_RESTORE_SYSTEM_VOLUME\x10\x1d\x12%\n" +
+	"!TASK_TYPE_VM_SNAPSHOT_CONSOLIDATE\x10\x1e*\xc9\x01\n" +
 	"\n" +
 	"TaskStatus\x12\x1b\n" +
 	"\x17TASK_STATUS_UNSPECIFIED\x10\x00\x12\x17\n" +

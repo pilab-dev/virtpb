@@ -337,6 +337,7 @@ type NodeEvent struct {
 	//	*NodeEvent_FullInventory
 	//	*NodeEvent_ResourceResult
 	//	*NodeEvent_HostMetrics
+	//	*NodeEvent_VmGuestInfo
 	Event         isNodeEvent_Event `protobuf_oneof:"event"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -481,6 +482,15 @@ func (x *NodeEvent) GetHostMetrics() *HostMetricsEvent {
 	return nil
 }
 
+func (x *NodeEvent) GetVmGuestInfo() *VmGuestInfoEvent {
+	if x != nil {
+		if x, ok := x.Event.(*NodeEvent_VmGuestInfo); ok {
+			return x.VmGuestInfo
+		}
+	}
+	return nil
+}
+
 type isNodeEvent_Event interface {
 	isNodeEvent_Event()
 }
@@ -523,6 +533,11 @@ type NodeEvent_HostMetrics struct {
 	HostMetrics *HostMetricsEvent `protobuf:"bytes,12,opt,name=host_metrics,json=hostMetrics,proto3,oneof"`
 }
 
+type NodeEvent_VmGuestInfo struct {
+	// Guest agent data (OS details, hostname, IP addresses) forwarded to the director.
+	VmGuestInfo *VmGuestInfoEvent `protobuf:"bytes,13,opt,name=vm_guest_info,json=vmGuestInfo,proto3,oneof"`
+}
+
 func (*NodeEvent_Heartbeat) isNodeEvent_Event() {}
 
 func (*NodeEvent_HostReport) isNodeEvent_Event() {}
@@ -541,6 +556,78 @@ func (*NodeEvent_ResourceResult) isNodeEvent_Event() {}
 
 func (*NodeEvent_HostMetrics) isNodeEvent_Event() {}
 
+func (*NodeEvent_VmGuestInfo) isNodeEvent_Event() {}
+
+// VmGuestInfoEvent forwards guest agent data (OS details, hostname, IP addresses)
+// to the director (superseding director/v1.VmGuestInfo).
+type VmGuestInfoEvent struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Uid           string                 `protobuf:"bytes,1,opt,name=uid,proto3" json:"uid,omitempty"`
+	VmUuid        string                 `protobuf:"bytes,2,opt,name=vm_uuid,json=vmUuid,proto3" json:"vm_uuid,omitempty"`
+	VmName        string                 `protobuf:"bytes,3,opt,name=vm_name,json=vmName,proto3" json:"vm_name,omitempty"`
+	GuestInfo     *v11.VmGuestInfo       `protobuf:"bytes,4,opt,name=guest_info,json=guestInfo,proto3" json:"guest_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VmGuestInfoEvent) Reset() {
+	*x = VmGuestInfoEvent{}
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VmGuestInfoEvent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VmGuestInfoEvent) ProtoMessage() {}
+
+func (x *VmGuestInfoEvent) ProtoReflect() protoreflect.Message {
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VmGuestInfoEvent.ProtoReflect.Descriptor instead.
+func (*VmGuestInfoEvent) Descriptor() ([]byte, []int) {
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *VmGuestInfoEvent) GetUid() string {
+	if x != nil {
+		return x.Uid
+	}
+	return ""
+}
+
+func (x *VmGuestInfoEvent) GetVmUuid() string {
+	if x != nil {
+		return x.VmUuid
+	}
+	return ""
+}
+
+func (x *VmGuestInfoEvent) GetVmName() string {
+	if x != nil {
+		return x.VmName
+	}
+	return ""
+}
+
+func (x *VmGuestInfoEvent) GetGuestInfo() *v11.VmGuestInfo {
+	if x != nil {
+		return x.GuestInfo
+	}
+	return nil
+}
+
 // VmMetricsBatch carries one stats snapshot from pivirtd's StatsCollector
 // (PIVIRT-211). One batch per StatsCollector tick; VMs with no uid are dropped.
 type VmMetricsBatch struct {
@@ -553,7 +640,7 @@ type VmMetricsBatch struct {
 
 func (x *VmMetricsBatch) Reset() {
 	*x = VmMetricsBatch{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[5]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -565,7 +652,7 @@ func (x *VmMetricsBatch) String() string {
 func (*VmMetricsBatch) ProtoMessage() {}
 
 func (x *VmMetricsBatch) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[5]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -578,7 +665,7 @@ func (x *VmMetricsBatch) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmMetricsBatch.ProtoReflect.Descriptor instead.
 func (*VmMetricsBatch) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{5}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *VmMetricsBatch) GetAt() *timestamppb.Timestamp {
@@ -614,7 +701,7 @@ type VmMetricsSample struct {
 
 func (x *VmMetricsSample) Reset() {
 	*x = VmMetricsSample{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[6]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -626,7 +713,7 @@ func (x *VmMetricsSample) String() string {
 func (*VmMetricsSample) ProtoMessage() {}
 
 func (x *VmMetricsSample) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[6]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -639,7 +726,7 @@ func (x *VmMetricsSample) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmMetricsSample.ProtoReflect.Descriptor instead.
 func (*VmMetricsSample) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{6}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *VmMetricsSample) GetUid() string {
@@ -722,7 +809,7 @@ type HostMetricsEvent struct {
 
 func (x *HostMetricsEvent) Reset() {
 	*x = HostMetricsEvent{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[7]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -734,7 +821,7 @@ func (x *HostMetricsEvent) String() string {
 func (*HostMetricsEvent) ProtoMessage() {}
 
 func (x *HostMetricsEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[7]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -747,7 +834,7 @@ func (x *HostMetricsEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HostMetricsEvent.ProtoReflect.Descriptor instead.
 func (*HostMetricsEvent) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{7}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *HostMetricsEvent) GetStats() *v1.HostStats {
@@ -769,7 +856,7 @@ type ResourceResultEvent struct {
 
 func (x *ResourceResultEvent) Reset() {
 	*x = ResourceResultEvent{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[8]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -781,7 +868,7 @@ func (x *ResourceResultEvent) String() string {
 func (*ResourceResultEvent) ProtoMessage() {}
 
 func (x *ResourceResultEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[8]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -794,7 +881,7 @@ func (x *ResourceResultEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceResultEvent.ProtoReflect.Descriptor instead.
 func (*ResourceResultEvent) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{8}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ResourceResultEvent) GetDirectiveId() string {
@@ -828,7 +915,7 @@ type ResourceOutcome struct {
 
 func (x *ResourceOutcome) Reset() {
 	*x = ResourceOutcome{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[9]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -840,7 +927,7 @@ func (x *ResourceOutcome) String() string {
 func (*ResourceOutcome) ProtoMessage() {}
 
 func (x *ResourceOutcome) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[9]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -853,7 +940,7 @@ func (x *ResourceOutcome) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceOutcome.ProtoReflect.Descriptor instead.
 func (*ResourceOutcome) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{9}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ResourceOutcome) GetKind() string {
@@ -907,7 +994,7 @@ type HeartbeatEvent struct {
 
 func (x *HeartbeatEvent) Reset() {
 	*x = HeartbeatEvent{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[10]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -919,7 +1006,7 @@ func (x *HeartbeatEvent) String() string {
 func (*HeartbeatEvent) ProtoMessage() {}
 
 func (x *HeartbeatEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[10]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -932,7 +1019,7 @@ func (x *HeartbeatEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HeartbeatEvent.ProtoReflect.Descriptor instead.
 func (*HeartbeatEvent) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{10}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *HeartbeatEvent) GetTimestamp() *timestamppb.Timestamp {
@@ -969,7 +1056,7 @@ type VmStatusEvent struct {
 
 func (x *VmStatusEvent) Reset() {
 	*x = VmStatusEvent{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[11]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -981,7 +1068,7 @@ func (x *VmStatusEvent) String() string {
 func (*VmStatusEvent) ProtoMessage() {}
 
 func (x *VmStatusEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[11]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -994,7 +1081,7 @@ func (x *VmStatusEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VmStatusEvent.ProtoReflect.Descriptor instead.
 func (*VmStatusEvent) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{11}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *VmStatusEvent) GetVmName() string {
@@ -1063,7 +1150,7 @@ type TaskProgressEvent struct {
 
 func (x *TaskProgressEvent) Reset() {
 	*x = TaskProgressEvent{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[12]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1075,7 +1162,7 @@ func (x *TaskProgressEvent) String() string {
 func (*TaskProgressEvent) ProtoMessage() {}
 
 func (x *TaskProgressEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[12]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1088,7 +1175,7 @@ func (x *TaskProgressEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TaskProgressEvent.ProtoReflect.Descriptor instead.
 func (*TaskProgressEvent) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{12}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *TaskProgressEvent) GetTaskId() string {
@@ -1116,7 +1203,7 @@ type TaskResultEvent struct {
 
 func (x *TaskResultEvent) Reset() {
 	*x = TaskResultEvent{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[13]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1128,7 +1215,7 @@ func (x *TaskResultEvent) String() string {
 func (*TaskResultEvent) ProtoMessage() {}
 
 func (x *TaskResultEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[13]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1141,7 +1228,7 @@ func (x *TaskResultEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TaskResultEvent.ProtoReflect.Descriptor instead.
 func (*TaskResultEvent) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{13}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *TaskResultEvent) GetTaskId() string {
@@ -1177,7 +1264,7 @@ type FullInventoryEvent struct {
 
 func (x *FullInventoryEvent) Reset() {
 	*x = FullInventoryEvent{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[14]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1189,7 +1276,7 @@ func (x *FullInventoryEvent) String() string {
 func (*FullInventoryEvent) ProtoMessage() {}
 
 func (x *FullInventoryEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[14]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1202,7 +1289,7 @@ func (x *FullInventoryEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FullInventoryEvent.ProtoReflect.Descriptor instead.
 func (*FullInventoryEvent) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{14}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *FullInventoryEvent) GetVms() []*FullInventoryEvent_VmEntry {
@@ -1231,7 +1318,7 @@ type NodeDirective struct {
 
 func (x *NodeDirective) Reset() {
 	*x = NodeDirective{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[15]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1243,7 +1330,7 @@ func (x *NodeDirective) String() string {
 func (*NodeDirective) ProtoMessage() {}
 
 func (x *NodeDirective) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[15]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1256,7 +1343,7 @@ func (x *NodeDirective) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NodeDirective.ProtoReflect.Descriptor instead.
 func (*NodeDirective) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{15}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *NodeDirective) GetDirective() isNodeDirective_Directive {
@@ -1403,7 +1490,7 @@ type CancelTaskDirective struct {
 
 func (x *CancelTaskDirective) Reset() {
 	*x = CancelTaskDirective{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[16]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1415,7 +1502,7 @@ func (x *CancelTaskDirective) String() string {
 func (*CancelTaskDirective) ProtoMessage() {}
 
 func (x *CancelTaskDirective) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[16]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1428,7 +1515,7 @@ func (x *CancelTaskDirective) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CancelTaskDirective.ProtoReflect.Descriptor instead.
 func (*CancelTaskDirective) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{16}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *CancelTaskDirective) GetTaskId() string {
@@ -1455,7 +1542,7 @@ type ResyncDirective struct {
 
 func (x *ResyncDirective) Reset() {
 	*x = ResyncDirective{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[17]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1467,7 +1554,7 @@ func (x *ResyncDirective) String() string {
 func (*ResyncDirective) ProtoMessage() {}
 
 func (x *ResyncDirective) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[17]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1480,7 +1567,7 @@ func (x *ResyncDirective) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResyncDirective.ProtoReflect.Descriptor instead.
 func (*ResyncDirective) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{17}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{18}
 }
 
 // ConfigDirective pushes opaque configuration to the node. Transport
@@ -1494,7 +1581,7 @@ type ConfigDirective struct {
 
 func (x *ConfigDirective) Reset() {
 	*x = ConfigDirective{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[18]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1506,7 +1593,7 @@ func (x *ConfigDirective) String() string {
 func (*ConfigDirective) ProtoMessage() {}
 
 func (x *ConfigDirective) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[18]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1519,7 +1606,7 @@ func (x *ConfigDirective) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ConfigDirective.ProtoReflect.Descriptor instead.
 func (*ConfigDirective) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{18}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *ConfigDirective) GetConfig() *structpb.Struct {
@@ -1551,7 +1638,7 @@ type ResourceDirective struct {
 
 func (x *ResourceDirective) Reset() {
 	*x = ResourceDirective{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[19]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1563,7 +1650,7 @@ func (x *ResourceDirective) String() string {
 func (*ResourceDirective) ProtoMessage() {}
 
 func (x *ResourceDirective) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[19]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1576,7 +1663,7 @@ func (x *ResourceDirective) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceDirective.ProtoReflect.Descriptor instead.
 func (*ResourceDirective) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{19}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ResourceDirective) GetDirectiveId() string {
@@ -1618,7 +1705,7 @@ type ResourceRef struct {
 
 func (x *ResourceRef) Reset() {
 	*x = ResourceRef{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[20]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1630,7 +1717,7 @@ func (x *ResourceRef) String() string {
 func (*ResourceRef) ProtoMessage() {}
 
 func (x *ResourceRef) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[20]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1643,7 +1730,7 @@ func (x *ResourceRef) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceRef.ProtoReflect.Descriptor instead.
 func (*ResourceRef) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{20}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ResourceRef) GetKind() string {
@@ -1679,7 +1766,7 @@ type ClusterJoinDirective struct {
 
 func (x *ClusterJoinDirective) Reset() {
 	*x = ClusterJoinDirective{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[21]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1691,7 +1778,7 @@ func (x *ClusterJoinDirective) String() string {
 func (*ClusterJoinDirective) ProtoMessage() {}
 
 func (x *ClusterJoinDirective) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[21]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1704,7 +1791,7 @@ func (x *ClusterJoinDirective) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClusterJoinDirective.ProtoReflect.Descriptor instead.
 func (*ClusterJoinDirective) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{21}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ClusterJoinDirective) GetClusterId() string {
@@ -1724,7 +1811,7 @@ type ClusterLeaveDirective struct {
 
 func (x *ClusterLeaveDirective) Reset() {
 	*x = ClusterLeaveDirective{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[22]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1736,7 +1823,7 @@ func (x *ClusterLeaveDirective) String() string {
 func (*ClusterLeaveDirective) ProtoMessage() {}
 
 func (x *ClusterLeaveDirective) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[22]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1749,7 +1836,7 @@ func (x *ClusterLeaveDirective) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ClusterLeaveDirective.ProtoReflect.Descriptor instead.
 func (*ClusterLeaveDirective) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{22}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ClusterLeaveDirective) GetClusterId() string {
@@ -1775,7 +1862,7 @@ type DrainDirective struct {
 
 func (x *DrainDirective) Reset() {
 	*x = DrainDirective{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[23]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1787,7 +1874,7 @@ func (x *DrainDirective) String() string {
 func (*DrainDirective) ProtoMessage() {}
 
 func (x *DrainDirective) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[23]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1800,7 +1887,7 @@ func (x *DrainDirective) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DrainDirective.ProtoReflect.Descriptor instead.
 func (*DrainDirective) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{23}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *DrainDirective) GetReason() string {
@@ -1836,7 +1923,7 @@ type FullInventoryEvent_VmEntry struct {
 
 func (x *FullInventoryEvent_VmEntry) Reset() {
 	*x = FullInventoryEvent_VmEntry{}
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[24]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1848,7 +1935,7 @@ func (x *FullInventoryEvent_VmEntry) String() string {
 func (*FullInventoryEvent_VmEntry) ProtoMessage() {}
 
 func (x *FullInventoryEvent_VmEntry) ProtoReflect() protoreflect.Message {
-	mi := &file_pilab_director_v2_node_service_proto_msgTypes[24]
+	mi := &file_pilab_director_v2_node_service_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1861,7 +1948,7 @@ func (x *FullInventoryEvent_VmEntry) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FullInventoryEvent_VmEntry.ProtoReflect.Descriptor instead.
 func (*FullInventoryEvent_VmEntry) Descriptor() ([]byte, []int) {
-	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{14, 0}
+	return file_pilab_director_v2_node_service_proto_rawDescGZIP(), []int{15, 0}
 }
 
 func (x *FullInventoryEvent_VmEntry) GetVmUuid() string {
@@ -1917,7 +2004,7 @@ var File_pilab_director_v2_node_service_proto protoreflect.FileDescriptor
 
 const file_pilab_director_v2_node_service_proto_rawDesc = "" +
 	"\n" +
-	"$pilab/director/v2/node_service.proto\x12\x11pilab.director.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a$pilab/director/v2/task_service.proto\x1a$pilab/pivirtd/v1/host_resource.proto\x1a\x1epilab/pivirtd/v1/pivirtd.proto\x1a\x1bpilab/common/v1/phase.proto\x1a pilab/resource/v1/resource.proto\"\xe5\x02\n" +
+	"$pilab/director/v2/node_service.proto\x12\x11pilab.director.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a$pilab/director/v2/task_service.proto\x1a$pilab/pivirtd/v1/host_resource.proto\x1a\x1epilab/pivirtd/v1/pivirtd.proto\x1a\x1bpilab/common/v1/phase.proto\x1a\x18pilab/common/v1/vm.proto\x1a pilab/resource/v1/resource.proto\"\xe5\x02\n" +
 	"\x13RegisterNodeRequest\x12\x1b\n" +
 	"\tnode_uuid\x18\x01 \x01(\tR\bnodeUuid\x12'\n" +
 	"\x0fbootstrap_token\x18\x02 \x01(\tR\x0ebootstrapToken\x12\x1a\n" +
@@ -1943,7 +2030,7 @@ const file_pilab_director_v2_node_service_proto_rawDesc = "" +
 	"\x1aRequestCertificateResponse\x12'\n" +
 	"\x0fcertificate_pem\x18\x01 \x01(\tR\x0ecertificatePem\x12 \n" +
 	"\fca_chain_pem\x18\x02 \x01(\tR\n" +
-	"caChainPem\"\xf6\x05\n" +
+	"caChainPem\"\xc1\x06\n" +
 	"\tNodeEvent\x12\x1b\n" +
 	"\tnode_uuid\x18\x01 \x01(\tR\bnodeUuid\x12\x1f\n" +
 	"\vlease_epoch\x18\x02 \x01(\x03R\n" +
@@ -1961,8 +2048,15 @@ const file_pilab_director_v2_node_service_proto_rawDesc = "" +
 	"\x0efull_inventory\x18\n" +
 	" \x01(\v2%.pilab.director.v2.FullInventoryEventH\x00R\rfullInventory\x12Q\n" +
 	"\x0fresource_result\x18\v \x01(\v2&.pilab.director.v2.ResourceResultEventH\x00R\x0eresourceResult\x12H\n" +
-	"\fhost_metrics\x18\f \x01(\v2#.pilab.director.v2.HostMetricsEventH\x00R\vhostMetricsB\a\n" +
-	"\x05event\"z\n" +
+	"\fhost_metrics\x18\f \x01(\v2#.pilab.director.v2.HostMetricsEventH\x00R\vhostMetrics\x12I\n" +
+	"\rvm_guest_info\x18\r \x01(\v2#.pilab.director.v2.VmGuestInfoEventH\x00R\vvmGuestInfoB\a\n" +
+	"\x05event\"\x93\x01\n" +
+	"\x10VmGuestInfoEvent\x12\x10\n" +
+	"\x03uid\x18\x01 \x01(\tR\x03uid\x12\x17\n" +
+	"\avm_uuid\x18\x02 \x01(\tR\x06vmUuid\x12\x17\n" +
+	"\avm_name\x18\x03 \x01(\tR\x06vmName\x12;\n" +
+	"\n" +
+	"guest_info\x18\x04 \x01(\v2\x1c.pilab.common.v1.VmGuestInfoR\tguestInfo\"z\n" +
 	"\x0eVmMetricsBatch\x12*\n" +
 	"\x02at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x02at\x12<\n" +
 	"\asamples\x18\x02 \x03(\v2\".pilab.director.v2.VmMetricsSampleR\asamples\"\xfe\x02\n" +
@@ -2078,88 +2172,92 @@ func file_pilab_director_v2_node_service_proto_rawDescGZIP() []byte {
 	return file_pilab_director_v2_node_service_proto_rawDescData
 }
 
-var file_pilab_director_v2_node_service_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_pilab_director_v2_node_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_pilab_director_v2_node_service_proto_goTypes = []any{
 	(*RegisterNodeRequest)(nil),        // 0: pilab.director.v2.RegisterNodeRequest
 	(*RegisterNodeResponse)(nil),       // 1: pilab.director.v2.RegisterNodeResponse
 	(*RequestCertificateRequest)(nil),  // 2: pilab.director.v2.RequestCertificateRequest
 	(*RequestCertificateResponse)(nil), // 3: pilab.director.v2.RequestCertificateResponse
 	(*NodeEvent)(nil),                  // 4: pilab.director.v2.NodeEvent
-	(*VmMetricsBatch)(nil),             // 5: pilab.director.v2.VmMetricsBatch
-	(*VmMetricsSample)(nil),            // 6: pilab.director.v2.VmMetricsSample
-	(*HostMetricsEvent)(nil),           // 7: pilab.director.v2.HostMetricsEvent
-	(*ResourceResultEvent)(nil),        // 8: pilab.director.v2.ResourceResultEvent
-	(*ResourceOutcome)(nil),            // 9: pilab.director.v2.ResourceOutcome
-	(*HeartbeatEvent)(nil),             // 10: pilab.director.v2.HeartbeatEvent
-	(*VmStatusEvent)(nil),              // 11: pilab.director.v2.VmStatusEvent
-	(*TaskProgressEvent)(nil),          // 12: pilab.director.v2.TaskProgressEvent
-	(*TaskResultEvent)(nil),            // 13: pilab.director.v2.TaskResultEvent
-	(*FullInventoryEvent)(nil),         // 14: pilab.director.v2.FullInventoryEvent
-	(*NodeDirective)(nil),              // 15: pilab.director.v2.NodeDirective
-	(*CancelTaskDirective)(nil),        // 16: pilab.director.v2.CancelTaskDirective
-	(*ResyncDirective)(nil),            // 17: pilab.director.v2.ResyncDirective
-	(*ConfigDirective)(nil),            // 18: pilab.director.v2.ConfigDirective
-	(*ResourceDirective)(nil),          // 19: pilab.director.v2.ResourceDirective
-	(*ResourceRef)(nil),                // 20: pilab.director.v2.ResourceRef
-	(*ClusterJoinDirective)(nil),       // 21: pilab.director.v2.ClusterJoinDirective
-	(*ClusterLeaveDirective)(nil),      // 22: pilab.director.v2.ClusterLeaveDirective
-	(*DrainDirective)(nil),             // 23: pilab.director.v2.DrainDirective
-	(*FullInventoryEvent_VmEntry)(nil), // 24: pilab.director.v2.FullInventoryEvent.VmEntry
-	(*v1.HostResourceReport)(nil),      // 25: pilab.pivirtd.v1.HostResourceReport
-	(*timestamppb.Timestamp)(nil),      // 26: google.protobuf.Timestamp
-	(*v1.DiskStats)(nil),               // 27: pilab.pivirtd.v1.DiskStats
-	(*v1.NetworkStats)(nil),            // 28: pilab.pivirtd.v1.NetworkStats
-	(*v1.HostStats)(nil),               // 29: pilab.pivirtd.v1.HostStats
-	(v11.Phase)(0),                     // 30: pilab.common.v1.Phase
-	(*structpb.Struct)(nil),            // 31: google.protobuf.Struct
-	(TaskStatus)(0),                    // 32: pilab.director.v2.TaskStatus
-	(*Task)(nil),                       // 33: pilab.director.v2.Task
-	(*v12.Resource)(nil),               // 34: pilab.resource.v1.Resource
+	(*VmGuestInfoEvent)(nil),           // 5: pilab.director.v2.VmGuestInfoEvent
+	(*VmMetricsBatch)(nil),             // 6: pilab.director.v2.VmMetricsBatch
+	(*VmMetricsSample)(nil),            // 7: pilab.director.v2.VmMetricsSample
+	(*HostMetricsEvent)(nil),           // 8: pilab.director.v2.HostMetricsEvent
+	(*ResourceResultEvent)(nil),        // 9: pilab.director.v2.ResourceResultEvent
+	(*ResourceOutcome)(nil),            // 10: pilab.director.v2.ResourceOutcome
+	(*HeartbeatEvent)(nil),             // 11: pilab.director.v2.HeartbeatEvent
+	(*VmStatusEvent)(nil),              // 12: pilab.director.v2.VmStatusEvent
+	(*TaskProgressEvent)(nil),          // 13: pilab.director.v2.TaskProgressEvent
+	(*TaskResultEvent)(nil),            // 14: pilab.director.v2.TaskResultEvent
+	(*FullInventoryEvent)(nil),         // 15: pilab.director.v2.FullInventoryEvent
+	(*NodeDirective)(nil),              // 16: pilab.director.v2.NodeDirective
+	(*CancelTaskDirective)(nil),        // 17: pilab.director.v2.CancelTaskDirective
+	(*ResyncDirective)(nil),            // 18: pilab.director.v2.ResyncDirective
+	(*ConfigDirective)(nil),            // 19: pilab.director.v2.ConfigDirective
+	(*ResourceDirective)(nil),          // 20: pilab.director.v2.ResourceDirective
+	(*ResourceRef)(nil),                // 21: pilab.director.v2.ResourceRef
+	(*ClusterJoinDirective)(nil),       // 22: pilab.director.v2.ClusterJoinDirective
+	(*ClusterLeaveDirective)(nil),      // 23: pilab.director.v2.ClusterLeaveDirective
+	(*DrainDirective)(nil),             // 24: pilab.director.v2.DrainDirective
+	(*FullInventoryEvent_VmEntry)(nil), // 25: pilab.director.v2.FullInventoryEvent.VmEntry
+	(*v1.HostResourceReport)(nil),      // 26: pilab.pivirtd.v1.HostResourceReport
+	(*v11.VmGuestInfo)(nil),            // 27: pilab.common.v1.VmGuestInfo
+	(*timestamppb.Timestamp)(nil),      // 28: google.protobuf.Timestamp
+	(*v1.DiskStats)(nil),               // 29: pilab.pivirtd.v1.DiskStats
+	(*v1.NetworkStats)(nil),            // 30: pilab.pivirtd.v1.NetworkStats
+	(*v1.HostStats)(nil),               // 31: pilab.pivirtd.v1.HostStats
+	(v11.Phase)(0),                     // 32: pilab.common.v1.Phase
+	(*structpb.Struct)(nil),            // 33: google.protobuf.Struct
+	(TaskStatus)(0),                    // 34: pilab.director.v2.TaskStatus
+	(*Task)(nil),                       // 35: pilab.director.v2.Task
+	(*v12.Resource)(nil),               // 36: pilab.resource.v1.Resource
 }
 var file_pilab_director_v2_node_service_proto_depIdxs = []int32{
-	10, // 0: pilab.director.v2.NodeEvent.heartbeat:type_name -> pilab.director.v2.HeartbeatEvent
-	25, // 1: pilab.director.v2.NodeEvent.host_report:type_name -> pilab.pivirtd.v1.HostResourceReport
-	11, // 2: pilab.director.v2.NodeEvent.vm_status:type_name -> pilab.director.v2.VmStatusEvent
-	5,  // 3: pilab.director.v2.NodeEvent.vm_metrics:type_name -> pilab.director.v2.VmMetricsBatch
-	12, // 4: pilab.director.v2.NodeEvent.task_progress:type_name -> pilab.director.v2.TaskProgressEvent
-	13, // 5: pilab.director.v2.NodeEvent.task_result:type_name -> pilab.director.v2.TaskResultEvent
-	14, // 6: pilab.director.v2.NodeEvent.full_inventory:type_name -> pilab.director.v2.FullInventoryEvent
-	8,  // 7: pilab.director.v2.NodeEvent.resource_result:type_name -> pilab.director.v2.ResourceResultEvent
-	7,  // 8: pilab.director.v2.NodeEvent.host_metrics:type_name -> pilab.director.v2.HostMetricsEvent
-	26, // 9: pilab.director.v2.VmMetricsBatch.at:type_name -> google.protobuf.Timestamp
-	6,  // 10: pilab.director.v2.VmMetricsBatch.samples:type_name -> pilab.director.v2.VmMetricsSample
-	27, // 11: pilab.director.v2.VmMetricsSample.disks:type_name -> pilab.pivirtd.v1.DiskStats
-	28, // 12: pilab.director.v2.VmMetricsSample.nics:type_name -> pilab.pivirtd.v1.NetworkStats
-	29, // 13: pilab.director.v2.HostMetricsEvent.stats:type_name -> pilab.pivirtd.v1.HostStats
-	9,  // 14: pilab.director.v2.ResourceResultEvent.outcomes:type_name -> pilab.director.v2.ResourceOutcome
-	26, // 15: pilab.director.v2.HeartbeatEvent.timestamp:type_name -> google.protobuf.Timestamp
-	30, // 16: pilab.director.v2.VmStatusEvent.phase:type_name -> pilab.common.v1.Phase
-	31, // 17: pilab.director.v2.TaskProgressEvent.progress:type_name -> google.protobuf.Struct
-	32, // 18: pilab.director.v2.TaskResultEvent.status:type_name -> pilab.director.v2.TaskStatus
-	24, // 19: pilab.director.v2.FullInventoryEvent.vms:type_name -> pilab.director.v2.FullInventoryEvent.VmEntry
-	33, // 20: pilab.director.v2.NodeDirective.task:type_name -> pilab.director.v2.Task
-	16, // 21: pilab.director.v2.NodeDirective.cancel_task:type_name -> pilab.director.v2.CancelTaskDirective
-	17, // 22: pilab.director.v2.NodeDirective.resync:type_name -> pilab.director.v2.ResyncDirective
-	18, // 23: pilab.director.v2.NodeDirective.config:type_name -> pilab.director.v2.ConfigDirective
-	21, // 24: pilab.director.v2.NodeDirective.cluster_join:type_name -> pilab.director.v2.ClusterJoinDirective
-	22, // 25: pilab.director.v2.NodeDirective.cluster_leave:type_name -> pilab.director.v2.ClusterLeaveDirective
-	23, // 26: pilab.director.v2.NodeDirective.drain:type_name -> pilab.director.v2.DrainDirective
-	19, // 27: pilab.director.v2.NodeDirective.resources:type_name -> pilab.director.v2.ResourceDirective
-	31, // 28: pilab.director.v2.ConfigDirective.config:type_name -> google.protobuf.Struct
-	34, // 29: pilab.director.v2.ResourceDirective.apply:type_name -> pilab.resource.v1.Resource
-	20, // 30: pilab.director.v2.ResourceDirective.delete:type_name -> pilab.director.v2.ResourceRef
-	30, // 31: pilab.director.v2.FullInventoryEvent.VmEntry.phase:type_name -> pilab.common.v1.Phase
-	0,  // 32: pilab.director.v2.NodeService.Register:input_type -> pilab.director.v2.RegisterNodeRequest
-	2,  // 33: pilab.director.v2.NodeService.RequestCertificate:input_type -> pilab.director.v2.RequestCertificateRequest
-	4,  // 34: pilab.director.v2.NodeService.Session:input_type -> pilab.director.v2.NodeEvent
-	1,  // 35: pilab.director.v2.NodeService.Register:output_type -> pilab.director.v2.RegisterNodeResponse
-	3,  // 36: pilab.director.v2.NodeService.RequestCertificate:output_type -> pilab.director.v2.RequestCertificateResponse
-	15, // 37: pilab.director.v2.NodeService.Session:output_type -> pilab.director.v2.NodeDirective
-	35, // [35:38] is the sub-list for method output_type
-	32, // [32:35] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	11, // 0: pilab.director.v2.NodeEvent.heartbeat:type_name -> pilab.director.v2.HeartbeatEvent
+	26, // 1: pilab.director.v2.NodeEvent.host_report:type_name -> pilab.pivirtd.v1.HostResourceReport
+	12, // 2: pilab.director.v2.NodeEvent.vm_status:type_name -> pilab.director.v2.VmStatusEvent
+	6,  // 3: pilab.director.v2.NodeEvent.vm_metrics:type_name -> pilab.director.v2.VmMetricsBatch
+	13, // 4: pilab.director.v2.NodeEvent.task_progress:type_name -> pilab.director.v2.TaskProgressEvent
+	14, // 5: pilab.director.v2.NodeEvent.task_result:type_name -> pilab.director.v2.TaskResultEvent
+	15, // 6: pilab.director.v2.NodeEvent.full_inventory:type_name -> pilab.director.v2.FullInventoryEvent
+	9,  // 7: pilab.director.v2.NodeEvent.resource_result:type_name -> pilab.director.v2.ResourceResultEvent
+	8,  // 8: pilab.director.v2.NodeEvent.host_metrics:type_name -> pilab.director.v2.HostMetricsEvent
+	5,  // 9: pilab.director.v2.NodeEvent.vm_guest_info:type_name -> pilab.director.v2.VmGuestInfoEvent
+	27, // 10: pilab.director.v2.VmGuestInfoEvent.guest_info:type_name -> pilab.common.v1.VmGuestInfo
+	28, // 11: pilab.director.v2.VmMetricsBatch.at:type_name -> google.protobuf.Timestamp
+	7,  // 12: pilab.director.v2.VmMetricsBatch.samples:type_name -> pilab.director.v2.VmMetricsSample
+	29, // 13: pilab.director.v2.VmMetricsSample.disks:type_name -> pilab.pivirtd.v1.DiskStats
+	30, // 14: pilab.director.v2.VmMetricsSample.nics:type_name -> pilab.pivirtd.v1.NetworkStats
+	31, // 15: pilab.director.v2.HostMetricsEvent.stats:type_name -> pilab.pivirtd.v1.HostStats
+	10, // 16: pilab.director.v2.ResourceResultEvent.outcomes:type_name -> pilab.director.v2.ResourceOutcome
+	28, // 17: pilab.director.v2.HeartbeatEvent.timestamp:type_name -> google.protobuf.Timestamp
+	32, // 18: pilab.director.v2.VmStatusEvent.phase:type_name -> pilab.common.v1.Phase
+	33, // 19: pilab.director.v2.TaskProgressEvent.progress:type_name -> google.protobuf.Struct
+	34, // 20: pilab.director.v2.TaskResultEvent.status:type_name -> pilab.director.v2.TaskStatus
+	25, // 21: pilab.director.v2.FullInventoryEvent.vms:type_name -> pilab.director.v2.FullInventoryEvent.VmEntry
+	35, // 22: pilab.director.v2.NodeDirective.task:type_name -> pilab.director.v2.Task
+	17, // 23: pilab.director.v2.NodeDirective.cancel_task:type_name -> pilab.director.v2.CancelTaskDirective
+	18, // 24: pilab.director.v2.NodeDirective.resync:type_name -> pilab.director.v2.ResyncDirective
+	19, // 25: pilab.director.v2.NodeDirective.config:type_name -> pilab.director.v2.ConfigDirective
+	22, // 26: pilab.director.v2.NodeDirective.cluster_join:type_name -> pilab.director.v2.ClusterJoinDirective
+	23, // 27: pilab.director.v2.NodeDirective.cluster_leave:type_name -> pilab.director.v2.ClusterLeaveDirective
+	24, // 28: pilab.director.v2.NodeDirective.drain:type_name -> pilab.director.v2.DrainDirective
+	20, // 29: pilab.director.v2.NodeDirective.resources:type_name -> pilab.director.v2.ResourceDirective
+	33, // 30: pilab.director.v2.ConfigDirective.config:type_name -> google.protobuf.Struct
+	36, // 31: pilab.director.v2.ResourceDirective.apply:type_name -> pilab.resource.v1.Resource
+	21, // 32: pilab.director.v2.ResourceDirective.delete:type_name -> pilab.director.v2.ResourceRef
+	32, // 33: pilab.director.v2.FullInventoryEvent.VmEntry.phase:type_name -> pilab.common.v1.Phase
+	0,  // 34: pilab.director.v2.NodeService.Register:input_type -> pilab.director.v2.RegisterNodeRequest
+	2,  // 35: pilab.director.v2.NodeService.RequestCertificate:input_type -> pilab.director.v2.RequestCertificateRequest
+	4,  // 36: pilab.director.v2.NodeService.Session:input_type -> pilab.director.v2.NodeEvent
+	1,  // 37: pilab.director.v2.NodeService.Register:output_type -> pilab.director.v2.RegisterNodeResponse
+	3,  // 38: pilab.director.v2.NodeService.RequestCertificate:output_type -> pilab.director.v2.RequestCertificateResponse
+	16, // 39: pilab.director.v2.NodeService.Session:output_type -> pilab.director.v2.NodeDirective
+	37, // [37:40] is the sub-list for method output_type
+	34, // [34:37] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_pilab_director_v2_node_service_proto_init() }
@@ -2178,8 +2276,9 @@ func file_pilab_director_v2_node_service_proto_init() {
 		(*NodeEvent_FullInventory)(nil),
 		(*NodeEvent_ResourceResult)(nil),
 		(*NodeEvent_HostMetrics)(nil),
+		(*NodeEvent_VmGuestInfo)(nil),
 	}
-	file_pilab_director_v2_node_service_proto_msgTypes[15].OneofWrappers = []any{
+	file_pilab_director_v2_node_service_proto_msgTypes[16].OneofWrappers = []any{
 		(*NodeDirective_Task)(nil),
 		(*NodeDirective_CancelTask)(nil),
 		(*NodeDirective_Resync)(nil),
@@ -2195,7 +2294,7 @@ func file_pilab_director_v2_node_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_pilab_director_v2_node_service_proto_rawDesc), len(file_pilab_director_v2_node_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   25,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
