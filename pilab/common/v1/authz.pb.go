@@ -45,6 +45,11 @@ const (
 	// AUTHN_BOOTSTRAP_TOKEN: first-join enrolment, authenticated by a
 	// one-shot bootstrap token the method checks itself.
 	Authn_AUTHN_BOOTSTRAP_TOKEN Authn = 4
+	// AUTHN_PAIRING_TOKEN: callable by a peer agent holding a one-time pairing
+	// token the destination minted (X-Pivirt-Pairing-Token header). Used only
+	// by the migration handshake between two unmanaged nodes; a managed node
+	// never accepts it.
+	Authn_AUTHN_PAIRING_TOKEN Authn = 5
 )
 
 // Enum value maps for Authn.
@@ -55,6 +60,7 @@ var (
 		2: "AUTHN_PUBLIC",
 		3: "AUTHN_NODE_MTLS",
 		4: "AUTHN_BOOTSTRAP_TOKEN",
+		5: "AUTHN_PAIRING_TOKEN",
 	}
 	Authn_value = map[string]int32{
 		"AUTHN_UNSPECIFIED":     0,
@@ -62,6 +68,7 @@ var (
 		"AUTHN_PUBLIC":          2,
 		"AUTHN_NODE_MTLS":       3,
 		"AUTHN_BOOTSTRAP_TOKEN": 4,
+		"AUTHN_PAIRING_TOKEN":   5,
 	}
 )
 
@@ -193,14 +200,15 @@ const file_pilab_common_v1_authz_proto_rawDesc = "" +
 	"\x04verb\x18\x02 \x01(\tR\x04verb\x12,\n" +
 	"\x05authn\x18\x03 \x01(\x0e2\x16.pilab.common.v1.AuthnR\x05authn\x12\x1f\n" +
 	"\vnode_scoped\x18\x04 \x01(\bR\n" +
-	"nodeScoped*p\n" +
+	"nodeScoped*\x89\x01\n" +
 	"\x05Authn\x12\x15\n" +
 	"\x11AUTHN_UNSPECIFIED\x10\x00\x12\x0e\n" +
 	"\n" +
 	"AUTHN_USER\x10\x01\x12\x10\n" +
 	"\fAUTHN_PUBLIC\x10\x02\x12\x13\n" +
 	"\x0fAUTHN_NODE_MTLS\x10\x03\x12\x19\n" +
-	"\x15AUTHN_BOOTSTRAP_TOKEN\x10\x04:R\n" +
+	"\x15AUTHN_BOOTSTRAP_TOKEN\x10\x04\x12\x17\n" +
+	"\x13AUTHN_PAIRING_TOKEN\x10\x05:R\n" +
 	"\x05authz\x12\x1e.google.protobuf.MethodOptions\x18\xb4\x87\x03 \x01(\v2\x1a.pilab.common.v1.AuthzRuleR\x05authzB6Z4go.pilab.hu/cloud/virtpb/v3/pilab/common/v1;commonv1b\x06proto3"
 
 var (
