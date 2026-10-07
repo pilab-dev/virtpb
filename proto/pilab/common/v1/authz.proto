@@ -27,6 +27,11 @@ enum Authn {
   // AUTHN_BOOTSTRAP_TOKEN: first-join enrolment, authenticated by a
   // one-shot bootstrap token the method checks itself.
   AUTHN_BOOTSTRAP_TOKEN = 4;
+  // AUTHN_PAIRING_TOKEN: callable by a peer agent holding a one-time pairing
+  // token the destination minted (X-Pivirt-Pairing-Token header). Used only
+  // by the migration handshake between two unmanaged nodes; a managed node
+  // never accepts it.
+  AUTHN_PAIRING_TOKEN = 5;
 }
 
 message AuthzRule {

@@ -119,6 +119,7 @@ const (
 	AgentService_BackupSystemVolume_FullMethodName         = "/pilab.agent.v2.AgentService/BackupSystemVolume"
 	AgentService_RestoreSystemVolume_FullMethodName        = "/pilab.agent.v2.AgentService/RestoreSystemVolume"
 	AgentService_ConfigureManagementNetwork_FullMethodName = "/pilab.agent.v2.AgentService/ConfigureManagementNetwork"
+	AgentService_CreateMigrationPairing_FullMethodName     = "/pilab.agent.v2.AgentService/CreateMigrationPairing"
 	AgentService_ConfirmNetworkChange_FullMethodName       = "/pilab.agent.v2.AgentService/ConfirmNetworkChange"
 )
 
@@ -230,6 +231,10 @@ type AgentServiceClient interface {
 	// previous addresses and default route are restored. A change that cuts the
 	// operator off therefore undoes itself.
 	ConfigureManagementNetwork(ctx context.Context, in *ConfigureManagementNetworkRequest, opts ...grpc.CallOption) (*ConfigureManagementNetworkResponse, error)
+	// CreateMigrationPairing mints a one-time token on a destination node that
+	// lets one source agent migrate one VM here. Refused on managed nodes, which
+	// migrate only through the director.
+	CreateMigrationPairing(ctx context.Context, in *CreateMigrationPairingRequest, opts ...grpc.CallOption) (*CreateMigrationPairingResponse, error)
 	ConfirmNetworkChange(ctx context.Context, in *ConfirmNetworkChangeRequest, opts ...grpc.CallOption) (*ConfirmNetworkChangeResponse, error)
 }
 
@@ -1209,6 +1214,16 @@ func (c *agentServiceClient) ConfigureManagementNetwork(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *agentServiceClient) CreateMigrationPairing(ctx context.Context, in *CreateMigrationPairingRequest, opts ...grpc.CallOption) (*CreateMigrationPairingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateMigrationPairingResponse)
+	err := c.cc.Invoke(ctx, AgentService_CreateMigrationPairing_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *agentServiceClient) ConfirmNetworkChange(ctx context.Context, in *ConfirmNetworkChangeRequest, opts ...grpc.CallOption) (*ConfirmNetworkChangeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ConfirmNetworkChangeResponse)
@@ -1327,6 +1342,10 @@ type AgentServiceServer interface {
 	// previous addresses and default route are restored. A change that cuts the
 	// operator off therefore undoes itself.
 	ConfigureManagementNetwork(context.Context, *ConfigureManagementNetworkRequest) (*ConfigureManagementNetworkResponse, error)
+	// CreateMigrationPairing mints a one-time token on a destination node that
+	// lets one source agent migrate one VM here. Refused on managed nodes, which
+	// migrate only through the director.
+	CreateMigrationPairing(context.Context, *CreateMigrationPairingRequest) (*CreateMigrationPairingResponse, error)
 	ConfirmNetworkChange(context.Context, *ConfirmNetworkChangeRequest) (*ConfirmNetworkChangeResponse, error)
 	mustEmbedUnimplementedAgentServiceServer()
 }
@@ -1622,6 +1641,9 @@ func (UnimplementedAgentServiceServer) RestoreSystemVolume(context.Context, *Res
 }
 func (UnimplementedAgentServiceServer) ConfigureManagementNetwork(context.Context, *ConfigureManagementNetworkRequest) (*ConfigureManagementNetworkResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ConfigureManagementNetwork not implemented")
+}
+func (UnimplementedAgentServiceServer) CreateMigrationPairing(context.Context, *CreateMigrationPairingRequest) (*CreateMigrationPairingResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateMigrationPairing not implemented")
 }
 func (UnimplementedAgentServiceServer) ConfirmNetworkChange(context.Context, *ConfirmNetworkChangeRequest) (*ConfirmNetworkChangeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ConfirmNetworkChange not implemented")
@@ -3317,6 +3339,24 @@ func _AgentService_ConfigureManagementNetwork_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AgentService_CreateMigrationPairing_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateMigrationPairingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).CreateMigrationPairing(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_CreateMigrationPairing_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).CreateMigrationPairing(ctx, req.(*CreateMigrationPairingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AgentService_ConfirmNetworkChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ConfirmNetworkChangeRequest)
 	if err := dec(in); err != nil {
@@ -3705,6 +3745,10 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ConfigureManagementNetwork",
 			Handler:    _AgentService_ConfigureManagementNetwork_Handler,
+		},
+		{
+			MethodName: "CreateMigrationPairing",
+			Handler:    _AgentService_CreateMigrationPairing_Handler,
 		},
 		{
 			MethodName: "ConfirmNetworkChange",

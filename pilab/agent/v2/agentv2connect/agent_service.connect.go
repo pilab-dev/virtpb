@@ -300,6 +300,9 @@ const (
 	// AgentServiceConfigureManagementNetworkProcedure is the fully-qualified name of the AgentService's
 	// ConfigureManagementNetwork RPC.
 	AgentServiceConfigureManagementNetworkProcedure = "/pilab.agent.v2.AgentService/ConfigureManagementNetwork"
+	// AgentServiceCreateMigrationPairingProcedure is the fully-qualified name of the AgentService's
+	// CreateMigrationPairing RPC.
+	AgentServiceCreateMigrationPairingProcedure = "/pilab.agent.v2.AgentService/CreateMigrationPairing"
 	// AgentServiceConfirmNetworkChangeProcedure is the fully-qualified name of the AgentService's
 	// ConfirmNetworkChange RPC.
 	AgentServiceConfirmNetworkChangeProcedure = "/pilab.agent.v2.AgentService/ConfirmNetworkChange"
@@ -411,6 +414,10 @@ type AgentServiceClient interface {
 	// previous addresses and default route are restored. A change that cuts the
 	// operator off therefore undoes itself.
 	ConfigureManagementNetwork(context.Context, *connect.Request[v2.ConfigureManagementNetworkRequest]) (*connect.Response[v2.ConfigureManagementNetworkResponse], error)
+	// CreateMigrationPairing mints a one-time token on a destination node that
+	// lets one source agent migrate one VM here. Refused on managed nodes, which
+	// migrate only through the director.
+	CreateMigrationPairing(context.Context, *connect.Request[v2.CreateMigrationPairingRequest]) (*connect.Response[v2.CreateMigrationPairingResponse], error)
 	ConfirmNetworkChange(context.Context, *connect.Request[v2.ConfirmNetworkChangeRequest]) (*connect.Response[v2.ConfirmNetworkChangeResponse], error)
 }
 
@@ -995,6 +1002,12 @@ func NewAgentServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(agentServiceMethods.ByName("ConfigureManagementNetwork")),
 			connect.WithClientOptions(opts...),
 		),
+		createMigrationPairing: connect.NewClient[v2.CreateMigrationPairingRequest, v2.CreateMigrationPairingResponse](
+			httpClient,
+			baseURL+AgentServiceCreateMigrationPairingProcedure,
+			connect.WithSchema(agentServiceMethods.ByName("CreateMigrationPairing")),
+			connect.WithClientOptions(opts...),
+		),
 		confirmNetworkChange: connect.NewClient[v2.ConfirmNetworkChangeRequest, v2.ConfirmNetworkChangeResponse](
 			httpClient,
 			baseURL+AgentServiceConfirmNetworkChangeProcedure,
@@ -1101,6 +1114,7 @@ type agentServiceClient struct {
 	backupSystemVolume         *connect.Client[v2.BackupSystemVolumeRequest, v2.BackupSystemVolumeResponse]
 	restoreSystemVolume        *connect.Client[v2.RestoreSystemVolumeRequest, v2.RestoreSystemVolumeResponse]
 	configureManagementNetwork *connect.Client[v2.ConfigureManagementNetworkRequest, v2.ConfigureManagementNetworkResponse]
+	createMigrationPairing     *connect.Client[v2.CreateMigrationPairingRequest, v2.CreateMigrationPairingResponse]
 	confirmNetworkChange       *connect.Client[v2.ConfirmNetworkChangeRequest, v2.ConfirmNetworkChangeResponse]
 }
 
@@ -1579,6 +1593,11 @@ func (c *agentServiceClient) ConfigureManagementNetwork(ctx context.Context, req
 	return c.configureManagementNetwork.CallUnary(ctx, req)
 }
 
+// CreateMigrationPairing calls pilab.agent.v2.AgentService.CreateMigrationPairing.
+func (c *agentServiceClient) CreateMigrationPairing(ctx context.Context, req *connect.Request[v2.CreateMigrationPairingRequest]) (*connect.Response[v2.CreateMigrationPairingResponse], error) {
+	return c.createMigrationPairing.CallUnary(ctx, req)
+}
+
 // ConfirmNetworkChange calls pilab.agent.v2.AgentService.ConfirmNetworkChange.
 func (c *agentServiceClient) ConfirmNetworkChange(ctx context.Context, req *connect.Request[v2.ConfirmNetworkChangeRequest]) (*connect.Response[v2.ConfirmNetworkChangeResponse], error) {
 	return c.confirmNetworkChange.CallUnary(ctx, req)
@@ -1690,6 +1709,10 @@ type AgentServiceHandler interface {
 	// previous addresses and default route are restored. A change that cuts the
 	// operator off therefore undoes itself.
 	ConfigureManagementNetwork(context.Context, *connect.Request[v2.ConfigureManagementNetworkRequest]) (*connect.Response[v2.ConfigureManagementNetworkResponse], error)
+	// CreateMigrationPairing mints a one-time token on a destination node that
+	// lets one source agent migrate one VM here. Refused on managed nodes, which
+	// migrate only through the director.
+	CreateMigrationPairing(context.Context, *connect.Request[v2.CreateMigrationPairingRequest]) (*connect.Response[v2.CreateMigrationPairingResponse], error)
 	ConfirmNetworkChange(context.Context, *connect.Request[v2.ConfirmNetworkChangeRequest]) (*connect.Response[v2.ConfirmNetworkChangeResponse], error)
 }
 
@@ -2270,6 +2293,12 @@ func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(agentServiceMethods.ByName("ConfigureManagementNetwork")),
 		connect.WithHandlerOptions(opts...),
 	)
+	agentServiceCreateMigrationPairingHandler := connect.NewUnaryHandler(
+		AgentServiceCreateMigrationPairingProcedure,
+		svc.CreateMigrationPairing,
+		connect.WithSchema(agentServiceMethods.ByName("CreateMigrationPairing")),
+		connect.WithHandlerOptions(opts...),
+	)
 	agentServiceConfirmNetworkChangeHandler := connect.NewUnaryHandler(
 		AgentServiceConfirmNetworkChangeProcedure,
 		svc.ConfirmNetworkChange,
@@ -2468,6 +2497,8 @@ func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOpti
 			agentServiceRestoreSystemVolumeHandler.ServeHTTP(w, r)
 		case AgentServiceConfigureManagementNetworkProcedure:
 			agentServiceConfigureManagementNetworkHandler.ServeHTTP(w, r)
+		case AgentServiceCreateMigrationPairingProcedure:
+			agentServiceCreateMigrationPairingHandler.ServeHTTP(w, r)
 		case AgentServiceConfirmNetworkChangeProcedure:
 			agentServiceConfirmNetworkChangeHandler.ServeHTTP(w, r)
 		default:
@@ -2857,6 +2888,10 @@ func (UnimplementedAgentServiceHandler) RestoreSystemVolume(context.Context, *co
 
 func (UnimplementedAgentServiceHandler) ConfigureManagementNetwork(context.Context, *connect.Request[v2.ConfigureManagementNetworkRequest]) (*connect.Response[v2.ConfigureManagementNetworkResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ConfigureManagementNetwork is not implemented"))
+}
+
+func (UnimplementedAgentServiceHandler) CreateMigrationPairing(context.Context, *connect.Request[v2.CreateMigrationPairingRequest]) (*connect.Response[v2.CreateMigrationPairingResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.CreateMigrationPairing is not implemented"))
 }
 
 func (UnimplementedAgentServiceHandler) ConfirmNetworkChange(context.Context, *connect.Request[v2.ConfirmNetworkChangeRequest]) (*connect.Response[v2.ConfirmNetworkChangeResponse], error) {

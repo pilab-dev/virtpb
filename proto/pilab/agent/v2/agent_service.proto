@@ -62,13 +62,13 @@ service AgentService {
     option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "migrate", authn: AUTHN_USER };
   }
   rpc PrepareForMigration(PrepareForMigrationRequest) returns (PrepareForMigrationResponse) {
-    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "migrate", authn: AUTHN_USER };
+    option (pilab.common.v1.authz) = { authn: AUTHN_PAIRING_TOKEN };
   }
   rpc ConfirmMigration(ConfirmMigrationRequest) returns (google.protobuf.Empty) {
-    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "migrate", authn: AUTHN_USER };
+    option (pilab.common.v1.authz) = { authn: AUTHN_PAIRING_TOKEN };
   }
   rpc AbortMigration(AbortMigrationRequest) returns (google.protobuf.Empty) {
-    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "migrate", authn: AUTHN_USER };
+    option (pilab.common.v1.authz) = { authn: AUTHN_PAIRING_TOKEN };
   }
   rpc CreateSnapshot(CreateSnapshotRequest) returns (CreateSnapshotResponse) {
     option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "snapshot", authn: AUTHN_USER };
@@ -315,6 +315,12 @@ service AgentService {
   // previous addresses and default route are restored. A change that cuts the
   // operator off therefore undoes itself.
   rpc ConfigureManagementNetwork(ConfigureManagementNetworkRequest) returns (ConfigureManagementNetworkResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER, node_scoped: true };
+  }
+  // CreateMigrationPairing mints a one-time token on a destination node that
+  // lets one source agent migrate one VM here. Refused on managed nodes, which
+  // migrate only through the director.
+  rpc CreateMigrationPairing(CreateMigrationPairingRequest) returns (CreateMigrationPairingResponse) {
     option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER, node_scoped: true };
   }
   rpc ConfirmNetworkChange(ConfirmNetworkChangeRequest) returns (ConfirmNetworkChangeResponse) {
@@ -624,8 +630,13 @@ message MigrationOptions {
 
 message InitiateMigrationRequest {
   string vm_id = 1;
+  // target_host is the destination agent's address, "host" or "host:port".
   string target_host = 2;
   MigrationOptions options = 3;
+  // pairing_token is minted on the destination by CreateMigrationPairing and
+  // is the only credential the destination accepts for this migration. Both
+  // nodes must be unmanaged.
+  string pairing_token = 4;
 }
 
 message InitiateMigrationResponse {
@@ -1674,3 +1685,13 @@ message ConfirmNetworkChangeRequest {
 }
 
 message ConfirmNetworkChangeResponse {}
+
+message CreateMigrationPairingRequest {
+  // ttl_seconds is how long the token is valid. 0 means 900; clamped to 60..3600.
+  uint32 ttl_seconds = 1;
+}
+
+message CreateMigrationPairingResponse {
+  string token = 1;
+  google.protobuf.Timestamp expires_at = 2;
+}
