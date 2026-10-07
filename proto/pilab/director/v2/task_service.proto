@@ -64,6 +64,27 @@ enum TaskType {
   // a Task like any other, reporting progress upward via UpdateTaskStatus
   // instead of the director having to poll for it.
   TASK_TYPE_VM_DISK_MOVE = 19;
+
+  // Steps of a director-run VirtualMachine.Migrate (PIVIRT-252,
+  // agent-modes-and-cluster.md §4.2-4.3). Each is an ordinary task for one
+  // node; the director sequences them and passes each step's result to the
+  // next. The two nodes never address each other.
+  //
+  // DESCRIBE (source) reads the VM definition; PREPARE_INCOMING (destination)
+  // starts the incoming VM and returns the migration URI and a token; SEND
+  // (source) runs the QEMU migration; CONFIRM (destination) takes ownership;
+  // FINALIZE (source) removes the source VM. ABORT_INCOMING (destination) is
+  // the compensation for a failed or abandoned migration.
+  //
+  // The numbers start at 31 on purpose: the proto-consolidation work uses
+  // 20..30 for other task types, and a number must mean one thing in every
+  // branch.
+  TASK_TYPE_MIGRATION_DESCRIBE = 31;
+  TASK_TYPE_MIGRATION_PREPARE_INCOMING = 32;
+  TASK_TYPE_MIGRATION_SEND = 33;
+  TASK_TYPE_MIGRATION_CONFIRM = 34;
+  TASK_TYPE_MIGRATION_FINALIZE = 35;
+  TASK_TYPE_MIGRATION_ABORT_INCOMING = 36;
 }
 
 enum TaskStatus {
@@ -105,6 +126,9 @@ message Task {
   // successful completion, so observed_generation can be reported back on
   // the next resync/status event.
   uint64 generation = 19;
+  // result is the task's typed output once it has completed. For a step of a
+  // director-run task it is what the next step is templated from.
+  google.protobuf.Struct result = 20;
 }
 
 message SubscribeRequest {
@@ -155,6 +179,8 @@ message UpdateTaskStatusRequest {
   string error_message = 4;
   google.protobuf.Timestamp completed_at = 5;
   google.protobuf.Struct progress = 6;
+  // result carries the task's output with a terminal status (COMPLETED).
+  google.protobuf.Struct result = 7;
 }
 
 message UpdateTaskStatusResponse {
