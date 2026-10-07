@@ -24,100 +24,102 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AgentService_RegisterHost_FullMethodName              = "/pilab.agent.v2.AgentService/RegisterHost"
-	AgentService_Heartbeat_FullMethodName                 = "/pilab.agent.v2.AgentService/Heartbeat"
-	AgentService_GetHostStatus_FullMethodName             = "/pilab.agent.v2.AgentService/GetHostStatus"
-	AgentService_CreateVM_FullMethodName                  = "/pilab.agent.v2.AgentService/CreateVM"
-	AgentService_GetVMDetails_FullMethodName              = "/pilab.agent.v2.AgentService/GetVMDetails"
-	AgentService_UpdateVM_FullMethodName                  = "/pilab.agent.v2.AgentService/UpdateVM"
-	AgentService_DeleteVM_FullMethodName                  = "/pilab.agent.v2.AgentService/DeleteVM"
-	AgentService_StartVM_FullMethodName                   = "/pilab.agent.v2.AgentService/StartVM"
-	AgentService_StopVM_FullMethodName                    = "/pilab.agent.v2.AgentService/StopVM"
-	AgentService_ForceStopVM_FullMethodName               = "/pilab.agent.v2.AgentService/ForceStopVM"
-	AgentService_RebootVM_FullMethodName                  = "/pilab.agent.v2.AgentService/RebootVM"
-	AgentService_PauseVM_FullMethodName                   = "/pilab.agent.v2.AgentService/PauseVM"
-	AgentService_ResumeVM_FullMethodName                  = "/pilab.agent.v2.AgentService/ResumeVM"
-	AgentService_InitiateMigration_FullMethodName         = "/pilab.agent.v2.AgentService/InitiateMigration"
-	AgentService_PrepareForMigration_FullMethodName       = "/pilab.agent.v2.AgentService/PrepareForMigration"
-	AgentService_ConfirmMigration_FullMethodName          = "/pilab.agent.v2.AgentService/ConfirmMigration"
-	AgentService_AbortMigration_FullMethodName            = "/pilab.agent.v2.AgentService/AbortMigration"
-	AgentService_CreateSnapshot_FullMethodName            = "/pilab.agent.v2.AgentService/CreateSnapshot"
-	AgentService_RevertToSnapshot_FullMethodName          = "/pilab.agent.v2.AgentService/RevertToSnapshot"
-	AgentService_DeleteSnapshot_FullMethodName            = "/pilab.agent.v2.AgentService/DeleteSnapshot"
-	AgentService_GetTaskStatus_FullMethodName             = "/pilab.agent.v2.AgentService/GetTaskStatus"
-	AgentService_CancelTask_FullMethodName                = "/pilab.agent.v2.AgentService/CancelTask"
-	AgentService_ConfigureNetwork_FullMethodName          = "/pilab.agent.v2.AgentService/ConfigureNetwork"
-	AgentService_ConfigureStorage_FullMethodName          = "/pilab.agent.v2.AgentService/ConfigureStorage"
-	AgentService_ConfigureTime_FullMethodName             = "/pilab.agent.v2.AgentService/ConfigureTime"
-	AgentService_SetMaintenanceMode_FullMethodName        = "/pilab.agent.v2.AgentService/SetMaintenanceMode"
-	AgentService_UpdateHost_FullMethodName                = "/pilab.agent.v2.AgentService/UpdateHost"
-	AgentService_GetContentLibraryItems_FullMethodName    = "/pilab.agent.v2.AgentService/GetContentLibraryItems"
-	AgentService_UploadContentLibraryItem_FullMethodName  = "/pilab.agent.v2.AgentService/UploadContentLibraryItem"
-	AgentService_ExportOVA_FullMethodName                 = "/pilab.agent.v2.AgentService/ExportOVA"
-	AgentService_ImportOVA_FullMethodName                 = "/pilab.agent.v2.AgentService/ImportOVA"
-	AgentService_DeleteContentLibraryItem_FullMethodName  = "/pilab.agent.v2.AgentService/DeleteContentLibraryItem"
-	AgentService_GetDatastores_FullMethodName             = "/pilab.agent.v2.AgentService/GetDatastores"
-	AgentService_GetDatastore_FullMethodName              = "/pilab.agent.v2.AgentService/GetDatastore"
-	AgentService_CreateDatastore_FullMethodName           = "/pilab.agent.v2.AgentService/CreateDatastore"
-	AgentService_DeleteDatastore_FullMethodName           = "/pilab.agent.v2.AgentService/DeleteDatastore"
-	AgentService_GetNetworks_FullMethodName               = "/pilab.agent.v2.AgentService/GetNetworks"
-	AgentService_GetNetwork_FullMethodName                = "/pilab.agent.v2.AgentService/GetNetwork"
-	AgentService_CreateNetwork_FullMethodName             = "/pilab.agent.v2.AgentService/CreateNetwork"
-	AgentService_DeleteNetwork_FullMethodName             = "/pilab.agent.v2.AgentService/DeleteNetwork"
-	AgentService_AttachIso_FullMethodName                 = "/pilab.agent.v2.AgentService/AttachIso"
-	AgentService_DetachIso_FullMethodName                 = "/pilab.agent.v2.AgentService/DetachIso"
-	AgentService_CloneVmFromTemplate_FullMethodName       = "/pilab.agent.v2.AgentService/CloneVmFromTemplate"
-	AgentService_GetVMGuestIPs_FullMethodName             = "/pilab.agent.v2.AgentService/GetVMGuestIPs"
-	AgentService_ChangeVMUserPassword_FullMethodName      = "/pilab.agent.v2.AgentService/ChangeVMUserPassword"
-	AgentService_AttachCloudInit_FullMethodName           = "/pilab.agent.v2.AgentService/AttachCloudInit"
-	AgentService_AttachNetworkInterface_FullMethodName    = "/pilab.agent.v2.AgentService/AttachNetworkInterface"
-	AgentService_DetachNetworkInterface_FullMethodName    = "/pilab.agent.v2.AgentService/DetachNetworkInterface"
-	AgentService_Stream_FullMethodName                    = "/pilab.agent.v2.AgentService/Stream"
-	AgentService_GetHardwareHealth_FullMethodName         = "/pilab.agent.v2.AgentService/GetHardwareHealth"
-	AgentService_GetSensorData_FullMethodName             = "/pilab.agent.v2.AgentService/GetSensorData"
-	AgentService_DefineVM_FullMethodName                  = "/pilab.agent.v2.AgentService/DefineVM"
-	AgentService_GetVMDefinition_FullMethodName           = "/pilab.agent.v2.AgentService/GetVMDefinition"
-	AgentService_ControlVM_FullMethodName                 = "/pilab.agent.v2.AgentService/ControlVM"
-	AgentService_GetVMStatus_FullMethodName               = "/pilab.agent.v2.AgentService/GetVMStatus"
-	AgentService_GetVMGuestInfo_FullMethodName            = "/pilab.agent.v2.AgentService/GetVMGuestInfo"
-	AgentService_CreatePowerSchedule_FullMethodName       = "/pilab.agent.v2.AgentService/CreatePowerSchedule"
-	AgentService_ListPowerSchedules_FullMethodName        = "/pilab.agent.v2.AgentService/ListPowerSchedules"
-	AgentService_UpdatePowerSchedule_FullMethodName       = "/pilab.agent.v2.AgentService/UpdatePowerSchedule"
-	AgentService_DeletePowerSchedule_FullMethodName       = "/pilab.agent.v2.AgentService/DeletePowerSchedule"
-	AgentService_WakeOnLAN_FullMethodName                 = "/pilab.agent.v2.AgentService/WakeOnLAN"
-	AgentService_GetHostInfo_FullMethodName               = "/pilab.agent.v2.AgentService/GetHostInfo"
-	AgentService_GetSystemResources_FullMethodName        = "/pilab.agent.v2.AgentService/GetSystemResources"
-	AgentService_GetServiceStatus_FullMethodName          = "/pilab.agent.v2.AgentService/GetServiceStatus"
-	AgentService_RestartService_FullMethodName            = "/pilab.agent.v2.AgentService/RestartService"
-	AgentService_GetNetworkConfig_FullMethodName          = "/pilab.agent.v2.AgentService/GetNetworkConfig"
-	AgentService_ConfigureNetworkInterface_FullMethodName = "/pilab.agent.v2.AgentService/ConfigureNetworkInterface"
-	AgentService_TestNetwork_FullMethodName               = "/pilab.agent.v2.AgentService/TestNetwork"
-	AgentService_GetStorageConfig_FullMethodName          = "/pilab.agent.v2.AgentService/GetStorageConfig"
-	AgentService_MountNFS_FullMethodName                  = "/pilab.agent.v2.AgentService/MountNFS"
-	AgentService_UnmountNFS_FullMethodName                = "/pilab.agent.v2.AgentService/UnmountNFS"
-	AgentService_GetMaintenanceMode_FullMethodName        = "/pilab.agent.v2.AgentService/GetMaintenanceMode"
-	AgentService_GetFirewallRules_FullMethodName          = "/pilab.agent.v2.AgentService/GetFirewallRules"
-	AgentService_AddFirewallRule_FullMethodName           = "/pilab.agent.v2.AgentService/AddFirewallRule"
-	AgentService_RemoveFirewallRule_FullMethodName        = "/pilab.agent.v2.AgentService/RemoveFirewallRule"
-	AgentService_GetDNSConfig_FullMethodName              = "/pilab.agent.v2.AgentService/GetDNSConfig"
-	AgentService_SetDNSConfig_FullMethodName              = "/pilab.agent.v2.AgentService/SetDNSConfig"
-	AgentService_GetNTPConfig_FullMethodName              = "/pilab.agent.v2.AgentService/GetNTPConfig"
-	AgentService_SetNTPConfig_FullMethodName              = "/pilab.agent.v2.AgentService/SetNTPConfig"
-	AgentService_GetCloudStatus_FullMethodName            = "/pilab.agent.v2.AgentService/GetCloudStatus"
-	AgentService_AdoptToCloud_FullMethodName              = "/pilab.agent.v2.AgentService/AdoptToCloud"
-	AgentService_DisconnectFromCloud_FullMethodName       = "/pilab.agent.v2.AgentService/DisconnectFromCloud"
-	AgentService_UpdateConfig_FullMethodName              = "/pilab.agent.v2.AgentService/UpdateConfig"
-	AgentService_ListSnapshots_FullMethodName             = "/pilab.agent.v2.AgentService/ListSnapshots"
-	AgentService_ConsolidateSnapshot_FullMethodName       = "/pilab.agent.v2.AgentService/ConsolidateSnapshot"
-	AgentService_CloneSnapshot_FullMethodName             = "/pilab.agent.v2.AgentService/CloneSnapshot"
-	AgentService_CreateVolume_FullMethodName              = "/pilab.agent.v2.AgentService/CreateVolume"
-	AgentService_DeleteVolume_FullMethodName              = "/pilab.agent.v2.AgentService/DeleteVolume"
-	AgentService_ResizeVolume_FullMethodName              = "/pilab.agent.v2.AgentService/ResizeVolume"
-	AgentService_ListVolumes_FullMethodName               = "/pilab.agent.v2.AgentService/ListVolumes"
-	AgentService_GetVolume_FullMethodName                 = "/pilab.agent.v2.AgentService/GetVolume"
-	AgentService_CloneVolume_FullMethodName               = "/pilab.agent.v2.AgentService/CloneVolume"
-	AgentService_BackupSystemVolume_FullMethodName        = "/pilab.agent.v2.AgentService/BackupSystemVolume"
-	AgentService_RestoreSystemVolume_FullMethodName       = "/pilab.agent.v2.AgentService/RestoreSystemVolume"
+	AgentService_RegisterHost_FullMethodName               = "/pilab.agent.v2.AgentService/RegisterHost"
+	AgentService_Heartbeat_FullMethodName                  = "/pilab.agent.v2.AgentService/Heartbeat"
+	AgentService_GetHostStatus_FullMethodName              = "/pilab.agent.v2.AgentService/GetHostStatus"
+	AgentService_CreateVM_FullMethodName                   = "/pilab.agent.v2.AgentService/CreateVM"
+	AgentService_GetVMDetails_FullMethodName               = "/pilab.agent.v2.AgentService/GetVMDetails"
+	AgentService_UpdateVM_FullMethodName                   = "/pilab.agent.v2.AgentService/UpdateVM"
+	AgentService_DeleteVM_FullMethodName                   = "/pilab.agent.v2.AgentService/DeleteVM"
+	AgentService_StartVM_FullMethodName                    = "/pilab.agent.v2.AgentService/StartVM"
+	AgentService_StopVM_FullMethodName                     = "/pilab.agent.v2.AgentService/StopVM"
+	AgentService_ForceStopVM_FullMethodName                = "/pilab.agent.v2.AgentService/ForceStopVM"
+	AgentService_RebootVM_FullMethodName                   = "/pilab.agent.v2.AgentService/RebootVM"
+	AgentService_PauseVM_FullMethodName                    = "/pilab.agent.v2.AgentService/PauseVM"
+	AgentService_ResumeVM_FullMethodName                   = "/pilab.agent.v2.AgentService/ResumeVM"
+	AgentService_InitiateMigration_FullMethodName          = "/pilab.agent.v2.AgentService/InitiateMigration"
+	AgentService_PrepareForMigration_FullMethodName        = "/pilab.agent.v2.AgentService/PrepareForMigration"
+	AgentService_ConfirmMigration_FullMethodName           = "/pilab.agent.v2.AgentService/ConfirmMigration"
+	AgentService_AbortMigration_FullMethodName             = "/pilab.agent.v2.AgentService/AbortMigration"
+	AgentService_CreateSnapshot_FullMethodName             = "/pilab.agent.v2.AgentService/CreateSnapshot"
+	AgentService_RevertToSnapshot_FullMethodName           = "/pilab.agent.v2.AgentService/RevertToSnapshot"
+	AgentService_DeleteSnapshot_FullMethodName             = "/pilab.agent.v2.AgentService/DeleteSnapshot"
+	AgentService_GetTaskStatus_FullMethodName              = "/pilab.agent.v2.AgentService/GetTaskStatus"
+	AgentService_CancelTask_FullMethodName                 = "/pilab.agent.v2.AgentService/CancelTask"
+	AgentService_ConfigureNetwork_FullMethodName           = "/pilab.agent.v2.AgentService/ConfigureNetwork"
+	AgentService_ConfigureStorage_FullMethodName           = "/pilab.agent.v2.AgentService/ConfigureStorage"
+	AgentService_ConfigureTime_FullMethodName              = "/pilab.agent.v2.AgentService/ConfigureTime"
+	AgentService_SetMaintenanceMode_FullMethodName         = "/pilab.agent.v2.AgentService/SetMaintenanceMode"
+	AgentService_UpdateHost_FullMethodName                 = "/pilab.agent.v2.AgentService/UpdateHost"
+	AgentService_GetContentLibraryItems_FullMethodName     = "/pilab.agent.v2.AgentService/GetContentLibraryItems"
+	AgentService_UploadContentLibraryItem_FullMethodName   = "/pilab.agent.v2.AgentService/UploadContentLibraryItem"
+	AgentService_ExportOVA_FullMethodName                  = "/pilab.agent.v2.AgentService/ExportOVA"
+	AgentService_ImportOVA_FullMethodName                  = "/pilab.agent.v2.AgentService/ImportOVA"
+	AgentService_DeleteContentLibraryItem_FullMethodName   = "/pilab.agent.v2.AgentService/DeleteContentLibraryItem"
+	AgentService_GetDatastores_FullMethodName              = "/pilab.agent.v2.AgentService/GetDatastores"
+	AgentService_GetDatastore_FullMethodName               = "/pilab.agent.v2.AgentService/GetDatastore"
+	AgentService_CreateDatastore_FullMethodName            = "/pilab.agent.v2.AgentService/CreateDatastore"
+	AgentService_DeleteDatastore_FullMethodName            = "/pilab.agent.v2.AgentService/DeleteDatastore"
+	AgentService_GetNetworks_FullMethodName                = "/pilab.agent.v2.AgentService/GetNetworks"
+	AgentService_GetNetwork_FullMethodName                 = "/pilab.agent.v2.AgentService/GetNetwork"
+	AgentService_CreateNetwork_FullMethodName              = "/pilab.agent.v2.AgentService/CreateNetwork"
+	AgentService_DeleteNetwork_FullMethodName              = "/pilab.agent.v2.AgentService/DeleteNetwork"
+	AgentService_AttachIso_FullMethodName                  = "/pilab.agent.v2.AgentService/AttachIso"
+	AgentService_DetachIso_FullMethodName                  = "/pilab.agent.v2.AgentService/DetachIso"
+	AgentService_CloneVmFromTemplate_FullMethodName        = "/pilab.agent.v2.AgentService/CloneVmFromTemplate"
+	AgentService_GetVMGuestIPs_FullMethodName              = "/pilab.agent.v2.AgentService/GetVMGuestIPs"
+	AgentService_ChangeVMUserPassword_FullMethodName       = "/pilab.agent.v2.AgentService/ChangeVMUserPassword"
+	AgentService_AttachCloudInit_FullMethodName            = "/pilab.agent.v2.AgentService/AttachCloudInit"
+	AgentService_AttachNetworkInterface_FullMethodName     = "/pilab.agent.v2.AgentService/AttachNetworkInterface"
+	AgentService_DetachNetworkInterface_FullMethodName     = "/pilab.agent.v2.AgentService/DetachNetworkInterface"
+	AgentService_Stream_FullMethodName                     = "/pilab.agent.v2.AgentService/Stream"
+	AgentService_GetHardwareHealth_FullMethodName          = "/pilab.agent.v2.AgentService/GetHardwareHealth"
+	AgentService_GetSensorData_FullMethodName              = "/pilab.agent.v2.AgentService/GetSensorData"
+	AgentService_DefineVM_FullMethodName                   = "/pilab.agent.v2.AgentService/DefineVM"
+	AgentService_GetVMDefinition_FullMethodName            = "/pilab.agent.v2.AgentService/GetVMDefinition"
+	AgentService_ControlVM_FullMethodName                  = "/pilab.agent.v2.AgentService/ControlVM"
+	AgentService_GetVMStatus_FullMethodName                = "/pilab.agent.v2.AgentService/GetVMStatus"
+	AgentService_GetVMGuestInfo_FullMethodName             = "/pilab.agent.v2.AgentService/GetVMGuestInfo"
+	AgentService_CreatePowerSchedule_FullMethodName        = "/pilab.agent.v2.AgentService/CreatePowerSchedule"
+	AgentService_ListPowerSchedules_FullMethodName         = "/pilab.agent.v2.AgentService/ListPowerSchedules"
+	AgentService_UpdatePowerSchedule_FullMethodName        = "/pilab.agent.v2.AgentService/UpdatePowerSchedule"
+	AgentService_DeletePowerSchedule_FullMethodName        = "/pilab.agent.v2.AgentService/DeletePowerSchedule"
+	AgentService_WakeOnLAN_FullMethodName                  = "/pilab.agent.v2.AgentService/WakeOnLAN"
+	AgentService_GetHostInfo_FullMethodName                = "/pilab.agent.v2.AgentService/GetHostInfo"
+	AgentService_GetSystemResources_FullMethodName         = "/pilab.agent.v2.AgentService/GetSystemResources"
+	AgentService_GetServiceStatus_FullMethodName           = "/pilab.agent.v2.AgentService/GetServiceStatus"
+	AgentService_RestartService_FullMethodName             = "/pilab.agent.v2.AgentService/RestartService"
+	AgentService_GetNetworkConfig_FullMethodName           = "/pilab.agent.v2.AgentService/GetNetworkConfig"
+	AgentService_ConfigureNetworkInterface_FullMethodName  = "/pilab.agent.v2.AgentService/ConfigureNetworkInterface"
+	AgentService_TestNetwork_FullMethodName                = "/pilab.agent.v2.AgentService/TestNetwork"
+	AgentService_GetStorageConfig_FullMethodName           = "/pilab.agent.v2.AgentService/GetStorageConfig"
+	AgentService_MountNFS_FullMethodName                   = "/pilab.agent.v2.AgentService/MountNFS"
+	AgentService_UnmountNFS_FullMethodName                 = "/pilab.agent.v2.AgentService/UnmountNFS"
+	AgentService_GetMaintenanceMode_FullMethodName         = "/pilab.agent.v2.AgentService/GetMaintenanceMode"
+	AgentService_GetFirewallRules_FullMethodName           = "/pilab.agent.v2.AgentService/GetFirewallRules"
+	AgentService_AddFirewallRule_FullMethodName            = "/pilab.agent.v2.AgentService/AddFirewallRule"
+	AgentService_RemoveFirewallRule_FullMethodName         = "/pilab.agent.v2.AgentService/RemoveFirewallRule"
+	AgentService_GetDNSConfig_FullMethodName               = "/pilab.agent.v2.AgentService/GetDNSConfig"
+	AgentService_SetDNSConfig_FullMethodName               = "/pilab.agent.v2.AgentService/SetDNSConfig"
+	AgentService_GetNTPConfig_FullMethodName               = "/pilab.agent.v2.AgentService/GetNTPConfig"
+	AgentService_SetNTPConfig_FullMethodName               = "/pilab.agent.v2.AgentService/SetNTPConfig"
+	AgentService_GetCloudStatus_FullMethodName             = "/pilab.agent.v2.AgentService/GetCloudStatus"
+	AgentService_AdoptToCloud_FullMethodName               = "/pilab.agent.v2.AgentService/AdoptToCloud"
+	AgentService_DisconnectFromCloud_FullMethodName        = "/pilab.agent.v2.AgentService/DisconnectFromCloud"
+	AgentService_UpdateConfig_FullMethodName               = "/pilab.agent.v2.AgentService/UpdateConfig"
+	AgentService_ListSnapshots_FullMethodName              = "/pilab.agent.v2.AgentService/ListSnapshots"
+	AgentService_ConsolidateSnapshot_FullMethodName        = "/pilab.agent.v2.AgentService/ConsolidateSnapshot"
+	AgentService_CloneSnapshot_FullMethodName              = "/pilab.agent.v2.AgentService/CloneSnapshot"
+	AgentService_CreateVolume_FullMethodName               = "/pilab.agent.v2.AgentService/CreateVolume"
+	AgentService_DeleteVolume_FullMethodName               = "/pilab.agent.v2.AgentService/DeleteVolume"
+	AgentService_ResizeVolume_FullMethodName               = "/pilab.agent.v2.AgentService/ResizeVolume"
+	AgentService_ListVolumes_FullMethodName                = "/pilab.agent.v2.AgentService/ListVolumes"
+	AgentService_GetVolume_FullMethodName                  = "/pilab.agent.v2.AgentService/GetVolume"
+	AgentService_CloneVolume_FullMethodName                = "/pilab.agent.v2.AgentService/CloneVolume"
+	AgentService_BackupSystemVolume_FullMethodName         = "/pilab.agent.v2.AgentService/BackupSystemVolume"
+	AgentService_RestoreSystemVolume_FullMethodName        = "/pilab.agent.v2.AgentService/RestoreSystemVolume"
+	AgentService_ConfigureManagementNetwork_FullMethodName = "/pilab.agent.v2.AgentService/ConfigureManagementNetwork"
+	AgentService_ConfirmNetworkChange_FullMethodName       = "/pilab.agent.v2.AgentService/ConfirmNetworkChange"
 )
 
 // AgentServiceClient is the client API for AgentService service.
@@ -221,6 +223,14 @@ type AgentServiceClient interface {
 	CloneVolume(ctx context.Context, in *CloneVolumeRequest, opts ...grpc.CallOption) (*CloneVolumeResponse, error)
 	BackupSystemVolume(ctx context.Context, in *BackupSystemVolumeRequest, opts ...grpc.CallOption) (*BackupSystemVolumeResponse, error)
 	RestoreSystemVolume(ctx context.Context, in *RestoreSystemVolumeRequest, opts ...grpc.CallOption) (*RestoreSystemVolumeResponse, error)
+	// ConfigureManagementNetwork changes the addressing of the NIC that holds
+	// the management role (node.yaml) with an automatic revert: the new
+	// configuration is applied, and unless ConfirmNetworkChange arrives (from a
+	// client that reached the node on the new address) before revert_after, the
+	// previous addresses and default route are restored. A change that cuts the
+	// operator off therefore undoes itself.
+	ConfigureManagementNetwork(ctx context.Context, in *ConfigureManagementNetworkRequest, opts ...grpc.CallOption) (*ConfigureManagementNetworkResponse, error)
+	ConfirmNetworkChange(ctx context.Context, in *ConfirmNetworkChangeRequest, opts ...grpc.CallOption) (*ConfirmNetworkChangeResponse, error)
 }
 
 type agentServiceClient struct {
@@ -1189,6 +1199,26 @@ func (c *agentServiceClient) RestoreSystemVolume(ctx context.Context, in *Restor
 	return out, nil
 }
 
+func (c *agentServiceClient) ConfigureManagementNetwork(ctx context.Context, in *ConfigureManagementNetworkRequest, opts ...grpc.CallOption) (*ConfigureManagementNetworkResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfigureManagementNetworkResponse)
+	err := c.cc.Invoke(ctx, AgentService_ConfigureManagementNetwork_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) ConfirmNetworkChange(ctx context.Context, in *ConfirmNetworkChangeRequest, opts ...grpc.CallOption) (*ConfirmNetworkChangeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfirmNetworkChangeResponse)
+	err := c.cc.Invoke(ctx, AgentService_ConfirmNetworkChange_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AgentServiceServer is the server API for AgentService service.
 // All implementations must embed UnimplementedAgentServiceServer
 // for forward compatibility.
@@ -1290,6 +1320,14 @@ type AgentServiceServer interface {
 	CloneVolume(context.Context, *CloneVolumeRequest) (*CloneVolumeResponse, error)
 	BackupSystemVolume(context.Context, *BackupSystemVolumeRequest) (*BackupSystemVolumeResponse, error)
 	RestoreSystemVolume(context.Context, *RestoreSystemVolumeRequest) (*RestoreSystemVolumeResponse, error)
+	// ConfigureManagementNetwork changes the addressing of the NIC that holds
+	// the management role (node.yaml) with an automatic revert: the new
+	// configuration is applied, and unless ConfirmNetworkChange arrives (from a
+	// client that reached the node on the new address) before revert_after, the
+	// previous addresses and default route are restored. A change that cuts the
+	// operator off therefore undoes itself.
+	ConfigureManagementNetwork(context.Context, *ConfigureManagementNetworkRequest) (*ConfigureManagementNetworkResponse, error)
+	ConfirmNetworkChange(context.Context, *ConfirmNetworkChangeRequest) (*ConfirmNetworkChangeResponse, error)
 	mustEmbedUnimplementedAgentServiceServer()
 }
 
@@ -1581,6 +1619,12 @@ func (UnimplementedAgentServiceServer) BackupSystemVolume(context.Context, *Back
 }
 func (UnimplementedAgentServiceServer) RestoreSystemVolume(context.Context, *RestoreSystemVolumeRequest) (*RestoreSystemVolumeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method RestoreSystemVolume not implemented")
+}
+func (UnimplementedAgentServiceServer) ConfigureManagementNetwork(context.Context, *ConfigureManagementNetworkRequest) (*ConfigureManagementNetworkResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConfigureManagementNetwork not implemented")
+}
+func (UnimplementedAgentServiceServer) ConfirmNetworkChange(context.Context, *ConfirmNetworkChangeRequest) (*ConfirmNetworkChangeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConfirmNetworkChange not implemented")
 }
 func (UnimplementedAgentServiceServer) mustEmbedUnimplementedAgentServiceServer() {}
 func (UnimplementedAgentServiceServer) testEmbeddedByValue()                      {}
@@ -3255,6 +3299,42 @@ func _AgentService_RestoreSystemVolume_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AgentService_ConfigureManagementNetwork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigureManagementNetworkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).ConfigureManagementNetwork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_ConfigureManagementNetwork_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).ConfigureManagementNetwork(ctx, req.(*ConfigureManagementNetworkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_ConfirmNetworkChange_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfirmNetworkChangeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).ConfirmNetworkChange(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_ConfirmNetworkChange_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).ConfirmNetworkChange(ctx, req.(*ConfirmNetworkChangeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AgentService_ServiceDesc is the grpc.ServiceDesc for AgentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3621,6 +3701,14 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RestoreSystemVolume",
 			Handler:    _AgentService_RestoreSystemVolume_Handler,
+		},
+		{
+			MethodName: "ConfigureManagementNetwork",
+			Handler:    _AgentService_ConfigureManagementNetwork_Handler,
+		},
+		{
+			MethodName: "ConfirmNetworkChange",
+			Handler:    _AgentService_ConfirmNetworkChange_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

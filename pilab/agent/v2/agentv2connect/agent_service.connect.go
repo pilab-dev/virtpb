@@ -297,6 +297,12 @@ const (
 	// AgentServiceRestoreSystemVolumeProcedure is the fully-qualified name of the AgentService's
 	// RestoreSystemVolume RPC.
 	AgentServiceRestoreSystemVolumeProcedure = "/pilab.agent.v2.AgentService/RestoreSystemVolume"
+	// AgentServiceConfigureManagementNetworkProcedure is the fully-qualified name of the AgentService's
+	// ConfigureManagementNetwork RPC.
+	AgentServiceConfigureManagementNetworkProcedure = "/pilab.agent.v2.AgentService/ConfigureManagementNetwork"
+	// AgentServiceConfirmNetworkChangeProcedure is the fully-qualified name of the AgentService's
+	// ConfirmNetworkChange RPC.
+	AgentServiceConfirmNetworkChangeProcedure = "/pilab.agent.v2.AgentService/ConfirmNetworkChange"
 )
 
 // AgentServiceClient is a client for the pilab.agent.v2.AgentService service.
@@ -398,6 +404,14 @@ type AgentServiceClient interface {
 	CloneVolume(context.Context, *connect.Request[v2.CloneVolumeRequest]) (*connect.Response[v2.CloneVolumeResponse], error)
 	BackupSystemVolume(context.Context, *connect.Request[v2.BackupSystemVolumeRequest]) (*connect.Response[v2.BackupSystemVolumeResponse], error)
 	RestoreSystemVolume(context.Context, *connect.Request[v2.RestoreSystemVolumeRequest]) (*connect.Response[v2.RestoreSystemVolumeResponse], error)
+	// ConfigureManagementNetwork changes the addressing of the NIC that holds
+	// the management role (node.yaml) with an automatic revert: the new
+	// configuration is applied, and unless ConfirmNetworkChange arrives (from a
+	// client that reached the node on the new address) before revert_after, the
+	// previous addresses and default route are restored. A change that cuts the
+	// operator off therefore undoes itself.
+	ConfigureManagementNetwork(context.Context, *connect.Request[v2.ConfigureManagementNetworkRequest]) (*connect.Response[v2.ConfigureManagementNetworkResponse], error)
+	ConfirmNetworkChange(context.Context, *connect.Request[v2.ConfirmNetworkChangeRequest]) (*connect.Response[v2.ConfirmNetworkChangeResponse], error)
 }
 
 // NewAgentServiceClient constructs a client for the pilab.agent.v2.AgentService service. By
@@ -975,105 +989,119 @@ func NewAgentServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(agentServiceMethods.ByName("RestoreSystemVolume")),
 			connect.WithClientOptions(opts...),
 		),
+		configureManagementNetwork: connect.NewClient[v2.ConfigureManagementNetworkRequest, v2.ConfigureManagementNetworkResponse](
+			httpClient,
+			baseURL+AgentServiceConfigureManagementNetworkProcedure,
+			connect.WithSchema(agentServiceMethods.ByName("ConfigureManagementNetwork")),
+			connect.WithClientOptions(opts...),
+		),
+		confirmNetworkChange: connect.NewClient[v2.ConfirmNetworkChangeRequest, v2.ConfirmNetworkChangeResponse](
+			httpClient,
+			baseURL+AgentServiceConfirmNetworkChangeProcedure,
+			connect.WithSchema(agentServiceMethods.ByName("ConfirmNetworkChange")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // agentServiceClient implements AgentServiceClient.
 type agentServiceClient struct {
-	registerHost              *connect.Client[v2.RegisterHostRequest, v2.RegisterHostResponse]
-	heartbeat                 *connect.Client[v2.HeartbeatRequest, v2.HeartbeatResponse]
-	getHostStatus             *connect.Client[v2.GetHostStatusRequest, v2.HostStatus]
-	createVM                  *connect.Client[v2.CreateVMRequest, v2.CreateVMResponse]
-	getVMDetails              *connect.Client[v2.GetVMDetailsRequest, v2.GetVMDetailsResponse]
-	updateVM                  *connect.Client[v2.UpdateVMRequest, v2.UpdateVMResponse]
-	deleteVM                  *connect.Client[v2.DeleteVMRequest, v2.DeleteVMResponse]
-	startVM                   *connect.Client[v2.StartVMRequest, v2.StartVMResponse]
-	stopVM                    *connect.Client[v2.StopVMRequest, v2.StopVMResponse]
-	forceStopVM               *connect.Client[v2.ForceStopVMRequest, v2.ForceStopVMResponse]
-	rebootVM                  *connect.Client[v2.RebootVMRequest, v2.RebootVMResponse]
-	pauseVM                   *connect.Client[v2.PauseVMRequest, v2.PauseVMResponse]
-	resumeVM                  *connect.Client[v2.ResumeVMRequest, v2.ResumeVMResponse]
-	initiateMigration         *connect.Client[v2.InitiateMigrationRequest, v2.InitiateMigrationResponse]
-	prepareForMigration       *connect.Client[v2.PrepareForMigrationRequest, v2.PrepareForMigrationResponse]
-	confirmMigration          *connect.Client[v2.ConfirmMigrationRequest, emptypb.Empty]
-	abortMigration            *connect.Client[v2.AbortMigrationRequest, emptypb.Empty]
-	createSnapshot            *connect.Client[v2.CreateSnapshotRequest, v2.CreateSnapshotResponse]
-	revertToSnapshot          *connect.Client[v2.RevertToSnapshotRequest, v2.RevertToSnapshotResponse]
-	deleteSnapshot            *connect.Client[v2.DeleteSnapshotRequest, v2.DeleteSnapshotResponse]
-	getTaskStatus             *connect.Client[v2.GetTaskStatusRequest, v2.Task]
-	cancelTask                *connect.Client[v2.CancelTaskRequest, v2.CancelTaskResponse]
-	configureNetwork          *connect.Client[v2.ConfigureNetworkRequest, v2.ConfigureNetworkResponse]
-	configureStorage          *connect.Client[v2.ConfigureStorageRequest, v2.ConfigureStorageResponse]
-	configureTime             *connect.Client[v2.ConfigureTimeRequest, v2.ConfigureTimeResponse]
-	setMaintenanceMode        *connect.Client[v2.SetMaintenanceModeRequest, v2.SetMaintenanceModeResponse]
-	updateHost                *connect.Client[v2.UpdateHostRequest, v2.UpdateHostResponse]
-	getContentLibraryItems    *connect.Client[v2.GetContentLibraryItemsRequest, v2.GetContentLibraryItemsResponse]
-	uploadContentLibraryItem  *connect.Client[v2.UploadContentLibraryItemRequest, v2.UploadContentLibraryItemResponse]
-	exportOVA                 *connect.Client[v2.ExportOVARequest, v2.ExportOVAResponse]
-	importOVA                 *connect.Client[v2.ImportOVARequest, v2.ImportOVAResponse]
-	deleteContentLibraryItem  *connect.Client[v2.DeleteContentLibraryItemRequest, v2.DeleteContentLibraryItemResponse]
-	getDatastores             *connect.Client[v2.GetDatastoresRequest, v2.GetDatastoresResponse]
-	getDatastore              *connect.Client[v2.GetDatastoreRequest, v2.GetDatastoreResponse]
-	createDatastore           *connect.Client[v2.CreateDatastoreRequest, v2.CreateDatastoreResponse]
-	deleteDatastore           *connect.Client[v2.DeleteDatastoreRequest, v2.DeleteDatastoreResponse]
-	getNetworks               *connect.Client[v2.GetNetworksRequest, v2.GetNetworksResponse]
-	getNetwork                *connect.Client[v2.GetNetworkRequest, v2.GetNetworkResponse]
-	createNetwork             *connect.Client[v2.CreateNetworkRequest, v2.CreateNetworkResponse]
-	deleteNetwork             *connect.Client[v2.DeleteNetworkRequest, v2.DeleteNetworkResponse]
-	attachIso                 *connect.Client[v2.AttachIsoRequest, v2.AttachIsoResponse]
-	detachIso                 *connect.Client[v2.DetachIsoRequest, v2.DetachIsoResponse]
-	cloneVmFromTemplate       *connect.Client[v2.CloneVmFromTemplateRequest, v2.CloneVmFromTemplateResponse]
-	getVMGuestIPs             *connect.Client[v2.GetVMGuestIPsRequest, v2.GetVMGuestIPsResponse]
-	changeVMUserPassword      *connect.Client[v2.ChangeVMUserPasswordRequest, v2.ChangeVMUserPasswordResponse]
-	attachCloudInit           *connect.Client[v2.AttachCloudInitRequest, v2.AttachCloudInitResponse]
-	attachNetworkInterface    *connect.Client[v2.AttachNetworkInterfaceRequest, v2.AttachNetworkInterfaceResponse]
-	detachNetworkInterface    *connect.Client[v2.DetachNetworkInterfaceRequest, v2.DetachNetworkInterfaceResponse]
-	stream                    *connect.Client[v1.StreamRequest, v1.StreamResponse]
-	getHardwareHealth         *connect.Client[v2.GetHardwareHealthRequest, v2.GetHardwareHealthResponse]
-	getSensorData             *connect.Client[v2.GetSensorDataRequest, v2.GetSensorDataResponse]
-	defineVM                  *connect.Client[v2.DefineVMRequest, v2.DefineVMResponse]
-	getVMDefinition           *connect.Client[v2.GetVMDefinitionRequest, v2.GetVMDefinitionResponse]
-	controlVM                 *connect.Client[v2.ControlVMRequest, v2.ControlVMResponse]
-	getVMStatus               *connect.Client[v2.GetVMStatusRequest, v2.GetVMStatusResponse]
-	getVMGuestInfo            *connect.Client[v2.GetVMGuestInfoRequest, v2.GetVMGuestInfoResponse]
-	createPowerSchedule       *connect.Client[v2.CreatePowerScheduleRequest, v2.CreatePowerScheduleResponse]
-	listPowerSchedules        *connect.Client[v2.ListPowerSchedulesRequest, v2.ListPowerSchedulesResponse]
-	updatePowerSchedule       *connect.Client[v2.UpdatePowerScheduleRequest, v2.UpdatePowerScheduleResponse]
-	deletePowerSchedule       *connect.Client[v2.DeletePowerScheduleRequest, v2.DeletePowerScheduleResponse]
-	wakeOnLAN                 *connect.Client[v2.WakeOnLANRequest, v2.WakeOnLANResponse]
-	getHostInfo               *connect.Client[v2.GetHostInfoRequest, v2.HostInfo]
-	getSystemResources        *connect.Client[v2.GetSystemResourcesRequest, v2.SystemResources]
-	getServiceStatus          *connect.Client[v2.GetServiceStatusRequest, v2.ServiceStatusList]
-	restartService            *connect.Client[v2.RestartServiceRequest, v2.RestartServiceResponse]
-	getNetworkConfig          *connect.Client[v2.GetNetworkConfigRequest, v2.NetworkConfig]
-	configureNetworkInterface *connect.Client[v2.ConfigureNetworkInterfaceRequest, v2.ConfigureNetworkInterfaceResponse]
-	testNetwork               *connect.Client[v2.TestNetworkRequest, v2.NetworkTestResult]
-	getStorageConfig          *connect.Client[v2.GetStorageConfigRequest, v2.StorageConfig]
-	mountNFS                  *connect.Client[v2.MountNFSRequest, v2.MountNFSResponse]
-	unmountNFS                *connect.Client[v2.UnmountNFSRequest, v2.UnmountNFSResponse]
-	getMaintenanceMode        *connect.Client[v2.GetMaintenanceModeRequest, v2.MaintenanceModeStatus]
-	getFirewallRules          *connect.Client[v2.GetFirewallRulesRequest, v2.FirewallRuleList]
-	addFirewallRule           *connect.Client[v2.AddFirewallRuleRequest, v2.AddFirewallRuleResponse]
-	removeFirewallRule        *connect.Client[v2.RemoveFirewallRuleRequest, v2.RemoveFirewallRuleResponse]
-	getDNSConfig              *connect.Client[v2.GetDNSConfigRequest, v2.DNSConfig]
-	setDNSConfig              *connect.Client[v2.SetDNSConfigRequest, v2.SetDNSConfigResponse]
-	getNTPConfig              *connect.Client[v2.GetNTPConfigRequest, v2.NTPConfig]
-	setNTPConfig              *connect.Client[v2.SetNTPConfigRequest, v2.SetNTPConfigResponse]
-	getCloudStatus            *connect.Client[v2.GetCloudStatusRequest, v2.CloudStatus]
-	adoptToCloud              *connect.Client[v2.AdoptToCloudRequest, v2.AdoptToCloudResponse]
-	disconnectFromCloud       *connect.Client[v2.DisconnectFromCloudRequest, v2.DisconnectFromCloudResponse]
-	updateConfig              *connect.Client[v2.UpdateConfigRequest, v2.UpdateConfigResponse]
-	listSnapshots             *connect.Client[v2.ListSnapshotsRequest, v2.ListSnapshotsResponse]
-	consolidateSnapshot       *connect.Client[v2.ConsolidateSnapshotRequest, v2.ConsolidateSnapshotResponse]
-	cloneSnapshot             *connect.Client[v2.CloneSnapshotRequest, v2.CloneSnapshotResponse]
-	createVolume              *connect.Client[v2.CreateVolumeRequest, v2.CreateVolumeResponse]
-	deleteVolume              *connect.Client[v2.DeleteVolumeRequest, v2.DeleteVolumeResponse]
-	resizeVolume              *connect.Client[v2.ResizeVolumeRequest, v2.ResizeVolumeResponse]
-	listVolumes               *connect.Client[v2.ListVolumesRequest, v2.ListVolumesResponse]
-	getVolume                 *connect.Client[v2.GetVolumeRequest, v2.GetVolumeResponse]
-	cloneVolume               *connect.Client[v2.CloneVolumeRequest, v2.CloneVolumeResponse]
-	backupSystemVolume        *connect.Client[v2.BackupSystemVolumeRequest, v2.BackupSystemVolumeResponse]
-	restoreSystemVolume       *connect.Client[v2.RestoreSystemVolumeRequest, v2.RestoreSystemVolumeResponse]
+	registerHost               *connect.Client[v2.RegisterHostRequest, v2.RegisterHostResponse]
+	heartbeat                  *connect.Client[v2.HeartbeatRequest, v2.HeartbeatResponse]
+	getHostStatus              *connect.Client[v2.GetHostStatusRequest, v2.HostStatus]
+	createVM                   *connect.Client[v2.CreateVMRequest, v2.CreateVMResponse]
+	getVMDetails               *connect.Client[v2.GetVMDetailsRequest, v2.GetVMDetailsResponse]
+	updateVM                   *connect.Client[v2.UpdateVMRequest, v2.UpdateVMResponse]
+	deleteVM                   *connect.Client[v2.DeleteVMRequest, v2.DeleteVMResponse]
+	startVM                    *connect.Client[v2.StartVMRequest, v2.StartVMResponse]
+	stopVM                     *connect.Client[v2.StopVMRequest, v2.StopVMResponse]
+	forceStopVM                *connect.Client[v2.ForceStopVMRequest, v2.ForceStopVMResponse]
+	rebootVM                   *connect.Client[v2.RebootVMRequest, v2.RebootVMResponse]
+	pauseVM                    *connect.Client[v2.PauseVMRequest, v2.PauseVMResponse]
+	resumeVM                   *connect.Client[v2.ResumeVMRequest, v2.ResumeVMResponse]
+	initiateMigration          *connect.Client[v2.InitiateMigrationRequest, v2.InitiateMigrationResponse]
+	prepareForMigration        *connect.Client[v2.PrepareForMigrationRequest, v2.PrepareForMigrationResponse]
+	confirmMigration           *connect.Client[v2.ConfirmMigrationRequest, emptypb.Empty]
+	abortMigration             *connect.Client[v2.AbortMigrationRequest, emptypb.Empty]
+	createSnapshot             *connect.Client[v2.CreateSnapshotRequest, v2.CreateSnapshotResponse]
+	revertToSnapshot           *connect.Client[v2.RevertToSnapshotRequest, v2.RevertToSnapshotResponse]
+	deleteSnapshot             *connect.Client[v2.DeleteSnapshotRequest, v2.DeleteSnapshotResponse]
+	getTaskStatus              *connect.Client[v2.GetTaskStatusRequest, v2.Task]
+	cancelTask                 *connect.Client[v2.CancelTaskRequest, v2.CancelTaskResponse]
+	configureNetwork           *connect.Client[v2.ConfigureNetworkRequest, v2.ConfigureNetworkResponse]
+	configureStorage           *connect.Client[v2.ConfigureStorageRequest, v2.ConfigureStorageResponse]
+	configureTime              *connect.Client[v2.ConfigureTimeRequest, v2.ConfigureTimeResponse]
+	setMaintenanceMode         *connect.Client[v2.SetMaintenanceModeRequest, v2.SetMaintenanceModeResponse]
+	updateHost                 *connect.Client[v2.UpdateHostRequest, v2.UpdateHostResponse]
+	getContentLibraryItems     *connect.Client[v2.GetContentLibraryItemsRequest, v2.GetContentLibraryItemsResponse]
+	uploadContentLibraryItem   *connect.Client[v2.UploadContentLibraryItemRequest, v2.UploadContentLibraryItemResponse]
+	exportOVA                  *connect.Client[v2.ExportOVARequest, v2.ExportOVAResponse]
+	importOVA                  *connect.Client[v2.ImportOVARequest, v2.ImportOVAResponse]
+	deleteContentLibraryItem   *connect.Client[v2.DeleteContentLibraryItemRequest, v2.DeleteContentLibraryItemResponse]
+	getDatastores              *connect.Client[v2.GetDatastoresRequest, v2.GetDatastoresResponse]
+	getDatastore               *connect.Client[v2.GetDatastoreRequest, v2.GetDatastoreResponse]
+	createDatastore            *connect.Client[v2.CreateDatastoreRequest, v2.CreateDatastoreResponse]
+	deleteDatastore            *connect.Client[v2.DeleteDatastoreRequest, v2.DeleteDatastoreResponse]
+	getNetworks                *connect.Client[v2.GetNetworksRequest, v2.GetNetworksResponse]
+	getNetwork                 *connect.Client[v2.GetNetworkRequest, v2.GetNetworkResponse]
+	createNetwork              *connect.Client[v2.CreateNetworkRequest, v2.CreateNetworkResponse]
+	deleteNetwork              *connect.Client[v2.DeleteNetworkRequest, v2.DeleteNetworkResponse]
+	attachIso                  *connect.Client[v2.AttachIsoRequest, v2.AttachIsoResponse]
+	detachIso                  *connect.Client[v2.DetachIsoRequest, v2.DetachIsoResponse]
+	cloneVmFromTemplate        *connect.Client[v2.CloneVmFromTemplateRequest, v2.CloneVmFromTemplateResponse]
+	getVMGuestIPs              *connect.Client[v2.GetVMGuestIPsRequest, v2.GetVMGuestIPsResponse]
+	changeVMUserPassword       *connect.Client[v2.ChangeVMUserPasswordRequest, v2.ChangeVMUserPasswordResponse]
+	attachCloudInit            *connect.Client[v2.AttachCloudInitRequest, v2.AttachCloudInitResponse]
+	attachNetworkInterface     *connect.Client[v2.AttachNetworkInterfaceRequest, v2.AttachNetworkInterfaceResponse]
+	detachNetworkInterface     *connect.Client[v2.DetachNetworkInterfaceRequest, v2.DetachNetworkInterfaceResponse]
+	stream                     *connect.Client[v1.StreamRequest, v1.StreamResponse]
+	getHardwareHealth          *connect.Client[v2.GetHardwareHealthRequest, v2.GetHardwareHealthResponse]
+	getSensorData              *connect.Client[v2.GetSensorDataRequest, v2.GetSensorDataResponse]
+	defineVM                   *connect.Client[v2.DefineVMRequest, v2.DefineVMResponse]
+	getVMDefinition            *connect.Client[v2.GetVMDefinitionRequest, v2.GetVMDefinitionResponse]
+	controlVM                  *connect.Client[v2.ControlVMRequest, v2.ControlVMResponse]
+	getVMStatus                *connect.Client[v2.GetVMStatusRequest, v2.GetVMStatusResponse]
+	getVMGuestInfo             *connect.Client[v2.GetVMGuestInfoRequest, v2.GetVMGuestInfoResponse]
+	createPowerSchedule        *connect.Client[v2.CreatePowerScheduleRequest, v2.CreatePowerScheduleResponse]
+	listPowerSchedules         *connect.Client[v2.ListPowerSchedulesRequest, v2.ListPowerSchedulesResponse]
+	updatePowerSchedule        *connect.Client[v2.UpdatePowerScheduleRequest, v2.UpdatePowerScheduleResponse]
+	deletePowerSchedule        *connect.Client[v2.DeletePowerScheduleRequest, v2.DeletePowerScheduleResponse]
+	wakeOnLAN                  *connect.Client[v2.WakeOnLANRequest, v2.WakeOnLANResponse]
+	getHostInfo                *connect.Client[v2.GetHostInfoRequest, v2.HostInfo]
+	getSystemResources         *connect.Client[v2.GetSystemResourcesRequest, v2.SystemResources]
+	getServiceStatus           *connect.Client[v2.GetServiceStatusRequest, v2.ServiceStatusList]
+	restartService             *connect.Client[v2.RestartServiceRequest, v2.RestartServiceResponse]
+	getNetworkConfig           *connect.Client[v2.GetNetworkConfigRequest, v2.NetworkConfig]
+	configureNetworkInterface  *connect.Client[v2.ConfigureNetworkInterfaceRequest, v2.ConfigureNetworkInterfaceResponse]
+	testNetwork                *connect.Client[v2.TestNetworkRequest, v2.NetworkTestResult]
+	getStorageConfig           *connect.Client[v2.GetStorageConfigRequest, v2.StorageConfig]
+	mountNFS                   *connect.Client[v2.MountNFSRequest, v2.MountNFSResponse]
+	unmountNFS                 *connect.Client[v2.UnmountNFSRequest, v2.UnmountNFSResponse]
+	getMaintenanceMode         *connect.Client[v2.GetMaintenanceModeRequest, v2.MaintenanceModeStatus]
+	getFirewallRules           *connect.Client[v2.GetFirewallRulesRequest, v2.FirewallRuleList]
+	addFirewallRule            *connect.Client[v2.AddFirewallRuleRequest, v2.AddFirewallRuleResponse]
+	removeFirewallRule         *connect.Client[v2.RemoveFirewallRuleRequest, v2.RemoveFirewallRuleResponse]
+	getDNSConfig               *connect.Client[v2.GetDNSConfigRequest, v2.DNSConfig]
+	setDNSConfig               *connect.Client[v2.SetDNSConfigRequest, v2.SetDNSConfigResponse]
+	getNTPConfig               *connect.Client[v2.GetNTPConfigRequest, v2.NTPConfig]
+	setNTPConfig               *connect.Client[v2.SetNTPConfigRequest, v2.SetNTPConfigResponse]
+	getCloudStatus             *connect.Client[v2.GetCloudStatusRequest, v2.CloudStatus]
+	adoptToCloud               *connect.Client[v2.AdoptToCloudRequest, v2.AdoptToCloudResponse]
+	disconnectFromCloud        *connect.Client[v2.DisconnectFromCloudRequest, v2.DisconnectFromCloudResponse]
+	updateConfig               *connect.Client[v2.UpdateConfigRequest, v2.UpdateConfigResponse]
+	listSnapshots              *connect.Client[v2.ListSnapshotsRequest, v2.ListSnapshotsResponse]
+	consolidateSnapshot        *connect.Client[v2.ConsolidateSnapshotRequest, v2.ConsolidateSnapshotResponse]
+	cloneSnapshot              *connect.Client[v2.CloneSnapshotRequest, v2.CloneSnapshotResponse]
+	createVolume               *connect.Client[v2.CreateVolumeRequest, v2.CreateVolumeResponse]
+	deleteVolume               *connect.Client[v2.DeleteVolumeRequest, v2.DeleteVolumeResponse]
+	resizeVolume               *connect.Client[v2.ResizeVolumeRequest, v2.ResizeVolumeResponse]
+	listVolumes                *connect.Client[v2.ListVolumesRequest, v2.ListVolumesResponse]
+	getVolume                  *connect.Client[v2.GetVolumeRequest, v2.GetVolumeResponse]
+	cloneVolume                *connect.Client[v2.CloneVolumeRequest, v2.CloneVolumeResponse]
+	backupSystemVolume         *connect.Client[v2.BackupSystemVolumeRequest, v2.BackupSystemVolumeResponse]
+	restoreSystemVolume        *connect.Client[v2.RestoreSystemVolumeRequest, v2.RestoreSystemVolumeResponse]
+	configureManagementNetwork *connect.Client[v2.ConfigureManagementNetworkRequest, v2.ConfigureManagementNetworkResponse]
+	confirmNetworkChange       *connect.Client[v2.ConfirmNetworkChangeRequest, v2.ConfirmNetworkChangeResponse]
 }
 
 // RegisterHost calls pilab.agent.v2.AgentService.RegisterHost.
@@ -1546,6 +1574,16 @@ func (c *agentServiceClient) RestoreSystemVolume(ctx context.Context, req *conne
 	return c.restoreSystemVolume.CallUnary(ctx, req)
 }
 
+// ConfigureManagementNetwork calls pilab.agent.v2.AgentService.ConfigureManagementNetwork.
+func (c *agentServiceClient) ConfigureManagementNetwork(ctx context.Context, req *connect.Request[v2.ConfigureManagementNetworkRequest]) (*connect.Response[v2.ConfigureManagementNetworkResponse], error) {
+	return c.configureManagementNetwork.CallUnary(ctx, req)
+}
+
+// ConfirmNetworkChange calls pilab.agent.v2.AgentService.ConfirmNetworkChange.
+func (c *agentServiceClient) ConfirmNetworkChange(ctx context.Context, req *connect.Request[v2.ConfirmNetworkChangeRequest]) (*connect.Response[v2.ConfirmNetworkChangeResponse], error) {
+	return c.confirmNetworkChange.CallUnary(ctx, req)
+}
+
 // AgentServiceHandler is an implementation of the pilab.agent.v2.AgentService service.
 type AgentServiceHandler interface {
 	RegisterHost(context.Context, *connect.Request[v2.RegisterHostRequest]) (*connect.Response[v2.RegisterHostResponse], error)
@@ -1645,6 +1683,14 @@ type AgentServiceHandler interface {
 	CloneVolume(context.Context, *connect.Request[v2.CloneVolumeRequest]) (*connect.Response[v2.CloneVolumeResponse], error)
 	BackupSystemVolume(context.Context, *connect.Request[v2.BackupSystemVolumeRequest]) (*connect.Response[v2.BackupSystemVolumeResponse], error)
 	RestoreSystemVolume(context.Context, *connect.Request[v2.RestoreSystemVolumeRequest]) (*connect.Response[v2.RestoreSystemVolumeResponse], error)
+	// ConfigureManagementNetwork changes the addressing of the NIC that holds
+	// the management role (node.yaml) with an automatic revert: the new
+	// configuration is applied, and unless ConfirmNetworkChange arrives (from a
+	// client that reached the node on the new address) before revert_after, the
+	// previous addresses and default route are restored. A change that cuts the
+	// operator off therefore undoes itself.
+	ConfigureManagementNetwork(context.Context, *connect.Request[v2.ConfigureManagementNetworkRequest]) (*connect.Response[v2.ConfigureManagementNetworkResponse], error)
+	ConfirmNetworkChange(context.Context, *connect.Request[v2.ConfirmNetworkChangeRequest]) (*connect.Response[v2.ConfirmNetworkChangeResponse], error)
 }
 
 // NewAgentServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -2218,6 +2264,18 @@ func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(agentServiceMethods.ByName("RestoreSystemVolume")),
 		connect.WithHandlerOptions(opts...),
 	)
+	agentServiceConfigureManagementNetworkHandler := connect.NewUnaryHandler(
+		AgentServiceConfigureManagementNetworkProcedure,
+		svc.ConfigureManagementNetwork,
+		connect.WithSchema(agentServiceMethods.ByName("ConfigureManagementNetwork")),
+		connect.WithHandlerOptions(opts...),
+	)
+	agentServiceConfirmNetworkChangeHandler := connect.NewUnaryHandler(
+		AgentServiceConfirmNetworkChangeProcedure,
+		svc.ConfirmNetworkChange,
+		connect.WithSchema(agentServiceMethods.ByName("ConfirmNetworkChange")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/pilab.agent.v2.AgentService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case AgentServiceRegisterHostProcedure:
@@ -2408,6 +2466,10 @@ func NewAgentServiceHandler(svc AgentServiceHandler, opts ...connect.HandlerOpti
 			agentServiceBackupSystemVolumeHandler.ServeHTTP(w, r)
 		case AgentServiceRestoreSystemVolumeProcedure:
 			agentServiceRestoreSystemVolumeHandler.ServeHTTP(w, r)
+		case AgentServiceConfigureManagementNetworkProcedure:
+			agentServiceConfigureManagementNetworkHandler.ServeHTTP(w, r)
+		case AgentServiceConfirmNetworkChangeProcedure:
+			agentServiceConfirmNetworkChangeHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -2791,4 +2853,12 @@ func (UnimplementedAgentServiceHandler) BackupSystemVolume(context.Context, *con
 
 func (UnimplementedAgentServiceHandler) RestoreSystemVolume(context.Context, *connect.Request[v2.RestoreSystemVolumeRequest]) (*connect.Response[v2.RestoreSystemVolumeResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.RestoreSystemVolume is not implemented"))
+}
+
+func (UnimplementedAgentServiceHandler) ConfigureManagementNetwork(context.Context, *connect.Request[v2.ConfigureManagementNetworkRequest]) (*connect.Response[v2.ConfigureManagementNetworkResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ConfigureManagementNetwork is not implemented"))
+}
+
+func (UnimplementedAgentServiceHandler) ConfirmNetworkChange(context.Context, *connect.Request[v2.ConfirmNetworkChangeRequest]) (*connect.Response[v2.ConfirmNetworkChangeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("pilab.agent.v2.AgentService.ConfirmNetworkChange is not implemented"))
 }
