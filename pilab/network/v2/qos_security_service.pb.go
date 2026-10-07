@@ -10,6 +10,7 @@
 package networkv2
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -1824,7 +1825,7 @@ var File_pilab_network_v2_qos_security_service_proto protoreflect.FileDescriptor
 
 const file_pilab_network_v2_qos_security_service_proto_rawDesc = "" +
 	"\n" +
-	"+pilab/network/v2/qos_security_service.proto\x12\x10pilab.network.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a%pilab/network/v2/network_common.proto\"\xc5\x05\n" +
+	"+pilab/network/v2/qos_security_service.proto\x12\x10pilab.network.v2\x1a\x1bpilab/common/v1/authz.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a%pilab/network/v2/network_common.proto\"\xc5\x05\n" +
 	"\n" +
 	"QoSProfile\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
@@ -2003,27 +2004,52 @@ const file_pilab_network_v2_qos_security_service_proto_rawDesc = "" +
 	"\arule_id\x18\x02 \x01(\tR\x06ruleId\"y\n" +
 	"\x16ReorderACLRulesRequest\x12.\n" +
 	"\x13security_profile_id\x18\x01 \x01(\tR\x11securityProfileId\x12/\n" +
-	"\x05rules\x18\x02 \x03(\v2\x19.pilab.network.v2.ACLRuleR\x05rules2\xae\r\n" +
-	"\x12QoSSecurityService\x12[\n" +
-	"\x10CreateQoSProfile\x12).pilab.network.v2.CreateQoSProfileRequest\x1a\x1c.pilab.network.v2.QoSProfile\x12U\n" +
-	"\rGetQoSProfile\x12&.pilab.network.v2.GetQoSProfileRequest\x1a\x1c.pilab.network.v2.QoSProfile\x12f\n" +
-	"\x0fListQoSProfiles\x12(.pilab.network.v2.ListQoSProfilesRequest\x1a).pilab.network.v2.ListQoSProfilesResponse\x12[\n" +
-	"\x10UpdateQoSProfile\x12).pilab.network.v2.UpdateQoSProfileRequest\x1a\x1c.pilab.network.v2.QoSProfile\x12U\n" +
-	"\x10DeleteQoSProfile\x12).pilab.network.v2.DeleteQoSProfileRequest\x1a\x16.google.protobuf.Empty\x12S\n" +
-	"\x0fApplyQoSProfile\x12(.pilab.network.v2.ApplyQoSProfileRequest\x1a\x16.google.protobuf.Empty\x12U\n" +
-	"\x10RemoveQoSProfile\x12).pilab.network.v2.RemoveQoSProfileRequest\x1a\x16.google.protobuf.Empty\x12j\n" +
-	"\x15CreateSecurityProfile\x12..pilab.network.v2.CreateSecurityProfileRequest\x1a!.pilab.network.v2.SecurityProfile\x12d\n" +
-	"\x12GetSecurityProfile\x12+.pilab.network.v2.GetSecurityProfileRequest\x1a!.pilab.network.v2.SecurityProfile\x12u\n" +
-	"\x14ListSecurityProfiles\x12-.pilab.network.v2.ListSecurityProfilesRequest\x1a..pilab.network.v2.ListSecurityProfilesResponse\x12j\n" +
-	"\x15UpdateSecurityProfile\x12..pilab.network.v2.UpdateSecurityProfileRequest\x1a!.pilab.network.v2.SecurityProfile\x12_\n" +
-	"\x15DeleteSecurityProfile\x12..pilab.network.v2.DeleteSecurityProfileRequest\x1a\x16.google.protobuf.Empty\x12]\n" +
-	"\x14ApplySecurityProfile\x12-.pilab.network.v2.ApplySecurityProfileRequest\x1a\x16.google.protobuf.Empty\x12_\n" +
-	"\x15RemoveSecurityProfile\x12..pilab.network.v2.RemoveSecurityProfileRequest\x1a\x16.google.protobuf.Empty\x12L\n" +
+	"\x05rules\x18\x02 \x03(\v2\x19.pilab.network.v2.ACLRuleR\x05rules2\xc2\x11\n" +
+	"\x12QoSSecurityService\x12w\n" +
+	"\x10CreateQoSProfile\x12).pilab.network.v2.CreateQoSProfileRequest\x1a\x1c.pilab.network.v2.QoSProfile\"\x1a\xa2\xbb\x18\x16\n" +
 	"\n" +
-	"AddACLRule\x12#.pilab.network.v2.AddACLRuleRequest\x1a\x19.pilab.network.v2.ACLRule\x12R\n" +
-	"\rUpdateACLRule\x12&.pilab.network.v2.UpdateACLRuleRequest\x1a\x19.pilab.network.v2.ACLRule\x12O\n" +
-	"\rRemoveACLRule\x12&.pilab.network.v2.RemoveACLRuleRequest\x1a\x16.google.protobuf.Empty\x12S\n" +
-	"\x0fReorderACLRules\x12(.pilab.network.v2.ReorderACLRulesRequest\x1a\x16.google.protobuf.EmptyB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
+	"QoSProfile\x12\x06create\x18\x01\x12n\n" +
+	"\rGetQoSProfile\x12&.pilab.network.v2.GetQoSProfileRequest\x1a\x1c.pilab.network.v2.QoSProfile\"\x17\xa2\xbb\x18\x13\n" +
+	"\n" +
+	"QoSProfile\x12\x03get\x18\x01\x12\x80\x01\n" +
+	"\x0fListQoSProfiles\x12(.pilab.network.v2.ListQoSProfilesRequest\x1a).pilab.network.v2.ListQoSProfilesResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\n" +
+	"QoSProfile\x12\x04list\x18\x01\x12w\n" +
+	"\x10UpdateQoSProfile\x12).pilab.network.v2.UpdateQoSProfileRequest\x1a\x1c.pilab.network.v2.QoSProfile\"\x1a\xa2\xbb\x18\x16\n" +
+	"\n" +
+	"QoSProfile\x12\x06update\x18\x01\x12q\n" +
+	"\x10DeleteQoSProfile\x12).pilab.network.v2.DeleteQoSProfileRequest\x1a\x16.google.protobuf.Empty\"\x1a\xa2\xbb\x18\x16\n" +
+	"\n" +
+	"QoSProfile\x12\x06delete\x18\x01\x12o\n" +
+	"\x0fApplyQoSProfile\x12(.pilab.network.v2.ApplyQoSProfileRequest\x1a\x16.google.protobuf.Empty\"\x1a\xa2\xbb\x18\x16\n" +
+	"\n" +
+	"QoSProfile\x12\x06attach\x18\x01\x12q\n" +
+	"\x10RemoveQoSProfile\x12).pilab.network.v2.RemoveQoSProfileRequest\x1a\x16.google.protobuf.Empty\"\x1a\xa2\xbb\x18\x16\n" +
+	"\n" +
+	"QoSProfile\x12\x06attach\x18\x01\x12\x89\x01\n" +
+	"\x15CreateSecurityProfile\x12..pilab.network.v2.CreateSecurityProfileRequest\x1a!.pilab.network.v2.SecurityProfile\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06create\x18\x01\x12\x80\x01\n" +
+	"\x12GetSecurityProfile\x12+.pilab.network.v2.GetSecurityProfileRequest\x1a!.pilab.network.v2.SecurityProfile\"\x1a\xa2\xbb\x18\x16\n" +
+	"\rSecurityGroup\x12\x03get\x18\x01\x12\x92\x01\n" +
+	"\x14ListSecurityProfiles\x12-.pilab.network.v2.ListSecurityProfilesRequest\x1a..pilab.network.v2.ListSecurityProfilesResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\rSecurityGroup\x12\x04list\x18\x01\x12\x89\x01\n" +
+	"\x15UpdateSecurityProfile\x12..pilab.network.v2.UpdateSecurityProfileRequest\x1a!.pilab.network.v2.SecurityProfile\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01\x12~\n" +
+	"\x15DeleteSecurityProfile\x12..pilab.network.v2.DeleteSecurityProfileRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06delete\x18\x01\x12|\n" +
+	"\x14ApplySecurityProfile\x12-.pilab.network.v2.ApplySecurityProfileRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06attach\x18\x01\x12~\n" +
+	"\x15RemoveSecurityProfile\x12..pilab.network.v2.RemoveSecurityProfileRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06attach\x18\x01\x12k\n" +
+	"\n" +
+	"AddACLRule\x12#.pilab.network.v2.AddACLRuleRequest\x1a\x19.pilab.network.v2.ACLRule\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01\x12q\n" +
+	"\rUpdateACLRule\x12&.pilab.network.v2.UpdateACLRuleRequest\x1a\x19.pilab.network.v2.ACLRule\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01\x12n\n" +
+	"\rRemoveACLRule\x12&.pilab.network.v2.RemoveACLRuleRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01\x12r\n" +
+	"\x0fReorderACLRules\x12(.pilab.network.v2.ReorderACLRulesRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01B8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_qos_security_service_proto_rawDescOnce sync.Once

@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.network.v2;
 
+import "pilab/common/v1/authz.proto";
+
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
@@ -14,13 +16,27 @@ option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2";
 
 // ClusterBridgeService manages OVS bridges per cluster.
 service ClusterBridgeService {
-  rpc CreateClusterBridge(CreateClusterBridgeRequest) returns (ClusterBridge);
-  rpc GetClusterBridge(GetClusterBridgeRequest) returns (ClusterBridge);
-  rpc ListClusterBridges(ListClusterBridgesRequest) returns (ListClusterBridgesResponse);
-  rpc UpdateClusterBridge(UpdateClusterBridgeRequest) returns (ClusterBridge);
-  rpc DeleteClusterBridge(DeleteClusterBridgeRequest) returns (google.protobuf.Empty);
-  rpc AddUplink(AddUplinkRequest) returns (google.protobuf.Empty);
-  rpc RemoveUplink(RemoveUplinkRequest) returns (google.protobuf.Empty);
+  rpc CreateClusterBridge(CreateClusterBridgeRequest) returns (ClusterBridge) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetClusterBridge(GetClusterBridgeRequest) returns (ClusterBridge) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListClusterBridges(ListClusterBridgesRequest) returns (ListClusterBridgesResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateClusterBridge(UpdateClusterBridgeRequest) returns (ClusterBridge) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteClusterBridge(DeleteClusterBridgeRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc AddUplink(AddUplinkRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc RemoveUplink(RemoveUplinkRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "attach", authn: AUTHN_USER };
+  }
 }
 
 // ClusterBridge represents an OVS bridge configuration for a cluster.

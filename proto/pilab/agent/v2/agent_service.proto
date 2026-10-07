@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.agent.v2;
 
+import "pilab/common/v1/authz.proto";
+
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/agent/v2;agentv2";
 
 import "google/protobuf/empty.proto";
@@ -17,106 +19,294 @@ import "pilab/common/v1/task.proto";
 import "pilab/pivirtd/v1/pivirtd.proto";
 
 service AgentService {
-  rpc RegisterHost(RegisterHostRequest) returns (RegisterHostResponse);
-  rpc Heartbeat(HeartbeatRequest) returns (HeartbeatResponse);
-  rpc GetHostStatus(GetHostStatusRequest) returns (HostStatus);
-  rpc CreateVM(CreateVMRequest) returns (CreateVMResponse);
-  rpc GetVMDetails(GetVMDetailsRequest) returns (GetVMDetailsResponse);
-  rpc UpdateVM(UpdateVMRequest) returns (UpdateVMResponse);
-  rpc DeleteVM(DeleteVMRequest) returns (DeleteVMResponse);
-  rpc StartVM(StartVMRequest) returns (StartVMResponse);
-  rpc StopVM(StopVMRequest) returns (StopVMResponse);
-  rpc ForceStopVM(ForceStopVMRequest) returns (ForceStopVMResponse);
-  rpc RebootVM(RebootVMRequest) returns (RebootVMResponse);
-  rpc PauseVM(PauseVMRequest) returns (PauseVMResponse);
-  rpc ResumeVM(ResumeVMRequest) returns (ResumeVMResponse);
-  rpc InitiateMigration(InitiateMigrationRequest) returns (InitiateMigrationResponse);
-  rpc PrepareForMigration(PrepareForMigrationRequest) returns (PrepareForMigrationResponse);
-  rpc ConfirmMigration(ConfirmMigrationRequest) returns (google.protobuf.Empty);
-  rpc AbortMigration(AbortMigrationRequest) returns (google.protobuf.Empty);
-  rpc CreateSnapshot(CreateSnapshotRequest) returns (CreateSnapshotResponse);
-  rpc RevertToSnapshot(RevertToSnapshotRequest) returns (RevertToSnapshotResponse);
-  rpc DeleteSnapshot(DeleteSnapshotRequest) returns (DeleteSnapshotResponse);
-  rpc GetTaskStatus(GetTaskStatusRequest) returns (Task);
-  rpc CancelTask(CancelTaskRequest) returns (CancelTaskResponse);
-  rpc ConfigureNetwork(ConfigureNetworkRequest) returns (ConfigureNetworkResponse);
-  rpc ConfigureStorage(ConfigureStorageRequest) returns (ConfigureStorageResponse);
-  rpc ConfigureTime(ConfigureTimeRequest) returns (ConfigureTimeResponse);
-  rpc SetMaintenanceMode(SetMaintenanceModeRequest) returns (SetMaintenanceModeResponse);
-  rpc UpdateHost(UpdateHostRequest) returns (UpdateHostResponse);
-  rpc GetContentLibraryItems(GetContentLibraryItemsRequest) returns (GetContentLibraryItemsResponse);
-  rpc UploadContentLibraryItem(stream UploadContentLibraryItemRequest) returns (UploadContentLibraryItemResponse);
-  rpc ExportOVA(ExportOVARequest) returns (stream ExportOVAResponse);
-  rpc ImportOVA(stream ImportOVARequest) returns (ImportOVAResponse);
-  rpc DeleteContentLibraryItem(DeleteContentLibraryItemRequest) returns (DeleteContentLibraryItemResponse);
-  rpc GetDatastores(GetDatastoresRequest) returns (GetDatastoresResponse);
-  rpc GetDatastore(GetDatastoreRequest) returns (GetDatastoreResponse);
-  rpc CreateDatastore(CreateDatastoreRequest) returns (CreateDatastoreResponse);
-  rpc DeleteDatastore(DeleteDatastoreRequest) returns (DeleteDatastoreResponse);
-  rpc GetNetworks(GetNetworksRequest) returns (GetNetworksResponse);
-  rpc GetNetwork(GetNetworkRequest) returns (GetNetworkResponse);
-  rpc CreateNetwork(CreateNetworkRequest) returns (CreateNetworkResponse);
-  rpc DeleteNetwork(DeleteNetworkRequest) returns (DeleteNetworkResponse);
-  rpc AttachIso(AttachIsoRequest) returns (AttachIsoResponse);
-  rpc DetachIso(DetachIsoRequest) returns (DetachIsoResponse);
-  rpc CloneVmFromTemplate(CloneVmFromTemplateRequest) returns (CloneVmFromTemplateResponse);
-  rpc GetVMGuestIPs(GetVMGuestIPsRequest) returns (GetVMGuestIPsResponse);
-  rpc ChangeVMUserPassword(ChangeVMUserPasswordRequest) returns (ChangeVMUserPasswordResponse);
-  rpc AttachCloudInit(AttachCloudInitRequest) returns (AttachCloudInitResponse);
-  rpc AttachNetworkInterface(AttachNetworkInterfaceRequest) returns (AttachNetworkInterfaceResponse);
-  rpc DetachNetworkInterface(DetachNetworkInterfaceRequest) returns (DetachNetworkInterfaceResponse);
-  rpc Stream(stream pilab.common.v1.StreamRequest) returns (stream pilab.common.v1.StreamResponse);
-  rpc GetHardwareHealth(GetHardwareHealthRequest) returns (GetHardwareHealthResponse);
-  rpc GetSensorData(GetSensorDataRequest) returns (GetSensorDataResponse);
-  rpc DefineVM(DefineVMRequest) returns (DefineVMResponse);
-  rpc GetVMDefinition(GetVMDefinitionRequest) returns (GetVMDefinitionResponse);
-  rpc ControlVM(ControlVMRequest) returns (ControlVMResponse);
-  rpc GetVMStatus(GetVMStatusRequest) returns (GetVMStatusResponse);
-  rpc GetVMGuestInfo(GetVMGuestInfoRequest) returns (GetVMGuestInfoResponse);
-  rpc CreatePowerSchedule(CreatePowerScheduleRequest) returns (CreatePowerScheduleResponse);
-  rpc ListPowerSchedules(ListPowerSchedulesRequest) returns (ListPowerSchedulesResponse);
-  rpc UpdatePowerSchedule(UpdatePowerScheduleRequest) returns (UpdatePowerScheduleResponse);
-  rpc DeletePowerSchedule(DeletePowerScheduleRequest) returns (DeletePowerScheduleResponse);
-  rpc WakeOnLAN(WakeOnLANRequest) returns (WakeOnLANResponse);
+  rpc RegisterHost(RegisterHostRequest) returns (RegisterHostResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc Heartbeat(HeartbeatRequest) returns (HeartbeatResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetHostStatus(GetHostStatusRequest) returns (HostStatus) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc CreateVM(CreateVMRequest) returns (CreateVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetVMDetails(GetVMDetailsRequest) returns (GetVMDetailsResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc UpdateVM(UpdateVMRequest) returns (UpdateVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteVM(DeleteVMRequest) returns (DeleteVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc StartVM(StartVMRequest) returns (StartVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc StopVM(StopVMRequest) returns (StopVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc ForceStopVM(ForceStopVMRequest) returns (ForceStopVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc RebootVM(RebootVMRequest) returns (RebootVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc PauseVM(PauseVMRequest) returns (PauseVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc ResumeVM(ResumeVMRequest) returns (ResumeVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc InitiateMigration(InitiateMigrationRequest) returns (InitiateMigrationResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "migrate", authn: AUTHN_USER };
+  }
+  rpc PrepareForMigration(PrepareForMigrationRequest) returns (PrepareForMigrationResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "migrate", authn: AUTHN_USER };
+  }
+  rpc ConfirmMigration(ConfirmMigrationRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "migrate", authn: AUTHN_USER };
+  }
+  rpc AbortMigration(AbortMigrationRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "migrate", authn: AUTHN_USER };
+  }
+  rpc CreateSnapshot(CreateSnapshotRequest) returns (CreateSnapshotResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "snapshot", authn: AUTHN_USER };
+  }
+  rpc RevertToSnapshot(RevertToSnapshotRequest) returns (RevertToSnapshotResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "revert", authn: AUTHN_USER };
+  }
+  rpc DeleteSnapshot(DeleteSnapshotRequest) returns (DeleteSnapshotResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc GetTaskStatus(GetTaskStatusRequest) returns (Task) {
+    option (pilab.common.v1.authz) = { kind: "Task", verb: "get", authn: AUTHN_USER };
+  }
+  rpc CancelTask(CancelTaskRequest) returns (CancelTaskResponse) {
+    option (pilab.common.v1.authz) = { kind: "Task", verb: "update", authn: AUTHN_USER };
+  }
+  rpc ConfigureNetwork(ConfigureNetworkRequest) returns (ConfigureNetworkResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc ConfigureStorage(ConfigureStorageRequest) returns (ConfigureStorageResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc ConfigureTime(ConfigureTimeRequest) returns (ConfigureTimeResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc SetMaintenanceMode(SetMaintenanceModeRequest) returns (SetMaintenanceModeResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc UpdateHost(UpdateHostRequest) returns (UpdateHostResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetContentLibraryItems(GetContentLibraryItemsRequest) returns (GetContentLibraryItemsResponse) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UploadContentLibraryItem(stream UploadContentLibraryItemRequest) returns (UploadContentLibraryItemResponse) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "create", authn: AUTHN_USER };
+  }
+  rpc ExportOVA(ExportOVARequest) returns (stream ExportOVAResponse) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ImportOVA(stream ImportOVARequest) returns (ImportOVAResponse) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "create", authn: AUTHN_USER };
+  }
+  rpc DeleteContentLibraryItem(DeleteContentLibraryItemRequest) returns (DeleteContentLibraryItemResponse) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc GetDatastores(GetDatastoresRequest) returns (GetDatastoresResponse) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetDatastore(GetDatastoreRequest) returns (GetDatastoreResponse) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc CreateDatastore(CreateDatastoreRequest) returns (CreateDatastoreResponse) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc DeleteDatastore(DeleteDatastoreRequest) returns (DeleteDatastoreResponse) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetNetworks(GetNetworksRequest) returns (GetNetworksResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetNetwork(GetNetworkRequest) returns (GetNetworkResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc CreateNetwork(CreateNetworkRequest) returns (CreateNetworkResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc DeleteNetwork(DeleteNetworkRequest) returns (DeleteNetworkResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc AttachIso(AttachIsoRequest) returns (AttachIsoResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc DetachIso(DetachIsoRequest) returns (DetachIsoResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc CloneVmFromTemplate(CloneVmFromTemplateRequest) returns (CloneVmFromTemplateResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetVMGuestIPs(GetVMGuestIPsRequest) returns (GetVMGuestIPsResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ChangeVMUserPassword(ChangeVMUserPasswordRequest) returns (ChangeVMUserPasswordResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "admin", authn: AUTHN_USER };
+  }
+  rpc AttachCloudInit(AttachCloudInitRequest) returns (AttachCloudInitResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc AttachNetworkInterface(AttachNetworkInterfaceRequest) returns (AttachNetworkInterfaceResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc DetachNetworkInterface(DetachNetworkInterfaceRequest) returns (DetachNetworkInterfaceResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc Stream(stream pilab.common.v1.StreamRequest) returns (stream pilab.common.v1.StreamResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetHardwareHealth(GetHardwareHealthRequest) returns (GetHardwareHealthResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetSensorData(GetSensorDataRequest) returns (GetSensorDataResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc DefineVM(DefineVMRequest) returns (DefineVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetVMDefinition(GetVMDefinitionRequest) returns (GetVMDefinitionResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ControlVM(ControlVMRequest) returns (ControlVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc GetVMStatus(GetVMStatusRequest) returns (GetVMStatusResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetVMGuestInfo(GetVMGuestInfoRequest) returns (GetVMGuestInfoResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc CreatePowerSchedule(CreatePowerScheduleRequest) returns (CreatePowerScheduleResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc ListPowerSchedules(ListPowerSchedulesRequest) returns (ListPowerSchedulesResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdatePowerSchedule(UpdatePowerScheduleRequest) returns (UpdatePowerScheduleResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeletePowerSchedule(DeletePowerScheduleRequest) returns (DeletePowerScheduleResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc WakeOnLAN(WakeOnLANRequest) returns (WakeOnLANResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
 
   // Host Management & DCUI
-  rpc GetHostInfo(GetHostInfoRequest) returns (HostInfo);
-  rpc GetSystemResources(GetSystemResourcesRequest) returns (SystemResources);
-  rpc GetServiceStatus(GetServiceStatusRequest) returns (ServiceStatusList);
-  rpc RestartService(RestartServiceRequest) returns (RestartServiceResponse);
-  rpc GetNetworkConfig(GetNetworkConfigRequest) returns (NetworkConfig);
-  rpc ConfigureNetworkInterface(ConfigureNetworkInterfaceRequest) returns (ConfigureNetworkInterfaceResponse);
-  rpc TestNetwork(TestNetworkRequest) returns (NetworkTestResult);
-  rpc GetStorageConfig(GetStorageConfigRequest) returns (StorageConfig);
-  rpc MountNFS(MountNFSRequest) returns (MountNFSResponse);
-  rpc UnmountNFS(UnmountNFSRequest) returns (UnmountNFSResponse);
-  rpc GetMaintenanceMode(GetMaintenanceModeRequest) returns (MaintenanceModeStatus);
-  rpc GetFirewallRules(GetFirewallRulesRequest) returns (FirewallRuleList);
-  rpc AddFirewallRule(AddFirewallRuleRequest) returns (AddFirewallRuleResponse);
-  rpc RemoveFirewallRule(RemoveFirewallRuleRequest) returns (RemoveFirewallRuleResponse);
-  rpc GetDNSConfig(GetDNSConfigRequest) returns (DNSConfig);
-  rpc SetDNSConfig(SetDNSConfigRequest) returns (SetDNSConfigResponse);
-  rpc GetNTPConfig(GetNTPConfigRequest) returns (NTPConfig);
-  rpc SetNTPConfig(SetNTPConfigRequest) returns (SetNTPConfigResponse);
-  rpc GetCloudStatus(GetCloudStatusRequest) returns (CloudStatus);
-  rpc AdoptToCloud(AdoptToCloudRequest) returns (AdoptToCloudResponse);
-  rpc DisconnectFromCloud(DisconnectFromCloudRequest) returns (DisconnectFromCloudResponse);
-  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
+  rpc GetHostInfo(GetHostInfoRequest) returns (HostInfo) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetSystemResources(GetSystemResourcesRequest) returns (SystemResources) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetServiceStatus(GetServiceStatusRequest) returns (ServiceStatusList) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc RestartService(RestartServiceRequest) returns (RestartServiceResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetNetworkConfig(GetNetworkConfigRequest) returns (NetworkConfig) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc ConfigureNetworkInterface(ConfigureNetworkInterfaceRequest) returns (ConfigureNetworkInterfaceResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc TestNetwork(TestNetworkRequest) returns (NetworkTestResult) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetStorageConfig(GetStorageConfigRequest) returns (StorageConfig) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc MountNFS(MountNFSRequest) returns (MountNFSResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc UnmountNFS(UnmountNFSRequest) returns (UnmountNFSResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetMaintenanceMode(GetMaintenanceModeRequest) returns (MaintenanceModeStatus) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetFirewallRules(GetFirewallRulesRequest) returns (FirewallRuleList) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc AddFirewallRule(AddFirewallRuleRequest) returns (AddFirewallRuleResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc RemoveFirewallRule(RemoveFirewallRuleRequest) returns (RemoveFirewallRuleResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetDNSConfig(GetDNSConfigRequest) returns (DNSConfig) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc SetDNSConfig(SetDNSConfigRequest) returns (SetDNSConfigResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetNTPConfig(GetNTPConfigRequest) returns (NTPConfig) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc SetNTPConfig(SetNTPConfigRequest) returns (SetNTPConfigResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetCloudStatus(GetCloudStatusRequest) returns (CloudStatus) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_PUBLIC };
+  }
+  rpc AdoptToCloud(AdoptToCloudRequest) returns (AdoptToCloudResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc DisconnectFromCloud(DisconnectFromCloudRequest) returns (DisconnectFromCloudResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
 
   // Snapshot Management
-  rpc ListSnapshots(ListSnapshotsRequest) returns (ListSnapshotsResponse);
-  rpc ConsolidateSnapshot(ConsolidateSnapshotRequest) returns (ConsolidateSnapshotResponse);
-  rpc CloneSnapshot(CloneSnapshotRequest) returns (CloneSnapshotResponse);
+  rpc ListSnapshots(ListSnapshotsRequest) returns (ListSnapshotsResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "list", authn: AUTHN_USER };
+  }
+  rpc ConsolidateSnapshot(ConsolidateSnapshotRequest) returns (ConsolidateSnapshotResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "update", authn: AUTHN_USER };
+  }
+  rpc CloneSnapshot(CloneSnapshotRequest) returns (CloneSnapshotResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "create", authn: AUTHN_USER };
+  }
 
   // Volume Management
-  rpc CreateVolume(CreateVolumeRequest) returns (CreateVolumeResponse);
-  rpc DeleteVolume(DeleteVolumeRequest) returns (DeleteVolumeResponse);
-  rpc ResizeVolume(ResizeVolumeRequest) returns (ResizeVolumeResponse);
-  rpc ListVolumes(ListVolumesRequest) returns (ListVolumesResponse);
-  rpc GetVolume(GetVolumeRequest) returns (GetVolumeResponse);
-  rpc CloneVolume(CloneVolumeRequest) returns (CloneVolumeResponse);
-  rpc BackupSystemVolume(BackupSystemVolumeRequest) returns (BackupSystemVolumeResponse);
-  rpc RestoreSystemVolume(RestoreSystemVolumeRequest) returns (RestoreSystemVolumeResponse);
+  rpc CreateVolume(CreateVolumeRequest) returns (CreateVolumeResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "create", authn: AUTHN_USER };
+  }
+  rpc DeleteVolume(DeleteVolumeRequest) returns (DeleteVolumeResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc ResizeVolume(ResizeVolumeRequest) returns (ResizeVolumeResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "update", authn: AUTHN_USER };
+  }
+  rpc ListVolumes(ListVolumesRequest) returns (ListVolumesResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "list", authn: AUTHN_USER };
+  }
+  rpc GetVolume(GetVolumeRequest) returns (GetVolumeResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "get", authn: AUTHN_USER };
+  }
+  rpc CloneVolume(CloneVolumeRequest) returns (CloneVolumeResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "create", authn: AUTHN_USER };
+  }
+  rpc BackupSystemVolume(BackupSystemVolumeRequest) returns (BackupSystemVolumeResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "snapshot", authn: AUTHN_USER };
+  }
+  rpc RestoreSystemVolume(RestoreSystemVolumeRequest) returns (RestoreSystemVolumeResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "revert", authn: AUTHN_USER };
+  }
 }
 
 message Task {

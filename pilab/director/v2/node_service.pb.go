@@ -2004,7 +2004,7 @@ var File_pilab_director_v2_node_service_proto protoreflect.FileDescriptor
 
 const file_pilab_director_v2_node_service_proto_rawDesc = "" +
 	"\n" +
-	"$pilab/director/v2/node_service.proto\x12\x11pilab.director.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a$pilab/director/v2/task_service.proto\x1a$pilab/pivirtd/v1/host_resource.proto\x1a\x1epilab/pivirtd/v1/pivirtd.proto\x1a\x1bpilab/common/v1/phase.proto\x1a\x18pilab/common/v1/vm.proto\x1a pilab/resource/v1/resource.proto\"\xe5\x02\n" +
+	"$pilab/director/v2/node_service.proto\x12\x11pilab.director.v2\x1a\x1bpilab/common/v1/authz.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a$pilab/director/v2/task_service.proto\x1a$pilab/pivirtd/v1/host_resource.proto\x1a\x1epilab/pivirtd/v1/pivirtd.proto\x1a\x1bpilab/common/v1/phase.proto\x1a\x18pilab/common/v1/vm.proto\x1a pilab/resource/v1/resource.proto\"\xe5\x02\n" +
 	"\x13RegisterNodeRequest\x12\x1b\n" +
 	"\tnode_uuid\x18\x01 \x01(\tR\bnodeUuid\x12'\n" +
 	"\x0fbootstrap_token\x18\x02 \x01(\tR\x0ebootstrapToken\x12\x1a\n" +
@@ -2154,11 +2154,11 @@ const file_pilab_director_v2_node_service_proto_rawDesc = "" +
 	"cluster_id\x18\x01 \x01(\tR\tclusterId\x12\x14\n" +
 	"\x05force\x18\x02 \x01(\bR\x05force\"(\n" +
 	"\x0eDrainDirective\x12\x16\n" +
-	"\x06reason\x18\x01 \x01(\tR\x06reason2\xac\x02\n" +
-	"\vNodeService\x12[\n" +
-	"\bRegister\x12&.pilab.director.v2.RegisterNodeRequest\x1a'.pilab.director.v2.RegisterNodeResponse\x12q\n" +
-	"\x12RequestCertificate\x12,.pilab.director.v2.RequestCertificateRequest\x1a-.pilab.director.v2.RequestCertificateResponse\x12M\n" +
-	"\aSession\x12\x1c.pilab.director.v2.NodeEvent\x1a .pilab.director.v2.NodeDirective(\x010\x01B:Z8go.pilab.hu/cloud/virtpb/v3/pilab/director/v2;directorv2b\x06proto3"
+	"\x06reason\x18\x01 \x01(\tR\x06reason2\xc4\x02\n" +
+	"\vNodeService\x12c\n" +
+	"\bRegister\x12&.pilab.director.v2.RegisterNodeRequest\x1a'.pilab.director.v2.RegisterNodeResponse\"\x06\xa2\xbb\x18\x02\x18\x04\x12y\n" +
+	"\x12RequestCertificate\x12,.pilab.director.v2.RequestCertificateRequest\x1a-.pilab.director.v2.RequestCertificateResponse\"\x06\xa2\xbb\x18\x02\x18\x04\x12U\n" +
+	"\aSession\x12\x1c.pilab.director.v2.NodeEvent\x1a .pilab.director.v2.NodeDirective\"\x06\xa2\xbb\x18\x02\x18\x03(\x010\x01B:Z8go.pilab.hu/cloud/virtpb/v3/pilab/director/v2;directorv2b\x06proto3"
 
 var (
 	file_pilab_director_v2_node_service_proto_rawDescOnce sync.Once

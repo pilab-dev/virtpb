@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.network.v2;
 
+import "pilab/common/v1/authz.proto";
+
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
@@ -15,20 +17,44 @@ option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2";
 // DVSService manages distributed virtual switches and port groups.
 service DVSService {
   // Distributed switch operations
-  rpc CreateDistributedSwitch(CreateDistributedSwitchRequest) returns (DistributedSwitch);
-  rpc GetDistributedSwitch(GetDistributedSwitchRequest) returns (DistributedSwitch);
-  rpc ListDistributedSwitches(ListDistributedSwitchesRequest) returns (ListDistributedSwitchesResponse);
-  rpc UpdateDistributedSwitch(UpdateDistributedSwitchRequest) returns (DistributedSwitch);
-  rpc DeleteDistributedSwitch(DeleteDistributedSwitchRequest) returns (google.protobuf.Empty);
-  rpc AddHostToDVS(AddHostToDVSRequest) returns (google.protobuf.Empty);
-  rpc RemoveHostFromDVS(RemoveHostFromDVSRequest) returns (google.protobuf.Empty);
+  rpc CreateDistributedSwitch(CreateDistributedSwitchRequest) returns (DistributedSwitch) {
+    option (pilab.common.v1.authz) = { kind: "DistributedSwitch", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetDistributedSwitch(GetDistributedSwitchRequest) returns (DistributedSwitch) {
+    option (pilab.common.v1.authz) = { kind: "DistributedSwitch", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListDistributedSwitches(ListDistributedSwitchesRequest) returns (ListDistributedSwitchesResponse) {
+    option (pilab.common.v1.authz) = { kind: "DistributedSwitch", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateDistributedSwitch(UpdateDistributedSwitchRequest) returns (DistributedSwitch) {
+    option (pilab.common.v1.authz) = { kind: "DistributedSwitch", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteDistributedSwitch(DeleteDistributedSwitchRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "DistributedSwitch", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc AddHostToDVS(AddHostToDVSRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "DistributedSwitch", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc RemoveHostFromDVS(RemoveHostFromDVSRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "DistributedSwitch", verb: "attach", authn: AUTHN_USER };
+  }
 
   // Port group operations
-  rpc CreatePortGroup(CreatePortGroupRequest) returns (PortGroup);
-  rpc GetPortGroup(GetPortGroupRequest) returns (PortGroup);
-  rpc ListPortGroups(ListPortGroupsRequest) returns (ListPortGroupsResponse);
-  rpc UpdatePortGroup(UpdatePortGroupRequest) returns (PortGroup);
-  rpc DeletePortGroup(DeletePortGroupRequest) returns (google.protobuf.Empty);
+  rpc CreatePortGroup(CreatePortGroupRequest) returns (PortGroup) {
+    option (pilab.common.v1.authz) = { kind: "PortGroup", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetPortGroup(GetPortGroupRequest) returns (PortGroup) {
+    option (pilab.common.v1.authz) = { kind: "PortGroup", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListPortGroups(ListPortGroupsRequest) returns (ListPortGroupsResponse) {
+    option (pilab.common.v1.authz) = { kind: "PortGroup", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdatePortGroup(UpdatePortGroupRequest) returns (PortGroup) {
+    option (pilab.common.v1.authz) = { kind: "PortGroup", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeletePortGroup(DeletePortGroupRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "PortGroup", verb: "delete", authn: AUTHN_USER };
+  }
 }
 
 // DistributedSwitch represents a distributed virtual switch.

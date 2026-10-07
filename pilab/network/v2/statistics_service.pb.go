@@ -10,6 +10,7 @@
 package networkv2
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -818,7 +819,7 @@ var File_pilab_network_v2_statistics_service_proto protoreflect.FileDescriptor
 
 const file_pilab_network_v2_statistics_service_proto_rawDesc = "" +
 	"\n" +
-	")pilab/network/v2/statistics_service.proto\x12\x10pilab.network.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a%pilab/network/v2/network_common.proto\"\xf4\x04\n" +
+	")pilab/network/v2/statistics_service.proto\x12\x10pilab.network.v2\x1a\x1bpilab/common/v1/authz.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a%pilab/network/v2/network_common.proto\"\xf4\x04\n" +
 	"\fNetworkStats\x12\x1d\n" +
 	"\n" +
 	"network_id\x18\x01 \x01(\tR\tnetworkId\x12\x1d\n" +
@@ -916,12 +917,16 @@ const file_pilab_network_v2_statistics_service_proto_rawDesc = "" +
 	"publicIpId\x12=\n" +
 	"\fperiod_start\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\vperiodStart\x129\n" +
 	"\n" +
-	"period_end\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tperiodEnd2\xf5\x02\n" +
-	"\x11StatisticsService\x12[\n" +
-	"\x0fGetNetworkStats\x12(.pilab.network.v2.GetNetworkStatsRequest\x1a\x1e.pilab.network.v2.NetworkStats\x12R\n" +
-	"\fGetPortStats\x12%.pilab.network.v2.GetPortStatsRequest\x1a\x1b.pilab.network.v2.PortStats\x12O\n" +
-	"\vGetQoSStats\x12$.pilab.network.v2.GetQoSStatsRequest\x1a\x1a.pilab.network.v2.QoSStats\x12^\n" +
-	"\x10GetPublicIPUsage\x12).pilab.network.v2.GetPublicIPUsageRequest\x1a\x1f.pilab.network.v2.PublicIPUsageB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
+	"period_end\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tperiodEnd2\xcd\x03\n" +
+	"\x11StatisticsService\x12q\n" +
+	"\x0fGetNetworkStats\x12(.pilab.network.v2.GetNetworkStatsRequest\x1a\x1e.pilab.network.v2.NetworkStats\"\x14\xa2\xbb\x18\x10\n" +
+	"\aNetwork\x12\x03get\x18\x01\x12h\n" +
+	"\fGetPortStats\x12%.pilab.network.v2.GetPortStatsRequest\x1a\x1b.pilab.network.v2.PortStats\"\x14\xa2\xbb\x18\x10\n" +
+	"\aNetwork\x12\x03get\x18\x01\x12e\n" +
+	"\vGetQoSStats\x12$.pilab.network.v2.GetQoSStatsRequest\x1a\x1a.pilab.network.v2.QoSStats\"\x14\xa2\xbb\x18\x10\n" +
+	"\aNetwork\x12\x03get\x18\x01\x12t\n" +
+	"\x10GetPublicIPUsage\x12).pilab.network.v2.GetPublicIPUsageRequest\x1a\x1f.pilab.network.v2.PublicIPUsage\"\x14\xa2\xbb\x18\x10\n" +
+	"\aNetwork\x12\x03get\x18\x01B8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_statistics_service_proto_rawDescOnce sync.Once

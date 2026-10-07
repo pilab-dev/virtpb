@@ -5,45 +5,115 @@ syntax = "proto3";
 
 package pilab.frontend.v1;
 
+import "pilab/common/v1/authz.proto";
+
 import "google/protobuf/empty.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1";
 
 service ManagementService {
-  rpc CreateUser(CreateUserRequest) returns (User);
-  rpc GetUser(GetUserRequest) returns (User);
-  rpc GetUserByUsername(GetUserByUsernameRequest) returns (User);
-  rpc GetUserByEmail(GetUserByEmailRequest) returns (User);
-  rpc UpdateUser(UpdateUserRequest) returns (User);
-  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
-  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse);
-  rpc ChangeUserPassword(ChangeUserPasswordRequest) returns (google.protobuf.Empty);
-  rpc CreateRole(CreateRoleRequest) returns (Role);
-  rpc GetRole(GetRoleRequest) returns (Role);
-  rpc GetRoleByName(GetRoleByNameRequest) returns (Role);
-  rpc UpdateRole(UpdateRoleRequest) returns (Role);
-  rpc DeleteRole(DeleteRoleRequest) returns (google.protobuf.Empty);
-  rpc SearchRoles(SearchRolesRequest) returns (SearchRolesResponse);
-  rpc AddRoleInheritance(AddRoleInheritanceRequest) returns (google.protobuf.Empty);
-  rpc RemoveRoleInheritance(RemoveRoleInheritanceRequest) returns (google.protobuf.Empty);
-  rpc GetParentRoles(GetParentRolesRequest) returns (GetParentRolesResponse);
-  rpc GetChildRoles(GetChildRolesRequest) returns (GetChildRolesResponse);
-  rpc GetAllParentRoles(GetAllParentRolesRequest) returns (GetAllParentRolesResponse);
-  rpc GetAllChildRoles(GetAllChildRolesRequest) returns (GetAllChildRolesResponse);
-  rpc CreateRoleGroup(CreateRoleGroupRequest) returns (RoleGroup);
-  rpc GetRoleGroup(GetRoleGroupRequest) returns (RoleGroup);
-  rpc GetRoleGroupByName(GetRoleGroupByNameRequest) returns (RoleGroup);
-  rpc UpdateRoleGroup(UpdateRoleGroupRequest) returns (RoleGroup);
-  rpc DeleteRoleGroup(DeleteRoleGroupRequest) returns (google.protobuf.Empty);
-  rpc SearchRoleGroups(SearchRoleGroupsRequest) returns (SearchRoleGroupsResponse);
-  rpc AddUserToRoleGroup(AddUserToRoleGroupRequest) returns (google.protobuf.Empty);
-  rpc RemoveUserFromRoleGroup(RemoveUserFromRoleGroupRequest) returns (google.protobuf.Empty);
-  rpc GetRoleGroupsForUser(GetRoleGroupsForUserRequest) returns (GetRoleGroupsForUserResponse);
-  rpc GetUsersInRoleGroup(GetUsersInRoleGroupRequest) returns (GetUsersInRoleGroupResponse);
-  rpc AssignRoleToUser(AssignRoleToUserRequest) returns (google.protobuf.Empty);
-  rpc UnassignRoleFromUser(UnassignRoleFromUserRequest) returns (google.protobuf.Empty);
-  rpc GetRolesForUser(GetRolesForUserRequest) returns (GetRolesForUserResponse);
-  rpc GetPermissionsForRole(GetPermissionsForRoleRequest) returns (GetPermissionsForRoleResponse);
+  rpc CreateUser(CreateUserRequest) returns (User) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetUser(GetUserRequest) returns (User) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetUserByUsername(GetUserByUsernameRequest) returns (User) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetUserByEmail(GetUserByEmailRequest) returns (User) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "get", authn: AUTHN_USER };
+  }
+  rpc UpdateUser(UpdateUserRequest) returns (User) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc SearchUsers(SearchUsersRequest) returns (SearchUsersResponse) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "list", authn: AUTHN_USER };
+  }
+  rpc ChangeUserPassword(ChangeUserPasswordRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "admin", authn: AUTHN_USER };
+  }
+  rpc CreateRole(CreateRoleRequest) returns (Role) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetRole(GetRoleRequest) returns (Role) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetRoleByName(GetRoleByNameRequest) returns (Role) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "get", authn: AUTHN_USER };
+  }
+  rpc UpdateRole(UpdateRoleRequest) returns (Role) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteRole(DeleteRoleRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc SearchRoles(SearchRolesRequest) returns (SearchRolesResponse) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "list", authn: AUTHN_USER };
+  }
+  rpc AddRoleInheritance(AddRoleInheritanceRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "update", authn: AUTHN_USER };
+  }
+  rpc RemoveRoleInheritance(RemoveRoleInheritanceRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "update", authn: AUTHN_USER };
+  }
+  rpc GetParentRoles(GetParentRolesRequest) returns (GetParentRolesResponse) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "list", authn: AUTHN_USER };
+  }
+  rpc GetChildRoles(GetChildRolesRequest) returns (GetChildRolesResponse) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "list", authn: AUTHN_USER };
+  }
+  rpc GetAllParentRoles(GetAllParentRolesRequest) returns (GetAllParentRolesResponse) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "list", authn: AUTHN_USER };
+  }
+  rpc GetAllChildRoles(GetAllChildRolesRequest) returns (GetAllChildRolesResponse) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "list", authn: AUTHN_USER };
+  }
+  rpc CreateRoleGroup(CreateRoleGroupRequest) returns (RoleGroup) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetRoleGroup(GetRoleGroupRequest) returns (RoleGroup) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetRoleGroupByName(GetRoleGroupByNameRequest) returns (RoleGroup) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "get", authn: AUTHN_USER };
+  }
+  rpc UpdateRoleGroup(UpdateRoleGroupRequest) returns (RoleGroup) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteRoleGroup(DeleteRoleGroupRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc SearchRoleGroups(SearchRoleGroupsRequest) returns (SearchRoleGroupsResponse) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "list", authn: AUTHN_USER };
+  }
+  rpc AddUserToRoleGroup(AddUserToRoleGroupRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "RoleBinding", verb: "create", authn: AUTHN_USER };
+  }
+  rpc RemoveUserFromRoleGroup(RemoveUserFromRoleGroupRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "RoleBinding", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc GetRoleGroupsForUser(GetRoleGroupsForUserRequest) returns (GetRoleGroupsForUserResponse) {
+    option (pilab.common.v1.authz) = { kind: "RoleBinding", verb: "list", authn: AUTHN_USER };
+  }
+  rpc GetUsersInRoleGroup(GetUsersInRoleGroupRequest) returns (GetUsersInRoleGroupResponse) {
+    option (pilab.common.v1.authz) = { kind: "RoleBinding", verb: "list", authn: AUTHN_USER };
+  }
+  rpc AssignRoleToUser(AssignRoleToUserRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "RoleBinding", verb: "create", authn: AUTHN_USER };
+  }
+  rpc UnassignRoleFromUser(UnassignRoleFromUserRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "RoleBinding", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc GetRolesForUser(GetRolesForUserRequest) returns (GetRolesForUserResponse) {
+    option (pilab.common.v1.authz) = { kind: "RoleBinding", verb: "list", authn: AUTHN_USER };
+  }
+  rpc GetPermissionsForRole(GetPermissionsForRoleRequest) returns (GetPermissionsForRoleResponse) {
+    option (pilab.common.v1.authz) = { kind: "Role", verb: "get", authn: AUTHN_USER };
+  }
 }
 
 message CreateUserRequest {

@@ -10,6 +10,7 @@
 package networkv2
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -1219,7 +1220,7 @@ var File_pilab_network_v2_ipam_service_proto protoreflect.FileDescriptor
 
 const file_pilab_network_v2_ipam_service_proto_rawDesc = "" +
 	"\n" +
-	"#pilab/network/v2/ipam_service.proto\x12\x10pilab.network.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a%pilab/network/v2/network_common.proto\"\x86\x06\n" +
+	"#pilab/network/v2/ipam_service.proto\x12\x10pilab.network.v2\x1a\x1bpilab/common/v1/authz.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a%pilab/network/v2/network_common.proto\"\x86\x06\n" +
 	"\x06IPPool\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -1347,18 +1348,27 @@ const file_pilab_network_v2_ipam_service_proto_rawDesc = "" +
 	"\n" +
 	"ip_address\x18\x02 \x01(\tR\tipAddress\x12\x1b\n" +
 	"\ttenant_id\x18\x03 \x01(\tR\btenantId\x12\x16\n" +
-	"\x06reason\x18\x04 \x01(\tR\x06reason2\xfb\x05\n" +
-	"\vIPAMService\x12O\n" +
-	"\fCreateIPPool\x12%.pilab.network.v2.CreateIPPoolRequest\x1a\x18.pilab.network.v2.IPPool\x12I\n" +
-	"\tGetIPPool\x12\".pilab.network.v2.GetIPPoolRequest\x1a\x18.pilab.network.v2.IPPool\x12Z\n" +
-	"\vListIPPools\x12$.pilab.network.v2.ListIPPoolsRequest\x1a%.pilab.network.v2.ListIPPoolsResponse\x12O\n" +
-	"\fUpdateIPPool\x12%.pilab.network.v2.UpdateIPPoolRequest\x1a\x18.pilab.network.v2.IPPool\x12M\n" +
-	"\fDeleteIPPool\x12%.pilab.network.v2.DeleteIPPoolRequest\x1a\x16.google.protobuf.Empty\x12Q\n" +
+	"\x06reason\x18\x04 \x01(\tR\x06reason2\xef\a\n" +
+	"\vIPAMService\x12i\n" +
+	"\fCreateIPPool\x12%.pilab.network.v2.CreateIPPoolRequest\x1a\x18.pilab.network.v2.IPPool\"\x18\xa2\xbb\x18\x14\n" +
+	"\bIPAMPool\x12\x06create\x18\x01\x12`\n" +
+	"\tGetIPPool\x12\".pilab.network.v2.GetIPPoolRequest\x1a\x18.pilab.network.v2.IPPool\"\x15\xa2\xbb\x18\x11\n" +
+	"\bIPAMPool\x12\x03get\x18\x01\x12r\n" +
+	"\vListIPPools\x12$.pilab.network.v2.ListIPPoolsRequest\x1a%.pilab.network.v2.ListIPPoolsResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\bIPAMPool\x12\x04list\x18\x01\x12i\n" +
+	"\fUpdateIPPool\x12%.pilab.network.v2.UpdateIPPoolRequest\x1a\x18.pilab.network.v2.IPPool\"\x18\xa2\xbb\x18\x14\n" +
+	"\bIPAMPool\x12\x06update\x18\x01\x12g\n" +
+	"\fDeleteIPPool\x12%.pilab.network.v2.DeleteIPPoolRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bIPAMPool\x12\x06delete\x18\x01\x12o\n" +
 	"\n" +
-	"AllocateIP\x12#.pilab.network.v2.AllocateIPRequest\x1a\x1e.pilab.network.v2.IPAllocation\x12G\n" +
-	"\tReleaseIP\x12\".pilab.network.v2.ReleaseIPRequest\x1a\x16.google.protobuf.Empty\x12f\n" +
-	"\x0fListAllocations\x12(.pilab.network.v2.ListAllocationsRequest\x1a).pilab.network.v2.ListAllocationsResponse\x12P\n" +
-	"\tReserveIP\x12\".pilab.network.v2.ReserveIPRequest\x1a\x1f.pilab.network.v2.IPReservationB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
+	"AllocateIP\x12#.pilab.network.v2.AllocateIPRequest\x1a\x1e.pilab.network.v2.IPAllocation\"\x1c\xa2\xbb\x18\x18\n" +
+	"\fIPAllocation\x12\x06create\x18\x01\x12e\n" +
+	"\tReleaseIP\x12\".pilab.network.v2.ReleaseIPRequest\x1a\x16.google.protobuf.Empty\"\x1c\xa2\xbb\x18\x18\n" +
+	"\fIPAllocation\x12\x06delete\x18\x01\x12\x82\x01\n" +
+	"\x0fListAllocations\x12(.pilab.network.v2.ListAllocationsRequest\x1a).pilab.network.v2.ListAllocationsResponse\"\x1a\xa2\xbb\x18\x16\n" +
+	"\fIPAllocation\x12\x04list\x18\x01\x12n\n" +
+	"\tReserveIP\x12\".pilab.network.v2.ReserveIPRequest\x1a\x1f.pilab.network.v2.IPReservation\"\x1c\xa2\xbb\x18\x18\n" +
+	"\fIPAllocation\x12\x06create\x18\x01B8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_ipam_service_proto_rawDescOnce sync.Once

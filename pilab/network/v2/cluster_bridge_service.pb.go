@@ -10,6 +10,7 @@
 package networkv2
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -660,7 +661,7 @@ var File_pilab_network_v2_cluster_bridge_service_proto protoreflect.FileDescript
 
 const file_pilab_network_v2_cluster_bridge_service_proto_rawDesc = "" +
 	"\n" +
-	"-pilab/network/v2/cluster_bridge_service.proto\x12\x10pilab.network.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a%pilab/network/v2/network_common.proto\"\x8c\x04\n" +
+	"-pilab/network/v2/cluster_bridge_service.proto\x12\x10pilab.network.v2\x1a\x1bpilab/common/v1/authz.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a%pilab/network/v2/network_common.proto\"\x8c\x04\n" +
 	"\rClusterBridge\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1d\n" +
 	"\n" +
@@ -733,15 +734,22 @@ const file_pilab_network_v2_cluster_bridge_service_proto_rawDesc = "" +
 	"cluster_id\x18\x02 \x01(\tR\tclusterId\x12\x1e\n" +
 	"\n" +
 	"interfaces\x18\x03 \x03(\tR\n" +
-	"interfaces2\xa8\x05\n" +
-	"\x14ClusterBridgeService\x12d\n" +
-	"\x13CreateClusterBridge\x12,.pilab.network.v2.CreateClusterBridgeRequest\x1a\x1f.pilab.network.v2.ClusterBridge\x12^\n" +
-	"\x10GetClusterBridge\x12).pilab.network.v2.GetClusterBridgeRequest\x1a\x1f.pilab.network.v2.ClusterBridge\x12o\n" +
-	"\x12ListClusterBridges\x12+.pilab.network.v2.ListClusterBridgesRequest\x1a,.pilab.network.v2.ListClusterBridgesResponse\x12d\n" +
-	"\x13UpdateClusterBridge\x12,.pilab.network.v2.UpdateClusterBridgeRequest\x1a\x1f.pilab.network.v2.ClusterBridge\x12[\n" +
-	"\x13DeleteClusterBridge\x12,.pilab.network.v2.DeleteClusterBridgeRequest\x1a\x16.google.protobuf.Empty\x12G\n" +
-	"\tAddUplink\x12\".pilab.network.v2.AddUplinkRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
-	"\fRemoveUplink\x12%.pilab.network.v2.RemoveUplinkRequest\x1a\x16.google.protobuf.EmptyB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
+	"interfaces2\xe1\x06\n" +
+	"\x14ClusterBridgeService\x12\x7f\n" +
+	"\x13CreateClusterBridge\x12,.pilab.network.v2.CreateClusterBridgeRequest\x1a\x1f.pilab.network.v2.ClusterBridge\"\x19\xa2\xbb\x18\x15\n" +
+	"\tOVSBridge\x12\x06create\x18\x01\x12v\n" +
+	"\x10GetClusterBridge\x12).pilab.network.v2.GetClusterBridgeRequest\x1a\x1f.pilab.network.v2.ClusterBridge\"\x16\xa2\xbb\x18\x12\n" +
+	"\tOVSBridge\x12\x03get\x18\x01\x12\x88\x01\n" +
+	"\x12ListClusterBridges\x12+.pilab.network.v2.ListClusterBridgesRequest\x1a,.pilab.network.v2.ListClusterBridgesResponse\"\x17\xa2\xbb\x18\x13\n" +
+	"\tOVSBridge\x12\x04list\x18\x01\x12\x7f\n" +
+	"\x13UpdateClusterBridge\x12,.pilab.network.v2.UpdateClusterBridgeRequest\x1a\x1f.pilab.network.v2.ClusterBridge\"\x19\xa2\xbb\x18\x15\n" +
+	"\tOVSBridge\x12\x06update\x18\x01\x12v\n" +
+	"\x13DeleteClusterBridge\x12,.pilab.network.v2.DeleteClusterBridgeRequest\x1a\x16.google.protobuf.Empty\"\x19\xa2\xbb\x18\x15\n" +
+	"\tOVSBridge\x12\x06delete\x18\x01\x12b\n" +
+	"\tAddUplink\x12\".pilab.network.v2.AddUplinkRequest\x1a\x16.google.protobuf.Empty\"\x19\xa2\xbb\x18\x15\n" +
+	"\tOVSBridge\x12\x06attach\x18\x01\x12h\n" +
+	"\fRemoveUplink\x12%.pilab.network.v2.RemoveUplinkRequest\x1a\x16.google.protobuf.Empty\"\x19\xa2\xbb\x18\x15\n" +
+	"\tOVSBridge\x12\x06attach\x18\x01B8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_cluster_bridge_service_proto_rawDescOnce sync.Once
