@@ -5,17 +5,31 @@ syntax = "proto3";
 
 package pilab.cloud.agent.v1;
 
+import "pilab/common/v1/authz.proto";
+
 import "pilab/agent/v1/stream.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1";
 
 service SnapshotService {
-  rpc Create(SnapshotCreateRequest) returns (stream SnapshotCreateResponse);
-  rpc Restore(SnapshotRestoreRequest) returns (SnapshotRestoreResponse);
-  rpc Delete(SnapshotDeleteRequest) returns (SnapshotDeleteResponse);
-  rpc Clone(SnapshotCloneRequest) returns (SnapshotCloneResponse);
-  rpc Consolidate(SnapshotConsolidateRequest) returns (SnapshotConsolidateResponse);
-  rpc List(SnapshotListRequest) returns (SnapshotListResponse);
+  rpc Create(SnapshotCreateRequest) returns (stream SnapshotCreateResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "create", authn: AUTHN_USER };
+  }
+  rpc Restore(SnapshotRestoreRequest) returns (SnapshotRestoreResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "revert", authn: AUTHN_USER };
+  }
+  rpc Delete(SnapshotDeleteRequest) returns (SnapshotDeleteResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc Clone(SnapshotCloneRequest) returns (SnapshotCloneResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "create", authn: AUTHN_USER };
+  }
+  rpc Consolidate(SnapshotConsolidateRequest) returns (SnapshotConsolidateResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "update", authn: AUTHN_USER };
+  }
+  rpc List(SnapshotListRequest) returns (SnapshotListResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "list", authn: AUTHN_USER };
+  }
 }
 
 message SnapshotConsolidateRequest {

@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.cli.v1;
 
+import "pilab/common/v1/authz.proto";
+
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/cli/v1;cliv1";
 
 import "google/protobuf/timestamp.proto";
@@ -15,143 +17,351 @@ import "pilab/cli/v1/cli_common.proto";
 import "pilab/common/v1/vm.proto";
 
 service AuthService {
-  rpc Login(LoginRequest) returns (LoginResponse);
-  rpc InitiateDeviceAuth(InitiateDeviceAuthRequest) returns (InitiateDeviceAuthResponse);
-  rpc PollDeviceAuth(PollDeviceAuthRequest) returns (PollDeviceAuthResponse);
-  rpc Logout(LogoutRequest) returns (google.protobuf.Empty);
-  rpc GetCurrentUser(google.protobuf.Empty) returns (User);
+  rpc Login(LoginRequest) returns (LoginResponse) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_PUBLIC };
+  }
+  rpc InitiateDeviceAuth(InitiateDeviceAuthRequest) returns (InitiateDeviceAuthResponse) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_PUBLIC };
+  }
+  rpc PollDeviceAuth(PollDeviceAuthRequest) returns (PollDeviceAuthResponse) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_PUBLIC };
+  }
+  rpc Logout(LogoutRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "update", authn: AUTHN_USER };
+  }
+  rpc GetCurrentUser(google.protobuf.Empty) returns (User) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "get", authn: AUTHN_USER };
+  }
 }
 
 service VMService {
-  rpc CreateVM(CreateVMRequest) returns (pilab.common.v1.VM);
-  rpc GetVM(GetVMRequest) returns (pilab.common.v1.VM);
-  rpc ListVMs(ListVMsRequest) returns (ListVMsResponse);
-  rpc UpdateVM(UpdateVMRequest) returns (pilab.common.v1.VM);
-  rpc DeleteVM(DeleteVMRequest) returns (google.protobuf.Empty);
-  rpc StartVM(StartVMRequest) returns (google.protobuf.Empty);
-  rpc StopVM(StopVMRequest) returns (google.protobuf.Empty);
-  rpc RestartVM(RestartVMRequest) returns (google.protobuf.Empty);
-  rpc PauseVM(PauseVMRequest) returns (google.protobuf.Empty);
-  rpc UnpauseVM(UnpauseVMRequest) returns (google.protobuf.Empty);
-  rpc MigrateVM(MigrateVMRequest) returns (google.protobuf.Empty);
-  rpc RebuildVM(RebuildVMRequest) returns (pilab.common.v1.VM);
-  rpc CloneVM(CloneVMRequest) returns (pilab.common.v1.VM);
-  rpc LinkedCloneVM(LinkedCloneVMRequest) returns (pilab.common.v1.VM);
-  rpc GetVMConsole(GetVMConsoleRequest) returns (GetVMConsoleResponse);
-  rpc UpdateVMResources(UpdateVMResourcesRequest) returns (UpdateVMResourcesResponse);
-  rpc GetVMResources(GetVMResourcesRequest) returns (GetVMResourcesResponse);
+  rpc CreateVM(CreateVMRequest) returns (pilab.common.v1.VM) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetVM(GetVMRequest) returns (pilab.common.v1.VM) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListVMs(ListVMsRequest) returns (ListVMsResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateVM(UpdateVMRequest) returns (pilab.common.v1.VM) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteVM(DeleteVMRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc StartVM(StartVMRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc StopVM(StopVMRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc RestartVM(RestartVMRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc PauseVM(PauseVMRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc UnpauseVM(UnpauseVMRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc MigrateVM(MigrateVMRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "migrate", authn: AUTHN_USER };
+  }
+  rpc RebuildVM(RebuildVMRequest) returns (pilab.common.v1.VM) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc CloneVM(CloneVMRequest) returns (pilab.common.v1.VM) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc LinkedCloneVM(LinkedCloneVMRequest) returns (pilab.common.v1.VM) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetVMConsole(GetVMConsoleRequest) returns (GetVMConsoleResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "console", authn: AUTHN_USER };
+  }
+  rpc UpdateVMResources(UpdateVMResourcesRequest) returns (UpdateVMResourcesResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "update", authn: AUTHN_USER };
+  }
+  rpc GetVMResources(GetVMResourcesRequest) returns (GetVMResourcesResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
 }
 
 service DiskService {
-  rpc CreateDisk(CreateDiskRequest) returns (pilab.common.v1.Disk);
-  rpc GetDisk(GetDiskRequest) returns (pilab.common.v1.Disk);
-  rpc ListDisks(ListDisksRequest) returns (ListDisksResponse);
-  rpc UpdateDisk(UpdateDiskRequest) returns (pilab.common.v1.Disk);
-  rpc DeleteDisk(DeleteDiskRequest) returns (google.protobuf.Empty);
-  rpc ExtendDisk(ExtendDiskRequest) returns (pilab.common.v1.Disk);
-  rpc AttachDisk(AttachDiskRequest) returns (google.protobuf.Empty);
-  rpc DetachDisk(DetachDiskRequest) returns (google.protobuf.Empty);
+  rpc CreateDisk(CreateDiskRequest) returns (pilab.common.v1.Disk) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetDisk(GetDiskRequest) returns (pilab.common.v1.Disk) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListDisks(ListDisksRequest) returns (ListDisksResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateDisk(UpdateDiskRequest) returns (pilab.common.v1.Disk) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteDisk(DeleteDiskRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc ExtendDisk(ExtendDiskRequest) returns (pilab.common.v1.Disk) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "update", authn: AUTHN_USER };
+  }
+  rpc AttachDisk(AttachDiskRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc DetachDisk(DetachDiskRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
 }
 
 service ImageService {
-  rpc GetImage(GetImageRequest) returns (Image);
-  rpc ListImages(ListImagesRequest) returns (ListImagesResponse);
-  rpc CreateImage(CreateImageRequest) returns (Image);
-  rpc UploadImage(UploadImageRequest) returns (Image);
-  rpc DeleteImage(DeleteImageRequest) returns (google.protobuf.Empty);
+  rpc GetImage(GetImageRequest) returns (Image) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListImages(ListImagesRequest) returns (ListImagesResponse) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "list", authn: AUTHN_USER };
+  }
+  rpc CreateImage(CreateImageRequest) returns (Image) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "create", authn: AUTHN_USER };
+  }
+  rpc UploadImage(UploadImageRequest) returns (Image) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "create", authn: AUTHN_USER };
+  }
+  rpc DeleteImage(DeleteImageRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "delete", authn: AUTHN_USER };
+  }
 }
 
 service SnapshotService {
-  rpc GetSnapshot(GetSnapshotRequest) returns (pilab.common.v1.Snapshot);
-  rpc ListSnapshots(ListSnapshotsRequest) returns (ListSnapshotsResponse);
-  rpc CreateSnapshot(CreateSnapshotRequest) returns (pilab.common.v1.Snapshot);
-  rpc RestoreSnapshot(RestoreSnapshotRequest) returns (google.protobuf.Empty);
-  rpc DeleteSnapshot(DeleteSnapshotRequest) returns (google.protobuf.Empty);
-  rpc ConsolidateSnapshot(SnapshotConsolidateRequest) returns (google.protobuf.Empty);
+  rpc GetSnapshot(GetSnapshotRequest) returns (pilab.common.v1.Snapshot) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListSnapshots(ListSnapshotsRequest) returns (ListSnapshotsResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "list", authn: AUTHN_USER };
+  }
+  rpc CreateSnapshot(CreateSnapshotRequest) returns (pilab.common.v1.Snapshot) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "snapshot", authn: AUTHN_USER };
+  }
+  rpc RestoreSnapshot(RestoreSnapshotRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "revert", authn: AUTHN_USER };
+  }
+  rpc DeleteSnapshot(DeleteSnapshotRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc ConsolidateSnapshot(SnapshotConsolidateRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "update", authn: AUTHN_USER };
+  }
 }
 
 service NetworkService {
-  rpc CreateNetwork(CreateNetworkRequest) returns (Network);
-  rpc GetNetwork(GetNetworkRequest) returns (Network);
-  rpc ListNetworks(ListNetworksRequest) returns (ListNetworksResponse);
-  rpc UpdateNetwork(UpdateNetworkRequest) returns (Network);
-  rpc DeleteNetwork(DeleteNetworkRequest) returns (google.protobuf.Empty);
-  rpc GetNetworkInterface(GetNetworkInterfaceRequest) returns (pilab.common.v1.NetworkInterface);
-  rpc ListNetworkInterfaces(ListNetworkInterfacesRequest) returns (ListNetworkInterfacesResponse);
-  rpc AddNetworkInterface(AddNetworkInterfaceRequest) returns (pilab.common.v1.NetworkInterface);
-  rpc RemoveNetworkInterface(RemoveNetworkInterfaceRequest) returns (google.protobuf.Empty);
-  rpc CreateVSwitch(CreateVSwitchRequest) returns (VSwitch);
-  rpc GetVSwitch(GetVSwitchRequest) returns (VSwitch);
-  rpc ListVSwitches(ListVSwitchesRequest) returns (ListVSwitchesResponse);
-  rpc DeleteVSwitch(DeleteVSwitchRequest) returns (google.protobuf.Empty);
-  rpc CreatePortGroup(CreatePortGroupRequest) returns (PortGroup);
-  rpc GetPortGroup(GetPortGroupRequest) returns (PortGroup);
-  rpc ListPortGroups(ListPortGroupsRequest) returns (ListPortGroupsResponse);
-  rpc DeletePortGroup(DeletePortGroupRequest) returns (google.protobuf.Empty);
+  rpc CreateNetwork(CreateNetworkRequest) returns (Network) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetNetwork(GetNetworkRequest) returns (Network) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListNetworks(ListNetworksRequest) returns (ListNetworksResponse) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateNetwork(UpdateNetworkRequest) returns (Network) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteNetwork(DeleteNetworkRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc GetNetworkInterface(GetNetworkInterfaceRequest) returns (pilab.common.v1.NetworkInterface) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListNetworkInterfaces(ListNetworkInterfacesRequest) returns (ListNetworkInterfacesResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "list", authn: AUTHN_USER };
+  }
+  rpc AddNetworkInterface(AddNetworkInterfaceRequest) returns (pilab.common.v1.NetworkInterface) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc RemoveNetworkInterface(RemoveNetworkInterfaceRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc CreateVSwitch(CreateVSwitchRequest) returns (VSwitch) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetVSwitch(GetVSwitchRequest) returns (VSwitch) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc ListVSwitches(ListVSwitchesRequest) returns (ListVSwitchesResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc DeleteVSwitch(DeleteVSwitchRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc CreatePortGroup(CreatePortGroupRequest) returns (PortGroup) {
+    option (pilab.common.v1.authz) = { kind: "PortGroup", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetPortGroup(GetPortGroupRequest) returns (PortGroup) {
+    option (pilab.common.v1.authz) = { kind: "PortGroup", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc ListPortGroups(ListPortGroupsRequest) returns (ListPortGroupsResponse) {
+    option (pilab.common.v1.authz) = { kind: "PortGroup", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc DeletePortGroup(DeletePortGroupRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "PortGroup", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
 }
 
 service PublicIPService {
-  rpc CreatePublicIP(CreatePublicIPRequest) returns (PublicIP);
-  rpc GetPublicIP(GetPublicIPRequest) returns (PublicIP);
-  rpc ListPublicIPs(ListPublicIPsRequest) returns (ListPublicIPsResponse);
-  rpc UpdatePublicIP(UpdatePublicIPRequest) returns (PublicIP);
-  rpc DeletePublicIP(DeletePublicIPRequest) returns (google.protobuf.Empty);
-  rpc AssignPublicIP(AssignPublicIPRequest) returns (google.protobuf.Empty);
-  rpc UnassignPublicIP(UnassignPublicIPRequest) returns (google.protobuf.Empty);
+  rpc CreatePublicIP(CreatePublicIPRequest) returns (PublicIP) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetPublicIP(GetPublicIPRequest) returns (PublicIP) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListPublicIPs(ListPublicIPsRequest) returns (ListPublicIPsResponse) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdatePublicIP(UpdatePublicIPRequest) returns (PublicIP) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeletePublicIP(DeletePublicIPRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc AssignPublicIP(AssignPublicIPRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc UnassignPublicIP(UnassignPublicIPRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "attach", authn: AUTHN_USER };
+  }
 }
 
 service SecurityService {
-  rpc CreateSecurityGroup(CreateSecurityGroupRequest) returns (SecurityGroup);
-  rpc GetSecurityGroup(GetSecurityGroupRequest) returns (SecurityGroup);
-  rpc ListSecurityGroups(ListSecurityGroupsRequest) returns (ListSecurityGroupsResponse);
-  rpc UpdateSecurityGroup(UpdateSecurityGroupRequest) returns (SecurityGroup);
-  rpc DeleteSecurityGroup(DeleteSecurityGroupRequest) returns (google.protobuf.Empty);
-  rpc AddSecurityRule(AddSecurityRuleRequest) returns (SecurityRule);
-  rpc RemoveSecurityRule(RemoveSecurityRuleRequest) returns (google.protobuf.Empty);
+  rpc CreateSecurityGroup(CreateSecurityGroupRequest) returns (SecurityGroup) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetSecurityGroup(GetSecurityGroupRequest) returns (SecurityGroup) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListSecurityGroups(ListSecurityGroupsRequest) returns (ListSecurityGroupsResponse) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateSecurityGroup(UpdateSecurityGroupRequest) returns (SecurityGroup) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteSecurityGroup(DeleteSecurityGroupRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc AddSecurityRule(AddSecurityRuleRequest) returns (SecurityRule) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
+  rpc RemoveSecurityRule(RemoveSecurityRuleRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
 }
 
 service TemplateService {
-  rpc CreateTemplate(CreateTemplateRequest) returns (Template);
-  rpc GetTemplate(GetTemplateRequest) returns (Template);
-  rpc ListTemplates(ListTemplatesRequest) returns (ListTemplatesResponse);
-  rpc DeleteTemplate(DeleteTemplateRequest) returns (google.protobuf.Empty);
-  rpc ListOSTemplates(ListOSTemplatesRequest) returns (ListOSTemplatesResponse);
-  rpc GetOSTemplate(GetOSTemplateRequest) returns (OSTemplate);
-  rpc SyncOSTemplates(SyncOSTemplatesRequest) returns (SyncOSTemplatesResponse);
-  rpc CreateVMFromOSTemplate(CreateVMFromOSTemplateRequest) returns (pilab.common.v1.VM);
+  rpc CreateTemplate(CreateTemplateRequest) returns (Template) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetTemplate(GetTemplateRequest) returns (Template) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListTemplates(ListTemplatesRequest) returns (ListTemplatesResponse) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "list", authn: AUTHN_USER };
+  }
+  rpc DeleteTemplate(DeleteTemplateRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc ListOSTemplates(ListOSTemplatesRequest) returns (ListOSTemplatesResponse) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "list", authn: AUTHN_USER };
+  }
+  rpc GetOSTemplate(GetOSTemplateRequest) returns (OSTemplate) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "get", authn: AUTHN_USER };
+  }
+  rpc SyncOSTemplates(SyncOSTemplatesRequest) returns (SyncOSTemplatesResponse) {
+    option (pilab.common.v1.authz) = { kind: "Template", verb: "update", authn: AUTHN_USER };
+  }
+  rpc CreateVMFromOSTemplate(CreateVMFromOSTemplateRequest) returns (pilab.common.v1.VM) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
 }
 
 service MonitoringService {
-  rpc GetMetrics(GetMetricsRequest) returns (GetMetricsResponse);
-  rpc GetActivity(GetActivityRequest) returns (GetActivityResponse);
+  rpc GetMetrics(GetMetricsRequest) returns (GetMetricsResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetActivity(GetActivityRequest) returns (GetActivityResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
 }
 
 service AdminService {
-  rpc CreateOrganization(CreateOrganizationRequest) returns (Organization);
-  rpc GetOrganization(GetOrganizationRequest) returns (Organization);
-  rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse);
-  rpc UpdateOrganization(UpdateOrganizationRequest) returns (Organization);
-  rpc DeleteOrganization(DeleteOrganizationRequest) returns (google.protobuf.Empty);
-  rpc CreateUser(CreateUserRequest) returns (User);
-  rpc GetUser(GetUserRequest) returns (User);
-  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
-  rpc UpdateUser(UpdateUserRequest) returns (User);
-  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
+  rpc CreateOrganization(CreateOrganizationRequest) returns (Organization) {
+    option (pilab.common.v1.authz) = { kind: "Organization", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetOrganization(GetOrganizationRequest) returns (Organization) {
+    option (pilab.common.v1.authz) = { kind: "Organization", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse) {
+    option (pilab.common.v1.authz) = { kind: "Organization", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateOrganization(UpdateOrganizationRequest) returns (Organization) {
+    option (pilab.common.v1.authz) = { kind: "Organization", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteOrganization(DeleteOrganizationRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Organization", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc CreateUser(CreateUserRequest) returns (User) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetUser(GetUserRequest) returns (User) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateUser(UpdateUserRequest) returns (User) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "User", verb: "delete", authn: AUTHN_USER };
+  }
 }
 
 service SystemService {
-  rpc GetVersion(google.protobuf.Empty) returns (VersionResponse);
-  rpc CreateDatastore(CreateDatastoreRequest) returns (Datastore);
-  rpc GetDatastore(GetDatastoreRequest) returns (Datastore);
-  rpc ListDatastores(ListDatastoresRequest) returns (ListDatastoresResponse);
-  rpc DeleteDatastore(DeleteDatastoreRequest) returns (google.protobuf.Empty);
-  rpc MountDatastore(MountDatastoreRequest) returns (google.protobuf.Empty);
-  rpc UnmountDatastore(UnmountDatastoreRequest) returns (google.protobuf.Empty);
-  rpc GetHostInfo(google.protobuf.Empty) returns (HostInfo);
-  rpc GetNetworkConfig(google.protobuf.Empty) returns (NetworkConfigResponse);
-  rpc GetStorageConfig(google.protobuf.Empty) returns (StorageConfigResponse);
-  rpc GetHostHealth(google.protobuf.Empty) returns (HostHealthResponse);
-  rpc ConfigureNetwork(ConfigureNetworkRequest) returns (google.protobuf.Empty);
+  rpc GetVersion(google.protobuf.Empty) returns (VersionResponse) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_PUBLIC };
+  }
+  rpc CreateDatastore(CreateDatastoreRequest) returns (Datastore) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetDatastore(GetDatastoreRequest) returns (Datastore) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc ListDatastores(ListDatastoresRequest) returns (ListDatastoresResponse) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc DeleteDatastore(DeleteDatastoreRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc MountDatastore(MountDatastoreRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc UnmountDatastore(UnmountDatastoreRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetHostInfo(google.protobuf.Empty) returns (HostInfo) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetNetworkConfig(google.protobuf.Empty) returns (NetworkConfigResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetStorageConfig(google.protobuf.Empty) returns (StorageConfigResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetHostHealth(google.protobuf.Empty) returns (HostHealthResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc ConfigureNetwork(ConfigureNetworkRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
 }
 
 message LoginRequest {

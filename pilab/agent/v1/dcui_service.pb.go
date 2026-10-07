@@ -10,6 +10,7 @@
 package agentv1
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -2438,7 +2439,7 @@ var File_pilab_agent_v1_dcui_service_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"\n" +
-	"!pilab/agent/v1/dcui_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x85\x04\n" +
+	"!pilab/agent/v1/dcui_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/common/v1/authz.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x85\x04\n" +
 	"\bHostInfo\x12\x1a\n" +
 	"\bhostname\x18\x01 \x01(\tR\bhostname\x12\x1d\n" +
 	"\n" +
@@ -2670,31 +2671,52 @@ const file_pilab_agent_v1_dcui_service_proto_rawDesc = "" +
 	"\x0elast_heartbeat\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\rlastHeartbeat\"g\n" +
 	"\x13AdoptToCloudRequest\x12)\n" +
 	"\x10director_address\x18\x01 \x01(\tR\x0fdirectorAddress\x12%\n" +
-	"\x0edirector_token\x18\x02 \x01(\tR\rdirectorToken2\xb3\x0e\n" +
-	"\vDCUIService\x12E\n" +
-	"\vGetHostInfo\x12\x16.google.protobuf.Empty\x1a\x1e.pilab.cloud.agent.v1.HostInfo\x12S\n" +
-	"\x12GetSystemResources\x12\x16.google.protobuf.Empty\x1a%.pilab.cloud.agent.v1.SystemResources\x12S\n" +
-	"\x10GetServiceStatus\x12\x16.google.protobuf.Empty\x1a'.pilab.cloud.agent.v1.ServiceStatusList\x12O\n" +
-	"\x10GetNetworkConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cloud.agent.v1.NetworkConfig\x12k\n" +
-	"\x19ConfigureNetworkInterface\x126.pilab.cloud.agent.v1.ConfigureNetworkInterfaceRequest\x1a\x16.google.protobuf.Empty\x12N\n" +
-	"\vTestNetwork\x12\x16.google.protobuf.Empty\x1a'.pilab.cloud.agent.v1.NetworkTestResult\x12O\n" +
-	"\x10GetStorageConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cloud.agent.v1.StorageConfig\x12I\n" +
-	"\bMountNFS\x12%.pilab.cloud.agent.v1.MountNFSRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
+	"\x0edirector_token\x18\x02 \x01(\tR\rdirectorToken2\xc8\x12\n" +
+	"\vDCUIService\x12Z\n" +
+	"\vGetHostInfo\x12\x16.google.protobuf.Empty\x1a\x1e.pilab.cloud.agent.v1.HostInfo\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12h\n" +
+	"\x12GetSystemResources\x12\x16.google.protobuf.Empty\x1a%.pilab.cloud.agent.v1.SystemResources\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12h\n" +
+	"\x10GetServiceStatus\x12\x16.google.protobuf.Empty\x1a'.pilab.cloud.agent.v1.ServiceStatusList\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12n\n" +
+	"\x10GetNetworkConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cloud.agent.v1.NetworkConfig\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eNetworkSegment\x12\x03get\x18\x01 \x01\x12\x8d\x01\n" +
+	"\x19ConfigureNetworkInterface\x126.pilab.cloud.agent.v1.ConfigureNetworkInterfaceRequest\x1a\x16.google.protobuf.Empty\" \xa2\xbb\x18\x1c\n" +
+	"\x0eNetworkSegment\x12\x06update\x18\x01 \x01\x12p\n" +
+	"\vTestNetwork\x12\x16.google.protobuf.Empty\x1a'.pilab.cloud.agent.v1.NetworkTestResult\" \xa2\xbb\x18\x1c\n" +
+	"\x0eNetworkSegment\x12\x06update\x18\x01 \x01\x12k\n" +
+	"\x10GetStorageConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cloud.agent.v1.StorageConfig\"\x1a\xa2\xbb\x18\x16\n" +
+	"\vStoragePool\x12\x03get\x18\x01 \x01\x12h\n" +
+	"\bMountNFS\x12%.pilab.cloud.agent.v1.MountNFSRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06create\x18\x01 \x01\x12l\n" +
 	"\n" +
-	"UnmountNFS\x12'.pilab.cloud.agent.v1.UnmountNFSRequest\x1a\x16.google.protobuf.Empty\x12]\n" +
-	"\x12SetMaintenanceMode\x12/.pilab.cloud.agent.v1.SetMaintenanceModeRequest\x1a\x16.google.protobuf.Empty\x12Y\n" +
-	"\x12GetMaintenanceMode\x12\x16.google.protobuf.Empty\x1a+.pilab.cloud.agent.v1.MaintenanceModeStatus\x12U\n" +
-	"\x0eRestartService\x12+.pilab.cloud.agent.v1.RestartServiceRequest\x1a\x16.google.protobuf.Empty\x12R\n" +
-	"\x10GetFirewallRules\x12\x16.google.protobuf.Empty\x1a&.pilab.cloud.agent.v1.FirewallRuleList\x12W\n" +
-	"\x0fAddFirewallRule\x12,.pilab.cloud.agent.v1.AddFirewallRuleRequest\x1a\x16.google.protobuf.Empty\x12]\n" +
-	"\x12RemoveFirewallRule\x12/.pilab.cloud.agent.v1.RemoveFirewallRuleRequest\x1a\x16.google.protobuf.Empty\x12G\n" +
-	"\fGetDNSConfig\x12\x16.google.protobuf.Empty\x1a\x1f.pilab.cloud.agent.v1.DNSConfig\x12Q\n" +
-	"\fSetDNSConfig\x12).pilab.cloud.agent.v1.SetDNSConfigRequest\x1a\x16.google.protobuf.Empty\x12G\n" +
-	"\fGetNTPConfig\x12\x16.google.protobuf.Empty\x1a\x1f.pilab.cloud.agent.v1.NTPConfig\x12Q\n" +
-	"\fSetNTPConfig\x12).pilab.cloud.agent.v1.SetNTPConfigRequest\x1a\x16.google.protobuf.Empty\x12K\n" +
-	"\x0eGetCloudStatus\x12\x16.google.protobuf.Empty\x1a!.pilab.cloud.agent.v1.CloudStatus\x12Q\n" +
-	"\fAdoptToCloud\x12).pilab.cloud.agent.v1.AdoptToCloudRequest\x1a\x16.google.protobuf.Empty\x12E\n" +
-	"\x13DisconnectFromCloud\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.EmptyB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
+	"UnmountNFS\x12'.pilab.cloud.agent.v1.UnmountNFSRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06delete\x18\x01 \x01\x12t\n" +
+	"\x12SetMaintenanceMode\x12/.pilab.cloud.agent.v1.SetMaintenanceModeRequest\x1a\x16.google.protobuf.Empty\"\x15\xa2\xbb\x18\x11\n" +
+	"\x04Node\x12\x05admin\x18\x01 \x01\x12n\n" +
+	"\x12GetMaintenanceMode\x12\x16.google.protobuf.Empty\x1a+.pilab.cloud.agent.v1.MaintenanceModeStatus\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12l\n" +
+	"\x0eRestartService\x12+.pilab.cloud.agent.v1.RestartServiceRequest\x1a\x16.google.protobuf.Empty\"\x15\xa2\xbb\x18\x11\n" +
+	"\x04Node\x12\x05admin\x18\x01 \x01\x12g\n" +
+	"\x10GetFirewallRules\x12\x16.google.protobuf.Empty\x1a&.pilab.cloud.agent.v1.FirewallRuleList\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12o\n" +
+	"\x0fAddFirewallRule\x12,.pilab.cloud.agent.v1.AddFirewallRuleRequest\x1a\x16.google.protobuf.Empty\"\x16\xa2\xbb\x18\x12\n" +
+	"\x04Node\x12\x06create\x18\x01 \x01\x12u\n" +
+	"\x12RemoveFirewallRule\x12/.pilab.cloud.agent.v1.RemoveFirewallRuleRequest\x1a\x16.google.protobuf.Empty\"\x16\xa2\xbb\x18\x12\n" +
+	"\x04Node\x12\x06delete\x18\x01 \x01\x12\\\n" +
+	"\fGetDNSConfig\x12\x16.google.protobuf.Empty\x1a\x1f.pilab.cloud.agent.v1.DNSConfig\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12i\n" +
+	"\fSetDNSConfig\x12).pilab.cloud.agent.v1.SetDNSConfigRequest\x1a\x16.google.protobuf.Empty\"\x16\xa2\xbb\x18\x12\n" +
+	"\x04Node\x12\x06update\x18\x01 \x01\x12\\\n" +
+	"\fGetNTPConfig\x12\x16.google.protobuf.Empty\x1a\x1f.pilab.cloud.agent.v1.NTPConfig\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12i\n" +
+	"\fSetNTPConfig\x12).pilab.cloud.agent.v1.SetNTPConfigRequest\x1a\x16.google.protobuf.Empty\"\x16\xa2\xbb\x18\x12\n" +
+	"\x04Node\x12\x06update\x18\x01 \x01\x12S\n" +
+	"\x0eGetCloudStatus\x12\x16.google.protobuf.Empty\x1a!.pilab.cloud.agent.v1.CloudStatus\"\x06\xa2\xbb\x18\x02\x18\x02\x12h\n" +
+	"\fAdoptToCloud\x12).pilab.cloud.agent.v1.AdoptToCloudRequest\x1a\x16.google.protobuf.Empty\"\x15\xa2\xbb\x18\x11\n" +
+	"\x04Node\x12\x05admin\x18\x01 \x01\x12\\\n" +
+	"\x13DisconnectFromCloud\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\"\x15\xa2\xbb\x18\x11\n" +
+	"\x04Node\x12\x05admin\x18\x01 \x01B4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_dcui_service_proto_rawDescOnce sync.Once

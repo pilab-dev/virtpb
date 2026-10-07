@@ -5,34 +5,80 @@ syntax = "proto3";
 
 package pilab.cloud.agent.v1;
 
+import "pilab/common/v1/authz.proto";
+
 import "pilab/agent/v1/error.proto";
 import "pilab/agent/v1/stream.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1";
 
 service NetworkService {
-  rpc OvsBridgeCreate(OvsBridgeCreateRequest) returns (OvsBridgeCreateResponse);
-  rpc OvsBridgeDelete(OvsBridgeDeleteRequest) returns (OvsBridgeDeleteResponse);
-  rpc OvsBridgeList(OvsBridgeListRequest) returns (OvsBridgeListResponse);
-  rpc OvsBridgeGet(OvsBridgeGetRequest) returns (OvsBridgeGetResponse);
-  rpc OvsPortCreate(OvsPortCreateRequest) returns (OvsPortCreateResponse);
-  rpc OvsPortDelete(OvsPortDeleteRequest) returns (OvsPortDeleteResponse);
-  rpc OvsPortList(OvsPortListRequest) returns (OvsPortListResponse);
-  rpc OvsPortGet(OvsPortGetRequest) returns (OvsPortGetResponse);
-  rpc OvsPortUpdate(OvsPortUpdateRequest) returns (OvsPortUpdateResponse);
-  rpc OvsQosRuleCreate(OvsQosRuleCreateRequest) returns (OvsQosRuleCreateResponse);
-  rpc OvsQosRuleDelete(OvsQosRuleDeleteRequest) returns (OvsQosRuleDeleteResponse);
-  rpc OvsQosRuleList(OvsQosRuleListRequest) returns (OvsQosRuleListResponse);
-  rpc OvsQosRuleGet(OvsQosRuleGetRequest) returns (OvsQosRuleGetResponse);
-  rpc NetworkCreate(NetworkCreateRequest) returns (NetworkCreateResponse);
-  rpc NetworkDelete(NetworkDeleteRequest) returns (NetworkDeleteResponse);
-  rpc NetworkList(NetworkListRequest) returns (NetworkListResponse);
-  rpc NetworkGet(NetworkGetRequest) returns (NetworkGetResponse);
-  rpc NetworkStart(NetworkStartRequest) returns (NetworkStartResponse);
-  rpc NetworkStop(NetworkStopRequest) returns (NetworkStopResponse);
-  rpc NetworkUpdate(NetworkUpdateRequest) returns (NetworkUpdateResponse);
-  rpc OvsFlowPush(OvsFlowPushRequest) returns (OvsFlowPushResponse);
-  rpc OvsFlowSync(OvsFlowSyncRequest) returns (OvsFlowSyncResponse);
+  rpc OvsBridgeCreate(OvsBridgeCreateRequest) returns (OvsBridgeCreateResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsBridgeDelete(OvsBridgeDeleteRequest) returns (OvsBridgeDeleteResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsBridgeList(OvsBridgeListRequest) returns (OvsBridgeListResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsBridgeGet(OvsBridgeGetRequest) returns (OvsBridgeGetResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsPortCreate(OvsPortCreateRequest) returns (OvsPortCreateResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsPortDelete(OvsPortDeleteRequest) returns (OvsPortDeleteResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsPortList(OvsPortListRequest) returns (OvsPortListResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsPortGet(OvsPortGetRequest) returns (OvsPortGetResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsPortUpdate(OvsPortUpdateRequest) returns (OvsPortUpdateResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsQosRuleCreate(OvsQosRuleCreateRequest) returns (OvsQosRuleCreateResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsQosRuleDelete(OvsQosRuleDeleteRequest) returns (OvsQosRuleDeleteResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsQosRuleList(OvsQosRuleListRequest) returns (OvsQosRuleListResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsQosRuleGet(OvsQosRuleGetRequest) returns (OvsQosRuleGetResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc NetworkCreate(NetworkCreateRequest) returns (NetworkCreateResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc NetworkDelete(NetworkDeleteRequest) returns (NetworkDeleteResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc NetworkList(NetworkListRequest) returns (NetworkListResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc NetworkGet(NetworkGetRequest) returns (NetworkGetResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc NetworkStart(NetworkStartRequest) returns (NetworkStartResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc NetworkStop(NetworkStopRequest) returns (NetworkStopResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc NetworkUpdate(NetworkUpdateRequest) returns (NetworkUpdateResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsFlowPush(OvsFlowPushRequest) returns (OvsFlowPushResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc OvsFlowSync(OvsFlowSyncRequest) returns (OvsFlowSyncResponse) {
+    option (pilab.common.v1.authz) = { kind: "OVSBridge", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
 }
 
 message OvsBridge {

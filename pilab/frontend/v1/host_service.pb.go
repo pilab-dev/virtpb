@@ -9,6 +9,7 @@
 package frontendv1
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -3160,7 +3161,7 @@ var File_pilab_frontend_v1_host_service_proto protoreflect.FileDescriptor
 
 const file_pilab_frontend_v1_host_service_proto_rawDesc = "" +
 	"\n" +
-	"$pilab/frontend/v1/host_service.proto\x12\x11pilab.frontend.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfc\x04\n" +
+	"$pilab/frontend/v1/host_service.proto\x12\x11pilab.frontend.v1\x1a\x1bpilab/common/v1/authz.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xfc\x04\n" +
 	"\fHostOverview\x12\x1a\n" +
 	"\bhostname\x18\x01 \x01(\tR\bhostname\x12\x12\n" +
 	"\x04fqdn\x18\x02 \x01(\tR\x04fqdn\x125\n" +
@@ -3374,26 +3375,44 @@ const file_pilab_frontend_v1_host_service_proto_rawDesc = "" +
 	"\x16NetworkInterfaceStatus\x12\x1a\n" +
 	"\x16NIC_STATUS_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14NIC_STATUS_CONNECTED\x10\x01\x12\x1b\n" +
-	"\x17NIC_STATUS_DISCONNECTED\x10\x022\x95\x10\n" +
-	"\vHostService\x12]\n" +
-	"\x0fGetHostOverview\x12).pilab.frontend.v1.GetHostOverviewRequest\x1a\x1f.pilab.frontend.v1.HostOverview\x12k\n" +
-	"\x11GetMonitoringData\x12+.pilab.frontend.v1.GetMonitoringDataRequest\x1a).pilab.frontend.v1.MonitoringDataResponse\x12X\n" +
-	"\vListHostVMs\x12%.pilab.frontend.v1.ListHostVMsRequest\x1a\".pilab.frontend.v1.HostVMsResponse\x12n\n" +
-	"\x12GetHostPermissions\x12,.pilab.frontend.v1.GetHostPermissionsRequest\x1a*.pilab.frontend.v1.HostPermissionsResponse\x12m\n" +
-	"\x12ListHostDatastores\x12,.pilab.frontend.v1.ListHostDatastoresRequest\x1a).pilab.frontend.v1.HostDatastoresResponse\x12e\n" +
-	"\x0eMountDatastore\x12(.pilab.frontend.v1.MountDatastoreRequest\x1a).pilab.frontend.v1.MountDatastoreResponse\x12k\n" +
-	"\x10UnmountDatastore\x12*.pilab.frontend.v1.UnmountDatastoreRequest\x1a+.pilab.frontend.v1.UnmountDatastoreResponse\x12w\n" +
-	"\x15GetHostSystemSettings\x12/.pilab.frontend.v1.GetHostSystemSettingsRequest\x1a-.pilab.frontend.v1.HostSystemSettingsResponse\x12h\n" +
-	"\x0fUpdateNTPConfig\x12).pilab.frontend.v1.UpdateNTPConfigRequest\x1a*.pilab.frontend.v1.UpdateNTPConfigResponse\x12e\n" +
-	"\x0eUpdateTimezone\x12(.pilab.frontend.v1.UpdateTimezoneRequest\x1a).pilab.frontend.v1.UpdateTimezoneResponse\x12n\n" +
-	"\x11UpdateDNSSettings\x12+.pilab.frontend.v1.UpdateDNSSettingsRequest\x1a,.pilab.frontend.v1.UpdateDNSSettingsResponse\x12z\n" +
-	"\x15UpdateRoutingSettings\x12/.pilab.frontend.v1.UpdateRoutingSettingsRequest\x1a0.pilab.frontend.v1.UpdateRoutingSettingsResponse\x12\x80\x01\n" +
-	"\x18GetMaintenanceModeStatus\x122.pilab.frontend.v1.GetMaintenanceModeStatusRequest\x1a0.pilab.frontend.v1.MaintenanceModeStatusResponse\x12w\n" +
-	"\x14EnterMaintenanceMode\x12..pilab.frontend.v1.EnterMaintenanceModeRequest\x1a/.pilab.frontend.v1.EnterMaintenanceModeResponse\x12t\n" +
-	"\x13ExitMaintenanceMode\x12-.pilab.frontend.v1.ExitMaintenanceModeRequest\x1a..pilab.frontend.v1.ExitMaintenanceModeResponse\x12\x82\x01\n" +
-	"\x19ListHostNetworkInterfaces\x123.pilab.frontend.v1.ListHostNetworkInterfacesRequest\x1a0.pilab.frontend.v1.HostNetworkInterfacesResponse\x12}\n" +
-	"\x16EnableNetworkInterface\x120.pilab.frontend.v1.EnableNetworkInterfaceRequest\x1a1.pilab.frontend.v1.EnableNetworkInterfaceResponse\x12\x80\x01\n" +
-	"\x17DisableNetworkInterface\x121.pilab.frontend.v1.DisableNetworkInterfaceRequest\x1a2.pilab.frontend.v1.DisableNetworkInterfaceResponseB:Z8go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1b\x06proto3"
+	"\x17NIC_STATUS_DISCONNECTED\x10\x022\xcb\x13\n" +
+	"\vHostService\x12p\n" +
+	"\x0fGetHostOverview\x12).pilab.frontend.v1.GetHostOverviewRequest\x1a\x1f.pilab.frontend.v1.HostOverview\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Node\x12\x03get\x18\x01\x12~\n" +
+	"\x11GetMonitoringData\x12+.pilab.frontend.v1.GetMonitoringDataRequest\x1a).pilab.frontend.v1.MonitoringDataResponse\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Node\x12\x03get\x18\x01\x12v\n" +
+	"\vListHostVMs\x12%.pilab.frontend.v1.ListHostVMsRequest\x1a\".pilab.frontend.v1.HostVMsResponse\"\x1c\xa2\xbb\x18\x18\n" +
+	"\x0eVirtualMachine\x12\x04list\x18\x01\x12\x81\x01\n" +
+	"\x12GetHostPermissions\x12,.pilab.frontend.v1.GetHostPermissionsRequest\x1a*.pilab.frontend.v1.HostPermissionsResponse\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Node\x12\x03get\x18\x01\x12\x86\x01\n" +
+	"\x12ListHostDatastores\x12,.pilab.frontend.v1.ListHostDatastoresRequest\x1a).pilab.frontend.v1.HostDatastoresResponse\"\x17\xa2\xbb\x18\x13\n" +
+	"\tDatastore\x12\x04list\x18\x01\x12\x80\x01\n" +
+	"\x0eMountDatastore\x12(.pilab.frontend.v1.MountDatastoreRequest\x1a).pilab.frontend.v1.MountDatastoreResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\tDatastore\x12\x06update\x18\x01\x12\x86\x01\n" +
+	"\x10UnmountDatastore\x12*.pilab.frontend.v1.UnmountDatastoreRequest\x1a+.pilab.frontend.v1.UnmountDatastoreResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\tDatastore\x12\x06update\x18\x01\x12\x8a\x01\n" +
+	"\x15GetHostSystemSettings\x12/.pilab.frontend.v1.GetHostSystemSettingsRequest\x1a-.pilab.frontend.v1.HostSystemSettingsResponse\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Node\x12\x03get\x18\x01\x12~\n" +
+	"\x0fUpdateNTPConfig\x12).pilab.frontend.v1.UpdateNTPConfigRequest\x1a*.pilab.frontend.v1.UpdateNTPConfigResponse\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Node\x12\x06update\x18\x01\x12{\n" +
+	"\x0eUpdateTimezone\x12(.pilab.frontend.v1.UpdateTimezoneRequest\x1a).pilab.frontend.v1.UpdateTimezoneResponse\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Node\x12\x06update\x18\x01\x12\x84\x01\n" +
+	"\x11UpdateDNSSettings\x12+.pilab.frontend.v1.UpdateDNSSettingsRequest\x1a,.pilab.frontend.v1.UpdateDNSSettingsResponse\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Node\x12\x06update\x18\x01\x12\x90\x01\n" +
+	"\x15UpdateRoutingSettings\x12/.pilab.frontend.v1.UpdateRoutingSettingsRequest\x1a0.pilab.frontend.v1.UpdateRoutingSettingsResponse\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Node\x12\x06update\x18\x01\x12\x93\x01\n" +
+	"\x18GetMaintenanceModeStatus\x122.pilab.frontend.v1.GetMaintenanceModeStatusRequest\x1a0.pilab.frontend.v1.MaintenanceModeStatusResponse\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Node\x12\x03get\x18\x01\x12\x8c\x01\n" +
+	"\x14EnterMaintenanceMode\x12..pilab.frontend.v1.EnterMaintenanceModeRequest\x1a/.pilab.frontend.v1.EnterMaintenanceModeResponse\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x05admin\x18\x01\x12\x89\x01\n" +
+	"\x13ExitMaintenanceMode\x12-.pilab.frontend.v1.ExitMaintenanceModeRequest\x1a..pilab.frontend.v1.ExitMaintenanceModeResponse\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x05admin\x18\x01\x12\xa0\x01\n" +
+	"\x19ListHostNetworkInterfaces\x123.pilab.frontend.v1.ListHostNetworkInterfacesRequest\x1a0.pilab.frontend.v1.HostNetworkInterfacesResponse\"\x1c\xa2\xbb\x18\x18\n" +
+	"\x0eNetworkSegment\x12\x04list\x18\x01\x12\x9d\x01\n" +
+	"\x16EnableNetworkInterface\x120.pilab.frontend.v1.EnableNetworkInterfaceRequest\x1a1.pilab.frontend.v1.EnableNetworkInterfaceResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eNetworkSegment\x12\x06update\x18\x01\x12\xa0\x01\n" +
+	"\x17DisableNetworkInterface\x121.pilab.frontend.v1.DisableNetworkInterfaceRequest\x1a2.pilab.frontend.v1.DisableNetworkInterfaceResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eNetworkSegment\x12\x06update\x18\x01B:Z8go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1b\x06proto3"
 
 var (
 	file_pilab_frontend_v1_host_service_proto_rawDescOnce sync.Once

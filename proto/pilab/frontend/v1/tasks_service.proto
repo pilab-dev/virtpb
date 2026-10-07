@@ -4,10 +4,14 @@ syntax = "proto3";
 
 package pilab.frontend.v1;
 
+import "pilab/common/v1/authz.proto";
+
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1";
 
 service TasksService {
-  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse);
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse) {
+    option (pilab.common.v1.authz) = { kind: "Task", verb: "list", authn: AUTHN_USER };
+  }
 }
 
 message TaskStatus {

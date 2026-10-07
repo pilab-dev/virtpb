@@ -5,21 +5,47 @@ syntax = "proto3";
 
 package pilab.agent.v2;
 
+import "pilab/common/v1/authz.proto";
+
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/agent/v2;agentv2";
 
 service ISCSIService {
-  rpc Discover(ISCSIDiscoverRequest) returns (ISCSIDiscoverResponse);
-  rpc Login(ISCSILoginRequest) returns (ISCSILoginResponse);
-  rpc Logout(ISCSILogoutRequest) returns (ISCSILogoutResponse);
-  rpc DeleteNode(ISCSIDeleteNodeRequest) returns (ISCSIDeleteNodeResponse);
-  rpc Rescan(ISCSIRescanRequest) returns (ISCSIRescanResponse);
-  rpc Sessions(ISCSISessionsRequest) returns (ISCSISessionsResponse);
-  rpc Nodes(ISCSINodesRequest) returns (ISCSINodesResponse);
-  rpc GetLuns(ISCSIGetLunsRequest) returns (ISCSIGetLunsResponse);
-  rpc GetPaths(ISCSIGetPathsRequest) returns (ISCSIGetPathsResponse);
-  rpc ConfigureCHAP(ISCSIConfigureCHAPRequest) returns (ISCSIConfigureCHAPResponse);
-  rpc ConfigureCHAPInbound(ISCSIConfigureCHAPInboundRequest) returns (ISCSIConfigureCHAPInboundResponse);
-  rpc SetLogin(ISCSISetLoginRequest) returns (ISCSISetLoginResponse);
+  rpc Discover(ISCSIDiscoverRequest) returns (ISCSIDiscoverResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc Login(ISCSILoginRequest) returns (ISCSILoginResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc Logout(ISCSILogoutRequest) returns (ISCSILogoutResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc DeleteNode(ISCSIDeleteNodeRequest) returns (ISCSIDeleteNodeResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc Rescan(ISCSIRescanRequest) returns (ISCSIRescanResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc Sessions(ISCSISessionsRequest) returns (ISCSISessionsResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc Nodes(ISCSINodesRequest) returns (ISCSINodesResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetLuns(ISCSIGetLunsRequest) returns (ISCSIGetLunsResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetPaths(ISCSIGetPathsRequest) returns (ISCSIGetPathsResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc ConfigureCHAP(ISCSIConfigureCHAPRequest) returns (ISCSIConfigureCHAPResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc ConfigureCHAPInbound(ISCSIConfigureCHAPInboundRequest) returns (ISCSIConfigureCHAPInboundResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc SetLogin(ISCSISetLoginRequest) returns (ISCSISetLoginResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
 }
 
 message ISCSIDiscoverRequest {

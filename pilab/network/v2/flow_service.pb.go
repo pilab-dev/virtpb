@@ -10,6 +10,7 @@
 package networkv2
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -435,7 +436,7 @@ var File_pilab_network_v2_flow_service_proto protoreflect.FileDescriptor
 
 const file_pilab_network_v2_flow_service_proto_rawDesc = "" +
 	"\n" +
-	"#pilab/network/v2/flow_service.proto\x12\x10pilab.network.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a%pilab/network/v2/network_common.proto\"\xd9\x03\n" +
+	"#pilab/network/v2/flow_service.proto\x12\x10pilab.network.v2\x1a\x1bpilab/common/v1/authz.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a%pilab/network/v2/network_common.proto\"\xd9\x03\n" +
 	"\bFlowRule\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1a\n" +
@@ -475,10 +476,12 @@ const file_pilab_network_v2_flow_service_proto_rawDesc = "" +
 	"\x11DebugFlowResponse\x12?\n" +
 	"\rmatched_flows\x18\x01 \x03(\v2\x1a.pilab.network.v2.FlowRuleR\fmatchedFlows\x12\x18\n" +
 	"\averdict\x18\x02 \x01(\tR\averdict\x12 \n" +
-	"\vexplanation\x18\x03 \x01(\tR\vexplanation2\xb9\x01\n" +
-	"\vFlowService\x12T\n" +
-	"\tListFlows\x12\".pilab.network.v2.ListFlowsRequest\x1a#.pilab.network.v2.ListFlowsResponse\x12T\n" +
-	"\tDebugFlow\x12\".pilab.network.v2.DebugFlowRequest\x1a#.pilab.network.v2.DebugFlowResponseB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
+	"\vexplanation\x18\x03 \x01(\tR\vexplanation2\xe5\x01\n" +
+	"\vFlowService\x12j\n" +
+	"\tListFlows\x12\".pilab.network.v2.ListFlowsRequest\x1a#.pilab.network.v2.ListFlowsResponse\"\x14\xa2\xbb\x18\x10\n" +
+	"\aNetwork\x12\x03get\x18\x01\x12j\n" +
+	"\tDebugFlow\x12\".pilab.network.v2.DebugFlowRequest\x1a#.pilab.network.v2.DebugFlowResponse\"\x14\xa2\xbb\x18\x10\n" +
+	"\aNetwork\x12\x03get\x18\x01B8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_flow_service_proto_rawDescOnce sync.Once

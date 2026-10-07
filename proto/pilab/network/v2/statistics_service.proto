@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.network.v2;
 
+import "pilab/common/v1/authz.proto";
+
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "pilab/network/v2/network_common.proto";
@@ -13,10 +15,18 @@ option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2";
 
 // StatisticsService retrieves network and port statistics.
 service StatisticsService {
-  rpc GetNetworkStats(GetNetworkStatsRequest) returns (NetworkStats);
-  rpc GetPortStats(GetPortStatsRequest) returns (PortStats);
-  rpc GetQoSStats(GetQoSStatsRequest) returns (QoSStats);
-  rpc GetPublicIPUsage(GetPublicIPUsageRequest) returns (PublicIPUsage);
+  rpc GetNetworkStats(GetNetworkStatsRequest) returns (NetworkStats) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetPortStats(GetPortStatsRequest) returns (PortStats) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetQoSStats(GetQoSStatsRequest) returns (QoSStats) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetPublicIPUsage(GetPublicIPUsageRequest) returns (PublicIPUsage) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "get", authn: AUTHN_USER };
+  }
 }
 
 // NetworkStats contains traffic statistics for a network.

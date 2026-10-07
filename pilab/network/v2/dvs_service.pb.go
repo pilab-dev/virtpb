@@ -10,6 +10,7 @@
 package networkv2
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -1306,7 +1307,7 @@ var File_pilab_network_v2_dvs_service_proto protoreflect.FileDescriptor
 
 const file_pilab_network_v2_dvs_service_proto_rawDesc = "" +
 	"\n" +
-	"\"pilab/network/v2/dvs_service.proto\x12\x10pilab.network.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a%pilab/network/v2/network_common.proto\"\x83\x05\n" +
+	"\"pilab/network/v2/dvs_service.proto\x12\x10pilab.network.v2\x1a\x1bpilab/common/v1/authz.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a%pilab/network/v2/network_common.proto\"\x83\x05\n" +
 	"\x11DistributedSwitch\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -1440,21 +1441,33 @@ const file_pilab_network_v2_dvs_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"R\n" +
 	"\x16DeletePortGroupRequest\x12\"\n" +
 	"\rport_group_id\x18\x01 \x01(\tR\vportGroupId\x12\x14\n" +
-	"\x05force\x18\x02 \x01(\bR\x05force2\xab\t\n" +
+	"\x05force\x18\x02 \x01(\bR\x05force2\xa2\f\n" +
 	"\n" +
-	"DVSService\x12p\n" +
-	"\x17CreateDistributedSwitch\x120.pilab.network.v2.CreateDistributedSwitchRequest\x1a#.pilab.network.v2.DistributedSwitch\x12j\n" +
-	"\x14GetDistributedSwitch\x12-.pilab.network.v2.GetDistributedSwitchRequest\x1a#.pilab.network.v2.DistributedSwitch\x12~\n" +
-	"\x17ListDistributedSwitches\x120.pilab.network.v2.ListDistributedSwitchesRequest\x1a1.pilab.network.v2.ListDistributedSwitchesResponse\x12p\n" +
-	"\x17UpdateDistributedSwitch\x120.pilab.network.v2.UpdateDistributedSwitchRequest\x1a#.pilab.network.v2.DistributedSwitch\x12c\n" +
-	"\x17DeleteDistributedSwitch\x120.pilab.network.v2.DeleteDistributedSwitchRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
-	"\fAddHostToDVS\x12%.pilab.network.v2.AddHostToDVSRequest\x1a\x16.google.protobuf.Empty\x12W\n" +
-	"\x11RemoveHostFromDVS\x12*.pilab.network.v2.RemoveHostFromDVSRequest\x1a\x16.google.protobuf.Empty\x12X\n" +
-	"\x0fCreatePortGroup\x12(.pilab.network.v2.CreatePortGroupRequest\x1a\x1b.pilab.network.v2.PortGroup\x12R\n" +
-	"\fGetPortGroup\x12%.pilab.network.v2.GetPortGroupRequest\x1a\x1b.pilab.network.v2.PortGroup\x12c\n" +
-	"\x0eListPortGroups\x12'.pilab.network.v2.ListPortGroupsRequest\x1a(.pilab.network.v2.ListPortGroupsResponse\x12X\n" +
-	"\x0fUpdatePortGroup\x12(.pilab.network.v2.UpdatePortGroupRequest\x1a\x1b.pilab.network.v2.PortGroup\x12S\n" +
-	"\x0fDeletePortGroup\x12(.pilab.network.v2.DeletePortGroupRequest\x1a\x16.google.protobuf.EmptyB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
+	"DVSService\x12\x93\x01\n" +
+	"\x17CreateDistributedSwitch\x120.pilab.network.v2.CreateDistributedSwitchRequest\x1a#.pilab.network.v2.DistributedSwitch\"!\xa2\xbb\x18\x1d\n" +
+	"\x11DistributedSwitch\x12\x06create\x18\x01\x12\x8a\x01\n" +
+	"\x14GetDistributedSwitch\x12-.pilab.network.v2.GetDistributedSwitchRequest\x1a#.pilab.network.v2.DistributedSwitch\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x11DistributedSwitch\x12\x03get\x18\x01\x12\x9f\x01\n" +
+	"\x17ListDistributedSwitches\x120.pilab.network.v2.ListDistributedSwitchesRequest\x1a1.pilab.network.v2.ListDistributedSwitchesResponse\"\x1f\xa2\xbb\x18\x1b\n" +
+	"\x11DistributedSwitch\x12\x04list\x18\x01\x12\x93\x01\n" +
+	"\x17UpdateDistributedSwitch\x120.pilab.network.v2.UpdateDistributedSwitchRequest\x1a#.pilab.network.v2.DistributedSwitch\"!\xa2\xbb\x18\x1d\n" +
+	"\x11DistributedSwitch\x12\x06update\x18\x01\x12\x86\x01\n" +
+	"\x17DeleteDistributedSwitch\x120.pilab.network.v2.DeleteDistributedSwitchRequest\x1a\x16.google.protobuf.Empty\"!\xa2\xbb\x18\x1d\n" +
+	"\x11DistributedSwitch\x12\x06delete\x18\x01\x12p\n" +
+	"\fAddHostToDVS\x12%.pilab.network.v2.AddHostToDVSRequest\x1a\x16.google.protobuf.Empty\"!\xa2\xbb\x18\x1d\n" +
+	"\x11DistributedSwitch\x12\x06attach\x18\x01\x12z\n" +
+	"\x11RemoveHostFromDVS\x12*.pilab.network.v2.RemoveHostFromDVSRequest\x1a\x16.google.protobuf.Empty\"!\xa2\xbb\x18\x1d\n" +
+	"\x11DistributedSwitch\x12\x06attach\x18\x01\x12s\n" +
+	"\x0fCreatePortGroup\x12(.pilab.network.v2.CreatePortGroupRequest\x1a\x1b.pilab.network.v2.PortGroup\"\x19\xa2\xbb\x18\x15\n" +
+	"\tPortGroup\x12\x06create\x18\x01\x12j\n" +
+	"\fGetPortGroup\x12%.pilab.network.v2.GetPortGroupRequest\x1a\x1b.pilab.network.v2.PortGroup\"\x16\xa2\xbb\x18\x12\n" +
+	"\tPortGroup\x12\x03get\x18\x01\x12|\n" +
+	"\x0eListPortGroups\x12'.pilab.network.v2.ListPortGroupsRequest\x1a(.pilab.network.v2.ListPortGroupsResponse\"\x17\xa2\xbb\x18\x13\n" +
+	"\tPortGroup\x12\x04list\x18\x01\x12s\n" +
+	"\x0fUpdatePortGroup\x12(.pilab.network.v2.UpdatePortGroupRequest\x1a\x1b.pilab.network.v2.PortGroup\"\x19\xa2\xbb\x18\x15\n" +
+	"\tPortGroup\x12\x06update\x18\x01\x12n\n" +
+	"\x0fDeletePortGroup\x12(.pilab.network.v2.DeletePortGroupRequest\x1a\x16.google.protobuf.Empty\"\x19\xa2\xbb\x18\x15\n" +
+	"\tPortGroup\x12\x06delete\x18\x01B8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_dvs_service_proto_rawDescOnce sync.Once

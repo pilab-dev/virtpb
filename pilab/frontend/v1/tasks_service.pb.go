@@ -9,6 +9,7 @@
 package frontendv1
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -223,7 +224,7 @@ var File_pilab_frontend_v1_tasks_service_proto protoreflect.FileDescriptor
 
 const file_pilab_frontend_v1_tasks_service_proto_rawDesc = "" +
 	"\n" +
-	"%pilab/frontend/v1/tasks_service.proto\x12\x11pilab.frontend.v1\"\x86\x02\n" +
+	"%pilab/frontend/v1/tasks_service.proto\x12\x11pilab.frontend.v1\x1a\x1bpilab/common/v1/authz.proto\"\x86\x02\n" +
 	"\n" +
 	"TaskStatus\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
@@ -240,9 +241,10 @@ const file_pilab_frontend_v1_tasks_service_proto_rawDesc = "" +
 	" \x01(\tR\adetails\"\x12\n" +
 	"\x10ListTasksRequest\"H\n" +
 	"\x11ListTasksResponse\x123\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x1d.pilab.frontend.v1.TaskStatusR\x05tasks2f\n" +
-	"\fTasksService\x12V\n" +
-	"\tListTasks\x12#.pilab.frontend.v1.ListTasksRequest\x1a$.pilab.frontend.v1.ListTasksResponseB:Z8go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1b\x06proto3"
+	"\x05tasks\x18\x01 \x03(\v2\x1d.pilab.frontend.v1.TaskStatusR\x05tasks2z\n" +
+	"\fTasksService\x12j\n" +
+	"\tListTasks\x12#.pilab.frontend.v1.ListTasksRequest\x1a$.pilab.frontend.v1.ListTasksResponse\"\x12\xa2\xbb\x18\x0e\n" +
+	"\x04Task\x12\x04list\x18\x01B:Z8go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1b\x06proto3"
 
 var (
 	file_pilab_frontend_v1_tasks_service_proto_rawDescOnce sync.Once

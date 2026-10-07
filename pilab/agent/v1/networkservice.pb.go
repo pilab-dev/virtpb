@@ -10,6 +10,7 @@
 package agentv1
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -2724,7 +2725,7 @@ var File_pilab_agent_v1_networkservice_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_networkservice_proto_rawDesc = "" +
 	"\n" +
-	"#pilab/agent/v1/networkservice.proto\x12\x14pilab.cloud.agent.v1\x1a\x1apilab/agent/v1/error.proto\x1a\x1bpilab/agent/v1/stream.proto\"\x1f\n" +
+	"#pilab/agent/v1/networkservice.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/common/v1/authz.proto\x1a\x1apilab/agent/v1/error.proto\x1a\x1bpilab/agent/v1/stream.proto\"\x1f\n" +
 	"\tOvsBridge\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\",\n" +
 	"\x16OvsBridgeCreateRequest\x12\x12\n" +
@@ -2973,32 +2974,54 @@ const file_pilab_agent_v1_networkservice_proto_rawDesc = "" +
 	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01\x12\x1f\n" +
 	"\vflows_count\x18\x03 \x01(\x05R\n" +
 	"flowsCountB\b\n" +
-	"\x06_error2\x97\x12\n" +
-	"\x0eNetworkService\x12n\n" +
-	"\x0fOvsBridgeCreate\x12,.pilab.cloud.agent.v1.OvsBridgeCreateRequest\x1a-.pilab.cloud.agent.v1.OvsBridgeCreateResponse\x12n\n" +
-	"\x0fOvsBridgeDelete\x12,.pilab.cloud.agent.v1.OvsBridgeDeleteRequest\x1a-.pilab.cloud.agent.v1.OvsBridgeDeleteResponse\x12h\n" +
-	"\rOvsBridgeList\x12*.pilab.cloud.agent.v1.OvsBridgeListRequest\x1a+.pilab.cloud.agent.v1.OvsBridgeListResponse\x12e\n" +
-	"\fOvsBridgeGet\x12).pilab.cloud.agent.v1.OvsBridgeGetRequest\x1a*.pilab.cloud.agent.v1.OvsBridgeGetResponse\x12h\n" +
-	"\rOvsPortCreate\x12*.pilab.cloud.agent.v1.OvsPortCreateRequest\x1a+.pilab.cloud.agent.v1.OvsPortCreateResponse\x12h\n" +
-	"\rOvsPortDelete\x12*.pilab.cloud.agent.v1.OvsPortDeleteRequest\x1a+.pilab.cloud.agent.v1.OvsPortDeleteResponse\x12b\n" +
-	"\vOvsPortList\x12(.pilab.cloud.agent.v1.OvsPortListRequest\x1a).pilab.cloud.agent.v1.OvsPortListResponse\x12_\n" +
+	"\x06_error2\xb4\x17\n" +
+	"\x0eNetworkService\x12\x8b\x01\n" +
+	"\x0fOvsBridgeCreate\x12,.pilab.cloud.agent.v1.OvsBridgeCreateRequest\x1a-.pilab.cloud.agent.v1.OvsBridgeCreateResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tOVSBridge\x12\x06create\x18\x01 \x01\x12\x8b\x01\n" +
+	"\x0fOvsBridgeDelete\x12,.pilab.cloud.agent.v1.OvsBridgeDeleteRequest\x1a-.pilab.cloud.agent.v1.OvsBridgeDeleteResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tOVSBridge\x12\x06delete\x18\x01 \x01\x12\x83\x01\n" +
+	"\rOvsBridgeList\x12*.pilab.cloud.agent.v1.OvsBridgeListRequest\x1a+.pilab.cloud.agent.v1.OvsBridgeListResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\tOVSBridge\x12\x04list\x18\x01 \x01\x12\x7f\n" +
+	"\fOvsBridgeGet\x12).pilab.cloud.agent.v1.OvsBridgeGetRequest\x1a*.pilab.cloud.agent.v1.OvsBridgeGetResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\tOVSBridge\x12\x03get\x18\x01 \x01\x12\x85\x01\n" +
+	"\rOvsPortCreate\x12*.pilab.cloud.agent.v1.OvsPortCreateRequest\x1a+.pilab.cloud.agent.v1.OvsPortCreateResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tOVSBridge\x12\x06create\x18\x01 \x01\x12\x85\x01\n" +
+	"\rOvsPortDelete\x12*.pilab.cloud.agent.v1.OvsPortDeleteRequest\x1a+.pilab.cloud.agent.v1.OvsPortDeleteResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tOVSBridge\x12\x06delete\x18\x01 \x01\x12}\n" +
+	"\vOvsPortList\x12(.pilab.cloud.agent.v1.OvsPortListRequest\x1a).pilab.cloud.agent.v1.OvsPortListResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\tOVSBridge\x12\x04list\x18\x01 \x01\x12y\n" +
 	"\n" +
-	"OvsPortGet\x12'.pilab.cloud.agent.v1.OvsPortGetRequest\x1a(.pilab.cloud.agent.v1.OvsPortGetResponse\x12h\n" +
-	"\rOvsPortUpdate\x12*.pilab.cloud.agent.v1.OvsPortUpdateRequest\x1a+.pilab.cloud.agent.v1.OvsPortUpdateResponse\x12q\n" +
-	"\x10OvsQosRuleCreate\x12-.pilab.cloud.agent.v1.OvsQosRuleCreateRequest\x1a..pilab.cloud.agent.v1.OvsQosRuleCreateResponse\x12q\n" +
-	"\x10OvsQosRuleDelete\x12-.pilab.cloud.agent.v1.OvsQosRuleDeleteRequest\x1a..pilab.cloud.agent.v1.OvsQosRuleDeleteResponse\x12k\n" +
-	"\x0eOvsQosRuleList\x12+.pilab.cloud.agent.v1.OvsQosRuleListRequest\x1a,.pilab.cloud.agent.v1.OvsQosRuleListResponse\x12h\n" +
-	"\rOvsQosRuleGet\x12*.pilab.cloud.agent.v1.OvsQosRuleGetRequest\x1a+.pilab.cloud.agent.v1.OvsQosRuleGetResponse\x12h\n" +
-	"\rNetworkCreate\x12*.pilab.cloud.agent.v1.NetworkCreateRequest\x1a+.pilab.cloud.agent.v1.NetworkCreateResponse\x12h\n" +
-	"\rNetworkDelete\x12*.pilab.cloud.agent.v1.NetworkDeleteRequest\x1a+.pilab.cloud.agent.v1.NetworkDeleteResponse\x12b\n" +
-	"\vNetworkList\x12(.pilab.cloud.agent.v1.NetworkListRequest\x1a).pilab.cloud.agent.v1.NetworkListResponse\x12_\n" +
+	"OvsPortGet\x12'.pilab.cloud.agent.v1.OvsPortGetRequest\x1a(.pilab.cloud.agent.v1.OvsPortGetResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\tOVSBridge\x12\x03get\x18\x01 \x01\x12\x85\x01\n" +
+	"\rOvsPortUpdate\x12*.pilab.cloud.agent.v1.OvsPortUpdateRequest\x1a+.pilab.cloud.agent.v1.OvsPortUpdateResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tOVSBridge\x12\x06update\x18\x01 \x01\x12\x8e\x01\n" +
+	"\x10OvsQosRuleCreate\x12-.pilab.cloud.agent.v1.OvsQosRuleCreateRequest\x1a..pilab.cloud.agent.v1.OvsQosRuleCreateResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tOVSBridge\x12\x06create\x18\x01 \x01\x12\x8e\x01\n" +
+	"\x10OvsQosRuleDelete\x12-.pilab.cloud.agent.v1.OvsQosRuleDeleteRequest\x1a..pilab.cloud.agent.v1.OvsQosRuleDeleteResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tOVSBridge\x12\x06delete\x18\x01 \x01\x12\x86\x01\n" +
+	"\x0eOvsQosRuleList\x12+.pilab.cloud.agent.v1.OvsQosRuleListRequest\x1a,.pilab.cloud.agent.v1.OvsQosRuleListResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\tOVSBridge\x12\x04list\x18\x01 \x01\x12\x82\x01\n" +
+	"\rOvsQosRuleGet\x12*.pilab.cloud.agent.v1.OvsQosRuleGetRequest\x1a+.pilab.cloud.agent.v1.OvsQosRuleGetResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\tOVSBridge\x12\x03get\x18\x01 \x01\x12\x8a\x01\n" +
+	"\rNetworkCreate\x12*.pilab.cloud.agent.v1.NetworkCreateRequest\x1a+.pilab.cloud.agent.v1.NetworkCreateResponse\" \xa2\xbb\x18\x1c\n" +
+	"\x0eNetworkSegment\x12\x06create\x18\x01 \x01\x12\x8a\x01\n" +
+	"\rNetworkDelete\x12*.pilab.cloud.agent.v1.NetworkDeleteRequest\x1a+.pilab.cloud.agent.v1.NetworkDeleteResponse\" \xa2\xbb\x18\x1c\n" +
+	"\x0eNetworkSegment\x12\x06delete\x18\x01 \x01\x12\x82\x01\n" +
+	"\vNetworkList\x12(.pilab.cloud.agent.v1.NetworkListRequest\x1a).pilab.cloud.agent.v1.NetworkListResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eNetworkSegment\x12\x04list\x18\x01 \x01\x12~\n" +
 	"\n" +
-	"NetworkGet\x12'.pilab.cloud.agent.v1.NetworkGetRequest\x1a(.pilab.cloud.agent.v1.NetworkGetResponse\x12e\n" +
-	"\fNetworkStart\x12).pilab.cloud.agent.v1.NetworkStartRequest\x1a*.pilab.cloud.agent.v1.NetworkStartResponse\x12b\n" +
-	"\vNetworkStop\x12(.pilab.cloud.agent.v1.NetworkStopRequest\x1a).pilab.cloud.agent.v1.NetworkStopResponse\x12h\n" +
-	"\rNetworkUpdate\x12*.pilab.cloud.agent.v1.NetworkUpdateRequest\x1a+.pilab.cloud.agent.v1.NetworkUpdateResponse\x12b\n" +
-	"\vOvsFlowPush\x12(.pilab.cloud.agent.v1.OvsFlowPushRequest\x1a).pilab.cloud.agent.v1.OvsFlowPushResponse\x12b\n" +
-	"\vOvsFlowSync\x12(.pilab.cloud.agent.v1.OvsFlowSyncRequest\x1a).pilab.cloud.agent.v1.OvsFlowSyncResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
+	"NetworkGet\x12'.pilab.cloud.agent.v1.NetworkGetRequest\x1a(.pilab.cloud.agent.v1.NetworkGetResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eNetworkSegment\x12\x03get\x18\x01 \x01\x12\x87\x01\n" +
+	"\fNetworkStart\x12).pilab.cloud.agent.v1.NetworkStartRequest\x1a*.pilab.cloud.agent.v1.NetworkStartResponse\" \xa2\xbb\x18\x1c\n" +
+	"\x0eNetworkSegment\x12\x06update\x18\x01 \x01\x12\x84\x01\n" +
+	"\vNetworkStop\x12(.pilab.cloud.agent.v1.NetworkStopRequest\x1a).pilab.cloud.agent.v1.NetworkStopResponse\" \xa2\xbb\x18\x1c\n" +
+	"\x0eNetworkSegment\x12\x06update\x18\x01 \x01\x12\x8a\x01\n" +
+	"\rNetworkUpdate\x12*.pilab.cloud.agent.v1.NetworkUpdateRequest\x1a+.pilab.cloud.agent.v1.NetworkUpdateResponse\" \xa2\xbb\x18\x1c\n" +
+	"\x0eNetworkSegment\x12\x06update\x18\x01 \x01\x12\x7f\n" +
+	"\vOvsFlowPush\x12(.pilab.cloud.agent.v1.OvsFlowPushRequest\x1a).pilab.cloud.agent.v1.OvsFlowPushResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tOVSBridge\x12\x06update\x18\x01 \x01\x12\x7f\n" +
+	"\vOvsFlowSync\x12(.pilab.cloud.agent.v1.OvsFlowSyncRequest\x1a).pilab.cloud.agent.v1.OvsFlowSyncResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tOVSBridge\x12\x06update\x18\x01 \x01B4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_networkservice_proto_rawDescOnce sync.Once

@@ -10,6 +10,7 @@
 package directorv2
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -1512,7 +1513,7 @@ var File_pilab_director_v2_task_service_proto protoreflect.FileDescriptor
 
 const file_pilab_director_v2_task_service_proto_rawDesc = "" +
 	"\n" +
-	"$pilab/director/v2/task_service.proto\x12\x11pilab.director.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xea\x05\n" +
+	"$pilab/director/v2/task_service.proto\x12\x11pilab.director.v2\x1a\x1bpilab/common/v1/authz.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xea\x05\n" +
 	"\x04Task\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12/\n" +
 	"\x04type\x18\x02 \x01(\x0e2\x1b.pilab.director.v2.TaskTypeR\x04type\x12\x13\n" +
@@ -1653,18 +1654,23 @@ const file_pilab_director_v2_task_service_proto_rawDesc = "" +
 	"\x15TASK_STATUS_COMPLETED\x10\x03\x12\x16\n" +
 	"\x12TASK_STATUS_FAILED\x10\x04\x12\x19\n" +
 	"\x15TASK_STATUS_CANCELLED\x10\x05\x12\x1a\n" +
-	"\x16TASK_STATUS_SUPERSEDED\x10\x062\xf8\x05\n" +
-	"\vTaskService\x12K\n" +
-	"\tSubscribe\x12#.pilab.director.v2.SubscribeRequest\x1a\x17.pilab.director.v2.Task0\x01\x12Y\n" +
+	"\x16TASK_STATUS_SUPERSEDED\x10\x062\xf5\x06\n" +
+	"\vTaskService\x12S\n" +
+	"\tSubscribe\x12#.pilab.director.v2.SubscribeRequest\x1a\x17.pilab.director.v2.Task\"\x06\xa2\xbb\x18\x02\x18\x030\x01\x12o\n" +
 	"\n" +
-	"CreateTask\x12$.pilab.director.v2.CreateTaskRequest\x1a%.pilab.director.v2.CreateTaskResponse\x12S\n" +
-	"\bGetTasks\x12\".pilab.director.v2.GetTasksRequest\x1a#.pilab.director.v2.GetTasksResponse\x12P\n" +
-	"\aGetTask\x12!.pilab.director.v2.GetTaskRequest\x1a\".pilab.director.v2.GetTaskResponse\x12k\n" +
-	"\x10UpdateTaskStatus\x12*.pilab.director.v2.UpdateTaskStatusRequest\x1a+.pilab.director.v2.UpdateTaskStatusResponse\x12Y\n" +
+	"CreateTask\x12$.pilab.director.v2.CreateTaskRequest\x1a%.pilab.director.v2.CreateTaskResponse\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Task\x12\x06create\x18\x01\x12f\n" +
+	"\bGetTasks\x12\".pilab.director.v2.GetTasksRequest\x1a#.pilab.director.v2.GetTasksResponse\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Task\x12\x03get\x18\x01\x12c\n" +
+	"\aGetTask\x12!.pilab.director.v2.GetTaskRequest\x1a\".pilab.director.v2.GetTaskResponse\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Task\x12\x03get\x18\x01\x12s\n" +
+	"\x10UpdateTaskStatus\x12*.pilab.director.v2.UpdateTaskStatusRequest\x1a+.pilab.director.v2.UpdateTaskStatusResponse\"\x06\xa2\xbb\x18\x02\x18\x03\x12o\n" +
 	"\n" +
-	"CancelTask\x12$.pilab.director.v2.CancelTaskRequest\x1a%.pilab.director.v2.CancelTaskResponse\x12e\n" +
-	"\x0eGetTaskHistory\x12(.pilab.director.v2.GetTaskHistoryRequest\x1a).pilab.director.v2.GetTaskHistoryResponse\x12k\n" +
-	"\x10BatchUpdateTasks\x12*.pilab.director.v2.BatchUpdateTasksRequest\x1a+.pilab.director.v2.BatchUpdateTasksResponseB:Z8go.pilab.hu/cloud/virtpb/v3/pilab/director/v2;directorv2b\x06proto3"
+	"CancelTask\x12$.pilab.director.v2.CancelTaskRequest\x1a%.pilab.director.v2.CancelTaskResponse\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Task\x12\x06update\x18\x01\x12x\n" +
+	"\x0eGetTaskHistory\x12(.pilab.director.v2.GetTaskHistoryRequest\x1a).pilab.director.v2.GetTaskHistoryResponse\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Task\x12\x03get\x18\x01\x12s\n" +
+	"\x10BatchUpdateTasks\x12*.pilab.director.v2.BatchUpdateTasksRequest\x1a+.pilab.director.v2.BatchUpdateTasksResponse\"\x06\xa2\xbb\x18\x02\x18\x03B:Z8go.pilab.hu/cloud/virtpb/v3/pilab/director/v2;directorv2b\x06proto3"
 
 var (
 	file_pilab_director_v2_task_service_proto_rawDescOnce sync.Once

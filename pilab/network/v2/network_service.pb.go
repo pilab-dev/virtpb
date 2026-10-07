@@ -10,6 +10,7 @@
 package networkv2
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -3023,7 +3024,7 @@ var File_pilab_network_v2_network_service_proto protoreflect.FileDescriptor
 
 const file_pilab_network_v2_network_service_proto_rawDesc = "" +
 	"\n" +
-	"&pilab/network/v2/network_service.proto\x12\x10pilab.network.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a%pilab/network/v2/network_common.proto\"\xcf\a\n" +
+	"&pilab/network/v2/network_service.proto\x12\x10pilab.network.v2\x1a\x1bpilab/common/v1/authz.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a%pilab/network/v2/network_common.proto\"\xcf\a\n" +
 	"\x0eVirtualNetwork\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -3338,42 +3339,69 @@ const file_pilab_network_v2_network_service_proto_rawDesc = "" +
 	"\ttenant_id\x18\x01 \x01(\tR\btenantId\x12(\n" +
 	"\x10virtual_cloud_id\x18\x02 \x01(\tR\x0evirtualCloudId\"%\n" +
 	"\x11ReleaseVNIRequest\x12\x10\n" +
-	"\x03vni\x18\x01 \x01(\rR\x03vni2\xaa\x12\n" +
-	"\x0eNetworkService\x12Y\n" +
-	"\rCreateNetwork\x12&.pilab.network.v2.CreateNetworkRequest\x1a .pilab.network.v2.VirtualNetwork\x12S\n" +
+	"\x03vni\x18\x01 \x01(\rR\x03vni2\x83\x17\n" +
+	"\x0eNetworkService\x12r\n" +
+	"\rCreateNetwork\x12&.pilab.network.v2.CreateNetworkRequest\x1a .pilab.network.v2.VirtualNetwork\"\x17\xa2\xbb\x18\x13\n" +
+	"\aNetwork\x12\x06create\x18\x01\x12i\n" +
 	"\n" +
-	"GetNetwork\x12#.pilab.network.v2.GetNetworkRequest\x1a .pilab.network.v2.VirtualNetwork\x12]\n" +
-	"\fListNetworks\x12%.pilab.network.v2.ListNetworksRequest\x1a&.pilab.network.v2.ListNetworksResponse\x12Y\n" +
-	"\rUpdateNetwork\x12&.pilab.network.v2.UpdateNetworkRequest\x1a .pilab.network.v2.VirtualNetwork\x12O\n" +
-	"\rDeleteNetwork\x12&.pilab.network.v2.DeleteNetworkRequest\x1a\x16.google.protobuf.Empty\x12K\n" +
-	"\vAttachHosts\x12$.pilab.network.v2.AttachHostsRequest\x1a\x16.google.protobuf.Empty\x12K\n" +
-	"\vDetachHosts\x12$.pilab.network.v2.DetachHostsRequest\x1a\x16.google.protobuf.Empty\x12P\n" +
+	"GetNetwork\x12#.pilab.network.v2.GetNetworkRequest\x1a .pilab.network.v2.VirtualNetwork\"\x14\xa2\xbb\x18\x10\n" +
+	"\aNetwork\x12\x03get\x18\x01\x12t\n" +
+	"\fListNetworks\x12%.pilab.network.v2.ListNetworksRequest\x1a&.pilab.network.v2.ListNetworksResponse\"\x15\xa2\xbb\x18\x11\n" +
+	"\aNetwork\x12\x04list\x18\x01\x12r\n" +
+	"\rUpdateNetwork\x12&.pilab.network.v2.UpdateNetworkRequest\x1a .pilab.network.v2.VirtualNetwork\"\x17\xa2\xbb\x18\x13\n" +
+	"\aNetwork\x12\x06update\x18\x01\x12h\n" +
+	"\rDeleteNetwork\x12&.pilab.network.v2.DeleteNetworkRequest\x1a\x16.google.protobuf.Empty\"\x17\xa2\xbb\x18\x13\n" +
+	"\aNetwork\x12\x06delete\x18\x01\x12d\n" +
+	"\vAttachHosts\x12$.pilab.network.v2.AttachHostsRequest\x1a\x16.google.protobuf.Empty\"\x17\xa2\xbb\x18\x13\n" +
+	"\aNetwork\x12\x06attach\x18\x01\x12d\n" +
+	"\vDetachHosts\x12$.pilab.network.v2.DetachHostsRequest\x1a\x16.google.protobuf.Empty\"\x17\xa2\xbb\x18\x13\n" +
+	"\aNetwork\x12\x06attach\x18\x01\x12f\n" +
 	"\n" +
-	"CreatePort\x12#.pilab.network.v2.CreatePortRequest\x1a\x1d.pilab.network.v2.VirtualPort\x12J\n" +
-	"\aGetPort\x12 .pilab.network.v2.GetPortRequest\x1a\x1d.pilab.network.v2.VirtualPort\x12T\n" +
-	"\tListPorts\x12\".pilab.network.v2.ListPortsRequest\x1a#.pilab.network.v2.ListPortsResponse\x12P\n" +
+	"CreatePort\x12#.pilab.network.v2.CreatePortRequest\x1a\x1d.pilab.network.v2.VirtualPort\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Port\x12\x06create\x18\x01\x12]\n" +
+	"\aGetPort\x12 .pilab.network.v2.GetPortRequest\x1a\x1d.pilab.network.v2.VirtualPort\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Port\x12\x03get\x18\x01\x12h\n" +
+	"\tListPorts\x12\".pilab.network.v2.ListPortsRequest\x1a#.pilab.network.v2.ListPortsResponse\"\x12\xa2\xbb\x18\x0e\n" +
+	"\x04Port\x12\x04list\x18\x01\x12f\n" +
 	"\n" +
-	"UpdatePort\x12#.pilab.network.v2.UpdatePortRequest\x1a\x1d.pilab.network.v2.VirtualPort\x12I\n" +
+	"UpdatePort\x12#.pilab.network.v2.UpdatePortRequest\x1a\x1d.pilab.network.v2.VirtualPort\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Port\x12\x06update\x18\x01\x12_\n" +
 	"\n" +
-	"DeletePort\x12#.pilab.network.v2.DeletePortRequest\x1a\x16.google.protobuf.Empty\x12I\n" +
+	"DeletePort\x12#.pilab.network.v2.DeletePortRequest\x1a\x16.google.protobuf.Empty\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Port\x12\x06delete\x18\x01\x12_\n" +
 	"\n" +
-	"AttachPort\x12#.pilab.network.v2.AttachPortRequest\x1a\x16.google.protobuf.Empty\x12I\n" +
+	"AttachPort\x12#.pilab.network.v2.AttachPortRequest\x1a\x16.google.protobuf.Empty\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Port\x12\x06attach\x18\x01\x12_\n" +
 	"\n" +
-	"DetachPort\x12#.pilab.network.v2.DetachPortRequest\x1a\x16.google.protobuf.Empty\x12X\n" +
-	"\x0fCreateVLANRange\x12(.pilab.network.v2.CreateVLANRangeRequest\x1a\x1b.pilab.network.v2.VLANRange\x12c\n" +
-	"\x0eListVLANRanges\x12'.pilab.network.v2.ListVLANRangesRequest\x1a(.pilab.network.v2.ListVLANRangesResponse\x12W\n" +
-	"\fAllocateVLAN\x12%.pilab.network.v2.AllocateVLANRequest\x1a .pilab.network.v2.VLANAllocation\x12K\n" +
-	"\vReleaseVLAN\x12$.pilab.network.v2.ReleaseVLANRequest\x1a\x16.google.protobuf.Empty\x12a\n" +
-	"\x12CreateVirtualCloud\x12+.pilab.network.v2.CreateVirtualCloudRequest\x1a\x1e.pilab.network.v2.VirtualCloud\x12[\n" +
-	"\x0fGetVirtualCloud\x12(.pilab.network.v2.GetVirtualCloudRequest\x1a\x1e.pilab.network.v2.VirtualCloud\x12l\n" +
-	"\x11ListVirtualClouds\x12*.pilab.network.v2.ListVirtualCloudsRequest\x1a+.pilab.network.v2.ListVirtualCloudsResponse\x12a\n" +
-	"\x12UpdateVirtualCloud\x12+.pilab.network.v2.UpdateVirtualCloudRequest\x1a\x1e.pilab.network.v2.VirtualCloud\x12Y\n" +
-	"\x12DeleteVirtualCloud\x12+.pilab.network.v2.DeleteVirtualCloudRequest\x1a\x16.google.protobuf.Empty\x12Q\n" +
-	"\x0eAddVNIEndpoint\x12'.pilab.network.v2.AddVNIEndpointRequest\x1a\x16.google.protobuf.Empty\x12W\n" +
-	"\x11RemoveVNIEndpoint\x12*.pilab.network.v2.RemoveVNIEndpointRequest\x1a\x16.google.protobuf.Empty\x12T\n" +
-	"\vAllocateVNI\x12$.pilab.network.v2.AllocateVNIRequest\x1a\x1f.pilab.network.v2.VNIAllocation\x12I\n" +
+	"DetachPort\x12#.pilab.network.v2.DetachPortRequest\x1a\x16.google.protobuf.Empty\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Port\x12\x06attach\x18\x01\x12q\n" +
+	"\x0fCreateVLANRange\x12(.pilab.network.v2.CreateVLANRangeRequest\x1a\x1b.pilab.network.v2.VLANRange\"\x17\xa2\xbb\x18\x13\n" +
+	"\aNetwork\x12\x06create\x18\x01\x12z\n" +
+	"\x0eListVLANRanges\x12'.pilab.network.v2.ListVLANRangesRequest\x1a(.pilab.network.v2.ListVLANRangesResponse\"\x15\xa2\xbb\x18\x11\n" +
+	"\aNetwork\x12\x04list\x18\x01\x12p\n" +
+	"\fAllocateVLAN\x12%.pilab.network.v2.AllocateVLANRequest\x1a .pilab.network.v2.VLANAllocation\"\x17\xa2\xbb\x18\x13\n" +
+	"\aNetwork\x12\x06attach\x18\x01\x12d\n" +
+	"\vReleaseVLAN\x12$.pilab.network.v2.ReleaseVLANRequest\x1a\x16.google.protobuf.Empty\"\x17\xa2\xbb\x18\x13\n" +
+	"\aNetwork\x12\x06attach\x18\x01\x12v\n" +
+	"\x12CreateVirtualCloud\x12+.pilab.network.v2.CreateVirtualCloudRequest\x1a\x1e.pilab.network.v2.VirtualCloud\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x03VPC\x12\x06create\x18\x01\x12m\n" +
+	"\x0fGetVirtualCloud\x12(.pilab.network.v2.GetVirtualCloudRequest\x1a\x1e.pilab.network.v2.VirtualCloud\"\x10\xa2\xbb\x18\f\n" +
+	"\x03VPC\x12\x03get\x18\x01\x12\x7f\n" +
+	"\x11ListVirtualClouds\x12*.pilab.network.v2.ListVirtualCloudsRequest\x1a+.pilab.network.v2.ListVirtualCloudsResponse\"\x11\xa2\xbb\x18\r\n" +
+	"\x03VPC\x12\x04list\x18\x01\x12v\n" +
+	"\x12UpdateVirtualCloud\x12+.pilab.network.v2.UpdateVirtualCloudRequest\x1a\x1e.pilab.network.v2.VirtualCloud\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x03VPC\x12\x06update\x18\x01\x12n\n" +
+	"\x12DeleteVirtualCloud\x12+.pilab.network.v2.DeleteVirtualCloudRequest\x1a\x16.google.protobuf.Empty\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x03VPC\x12\x06delete\x18\x01\x12f\n" +
+	"\x0eAddVNIEndpoint\x12'.pilab.network.v2.AddVNIEndpointRequest\x1a\x16.google.protobuf.Empty\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x03VPC\x12\x06attach\x18\x01\x12l\n" +
+	"\x11RemoveVNIEndpoint\x12*.pilab.network.v2.RemoveVNIEndpointRequest\x1a\x16.google.protobuf.Empty\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x03VPC\x12\x06attach\x18\x01\x12i\n" +
+	"\vAllocateVNI\x12$.pilab.network.v2.AllocateVNIRequest\x1a\x1f.pilab.network.v2.VNIAllocation\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x03VPC\x12\x06attach\x18\x01\x12^\n" +
 	"\n" +
-	"ReleaseVNI\x12#.pilab.network.v2.ReleaseVNIRequest\x1a\x16.google.protobuf.EmptyB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
+	"ReleaseVNI\x12#.pilab.network.v2.ReleaseVNIRequest\x1a\x16.google.protobuf.Empty\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x03VPC\x12\x06attach\x18\x01B8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_network_service_proto_rawDescOnce sync.Once

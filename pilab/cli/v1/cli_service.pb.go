@@ -8313,7 +8313,7 @@ var File_pilab_cli_v1_cli_service_proto protoreflect.FileDescriptor
 
 const file_pilab_cli_v1_cli_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1epilab/cli/v1/cli_service.proto\x12\fpilab.cli.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1dpilab/cli/v1/cli_common.proto\x1a\x18pilab/common/v1/vm.proto\"\x89\x01\n" +
+	"\x1epilab/cli/v1/cli_service.proto\x12\fpilab.cli.v1\x1a\x1bpilab/common/v1/authz.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1dpilab/cli/v1/cli_common.proto\x1a\x18pilab/common/v1/vm.proto\"\x89\x01\n" +
 	"\fLoginRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\"\n" +
@@ -9101,137 +9101,237 @@ const file_pilab_cli_v1_cli_service_proto_rawDesc = "" +
 	"\x13GetActivityResponse\x123\n" +
 	"\aentries\x18\x01 \x03(\v2\x19.pilab.cli.v1.ActivityLogR\aentries\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
-	"totalCount2\x92\x03\n" +
-	"\vAuthService\x12@\n" +
-	"\x05Login\x12\x1a.pilab.cli.v1.LoginRequest\x1a\x1b.pilab.cli.v1.LoginResponse\x12g\n" +
-	"\x12InitiateDeviceAuth\x12'.pilab.cli.v1.InitiateDeviceAuthRequest\x1a(.pilab.cli.v1.InitiateDeviceAuthResponse\x12[\n" +
-	"\x0ePollDeviceAuth\x12#.pilab.cli.v1.PollDeviceAuthRequest\x1a$.pilab.cli.v1.PollDeviceAuthResponse\x12=\n" +
-	"\x06Logout\x12\x1b.pilab.cli.v1.LogoutRequest\x1a\x16.google.protobuf.Empty\x12<\n" +
-	"\x0eGetCurrentUser\x12\x16.google.protobuf.Empty\x1a\x12.pilab.cli.v1.User2\xc4\t\n" +
-	"\tVMService\x12>\n" +
-	"\bCreateVM\x12\x1d.pilab.cli.v1.CreateVMRequest\x1a\x13.pilab.common.v1.VM\x128\n" +
-	"\x05GetVM\x12\x1a.pilab.cli.v1.GetVMRequest\x1a\x13.pilab.common.v1.VM\x12F\n" +
-	"\aListVMs\x12\x1c.pilab.cli.v1.ListVMsRequest\x1a\x1d.pilab.cli.v1.ListVMsResponse\x12>\n" +
-	"\bUpdateVM\x12\x1d.pilab.cli.v1.UpdateVMRequest\x1a\x13.pilab.common.v1.VM\x12A\n" +
-	"\bDeleteVM\x12\x1d.pilab.cli.v1.DeleteVMRequest\x1a\x16.google.protobuf.Empty\x12?\n" +
-	"\aStartVM\x12\x1c.pilab.cli.v1.StartVMRequest\x1a\x16.google.protobuf.Empty\x12=\n" +
-	"\x06StopVM\x12\x1b.pilab.cli.v1.StopVMRequest\x1a\x16.google.protobuf.Empty\x12C\n" +
-	"\tRestartVM\x12\x1e.pilab.cli.v1.RestartVMRequest\x1a\x16.google.protobuf.Empty\x12?\n" +
-	"\aPauseVM\x12\x1c.pilab.cli.v1.PauseVMRequest\x1a\x16.google.protobuf.Empty\x12C\n" +
-	"\tUnpauseVM\x12\x1e.pilab.cli.v1.UnpauseVMRequest\x1a\x16.google.protobuf.Empty\x12C\n" +
-	"\tMigrateVM\x12\x1e.pilab.cli.v1.MigrateVMRequest\x1a\x16.google.protobuf.Empty\x12@\n" +
-	"\tRebuildVM\x12\x1e.pilab.cli.v1.RebuildVMRequest\x1a\x13.pilab.common.v1.VM\x12<\n" +
-	"\aCloneVM\x12\x1c.pilab.cli.v1.CloneVMRequest\x1a\x13.pilab.common.v1.VM\x12H\n" +
-	"\rLinkedCloneVM\x12\".pilab.cli.v1.LinkedCloneVMRequest\x1a\x13.pilab.common.v1.VM\x12U\n" +
-	"\fGetVMConsole\x12!.pilab.cli.v1.GetVMConsoleRequest\x1a\".pilab.cli.v1.GetVMConsoleResponse\x12d\n" +
-	"\x11UpdateVMResources\x12&.pilab.cli.v1.UpdateVMResourcesRequest\x1a'.pilab.cli.v1.UpdateVMResourcesResponse\x12[\n" +
-	"\x0eGetVMResources\x12#.pilab.cli.v1.GetVMResourcesRequest\x1a$.pilab.cli.v1.GetVMResourcesResponse2\xc2\x04\n" +
-	"\vDiskService\x12D\n" +
+	"totalCount2\xd3\x03\n" +
+	"\vAuthService\x12H\n" +
+	"\x05Login\x12\x1a.pilab.cli.v1.LoginRequest\x1a\x1b.pilab.cli.v1.LoginResponse\"\x06\xa2\xbb\x18\x02\x18\x02\x12o\n" +
+	"\x12InitiateDeviceAuth\x12'.pilab.cli.v1.InitiateDeviceAuthRequest\x1a(.pilab.cli.v1.InitiateDeviceAuthResponse\"\x06\xa2\xbb\x18\x02\x18\x02\x12c\n" +
+	"\x0ePollDeviceAuth\x12#.pilab.cli.v1.PollDeviceAuthRequest\x1a$.pilab.cli.v1.PollDeviceAuthResponse\"\x06\xa2\xbb\x18\x02\x18\x02\x12S\n" +
+	"\x06Logout\x12\x1b.pilab.cli.v1.LogoutRequest\x1a\x16.google.protobuf.Empty\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04User\x12\x06update\x18\x01\x12O\n" +
+	"\x0eGetCurrentUser\x12\x16.google.protobuf.Empty\x1a\x12.pilab.cli.v1.User\"\x11\xa2\xbb\x18\r\n" +
+	"\x04User\x12\x03get\x18\x012\xda\r\n" +
+	"\tVMService\x12^\n" +
+	"\bCreateVM\x12\x1d.pilab.cli.v1.CreateVMRequest\x1a\x13.pilab.common.v1.VM\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12U\n" +
+	"\x05GetVM\x12\x1a.pilab.cli.v1.GetVMRequest\x1a\x13.pilab.common.v1.VM\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12d\n" +
+	"\aListVMs\x12\x1c.pilab.cli.v1.ListVMsRequest\x1a\x1d.pilab.cli.v1.ListVMsResponse\"\x1c\xa2\xbb\x18\x18\n" +
+	"\x0eVirtualMachine\x12\x04list\x18\x01\x12^\n" +
+	"\bUpdateVM\x12\x1d.pilab.cli.v1.UpdateVMRequest\x1a\x13.pilab.common.v1.VM\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06update\x18\x01\x12a\n" +
+	"\bDeleteVM\x12\x1d.pilab.cli.v1.DeleteVMRequest\x1a\x16.google.protobuf.Empty\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06delete\x18\x01\x12^\n" +
+	"\aStartVM\x12\x1c.pilab.cli.v1.StartVMRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12\\\n" +
+	"\x06StopVM\x12\x1b.pilab.cli.v1.StopVMRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12b\n" +
+	"\tRestartVM\x12\x1e.pilab.cli.v1.RestartVMRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12^\n" +
+	"\aPauseVM\x12\x1c.pilab.cli.v1.PauseVMRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12b\n" +
+	"\tUnpauseVM\x12\x1e.pilab.cli.v1.UnpauseVMRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12d\n" +
+	"\tMigrateVM\x12\x1e.pilab.cli.v1.MigrateVMRequest\x1a\x16.google.protobuf.Empty\"\x1f\xa2\xbb\x18\x1b\n" +
+	"\x0eVirtualMachine\x12\amigrate\x18\x01\x12`\n" +
+	"\tRebuildVM\x12\x1e.pilab.cli.v1.RebuildVMRequest\x1a\x13.pilab.common.v1.VM\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12\\\n" +
+	"\aCloneVM\x12\x1c.pilab.cli.v1.CloneVMRequest\x1a\x13.pilab.common.v1.VM\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12h\n" +
+	"\rLinkedCloneVM\x12\".pilab.cli.v1.LinkedCloneVMRequest\x1a\x13.pilab.common.v1.VM\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12v\n" +
+	"\fGetVMConsole\x12!.pilab.cli.v1.GetVMConsoleRequest\x1a\".pilab.cli.v1.GetVMConsoleResponse\"\x1f\xa2\xbb\x18\x1b\n" +
+	"\x0eVirtualMachine\x12\aconsole\x18\x01\x12\x84\x01\n" +
+	"\x11UpdateVMResources\x12&.pilab.cli.v1.UpdateVMResourcesRequest\x1a'.pilab.cli.v1.UpdateVMResourcesResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06update\x18\x01\x12x\n" +
+	"\x0eGetVMResources\x12#.pilab.cli.v1.GetVMResourcesRequest\x1a$.pilab.cli.v1.GetVMResourcesResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x012\xab\x06\n" +
+	"\vDiskService\x12a\n" +
 	"\n" +
-	"CreateDisk\x12\x1f.pilab.cli.v1.CreateDiskRequest\x1a\x15.pilab.common.v1.Disk\x12>\n" +
-	"\aGetDisk\x12\x1c.pilab.cli.v1.GetDiskRequest\x1a\x15.pilab.common.v1.Disk\x12L\n" +
-	"\tListDisks\x12\x1e.pilab.cli.v1.ListDisksRequest\x1a\x1f.pilab.cli.v1.ListDisksResponse\x12D\n" +
+	"CreateDisk\x12\x1f.pilab.cli.v1.CreateDiskRequest\x1a\x15.pilab.common.v1.Disk\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vVirtualDisk\x12\x06create\x18\x01\x12X\n" +
+	"\aGetDisk\x12\x1c.pilab.cli.v1.GetDiskRequest\x1a\x15.pilab.common.v1.Disk\"\x18\xa2\xbb\x18\x14\n" +
+	"\vVirtualDisk\x12\x03get\x18\x01\x12g\n" +
+	"\tListDisks\x12\x1e.pilab.cli.v1.ListDisksRequest\x1a\x1f.pilab.cli.v1.ListDisksResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\vVirtualDisk\x12\x04list\x18\x01\x12a\n" +
 	"\n" +
-	"UpdateDisk\x12\x1f.pilab.cli.v1.UpdateDiskRequest\x1a\x15.pilab.common.v1.Disk\x12E\n" +
+	"UpdateDisk\x12\x1f.pilab.cli.v1.UpdateDiskRequest\x1a\x15.pilab.common.v1.Disk\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vVirtualDisk\x12\x06update\x18\x01\x12b\n" +
 	"\n" +
-	"DeleteDisk\x12\x1f.pilab.cli.v1.DeleteDiskRequest\x1a\x16.google.protobuf.Empty\x12D\n" +
+	"DeleteDisk\x12\x1f.pilab.cli.v1.DeleteDiskRequest\x1a\x16.google.protobuf.Empty\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vVirtualDisk\x12\x06delete\x18\x01\x12a\n" +
 	"\n" +
-	"ExtendDisk\x12\x1f.pilab.cli.v1.ExtendDiskRequest\x1a\x15.pilab.common.v1.Disk\x12E\n" +
+	"ExtendDisk\x12\x1f.pilab.cli.v1.ExtendDiskRequest\x1a\x15.pilab.common.v1.Disk\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vVirtualDisk\x12\x06update\x18\x01\x12e\n" +
 	"\n" +
-	"AttachDisk\x12\x1f.pilab.cli.v1.AttachDiskRequest\x1a\x16.google.protobuf.Empty\x12E\n" +
+	"AttachDisk\x12\x1f.pilab.cli.v1.AttachDiskRequest\x1a\x16.google.protobuf.Empty\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x01\x12e\n" +
 	"\n" +
-	"DetachDisk\x12\x1f.pilab.cli.v1.DetachDiskRequest\x1a\x16.google.protobuf.Empty2\xf4\x02\n" +
-	"\fImageService\x12>\n" +
-	"\bGetImage\x12\x1d.pilab.cli.v1.GetImageRequest\x1a\x13.pilab.cli.v1.Image\x12O\n" +
+	"DetachDisk\x12\x1f.pilab.cli.v1.DetachDiskRequest\x1a\x16.google.protobuf.Empty\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x012\xf1\x03\n" +
+	"\fImageService\x12U\n" +
+	"\bGetImage\x12\x1d.pilab.cli.v1.GetImageRequest\x1a\x13.pilab.cli.v1.Image\"\x15\xa2\xbb\x18\x11\n" +
+	"\bTemplate\x12\x03get\x18\x01\x12g\n" +
 	"\n" +
-	"ListImages\x12\x1f.pilab.cli.v1.ListImagesRequest\x1a .pilab.cli.v1.ListImagesResponse\x12D\n" +
-	"\vCreateImage\x12 .pilab.cli.v1.CreateImageRequest\x1a\x13.pilab.cli.v1.Image\x12D\n" +
-	"\vUploadImage\x12 .pilab.cli.v1.UploadImageRequest\x1a\x13.pilab.cli.v1.Image\x12G\n" +
-	"\vDeleteImage\x12 .pilab.cli.v1.DeleteImageRequest\x1a\x16.google.protobuf.Empty2\x82\x04\n" +
-	"\x0fSnapshotService\x12J\n" +
-	"\vGetSnapshot\x12 .pilab.cli.v1.GetSnapshotRequest\x1a\x19.pilab.common.v1.Snapshot\x12X\n" +
-	"\rListSnapshots\x12\".pilab.cli.v1.ListSnapshotsRequest\x1a#.pilab.cli.v1.ListSnapshotsResponse\x12P\n" +
-	"\x0eCreateSnapshot\x12#.pilab.cli.v1.CreateSnapshotRequest\x1a\x19.pilab.common.v1.Snapshot\x12O\n" +
-	"\x0fRestoreSnapshot\x12$.pilab.cli.v1.RestoreSnapshotRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
-	"\x0eDeleteSnapshot\x12#.pilab.cli.v1.DeleteSnapshotRequest\x1a\x16.google.protobuf.Empty\x12W\n" +
-	"\x13ConsolidateSnapshot\x12(.pilab.cli.v1.SnapshotConsolidateRequest\x1a\x16.google.protobuf.Empty2\xb0\v\n" +
-	"\x0eNetworkService\x12J\n" +
-	"\rCreateNetwork\x12\".pilab.cli.v1.CreateNetworkRequest\x1a\x15.pilab.cli.v1.Network\x12D\n" +
+	"ListImages\x12\x1f.pilab.cli.v1.ListImagesRequest\x1a .pilab.cli.v1.ListImagesResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\bTemplate\x12\x04list\x18\x01\x12^\n" +
+	"\vCreateImage\x12 .pilab.cli.v1.CreateImageRequest\x1a\x13.pilab.cli.v1.Image\"\x18\xa2\xbb\x18\x14\n" +
+	"\bTemplate\x12\x06create\x18\x01\x12^\n" +
+	"\vUploadImage\x12 .pilab.cli.v1.UploadImageRequest\x1a\x13.pilab.cli.v1.Image\"\x18\xa2\xbb\x18\x14\n" +
+	"\bTemplate\x12\x06create\x18\x01\x12a\n" +
+	"\vDeleteImage\x12 .pilab.cli.v1.DeleteImageRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bTemplate\x12\x06delete\x18\x012\x9b\x05\n" +
+	"\x0fSnapshotService\x12a\n" +
+	"\vGetSnapshot\x12 .pilab.cli.v1.GetSnapshotRequest\x1a\x19.pilab.common.v1.Snapshot\"\x15\xa2\xbb\x18\x11\n" +
+	"\bSnapshot\x12\x03get\x18\x01\x12p\n" +
+	"\rListSnapshots\x12\".pilab.cli.v1.ListSnapshotsRequest\x1a#.pilab.cli.v1.ListSnapshotsResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\bSnapshot\x12\x04list\x18\x01\x12l\n" +
+	"\x0eCreateSnapshot\x12#.pilab.cli.v1.CreateSnapshotRequest\x1a\x19.pilab.common.v1.Snapshot\"\x1a\xa2\xbb\x18\x16\n" +
+	"\bSnapshot\x12\bsnapshot\x18\x01\x12i\n" +
+	"\x0fRestoreSnapshot\x12$.pilab.cli.v1.RestoreSnapshotRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06revert\x18\x01\x12g\n" +
+	"\x0eDeleteSnapshot\x12#.pilab.cli.v1.DeleteSnapshotRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06delete\x18\x01\x12q\n" +
+	"\x13ConsolidateSnapshot\x12(.pilab.cli.v1.SnapshotConsolidateRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06update\x18\x012\x83\x0f\n" +
+	"\x0eNetworkService\x12c\n" +
+	"\rCreateNetwork\x12\".pilab.cli.v1.CreateNetworkRequest\x1a\x15.pilab.cli.v1.Network\"\x17\xa2\xbb\x18\x13\n" +
+	"\aNetwork\x12\x06create\x18\x01\x12Z\n" +
 	"\n" +
-	"GetNetwork\x12\x1f.pilab.cli.v1.GetNetworkRequest\x1a\x15.pilab.cli.v1.Network\x12U\n" +
-	"\fListNetworks\x12!.pilab.cli.v1.ListNetworksRequest\x1a\".pilab.cli.v1.ListNetworksResponse\x12J\n" +
-	"\rUpdateNetwork\x12\".pilab.cli.v1.UpdateNetworkRequest\x1a\x15.pilab.cli.v1.Network\x12K\n" +
-	"\rDeleteNetwork\x12\".pilab.cli.v1.DeleteNetworkRequest\x1a\x16.google.protobuf.Empty\x12b\n" +
-	"\x13GetNetworkInterface\x12(.pilab.cli.v1.GetNetworkInterfaceRequest\x1a!.pilab.common.v1.NetworkInterface\x12p\n" +
-	"\x15ListNetworkInterfaces\x12*.pilab.cli.v1.ListNetworkInterfacesRequest\x1a+.pilab.cli.v1.ListNetworkInterfacesResponse\x12b\n" +
-	"\x13AddNetworkInterface\x12(.pilab.cli.v1.AddNetworkInterfaceRequest\x1a!.pilab.common.v1.NetworkInterface\x12]\n" +
-	"\x16RemoveNetworkInterface\x12+.pilab.cli.v1.RemoveNetworkInterfaceRequest\x1a\x16.google.protobuf.Empty\x12J\n" +
-	"\rCreateVSwitch\x12\".pilab.cli.v1.CreateVSwitchRequest\x1a\x15.pilab.cli.v1.VSwitch\x12D\n" +
+	"GetNetwork\x12\x1f.pilab.cli.v1.GetNetworkRequest\x1a\x15.pilab.cli.v1.Network\"\x14\xa2\xbb\x18\x10\n" +
+	"\aNetwork\x12\x03get\x18\x01\x12l\n" +
+	"\fListNetworks\x12!.pilab.cli.v1.ListNetworksRequest\x1a\".pilab.cli.v1.ListNetworksResponse\"\x15\xa2\xbb\x18\x11\n" +
+	"\aNetwork\x12\x04list\x18\x01\x12c\n" +
+	"\rUpdateNetwork\x12\".pilab.cli.v1.UpdateNetworkRequest\x1a\x15.pilab.cli.v1.Network\"\x17\xa2\xbb\x18\x13\n" +
+	"\aNetwork\x12\x06update\x18\x01\x12d\n" +
+	"\rDeleteNetwork\x12\".pilab.cli.v1.DeleteNetworkRequest\x1a\x16.google.protobuf.Empty\"\x17\xa2\xbb\x18\x13\n" +
+	"\aNetwork\x12\x06delete\x18\x01\x12\x7f\n" +
+	"\x13GetNetworkInterface\x12(.pilab.cli.v1.GetNetworkInterfaceRequest\x1a!.pilab.common.v1.NetworkInterface\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12\x8e\x01\n" +
+	"\x15ListNetworkInterfaces\x12*.pilab.cli.v1.ListNetworkInterfacesRequest\x1a+.pilab.cli.v1.ListNetworkInterfacesResponse\"\x1c\xa2\xbb\x18\x18\n" +
+	"\x0eVirtualMachine\x12\x04list\x18\x01\x12\x82\x01\n" +
+	"\x13AddNetworkInterface\x12(.pilab.cli.v1.AddNetworkInterfaceRequest\x1a!.pilab.common.v1.NetworkInterface\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12}\n" +
+	"\x16RemoveNetworkInterface\x12+.pilab.cli.v1.RemoveNetworkInterfaceRequest\x1a\x16.google.protobuf.Empty\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06delete\x18\x01\x12g\n" +
+	"\rCreateVSwitch\x12\".pilab.cli.v1.CreateVSwitchRequest\x1a\x15.pilab.cli.v1.VSwitch\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tOVSBridge\x12\x06create\x18\x01 \x01\x12^\n" +
 	"\n" +
-	"GetVSwitch\x12\x1f.pilab.cli.v1.GetVSwitchRequest\x1a\x15.pilab.cli.v1.VSwitch\x12X\n" +
-	"\rListVSwitches\x12\".pilab.cli.v1.ListVSwitchesRequest\x1a#.pilab.cli.v1.ListVSwitchesResponse\x12K\n" +
-	"\rDeleteVSwitch\x12\".pilab.cli.v1.DeleteVSwitchRequest\x1a\x16.google.protobuf.Empty\x12P\n" +
-	"\x0fCreatePortGroup\x12$.pilab.cli.v1.CreatePortGroupRequest\x1a\x17.pilab.cli.v1.PortGroup\x12J\n" +
-	"\fGetPortGroup\x12!.pilab.cli.v1.GetPortGroupRequest\x1a\x17.pilab.cli.v1.PortGroup\x12[\n" +
-	"\x0eListPortGroups\x12#.pilab.cli.v1.ListPortGroupsRequest\x1a$.pilab.cli.v1.ListPortGroupsResponse\x12O\n" +
-	"\x0fDeletePortGroup\x12$.pilab.cli.v1.DeletePortGroupRequest\x1a\x16.google.protobuf.Empty2\xc3\x04\n" +
-	"\x0fPublicIPService\x12M\n" +
-	"\x0eCreatePublicIP\x12#.pilab.cli.v1.CreatePublicIPRequest\x1a\x16.pilab.cli.v1.PublicIP\x12G\n" +
-	"\vGetPublicIP\x12 .pilab.cli.v1.GetPublicIPRequest\x1a\x16.pilab.cli.v1.PublicIP\x12X\n" +
-	"\rListPublicIPs\x12\".pilab.cli.v1.ListPublicIPsRequest\x1a#.pilab.cli.v1.ListPublicIPsResponse\x12M\n" +
-	"\x0eUpdatePublicIP\x12#.pilab.cli.v1.UpdatePublicIPRequest\x1a\x16.pilab.cli.v1.PublicIP\x12M\n" +
-	"\x0eDeletePublicIP\x12#.pilab.cli.v1.DeletePublicIPRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
-	"\x0eAssignPublicIP\x12#.pilab.cli.v1.AssignPublicIPRequest\x1a\x16.google.protobuf.Empty\x12Q\n" +
-	"\x10UnassignPublicIP\x12%.pilab.cli.v1.UnassignPublicIPRequest\x1a\x16.google.protobuf.Empty2\x93\x05\n" +
-	"\x0fSecurityService\x12\\\n" +
-	"\x13CreateSecurityGroup\x12(.pilab.cli.v1.CreateSecurityGroupRequest\x1a\x1b.pilab.cli.v1.SecurityGroup\x12V\n" +
-	"\x10GetSecurityGroup\x12%.pilab.cli.v1.GetSecurityGroupRequest\x1a\x1b.pilab.cli.v1.SecurityGroup\x12g\n" +
-	"\x12ListSecurityGroups\x12'.pilab.cli.v1.ListSecurityGroupsRequest\x1a(.pilab.cli.v1.ListSecurityGroupsResponse\x12\\\n" +
-	"\x13UpdateSecurityGroup\x12(.pilab.cli.v1.UpdateSecurityGroupRequest\x1a\x1b.pilab.cli.v1.SecurityGroup\x12W\n" +
-	"\x13DeleteSecurityGroup\x12(.pilab.cli.v1.DeleteSecurityGroupRequest\x1a\x16.google.protobuf.Empty\x12S\n" +
-	"\x0fAddSecurityRule\x12$.pilab.cli.v1.AddSecurityRuleRequest\x1a\x1a.pilab.cli.v1.SecurityRule\x12U\n" +
-	"\x12RemoveSecurityRule\x12'.pilab.cli.v1.RemoveSecurityRuleRequest\x1a\x16.google.protobuf.Empty2\xbd\x05\n" +
-	"\x0fTemplateService\x12M\n" +
-	"\x0eCreateTemplate\x12#.pilab.cli.v1.CreateTemplateRequest\x1a\x16.pilab.cli.v1.Template\x12G\n" +
-	"\vGetTemplate\x12 .pilab.cli.v1.GetTemplateRequest\x1a\x16.pilab.cli.v1.Template\x12X\n" +
-	"\rListTemplates\x12\".pilab.cli.v1.ListTemplatesRequest\x1a#.pilab.cli.v1.ListTemplatesResponse\x12M\n" +
-	"\x0eDeleteTemplate\x12#.pilab.cli.v1.DeleteTemplateRequest\x1a\x16.google.protobuf.Empty\x12^\n" +
-	"\x0fListOSTemplates\x12$.pilab.cli.v1.ListOSTemplatesRequest\x1a%.pilab.cli.v1.ListOSTemplatesResponse\x12M\n" +
-	"\rGetOSTemplate\x12\".pilab.cli.v1.GetOSTemplateRequest\x1a\x18.pilab.cli.v1.OSTemplate\x12^\n" +
-	"\x0fSyncOSTemplates\x12$.pilab.cli.v1.SyncOSTemplatesRequest\x1a%.pilab.cli.v1.SyncOSTemplatesResponse\x12Z\n" +
-	"\x16CreateVMFromOSTemplate\x12+.pilab.cli.v1.CreateVMFromOSTemplateRequest\x1a\x13.pilab.common.v1.VM2\xb8\x01\n" +
-	"\x11MonitoringService\x12O\n" +
+	"GetVSwitch\x12\x1f.pilab.cli.v1.GetVSwitchRequest\x1a\x15.pilab.cli.v1.VSwitch\"\x18\xa2\xbb\x18\x14\n" +
+	"\tOVSBridge\x12\x03get\x18\x01 \x01\x12s\n" +
+	"\rListVSwitches\x12\".pilab.cli.v1.ListVSwitchesRequest\x1a#.pilab.cli.v1.ListVSwitchesResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\tOVSBridge\x12\x04list\x18\x01 \x01\x12h\n" +
+	"\rDeleteVSwitch\x12\".pilab.cli.v1.DeleteVSwitchRequest\x1a\x16.google.protobuf.Empty\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tOVSBridge\x12\x06delete\x18\x01 \x01\x12m\n" +
+	"\x0fCreatePortGroup\x12$.pilab.cli.v1.CreatePortGroupRequest\x1a\x17.pilab.cli.v1.PortGroup\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tPortGroup\x12\x06create\x18\x01 \x01\x12d\n" +
+	"\fGetPortGroup\x12!.pilab.cli.v1.GetPortGroupRequest\x1a\x17.pilab.cli.v1.PortGroup\"\x18\xa2\xbb\x18\x14\n" +
+	"\tPortGroup\x12\x03get\x18\x01 \x01\x12v\n" +
+	"\x0eListPortGroups\x12#.pilab.cli.v1.ListPortGroupsRequest\x1a$.pilab.cli.v1.ListPortGroupsResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\tPortGroup\x12\x04list\x18\x01 \x01\x12l\n" +
+	"\x0fDeletePortGroup\x12$.pilab.cli.v1.DeletePortGroupRequest\x1a\x16.google.protobuf.Empty\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tPortGroup\x12\x06delete\x18\x01 \x012\xf4\x05\n" +
+	"\x0fPublicIPService\x12g\n" +
+	"\x0eCreatePublicIP\x12#.pilab.cli.v1.CreatePublicIPRequest\x1a\x16.pilab.cli.v1.PublicIP\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06create\x18\x01\x12^\n" +
+	"\vGetPublicIP\x12 .pilab.cli.v1.GetPublicIPRequest\x1a\x16.pilab.cli.v1.PublicIP\"\x15\xa2\xbb\x18\x11\n" +
+	"\bPublicIP\x12\x03get\x18\x01\x12p\n" +
+	"\rListPublicIPs\x12\".pilab.cli.v1.ListPublicIPsRequest\x1a#.pilab.cli.v1.ListPublicIPsResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\bPublicIP\x12\x04list\x18\x01\x12g\n" +
+	"\x0eUpdatePublicIP\x12#.pilab.cli.v1.UpdatePublicIPRequest\x1a\x16.pilab.cli.v1.PublicIP\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06update\x18\x01\x12g\n" +
+	"\x0eDeletePublicIP\x12#.pilab.cli.v1.DeletePublicIPRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06delete\x18\x01\x12g\n" +
+	"\x0eAssignPublicIP\x12#.pilab.cli.v1.AssignPublicIPRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06attach\x18\x01\x12k\n" +
+	"\x10UnassignPublicIP\x12%.pilab.cli.v1.UnassignPublicIPRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06attach\x18\x012\xe8\x06\n" +
+	"\x0fSecurityService\x12{\n" +
+	"\x13CreateSecurityGroup\x12(.pilab.cli.v1.CreateSecurityGroupRequest\x1a\x1b.pilab.cli.v1.SecurityGroup\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06create\x18\x01\x12r\n" +
+	"\x10GetSecurityGroup\x12%.pilab.cli.v1.GetSecurityGroupRequest\x1a\x1b.pilab.cli.v1.SecurityGroup\"\x1a\xa2\xbb\x18\x16\n" +
+	"\rSecurityGroup\x12\x03get\x18\x01\x12\x84\x01\n" +
+	"\x12ListSecurityGroups\x12'.pilab.cli.v1.ListSecurityGroupsRequest\x1a(.pilab.cli.v1.ListSecurityGroupsResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\rSecurityGroup\x12\x04list\x18\x01\x12{\n" +
+	"\x13UpdateSecurityGroup\x12(.pilab.cli.v1.UpdateSecurityGroupRequest\x1a\x1b.pilab.cli.v1.SecurityGroup\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01\x12v\n" +
+	"\x13DeleteSecurityGroup\x12(.pilab.cli.v1.DeleteSecurityGroupRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06delete\x18\x01\x12r\n" +
+	"\x0fAddSecurityRule\x12$.pilab.cli.v1.AddSecurityRuleRequest\x1a\x1a.pilab.cli.v1.SecurityRule\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01\x12t\n" +
+	"\x12RemoveSecurityRule\x12'.pilab.cli.v1.RemoveSecurityRuleRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x012\x89\a\n" +
+	"\x0fTemplateService\x12g\n" +
+	"\x0eCreateTemplate\x12#.pilab.cli.v1.CreateTemplateRequest\x1a\x16.pilab.cli.v1.Template\"\x18\xa2\xbb\x18\x14\n" +
+	"\bTemplate\x12\x06create\x18\x01\x12^\n" +
+	"\vGetTemplate\x12 .pilab.cli.v1.GetTemplateRequest\x1a\x16.pilab.cli.v1.Template\"\x15\xa2\xbb\x18\x11\n" +
+	"\bTemplate\x12\x03get\x18\x01\x12p\n" +
+	"\rListTemplates\x12\".pilab.cli.v1.ListTemplatesRequest\x1a#.pilab.cli.v1.ListTemplatesResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\bTemplate\x12\x04list\x18\x01\x12g\n" +
+	"\x0eDeleteTemplate\x12#.pilab.cli.v1.DeleteTemplateRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bTemplate\x12\x06delete\x18\x01\x12v\n" +
+	"\x0fListOSTemplates\x12$.pilab.cli.v1.ListOSTemplatesRequest\x1a%.pilab.cli.v1.ListOSTemplatesResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\bTemplate\x12\x04list\x18\x01\x12d\n" +
+	"\rGetOSTemplate\x12\".pilab.cli.v1.GetOSTemplateRequest\x1a\x18.pilab.cli.v1.OSTemplate\"\x15\xa2\xbb\x18\x11\n" +
+	"\bTemplate\x12\x03get\x18\x01\x12x\n" +
+	"\x0fSyncOSTemplates\x12$.pilab.cli.v1.SyncOSTemplatesRequest\x1a%.pilab.cli.v1.SyncOSTemplatesResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bTemplate\x12\x06update\x18\x01\x12z\n" +
+	"\x16CreateVMFromOSTemplate\x12+.pilab.cli.v1.CreateVMFromOSTemplateRequest\x1a\x13.pilab.common.v1.VM\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x012\xf2\x01\n" +
+	"\x11MonitoringService\x12l\n" +
 	"\n" +
-	"GetMetrics\x12\x1f.pilab.cli.v1.GetMetricsRequest\x1a .pilab.cli.v1.GetMetricsResponse\x12R\n" +
-	"\vGetActivity\x12 .pilab.cli.v1.GetActivityRequest\x1a!.pilab.cli.v1.GetActivityResponse2\xae\x06\n" +
-	"\fAdminService\x12Y\n" +
-	"\x12CreateOrganization\x12'.pilab.cli.v1.CreateOrganizationRequest\x1a\x1a.pilab.cli.v1.Organization\x12S\n" +
-	"\x0fGetOrganization\x12$.pilab.cli.v1.GetOrganizationRequest\x1a\x1a.pilab.cli.v1.Organization\x12d\n" +
-	"\x11ListOrganizations\x12&.pilab.cli.v1.ListOrganizationsRequest\x1a'.pilab.cli.v1.ListOrganizationsResponse\x12Y\n" +
-	"\x12UpdateOrganization\x12'.pilab.cli.v1.UpdateOrganizationRequest\x1a\x1a.pilab.cli.v1.Organization\x12U\n" +
-	"\x12DeleteOrganization\x12'.pilab.cli.v1.DeleteOrganizationRequest\x1a\x16.google.protobuf.Empty\x12A\n" +
+	"GetMetrics\x12\x1f.pilab.cli.v1.GetMetricsRequest\x1a .pilab.cli.v1.GetMetricsResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12o\n" +
+	"\vGetActivity\x12 .pilab.cli.v1.GetActivityRequest\x1a!.pilab.cli.v1.GetActivityResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x012\xa9\b\n" +
+	"\fAdminService\x12w\n" +
+	"\x12CreateOrganization\x12'.pilab.cli.v1.CreateOrganizationRequest\x1a\x1a.pilab.cli.v1.Organization\"\x1c\xa2\xbb\x18\x18\n" +
+	"\fOrganization\x12\x06create\x18\x01\x12n\n" +
+	"\x0fGetOrganization\x12$.pilab.cli.v1.GetOrganizationRequest\x1a\x1a.pilab.cli.v1.Organization\"\x19\xa2\xbb\x18\x15\n" +
+	"\fOrganization\x12\x03get\x18\x01\x12\x80\x01\n" +
+	"\x11ListOrganizations\x12&.pilab.cli.v1.ListOrganizationsRequest\x1a'.pilab.cli.v1.ListOrganizationsResponse\"\x1a\xa2\xbb\x18\x16\n" +
+	"\fOrganization\x12\x04list\x18\x01\x12w\n" +
+	"\x12UpdateOrganization\x12'.pilab.cli.v1.UpdateOrganizationRequest\x1a\x1a.pilab.cli.v1.Organization\"\x1c\xa2\xbb\x18\x18\n" +
+	"\fOrganization\x12\x06update\x18\x01\x12s\n" +
+	"\x12DeleteOrganization\x12'.pilab.cli.v1.DeleteOrganizationRequest\x1a\x16.google.protobuf.Empty\"\x1c\xa2\xbb\x18\x18\n" +
+	"\fOrganization\x12\x06delete\x18\x01\x12W\n" +
 	"\n" +
-	"CreateUser\x12\x1f.pilab.cli.v1.CreateUserRequest\x1a\x12.pilab.cli.v1.User\x12;\n" +
-	"\aGetUser\x12\x1c.pilab.cli.v1.GetUserRequest\x1a\x12.pilab.cli.v1.User\x12L\n" +
-	"\tListUsers\x12\x1e.pilab.cli.v1.ListUsersRequest\x1a\x1f.pilab.cli.v1.ListUsersResponse\x12A\n" +
+	"CreateUser\x12\x1f.pilab.cli.v1.CreateUserRequest\x1a\x12.pilab.cli.v1.User\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04User\x12\x06create\x18\x01\x12N\n" +
+	"\aGetUser\x12\x1c.pilab.cli.v1.GetUserRequest\x1a\x12.pilab.cli.v1.User\"\x11\xa2\xbb\x18\r\n" +
+	"\x04User\x12\x03get\x18\x01\x12`\n" +
+	"\tListUsers\x12\x1e.pilab.cli.v1.ListUsersRequest\x1a\x1f.pilab.cli.v1.ListUsersResponse\"\x12\xa2\xbb\x18\x0e\n" +
+	"\x04User\x12\x04list\x18\x01\x12W\n" +
 	"\n" +
-	"UpdateUser\x12\x1f.pilab.cli.v1.UpdateUserRequest\x1a\x12.pilab.cli.v1.User\x12E\n" +
+	"UpdateUser\x12\x1f.pilab.cli.v1.UpdateUserRequest\x1a\x12.pilab.cli.v1.User\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04User\x12\x06update\x18\x01\x12[\n" +
 	"\n" +
-	"DeleteUser\x12\x1f.pilab.cli.v1.DeleteUserRequest\x1a\x16.google.protobuf.Empty2\xc1\a\n" +
-	"\rSystemService\x12C\n" +
+	"DeleteUser\x12\x1f.pilab.cli.v1.DeleteUserRequest\x1a\x16.google.protobuf.Empty\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04User\x12\x06delete\x18\x012\xf9\t\n" +
+	"\rSystemService\x12K\n" +
 	"\n" +
-	"GetVersion\x12\x16.google.protobuf.Empty\x1a\x1d.pilab.cli.v1.VersionResponse\x12P\n" +
-	"\x0fCreateDatastore\x12$.pilab.cli.v1.CreateDatastoreRequest\x1a\x17.pilab.cli.v1.Datastore\x12J\n" +
-	"\fGetDatastore\x12!.pilab.cli.v1.GetDatastoreRequest\x1a\x17.pilab.cli.v1.Datastore\x12[\n" +
-	"\x0eListDatastores\x12#.pilab.cli.v1.ListDatastoresRequest\x1a$.pilab.cli.v1.ListDatastoresResponse\x12O\n" +
-	"\x0fDeleteDatastore\x12$.pilab.cli.v1.DeleteDatastoreRequest\x1a\x16.google.protobuf.Empty\x12M\n" +
-	"\x0eMountDatastore\x12#.pilab.cli.v1.MountDatastoreRequest\x1a\x16.google.protobuf.Empty\x12Q\n" +
-	"\x10UnmountDatastore\x12%.pilab.cli.v1.UnmountDatastoreRequest\x1a\x16.google.protobuf.Empty\x12=\n" +
-	"\vGetHostInfo\x12\x16.google.protobuf.Empty\x1a\x16.pilab.cli.v1.HostInfo\x12O\n" +
-	"\x10GetNetworkConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cli.v1.NetworkConfigResponse\x12O\n" +
-	"\x10GetStorageConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cli.v1.StorageConfigResponse\x12I\n" +
-	"\rGetHostHealth\x12\x16.google.protobuf.Empty\x1a .pilab.cli.v1.HostHealthResponse\x12Q\n" +
-	"\x10ConfigureNetwork\x12%.pilab.cli.v1.ConfigureNetworkRequest\x1a\x16.google.protobuf.EmptyB0Z.go.pilab.hu/cloud/virtpb/v3/pilab/cli/v1;cliv1b\x06proto3"
+	"GetVersion\x12\x16.google.protobuf.Empty\x1a\x1d.pilab.cli.v1.VersionResponse\"\x06\xa2\xbb\x18\x02\x18\x02\x12m\n" +
+	"\x0fCreateDatastore\x12$.pilab.cli.v1.CreateDatastoreRequest\x1a\x17.pilab.cli.v1.Datastore\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tDatastore\x12\x06create\x18\x01 \x01\x12d\n" +
+	"\fGetDatastore\x12!.pilab.cli.v1.GetDatastoreRequest\x1a\x17.pilab.cli.v1.Datastore\"\x18\xa2\xbb\x18\x14\n" +
+	"\tDatastore\x12\x03get\x18\x01 \x01\x12v\n" +
+	"\x0eListDatastores\x12#.pilab.cli.v1.ListDatastoresRequest\x1a$.pilab.cli.v1.ListDatastoresResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\tDatastore\x12\x04list\x18\x01 \x01\x12l\n" +
+	"\x0fDeleteDatastore\x12$.pilab.cli.v1.DeleteDatastoreRequest\x1a\x16.google.protobuf.Empty\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tDatastore\x12\x06delete\x18\x01 \x01\x12j\n" +
+	"\x0eMountDatastore\x12#.pilab.cli.v1.MountDatastoreRequest\x1a\x16.google.protobuf.Empty\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tDatastore\x12\x06create\x18\x01 \x01\x12n\n" +
+	"\x10UnmountDatastore\x12%.pilab.cli.v1.UnmountDatastoreRequest\x1a\x16.google.protobuf.Empty\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tDatastore\x12\x06delete\x18\x01 \x01\x12R\n" +
+	"\vGetHostInfo\x12\x16.google.protobuf.Empty\x1a\x16.pilab.cli.v1.HostInfo\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12n\n" +
+	"\x10GetNetworkConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cli.v1.NetworkConfigResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eNetworkSegment\x12\x03get\x18\x01 \x01\x12k\n" +
+	"\x10GetStorageConfig\x12\x16.google.protobuf.Empty\x1a#.pilab.cli.v1.StorageConfigResponse\"\x1a\xa2\xbb\x18\x16\n" +
+	"\vStoragePool\x12\x03get\x18\x01 \x01\x12^\n" +
+	"\rGetHostHealth\x12\x16.google.protobuf.Empty\x1a .pilab.cli.v1.HostHealthResponse\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12s\n" +
+	"\x10ConfigureNetwork\x12%.pilab.cli.v1.ConfigureNetworkRequest\x1a\x16.google.protobuf.Empty\" \xa2\xbb\x18\x1c\n" +
+	"\x0eNetworkSegment\x12\x06update\x18\x01 \x01B0Z.go.pilab.hu/cloud/virtpb/v3/pilab/cli/v1;cliv1b\x06proto3"
 
 var (
 	file_pilab_cli_v1_cli_service_proto_rawDescOnce sync.Once

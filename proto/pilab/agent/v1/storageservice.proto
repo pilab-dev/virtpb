@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.cloud.agent.v1;
 
+import "pilab/common/v1/authz.proto";
+
 import "pilab/agent/v1/stream.proto";
 import "pilab/agent/v1/agent_service.proto";
 import "pilab/agent/v1/error.proto";
@@ -12,19 +14,45 @@ import "pilab/agent/v1/error.proto";
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1";
 
 service StorageService {
-  rpc VolumeCreate(VolumeCreateRequest) returns (VolumeCreateResponse);
-  rpc VolumeDelete(VolumeDeleteRequest) returns (VolumeDeleteResponse);
-  rpc VolumeResize(VolumeResizeRequest) returns (VolumeResizeResponse);
-  rpc VolumeList(VolumeListRequest) returns (VolumeListResponse);
-  rpc VolumeGet(VolumeGetRequest) returns (VolumeGetResponse);
-  rpc VolumeClone(VolumeCloneRequest) returns (VolumeCloneResponse);
-  rpc VolumeSnapshotCreate(VolumeSnapshotCreateRequest) returns (VolumeSnapshotCreateResponse);
-  rpc VolumeSnapshotRevert(VolumeSnapshotRevertRequest) returns (VolumeSnapshotRevertResponse);
-  rpc VolumeSnapshotDelete(VolumeSnapshotDeleteRequest) returns (VolumeSnapshotDeleteResponse);
-  rpc StoragePoolCreate(StoragePoolCreateRequest) returns (StoragePoolCreateResponse);
-  rpc StoragePoolDelete(StoragePoolDeleteRequest) returns (StoragePoolDeleteResponse);
-  rpc StoragePoolList(StoragePoolListRequest) returns (StoragePoolListResponse);
-  rpc StoragePoolGet(StoragePoolGetRequest) returns (StoragePoolGetResponse);
+  rpc VolumeCreate(VolumeCreateRequest) returns (VolumeCreateResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "create", authn: AUTHN_USER };
+  }
+  rpc VolumeDelete(VolumeDeleteRequest) returns (VolumeDeleteResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc VolumeResize(VolumeResizeRequest) returns (VolumeResizeResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "update", authn: AUTHN_USER };
+  }
+  rpc VolumeList(VolumeListRequest) returns (VolumeListResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "list", authn: AUTHN_USER };
+  }
+  rpc VolumeGet(VolumeGetRequest) returns (VolumeGetResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "get", authn: AUTHN_USER };
+  }
+  rpc VolumeClone(VolumeCloneRequest) returns (VolumeCloneResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualDisk", verb: "create", authn: AUTHN_USER };
+  }
+  rpc VolumeSnapshotCreate(VolumeSnapshotCreateRequest) returns (VolumeSnapshotCreateResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "create", authn: AUTHN_USER };
+  }
+  rpc VolumeSnapshotRevert(VolumeSnapshotRevertRequest) returns (VolumeSnapshotRevertResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "revert", authn: AUTHN_USER };
+  }
+  rpc VolumeSnapshotDelete(VolumeSnapshotDeleteRequest) returns (VolumeSnapshotDeleteResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc StoragePoolCreate(StoragePoolCreateRequest) returns (StoragePoolCreateResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc StoragePoolDelete(StoragePoolDeleteRequest) returns (StoragePoolDeleteResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc StoragePoolList(StoragePoolListRequest) returns (StoragePoolListResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "list", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc StoragePoolGet(StoragePoolGetRequest) returns (StoragePoolGetResponse) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
 }
 
 message Volume {

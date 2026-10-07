@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.network.v2;
 
+import "pilab/common/v1/authz.proto";
+
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "pilab/network/v2/network_common.proto";
@@ -13,8 +15,12 @@ option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2";
 
 // FlowService provides OpenFlow rule debugging and inspection.
 service FlowService {
-  rpc ListFlows(ListFlowsRequest) returns (ListFlowsResponse);
-  rpc DebugFlow(DebugFlowRequest) returns (DebugFlowResponse);
+  rpc ListFlows(ListFlowsRequest) returns (ListFlowsResponse) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "get", authn: AUTHN_USER };
+  }
+  rpc DebugFlow(DebugFlowRequest) returns (DebugFlowResponse) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "get", authn: AUTHN_USER };
+  }
 }
 
 // FlowRule represents an OpenFlow rule on a switch.

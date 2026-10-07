@@ -10,6 +10,7 @@
 package agentv1
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1268,7 +1269,7 @@ var File_pilab_agent_v1_agent_service_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_agent_service_proto_rawDesc = "" +
 	"\n" +
-	"\"pilab/agent/v1/agent_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/agent/v1/stream.proto\x1a\x1apilab/agent/v1/error.proto\"P\n" +
+	"\"pilab/agent/v1/agent_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/common/v1/authz.proto\x1a\x1bpilab/agent/v1/stream.proto\x1a\x1apilab/agent/v1/error.proto\"P\n" +
 	"\x18VmAttachCloudInitRequest\x12\x0e\n" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12$\n" +
 	"\x0ecloud_init_iso\x18\x02 \x01(\fR\fcloudInitIso\"\x1b\n" +
@@ -1360,21 +1361,32 @@ const file_pilab_agent_v1_agent_service_proto_rawDesc = "" +
 	" VmDetachNetworkInterfaceResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12>\n" +
 	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x00R\x05error\x88\x01\x01B\b\n" +
-	"\x06_error2\xf6\n" +
-	"\n" +
-	"\fAgentService\x12\\\n" +
-	"\tVmMigrate\x12&.pilab.cloud.agent.v1.VmMigrateRequest\x1a'.pilab.cloud.agent.v1.VmMigrateResponse\x12Y\n" +
-	"\bVmIpList\x12%.pilab.cloud.agent.v1.VmIpListRequest\x1a&.pilab.cloud.agent.v1.VmIpListResponse\x12}\n" +
-	"\x14VmChangeUserPassword\x121.pilab.cloud.agent.v1.VmChangeUserPasswordRequest\x1a2.pilab.cloud.agent.v1.VmChangeUserPasswordResponse\x12}\n" +
-	"\x14VmBackupSystemVolume\x121.pilab.cloud.agent.v1.VmBackupSystemVolumeRequest\x1a2.pilab.cloud.agent.v1.VmBackupSystemVolumeResponse\x12\x80\x01\n" +
-	"\x15VmRestoreSystemVolume\x122.pilab.cloud.agent.v1.VmRestoreSystemVolumeRequest\x1a3.pilab.cloud.agent.v1.VmRestoreSystemVolumeResponse\x12t\n" +
-	"\x11VmAttachCloudInit\x12..pilab.cloud.agent.v1.VmAttachCloudInitRequest\x1a/.pilab.cloud.agent.v1.VmAttachCloudInitResponse\x12\x89\x01\n" +
-	"\x18VmAttachNetworkInterface\x125.pilab.cloud.agent.v1.VmAttachNetworkInterfaceRequest\x1a6.pilab.cloud.agent.v1.VmAttachNetworkInterfaceResponse\x12\x89\x01\n" +
-	"\x18VmDetachNetworkInterface\x125.pilab.cloud.agent.v1.VmDetachNetworkInterfaceRequest\x1a6.pilab.cloud.agent.v1.VmDetachNetworkInterfaceResponse\x12W\n" +
-	"\x06Stream\x12#.pilab.cloud.agent.v1.StreamRequest\x1a$.pilab.cloud.agent.v1.StreamResponse(\x010\x01\x12e\n" +
-	"\fUpdateConfig\x12).pilab.cloud.agent.v1.UpdateConfigRequest\x1a*.pilab.cloud.agent.v1.UpdateConfigResponse\x12t\n" +
-	"\x11GetHardwareHealth\x12..pilab.cloud.agent.v1.GetHardwareHealthRequest\x1a/.pilab.cloud.agent.v1.GetHardwareHealthResponse\x12h\n" +
-	"\rGetSensorData\x12*.pilab.cloud.agent.v1.GetSensorDataRequest\x1a+.pilab.cloud.agent.v1.GetSensorDataResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
+	"\x06_error2\xcc\r\n" +
+	"\fAgentService\x12}\n" +
+	"\tVmMigrate\x12&.pilab.cloud.agent.v1.VmMigrateRequest\x1a'.pilab.cloud.agent.v1.VmMigrateResponse\"\x1f\xa2\xbb\x18\x1b\n" +
+	"\x0eVirtualMachine\x12\amigrate\x18\x01\x12v\n" +
+	"\bVmIpList\x12%.pilab.cloud.agent.v1.VmIpListRequest\x1a&.pilab.cloud.agent.v1.VmIpListResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12\x9c\x01\n" +
+	"\x14VmChangeUserPassword\x121.pilab.cloud.agent.v1.VmChangeUserPasswordRequest\x1a2.pilab.cloud.agent.v1.VmChangeUserPasswordResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05admin\x18\x01\x12\x99\x01\n" +
+	"\x14VmBackupSystemVolume\x121.pilab.cloud.agent.v1.VmBackupSystemVolumeRequest\x1a2.pilab.cloud.agent.v1.VmBackupSystemVolumeResponse\"\x1a\xa2\xbb\x18\x16\n" +
+	"\bSnapshot\x12\bsnapshot\x18\x01\x12\x9a\x01\n" +
+	"\x15VmRestoreSystemVolume\x122.pilab.cloud.agent.v1.VmRestoreSystemVolumeRequest\x1a3.pilab.cloud.agent.v1.VmRestoreSystemVolumeResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06revert\x18\x01\x12\x94\x01\n" +
+	"\x11VmAttachCloudInit\x12..pilab.cloud.agent.v1.VmAttachCloudInitRequest\x1a/.pilab.cloud.agent.v1.VmAttachCloudInitResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x01\x12\xa9\x01\n" +
+	"\x18VmAttachNetworkInterface\x125.pilab.cloud.agent.v1.VmAttachNetworkInterfaceRequest\x1a6.pilab.cloud.agent.v1.VmAttachNetworkInterfaceResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x01\x12\xa9\x01\n" +
+	"\x18VmDetachNetworkInterface\x125.pilab.cloud.agent.v1.VmDetachNetworkInterfaceRequest\x1a6.pilab.cloud.agent.v1.VmDetachNetworkInterfaceResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x01\x12t\n" +
+	"\x06Stream\x12#.pilab.cloud.agent.v1.StreamRequest\x1a$.pilab.cloud.agent.v1.StreamResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01(\x010\x01\x12}\n" +
+	"\fUpdateConfig\x12).pilab.cloud.agent.v1.UpdateConfigRequest\x1a*.pilab.cloud.agent.v1.UpdateConfigResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\x04Node\x12\x06update\x18\x01 \x01\x12\x89\x01\n" +
+	"\x11GetHardwareHealth\x12..pilab.cloud.agent.v1.GetHardwareHealthRequest\x1a/.pilab.cloud.agent.v1.GetHardwareHealthResponse\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12}\n" +
+	"\rGetSensorData\x12*.pilab.cloud.agent.v1.GetSensorDataRequest\x1a+.pilab.cloud.agent.v1.GetSensorDataResponse\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01B4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_agent_service_proto_rawDescOnce sync.Once

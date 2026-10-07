@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.network.v2;
 
+import "pilab/common/v1/authz.proto";
+
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
@@ -15,39 +17,93 @@ option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2";
 // NetworkService manages virtual networks, ports, VLANs, and virtual clouds.
 service NetworkService {
   // Network operations
-  rpc CreateNetwork(CreateNetworkRequest) returns (VirtualNetwork);
-  rpc GetNetwork(GetNetworkRequest) returns (VirtualNetwork);
-  rpc ListNetworks(ListNetworksRequest) returns (ListNetworksResponse);
-  rpc UpdateNetwork(UpdateNetworkRequest) returns (VirtualNetwork);
-  rpc DeleteNetwork(DeleteNetworkRequest) returns (google.protobuf.Empty);
-  rpc AttachHosts(AttachHostsRequest) returns (google.protobuf.Empty);
-  rpc DetachHosts(DetachHostsRequest) returns (google.protobuf.Empty);
+  rpc CreateNetwork(CreateNetworkRequest) returns (VirtualNetwork) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetNetwork(GetNetworkRequest) returns (VirtualNetwork) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListNetworks(ListNetworksRequest) returns (ListNetworksResponse) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateNetwork(UpdateNetworkRequest) returns (VirtualNetwork) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteNetwork(DeleteNetworkRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc AttachHosts(AttachHostsRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc DetachHosts(DetachHostsRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "attach", authn: AUTHN_USER };
+  }
 
   // Port operations
-  rpc CreatePort(CreatePortRequest) returns (VirtualPort);
-  rpc GetPort(GetPortRequest) returns (VirtualPort);
-  rpc ListPorts(ListPortsRequest) returns (ListPortsResponse);
-  rpc UpdatePort(UpdatePortRequest) returns (VirtualPort);
-  rpc DeletePort(DeletePortRequest) returns (google.protobuf.Empty);
-  rpc AttachPort(AttachPortRequest) returns (google.protobuf.Empty);
-  rpc DetachPort(DetachPortRequest) returns (google.protobuf.Empty);
+  rpc CreatePort(CreatePortRequest) returns (VirtualPort) {
+    option (pilab.common.v1.authz) = { kind: "Port", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetPort(GetPortRequest) returns (VirtualPort) {
+    option (pilab.common.v1.authz) = { kind: "Port", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListPorts(ListPortsRequest) returns (ListPortsResponse) {
+    option (pilab.common.v1.authz) = { kind: "Port", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdatePort(UpdatePortRequest) returns (VirtualPort) {
+    option (pilab.common.v1.authz) = { kind: "Port", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeletePort(DeletePortRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Port", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc AttachPort(AttachPortRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Port", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc DetachPort(DetachPortRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Port", verb: "attach", authn: AUTHN_USER };
+  }
 
   // VLAN operations
-  rpc CreateVLANRange(CreateVLANRangeRequest) returns (VLANRange);
-  rpc ListVLANRanges(ListVLANRangesRequest) returns (ListVLANRangesResponse);
-  rpc AllocateVLAN(AllocateVLANRequest) returns (VLANAllocation);
-  rpc ReleaseVLAN(ReleaseVLANRequest) returns (google.protobuf.Empty);
+  rpc CreateVLANRange(CreateVLANRangeRequest) returns (VLANRange) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "create", authn: AUTHN_USER };
+  }
+  rpc ListVLANRanges(ListVLANRangesRequest) returns (ListVLANRangesResponse) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "list", authn: AUTHN_USER };
+  }
+  rpc AllocateVLAN(AllocateVLANRequest) returns (VLANAllocation) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc ReleaseVLAN(ReleaseVLANRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Network", verb: "attach", authn: AUTHN_USER };
+  }
 
   // Virtual cloud (VXLAN) operations
-  rpc CreateVirtualCloud(CreateVirtualCloudRequest) returns (VirtualCloud);
-  rpc GetVirtualCloud(GetVirtualCloudRequest) returns (VirtualCloud);
-  rpc ListVirtualClouds(ListVirtualCloudsRequest) returns (ListVirtualCloudsResponse);
-  rpc UpdateVirtualCloud(UpdateVirtualCloudRequest) returns (VirtualCloud);
-  rpc DeleteVirtualCloud(DeleteVirtualCloudRequest) returns (google.protobuf.Empty);
-  rpc AddVNIEndpoint(AddVNIEndpointRequest) returns (google.protobuf.Empty);
-  rpc RemoveVNIEndpoint(RemoveVNIEndpointRequest) returns (google.protobuf.Empty);
-  rpc AllocateVNI(AllocateVNIRequest) returns (VNIAllocation);
-  rpc ReleaseVNI(ReleaseVNIRequest) returns (google.protobuf.Empty);
+  rpc CreateVirtualCloud(CreateVirtualCloudRequest) returns (VirtualCloud) {
+    option (pilab.common.v1.authz) = { kind: "VPC", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetVirtualCloud(GetVirtualCloudRequest) returns (VirtualCloud) {
+    option (pilab.common.v1.authz) = { kind: "VPC", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListVirtualClouds(ListVirtualCloudsRequest) returns (ListVirtualCloudsResponse) {
+    option (pilab.common.v1.authz) = { kind: "VPC", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateVirtualCloud(UpdateVirtualCloudRequest) returns (VirtualCloud) {
+    option (pilab.common.v1.authz) = { kind: "VPC", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteVirtualCloud(DeleteVirtualCloudRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VPC", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc AddVNIEndpoint(AddVNIEndpointRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VPC", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc RemoveVNIEndpoint(RemoveVNIEndpointRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VPC", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc AllocateVNI(AllocateVNIRequest) returns (VNIAllocation) {
+    option (pilab.common.v1.authz) = { kind: "VPC", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc ReleaseVNI(ReleaseVNIRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "VPC", verb: "attach", authn: AUTHN_USER };
+  }
 }
 
 // VirtualNetwork represents a virtual network with its configuration.

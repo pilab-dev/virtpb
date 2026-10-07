@@ -1051,7 +1051,7 @@ var File_pilab_director_v1_clouddirector_proto protoreflect.FileDescriptor
 
 const file_pilab_director_v1_clouddirector_proto_rawDesc = "" +
 	"\n" +
-	"%pilab/director/v1/clouddirector.proto\x12\x11pilab.director.v1\x1a\x1apilab/common/v1/host.proto\x1a\x1apilab/common/v1/task.proto\"6\n" +
+	"%pilab/director/v1/clouddirector.proto\x12\x11pilab.director.v1\x1a\x1bpilab/common/v1/authz.proto\x1a\x1apilab/common/v1/host.proto\x1a\x1apilab/common/v1/task.proto\"6\n" +
 	"\vVmGuestInfo\x12\x13\n" +
 	"\x05vm_id\x18\x01 \x01(\tR\x04vmId\x12\x12\n" +
 	"\x04info\x18\x02 \x01(\tR\x04info\"\xb1\x03\n" +
@@ -1132,10 +1132,10 @@ const file_pilab_director_v1_clouddirector_proto_rawDesc = "" +
 	"\x10director_welcome\x18\x01 \x01(\tH\x00R\x0fdirectorWelcome\x12#\n" +
 	"\ferror_reason\x18\x02 \x01(\tH\x00R\verrorReasonB\n" +
 	"\n" +
-	"\bresponse2\xd7\x01\n" +
-	"\x14CloudDirectorService\x12b\n" +
-	"\rRegisterAgent\x12'.pilab.director.v1.RegisterAgentRequest\x1a(.pilab.director.v1.RegisterAgentResponse\x12[\n" +
-	"\vAgentEvents\x12%.pilab.director.v1.AgentEventsRequest\x1a!.pilab.director.v1.ManagerMessage(\x010\x01B:Z8go.pilab.hu/cloud/virtpb/v3/pilab/director/v1;directorv1b\x06proto3"
+	"\bresponse2\xe7\x01\n" +
+	"\x14CloudDirectorService\x12j\n" +
+	"\rRegisterAgent\x12'.pilab.director.v1.RegisterAgentRequest\x1a(.pilab.director.v1.RegisterAgentResponse\"\x06\xa2\xbb\x18\x02\x18\x03\x12c\n" +
+	"\vAgentEvents\x12%.pilab.director.v1.AgentEventsRequest\x1a!.pilab.director.v1.ManagerMessage\"\x06\xa2\xbb\x18\x02\x18\x03(\x010\x01B:Z8go.pilab.hu/cloud/virtpb/v3/pilab/director/v1;directorv1b\x06proto3"
 
 var (
 	file_pilab_director_v1_clouddirector_proto_rawDescOnce sync.Once

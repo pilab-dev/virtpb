@@ -5,20 +5,38 @@ syntax = "proto3";
 
 package pilab.director.v2;
 
+import "pilab/common/v1/authz.proto";
+
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/director/v2;directorv2";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 
 service TaskService {
-  rpc Subscribe(SubscribeRequest) returns (stream Task);
-  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
-  rpc GetTasks(GetTasksRequest) returns (GetTasksResponse);
-  rpc GetTask(GetTaskRequest) returns (GetTaskResponse);
-  rpc UpdateTaskStatus(UpdateTaskStatusRequest) returns (UpdateTaskStatusResponse);
-  rpc CancelTask(CancelTaskRequest) returns (CancelTaskResponse);
-  rpc GetTaskHistory(GetTaskHistoryRequest) returns (GetTaskHistoryResponse);
-  rpc BatchUpdateTasks(BatchUpdateTasksRequest) returns (BatchUpdateTasksResponse);
+  rpc Subscribe(SubscribeRequest) returns (stream Task) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_NODE_MTLS };
+  }
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse) {
+    option (pilab.common.v1.authz) = { kind: "Task", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetTasks(GetTasksRequest) returns (GetTasksResponse) {
+    option (pilab.common.v1.authz) = { kind: "Task", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetTask(GetTaskRequest) returns (GetTaskResponse) {
+    option (pilab.common.v1.authz) = { kind: "Task", verb: "get", authn: AUTHN_USER };
+  }
+  rpc UpdateTaskStatus(UpdateTaskStatusRequest) returns (UpdateTaskStatusResponse) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_NODE_MTLS };
+  }
+  rpc CancelTask(CancelTaskRequest) returns (CancelTaskResponse) {
+    option (pilab.common.v1.authz) = { kind: "Task", verb: "update", authn: AUTHN_USER };
+  }
+  rpc GetTaskHistory(GetTaskHistoryRequest) returns (GetTaskHistoryResponse) {
+    option (pilab.common.v1.authz) = { kind: "Task", verb: "get", authn: AUTHN_USER };
+  }
+  rpc BatchUpdateTasks(BatchUpdateTasksRequest) returns (BatchUpdateTasksResponse) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_NODE_MTLS };
+  }
 }
 
 enum TaskType {

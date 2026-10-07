@@ -10,6 +10,7 @@
 package agentv1
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -672,7 +673,7 @@ var File_pilab_agent_v1_snapshot_service_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_snapshot_service_proto_rawDesc = "" +
 	"\n" +
-	"%pilab/agent/v1/snapshot_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/agent/v1/stream.proto\"Q\n" +
+	"%pilab/agent/v1/snapshot_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/common/v1/authz.proto\x1a\x1bpilab/agent/v1/stream.proto\"Q\n" +
 	"\x1aSnapshotConsolidateRequest\x12\x0e\n" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12#\n" +
 	"\rsnapshot_name\x18\x02 \x01(\tR\fsnapshotName\"\x1d\n" +
@@ -710,14 +711,20 @@ const file_pilab_agent_v1_snapshot_service_proto_rawDesc = "" +
 	"\x02vm\x18\x01 \x01(\tR\x02vm\x12#\n" +
 	"\rsnapshot_name\x18\x03 \x01(\tR\fsnapshotName\x12\x1e\n" +
 	"\vnew_vm_name\x18\x04 \x01(\tR\tnewVmName\"\x17\n" +
-	"\x15SnapshotCloneResponse2\xfa\x04\n" +
-	"\x0fSnapshotService\x12e\n" +
-	"\x06Create\x12+.pilab.cloud.agent.v1.SnapshotCreateRequest\x1a,.pilab.cloud.agent.v1.SnapshotCreateResponse0\x01\x12f\n" +
-	"\aRestore\x12,.pilab.cloud.agent.v1.SnapshotRestoreRequest\x1a-.pilab.cloud.agent.v1.SnapshotRestoreResponse\x12c\n" +
-	"\x06Delete\x12+.pilab.cloud.agent.v1.SnapshotDeleteRequest\x1a,.pilab.cloud.agent.v1.SnapshotDeleteResponse\x12`\n" +
-	"\x05Clone\x12*.pilab.cloud.agent.v1.SnapshotCloneRequest\x1a+.pilab.cloud.agent.v1.SnapshotCloneResponse\x12r\n" +
-	"\vConsolidate\x120.pilab.cloud.agent.v1.SnapshotConsolidateRequest\x1a1.pilab.cloud.agent.v1.SnapshotConsolidateResponse\x12]\n" +
-	"\x04List\x12).pilab.cloud.agent.v1.SnapshotListRequest\x1a*.pilab.cloud.agent.v1.SnapshotListResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
+	"\x15SnapshotCloneResponse2\x96\x06\n" +
+	"\x0fSnapshotService\x12\x7f\n" +
+	"\x06Create\x12+.pilab.cloud.agent.v1.SnapshotCreateRequest\x1a,.pilab.cloud.agent.v1.SnapshotCreateResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06create\x18\x010\x01\x12\x80\x01\n" +
+	"\aRestore\x12,.pilab.cloud.agent.v1.SnapshotRestoreRequest\x1a-.pilab.cloud.agent.v1.SnapshotRestoreResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06revert\x18\x01\x12}\n" +
+	"\x06Delete\x12+.pilab.cloud.agent.v1.SnapshotDeleteRequest\x1a,.pilab.cloud.agent.v1.SnapshotDeleteResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06delete\x18\x01\x12z\n" +
+	"\x05Clone\x12*.pilab.cloud.agent.v1.SnapshotCloneRequest\x1a+.pilab.cloud.agent.v1.SnapshotCloneResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06create\x18\x01\x12\x8c\x01\n" +
+	"\vConsolidate\x120.pilab.cloud.agent.v1.SnapshotConsolidateRequest\x1a1.pilab.cloud.agent.v1.SnapshotConsolidateResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06update\x18\x01\x12u\n" +
+	"\x04List\x12).pilab.cloud.agent.v1.SnapshotListRequest\x1a*.pilab.cloud.agent.v1.SnapshotListResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\bSnapshot\x12\x04list\x18\x01B4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_snapshot_service_proto_rawDescOnce sync.Once

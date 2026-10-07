@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.network.v2;
 
+import "pilab/common/v1/authz.proto";
+
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
@@ -15,28 +17,64 @@ option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2";
 // QoSSecurityService manages QoS profiles, security profiles, and ACL rules.
 service QoSSecurityService {
   // QoS profile operations
-  rpc CreateQoSProfile(CreateQoSProfileRequest) returns (QoSProfile);
-  rpc GetQoSProfile(GetQoSProfileRequest) returns (QoSProfile);
-  rpc ListQoSProfiles(ListQoSProfilesRequest) returns (ListQoSProfilesResponse);
-  rpc UpdateQoSProfile(UpdateQoSProfileRequest) returns (QoSProfile);
-  rpc DeleteQoSProfile(DeleteQoSProfileRequest) returns (google.protobuf.Empty);
-  rpc ApplyQoSProfile(ApplyQoSProfileRequest) returns (google.protobuf.Empty);
-  rpc RemoveQoSProfile(RemoveQoSProfileRequest) returns (google.protobuf.Empty);
+  rpc CreateQoSProfile(CreateQoSProfileRequest) returns (QoSProfile) {
+    option (pilab.common.v1.authz) = { kind: "QoSProfile", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetQoSProfile(GetQoSProfileRequest) returns (QoSProfile) {
+    option (pilab.common.v1.authz) = { kind: "QoSProfile", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListQoSProfiles(ListQoSProfilesRequest) returns (ListQoSProfilesResponse) {
+    option (pilab.common.v1.authz) = { kind: "QoSProfile", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateQoSProfile(UpdateQoSProfileRequest) returns (QoSProfile) {
+    option (pilab.common.v1.authz) = { kind: "QoSProfile", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteQoSProfile(DeleteQoSProfileRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "QoSProfile", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc ApplyQoSProfile(ApplyQoSProfileRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "QoSProfile", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc RemoveQoSProfile(RemoveQoSProfileRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "QoSProfile", verb: "attach", authn: AUTHN_USER };
+  }
 
   // Security profile operations
-  rpc CreateSecurityProfile(CreateSecurityProfileRequest) returns (SecurityProfile);
-  rpc GetSecurityProfile(GetSecurityProfileRequest) returns (SecurityProfile);
-  rpc ListSecurityProfiles(ListSecurityProfilesRequest) returns (ListSecurityProfilesResponse);
-  rpc UpdateSecurityProfile(UpdateSecurityProfileRequest) returns (SecurityProfile);
-  rpc DeleteSecurityProfile(DeleteSecurityProfileRequest) returns (google.protobuf.Empty);
-  rpc ApplySecurityProfile(ApplySecurityProfileRequest) returns (google.protobuf.Empty);
-  rpc RemoveSecurityProfile(RemoveSecurityProfileRequest) returns (google.protobuf.Empty);
+  rpc CreateSecurityProfile(CreateSecurityProfileRequest) returns (SecurityProfile) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetSecurityProfile(GetSecurityProfileRequest) returns (SecurityProfile) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListSecurityProfiles(ListSecurityProfilesRequest) returns (ListSecurityProfilesResponse) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateSecurityProfile(UpdateSecurityProfileRequest) returns (SecurityProfile) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteSecurityProfile(DeleteSecurityProfileRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc ApplySecurityProfile(ApplySecurityProfileRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc RemoveSecurityProfile(RemoveSecurityProfileRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "attach", authn: AUTHN_USER };
+  }
 
   // ACL rule operations
-  rpc AddACLRule(AddACLRuleRequest) returns (ACLRule);
-  rpc UpdateACLRule(UpdateACLRuleRequest) returns (ACLRule);
-  rpc RemoveACLRule(RemoveACLRuleRequest) returns (google.protobuf.Empty);
-  rpc ReorderACLRules(ReorderACLRulesRequest) returns (google.protobuf.Empty);
+  rpc AddACLRule(AddACLRuleRequest) returns (ACLRule) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
+  rpc UpdateACLRule(UpdateACLRuleRequest) returns (ACLRule) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
+  rpc RemoveACLRule(RemoveACLRuleRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
+  rpc ReorderACLRules(ReorderACLRulesRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
 }
 
 // QoSProfile defines quality of service settings for ports and networks.

@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.network.v2;
 
+import "pilab/common/v1/authz.proto";
+
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
@@ -15,28 +17,64 @@ option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2";
 // PublicIPService manages public IP allocation, port forwarding, and firewalls.
 service PublicIPService {
   // Public IP operations
-  rpc AllocatePublicIP(AllocatePublicIPRequest) returns (PublicIP);
-  rpc GetPublicIP(GetPublicIPRequest) returns (PublicIP);
-  rpc ListPublicIPs(ListPublicIPsRequest) returns (ListPublicIPsResponse);
-  rpc ReleasePublicIP(ReleasePublicIPRequest) returns (google.protobuf.Empty);
-  rpc AssociatePublicIP(AssociatePublicIPRequest) returns (PublicIP);
-  rpc DisassociatePublicIP(DisassociatePublicIPRequest) returns (google.protobuf.Empty);
+  rpc AllocatePublicIP(AllocatePublicIPRequest) returns (PublicIP) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetPublicIP(GetPublicIPRequest) returns (PublicIP) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListPublicIPs(ListPublicIPsRequest) returns (ListPublicIPsResponse) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "list", authn: AUTHN_USER };
+  }
+  rpc ReleasePublicIP(ReleasePublicIPRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc AssociatePublicIP(AssociatePublicIPRequest) returns (PublicIP) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc DisassociatePublicIP(DisassociatePublicIPRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "attach", authn: AUTHN_USER };
+  }
 
   // Port forwarding operations
-  rpc CreatePortForward(CreatePortForwardRequest) returns (PortForward);
-  rpc UpdatePortForward(UpdatePortForwardRequest) returns (PortForward);
-  rpc DeletePortForward(DeletePortForwardRequest) returns (google.protobuf.Empty);
-  rpc ListPortForwards(ListPortForwardsRequest) returns (ListPortForwardsResponse);
+  rpc CreatePortForward(CreatePortForwardRequest) returns (PortForward) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "update", authn: AUTHN_USER };
+  }
+  rpc UpdatePortForward(UpdatePortForwardRequest) returns (PortForward) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeletePortForward(DeletePortForwardRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "update", authn: AUTHN_USER };
+  }
+  rpc ListPortForwards(ListPortForwardsRequest) returns (ListPortForwardsResponse) {
+    option (pilab.common.v1.authz) = { kind: "PublicIP", verb: "list", authn: AUTHN_USER };
+  }
 
   // Firewall operations
-  rpc CreateFirewallProfile(CreateFirewallProfileRequest) returns (FirewallProfile);
-  rpc GetFirewallProfile(GetFirewallProfileRequest) returns (FirewallProfile);
-  rpc UpdateFirewallProfile(UpdateFirewallProfileRequest) returns (FirewallProfile);
-  rpc DeleteFirewallProfile(DeleteFirewallProfileRequest) returns (google.protobuf.Empty);
-  rpc AddFirewallRule(AddFirewallRuleRequest) returns (FirewallRule);
-  rpc UpdateFirewallRule(UpdateFirewallRuleRequest) returns (FirewallRule);
-  rpc RemoveFirewallRule(RemoveFirewallRuleRequest) returns (google.protobuf.Empty);
-  rpc ReorderFirewallRules(ReorderFirewallRulesRequest) returns (google.protobuf.Empty);
+  rpc CreateFirewallProfile(CreateFirewallProfileRequest) returns (FirewallProfile) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetFirewallProfile(GetFirewallProfileRequest) returns (FirewallProfile) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "get", authn: AUTHN_USER };
+  }
+  rpc UpdateFirewallProfile(UpdateFirewallProfileRequest) returns (FirewallProfile) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteFirewallProfile(DeleteFirewallProfileRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc AddFirewallRule(AddFirewallRuleRequest) returns (FirewallRule) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
+  rpc UpdateFirewallRule(UpdateFirewallRuleRequest) returns (FirewallRule) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
+  rpc RemoveFirewallRule(RemoveFirewallRuleRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
+  rpc ReorderFirewallRules(ReorderFirewallRulesRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "SecurityGroup", verb: "update", authn: AUTHN_USER };
+  }
 }
 
 // PublicIP represents a public IP address allocation.

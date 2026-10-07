@@ -4,6 +4,8 @@ syntax = "proto3";
 
 package pilab.frontend.v1;
 
+import "pilab/common/v1/authz.proto";
+
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1";
 
 import "google/protobuf/timestamp.proto";
@@ -309,22 +311,58 @@ message EnableNetworkInterfaceResponse {}
 message DisableNetworkInterfaceResponse {}
 
 service HostService {
-  rpc GetHostOverview(GetHostOverviewRequest) returns (HostOverview);
-  rpc GetMonitoringData(GetMonitoringDataRequest) returns (MonitoringDataResponse);
-  rpc ListHostVMs(ListHostVMsRequest) returns (HostVMsResponse);
-  rpc GetHostPermissions(GetHostPermissionsRequest) returns (HostPermissionsResponse);
-  rpc ListHostDatastores(ListHostDatastoresRequest) returns (HostDatastoresResponse);
-  rpc MountDatastore(MountDatastoreRequest) returns (MountDatastoreResponse);
-  rpc UnmountDatastore(UnmountDatastoreRequest) returns (UnmountDatastoreResponse);
-  rpc GetHostSystemSettings(GetHostSystemSettingsRequest) returns (HostSystemSettingsResponse);
-  rpc UpdateNTPConfig(UpdateNTPConfigRequest) returns (UpdateNTPConfigResponse);
-  rpc UpdateTimezone(UpdateTimezoneRequest) returns (UpdateTimezoneResponse);
-  rpc UpdateDNSSettings(UpdateDNSSettingsRequest) returns (UpdateDNSSettingsResponse);
-  rpc UpdateRoutingSettings(UpdateRoutingSettingsRequest) returns (UpdateRoutingSettingsResponse);
-  rpc GetMaintenanceModeStatus(GetMaintenanceModeStatusRequest) returns (MaintenanceModeStatusResponse);
-  rpc EnterMaintenanceMode(EnterMaintenanceModeRequest) returns (EnterMaintenanceModeResponse);
-  rpc ExitMaintenanceMode(ExitMaintenanceModeRequest) returns (ExitMaintenanceModeResponse);
-  rpc ListHostNetworkInterfaces(ListHostNetworkInterfacesRequest) returns (HostNetworkInterfacesResponse);
-  rpc EnableNetworkInterface(EnableNetworkInterfaceRequest) returns (EnableNetworkInterfaceResponse);
-  rpc DisableNetworkInterface(DisableNetworkInterfaceRequest) returns (DisableNetworkInterfaceResponse);
+  rpc GetHostOverview(GetHostOverviewRequest) returns (HostOverview) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GetMonitoringData(GetMonitoringDataRequest) returns (MonitoringDataResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListHostVMs(ListHostVMsRequest) returns (HostVMsResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "list", authn: AUTHN_USER };
+  }
+  rpc GetHostPermissions(GetHostPermissionsRequest) returns (HostPermissionsResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListHostDatastores(ListHostDatastoresRequest) returns (HostDatastoresResponse) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "list", authn: AUTHN_USER };
+  }
+  rpc MountDatastore(MountDatastoreRequest) returns (MountDatastoreResponse) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "update", authn: AUTHN_USER };
+  }
+  rpc UnmountDatastore(UnmountDatastoreRequest) returns (UnmountDatastoreResponse) {
+    option (pilab.common.v1.authz) = { kind: "Datastore", verb: "update", authn: AUTHN_USER };
+  }
+  rpc GetHostSystemSettings(GetHostSystemSettingsRequest) returns (HostSystemSettingsResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER };
+  }
+  rpc UpdateNTPConfig(UpdateNTPConfigRequest) returns (UpdateNTPConfigResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER };
+  }
+  rpc UpdateTimezone(UpdateTimezoneRequest) returns (UpdateTimezoneResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER };
+  }
+  rpc UpdateDNSSettings(UpdateDNSSettingsRequest) returns (UpdateDNSSettingsResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER };
+  }
+  rpc UpdateRoutingSettings(UpdateRoutingSettingsRequest) returns (UpdateRoutingSettingsResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER };
+  }
+  rpc GetMaintenanceModeStatus(GetMaintenanceModeStatusRequest) returns (MaintenanceModeStatusResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER };
+  }
+  rpc EnterMaintenanceMode(EnterMaintenanceModeRequest) returns (EnterMaintenanceModeResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER };
+  }
+  rpc ExitMaintenanceMode(ExitMaintenanceModeRequest) returns (ExitMaintenanceModeResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER };
+  }
+  rpc ListHostNetworkInterfaces(ListHostNetworkInterfacesRequest) returns (HostNetworkInterfacesResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "list", authn: AUTHN_USER };
+  }
+  rpc EnableNetworkInterface(EnableNetworkInterfaceRequest) returns (EnableNetworkInterfaceResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DisableNetworkInterface(DisableNetworkInterfaceRequest) returns (DisableNetworkInterfaceResponse) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "update", authn: AUTHN_USER };
+  }
 }

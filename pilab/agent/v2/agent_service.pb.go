@@ -9030,7 +9030,7 @@ var File_pilab_agent_v2_agent_service_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\n" +
-	"\"pilab/agent/v2/agent_service.proto\x12\x0epilab.agent.v2\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x18pilab/common/v1/vm.proto\x1a\x1apilab/common/v1/host.proto\x1a\x1bpilab/common/v1/error.proto\x1a\x1cpilab/common/v1/stream.proto\x1a\x1apilab/common/v1/task.proto\x1a\x1epilab/pivirtd/v1/pivirtd.proto\"\xa3\x01\n" +
+	"\"pilab/agent/v2/agent_service.proto\x12\x0epilab.agent.v2\x1a\x1bpilab/common/v1/authz.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x18pilab/common/v1/vm.proto\x1a\x1apilab/common/v1/host.proto\x1a\x1bpilab/common/v1/error.proto\x1a\x1cpilab/common/v1/stream.proto\x1a\x1apilab/common/v1/task.proto\x1a\x1epilab/pivirtd/v1/pivirtd.proto\"\xa3\x01\n" +
 	"\x04Task\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x16\n" +
 	"\x06status\x18\x02 \x01(\tR\x06status\x12\x1a\n" +
@@ -9719,72 +9719,133 @@ const file_pilab_agent_v2_agent_service_proto_rawDesc = "" +
 	"\x1bRECURRENCE_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15RECURRENCE_TYPE_DAILY\x10\x01\x12\x1a\n" +
 	"\x16RECURRENCE_TYPE_WEEKLY\x10\x02\x12\x1b\n" +
-	"\x17RECURRENCE_TYPE_MONTHLY\x10\x032\x90-\n" +
-	"\fAgentService\x12Y\n" +
-	"\fRegisterHost\x12#.pilab.agent.v2.RegisterHostRequest\x1a$.pilab.agent.v2.RegisterHostResponse\x12P\n" +
-	"\tHeartbeat\x12 .pilab.agent.v2.HeartbeatRequest\x1a!.pilab.agent.v2.HeartbeatResponse\x12Q\n" +
-	"\rGetHostStatus\x12$.pilab.agent.v2.GetHostStatusRequest\x1a\x1a.pilab.agent.v2.HostStatus\x12M\n" +
-	"\bCreateVM\x12\x1f.pilab.agent.v2.CreateVMRequest\x1a .pilab.agent.v2.CreateVMResponse\x12Y\n" +
-	"\fGetVMDetails\x12#.pilab.agent.v2.GetVMDetailsRequest\x1a$.pilab.agent.v2.GetVMDetailsResponse\x12M\n" +
-	"\bUpdateVM\x12\x1f.pilab.agent.v2.UpdateVMRequest\x1a .pilab.agent.v2.UpdateVMResponse\x12M\n" +
-	"\bDeleteVM\x12\x1f.pilab.agent.v2.DeleteVMRequest\x1a .pilab.agent.v2.DeleteVMResponse\x12J\n" +
-	"\aStartVM\x12\x1e.pilab.agent.v2.StartVMRequest\x1a\x1f.pilab.agent.v2.StartVMResponse\x12G\n" +
-	"\x06StopVM\x12\x1d.pilab.agent.v2.StopVMRequest\x1a\x1e.pilab.agent.v2.StopVMResponse\x12V\n" +
-	"\vForceStopVM\x12\".pilab.agent.v2.ForceStopVMRequest\x1a#.pilab.agent.v2.ForceStopVMResponse\x12M\n" +
-	"\bRebootVM\x12\x1f.pilab.agent.v2.RebootVMRequest\x1a .pilab.agent.v2.RebootVMResponse\x12J\n" +
-	"\aPauseVM\x12\x1e.pilab.agent.v2.PauseVMRequest\x1a\x1f.pilab.agent.v2.PauseVMResponse\x12M\n" +
-	"\bResumeVM\x12\x1f.pilab.agent.v2.ResumeVMRequest\x1a .pilab.agent.v2.ResumeVMResponse\x12h\n" +
-	"\x11InitiateMigration\x12(.pilab.agent.v2.InitiateMigrationRequest\x1a).pilab.agent.v2.InitiateMigrationResponse\x12n\n" +
-	"\x13PrepareForMigration\x12*.pilab.agent.v2.PrepareForMigrationRequest\x1a+.pilab.agent.v2.PrepareForMigrationResponse\x12S\n" +
-	"\x10ConfirmMigration\x12'.pilab.agent.v2.ConfirmMigrationRequest\x1a\x16.google.protobuf.Empty\x12O\n" +
-	"\x0eAbortMigration\x12%.pilab.agent.v2.AbortMigrationRequest\x1a\x16.google.protobuf.Empty\x12_\n" +
-	"\x0eCreateSnapshot\x12%.pilab.agent.v2.CreateSnapshotRequest\x1a&.pilab.agent.v2.CreateSnapshotResponse\x12e\n" +
-	"\x10RevertToSnapshot\x12'.pilab.agent.v2.RevertToSnapshotRequest\x1a(.pilab.agent.v2.RevertToSnapshotResponse\x12_\n" +
-	"\x0eDeleteSnapshot\x12%.pilab.agent.v2.DeleteSnapshotRequest\x1a&.pilab.agent.v2.DeleteSnapshotResponse\x12K\n" +
-	"\rGetTaskStatus\x12$.pilab.agent.v2.GetTaskStatusRequest\x1a\x14.pilab.agent.v2.Task\x12S\n" +
+	"\x17RECURRENCE_TYPE_MONTHLY\x10\x032\xf4:\n" +
+	"\fAgentService\x12q\n" +
+	"\fRegisterHost\x12#.pilab.agent.v2.RegisterHostRequest\x1a$.pilab.agent.v2.RegisterHostResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\x04Node\x12\x06update\x18\x01 \x01\x12h\n" +
+	"\tHeartbeat\x12 .pilab.agent.v2.HeartbeatRequest\x1a!.pilab.agent.v2.HeartbeatResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\x04Node\x12\x06update\x18\x01 \x01\x12f\n" +
+	"\rGetHostStatus\x12$.pilab.agent.v2.GetHostStatusRequest\x1a\x1a.pilab.agent.v2.HostStatus\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12m\n" +
+	"\bCreateVM\x12\x1f.pilab.agent.v2.CreateVMRequest\x1a .pilab.agent.v2.CreateVMResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12v\n" +
+	"\fGetVMDetails\x12#.pilab.agent.v2.GetVMDetailsRequest\x1a$.pilab.agent.v2.GetVMDetailsResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12m\n" +
+	"\bUpdateVM\x12\x1f.pilab.agent.v2.UpdateVMRequest\x1a .pilab.agent.v2.UpdateVMResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06update\x18\x01\x12m\n" +
+	"\bDeleteVM\x12\x1f.pilab.agent.v2.DeleteVMRequest\x1a .pilab.agent.v2.DeleteVMResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06delete\x18\x01\x12i\n" +
+	"\aStartVM\x12\x1e.pilab.agent.v2.StartVMRequest\x1a\x1f.pilab.agent.v2.StartVMResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12f\n" +
+	"\x06StopVM\x12\x1d.pilab.agent.v2.StopVMRequest\x1a\x1e.pilab.agent.v2.StopVMResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12u\n" +
+	"\vForceStopVM\x12\".pilab.agent.v2.ForceStopVMRequest\x1a#.pilab.agent.v2.ForceStopVMResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12l\n" +
+	"\bRebootVM\x12\x1f.pilab.agent.v2.RebootVMRequest\x1a .pilab.agent.v2.RebootVMResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12i\n" +
+	"\aPauseVM\x12\x1e.pilab.agent.v2.PauseVMRequest\x1a\x1f.pilab.agent.v2.PauseVMResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12l\n" +
+	"\bResumeVM\x12\x1f.pilab.agent.v2.ResumeVMRequest\x1a .pilab.agent.v2.ResumeVMResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12\x89\x01\n" +
+	"\x11InitiateMigration\x12(.pilab.agent.v2.InitiateMigrationRequest\x1a).pilab.agent.v2.InitiateMigrationResponse\"\x1f\xa2\xbb\x18\x1b\n" +
+	"\x0eVirtualMachine\x12\amigrate\x18\x01\x12\x8f\x01\n" +
+	"\x13PrepareForMigration\x12*.pilab.agent.v2.PrepareForMigrationRequest\x1a+.pilab.agent.v2.PrepareForMigrationResponse\"\x1f\xa2\xbb\x18\x1b\n" +
+	"\x0eVirtualMachine\x12\amigrate\x18\x01\x12t\n" +
+	"\x10ConfirmMigration\x12'.pilab.agent.v2.ConfirmMigrationRequest\x1a\x16.google.protobuf.Empty\"\x1f\xa2\xbb\x18\x1b\n" +
+	"\x0eVirtualMachine\x12\amigrate\x18\x01\x12p\n" +
+	"\x0eAbortMigration\x12%.pilab.agent.v2.AbortMigrationRequest\x1a\x16.google.protobuf.Empty\"\x1f\xa2\xbb\x18\x1b\n" +
+	"\x0eVirtualMachine\x12\amigrate\x18\x01\x12{\n" +
+	"\x0eCreateSnapshot\x12%.pilab.agent.v2.CreateSnapshotRequest\x1a&.pilab.agent.v2.CreateSnapshotResponse\"\x1a\xa2\xbb\x18\x16\n" +
+	"\bSnapshot\x12\bsnapshot\x18\x01\x12\x7f\n" +
+	"\x10RevertToSnapshot\x12'.pilab.agent.v2.RevertToSnapshotRequest\x1a(.pilab.agent.v2.RevertToSnapshotResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06revert\x18\x01\x12y\n" +
+	"\x0eDeleteSnapshot\x12%.pilab.agent.v2.DeleteSnapshotRequest\x1a&.pilab.agent.v2.DeleteSnapshotResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06delete\x18\x01\x12^\n" +
+	"\rGetTaskStatus\x12$.pilab.agent.v2.GetTaskStatusRequest\x1a\x14.pilab.agent.v2.Task\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Task\x12\x03get\x18\x01\x12i\n" +
 	"\n" +
-	"CancelTask\x12!.pilab.agent.v2.CancelTaskRequest\x1a\".pilab.agent.v2.CancelTaskResponse\x12e\n" +
-	"\x10ConfigureNetwork\x12'.pilab.agent.v2.ConfigureNetworkRequest\x1a(.pilab.agent.v2.ConfigureNetworkResponse\x12e\n" +
-	"\x10ConfigureStorage\x12'.pilab.agent.v2.ConfigureStorageRequest\x1a(.pilab.agent.v2.ConfigureStorageResponse\x12\\\n" +
-	"\rConfigureTime\x12$.pilab.agent.v2.ConfigureTimeRequest\x1a%.pilab.agent.v2.ConfigureTimeResponse\x12k\n" +
-	"\x12SetMaintenanceMode\x12).pilab.agent.v2.SetMaintenanceModeRequest\x1a*.pilab.agent.v2.SetMaintenanceModeResponse\x12S\n" +
+	"CancelTask\x12!.pilab.agent.v2.CancelTaskRequest\x1a\".pilab.agent.v2.CancelTaskResponse\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Task\x12\x06update\x18\x01\x12}\n" +
+	"\x10ConfigureNetwork\x12'.pilab.agent.v2.ConfigureNetworkRequest\x1a(.pilab.agent.v2.ConfigureNetworkResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\x04Node\x12\x06update\x18\x01 \x01\x12}\n" +
+	"\x10ConfigureStorage\x12'.pilab.agent.v2.ConfigureStorageRequest\x1a(.pilab.agent.v2.ConfigureStorageResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\x04Node\x12\x06update\x18\x01 \x01\x12t\n" +
+	"\rConfigureTime\x12$.pilab.agent.v2.ConfigureTimeRequest\x1a%.pilab.agent.v2.ConfigureTimeResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\x04Node\x12\x06update\x18\x01 \x01\x12\x82\x01\n" +
+	"\x12SetMaintenanceMode\x12).pilab.agent.v2.SetMaintenanceModeRequest\x1a*.pilab.agent.v2.SetMaintenanceModeResponse\"\x15\xa2\xbb\x18\x11\n" +
+	"\x04Node\x12\x05admin\x18\x01 \x01\x12k\n" +
 	"\n" +
-	"UpdateHost\x12!.pilab.agent.v2.UpdateHostRequest\x1a\".pilab.agent.v2.UpdateHostResponse\x12w\n" +
-	"\x16GetContentLibraryItems\x12-.pilab.agent.v2.GetContentLibraryItemsRequest\x1a..pilab.agent.v2.GetContentLibraryItemsResponse\x12\x7f\n" +
-	"\x18UploadContentLibraryItem\x12/.pilab.agent.v2.UploadContentLibraryItemRequest\x1a0.pilab.agent.v2.UploadContentLibraryItemResponse(\x01\x12R\n" +
-	"\tExportOVA\x12 .pilab.agent.v2.ExportOVARequest\x1a!.pilab.agent.v2.ExportOVAResponse0\x01\x12R\n" +
-	"\tImportOVA\x12 .pilab.agent.v2.ImportOVARequest\x1a!.pilab.agent.v2.ImportOVAResponse(\x01\x12}\n" +
-	"\x18DeleteContentLibraryItem\x12/.pilab.agent.v2.DeleteContentLibraryItemRequest\x1a0.pilab.agent.v2.DeleteContentLibraryItemResponse\x12\\\n" +
-	"\rGetDatastores\x12$.pilab.agent.v2.GetDatastoresRequest\x1a%.pilab.agent.v2.GetDatastoresResponse\x12Y\n" +
-	"\fGetDatastore\x12#.pilab.agent.v2.GetDatastoreRequest\x1a$.pilab.agent.v2.GetDatastoreResponse\x12b\n" +
-	"\x0fCreateDatastore\x12&.pilab.agent.v2.CreateDatastoreRequest\x1a'.pilab.agent.v2.CreateDatastoreResponse\x12b\n" +
-	"\x0fDeleteDatastore\x12&.pilab.agent.v2.DeleteDatastoreRequest\x1a'.pilab.agent.v2.DeleteDatastoreResponse\x12V\n" +
-	"\vGetNetworks\x12\".pilab.agent.v2.GetNetworksRequest\x1a#.pilab.agent.v2.GetNetworksResponse\x12S\n" +
+	"UpdateHost\x12!.pilab.agent.v2.UpdateHostRequest\x1a\".pilab.agent.v2.UpdateHostResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\x04Node\x12\x06update\x18\x01 \x01\x12\x8f\x01\n" +
+	"\x16GetContentLibraryItems\x12-.pilab.agent.v2.GetContentLibraryItemsRequest\x1a..pilab.agent.v2.GetContentLibraryItemsResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\bTemplate\x12\x04list\x18\x01\x12\x99\x01\n" +
+	"\x18UploadContentLibraryItem\x12/.pilab.agent.v2.UploadContentLibraryItemRequest\x1a0.pilab.agent.v2.UploadContentLibraryItemResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bTemplate\x12\x06create\x18\x01(\x01\x12i\n" +
+	"\tExportOVA\x12 .pilab.agent.v2.ExportOVARequest\x1a!.pilab.agent.v2.ExportOVAResponse\"\x15\xa2\xbb\x18\x11\n" +
+	"\bTemplate\x12\x03get\x18\x010\x01\x12l\n" +
+	"\tImportOVA\x12 .pilab.agent.v2.ImportOVARequest\x1a!.pilab.agent.v2.ImportOVAResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bTemplate\x12\x06create\x18\x01(\x01\x12\x97\x01\n" +
+	"\x18DeleteContentLibraryItem\x12/.pilab.agent.v2.DeleteContentLibraryItemRequest\x1a0.pilab.agent.v2.DeleteContentLibraryItemResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bTemplate\x12\x06delete\x18\x01\x12w\n" +
+	"\rGetDatastores\x12$.pilab.agent.v2.GetDatastoresRequest\x1a%.pilab.agent.v2.GetDatastoresResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\tDatastore\x12\x04list\x18\x01 \x01\x12s\n" +
+	"\fGetDatastore\x12#.pilab.agent.v2.GetDatastoreRequest\x1a$.pilab.agent.v2.GetDatastoreResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\tDatastore\x12\x03get\x18\x01 \x01\x12\x7f\n" +
+	"\x0fCreateDatastore\x12&.pilab.agent.v2.CreateDatastoreRequest\x1a'.pilab.agent.v2.CreateDatastoreResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tDatastore\x12\x06create\x18\x01 \x01\x12\x7f\n" +
+	"\x0fDeleteDatastore\x12&.pilab.agent.v2.DeleteDatastoreRequest\x1a'.pilab.agent.v2.DeleteDatastoreResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\tDatastore\x12\x06delete\x18\x01 \x01\x12v\n" +
+	"\vGetNetworks\x12\".pilab.agent.v2.GetNetworksRequest\x1a#.pilab.agent.v2.GetNetworksResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eNetworkSegment\x12\x04list\x18\x01 \x01\x12r\n" +
 	"\n" +
-	"GetNetwork\x12!.pilab.agent.v2.GetNetworkRequest\x1a\".pilab.agent.v2.GetNetworkResponse\x12\\\n" +
-	"\rCreateNetwork\x12$.pilab.agent.v2.CreateNetworkRequest\x1a%.pilab.agent.v2.CreateNetworkResponse\x12\\\n" +
-	"\rDeleteNetwork\x12$.pilab.agent.v2.DeleteNetworkRequest\x1a%.pilab.agent.v2.DeleteNetworkResponse\x12P\n" +
-	"\tAttachIso\x12 .pilab.agent.v2.AttachIsoRequest\x1a!.pilab.agent.v2.AttachIsoResponse\x12P\n" +
-	"\tDetachIso\x12 .pilab.agent.v2.DetachIsoRequest\x1a!.pilab.agent.v2.DetachIsoResponse\x12n\n" +
-	"\x13CloneVmFromTemplate\x12*.pilab.agent.v2.CloneVmFromTemplateRequest\x1a+.pilab.agent.v2.CloneVmFromTemplateResponse\x12\\\n" +
-	"\rGetVMGuestIPs\x12$.pilab.agent.v2.GetVMGuestIPsRequest\x1a%.pilab.agent.v2.GetVMGuestIPsResponse\x12q\n" +
-	"\x14ChangeVMUserPassword\x12+.pilab.agent.v2.ChangeVMUserPasswordRequest\x1a,.pilab.agent.v2.ChangeVMUserPasswordResponse\x12b\n" +
-	"\x0fAttachCloudInit\x12&.pilab.agent.v2.AttachCloudInitRequest\x1a'.pilab.agent.v2.AttachCloudInitResponse\x12w\n" +
-	"\x16AttachNetworkInterface\x12-.pilab.agent.v2.AttachNetworkInterfaceRequest\x1a..pilab.agent.v2.AttachNetworkInterfaceResponse\x12w\n" +
-	"\x16DetachNetworkInterface\x12-.pilab.agent.v2.DetachNetworkInterfaceRequest\x1a..pilab.agent.v2.DetachNetworkInterfaceResponse\x12M\n" +
-	"\x06Stream\x12\x1e.pilab.common.v1.StreamRequest\x1a\x1f.pilab.common.v1.StreamResponse(\x010\x01\x12h\n" +
-	"\x11GetHardwareHealth\x12(.pilab.agent.v2.GetHardwareHealthRequest\x1a).pilab.agent.v2.GetHardwareHealthResponse\x12\\\n" +
-	"\rGetSensorData\x12$.pilab.agent.v2.GetSensorDataRequest\x1a%.pilab.agent.v2.GetSensorDataResponse\x12M\n" +
-	"\bDefineVM\x12\x1f.pilab.agent.v2.DefineVMRequest\x1a .pilab.agent.v2.DefineVMResponse\x12b\n" +
-	"\x0fGetVMDefinition\x12&.pilab.agent.v2.GetVMDefinitionRequest\x1a'.pilab.agent.v2.GetVMDefinitionResponse\x12P\n" +
-	"\tControlVM\x12 .pilab.agent.v2.ControlVMRequest\x1a!.pilab.agent.v2.ControlVMResponse\x12V\n" +
-	"\vGetVMStatus\x12\".pilab.agent.v2.GetVMStatusRequest\x1a#.pilab.agent.v2.GetVMStatusResponse\x12_\n" +
-	"\x0eGetVMGuestInfo\x12%.pilab.agent.v2.GetVMGuestInfoRequest\x1a&.pilab.agent.v2.GetVMGuestInfoResponse\x12n\n" +
-	"\x13CreatePowerSchedule\x12*.pilab.agent.v2.CreatePowerScheduleRequest\x1a+.pilab.agent.v2.CreatePowerScheduleResponse\x12k\n" +
-	"\x12ListPowerSchedules\x12).pilab.agent.v2.ListPowerSchedulesRequest\x1a*.pilab.agent.v2.ListPowerSchedulesResponse\x12n\n" +
-	"\x13UpdatePowerSchedule\x12*.pilab.agent.v2.UpdatePowerScheduleRequest\x1a+.pilab.agent.v2.UpdatePowerScheduleResponse\x12n\n" +
-	"\x13DeletePowerSchedule\x12*.pilab.agent.v2.DeletePowerScheduleRequest\x1a+.pilab.agent.v2.DeletePowerScheduleResponse\x12P\n" +
-	"\tWakeOnLAN\x12 .pilab.agent.v2.WakeOnLANRequest\x1a!.pilab.agent.v2.WakeOnLANResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v2;agentv2b\x06proto3"
+	"GetNetwork\x12!.pilab.agent.v2.GetNetworkRequest\x1a\".pilab.agent.v2.GetNetworkResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eNetworkSegment\x12\x03get\x18\x01 \x01\x12~\n" +
+	"\rCreateNetwork\x12$.pilab.agent.v2.CreateNetworkRequest\x1a%.pilab.agent.v2.CreateNetworkResponse\" \xa2\xbb\x18\x1c\n" +
+	"\x0eNetworkSegment\x12\x06create\x18\x01 \x01\x12~\n" +
+	"\rDeleteNetwork\x12$.pilab.agent.v2.DeleteNetworkRequest\x1a%.pilab.agent.v2.DeleteNetworkResponse\" \xa2\xbb\x18\x1c\n" +
+	"\x0eNetworkSegment\x12\x06delete\x18\x01 \x01\x12p\n" +
+	"\tAttachIso\x12 .pilab.agent.v2.AttachIsoRequest\x1a!.pilab.agent.v2.AttachIsoResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x01\x12p\n" +
+	"\tDetachIso\x12 .pilab.agent.v2.DetachIsoRequest\x1a!.pilab.agent.v2.DetachIsoResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x01\x12\x8e\x01\n" +
+	"\x13CloneVmFromTemplate\x12*.pilab.agent.v2.CloneVmFromTemplateRequest\x1a+.pilab.agent.v2.CloneVmFromTemplateResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12y\n" +
+	"\rGetVMGuestIPs\x12$.pilab.agent.v2.GetVMGuestIPsRequest\x1a%.pilab.agent.v2.GetVMGuestIPsResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12\x90\x01\n" +
+	"\x14ChangeVMUserPassword\x12+.pilab.agent.v2.ChangeVMUserPasswordRequest\x1a,.pilab.agent.v2.ChangeVMUserPasswordResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05admin\x18\x01\x12\x82\x01\n" +
+	"\x0fAttachCloudInit\x12&.pilab.agent.v2.AttachCloudInitRequest\x1a'.pilab.agent.v2.AttachCloudInitResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x01\x12\x97\x01\n" +
+	"\x16AttachNetworkInterface\x12-.pilab.agent.v2.AttachNetworkInterfaceRequest\x1a..pilab.agent.v2.AttachNetworkInterfaceResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x01\x12\x97\x01\n" +
+	"\x16DetachNetworkInterface\x12-.pilab.agent.v2.DetachNetworkInterfaceRequest\x1a..pilab.agent.v2.DetachNetworkInterfaceResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x01\x12j\n" +
+	"\x06Stream\x12\x1e.pilab.common.v1.StreamRequest\x1a\x1f.pilab.common.v1.StreamResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01(\x010\x01\x12}\n" +
+	"\x11GetHardwareHealth\x12(.pilab.agent.v2.GetHardwareHealthRequest\x1a).pilab.agent.v2.GetHardwareHealthResponse\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12q\n" +
+	"\rGetSensorData\x12$.pilab.agent.v2.GetSensorDataRequest\x1a%.pilab.agent.v2.GetSensorDataResponse\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04Node\x12\x03get\x18\x01 \x01\x12m\n" +
+	"\bDefineVM\x12\x1f.pilab.agent.v2.DefineVMRequest\x1a .pilab.agent.v2.DefineVMResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12\x7f\n" +
+	"\x0fGetVMDefinition\x12&.pilab.agent.v2.GetVMDefinitionRequest\x1a'.pilab.agent.v2.GetVMDefinitionResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12o\n" +
+	"\tControlVM\x12 .pilab.agent.v2.ControlVMRequest\x1a!.pilab.agent.v2.ControlVMResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12s\n" +
+	"\vGetVMStatus\x12\".pilab.agent.v2.GetVMStatusRequest\x1a#.pilab.agent.v2.GetVMStatusResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12|\n" +
+	"\x0eGetVMGuestInfo\x12%.pilab.agent.v2.GetVMGuestInfoRequest\x1a&.pilab.agent.v2.GetVMGuestInfoResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12\x8e\x01\n" +
+	"\x13CreatePowerSchedule\x12*.pilab.agent.v2.CreatePowerScheduleRequest\x1a+.pilab.agent.v2.CreatePowerScheduleResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12\x89\x01\n" +
+	"\x12ListPowerSchedules\x12).pilab.agent.v2.ListPowerSchedulesRequest\x1a*.pilab.agent.v2.ListPowerSchedulesResponse\"\x1c\xa2\xbb\x18\x18\n" +
+	"\x0eVirtualMachine\x12\x04list\x18\x01\x12\x8e\x01\n" +
+	"\x13UpdatePowerSchedule\x12*.pilab.agent.v2.UpdatePowerScheduleRequest\x1a+.pilab.agent.v2.UpdatePowerScheduleResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06update\x18\x01\x12\x8e\x01\n" +
+	"\x13DeletePowerSchedule\x12*.pilab.agent.v2.DeletePowerScheduleRequest\x1a+.pilab.agent.v2.DeletePowerScheduleResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06delete\x18\x01\x12o\n" +
+	"\tWakeOnLAN\x12 .pilab.agent.v2.WakeOnLANRequest\x1a!.pilab.agent.v2.WakeOnLANResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01B4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v2;agentv2b\x06proto3"
 
 var (
 	file_pilab_agent_v2_agent_service_proto_rawDescOnce sync.Once

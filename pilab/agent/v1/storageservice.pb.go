@@ -10,6 +10,7 @@
 package agentv1
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1604,7 +1605,7 @@ var File_pilab_agent_v1_storageservice_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_storageservice_proto_rawDesc = "" +
 	"\n" +
-	"#pilab/agent/v1/storageservice.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/agent/v1/stream.proto\x1a\"pilab/agent/v1/agent_service.proto\x1a\x1apilab/agent/v1/error.proto\"~\n" +
+	"#pilab/agent/v1/storageservice.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/common/v1/authz.proto\x1a\x1bpilab/agent/v1/stream.proto\x1a\"pilab/agent/v1/agent_service.proto\x1a\x1apilab/agent/v1/error.proto\"~\n" +
 	"\x06Volume\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1b\n" +
 	"\tpool_name\x18\x02 \x01(\tR\bpoolName\x12\x17\n" +
@@ -1730,22 +1731,35 @@ const file_pilab_agent_v1_storageservice_proto_rawDesc = "" +
 	"\x04pool\x18\x01 \x01(\v2!.pilab.cloud.agent.v1.StoragePoolH\x00R\x04pool\x88\x01\x01\x12>\n" +
 	"\x05error\x18\x02 \x01(\v2#.pilab.cloud.agent.v1.ErrorResponseH\x01R\x05error\x88\x01\x01B\a\n" +
 	"\x05_poolB\b\n" +
-	"\x06_error2\xae\v\n" +
-	"\x0eStorageService\x12e\n" +
-	"\fVolumeCreate\x12).pilab.cloud.agent.v1.VolumeCreateRequest\x1a*.pilab.cloud.agent.v1.VolumeCreateResponse\x12e\n" +
-	"\fVolumeDelete\x12).pilab.cloud.agent.v1.VolumeDeleteRequest\x1a*.pilab.cloud.agent.v1.VolumeDeleteResponse\x12e\n" +
-	"\fVolumeResize\x12).pilab.cloud.agent.v1.VolumeResizeRequest\x1a*.pilab.cloud.agent.v1.VolumeResizeResponse\x12_\n" +
+	"\x06_error2\xa6\x0e\n" +
+	"\x0eStorageService\x12\x82\x01\n" +
+	"\fVolumeCreate\x12).pilab.cloud.agent.v1.VolumeCreateRequest\x1a*.pilab.cloud.agent.v1.VolumeCreateResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vVirtualDisk\x12\x06create\x18\x01\x12\x82\x01\n" +
+	"\fVolumeDelete\x12).pilab.cloud.agent.v1.VolumeDeleteRequest\x1a*.pilab.cloud.agent.v1.VolumeDeleteResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vVirtualDisk\x12\x06delete\x18\x01\x12\x82\x01\n" +
+	"\fVolumeResize\x12).pilab.cloud.agent.v1.VolumeResizeRequest\x1a*.pilab.cloud.agent.v1.VolumeResizeResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vVirtualDisk\x12\x06update\x18\x01\x12z\n" +
 	"\n" +
-	"VolumeList\x12'.pilab.cloud.agent.v1.VolumeListRequest\x1a(.pilab.cloud.agent.v1.VolumeListResponse\x12\\\n" +
-	"\tVolumeGet\x12&.pilab.cloud.agent.v1.VolumeGetRequest\x1a'.pilab.cloud.agent.v1.VolumeGetResponse\x12b\n" +
-	"\vVolumeClone\x12(.pilab.cloud.agent.v1.VolumeCloneRequest\x1a).pilab.cloud.agent.v1.VolumeCloneResponse\x12}\n" +
-	"\x14VolumeSnapshotCreate\x121.pilab.cloud.agent.v1.VolumeSnapshotCreateRequest\x1a2.pilab.cloud.agent.v1.VolumeSnapshotCreateResponse\x12}\n" +
-	"\x14VolumeSnapshotRevert\x121.pilab.cloud.agent.v1.VolumeSnapshotRevertRequest\x1a2.pilab.cloud.agent.v1.VolumeSnapshotRevertResponse\x12}\n" +
-	"\x14VolumeSnapshotDelete\x121.pilab.cloud.agent.v1.VolumeSnapshotDeleteRequest\x1a2.pilab.cloud.agent.v1.VolumeSnapshotDeleteResponse\x12t\n" +
-	"\x11StoragePoolCreate\x12..pilab.cloud.agent.v1.StoragePoolCreateRequest\x1a/.pilab.cloud.agent.v1.StoragePoolCreateResponse\x12t\n" +
-	"\x11StoragePoolDelete\x12..pilab.cloud.agent.v1.StoragePoolDeleteRequest\x1a/.pilab.cloud.agent.v1.StoragePoolDeleteResponse\x12n\n" +
-	"\x0fStoragePoolList\x12,.pilab.cloud.agent.v1.StoragePoolListRequest\x1a-.pilab.cloud.agent.v1.StoragePoolListResponse\x12k\n" +
-	"\x0eStoragePoolGet\x12+.pilab.cloud.agent.v1.StoragePoolGetRequest\x1a,.pilab.cloud.agent.v1.StoragePoolGetResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
+	"VolumeList\x12'.pilab.cloud.agent.v1.VolumeListRequest\x1a(.pilab.cloud.agent.v1.VolumeListResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\vVirtualDisk\x12\x04list\x18\x01\x12v\n" +
+	"\tVolumeGet\x12&.pilab.cloud.agent.v1.VolumeGetRequest\x1a'.pilab.cloud.agent.v1.VolumeGetResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\vVirtualDisk\x12\x03get\x18\x01\x12\x7f\n" +
+	"\vVolumeClone\x12(.pilab.cloud.agent.v1.VolumeCloneRequest\x1a).pilab.cloud.agent.v1.VolumeCloneResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vVirtualDisk\x12\x06create\x18\x01\x12\x97\x01\n" +
+	"\x14VolumeSnapshotCreate\x121.pilab.cloud.agent.v1.VolumeSnapshotCreateRequest\x1a2.pilab.cloud.agent.v1.VolumeSnapshotCreateResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06create\x18\x01\x12\x97\x01\n" +
+	"\x14VolumeSnapshotRevert\x121.pilab.cloud.agent.v1.VolumeSnapshotRevertRequest\x1a2.pilab.cloud.agent.v1.VolumeSnapshotRevertResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06revert\x18\x01\x12\x97\x01\n" +
+	"\x14VolumeSnapshotDelete\x121.pilab.cloud.agent.v1.VolumeSnapshotDeleteRequest\x1a2.pilab.cloud.agent.v1.VolumeSnapshotDeleteResponse\"\x18\xa2\xbb\x18\x14\n" +
+	"\bSnapshot\x12\x06delete\x18\x01\x12\x93\x01\n" +
+	"\x11StoragePoolCreate\x12..pilab.cloud.agent.v1.StoragePoolCreateRequest\x1a/.pilab.cloud.agent.v1.StoragePoolCreateResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06create\x18\x01 \x01\x12\x93\x01\n" +
+	"\x11StoragePoolDelete\x12..pilab.cloud.agent.v1.StoragePoolDeleteRequest\x1a/.pilab.cloud.agent.v1.StoragePoolDeleteResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06delete\x18\x01 \x01\x12\x8b\x01\n" +
+	"\x0fStoragePoolList\x12,.pilab.cloud.agent.v1.StoragePoolListRequest\x1a-.pilab.cloud.agent.v1.StoragePoolListResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vStoragePool\x12\x04list\x18\x01 \x01\x12\x87\x01\n" +
+	"\x0eStoragePoolGet\x12+.pilab.cloud.agent.v1.StoragePoolGetRequest\x1a,.pilab.cloud.agent.v1.StoragePoolGetResponse\"\x1a\xa2\xbb\x18\x16\n" +
+	"\vStoragePool\x12\x03get\x18\x01 \x01B4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_storageservice_proto_rawDescOnce sync.Once
