@@ -5,34 +5,80 @@ syntax = "proto3";
 
 package pilab.cloud.agent.v1;
 
+import "pilab/common/v1/authz.proto";
+
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1";
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 
 service DCUIService {
-  rpc GetHostInfo(google.protobuf.Empty) returns (HostInfo);
-  rpc GetSystemResources(google.protobuf.Empty) returns (SystemResources);
-  rpc GetServiceStatus(google.protobuf.Empty) returns (ServiceStatusList);
-  rpc GetNetworkConfig(google.protobuf.Empty) returns (NetworkConfig);
-  rpc ConfigureNetworkInterface(ConfigureNetworkInterfaceRequest) returns (google.protobuf.Empty);
-  rpc TestNetwork(google.protobuf.Empty) returns (NetworkTestResult);
-  rpc GetStorageConfig(google.protobuf.Empty) returns (StorageConfig);
-  rpc MountNFS(MountNFSRequest) returns (google.protobuf.Empty);
-  rpc UnmountNFS(UnmountNFSRequest) returns (google.protobuf.Empty);
-  rpc SetMaintenanceMode(SetMaintenanceModeRequest) returns (google.protobuf.Empty);
-  rpc GetMaintenanceMode(google.protobuf.Empty) returns (MaintenanceModeStatus);
-  rpc RestartService(RestartServiceRequest) returns (google.protobuf.Empty);
-  rpc GetFirewallRules(google.protobuf.Empty) returns (FirewallRuleList);
-  rpc AddFirewallRule(AddFirewallRuleRequest) returns (google.protobuf.Empty);
-  rpc RemoveFirewallRule(RemoveFirewallRuleRequest) returns (google.protobuf.Empty);
-  rpc GetDNSConfig(google.protobuf.Empty) returns (DNSConfig);
-  rpc SetDNSConfig(SetDNSConfigRequest) returns (google.protobuf.Empty);
-  rpc GetNTPConfig(google.protobuf.Empty) returns (NTPConfig);
-  rpc SetNTPConfig(SetNTPConfigRequest) returns (google.protobuf.Empty);
-  rpc GetCloudStatus(google.protobuf.Empty) returns (CloudStatus);
-  rpc AdoptToCloud(AdoptToCloudRequest) returns (google.protobuf.Empty);
-  rpc DisconnectFromCloud(google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc GetHostInfo(google.protobuf.Empty) returns (HostInfo) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetSystemResources(google.protobuf.Empty) returns (SystemResources) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetServiceStatus(google.protobuf.Empty) returns (ServiceStatusList) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetNetworkConfig(google.protobuf.Empty) returns (NetworkConfig) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc ConfigureNetworkInterface(ConfigureNetworkInterfaceRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc TestNetwork(google.protobuf.Empty) returns (NetworkTestResult) {
+    option (pilab.common.v1.authz) = { kind: "NetworkSegment", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetStorageConfig(google.protobuf.Empty) returns (StorageConfig) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc MountNFS(MountNFSRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc UnmountNFS(UnmountNFSRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "StoragePool", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc SetMaintenanceMode(SetMaintenanceModeRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetMaintenanceMode(google.protobuf.Empty) returns (MaintenanceModeStatus) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc RestartService(RestartServiceRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetFirewallRules(google.protobuf.Empty) returns (FirewallRuleList) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc AddFirewallRule(AddFirewallRuleRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "create", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc RemoveFirewallRule(RemoveFirewallRuleRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "delete", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetDNSConfig(google.protobuf.Empty) returns (DNSConfig) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc SetDNSConfig(SetDNSConfigRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetNTPConfig(google.protobuf.Empty) returns (NTPConfig) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc SetNTPConfig(SetNTPConfigRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetCloudStatus(google.protobuf.Empty) returns (CloudStatus) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_PUBLIC };
+  }
+  rpc AdoptToCloud(AdoptToCloudRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc DisconnectFromCloud(google.protobuf.Empty) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "admin", authn: AUTHN_USER, node_scoped: true };
+  }
 }
 
 message HostInfo {

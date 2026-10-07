@@ -1,0 +1,47 @@
+// Package common provides shared message types for the PiVirt Cloud platform.
+// AuthzRule is the method option every externally reachable RPC declares
+// (PIVIRT-246, docs/pivirt/agent-modes-and-cluster.md §3.2). One interceptor
+// in pibase reads it and decides; handlers never authorise on their own.
+
+syntax = "proto3";
+
+package pilab.common.v1;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1;commonv1";
+
+// Authn says how the caller of a method proves who it is.
+enum Authn {
+  AUTHN_UNSPECIFIED = 0;
+  // AUTHN_USER: a user or service-account token (JWT, API token, device
+  // flow); the method is authorised with kind + verb.
+  AUTHN_USER = 1;
+  // AUTHN_PUBLIC: callable without credentials (health, login, device-code
+  // start). Never use for anything that reads or changes state.
+  AUTHN_PUBLIC = 2;
+  // AUTHN_NODE_MTLS: callable only by a node presenting its director-issued
+  // client certificate (spiffe://pilab.hu/node/<uuid>); user tokens are
+  // rejected. kind/verb are not evaluated.
+  AUTHN_NODE_MTLS = 3;
+  // AUTHN_BOOTSTRAP_TOKEN: first-join enrolment, authenticated by a
+  // one-shot bootstrap token the method checks itself.
+  AUTHN_BOOTSTRAP_TOKEN = 4;
+}
+
+message AuthzRule {
+  // kind is the RDS kind the call acts on ("VirtualMachine", "Network", ...).
+  // Empty only for non-USER authn.
+  string kind = 1;
+  // verb is get, list, watch, create, update, delete, or a subresource verb
+  // (power, console, migrate, snapshot, revert, attach, admin).
+  string verb = 2;
+  Authn authn = 3;
+  // node_scoped marks a call whose target is the host itself rather than a
+  // tenant namespace; it is evaluated against node-wide role bindings.
+  bool node_scoped = 4;
+}
+
+extend google.protobuf.MethodOptions {
+  AuthzRule authz = 50100;
+}

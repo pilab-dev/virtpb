@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.network.v2;
 
+import "pilab/common/v1/authz.proto";
+
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/empty.proto";
@@ -14,15 +16,33 @@ option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2";
 
 // IPAMService manages IP address pools and allocations.
 service IPAMService {
-  rpc CreateIPPool(CreateIPPoolRequest) returns (IPPool);
-  rpc GetIPPool(GetIPPoolRequest) returns (IPPool);
-  rpc ListIPPools(ListIPPoolsRequest) returns (ListIPPoolsResponse);
-  rpc UpdateIPPool(UpdateIPPoolRequest) returns (IPPool);
-  rpc DeleteIPPool(DeleteIPPoolRequest) returns (google.protobuf.Empty);
-  rpc AllocateIP(AllocateIPRequest) returns (IPAllocation);
-  rpc ReleaseIP(ReleaseIPRequest) returns (google.protobuf.Empty);
-  rpc ListAllocations(ListAllocationsRequest) returns (ListAllocationsResponse);
-  rpc ReserveIP(ReserveIPRequest) returns (IPReservation);
+  rpc CreateIPPool(CreateIPPoolRequest) returns (IPPool) {
+    option (pilab.common.v1.authz) = { kind: "IPAMPool", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetIPPool(GetIPPoolRequest) returns (IPPool) {
+    option (pilab.common.v1.authz) = { kind: "IPAMPool", verb: "get", authn: AUTHN_USER };
+  }
+  rpc ListIPPools(ListIPPoolsRequest) returns (ListIPPoolsResponse) {
+    option (pilab.common.v1.authz) = { kind: "IPAMPool", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdateIPPool(UpdateIPPoolRequest) returns (IPPool) {
+    option (pilab.common.v1.authz) = { kind: "IPAMPool", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeleteIPPool(DeleteIPPoolRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "IPAMPool", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc AllocateIP(AllocateIPRequest) returns (IPAllocation) {
+    option (pilab.common.v1.authz) = { kind: "IPAllocation", verb: "create", authn: AUTHN_USER };
+  }
+  rpc ReleaseIP(ReleaseIPRequest) returns (google.protobuf.Empty) {
+    option (pilab.common.v1.authz) = { kind: "IPAllocation", verb: "delete", authn: AUTHN_USER };
+  }
+  rpc ListAllocations(ListAllocationsRequest) returns (ListAllocationsResponse) {
+    option (pilab.common.v1.authz) = { kind: "IPAllocation", verb: "list", authn: AUTHN_USER };
+  }
+  rpc ReserveIP(ReserveIPRequest) returns (IPReservation) {
+    option (pilab.common.v1.authz) = { kind: "IPAllocation", verb: "create", authn: AUTHN_USER };
+  }
 }
 
 // IPPool represents an IP address pool for allocation.

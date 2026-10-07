@@ -10,6 +10,7 @@
 package agentv1
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -2839,7 +2840,7 @@ var File_pilab_agent_v1_vm_service_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v1_vm_service_proto_rawDesc = "" +
 	"\n" +
-	"\x1fpilab/agent/v1/vm_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/agent/v1/stream.proto\x1a\x1apilab/agent/v1/error.proto\"t\n" +
+	"\x1fpilab/agent/v1/vm_service.proto\x12\x14pilab.cloud.agent.v1\x1a\x1bpilab/common/v1/authz.proto\x1a\x1bpilab/agent/v1/stream.proto\x1a\x1apilab/agent/v1/error.proto\"t\n" +
 	"\x0fVmDefineRequest\x12#\n" +
 	"\rvm_definition\x18\x01 \x01(\tR\fvmDefinition\x12)\n" +
 	"\x0eboon_on_create\x18\x02 \x01(\bH\x00R\fboonOnCreate\x88\x01\x01B\x11\n" +
@@ -3090,23 +3091,38 @@ const file_pilab_agent_v1_vm_service_proto_rawDesc = "" +
 	"\x14RECURRENCE_TYPE_ONCE\x10\x00\x12\x19\n" +
 	"\x15RECURRENCE_TYPE_DAILY\x10\x01\x12\x1a\n" +
 	"\x16RECURRENCE_TYPE_WEEKLY\x10\x02\x12\x1b\n" +
-	"\x17RECURRENCE_TYPE_MONTHLY\x10\x032\x92\f\n" +
-	"\x15VirtualMachineService\x12W\n" +
-	"\x06Define\x12%.pilab.cloud.agent.v1.VmDefineRequest\x1a&.pilab.cloud.agent.v1.VmDefineResponse\x12l\n" +
-	"\rGetDefinition\x12,.pilab.cloud.agent.v1.VmGetDefinitionRequest\x1a-.pilab.cloud.agent.v1.VmGetDefinitionResponse\x12Z\n" +
-	"\aControl\x12&.pilab.cloud.agent.v1.VmControlRequest\x1a'.pilab.cloud.agent.v1.VmControlResponse\x12W\n" +
-	"\x06Status\x12%.pilab.cloud.agent.v1.VmStatusRequest\x1a&.pilab.cloud.agent.v1.VmStatusResponse\x12`\n" +
-	"\tGuestInfo\x12(.pilab.cloud.agent.v1.VmGuestInfoRequest\x1a).pilab.cloud.agent.v1.VmGuestInfoResponse\x12`\n" +
-	"\tAttachISO\x12(.pilab.cloud.agent.v1.VmAttachISORequest\x1a).pilab.cloud.agent.v1.VmAttachISOResponse\x12`\n" +
-	"\tDetachISO\x12(.pilab.cloud.agent.v1.VmDetachISORequest\x1a).pilab.cloud.agent.v1.VmDetachISOResponse\x12Y\n" +
-	"\bCreateVM\x12%.pilab.cloud.agent.v1.CreateVMRequest\x1a&.pilab.cloud.agent.v1.CreateVMResponse\x12V\n" +
-	"\aStartVM\x12$.pilab.cloud.agent.v1.StartVMRequest\x1a%.pilab.cloud.agent.v1.StartVMResponse\x12Y\n" +
-	"\bUpdateVM\x12%.pilab.cloud.agent.v1.UpdateVMRequest\x1a&.pilab.cloud.agent.v1.UpdateVMResponse\x12\\\n" +
-	"\tWakeOnLAN\x12&.pilab.cloud.agent.v1.WakeOnLANRequest\x1a'.pilab.cloud.agent.v1.WakeOnLANResponse\x12z\n" +
-	"\x13CreatePowerSchedule\x120.pilab.cloud.agent.v1.CreatePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.CreatePowerScheduleResponse\x12w\n" +
-	"\x12ListPowerSchedules\x12/.pilab.cloud.agent.v1.ListPowerSchedulesRequest\x1a0.pilab.cloud.agent.v1.ListPowerSchedulesResponse\x12z\n" +
-	"\x13UpdatePowerSchedule\x120.pilab.cloud.agent.v1.UpdatePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.UpdatePowerScheduleResponse\x12z\n" +
-	"\x13DeletePowerSchedule\x120.pilab.cloud.agent.v1.DeletePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.DeletePowerScheduleResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
+	"\x17RECURRENCE_TYPE_MONTHLY\x10\x032\xeb\x0f\n" +
+	"\x15VirtualMachineService\x12w\n" +
+	"\x06Define\x12%.pilab.cloud.agent.v1.VmDefineRequest\x1a&.pilab.cloud.agent.v1.VmDefineResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12\x89\x01\n" +
+	"\rGetDefinition\x12,.pilab.cloud.agent.v1.VmGetDefinitionRequest\x1a-.pilab.cloud.agent.v1.VmGetDefinitionResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12y\n" +
+	"\aControl\x12&.pilab.cloud.agent.v1.VmControlRequest\x1a'.pilab.cloud.agent.v1.VmControlResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12t\n" +
+	"\x06Status\x12%.pilab.cloud.agent.v1.VmStatusRequest\x1a&.pilab.cloud.agent.v1.VmStatusResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12}\n" +
+	"\tGuestInfo\x12(.pilab.cloud.agent.v1.VmGuestInfoRequest\x1a).pilab.cloud.agent.v1.VmGuestInfoResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\x0eVirtualMachine\x12\x03get\x18\x01\x12\x80\x01\n" +
+	"\tAttachISO\x12(.pilab.cloud.agent.v1.VmAttachISORequest\x1a).pilab.cloud.agent.v1.VmAttachISOResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x01\x12\x80\x01\n" +
+	"\tDetachISO\x12(.pilab.cloud.agent.v1.VmDetachISORequest\x1a).pilab.cloud.agent.v1.VmDetachISOResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06attach\x18\x01\x12y\n" +
+	"\bCreateVM\x12%.pilab.cloud.agent.v1.CreateVMRequest\x1a&.pilab.cloud.agent.v1.CreateVMResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12u\n" +
+	"\aStartVM\x12$.pilab.cloud.agent.v1.StartVMRequest\x1a%.pilab.cloud.agent.v1.StartVMResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12y\n" +
+	"\bUpdateVM\x12%.pilab.cloud.agent.v1.UpdateVMRequest\x1a&.pilab.cloud.agent.v1.UpdateVMResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06update\x18\x01\x12{\n" +
+	"\tWakeOnLAN\x12&.pilab.cloud.agent.v1.WakeOnLANRequest\x1a'.pilab.cloud.agent.v1.WakeOnLANResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\x0eVirtualMachine\x12\x05power\x18\x01\x12\x9a\x01\n" +
+	"\x13CreatePowerSchedule\x120.pilab.cloud.agent.v1.CreatePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.CreatePowerScheduleResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06create\x18\x01\x12\x95\x01\n" +
+	"\x12ListPowerSchedules\x12/.pilab.cloud.agent.v1.ListPowerSchedulesRequest\x1a0.pilab.cloud.agent.v1.ListPowerSchedulesResponse\"\x1c\xa2\xbb\x18\x18\n" +
+	"\x0eVirtualMachine\x12\x04list\x18\x01\x12\x9a\x01\n" +
+	"\x13UpdatePowerSchedule\x120.pilab.cloud.agent.v1.UpdatePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.UpdatePowerScheduleResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06update\x18\x01\x12\x9a\x01\n" +
+	"\x13DeletePowerSchedule\x120.pilab.cloud.agent.v1.DeletePowerScheduleRequest\x1a1.pilab.cloud.agent.v1.DeletePowerScheduleResponse\"\x1e\xa2\xbb\x18\x1a\n" +
+	"\x0eVirtualMachine\x12\x06delete\x18\x01B4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1b\x06proto3"
 
 var (
 	file_pilab_agent_v1_vm_service_proto_rawDescOnce sync.Once

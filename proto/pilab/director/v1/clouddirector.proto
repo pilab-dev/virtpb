@@ -5,6 +5,8 @@ syntax = "proto3";
 
 package pilab.director.v1;
 
+import "pilab/common/v1/authz.proto";
+
 import "pilab/common/v1/host.proto";
 import "pilab/common/v1/task.proto";
 
@@ -108,6 +110,10 @@ message RegisterAgentResponse {
 }
 
 service CloudDirectorService {
-  rpc RegisterAgent(RegisterAgentRequest) returns (RegisterAgentResponse);
-  rpc AgentEvents(stream AgentEventsRequest) returns (stream ManagerMessage);
+  rpc RegisterAgent(RegisterAgentRequest) returns (RegisterAgentResponse) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_NODE_MTLS };
+  }
+  rpc AgentEvents(stream AgentEventsRequest) returns (stream ManagerMessage) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_NODE_MTLS };
+  }
 }

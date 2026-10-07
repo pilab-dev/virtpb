@@ -5,27 +5,59 @@ syntax = "proto3";
 
 package pilab.cloud.agent.v1;
 
+import "pilab/common/v1/authz.proto";
+
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1";
 
 import "pilab/agent/v1/stream.proto";
 import "pilab/agent/v1/error.proto";
 
 service VirtualMachineService {
-  rpc Define(VmDefineRequest) returns (VmDefineResponse);
-  rpc GetDefinition(VmGetDefinitionRequest) returns (VmGetDefinitionResponse);
-  rpc Control(VmControlRequest) returns (VmControlResponse);
-  rpc Status(VmStatusRequest) returns (VmStatusResponse);
-  rpc GuestInfo(VmGuestInfoRequest) returns (VmGuestInfoResponse);
-  rpc AttachISO(VmAttachISORequest) returns (VmAttachISOResponse);
-  rpc DetachISO(VmDetachISORequest) returns (VmDetachISOResponse);
-  rpc CreateVM(CreateVMRequest) returns (CreateVMResponse);
-  rpc StartVM(StartVMRequest) returns (StartVMResponse);
-  rpc UpdateVM(UpdateVMRequest) returns (UpdateVMResponse);
-  rpc WakeOnLAN(WakeOnLANRequest) returns (WakeOnLANResponse);
-  rpc CreatePowerSchedule(CreatePowerScheduleRequest) returns (CreatePowerScheduleResponse);
-  rpc ListPowerSchedules(ListPowerSchedulesRequest) returns (ListPowerSchedulesResponse);
-  rpc UpdatePowerSchedule(UpdatePowerScheduleRequest) returns (UpdatePowerScheduleResponse);
-  rpc DeletePowerSchedule(DeletePowerScheduleRequest) returns (DeletePowerScheduleResponse);
+  rpc Define(VmDefineRequest) returns (VmDefineResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc GetDefinition(VmGetDefinitionRequest) returns (VmGetDefinitionResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc Control(VmControlRequest) returns (VmControlResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc Status(VmStatusRequest) returns (VmStatusResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc GuestInfo(VmGuestInfoRequest) returns (VmGuestInfoResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc AttachISO(VmAttachISORequest) returns (VmAttachISOResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc DetachISO(VmDetachISORequest) returns (VmDetachISOResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc CreateVM(CreateVMRequest) returns (CreateVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc StartVM(StartVMRequest) returns (StartVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc UpdateVM(UpdateVMRequest) returns (UpdateVMResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "update", authn: AUTHN_USER };
+  }
+  rpc WakeOnLAN(WakeOnLANRequest) returns (WakeOnLANResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "power", authn: AUTHN_USER };
+  }
+  rpc CreatePowerSchedule(CreatePowerScheduleRequest) returns (CreatePowerScheduleResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "create", authn: AUTHN_USER };
+  }
+  rpc ListPowerSchedules(ListPowerSchedulesRequest) returns (ListPowerSchedulesResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "list", authn: AUTHN_USER };
+  }
+  rpc UpdatePowerSchedule(UpdatePowerScheduleRequest) returns (UpdatePowerScheduleResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "update", authn: AUTHN_USER };
+  }
+  rpc DeletePowerSchedule(DeletePowerScheduleRequest) returns (DeletePowerScheduleResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "delete", authn: AUTHN_USER };
+  }
 }
 
 enum ControlCommand {

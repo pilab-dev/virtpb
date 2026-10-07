@@ -10,6 +10,7 @@
 package frontendv1
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -2757,7 +2758,7 @@ var File_pilab_frontend_v1_management_service_proto protoreflect.FileDescriptor
 
 const file_pilab_frontend_v1_management_service_proto_rawDesc = "" +
 	"\n" +
-	"*pilab/frontend/v1/management_service.proto\x12\x11pilab.frontend.v1\x1a\x1bgoogle/protobuf/empty.proto\"\xa3\x02\n" +
+	"*pilab/frontend/v1/management_service.proto\x12\x11pilab.frontend.v1\x1a\x1bpilab/common/v1/authz.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xa3\x02\n" +
 	"\x11CreateUserRequest\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x12\n" +
@@ -2930,48 +2931,82 @@ const file_pilab_frontend_v1_management_service_proto_rawDesc = "" +
 	"\x1cGetPermissionsForRoleRequest\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\tR\x06roleId\"`\n" +
 	"\x1dGetPermissionsForRoleResponse\x12?\n" +
-	"\vpermissions\x18\x01 \x03(\v2\x1d.pilab.frontend.v1.PermissionR\vpermissions2\xf0\x18\n" +
-	"\x11ManagementService\x12K\n" +
+	"\vpermissions\x18\x01 \x03(\v2\x1d.pilab.frontend.v1.PermissionR\vpermissions2\xe6\x1e\n" +
+	"\x11ManagementService\x12a\n" +
 	"\n" +
-	"CreateUser\x12$.pilab.frontend.v1.CreateUserRequest\x1a\x17.pilab.frontend.v1.User\x12E\n" +
-	"\aGetUser\x12!.pilab.frontend.v1.GetUserRequest\x1a\x17.pilab.frontend.v1.User\x12Y\n" +
-	"\x11GetUserByUsername\x12+.pilab.frontend.v1.GetUserByUsernameRequest\x1a\x17.pilab.frontend.v1.User\x12S\n" +
-	"\x0eGetUserByEmail\x12(.pilab.frontend.v1.GetUserByEmailRequest\x1a\x17.pilab.frontend.v1.User\x12K\n" +
+	"CreateUser\x12$.pilab.frontend.v1.CreateUserRequest\x1a\x17.pilab.frontend.v1.User\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04User\x12\x06create\x18\x01\x12X\n" +
+	"\aGetUser\x12!.pilab.frontend.v1.GetUserRequest\x1a\x17.pilab.frontend.v1.User\"\x11\xa2\xbb\x18\r\n" +
+	"\x04User\x12\x03get\x18\x01\x12l\n" +
+	"\x11GetUserByUsername\x12+.pilab.frontend.v1.GetUserByUsernameRequest\x1a\x17.pilab.frontend.v1.User\"\x11\xa2\xbb\x18\r\n" +
+	"\x04User\x12\x03get\x18\x01\x12f\n" +
+	"\x0eGetUserByEmail\x12(.pilab.frontend.v1.GetUserByEmailRequest\x1a\x17.pilab.frontend.v1.User\"\x11\xa2\xbb\x18\r\n" +
+	"\x04User\x12\x03get\x18\x01\x12a\n" +
 	"\n" +
-	"UpdateUser\x12$.pilab.frontend.v1.UpdateUserRequest\x1a\x17.pilab.frontend.v1.User\x12J\n" +
+	"UpdateUser\x12$.pilab.frontend.v1.UpdateUserRequest\x1a\x17.pilab.frontend.v1.User\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04User\x12\x06update\x18\x01\x12`\n" +
 	"\n" +
-	"DeleteUser\x12$.pilab.frontend.v1.DeleteUserRequest\x1a\x16.google.protobuf.Empty\x12\\\n" +
-	"\vSearchUsers\x12%.pilab.frontend.v1.SearchUsersRequest\x1a&.pilab.frontend.v1.SearchUsersResponse\x12Z\n" +
-	"\x12ChangeUserPassword\x12,.pilab.frontend.v1.ChangeUserPasswordRequest\x1a\x16.google.protobuf.Empty\x12K\n" +
+	"DeleteUser\x12$.pilab.frontend.v1.DeleteUserRequest\x1a\x16.google.protobuf.Empty\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04User\x12\x06delete\x18\x01\x12p\n" +
+	"\vSearchUsers\x12%.pilab.frontend.v1.SearchUsersRequest\x1a&.pilab.frontend.v1.SearchUsersResponse\"\x12\xa2\xbb\x18\x0e\n" +
+	"\x04User\x12\x04list\x18\x01\x12o\n" +
+	"\x12ChangeUserPassword\x12,.pilab.frontend.v1.ChangeUserPasswordRequest\x1a\x16.google.protobuf.Empty\"\x13\xa2\xbb\x18\x0f\n" +
+	"\x04User\x12\x05admin\x18\x01\x12a\n" +
 	"\n" +
-	"CreateRole\x12$.pilab.frontend.v1.CreateRoleRequest\x1a\x17.pilab.frontend.v1.Role\x12E\n" +
-	"\aGetRole\x12!.pilab.frontend.v1.GetRoleRequest\x1a\x17.pilab.frontend.v1.Role\x12Q\n" +
-	"\rGetRoleByName\x12'.pilab.frontend.v1.GetRoleByNameRequest\x1a\x17.pilab.frontend.v1.Role\x12K\n" +
+	"CreateRole\x12$.pilab.frontend.v1.CreateRoleRequest\x1a\x17.pilab.frontend.v1.Role\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Role\x12\x06create\x18\x01\x12X\n" +
+	"\aGetRole\x12!.pilab.frontend.v1.GetRoleRequest\x1a\x17.pilab.frontend.v1.Role\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Role\x12\x03get\x18\x01\x12d\n" +
+	"\rGetRoleByName\x12'.pilab.frontend.v1.GetRoleByNameRequest\x1a\x17.pilab.frontend.v1.Role\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Role\x12\x03get\x18\x01\x12a\n" +
 	"\n" +
-	"UpdateRole\x12$.pilab.frontend.v1.UpdateRoleRequest\x1a\x17.pilab.frontend.v1.Role\x12J\n" +
+	"UpdateRole\x12$.pilab.frontend.v1.UpdateRoleRequest\x1a\x17.pilab.frontend.v1.Role\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Role\x12\x06update\x18\x01\x12`\n" +
 	"\n" +
-	"DeleteRole\x12$.pilab.frontend.v1.DeleteRoleRequest\x1a\x16.google.protobuf.Empty\x12\\\n" +
-	"\vSearchRoles\x12%.pilab.frontend.v1.SearchRolesRequest\x1a&.pilab.frontend.v1.SearchRolesResponse\x12Z\n" +
-	"\x12AddRoleInheritance\x12,.pilab.frontend.v1.AddRoleInheritanceRequest\x1a\x16.google.protobuf.Empty\x12`\n" +
-	"\x15RemoveRoleInheritance\x12/.pilab.frontend.v1.RemoveRoleInheritanceRequest\x1a\x16.google.protobuf.Empty\x12e\n" +
-	"\x0eGetParentRoles\x12(.pilab.frontend.v1.GetParentRolesRequest\x1a).pilab.frontend.v1.GetParentRolesResponse\x12b\n" +
-	"\rGetChildRoles\x12'.pilab.frontend.v1.GetChildRolesRequest\x1a(.pilab.frontend.v1.GetChildRolesResponse\x12n\n" +
-	"\x11GetAllParentRoles\x12+.pilab.frontend.v1.GetAllParentRolesRequest\x1a,.pilab.frontend.v1.GetAllParentRolesResponse\x12k\n" +
-	"\x10GetAllChildRoles\x12*.pilab.frontend.v1.GetAllChildRolesRequest\x1a+.pilab.frontend.v1.GetAllChildRolesResponse\x12Z\n" +
-	"\x0fCreateRoleGroup\x12).pilab.frontend.v1.CreateRoleGroupRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\x12T\n" +
-	"\fGetRoleGroup\x12&.pilab.frontend.v1.GetRoleGroupRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\x12`\n" +
-	"\x12GetRoleGroupByName\x12,.pilab.frontend.v1.GetRoleGroupByNameRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\x12Z\n" +
-	"\x0fUpdateRoleGroup\x12).pilab.frontend.v1.UpdateRoleGroupRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\x12T\n" +
-	"\x0fDeleteRoleGroup\x12).pilab.frontend.v1.DeleteRoleGroupRequest\x1a\x16.google.protobuf.Empty\x12k\n" +
-	"\x10SearchRoleGroups\x12*.pilab.frontend.v1.SearchRoleGroupsRequest\x1a+.pilab.frontend.v1.SearchRoleGroupsResponse\x12Z\n" +
-	"\x12AddUserToRoleGroup\x12,.pilab.frontend.v1.AddUserToRoleGroupRequest\x1a\x16.google.protobuf.Empty\x12d\n" +
-	"\x17RemoveUserFromRoleGroup\x121.pilab.frontend.v1.RemoveUserFromRoleGroupRequest\x1a\x16.google.protobuf.Empty\x12w\n" +
-	"\x14GetRoleGroupsForUser\x12..pilab.frontend.v1.GetRoleGroupsForUserRequest\x1a/.pilab.frontend.v1.GetRoleGroupsForUserResponse\x12t\n" +
-	"\x13GetUsersInRoleGroup\x12-.pilab.frontend.v1.GetUsersInRoleGroupRequest\x1a..pilab.frontend.v1.GetUsersInRoleGroupResponse\x12V\n" +
-	"\x10AssignRoleToUser\x12*.pilab.frontend.v1.AssignRoleToUserRequest\x1a\x16.google.protobuf.Empty\x12^\n" +
-	"\x14UnassignRoleFromUser\x12..pilab.frontend.v1.UnassignRoleFromUserRequest\x1a\x16.google.protobuf.Empty\x12h\n" +
-	"\x0fGetRolesForUser\x12).pilab.frontend.v1.GetRolesForUserRequest\x1a*.pilab.frontend.v1.GetRolesForUserResponse\x12z\n" +
-	"\x15GetPermissionsForRole\x12/.pilab.frontend.v1.GetPermissionsForRoleRequest\x1a0.pilab.frontend.v1.GetPermissionsForRoleResponseB:Z8go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1b\x06proto3"
+	"DeleteRole\x12$.pilab.frontend.v1.DeleteRoleRequest\x1a\x16.google.protobuf.Empty\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Role\x12\x06delete\x18\x01\x12p\n" +
+	"\vSearchRoles\x12%.pilab.frontend.v1.SearchRolesRequest\x1a&.pilab.frontend.v1.SearchRolesResponse\"\x12\xa2\xbb\x18\x0e\n" +
+	"\x04Role\x12\x04list\x18\x01\x12p\n" +
+	"\x12AddRoleInheritance\x12,.pilab.frontend.v1.AddRoleInheritanceRequest\x1a\x16.google.protobuf.Empty\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Role\x12\x06update\x18\x01\x12v\n" +
+	"\x15RemoveRoleInheritance\x12/.pilab.frontend.v1.RemoveRoleInheritanceRequest\x1a\x16.google.protobuf.Empty\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Role\x12\x06update\x18\x01\x12y\n" +
+	"\x0eGetParentRoles\x12(.pilab.frontend.v1.GetParentRolesRequest\x1a).pilab.frontend.v1.GetParentRolesResponse\"\x12\xa2\xbb\x18\x0e\n" +
+	"\x04Role\x12\x04list\x18\x01\x12v\n" +
+	"\rGetChildRoles\x12'.pilab.frontend.v1.GetChildRolesRequest\x1a(.pilab.frontend.v1.GetChildRolesResponse\"\x12\xa2\xbb\x18\x0e\n" +
+	"\x04Role\x12\x04list\x18\x01\x12\x82\x01\n" +
+	"\x11GetAllParentRoles\x12+.pilab.frontend.v1.GetAllParentRolesRequest\x1a,.pilab.frontend.v1.GetAllParentRolesResponse\"\x12\xa2\xbb\x18\x0e\n" +
+	"\x04Role\x12\x04list\x18\x01\x12\x7f\n" +
+	"\x10GetAllChildRoles\x12*.pilab.frontend.v1.GetAllChildRolesRequest\x1a+.pilab.frontend.v1.GetAllChildRolesResponse\"\x12\xa2\xbb\x18\x0e\n" +
+	"\x04Role\x12\x04list\x18\x01\x12p\n" +
+	"\x0fCreateRoleGroup\x12).pilab.frontend.v1.CreateRoleGroupRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Role\x12\x06create\x18\x01\x12g\n" +
+	"\fGetRoleGroup\x12&.pilab.frontend.v1.GetRoleGroupRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Role\x12\x03get\x18\x01\x12s\n" +
+	"\x12GetRoleGroupByName\x12,.pilab.frontend.v1.GetRoleGroupByNameRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Role\x12\x03get\x18\x01\x12p\n" +
+	"\x0fUpdateRoleGroup\x12).pilab.frontend.v1.UpdateRoleGroupRequest\x1a\x1c.pilab.frontend.v1.RoleGroup\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Role\x12\x06update\x18\x01\x12j\n" +
+	"\x0fDeleteRoleGroup\x12).pilab.frontend.v1.DeleteRoleGroupRequest\x1a\x16.google.protobuf.Empty\"\x14\xa2\xbb\x18\x10\n" +
+	"\x04Role\x12\x06delete\x18\x01\x12\x7f\n" +
+	"\x10SearchRoleGroups\x12*.pilab.frontend.v1.SearchRoleGroupsRequest\x1a+.pilab.frontend.v1.SearchRoleGroupsResponse\"\x12\xa2\xbb\x18\x0e\n" +
+	"\x04Role\x12\x04list\x18\x01\x12w\n" +
+	"\x12AddUserToRoleGroup\x12,.pilab.frontend.v1.AddUserToRoleGroupRequest\x1a\x16.google.protobuf.Empty\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vRoleBinding\x12\x06create\x18\x01\x12\x81\x01\n" +
+	"\x17RemoveUserFromRoleGroup\x121.pilab.frontend.v1.RemoveUserFromRoleGroupRequest\x1a\x16.google.protobuf.Empty\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vRoleBinding\x12\x06delete\x18\x01\x12\x92\x01\n" +
+	"\x14GetRoleGroupsForUser\x12..pilab.frontend.v1.GetRoleGroupsForUserRequest\x1a/.pilab.frontend.v1.GetRoleGroupsForUserResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\vRoleBinding\x12\x04list\x18\x01\x12\x8f\x01\n" +
+	"\x13GetUsersInRoleGroup\x12-.pilab.frontend.v1.GetUsersInRoleGroupRequest\x1a..pilab.frontend.v1.GetUsersInRoleGroupResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\vRoleBinding\x12\x04list\x18\x01\x12s\n" +
+	"\x10AssignRoleToUser\x12*.pilab.frontend.v1.AssignRoleToUserRequest\x1a\x16.google.protobuf.Empty\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vRoleBinding\x12\x06create\x18\x01\x12{\n" +
+	"\x14UnassignRoleFromUser\x12..pilab.frontend.v1.UnassignRoleFromUserRequest\x1a\x16.google.protobuf.Empty\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vRoleBinding\x12\x06delete\x18\x01\x12\x83\x01\n" +
+	"\x0fGetRolesForUser\x12).pilab.frontend.v1.GetRolesForUserRequest\x1a*.pilab.frontend.v1.GetRolesForUserResponse\"\x19\xa2\xbb\x18\x15\n" +
+	"\vRoleBinding\x12\x04list\x18\x01\x12\x8d\x01\n" +
+	"\x15GetPermissionsForRole\x12/.pilab.frontend.v1.GetPermissionsForRoleRequest\x1a0.pilab.frontend.v1.GetPermissionsForRoleResponse\"\x11\xa2\xbb\x18\r\n" +
+	"\x04Role\x12\x03get\x18\x01B:Z8go.pilab.hu/cloud/virtpb/v3/pilab/frontend/v1;frontendv1b\x06proto3"
 
 var (
 	file_pilab_frontend_v1_management_service_proto_rawDescOnce sync.Once

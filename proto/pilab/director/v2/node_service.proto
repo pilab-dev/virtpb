@@ -9,6 +9,8 @@ syntax = "proto3";
 
 package pilab.director.v2;
 
+import "pilab/common/v1/authz.proto";
+
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/director/v2;directorv2";
 
 import "google/protobuf/timestamp.proto";
@@ -26,7 +28,9 @@ service NodeService {
   // bootstrap_token -- and the director mints a new node_uuid. On
   // reconnect, the caller's mTLS peer identity must already be bound to
   // the supplied node_uuid.
-  rpc Register(RegisterNodeRequest) returns (RegisterNodeResponse);
+  rpc Register(RegisterNodeRequest) returns (RegisterNodeResponse) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_BOOTSTRAP_TOKEN };
+  }
 
   // RequestCertificate submits a CSR for the node_uuid minted by Register
   // and returns a signed mTLS client certificate whose SAN the director
@@ -34,7 +38,9 @@ service NodeService {
   // what the CSR itself claims. Like Register, usable without an existing
   // client certificate via bootstrap_token; a node_uuid may only be
   // certified once (rejects if already bound to a peer identity).
-  rpc RequestCertificate(RequestCertificateRequest) returns (RequestCertificateResponse);
+  rpc RequestCertificate(RequestCertificateRequest) returns (RequestCertificateResponse) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_BOOTSTRAP_TOKEN };
+  }
 
   // Session is the node's single long-lived stream to the director. It
   // requires a verified mTLS client certificate -- there is no
@@ -43,7 +49,9 @@ service NodeService {
   // stale epoch (an older Register than the one currently on record) are
   // dropped, which is what makes a duplicate or restarted agent process
   // safe.
-  rpc Session(stream NodeEvent) returns (stream NodeDirective);
+  rpc Session(stream NodeEvent) returns (stream NodeDirective) {
+    option (pilab.common.v1.authz) = { authn: AUTHN_NODE_MTLS };
+  }
 }
 
 message RegisterNodeRequest {

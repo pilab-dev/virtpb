@@ -10,6 +10,7 @@
 package agentv2
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1380,7 +1381,7 @@ var File_pilab_agent_v2_iscsi_service_proto protoreflect.FileDescriptor
 
 const file_pilab_agent_v2_iscsi_service_proto_rawDesc = "" +
 	"\n" +
-	"\"pilab/agent/v2/iscsi_service.proto\x12\x0epilab.agent.v2\".\n" +
+	"\"pilab/agent/v2/iscsi_service.proto\x12\x0epilab.agent.v2\x1a\x1bpilab/common/v1/authz.proto\".\n" +
 	"\x14ISCSIDiscoverRequest\x12\x16\n" +
 	"\x06portal\x18\x01 \x01(\tR\x06portal\"1\n" +
 	"\x15ISCSIDiscoverResponse\x12\x18\n" +
@@ -1455,21 +1456,33 @@ const file_pilab_agent_v2_iscsi_service_proto_rawDesc = "" +
 	"\x14ISCSISetLoginRequest\x12\x16\n" +
 	"\x06target\x18\x01 \x01(\tR\x06target\x12\x1c\n" +
 	"\tautomatic\x18\x02 \x01(\bR\tautomatic\"\x17\n" +
-	"\x15ISCSISetLoginResponse2\xd2\b\n" +
-	"\fISCSIService\x12W\n" +
-	"\bDiscover\x12$.pilab.agent.v2.ISCSIDiscoverRequest\x1a%.pilab.agent.v2.ISCSIDiscoverResponse\x12N\n" +
-	"\x05Login\x12!.pilab.agent.v2.ISCSILoginRequest\x1a\".pilab.agent.v2.ISCSILoginResponse\x12Q\n" +
-	"\x06Logout\x12\".pilab.agent.v2.ISCSILogoutRequest\x1a#.pilab.agent.v2.ISCSILogoutResponse\x12]\n" +
+	"\x15ISCSISetLoginResponse2\xbe\v\n" +
+	"\fISCSIService\x12v\n" +
+	"\bDiscover\x12$.pilab.agent.v2.ISCSIDiscoverRequest\x1a%.pilab.agent.v2.ISCSIDiscoverResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06update\x18\x01 \x01\x12m\n" +
+	"\x05Login\x12!.pilab.agent.v2.ISCSILoginRequest\x1a\".pilab.agent.v2.ISCSILoginResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06update\x18\x01 \x01\x12p\n" +
+	"\x06Logout\x12\".pilab.agent.v2.ISCSILogoutRequest\x1a#.pilab.agent.v2.ISCSILogoutResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06update\x18\x01 \x01\x12|\n" +
 	"\n" +
-	"DeleteNode\x12&.pilab.agent.v2.ISCSIDeleteNodeRequest\x1a'.pilab.agent.v2.ISCSIDeleteNodeResponse\x12Q\n" +
-	"\x06Rescan\x12\".pilab.agent.v2.ISCSIRescanRequest\x1a#.pilab.agent.v2.ISCSIRescanResponse\x12W\n" +
-	"\bSessions\x12$.pilab.agent.v2.ISCSISessionsRequest\x1a%.pilab.agent.v2.ISCSISessionsResponse\x12N\n" +
-	"\x05Nodes\x12!.pilab.agent.v2.ISCSINodesRequest\x1a\".pilab.agent.v2.ISCSINodesResponse\x12T\n" +
-	"\aGetLuns\x12#.pilab.agent.v2.ISCSIGetLunsRequest\x1a$.pilab.agent.v2.ISCSIGetLunsResponse\x12W\n" +
-	"\bGetPaths\x12$.pilab.agent.v2.ISCSIGetPathsRequest\x1a%.pilab.agent.v2.ISCSIGetPathsResponse\x12f\n" +
-	"\rConfigureCHAP\x12).pilab.agent.v2.ISCSIConfigureCHAPRequest\x1a*.pilab.agent.v2.ISCSIConfigureCHAPResponse\x12{\n" +
-	"\x14ConfigureCHAPInbound\x120.pilab.agent.v2.ISCSIConfigureCHAPInboundRequest\x1a1.pilab.agent.v2.ISCSIConfigureCHAPInboundResponse\x12W\n" +
-	"\bSetLogin\x12$.pilab.agent.v2.ISCSISetLoginRequest\x1a%.pilab.agent.v2.ISCSISetLoginResponseB4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v2;agentv2b\x06proto3"
+	"DeleteNode\x12&.pilab.agent.v2.ISCSIDeleteNodeRequest\x1a'.pilab.agent.v2.ISCSIDeleteNodeResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06delete\x18\x01 \x01\x12p\n" +
+	"\x06Rescan\x12\".pilab.agent.v2.ISCSIRescanRequest\x1a#.pilab.agent.v2.ISCSIRescanResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06update\x18\x01 \x01\x12t\n" +
+	"\bSessions\x12$.pilab.agent.v2.ISCSISessionsRequest\x1a%.pilab.agent.v2.ISCSISessionsResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vStoragePool\x12\x04list\x18\x01 \x01\x12k\n" +
+	"\x05Nodes\x12!.pilab.agent.v2.ISCSINodesRequest\x1a\".pilab.agent.v2.ISCSINodesResponse\"\x1b\xa2\xbb\x18\x17\n" +
+	"\vStoragePool\x12\x04list\x18\x01 \x01\x12p\n" +
+	"\aGetLuns\x12#.pilab.agent.v2.ISCSIGetLunsRequest\x1a$.pilab.agent.v2.ISCSIGetLunsResponse\"\x1a\xa2\xbb\x18\x16\n" +
+	"\vStoragePool\x12\x03get\x18\x01 \x01\x12s\n" +
+	"\bGetPaths\x12$.pilab.agent.v2.ISCSIGetPathsRequest\x1a%.pilab.agent.v2.ISCSIGetPathsResponse\"\x1a\xa2\xbb\x18\x16\n" +
+	"\vStoragePool\x12\x03get\x18\x01 \x01\x12\x85\x01\n" +
+	"\rConfigureCHAP\x12).pilab.agent.v2.ISCSIConfigureCHAPRequest\x1a*.pilab.agent.v2.ISCSIConfigureCHAPResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06update\x18\x01 \x01\x12\x9a\x01\n" +
+	"\x14ConfigureCHAPInbound\x120.pilab.agent.v2.ISCSIConfigureCHAPInboundRequest\x1a1.pilab.agent.v2.ISCSIConfigureCHAPInboundResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06update\x18\x01 \x01\x12v\n" +
+	"\bSetLogin\x12$.pilab.agent.v2.ISCSISetLoginRequest\x1a%.pilab.agent.v2.ISCSISetLoginResponse\"\x1d\xa2\xbb\x18\x19\n" +
+	"\vStoragePool\x12\x06update\x18\x01 \x01B4Z2go.pilab.hu/cloud/virtpb/v3/pilab/agent/v2;agentv2b\x06proto3"
 
 var (
 	file_pilab_agent_v2_iscsi_service_proto_rawDescOnce sync.Once

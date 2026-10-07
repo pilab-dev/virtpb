@@ -5,24 +5,50 @@ syntax = "proto3";
 
 package pilab.cloud.agent.v1;
 
+import "pilab/common/v1/authz.proto";
+
 import "pilab/agent/v1/stream.proto";
 import "pilab/agent/v1/error.proto";
 
 option go_package = "go.pilab.hu/cloud/virtpb/v3/pilab/agent/v1;agentv1";
 
 service AgentService {
-  rpc VmMigrate(VmMigrateRequest) returns (VmMigrateResponse);
-  rpc VmIpList(VmIpListRequest) returns (VmIpListResponse);
-  rpc VmChangeUserPassword(VmChangeUserPasswordRequest) returns (VmChangeUserPasswordResponse);
-  rpc VmBackupSystemVolume(VmBackupSystemVolumeRequest) returns (VmBackupSystemVolumeResponse);
-  rpc VmRestoreSystemVolume(VmRestoreSystemVolumeRequest) returns (VmRestoreSystemVolumeResponse);
-  rpc VmAttachCloudInit(VmAttachCloudInitRequest) returns (VmAttachCloudInitResponse);
-  rpc VmAttachNetworkInterface(VmAttachNetworkInterfaceRequest) returns (VmAttachNetworkInterfaceResponse);
-  rpc VmDetachNetworkInterface(VmDetachNetworkInterfaceRequest) returns (VmDetachNetworkInterfaceResponse);
-  rpc Stream(stream StreamRequest) returns (stream StreamResponse);
-  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse);
-  rpc GetHardwareHealth(GetHardwareHealthRequest) returns (GetHardwareHealthResponse);
-  rpc GetSensorData(GetSensorDataRequest) returns (GetSensorDataResponse);
+  rpc VmMigrate(VmMigrateRequest) returns (VmMigrateResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "migrate", authn: AUTHN_USER };
+  }
+  rpc VmIpList(VmIpListRequest) returns (VmIpListResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc VmChangeUserPassword(VmChangeUserPasswordRequest) returns (VmChangeUserPasswordResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "admin", authn: AUTHN_USER };
+  }
+  rpc VmBackupSystemVolume(VmBackupSystemVolumeRequest) returns (VmBackupSystemVolumeResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "snapshot", authn: AUTHN_USER };
+  }
+  rpc VmRestoreSystemVolume(VmRestoreSystemVolumeRequest) returns (VmRestoreSystemVolumeResponse) {
+    option (pilab.common.v1.authz) = { kind: "Snapshot", verb: "revert", authn: AUTHN_USER };
+  }
+  rpc VmAttachCloudInit(VmAttachCloudInitRequest) returns (VmAttachCloudInitResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc VmAttachNetworkInterface(VmAttachNetworkInterfaceRequest) returns (VmAttachNetworkInterfaceResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc VmDetachNetworkInterface(VmDetachNetworkInterfaceRequest) returns (VmDetachNetworkInterfaceResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "attach", authn: AUTHN_USER };
+  }
+  rpc Stream(stream StreamRequest) returns (stream StreamResponse) {
+    option (pilab.common.v1.authz) = { kind: "VirtualMachine", verb: "get", authn: AUTHN_USER };
+  }
+  rpc UpdateConfig(UpdateConfigRequest) returns (UpdateConfigResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "update", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetHardwareHealth(GetHardwareHealthRequest) returns (GetHardwareHealthResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
+  rpc GetSensorData(GetSensorDataRequest) returns (GetSensorDataResponse) {
+    option (pilab.common.v1.authz) = { kind: "Node", verb: "get", authn: AUTHN_USER, node_scoped: true };
+  }
 }
 
 message VmAttachCloudInitRequest {

@@ -10,6 +10,7 @@
 package networkv2
 
 import (
+	_ "go.pilab.hu/cloud/virtpb/v3/pilab/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -1796,7 +1797,7 @@ var File_pilab_network_v2_public_ip_service_proto protoreflect.FileDescriptor
 
 const file_pilab_network_v2_public_ip_service_proto_rawDesc = "" +
 	"\n" +
-	"(pilab/network/v2/public_ip_service.proto\x12\x10pilab.network.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a%pilab/network/v2/network_common.proto\"\xcc\x04\n" +
+	"(pilab/network/v2/public_ip_service.proto\x12\x10pilab.network.v2\x1a\x1bpilab/common/v1/authz.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a%pilab/network/v2/network_common.proto\"\xcc\x04\n" +
 	"\bPublicIP\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1b\n" +
@@ -1970,26 +1971,44 @@ const file_pilab_network_v2_public_ip_service_proto_rawDesc = "" +
 	"\arule_id\x18\x02 \x01(\tR\x06ruleId\"\x83\x01\n" +
 	"\x1bReorderFirewallRulesRequest\x12.\n" +
 	"\x13firewall_profile_id\x18\x01 \x01(\tR\x11firewallProfileId\x124\n" +
-	"\x05rules\x18\x02 \x03(\v2\x1e.pilab.network.v2.FirewallRuleR\x05rules2\xcd\r\n" +
-	"\x0fPublicIPService\x12Y\n" +
-	"\x10AllocatePublicIP\x12).pilab.network.v2.AllocatePublicIPRequest\x1a\x1a.pilab.network.v2.PublicIP\x12O\n" +
-	"\vGetPublicIP\x12$.pilab.network.v2.GetPublicIPRequest\x1a\x1a.pilab.network.v2.PublicIP\x12`\n" +
-	"\rListPublicIPs\x12&.pilab.network.v2.ListPublicIPsRequest\x1a'.pilab.network.v2.ListPublicIPsResponse\x12S\n" +
-	"\x0fReleasePublicIP\x12(.pilab.network.v2.ReleasePublicIPRequest\x1a\x16.google.protobuf.Empty\x12[\n" +
-	"\x11AssociatePublicIP\x12*.pilab.network.v2.AssociatePublicIPRequest\x1a\x1a.pilab.network.v2.PublicIP\x12]\n" +
-	"\x14DisassociatePublicIP\x12-.pilab.network.v2.DisassociatePublicIPRequest\x1a\x16.google.protobuf.Empty\x12^\n" +
-	"\x11CreatePortForward\x12*.pilab.network.v2.CreatePortForwardRequest\x1a\x1d.pilab.network.v2.PortForward\x12^\n" +
-	"\x11UpdatePortForward\x12*.pilab.network.v2.UpdatePortForwardRequest\x1a\x1d.pilab.network.v2.PortForward\x12W\n" +
-	"\x11DeletePortForward\x12*.pilab.network.v2.DeletePortForwardRequest\x1a\x16.google.protobuf.Empty\x12i\n" +
-	"\x10ListPortForwards\x12).pilab.network.v2.ListPortForwardsRequest\x1a*.pilab.network.v2.ListPortForwardsResponse\x12j\n" +
-	"\x15CreateFirewallProfile\x12..pilab.network.v2.CreateFirewallProfileRequest\x1a!.pilab.network.v2.FirewallProfile\x12d\n" +
-	"\x12GetFirewallProfile\x12+.pilab.network.v2.GetFirewallProfileRequest\x1a!.pilab.network.v2.FirewallProfile\x12j\n" +
-	"\x15UpdateFirewallProfile\x12..pilab.network.v2.UpdateFirewallProfileRequest\x1a!.pilab.network.v2.FirewallProfile\x12_\n" +
-	"\x15DeleteFirewallProfile\x12..pilab.network.v2.DeleteFirewallProfileRequest\x1a\x16.google.protobuf.Empty\x12[\n" +
-	"\x0fAddFirewallRule\x12(.pilab.network.v2.AddFirewallRuleRequest\x1a\x1e.pilab.network.v2.FirewallRule\x12a\n" +
-	"\x12UpdateFirewallRule\x12+.pilab.network.v2.UpdateFirewallRuleRequest\x1a\x1e.pilab.network.v2.FirewallRule\x12Y\n" +
-	"\x12RemoveFirewallRule\x12+.pilab.network.v2.RemoveFirewallRuleRequest\x1a\x16.google.protobuf.Empty\x12]\n" +
-	"\x14ReorderFirewallRules\x12-.pilab.network.v2.ReorderFirewallRulesRequest\x1a\x16.google.protobuf.EmptyB8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
+	"\x05rules\x18\x02 \x03(\v2\x1e.pilab.network.v2.FirewallRuleR\x05rules2\xc4\x11\n" +
+	"\x0fPublicIPService\x12s\n" +
+	"\x10AllocatePublicIP\x12).pilab.network.v2.AllocatePublicIPRequest\x1a\x1a.pilab.network.v2.PublicIP\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06create\x18\x01\x12f\n" +
+	"\vGetPublicIP\x12$.pilab.network.v2.GetPublicIPRequest\x1a\x1a.pilab.network.v2.PublicIP\"\x15\xa2\xbb\x18\x11\n" +
+	"\bPublicIP\x12\x03get\x18\x01\x12x\n" +
+	"\rListPublicIPs\x12&.pilab.network.v2.ListPublicIPsRequest\x1a'.pilab.network.v2.ListPublicIPsResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\bPublicIP\x12\x04list\x18\x01\x12m\n" +
+	"\x0fReleasePublicIP\x12(.pilab.network.v2.ReleasePublicIPRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06delete\x18\x01\x12u\n" +
+	"\x11AssociatePublicIP\x12*.pilab.network.v2.AssociatePublicIPRequest\x1a\x1a.pilab.network.v2.PublicIP\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06attach\x18\x01\x12w\n" +
+	"\x14DisassociatePublicIP\x12-.pilab.network.v2.DisassociatePublicIPRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06attach\x18\x01\x12x\n" +
+	"\x11CreatePortForward\x12*.pilab.network.v2.CreatePortForwardRequest\x1a\x1d.pilab.network.v2.PortForward\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06update\x18\x01\x12x\n" +
+	"\x11UpdatePortForward\x12*.pilab.network.v2.UpdatePortForwardRequest\x1a\x1d.pilab.network.v2.PortForward\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06update\x18\x01\x12q\n" +
+	"\x11DeletePortForward\x12*.pilab.network.v2.DeletePortForwardRequest\x1a\x16.google.protobuf.Empty\"\x18\xa2\xbb\x18\x14\n" +
+	"\bPublicIP\x12\x06update\x18\x01\x12\x81\x01\n" +
+	"\x10ListPortForwards\x12).pilab.network.v2.ListPortForwardsRequest\x1a*.pilab.network.v2.ListPortForwardsResponse\"\x16\xa2\xbb\x18\x12\n" +
+	"\bPublicIP\x12\x04list\x18\x01\x12\x89\x01\n" +
+	"\x15CreateFirewallProfile\x12..pilab.network.v2.CreateFirewallProfileRequest\x1a!.pilab.network.v2.FirewallProfile\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06create\x18\x01\x12\x80\x01\n" +
+	"\x12GetFirewallProfile\x12+.pilab.network.v2.GetFirewallProfileRequest\x1a!.pilab.network.v2.FirewallProfile\"\x1a\xa2\xbb\x18\x16\n" +
+	"\rSecurityGroup\x12\x03get\x18\x01\x12\x89\x01\n" +
+	"\x15UpdateFirewallProfile\x12..pilab.network.v2.UpdateFirewallProfileRequest\x1a!.pilab.network.v2.FirewallProfile\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01\x12~\n" +
+	"\x15DeleteFirewallProfile\x12..pilab.network.v2.DeleteFirewallProfileRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06delete\x18\x01\x12z\n" +
+	"\x0fAddFirewallRule\x12(.pilab.network.v2.AddFirewallRuleRequest\x1a\x1e.pilab.network.v2.FirewallRule\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01\x12\x80\x01\n" +
+	"\x12UpdateFirewallRule\x12+.pilab.network.v2.UpdateFirewallRuleRequest\x1a\x1e.pilab.network.v2.FirewallRule\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01\x12x\n" +
+	"\x12RemoveFirewallRule\x12+.pilab.network.v2.RemoveFirewallRuleRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01\x12|\n" +
+	"\x14ReorderFirewallRules\x12-.pilab.network.v2.ReorderFirewallRulesRequest\x1a\x16.google.protobuf.Empty\"\x1d\xa2\xbb\x18\x19\n" +
+	"\rSecurityGroup\x12\x06update\x18\x01B8Z6go.pilab.hu/cloud/virtpb/v3/pilab/network/v2;networkv2b\x06proto3"
 
 var (
 	file_pilab_network_v2_public_ip_service_proto_rawDescOnce sync.Once
