@@ -24,67 +24,100 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AgentService_RegisterHost_FullMethodName             = "/pilab.agent.v2.AgentService/RegisterHost"
-	AgentService_Heartbeat_FullMethodName                = "/pilab.agent.v2.AgentService/Heartbeat"
-	AgentService_GetHostStatus_FullMethodName            = "/pilab.agent.v2.AgentService/GetHostStatus"
-	AgentService_CreateVM_FullMethodName                 = "/pilab.agent.v2.AgentService/CreateVM"
-	AgentService_GetVMDetails_FullMethodName             = "/pilab.agent.v2.AgentService/GetVMDetails"
-	AgentService_UpdateVM_FullMethodName                 = "/pilab.agent.v2.AgentService/UpdateVM"
-	AgentService_DeleteVM_FullMethodName                 = "/pilab.agent.v2.AgentService/DeleteVM"
-	AgentService_StartVM_FullMethodName                  = "/pilab.agent.v2.AgentService/StartVM"
-	AgentService_StopVM_FullMethodName                   = "/pilab.agent.v2.AgentService/StopVM"
-	AgentService_ForceStopVM_FullMethodName              = "/pilab.agent.v2.AgentService/ForceStopVM"
-	AgentService_RebootVM_FullMethodName                 = "/pilab.agent.v2.AgentService/RebootVM"
-	AgentService_PauseVM_FullMethodName                  = "/pilab.agent.v2.AgentService/PauseVM"
-	AgentService_ResumeVM_FullMethodName                 = "/pilab.agent.v2.AgentService/ResumeVM"
-	AgentService_InitiateMigration_FullMethodName        = "/pilab.agent.v2.AgentService/InitiateMigration"
-	AgentService_PrepareForMigration_FullMethodName      = "/pilab.agent.v2.AgentService/PrepareForMigration"
-	AgentService_ConfirmMigration_FullMethodName         = "/pilab.agent.v2.AgentService/ConfirmMigration"
-	AgentService_AbortMigration_FullMethodName           = "/pilab.agent.v2.AgentService/AbortMigration"
-	AgentService_CreateSnapshot_FullMethodName           = "/pilab.agent.v2.AgentService/CreateSnapshot"
-	AgentService_RevertToSnapshot_FullMethodName         = "/pilab.agent.v2.AgentService/RevertToSnapshot"
-	AgentService_DeleteSnapshot_FullMethodName           = "/pilab.agent.v2.AgentService/DeleteSnapshot"
-	AgentService_GetTaskStatus_FullMethodName            = "/pilab.agent.v2.AgentService/GetTaskStatus"
-	AgentService_CancelTask_FullMethodName               = "/pilab.agent.v2.AgentService/CancelTask"
-	AgentService_ConfigureNetwork_FullMethodName         = "/pilab.agent.v2.AgentService/ConfigureNetwork"
-	AgentService_ConfigureStorage_FullMethodName         = "/pilab.agent.v2.AgentService/ConfigureStorage"
-	AgentService_ConfigureTime_FullMethodName            = "/pilab.agent.v2.AgentService/ConfigureTime"
-	AgentService_SetMaintenanceMode_FullMethodName       = "/pilab.agent.v2.AgentService/SetMaintenanceMode"
-	AgentService_UpdateHost_FullMethodName               = "/pilab.agent.v2.AgentService/UpdateHost"
-	AgentService_GetContentLibraryItems_FullMethodName   = "/pilab.agent.v2.AgentService/GetContentLibraryItems"
-	AgentService_UploadContentLibraryItem_FullMethodName = "/pilab.agent.v2.AgentService/UploadContentLibraryItem"
-	AgentService_ExportOVA_FullMethodName                = "/pilab.agent.v2.AgentService/ExportOVA"
-	AgentService_ImportOVA_FullMethodName                = "/pilab.agent.v2.AgentService/ImportOVA"
-	AgentService_DeleteContentLibraryItem_FullMethodName = "/pilab.agent.v2.AgentService/DeleteContentLibraryItem"
-	AgentService_GetDatastores_FullMethodName            = "/pilab.agent.v2.AgentService/GetDatastores"
-	AgentService_GetDatastore_FullMethodName             = "/pilab.agent.v2.AgentService/GetDatastore"
-	AgentService_CreateDatastore_FullMethodName          = "/pilab.agent.v2.AgentService/CreateDatastore"
-	AgentService_DeleteDatastore_FullMethodName          = "/pilab.agent.v2.AgentService/DeleteDatastore"
-	AgentService_GetNetworks_FullMethodName              = "/pilab.agent.v2.AgentService/GetNetworks"
-	AgentService_GetNetwork_FullMethodName               = "/pilab.agent.v2.AgentService/GetNetwork"
-	AgentService_CreateNetwork_FullMethodName            = "/pilab.agent.v2.AgentService/CreateNetwork"
-	AgentService_DeleteNetwork_FullMethodName            = "/pilab.agent.v2.AgentService/DeleteNetwork"
-	AgentService_AttachIso_FullMethodName                = "/pilab.agent.v2.AgentService/AttachIso"
-	AgentService_DetachIso_FullMethodName                = "/pilab.agent.v2.AgentService/DetachIso"
-	AgentService_CloneVmFromTemplate_FullMethodName      = "/pilab.agent.v2.AgentService/CloneVmFromTemplate"
-	AgentService_GetVMGuestIPs_FullMethodName            = "/pilab.agent.v2.AgentService/GetVMGuestIPs"
-	AgentService_ChangeVMUserPassword_FullMethodName     = "/pilab.agent.v2.AgentService/ChangeVMUserPassword"
-	AgentService_AttachCloudInit_FullMethodName          = "/pilab.agent.v2.AgentService/AttachCloudInit"
-	AgentService_AttachNetworkInterface_FullMethodName   = "/pilab.agent.v2.AgentService/AttachNetworkInterface"
-	AgentService_DetachNetworkInterface_FullMethodName   = "/pilab.agent.v2.AgentService/DetachNetworkInterface"
-	AgentService_Stream_FullMethodName                   = "/pilab.agent.v2.AgentService/Stream"
-	AgentService_GetHardwareHealth_FullMethodName        = "/pilab.agent.v2.AgentService/GetHardwareHealth"
-	AgentService_GetSensorData_FullMethodName            = "/pilab.agent.v2.AgentService/GetSensorData"
-	AgentService_DefineVM_FullMethodName                 = "/pilab.agent.v2.AgentService/DefineVM"
-	AgentService_GetVMDefinition_FullMethodName          = "/pilab.agent.v2.AgentService/GetVMDefinition"
-	AgentService_ControlVM_FullMethodName                = "/pilab.agent.v2.AgentService/ControlVM"
-	AgentService_GetVMStatus_FullMethodName              = "/pilab.agent.v2.AgentService/GetVMStatus"
-	AgentService_GetVMGuestInfo_FullMethodName           = "/pilab.agent.v2.AgentService/GetVMGuestInfo"
-	AgentService_CreatePowerSchedule_FullMethodName      = "/pilab.agent.v2.AgentService/CreatePowerSchedule"
-	AgentService_ListPowerSchedules_FullMethodName       = "/pilab.agent.v2.AgentService/ListPowerSchedules"
-	AgentService_UpdatePowerSchedule_FullMethodName      = "/pilab.agent.v2.AgentService/UpdatePowerSchedule"
-	AgentService_DeletePowerSchedule_FullMethodName      = "/pilab.agent.v2.AgentService/DeletePowerSchedule"
-	AgentService_WakeOnLAN_FullMethodName                = "/pilab.agent.v2.AgentService/WakeOnLAN"
+	AgentService_RegisterHost_FullMethodName              = "/pilab.agent.v2.AgentService/RegisterHost"
+	AgentService_Heartbeat_FullMethodName                 = "/pilab.agent.v2.AgentService/Heartbeat"
+	AgentService_GetHostStatus_FullMethodName             = "/pilab.agent.v2.AgentService/GetHostStatus"
+	AgentService_CreateVM_FullMethodName                  = "/pilab.agent.v2.AgentService/CreateVM"
+	AgentService_GetVMDetails_FullMethodName              = "/pilab.agent.v2.AgentService/GetVMDetails"
+	AgentService_UpdateVM_FullMethodName                  = "/pilab.agent.v2.AgentService/UpdateVM"
+	AgentService_DeleteVM_FullMethodName                  = "/pilab.agent.v2.AgentService/DeleteVM"
+	AgentService_StartVM_FullMethodName                   = "/pilab.agent.v2.AgentService/StartVM"
+	AgentService_StopVM_FullMethodName                    = "/pilab.agent.v2.AgentService/StopVM"
+	AgentService_ForceStopVM_FullMethodName               = "/pilab.agent.v2.AgentService/ForceStopVM"
+	AgentService_RebootVM_FullMethodName                  = "/pilab.agent.v2.AgentService/RebootVM"
+	AgentService_PauseVM_FullMethodName                   = "/pilab.agent.v2.AgentService/PauseVM"
+	AgentService_ResumeVM_FullMethodName                  = "/pilab.agent.v2.AgentService/ResumeVM"
+	AgentService_InitiateMigration_FullMethodName         = "/pilab.agent.v2.AgentService/InitiateMigration"
+	AgentService_PrepareForMigration_FullMethodName       = "/pilab.agent.v2.AgentService/PrepareForMigration"
+	AgentService_ConfirmMigration_FullMethodName          = "/pilab.agent.v2.AgentService/ConfirmMigration"
+	AgentService_AbortMigration_FullMethodName            = "/pilab.agent.v2.AgentService/AbortMigration"
+	AgentService_CreateSnapshot_FullMethodName            = "/pilab.agent.v2.AgentService/CreateSnapshot"
+	AgentService_RevertToSnapshot_FullMethodName          = "/pilab.agent.v2.AgentService/RevertToSnapshot"
+	AgentService_DeleteSnapshot_FullMethodName            = "/pilab.agent.v2.AgentService/DeleteSnapshot"
+	AgentService_GetTaskStatus_FullMethodName             = "/pilab.agent.v2.AgentService/GetTaskStatus"
+	AgentService_CancelTask_FullMethodName                = "/pilab.agent.v2.AgentService/CancelTask"
+	AgentService_ConfigureNetwork_FullMethodName          = "/pilab.agent.v2.AgentService/ConfigureNetwork"
+	AgentService_ConfigureStorage_FullMethodName          = "/pilab.agent.v2.AgentService/ConfigureStorage"
+	AgentService_ConfigureTime_FullMethodName             = "/pilab.agent.v2.AgentService/ConfigureTime"
+	AgentService_SetMaintenanceMode_FullMethodName        = "/pilab.agent.v2.AgentService/SetMaintenanceMode"
+	AgentService_UpdateHost_FullMethodName                = "/pilab.agent.v2.AgentService/UpdateHost"
+	AgentService_GetContentLibraryItems_FullMethodName    = "/pilab.agent.v2.AgentService/GetContentLibraryItems"
+	AgentService_UploadContentLibraryItem_FullMethodName  = "/pilab.agent.v2.AgentService/UploadContentLibraryItem"
+	AgentService_ExportOVA_FullMethodName                 = "/pilab.agent.v2.AgentService/ExportOVA"
+	AgentService_ImportOVA_FullMethodName                 = "/pilab.agent.v2.AgentService/ImportOVA"
+	AgentService_DeleteContentLibraryItem_FullMethodName  = "/pilab.agent.v2.AgentService/DeleteContentLibraryItem"
+	AgentService_GetDatastores_FullMethodName             = "/pilab.agent.v2.AgentService/GetDatastores"
+	AgentService_GetDatastore_FullMethodName              = "/pilab.agent.v2.AgentService/GetDatastore"
+	AgentService_CreateDatastore_FullMethodName           = "/pilab.agent.v2.AgentService/CreateDatastore"
+	AgentService_DeleteDatastore_FullMethodName           = "/pilab.agent.v2.AgentService/DeleteDatastore"
+	AgentService_GetNetworks_FullMethodName               = "/pilab.agent.v2.AgentService/GetNetworks"
+	AgentService_GetNetwork_FullMethodName                = "/pilab.agent.v2.AgentService/GetNetwork"
+	AgentService_CreateNetwork_FullMethodName             = "/pilab.agent.v2.AgentService/CreateNetwork"
+	AgentService_DeleteNetwork_FullMethodName             = "/pilab.agent.v2.AgentService/DeleteNetwork"
+	AgentService_AttachIso_FullMethodName                 = "/pilab.agent.v2.AgentService/AttachIso"
+	AgentService_DetachIso_FullMethodName                 = "/pilab.agent.v2.AgentService/DetachIso"
+	AgentService_CloneVmFromTemplate_FullMethodName       = "/pilab.agent.v2.AgentService/CloneVmFromTemplate"
+	AgentService_GetVMGuestIPs_FullMethodName             = "/pilab.agent.v2.AgentService/GetVMGuestIPs"
+	AgentService_ChangeVMUserPassword_FullMethodName      = "/pilab.agent.v2.AgentService/ChangeVMUserPassword"
+	AgentService_AttachCloudInit_FullMethodName           = "/pilab.agent.v2.AgentService/AttachCloudInit"
+	AgentService_AttachNetworkInterface_FullMethodName    = "/pilab.agent.v2.AgentService/AttachNetworkInterface"
+	AgentService_DetachNetworkInterface_FullMethodName    = "/pilab.agent.v2.AgentService/DetachNetworkInterface"
+	AgentService_Stream_FullMethodName                    = "/pilab.agent.v2.AgentService/Stream"
+	AgentService_GetHardwareHealth_FullMethodName         = "/pilab.agent.v2.AgentService/GetHardwareHealth"
+	AgentService_GetSensorData_FullMethodName             = "/pilab.agent.v2.AgentService/GetSensorData"
+	AgentService_DefineVM_FullMethodName                  = "/pilab.agent.v2.AgentService/DefineVM"
+	AgentService_GetVMDefinition_FullMethodName           = "/pilab.agent.v2.AgentService/GetVMDefinition"
+	AgentService_ControlVM_FullMethodName                 = "/pilab.agent.v2.AgentService/ControlVM"
+	AgentService_GetVMStatus_FullMethodName               = "/pilab.agent.v2.AgentService/GetVMStatus"
+	AgentService_GetVMGuestInfo_FullMethodName            = "/pilab.agent.v2.AgentService/GetVMGuestInfo"
+	AgentService_CreatePowerSchedule_FullMethodName       = "/pilab.agent.v2.AgentService/CreatePowerSchedule"
+	AgentService_ListPowerSchedules_FullMethodName        = "/pilab.agent.v2.AgentService/ListPowerSchedules"
+	AgentService_UpdatePowerSchedule_FullMethodName       = "/pilab.agent.v2.AgentService/UpdatePowerSchedule"
+	AgentService_DeletePowerSchedule_FullMethodName       = "/pilab.agent.v2.AgentService/DeletePowerSchedule"
+	AgentService_WakeOnLAN_FullMethodName                 = "/pilab.agent.v2.AgentService/WakeOnLAN"
+	AgentService_GetHostInfo_FullMethodName               = "/pilab.agent.v2.AgentService/GetHostInfo"
+	AgentService_GetSystemResources_FullMethodName        = "/pilab.agent.v2.AgentService/GetSystemResources"
+	AgentService_GetServiceStatus_FullMethodName          = "/pilab.agent.v2.AgentService/GetServiceStatus"
+	AgentService_RestartService_FullMethodName            = "/pilab.agent.v2.AgentService/RestartService"
+	AgentService_GetNetworkConfig_FullMethodName          = "/pilab.agent.v2.AgentService/GetNetworkConfig"
+	AgentService_ConfigureNetworkInterface_FullMethodName = "/pilab.agent.v2.AgentService/ConfigureNetworkInterface"
+	AgentService_TestNetwork_FullMethodName               = "/pilab.agent.v2.AgentService/TestNetwork"
+	AgentService_GetStorageConfig_FullMethodName          = "/pilab.agent.v2.AgentService/GetStorageConfig"
+	AgentService_MountNFS_FullMethodName                  = "/pilab.agent.v2.AgentService/MountNFS"
+	AgentService_UnmountNFS_FullMethodName                = "/pilab.agent.v2.AgentService/UnmountNFS"
+	AgentService_GetMaintenanceMode_FullMethodName        = "/pilab.agent.v2.AgentService/GetMaintenanceMode"
+	AgentService_GetFirewallRules_FullMethodName          = "/pilab.agent.v2.AgentService/GetFirewallRules"
+	AgentService_AddFirewallRule_FullMethodName           = "/pilab.agent.v2.AgentService/AddFirewallRule"
+	AgentService_RemoveFirewallRule_FullMethodName        = "/pilab.agent.v2.AgentService/RemoveFirewallRule"
+	AgentService_GetDNSConfig_FullMethodName              = "/pilab.agent.v2.AgentService/GetDNSConfig"
+	AgentService_SetDNSConfig_FullMethodName              = "/pilab.agent.v2.AgentService/SetDNSConfig"
+	AgentService_GetNTPConfig_FullMethodName              = "/pilab.agent.v2.AgentService/GetNTPConfig"
+	AgentService_SetNTPConfig_FullMethodName              = "/pilab.agent.v2.AgentService/SetNTPConfig"
+	AgentService_GetCloudStatus_FullMethodName            = "/pilab.agent.v2.AgentService/GetCloudStatus"
+	AgentService_AdoptToCloud_FullMethodName              = "/pilab.agent.v2.AgentService/AdoptToCloud"
+	AgentService_DisconnectFromCloud_FullMethodName       = "/pilab.agent.v2.AgentService/DisconnectFromCloud"
+	AgentService_UpdateConfig_FullMethodName              = "/pilab.agent.v2.AgentService/UpdateConfig"
+	AgentService_ListSnapshots_FullMethodName             = "/pilab.agent.v2.AgentService/ListSnapshots"
+	AgentService_ConsolidateSnapshot_FullMethodName       = "/pilab.agent.v2.AgentService/ConsolidateSnapshot"
+	AgentService_CloneSnapshot_FullMethodName             = "/pilab.agent.v2.AgentService/CloneSnapshot"
+	AgentService_CreateVolume_FullMethodName              = "/pilab.agent.v2.AgentService/CreateVolume"
+	AgentService_DeleteVolume_FullMethodName              = "/pilab.agent.v2.AgentService/DeleteVolume"
+	AgentService_ResizeVolume_FullMethodName              = "/pilab.agent.v2.AgentService/ResizeVolume"
+	AgentService_ListVolumes_FullMethodName               = "/pilab.agent.v2.AgentService/ListVolumes"
+	AgentService_GetVolume_FullMethodName                 = "/pilab.agent.v2.AgentService/GetVolume"
+	AgentService_CloneVolume_FullMethodName               = "/pilab.agent.v2.AgentService/CloneVolume"
+	AgentService_BackupSystemVolume_FullMethodName        = "/pilab.agent.v2.AgentService/BackupSystemVolume"
+	AgentService_RestoreSystemVolume_FullMethodName       = "/pilab.agent.v2.AgentService/RestoreSystemVolume"
 )
 
 // AgentServiceClient is the client API for AgentService service.
@@ -152,6 +185,42 @@ type AgentServiceClient interface {
 	UpdatePowerSchedule(ctx context.Context, in *UpdatePowerScheduleRequest, opts ...grpc.CallOption) (*UpdatePowerScheduleResponse, error)
 	DeletePowerSchedule(ctx context.Context, in *DeletePowerScheduleRequest, opts ...grpc.CallOption) (*DeletePowerScheduleResponse, error)
 	WakeOnLAN(ctx context.Context, in *WakeOnLANRequest, opts ...grpc.CallOption) (*WakeOnLANResponse, error)
+	// Host Management & DCUI
+	GetHostInfo(ctx context.Context, in *GetHostInfoRequest, opts ...grpc.CallOption) (*HostInfo, error)
+	GetSystemResources(ctx context.Context, in *GetSystemResourcesRequest, opts ...grpc.CallOption) (*SystemResources, error)
+	GetServiceStatus(ctx context.Context, in *GetServiceStatusRequest, opts ...grpc.CallOption) (*ServiceStatusList, error)
+	RestartService(ctx context.Context, in *RestartServiceRequest, opts ...grpc.CallOption) (*RestartServiceResponse, error)
+	GetNetworkConfig(ctx context.Context, in *GetNetworkConfigRequest, opts ...grpc.CallOption) (*NetworkConfig, error)
+	ConfigureNetworkInterface(ctx context.Context, in *ConfigureNetworkInterfaceRequest, opts ...grpc.CallOption) (*ConfigureNetworkInterfaceResponse, error)
+	TestNetwork(ctx context.Context, in *TestNetworkRequest, opts ...grpc.CallOption) (*NetworkTestResult, error)
+	GetStorageConfig(ctx context.Context, in *GetStorageConfigRequest, opts ...grpc.CallOption) (*StorageConfig, error)
+	MountNFS(ctx context.Context, in *MountNFSRequest, opts ...grpc.CallOption) (*MountNFSResponse, error)
+	UnmountNFS(ctx context.Context, in *UnmountNFSRequest, opts ...grpc.CallOption) (*UnmountNFSResponse, error)
+	GetMaintenanceMode(ctx context.Context, in *GetMaintenanceModeRequest, opts ...grpc.CallOption) (*MaintenanceModeStatus, error)
+	GetFirewallRules(ctx context.Context, in *GetFirewallRulesRequest, opts ...grpc.CallOption) (*FirewallRuleList, error)
+	AddFirewallRule(ctx context.Context, in *AddFirewallRuleRequest, opts ...grpc.CallOption) (*AddFirewallRuleResponse, error)
+	RemoveFirewallRule(ctx context.Context, in *RemoveFirewallRuleRequest, opts ...grpc.CallOption) (*RemoveFirewallRuleResponse, error)
+	GetDNSConfig(ctx context.Context, in *GetDNSConfigRequest, opts ...grpc.CallOption) (*DNSConfig, error)
+	SetDNSConfig(ctx context.Context, in *SetDNSConfigRequest, opts ...grpc.CallOption) (*SetDNSConfigResponse, error)
+	GetNTPConfig(ctx context.Context, in *GetNTPConfigRequest, opts ...grpc.CallOption) (*NTPConfig, error)
+	SetNTPConfig(ctx context.Context, in *SetNTPConfigRequest, opts ...grpc.CallOption) (*SetNTPConfigResponse, error)
+	GetCloudStatus(ctx context.Context, in *GetCloudStatusRequest, opts ...grpc.CallOption) (*CloudStatus, error)
+	AdoptToCloud(ctx context.Context, in *AdoptToCloudRequest, opts ...grpc.CallOption) (*AdoptToCloudResponse, error)
+	DisconnectFromCloud(ctx context.Context, in *DisconnectFromCloudRequest, opts ...grpc.CallOption) (*DisconnectFromCloudResponse, error)
+	UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*UpdateConfigResponse, error)
+	// Snapshot Management
+	ListSnapshots(ctx context.Context, in *ListSnapshotsRequest, opts ...grpc.CallOption) (*ListSnapshotsResponse, error)
+	ConsolidateSnapshot(ctx context.Context, in *ConsolidateSnapshotRequest, opts ...grpc.CallOption) (*ConsolidateSnapshotResponse, error)
+	CloneSnapshot(ctx context.Context, in *CloneSnapshotRequest, opts ...grpc.CallOption) (*CloneSnapshotResponse, error)
+	// Volume Management
+	CreateVolume(ctx context.Context, in *CreateVolumeRequest, opts ...grpc.CallOption) (*CreateVolumeResponse, error)
+	DeleteVolume(ctx context.Context, in *DeleteVolumeRequest, opts ...grpc.CallOption) (*DeleteVolumeResponse, error)
+	ResizeVolume(ctx context.Context, in *ResizeVolumeRequest, opts ...grpc.CallOption) (*ResizeVolumeResponse, error)
+	ListVolumes(ctx context.Context, in *ListVolumesRequest, opts ...grpc.CallOption) (*ListVolumesResponse, error)
+	GetVolume(ctx context.Context, in *GetVolumeRequest, opts ...grpc.CallOption) (*GetVolumeResponse, error)
+	CloneVolume(ctx context.Context, in *CloneVolumeRequest, opts ...grpc.CallOption) (*CloneVolumeResponse, error)
+	BackupSystemVolume(ctx context.Context, in *BackupSystemVolumeRequest, opts ...grpc.CallOption) (*BackupSystemVolumeResponse, error)
+	RestoreSystemVolume(ctx context.Context, in *RestoreSystemVolumeRequest, opts ...grpc.CallOption) (*RestoreSystemVolumeResponse, error)
 }
 
 type agentServiceClient struct {
@@ -790,6 +859,336 @@ func (c *agentServiceClient) WakeOnLAN(ctx context.Context, in *WakeOnLANRequest
 	return out, nil
 }
 
+func (c *agentServiceClient) GetHostInfo(ctx context.Context, in *GetHostInfoRequest, opts ...grpc.CallOption) (*HostInfo, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(HostInfo)
+	err := c.cc.Invoke(ctx, AgentService_GetHostInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) GetSystemResources(ctx context.Context, in *GetSystemResourcesRequest, opts ...grpc.CallOption) (*SystemResources, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SystemResources)
+	err := c.cc.Invoke(ctx, AgentService_GetSystemResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) GetServiceStatus(ctx context.Context, in *GetServiceStatusRequest, opts ...grpc.CallOption) (*ServiceStatusList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ServiceStatusList)
+	err := c.cc.Invoke(ctx, AgentService_GetServiceStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) RestartService(ctx context.Context, in *RestartServiceRequest, opts ...grpc.CallOption) (*RestartServiceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RestartServiceResponse)
+	err := c.cc.Invoke(ctx, AgentService_RestartService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) GetNetworkConfig(ctx context.Context, in *GetNetworkConfigRequest, opts ...grpc.CallOption) (*NetworkConfig, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NetworkConfig)
+	err := c.cc.Invoke(ctx, AgentService_GetNetworkConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) ConfigureNetworkInterface(ctx context.Context, in *ConfigureNetworkInterfaceRequest, opts ...grpc.CallOption) (*ConfigureNetworkInterfaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfigureNetworkInterfaceResponse)
+	err := c.cc.Invoke(ctx, AgentService_ConfigureNetworkInterface_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) TestNetwork(ctx context.Context, in *TestNetworkRequest, opts ...grpc.CallOption) (*NetworkTestResult, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NetworkTestResult)
+	err := c.cc.Invoke(ctx, AgentService_TestNetwork_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) GetStorageConfig(ctx context.Context, in *GetStorageConfigRequest, opts ...grpc.CallOption) (*StorageConfig, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StorageConfig)
+	err := c.cc.Invoke(ctx, AgentService_GetStorageConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) MountNFS(ctx context.Context, in *MountNFSRequest, opts ...grpc.CallOption) (*MountNFSResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MountNFSResponse)
+	err := c.cc.Invoke(ctx, AgentService_MountNFS_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) UnmountNFS(ctx context.Context, in *UnmountNFSRequest, opts ...grpc.CallOption) (*UnmountNFSResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UnmountNFSResponse)
+	err := c.cc.Invoke(ctx, AgentService_UnmountNFS_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) GetMaintenanceMode(ctx context.Context, in *GetMaintenanceModeRequest, opts ...grpc.CallOption) (*MaintenanceModeStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MaintenanceModeStatus)
+	err := c.cc.Invoke(ctx, AgentService_GetMaintenanceMode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) GetFirewallRules(ctx context.Context, in *GetFirewallRulesRequest, opts ...grpc.CallOption) (*FirewallRuleList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FirewallRuleList)
+	err := c.cc.Invoke(ctx, AgentService_GetFirewallRules_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) AddFirewallRule(ctx context.Context, in *AddFirewallRuleRequest, opts ...grpc.CallOption) (*AddFirewallRuleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AddFirewallRuleResponse)
+	err := c.cc.Invoke(ctx, AgentService_AddFirewallRule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) RemoveFirewallRule(ctx context.Context, in *RemoveFirewallRuleRequest, opts ...grpc.CallOption) (*RemoveFirewallRuleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveFirewallRuleResponse)
+	err := c.cc.Invoke(ctx, AgentService_RemoveFirewallRule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) GetDNSConfig(ctx context.Context, in *GetDNSConfigRequest, opts ...grpc.CallOption) (*DNSConfig, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DNSConfig)
+	err := c.cc.Invoke(ctx, AgentService_GetDNSConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) SetDNSConfig(ctx context.Context, in *SetDNSConfigRequest, opts ...grpc.CallOption) (*SetDNSConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetDNSConfigResponse)
+	err := c.cc.Invoke(ctx, AgentService_SetDNSConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) GetNTPConfig(ctx context.Context, in *GetNTPConfigRequest, opts ...grpc.CallOption) (*NTPConfig, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(NTPConfig)
+	err := c.cc.Invoke(ctx, AgentService_GetNTPConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) SetNTPConfig(ctx context.Context, in *SetNTPConfigRequest, opts ...grpc.CallOption) (*SetNTPConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetNTPConfigResponse)
+	err := c.cc.Invoke(ctx, AgentService_SetNTPConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) GetCloudStatus(ctx context.Context, in *GetCloudStatusRequest, opts ...grpc.CallOption) (*CloudStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CloudStatus)
+	err := c.cc.Invoke(ctx, AgentService_GetCloudStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) AdoptToCloud(ctx context.Context, in *AdoptToCloudRequest, opts ...grpc.CallOption) (*AdoptToCloudResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AdoptToCloudResponse)
+	err := c.cc.Invoke(ctx, AgentService_AdoptToCloud_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) DisconnectFromCloud(ctx context.Context, in *DisconnectFromCloudRequest, opts ...grpc.CallOption) (*DisconnectFromCloudResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DisconnectFromCloudResponse)
+	err := c.cc.Invoke(ctx, AgentService_DisconnectFromCloud_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) UpdateConfig(ctx context.Context, in *UpdateConfigRequest, opts ...grpc.CallOption) (*UpdateConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateConfigResponse)
+	err := c.cc.Invoke(ctx, AgentService_UpdateConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) ListSnapshots(ctx context.Context, in *ListSnapshotsRequest, opts ...grpc.CallOption) (*ListSnapshotsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSnapshotsResponse)
+	err := c.cc.Invoke(ctx, AgentService_ListSnapshots_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) ConsolidateSnapshot(ctx context.Context, in *ConsolidateSnapshotRequest, opts ...grpc.CallOption) (*ConsolidateSnapshotResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConsolidateSnapshotResponse)
+	err := c.cc.Invoke(ctx, AgentService_ConsolidateSnapshot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) CloneSnapshot(ctx context.Context, in *CloneSnapshotRequest, opts ...grpc.CallOption) (*CloneSnapshotResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CloneSnapshotResponse)
+	err := c.cc.Invoke(ctx, AgentService_CloneSnapshot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) CreateVolume(ctx context.Context, in *CreateVolumeRequest, opts ...grpc.CallOption) (*CreateVolumeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateVolumeResponse)
+	err := c.cc.Invoke(ctx, AgentService_CreateVolume_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) DeleteVolume(ctx context.Context, in *DeleteVolumeRequest, opts ...grpc.CallOption) (*DeleteVolumeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteVolumeResponse)
+	err := c.cc.Invoke(ctx, AgentService_DeleteVolume_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) ResizeVolume(ctx context.Context, in *ResizeVolumeRequest, opts ...grpc.CallOption) (*ResizeVolumeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResizeVolumeResponse)
+	err := c.cc.Invoke(ctx, AgentService_ResizeVolume_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) ListVolumes(ctx context.Context, in *ListVolumesRequest, opts ...grpc.CallOption) (*ListVolumesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListVolumesResponse)
+	err := c.cc.Invoke(ctx, AgentService_ListVolumes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) GetVolume(ctx context.Context, in *GetVolumeRequest, opts ...grpc.CallOption) (*GetVolumeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetVolumeResponse)
+	err := c.cc.Invoke(ctx, AgentService_GetVolume_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) CloneVolume(ctx context.Context, in *CloneVolumeRequest, opts ...grpc.CallOption) (*CloneVolumeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CloneVolumeResponse)
+	err := c.cc.Invoke(ctx, AgentService_CloneVolume_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) BackupSystemVolume(ctx context.Context, in *BackupSystemVolumeRequest, opts ...grpc.CallOption) (*BackupSystemVolumeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BackupSystemVolumeResponse)
+	err := c.cc.Invoke(ctx, AgentService_BackupSystemVolume_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentServiceClient) RestoreSystemVolume(ctx context.Context, in *RestoreSystemVolumeRequest, opts ...grpc.CallOption) (*RestoreSystemVolumeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RestoreSystemVolumeResponse)
+	err := c.cc.Invoke(ctx, AgentService_RestoreSystemVolume_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AgentServiceServer is the server API for AgentService service.
 // All implementations must embed UnimplementedAgentServiceServer
 // for forward compatibility.
@@ -855,6 +1254,42 @@ type AgentServiceServer interface {
 	UpdatePowerSchedule(context.Context, *UpdatePowerScheduleRequest) (*UpdatePowerScheduleResponse, error)
 	DeletePowerSchedule(context.Context, *DeletePowerScheduleRequest) (*DeletePowerScheduleResponse, error)
 	WakeOnLAN(context.Context, *WakeOnLANRequest) (*WakeOnLANResponse, error)
+	// Host Management & DCUI
+	GetHostInfo(context.Context, *GetHostInfoRequest) (*HostInfo, error)
+	GetSystemResources(context.Context, *GetSystemResourcesRequest) (*SystemResources, error)
+	GetServiceStatus(context.Context, *GetServiceStatusRequest) (*ServiceStatusList, error)
+	RestartService(context.Context, *RestartServiceRequest) (*RestartServiceResponse, error)
+	GetNetworkConfig(context.Context, *GetNetworkConfigRequest) (*NetworkConfig, error)
+	ConfigureNetworkInterface(context.Context, *ConfigureNetworkInterfaceRequest) (*ConfigureNetworkInterfaceResponse, error)
+	TestNetwork(context.Context, *TestNetworkRequest) (*NetworkTestResult, error)
+	GetStorageConfig(context.Context, *GetStorageConfigRequest) (*StorageConfig, error)
+	MountNFS(context.Context, *MountNFSRequest) (*MountNFSResponse, error)
+	UnmountNFS(context.Context, *UnmountNFSRequest) (*UnmountNFSResponse, error)
+	GetMaintenanceMode(context.Context, *GetMaintenanceModeRequest) (*MaintenanceModeStatus, error)
+	GetFirewallRules(context.Context, *GetFirewallRulesRequest) (*FirewallRuleList, error)
+	AddFirewallRule(context.Context, *AddFirewallRuleRequest) (*AddFirewallRuleResponse, error)
+	RemoveFirewallRule(context.Context, *RemoveFirewallRuleRequest) (*RemoveFirewallRuleResponse, error)
+	GetDNSConfig(context.Context, *GetDNSConfigRequest) (*DNSConfig, error)
+	SetDNSConfig(context.Context, *SetDNSConfigRequest) (*SetDNSConfigResponse, error)
+	GetNTPConfig(context.Context, *GetNTPConfigRequest) (*NTPConfig, error)
+	SetNTPConfig(context.Context, *SetNTPConfigRequest) (*SetNTPConfigResponse, error)
+	GetCloudStatus(context.Context, *GetCloudStatusRequest) (*CloudStatus, error)
+	AdoptToCloud(context.Context, *AdoptToCloudRequest) (*AdoptToCloudResponse, error)
+	DisconnectFromCloud(context.Context, *DisconnectFromCloudRequest) (*DisconnectFromCloudResponse, error)
+	UpdateConfig(context.Context, *UpdateConfigRequest) (*UpdateConfigResponse, error)
+	// Snapshot Management
+	ListSnapshots(context.Context, *ListSnapshotsRequest) (*ListSnapshotsResponse, error)
+	ConsolidateSnapshot(context.Context, *ConsolidateSnapshotRequest) (*ConsolidateSnapshotResponse, error)
+	CloneSnapshot(context.Context, *CloneSnapshotRequest) (*CloneSnapshotResponse, error)
+	// Volume Management
+	CreateVolume(context.Context, *CreateVolumeRequest) (*CreateVolumeResponse, error)
+	DeleteVolume(context.Context, *DeleteVolumeRequest) (*DeleteVolumeResponse, error)
+	ResizeVolume(context.Context, *ResizeVolumeRequest) (*ResizeVolumeResponse, error)
+	ListVolumes(context.Context, *ListVolumesRequest) (*ListVolumesResponse, error)
+	GetVolume(context.Context, *GetVolumeRequest) (*GetVolumeResponse, error)
+	CloneVolume(context.Context, *CloneVolumeRequest) (*CloneVolumeResponse, error)
+	BackupSystemVolume(context.Context, *BackupSystemVolumeRequest) (*BackupSystemVolumeResponse, error)
+	RestoreSystemVolume(context.Context, *RestoreSystemVolumeRequest) (*RestoreSystemVolumeResponse, error)
 	mustEmbedUnimplementedAgentServiceServer()
 }
 
@@ -1047,6 +1482,105 @@ func (UnimplementedAgentServiceServer) DeletePowerSchedule(context.Context, *Del
 }
 func (UnimplementedAgentServiceServer) WakeOnLAN(context.Context, *WakeOnLANRequest) (*WakeOnLANResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method WakeOnLAN not implemented")
+}
+func (UnimplementedAgentServiceServer) GetHostInfo(context.Context, *GetHostInfoRequest) (*HostInfo, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetHostInfo not implemented")
+}
+func (UnimplementedAgentServiceServer) GetSystemResources(context.Context, *GetSystemResourcesRequest) (*SystemResources, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetSystemResources not implemented")
+}
+func (UnimplementedAgentServiceServer) GetServiceStatus(context.Context, *GetServiceStatusRequest) (*ServiceStatusList, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetServiceStatus not implemented")
+}
+func (UnimplementedAgentServiceServer) RestartService(context.Context, *RestartServiceRequest) (*RestartServiceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RestartService not implemented")
+}
+func (UnimplementedAgentServiceServer) GetNetworkConfig(context.Context, *GetNetworkConfigRequest) (*NetworkConfig, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNetworkConfig not implemented")
+}
+func (UnimplementedAgentServiceServer) ConfigureNetworkInterface(context.Context, *ConfigureNetworkInterfaceRequest) (*ConfigureNetworkInterfaceResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConfigureNetworkInterface not implemented")
+}
+func (UnimplementedAgentServiceServer) TestNetwork(context.Context, *TestNetworkRequest) (*NetworkTestResult, error) {
+	return nil, status.Error(codes.Unimplemented, "method TestNetwork not implemented")
+}
+func (UnimplementedAgentServiceServer) GetStorageConfig(context.Context, *GetStorageConfigRequest) (*StorageConfig, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetStorageConfig not implemented")
+}
+func (UnimplementedAgentServiceServer) MountNFS(context.Context, *MountNFSRequest) (*MountNFSResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method MountNFS not implemented")
+}
+func (UnimplementedAgentServiceServer) UnmountNFS(context.Context, *UnmountNFSRequest) (*UnmountNFSResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UnmountNFS not implemented")
+}
+func (UnimplementedAgentServiceServer) GetMaintenanceMode(context.Context, *GetMaintenanceModeRequest) (*MaintenanceModeStatus, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMaintenanceMode not implemented")
+}
+func (UnimplementedAgentServiceServer) GetFirewallRules(context.Context, *GetFirewallRulesRequest) (*FirewallRuleList, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetFirewallRules not implemented")
+}
+func (UnimplementedAgentServiceServer) AddFirewallRule(context.Context, *AddFirewallRuleRequest) (*AddFirewallRuleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AddFirewallRule not implemented")
+}
+func (UnimplementedAgentServiceServer) RemoveFirewallRule(context.Context, *RemoveFirewallRuleRequest) (*RemoveFirewallRuleResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveFirewallRule not implemented")
+}
+func (UnimplementedAgentServiceServer) GetDNSConfig(context.Context, *GetDNSConfigRequest) (*DNSConfig, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetDNSConfig not implemented")
+}
+func (UnimplementedAgentServiceServer) SetDNSConfig(context.Context, *SetDNSConfigRequest) (*SetDNSConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetDNSConfig not implemented")
+}
+func (UnimplementedAgentServiceServer) GetNTPConfig(context.Context, *GetNTPConfigRequest) (*NTPConfig, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetNTPConfig not implemented")
+}
+func (UnimplementedAgentServiceServer) SetNTPConfig(context.Context, *SetNTPConfigRequest) (*SetNTPConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method SetNTPConfig not implemented")
+}
+func (UnimplementedAgentServiceServer) GetCloudStatus(context.Context, *GetCloudStatusRequest) (*CloudStatus, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCloudStatus not implemented")
+}
+func (UnimplementedAgentServiceServer) AdoptToCloud(context.Context, *AdoptToCloudRequest) (*AdoptToCloudResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AdoptToCloud not implemented")
+}
+func (UnimplementedAgentServiceServer) DisconnectFromCloud(context.Context, *DisconnectFromCloudRequest) (*DisconnectFromCloudResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DisconnectFromCloud not implemented")
+}
+func (UnimplementedAgentServiceServer) UpdateConfig(context.Context, *UpdateConfigRequest) (*UpdateConfigResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateConfig not implemented")
+}
+func (UnimplementedAgentServiceServer) ListSnapshots(context.Context, *ListSnapshotsRequest) (*ListSnapshotsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListSnapshots not implemented")
+}
+func (UnimplementedAgentServiceServer) ConsolidateSnapshot(context.Context, *ConsolidateSnapshotRequest) (*ConsolidateSnapshotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ConsolidateSnapshot not implemented")
+}
+func (UnimplementedAgentServiceServer) CloneSnapshot(context.Context, *CloneSnapshotRequest) (*CloneSnapshotResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CloneSnapshot not implemented")
+}
+func (UnimplementedAgentServiceServer) CreateVolume(context.Context, *CreateVolumeRequest) (*CreateVolumeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateVolume not implemented")
+}
+func (UnimplementedAgentServiceServer) DeleteVolume(context.Context, *DeleteVolumeRequest) (*DeleteVolumeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteVolume not implemented")
+}
+func (UnimplementedAgentServiceServer) ResizeVolume(context.Context, *ResizeVolumeRequest) (*ResizeVolumeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ResizeVolume not implemented")
+}
+func (UnimplementedAgentServiceServer) ListVolumes(context.Context, *ListVolumesRequest) (*ListVolumesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListVolumes not implemented")
+}
+func (UnimplementedAgentServiceServer) GetVolume(context.Context, *GetVolumeRequest) (*GetVolumeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetVolume not implemented")
+}
+func (UnimplementedAgentServiceServer) CloneVolume(context.Context, *CloneVolumeRequest) (*CloneVolumeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method CloneVolume not implemented")
+}
+func (UnimplementedAgentServiceServer) BackupSystemVolume(context.Context, *BackupSystemVolumeRequest) (*BackupSystemVolumeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method BackupSystemVolume not implemented")
+}
+func (UnimplementedAgentServiceServer) RestoreSystemVolume(context.Context, *RestoreSystemVolumeRequest) (*RestoreSystemVolumeResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RestoreSystemVolume not implemented")
 }
 func (UnimplementedAgentServiceServer) mustEmbedUnimplementedAgentServiceServer() {}
 func (UnimplementedAgentServiceServer) testEmbeddedByValue()                      {}
@@ -2127,6 +2661,600 @@ func _AgentService_WakeOnLAN_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AgentService_GetHostInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHostInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetHostInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetHostInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetHostInfo(ctx, req.(*GetHostInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_GetSystemResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSystemResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetSystemResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetSystemResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetSystemResources(ctx, req.(*GetSystemResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_GetServiceStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServiceStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetServiceStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetServiceStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetServiceStatus(ctx, req.(*GetServiceStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_RestartService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestartServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).RestartService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_RestartService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).RestartService(ctx, req.(*RestartServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_GetNetworkConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNetworkConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetNetworkConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetNetworkConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetNetworkConfig(ctx, req.(*GetNetworkConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_ConfigureNetworkInterface_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigureNetworkInterfaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).ConfigureNetworkInterface(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_ConfigureNetworkInterface_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).ConfigureNetworkInterface(ctx, req.(*ConfigureNetworkInterfaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_TestNetwork_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TestNetworkRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).TestNetwork(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_TestNetwork_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).TestNetwork(ctx, req.(*TestNetworkRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_GetStorageConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStorageConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetStorageConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetStorageConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetStorageConfig(ctx, req.(*GetStorageConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_MountNFS_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MountNFSRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).MountNFS(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_MountNFS_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).MountNFS(ctx, req.(*MountNFSRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_UnmountNFS_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnmountNFSRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).UnmountNFS(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_UnmountNFS_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).UnmountNFS(ctx, req.(*UnmountNFSRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_GetMaintenanceMode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMaintenanceModeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetMaintenanceMode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetMaintenanceMode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetMaintenanceMode(ctx, req.(*GetMaintenanceModeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_GetFirewallRules_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFirewallRulesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetFirewallRules(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetFirewallRules_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetFirewallRules(ctx, req.(*GetFirewallRulesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_AddFirewallRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddFirewallRuleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).AddFirewallRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_AddFirewallRule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).AddFirewallRule(ctx, req.(*AddFirewallRuleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_RemoveFirewallRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveFirewallRuleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).RemoveFirewallRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_RemoveFirewallRule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).RemoveFirewallRule(ctx, req.(*RemoveFirewallRuleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_GetDNSConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDNSConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetDNSConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetDNSConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetDNSConfig(ctx, req.(*GetDNSConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_SetDNSConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetDNSConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).SetDNSConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_SetDNSConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).SetDNSConfig(ctx, req.(*SetDNSConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_GetNTPConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNTPConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetNTPConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetNTPConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetNTPConfig(ctx, req.(*GetNTPConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_SetNTPConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetNTPConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).SetNTPConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_SetNTPConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).SetNTPConfig(ctx, req.(*SetNTPConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_GetCloudStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCloudStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetCloudStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetCloudStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetCloudStatus(ctx, req.(*GetCloudStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_AdoptToCloud_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdoptToCloudRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).AdoptToCloud(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_AdoptToCloud_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).AdoptToCloud(ctx, req.(*AdoptToCloudRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_DisconnectFromCloud_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DisconnectFromCloudRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).DisconnectFromCloud(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_DisconnectFromCloud_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).DisconnectFromCloud(ctx, req.(*DisconnectFromCloudRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_UpdateConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).UpdateConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_UpdateConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).UpdateConfig(ctx, req.(*UpdateConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_ListSnapshots_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSnapshotsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).ListSnapshots(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_ListSnapshots_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).ListSnapshots(ctx, req.(*ListSnapshotsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_ConsolidateSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConsolidateSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).ConsolidateSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_ConsolidateSnapshot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).ConsolidateSnapshot(ctx, req.(*ConsolidateSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_CloneSnapshot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloneSnapshotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).CloneSnapshot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_CloneSnapshot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).CloneSnapshot(ctx, req.(*CloneSnapshotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_CreateVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).CreateVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_CreateVolume_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).CreateVolume(ctx, req.(*CreateVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_DeleteVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).DeleteVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_DeleteVolume_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).DeleteVolume(ctx, req.(*DeleteVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_ResizeVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResizeVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).ResizeVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_ResizeVolume_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).ResizeVolume(ctx, req.(*ResizeVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_ListVolumes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListVolumesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).ListVolumes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_ListVolumes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).ListVolumes(ctx, req.(*ListVolumesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_GetVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).GetVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_GetVolume_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).GetVolume(ctx, req.(*GetVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_CloneVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CloneVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).CloneVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_CloneVolume_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).CloneVolume(ctx, req.(*CloneVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_BackupSystemVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BackupSystemVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).BackupSystemVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_BackupSystemVolume_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).BackupSystemVolume(ctx, req.(*BackupSystemVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentService_RestoreSystemVolume_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestoreSystemVolumeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentServiceServer).RestoreSystemVolume(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AgentService_RestoreSystemVolume_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentServiceServer).RestoreSystemVolume(ctx, req.(*RestoreSystemVolumeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AgentService_ServiceDesc is the grpc.ServiceDesc for AgentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2361,6 +3489,138 @@ var AgentService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "WakeOnLAN",
 			Handler:    _AgentService_WakeOnLAN_Handler,
+		},
+		{
+			MethodName: "GetHostInfo",
+			Handler:    _AgentService_GetHostInfo_Handler,
+		},
+		{
+			MethodName: "GetSystemResources",
+			Handler:    _AgentService_GetSystemResources_Handler,
+		},
+		{
+			MethodName: "GetServiceStatus",
+			Handler:    _AgentService_GetServiceStatus_Handler,
+		},
+		{
+			MethodName: "RestartService",
+			Handler:    _AgentService_RestartService_Handler,
+		},
+		{
+			MethodName: "GetNetworkConfig",
+			Handler:    _AgentService_GetNetworkConfig_Handler,
+		},
+		{
+			MethodName: "ConfigureNetworkInterface",
+			Handler:    _AgentService_ConfigureNetworkInterface_Handler,
+		},
+		{
+			MethodName: "TestNetwork",
+			Handler:    _AgentService_TestNetwork_Handler,
+		},
+		{
+			MethodName: "GetStorageConfig",
+			Handler:    _AgentService_GetStorageConfig_Handler,
+		},
+		{
+			MethodName: "MountNFS",
+			Handler:    _AgentService_MountNFS_Handler,
+		},
+		{
+			MethodName: "UnmountNFS",
+			Handler:    _AgentService_UnmountNFS_Handler,
+		},
+		{
+			MethodName: "GetMaintenanceMode",
+			Handler:    _AgentService_GetMaintenanceMode_Handler,
+		},
+		{
+			MethodName: "GetFirewallRules",
+			Handler:    _AgentService_GetFirewallRules_Handler,
+		},
+		{
+			MethodName: "AddFirewallRule",
+			Handler:    _AgentService_AddFirewallRule_Handler,
+		},
+		{
+			MethodName: "RemoveFirewallRule",
+			Handler:    _AgentService_RemoveFirewallRule_Handler,
+		},
+		{
+			MethodName: "GetDNSConfig",
+			Handler:    _AgentService_GetDNSConfig_Handler,
+		},
+		{
+			MethodName: "SetDNSConfig",
+			Handler:    _AgentService_SetDNSConfig_Handler,
+		},
+		{
+			MethodName: "GetNTPConfig",
+			Handler:    _AgentService_GetNTPConfig_Handler,
+		},
+		{
+			MethodName: "SetNTPConfig",
+			Handler:    _AgentService_SetNTPConfig_Handler,
+		},
+		{
+			MethodName: "GetCloudStatus",
+			Handler:    _AgentService_GetCloudStatus_Handler,
+		},
+		{
+			MethodName: "AdoptToCloud",
+			Handler:    _AgentService_AdoptToCloud_Handler,
+		},
+		{
+			MethodName: "DisconnectFromCloud",
+			Handler:    _AgentService_DisconnectFromCloud_Handler,
+		},
+		{
+			MethodName: "UpdateConfig",
+			Handler:    _AgentService_UpdateConfig_Handler,
+		},
+		{
+			MethodName: "ListSnapshots",
+			Handler:    _AgentService_ListSnapshots_Handler,
+		},
+		{
+			MethodName: "ConsolidateSnapshot",
+			Handler:    _AgentService_ConsolidateSnapshot_Handler,
+		},
+		{
+			MethodName: "CloneSnapshot",
+			Handler:    _AgentService_CloneSnapshot_Handler,
+		},
+		{
+			MethodName: "CreateVolume",
+			Handler:    _AgentService_CreateVolume_Handler,
+		},
+		{
+			MethodName: "DeleteVolume",
+			Handler:    _AgentService_DeleteVolume_Handler,
+		},
+		{
+			MethodName: "ResizeVolume",
+			Handler:    _AgentService_ResizeVolume_Handler,
+		},
+		{
+			MethodName: "ListVolumes",
+			Handler:    _AgentService_ListVolumes_Handler,
+		},
+		{
+			MethodName: "GetVolume",
+			Handler:    _AgentService_GetVolume_Handler,
+		},
+		{
+			MethodName: "CloneVolume",
+			Handler:    _AgentService_CloneVolume_Handler,
+		},
+		{
+			MethodName: "BackupSystemVolume",
+			Handler:    _AgentService_BackupSystemVolume_Handler,
+		},
+		{
+			MethodName: "RestoreSystemVolume",
+			Handler:    _AgentService_RestoreSystemVolume_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

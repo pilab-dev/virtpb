@@ -17,6 +17,7 @@ import "pilab/director/v2/task_service.proto";
 import "pilab/pivirtd/v1/host_resource.proto";
 import "pilab/pivirtd/v1/pivirtd.proto";
 import "pilab/common/v1/phase.proto";
+import "pilab/common/v1/vm.proto";
 import "pilab/resource/v1/resource.proto";
 
 service NodeService {
@@ -100,7 +101,18 @@ message NodeEvent {
     ResourceResultEvent resource_result = 11;
     // Host utilisation metrics forwarded from pivirtd's StatsCollector.
     HostMetricsEvent host_metrics = 12;
+    // Guest agent data (OS details, hostname, IP addresses) forwarded to the director.
+    VmGuestInfoEvent vm_guest_info = 13;
   }
+}
+
+// VmGuestInfoEvent forwards guest agent data (OS details, hostname, IP addresses)
+// to the director (superseding director/v1.VmGuestInfo).
+message VmGuestInfoEvent {
+  string uid = 1;
+  string vm_uuid = 2;
+  string vm_name = 3;
+  pilab.common.v1.VmGuestInfo guest_info = 4;
 }
 
 // VmMetricsBatch carries one stats snapshot from pivirtd's StatsCollector

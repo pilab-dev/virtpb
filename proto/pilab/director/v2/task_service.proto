@@ -46,6 +46,17 @@ enum TaskType {
   // a Task like any other, reporting progress upward via UpdateTaskStatus
   // instead of the director having to poll for it.
   TASK_TYPE_VM_DISK_MOVE = 19;
+  TASK_TYPE_VM_FORCE_STOP = 20;
+  TASK_TYPE_VM_FORCE_RESET = 21;
+  TASK_TYPE_VM_ATTACH_ISO = 22;
+  TASK_TYPE_VM_DETACH_ISO = 23;
+  TASK_TYPE_VM_ATTACH_CLOUD_INIT = 24;
+  TASK_TYPE_VM_DISK_RESIZE = 25;
+  TASK_TYPE_VM_DISK_DELETE = 26;
+  TASK_TYPE_VM_CHANGE_PASSWORD = 27;
+  TASK_TYPE_VM_BACKUP_SYSTEM_VOLUME = 28;
+  TASK_TYPE_VM_RESTORE_SYSTEM_VOLUME = 29;
+  TASK_TYPE_VM_SNAPSHOT_CONSOLIDATE = 30;
 }
 
 enum TaskStatus {
